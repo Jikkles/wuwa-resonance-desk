@@ -894,8 +894,15 @@ function selectTab(id, focus){
     document.getElementById(p).hidden = !on;
   });
   if(focus) document.getElementById(id).focus();
-  const slug = TABS[id].slice(2);
-  if(location.hash.slice(1) !== slug) history.replaceState(null, "", "#" + slug);
+  syncHash(id);
+}
+
+/* Timeline is the landing tab, so it gets the bare URL — no #timeline hanging
+   off the address bar on arrival, and switching back to it clears the hash. */
+function syncHash(id){
+  const isLanding = id === Object.keys(TABS)[0];
+  const url = location.pathname + location.search + (isLanding ? "" : "#" + TABS[id].slice(2));
+  if(location.pathname + location.search + location.hash !== url) history.replaceState(null, "", url);
 }
 
 function initTabs(){
@@ -911,8 +918,10 @@ function initTabs(){
     };
   });
   // Deep link, so "look at the auto feed" can be a shareable URL.
-  const fromHash = ids.find(id => TABS[id].slice(2) === location.hash.slice(1));
-  selectTab(fromHash || ids[0]);
+  const fromHash = () => ids.find(id => TABS[id].slice(2) === location.hash.slice(1));
+  // Changing only the fragment doesn't reload the page, so catch it here too.
+  addEventListener("hashchange", () => selectTab(fromHash() || ids[0]));
+  selectTab(fromHash() || ids[0]);
 }
 
 /* ---------------- Boot ---------------- */
