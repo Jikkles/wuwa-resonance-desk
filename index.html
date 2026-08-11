@@ -154,22 +154,22 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
 .up-head h2{font-family:var(--display);font-weight:900;font-size:clamp(22px,3.6vw,30px);margin:0;line-height:1.2}
 .up-head p{margin:10px 0 0;max-width:70ch;color:#B7B0A4;font-size:14.5px}
 
-.char-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
-.char-card{
+.character-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.character-card{
   --attr:var(--cinnabar);
   position:relative;display:flex;flex-direction:column;
   background:var(--ink-2);border:1px solid var(--line);border-radius:4px;overflow:hidden;
   transition:border-color .2s,transform .2s;
 }
-.char-card:hover{border-color:color-mix(in srgb,var(--attr) 55%,var(--line))}
-.char-card::before{
+.character-card:hover{border-color:color-mix(in srgb,var(--attr) 55%,var(--line))}
+.character-card::before{
   content:"";position:absolute;inset:0 0 auto;height:2px;
   background:linear-gradient(90deg,var(--attr),transparent 70%);
 }
 
 /* Portrait panel. Kuro's key art is a 9:16 poster, so the panel goes tall when
    there's art and stays shorter for the plate, which has nothing to show off. */
-.char-art{
+.character-art{
   position:relative;aspect-ratio:16/10;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
   background:
@@ -177,10 +177,10 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
     linear-gradient(160deg, var(--ink-3), var(--ink));
   border-bottom:1px solid var(--line);
 }
-.char-art.has-art{aspect-ratio:4/5}
+.character-art.has-art{aspect-ratio:4/5}
 /* Concentric resonance rings behind the plate, so a card with no art still
    looks composed rather than unfinished. Hidden once real art loads. */
-.char-art:not(.has-art)::before{
+.character-art:not(.has-art)::before{
   content:"";position:absolute;left:50%;top:52%;width:112%;aspect-ratio:1;
   transform:translate(-50%,-50%);
   background:repeating-radial-gradient(circle at 50% 50%,
@@ -192,8 +192,8 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
 }
 /* Kuro's poster carries its own logo at the top and a name plate at the bottom.
    This crop drops both, since the card states the name itself. */
-.char-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 17%}
-.char-art::after{
+.character-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 17%}
+.character-art::after{
   content:"";position:absolute;inset:0;
   background:
     /* Posters vary in framing, so scrim the top rather than trusting the crop
@@ -201,76 +201,76 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
     linear-gradient(to bottom, rgba(20,19,26,.80), rgba(20,19,26,.25) 9%, transparent 20%),
     linear-gradient(to top, rgba(20,19,26,.92) 4%, rgba(20,19,26,.15) 55%, transparent);
 }
-.char-art .cjk{
+.character-art .cjk{
   position:relative;font-family:var(--display);font-weight:900;
   font-size:clamp(48px,9vw,80px);line-height:1;letter-spacing:.06em;
   color:color-mix(in srgb,var(--attr) 70%,var(--paper));
   opacity:.5;user-select:none;
 }
-.char-art .initial{
+.character-art .initial{
   position:relative;font-family:var(--display);font-weight:900;
   font-size:clamp(72px,13vw,116px);line-height:1;
   color:color-mix(in srgb,var(--attr) 55%,var(--paper));opacity:.62;user-select:none;
   text-shadow:0 0 46px color-mix(in srgb,var(--attr) 45%,transparent);
 }
-.char-art .rank{
+.character-art .rank{
   position:absolute;top:12px;left:14px;z-index:2;
   font-family:var(--mono);font-size:11px;letter-spacing:.1em;
   color:var(--gold);border:1px solid var(--gold);border-radius:2px;padding:2px 7px;
   background:rgba(20,19,26,.72);
 }
-.char-art .phase{
+.character-art .phase{
   position:absolute;top:12px;right:14px;z-index:2;margin:0;padding:2px 8px;border:0;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink);background:var(--attr);border-radius:2px;font-weight:600;
 }
-.char-art .attrline{
+.character-art .attrline{
   position:absolute;left:14px;right:14px;bottom:12px;z-index:2;
   display:flex;gap:8px;flex-wrap:wrap;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--paper-dim);
 }
-.char-art .attrline b{color:var(--attr);font-weight:500}
+.character-art .attrline b{color:var(--attr);font-weight:500}
 
 /* Art is Kuro's, hotlinked from Kuro's CDN. Say so, and link back to the post. */
-.char-credit{
+.character-credit{
   padding:7px 20px;border-bottom:1px solid var(--line);background:var(--ink);
   font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--paper-dim);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
-.char-credit a{color:var(--paper-dim);text-decoration:none;border-bottom:1px dotted var(--line)}
-.char-credit a:hover{color:var(--jade);border-bottom-color:var(--jade)}
-.char-epithet{
+.character-credit a{color:var(--paper-dim);text-decoration:none;border-bottom:1px dotted var(--line)}
+.character-credit a:hover{color:var(--jade);border-bottom-color:var(--jade)}
+.character-epithet{
   font-family:var(--display);font-style:italic;font-size:14.5px;
   color:var(--attr);margin-top:-6px;
 }
-.char-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
-.char-body h3{font-family:var(--display);font-weight:900;font-size:25px;margin:0;line-height:1.15}
-.char-body h3 small{
+.character-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.character-body h3{font-family:var(--display);font-weight:900;font-size:25px;margin:0;line-height:1.15}
+.character-body h3 small{
   display:block;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.12em;
   text-transform:uppercase;color:var(--paper-dim);margin-top:6px;
 }
-.char-body>p{margin:0;font-size:14px;color:#B7B0A4}
-.char-gear{
+.character-body>p{margin:0;font-size:14px;color:#B7B0A4}
+.character-gear{
   display:grid;gap:6px;font-family:var(--mono);font-size:11px;color:var(--paper-dim);
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;
 }
-.char-gear div{display:flex;gap:10px;justify-content:space-between;align-items:baseline}
-.char-gear b{color:var(--paper);font-weight:500;font-family:var(--body);font-size:13px;text-align:right}
-.char-know{margin-top:auto}
-.char-know-h{
+.character-gear div{display:flex;gap:10px;justify-content:space-between;align-items:baseline}
+.character-gear b{color:var(--paper);font-weight:500;font-family:var(--body);font-size:13px;text-align:right}
+.character-know{margin-top:auto}
+.character-know-h{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-dim);
 }
-.char-know ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
-.char-know li{
+.character-know ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.character-know li{
   position:relative;padding-left:15px;font-size:13.5px;color:#C4BDB0;line-height:1.5;
 }
-.char-know li::before{
+.character-know li::before{
   content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;
   background:var(--attr);border-radius:50%;
 }
-.char-know .none{font-size:13px;color:var(--paper-dim);font-style:italic}
+.character-know .none{font-size:13px;color:var(--paper-dim);font-style:italic}
 
 .reruns{margin-top:26px}
 .reruns h3{
@@ -409,7 +409,7 @@ footer{
   .entry{padding-left:12px}
   nav{overflow-x:auto}
   .ver{padding-left:22px}
-  .char-grid{grid-template-columns:1fr}
+  .character-grid{grid-template-columns:1fr}
   .auto-item{grid-template-columns:1fr;gap:5px}
   .auto-when{order:2}
 }
@@ -688,8 +688,8 @@ function characterCard(b, phaseWindow){
       ? `<span class="cjk">${esc(r.nameCN)}</span>`
       : `<span class="initial">${esc(b.name.slice(0,1))}</span>`;
 
-  return `<article class="char-card"${attrStyle(attribute)}>
-    <div class="char-art${image ? " has-art" : ""}">
+  return `<article class="character-card"${attrStyle(attribute)}>
+    <div class="character-art${image ? " has-art" : ""}">
       ${plate}
       ${rarity ? `<span class="rank">${esc(rarity)}★</span>` : ""}
       <span class="phase">Phase ${b.phase}</span>
@@ -699,19 +699,19 @@ function characterCard(b, phaseWindow){
         ${role ? `<span>${esc(role)}</span>` : ""}
       </span>
     </div>
-    ${credit ? `<div class="char-credit">
+    ${credit ? `<div class="character-credit">
       ${shared ? "Detail from" : "Key art"} ${esc(credit.credit)} —
       <a href="${esc(credit.source)}" target="_blank" rel="noopener">${esc(credit.articleTitle || credit.title)}</a>
     </div>` : ""}
-    <div class="char-body">
+    <div class="character-body">
       <h3>${esc(b.name)}${phaseWindow ? `<small>${phaseWindow}</small>` : ""}</h3>
-      ${art?.epithet ? `<div class="char-epithet">${esc(art.epithet)}</div>` : ""}
+      ${art?.epithet ? `<div class="character-epithet">${esc(art.epithet)}</div>` : ""}
       ${summary ? `<p>${esc(summary)}</p>` : ""}
-      ${gear.length ? `<div class="char-gear">${
+      ${gear.length ? `<div class="character-gear">${
         gear.map(([k,v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")
       }</div>` : ""}
-      <div class="char-know">
-        <div class="char-know-h">
+      <div class="character-know">
+        <div class="character-know-h">
           <span>What we know</span>
           ${kit.length ? `<span class="tag ${kitTier==="official"?"solid":""} t-${esc(kitTier||"rumour")}"><span>${esc(TIER_SHORT[kitTier]||"Unverified")}</span></span>` : ""}
         </div>
@@ -764,7 +764,7 @@ function renderUpcoming(){
       <h2>${esc(next.title || "Upcoming character banners")}</h2>
       <p>${esc(next.notes || "Confirmed banner plan, reruns and expected phases.")}</p>
     </div>
-    <div class="char-grid">${cards || `<div class="empty">No confirmed new characters yet.</div>`}</div>
+    <div class="character-grid">${cards || `<div class="empty">No confirmed new characters yet.</div>`}</div>
     ${reruns.length ? `<div class="reruns">
       <h3>Also rerunning — ${reruns.length} banner${reruns.length===1?"":"s"}</h3>
       <div class="reruns-list">${reruns.map(rerunCard).join("")}</div>
