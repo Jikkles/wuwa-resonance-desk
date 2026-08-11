@@ -48,9 +48,33 @@ So a character shows a typographic plate until Kuro reveals them, then picks up 
 art within 6 hours of the reveal going live. Characters absent from `art.json` are
 absent by design — it means no reveal post exists yet.
 
-Precedence is `banner.image` → `resonator.image` → resolved art → plate, so you can
-always override by hand. `"nameCN"` on a resonator becomes the plate glyph when there's
-no image at all.
+**Before the reveal**, you can crop a character out of the patch key visual, which Kuro
+publishes with the version preview and which usually shows the new characters. Put the
+image on the version and the framing on the banner row:
+
+```jsonc
+// versions.json — on the version
+"keyVisual": { "url": "…", "source": "…", "title": "…", "credit": "© Kuro Games" }
+
+// on the banner row
+"keyVisualFocus":  "left 50%",   // object-position — frames horizontally
+"keyVisualZoom":   1.72,         // a 16:9 visual in a 4:5 box has no vertical
+"keyVisualOrigin": "47% 19%"     // overflow, so zoom picks the height
+```
+
+All three are needed together: `keyVisualFocus` alone can only frame left/right, because
+`object-fit: cover` on a 16:9 source in a 4:5 box overflows horizontally only. Zoom in
+until the poster's own title and logo fall outside the crop.
+
+Full precedence: `banner.image` → `resonator.image` → resolved reveal art → key visual
+crop → plate. The key visual crop drops out on its own the moment a real reveal card
+exists, so you don't have to go back and clean it up. `"nameCN"` on a resonator becomes
+the plate glyph when there's no image at all.
+
+**What not to use:** fan wikis host extracted full-body character art (transparent
+background, no official framing) for characters Kuro hasn't revealed yet. That's beta
+client art on someone else's CDN — it breaks the rule below twice over. Crop the
+official key visual instead and let the reveal card replace it.
 
 ## Setup
 

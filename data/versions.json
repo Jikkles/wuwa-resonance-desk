@@ -10,6 +10,12 @@
       "region": "Mengzhou",
       "livestream": "2026-08-07",
       "start": "2026-08-20",
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1785945600000/5m6mwaa4skqjm0xr33-1786004223192.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5245",
+        "title": "Version 3.6 Preview key visual",
+        "credit": "© Kuro Games"
+      },
       "phases": [
         {
           "n": 1,
@@ -17,7 +23,7 @@
           "end": "2026-09-10",
           "estimated_end": true,
           "banners": [
-            { "name": "Qingxiao", "rarity": 5, "attribute": "Aero", "weapon": "Sword", "role": "Main DPS", "new": true, "convene": "Wind of Transcendence", "signature": "Glint of Clouds" },
+            { "name": "Qingxiao", "rarity": 5, "attribute": "Aero", "weapon": "Sword", "role": "Main DPS", "new": true, "convene": "Wind of Transcendence", "signature": "Glint of Clouds", "keyVisualFocus": "left 50%", "keyVisualZoom": 1.72, "keyVisualOrigin": "47% 19%" },
             { "name": "Denia", "rarity": 5, "attribute": "Fusion", "weapon": "Gauntlets", "rerun": true }
           ]
         },
@@ -28,7 +34,7 @@
           "estimated_start": true,
           "estimated_end": true,
           "banners": [
-            { "name": "Jingran", "rarity": 5, "attribute": "Fusion", "weapon": "Broadblade", "role": "Main DPS", "new": true, "signature": "Thousandfold Deliverance" },
+            { "name": "Jingran", "rarity": 5, "attribute": "Fusion", "weapon": "Broadblade", "role": "Main DPS", "new": true, "signature": "Thousandfold Deliverance", "keyVisualFocus": "right 50%", "keyVisualZoom": 1.38, "keyVisualOrigin": "60% 34%" },
             { "name": "Hiyuki", "rarity": 5, "attribute": "Glacio", "weapon": "Sword", "rerun": true, "signature": "Frostburn", "note": "First rerun" },
             { "name": "Mornye", "rarity": 5, "weapon": "Broadblade", "role": "Healer", "rerun": true, "signature": "Starfield Calibrator" }
           ]

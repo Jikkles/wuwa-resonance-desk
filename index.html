@@ -656,7 +656,14 @@ function characterCard(b, phaseWindow){
   const weapon = b.weapon || r.weapon;
   const role = b.role || r.role;
   const rarity = b.rarity || r.rarity;
-  const image = b.image || r.image || art?.url;
+
+  /* Precedence: hand-set image, then the character's own reveal card, then a
+     crop of the patch key visual, then the plate. The key visual is a wide
+     shared banner, so each banner row carries the side its character stands on
+     and it drops out the moment a real reveal card exists. */
+  const shared = !b.image && !r.image && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
+  const image = b.image || r.image || art?.url || shared?.url;
+  const credit = art && image === art.url ? art : shared;
   const kit = r.kit || [];
   const kitTier = r.confidence?.kit;
   const summary = r.summary || b.note || "";
@@ -667,8 +674,16 @@ function characterCard(b, phaseWindow){
     ["Accessory", r.accessory]
   ].filter(([, v]) => v);
 
+  /* A 16:9 key visual dropped into a 4:5 box has no vertical overflow, so
+     object-position alone can only frame horizontally. Zoom picks the height. */
+  const kvStyle = shared
+    ? ` style="object-position:${esc(b.keyVisualFocus)};` +
+      `transform:scale(${Number(b.keyVisualZoom) || 1});` +
+      `transform-origin:${esc(b.keyVisualOrigin || "50% 50%")}"`
+    : "";
+
   const plate = image
-    ? `<img src="${esc(image)}" alt="${esc(b.name)}" loading="lazy" decoding="async">`
+    ? `<img src="${esc(image)}" alt="${esc(b.name)}" loading="lazy" decoding="async"${kvStyle}>`
     : r.nameCN
       ? `<span class="cjk">${esc(r.nameCN)}</span>`
       : `<span class="initial">${esc(b.name.slice(0,1))}</span>`;
@@ -684,9 +699,9 @@ function characterCard(b, phaseWindow){
         ${role ? `<span>${esc(role)}</span>` : ""}
       </span>
     </div>
-    ${art && image === art.url ? `<div class="char-credit">
-      Key art ${esc(art.credit)} —
-      <a href="${esc(art.source)}" target="_blank" rel="noopener">${esc(art.articleTitle)}</a>
+    ${credit ? `<div class="char-credit">
+      ${shared ? "Detail from" : "Key art"} ${esc(credit.credit)} —
+      <a href="${esc(credit.source)}" target="_blank" rel="noopener">${esc(credit.articleTitle || credit.title)}</a>
     </div>` : ""}
     <div class="char-body">
       <h3>${esc(b.name)}${phaseWindow ? `<small>${phaseWindow}</small>` : ""}</h3>
@@ -734,7 +749,8 @@ function renderUpcoming(){
     return p.start ? `From ${fmtDate(p.start)}${est}` : "";
   });
   const pick = test => phases.flatMap((p, i) =>
-    (p.banners||[]).filter(test).map(b => ({...b, phase: p.n ?? i + 1, window: windows[i]}))
+    (p.banners||[]).filter(test)
+      .map(b => ({...b, phase: p.n ?? i + 1, window: windows[i], keyVisual: next.keyVisual}))
   );
 
   const newChars = pick(b => b.new);
