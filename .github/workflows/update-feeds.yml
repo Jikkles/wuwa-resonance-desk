@@ -29,16 +29,23 @@ jobs:
       - name: Fetch feeds
         run: node scripts/fetch-feeds.mjs
 
+      # Picks up official key art within 6h of Kuro publishing a reveal post.
+      # Independent of the feed run — one failing must not lose the other.
+      - name: Resolve character art
+        if: always()
+        run: node scripts/fetch-art.mjs
+
       - name: Commit if changed
+        if: always()
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/feed.json
+          git add data/feed.json data/art.json
           if git diff --staged --quiet; then
             echo "no change"
             exit 0
           fi
-          git commit -m "chore: refresh feed $(date -u +%Y-%m-%dT%H:%MZ)"
+          git commit -m "chore: refresh data $(date -u +%Y-%m-%dT%H:%MZ)"
           # Another run may have landed while this one was fetching.
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"

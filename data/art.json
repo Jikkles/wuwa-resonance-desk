@@ -1,0 +1,34 @@
+{
+  "schema": "wuwa-desk/art@1.0",
+  "note": "Official key art from Kuro's own Profile Reveal posts, hotlinked from Kuro's CDN. Not rehosted, not datamined. Characters with no reveal post yet are absent by design.",
+  "art": {
+    "Denia": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1778688000000/1m2w8dfhnxgpz9fl6t-1778730440505.jpg",
+      "epithet": "Bubbles of Nihility",
+      "articleId": 4665,
+      "articleTitle": "Profile Reveal | Bubbles of Nihility - Denia",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4665",
+      "published": "2026-05-17",
+      "credit": "© Kuro Games"
+    },
+    "Hiyuki": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1776960000000/9f554s5q2h9vw84tw0-1777007618905.jpg",
+      "epithet": "Futures' Tithe",
+      "articleId": 4570,
+      "articleTitle": "Profile Reveal | Futures' Tithe — Hiyuki",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4570",
+      "published": "2026-04-26",
+      "credit": "© Kuro Games"
+    },
+    "Mornye": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1767888000000/v8ovakuptj99hwtk28-1767954561638.jpg",
+      "epithet": "Astral Mapping",
+      "articleId": 3990,
+      "articleTitle": "Profile Reveal | Astral Mapping — Mornye",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3990",
+      "published": "2026-01-11",
+      "credit": "© Kuro Games"
+    }
+  },
+  "updated": "2026-08-11T20:50:17.426Z"
+}

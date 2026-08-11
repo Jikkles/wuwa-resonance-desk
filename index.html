@@ -144,31 +144,32 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
 .filters button[aria-pressed="true"]{background:var(--ink-3);color:var(--paper);border-color:var(--cinnabar)}
 .filters button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
 
-/* ---- upcoming hero ---- */
+/* ---- upcoming characters ---- */
 .upcoming{margin-bottom:52px}
-.hero-head{margin-bottom:22px}
-.hero-head .label{
+.up-head{margin-bottom:22px}
+.up-head .label{
   font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--cinnabar);margin-bottom:8px;
 }
-.hero-head h2{font-family:var(--display);font-weight:900;font-size:clamp(22px,3.6vw,30px);margin:0;line-height:1.2}
-.hero-head p{margin:10px 0 0;max-width:70ch;color:#B7B0A4;font-size:14.5px}
+.up-head h2{font-family:var(--display);font-weight:900;font-size:clamp(22px,3.6vw,30px);margin:0;line-height:1.2}
+.up-head p{margin:10px 0 0;max-width:70ch;color:#B7B0A4;font-size:14.5px}
 
-.hero-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
-.hero-card{
+.char-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.char-card{
   --attr:var(--cinnabar);
   position:relative;display:flex;flex-direction:column;
   background:var(--ink-2);border:1px solid var(--line);border-radius:4px;overflow:hidden;
   transition:border-color .2s,transform .2s;
 }
-.hero-card:hover{border-color:color-mix(in srgb,var(--attr) 55%,var(--line))}
-.hero-card::before{
+.char-card:hover{border-color:color-mix(in srgb,var(--attr) 55%,var(--line))}
+.char-card::before{
   content:"";position:absolute;inset:0 0 auto;height:2px;
   background:linear-gradient(90deg,var(--attr),transparent 70%);
 }
 
-/* portrait panel — art when we have it, typographic plate when we don't */
-.hero-art{
+/* Portrait panel. Kuro's key art is a 9:16 poster, so the panel goes tall when
+   there's art and stays shorter for the plate, which has nothing to show off. */
+.char-art{
   position:relative;aspect-ratio:16/10;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
   background:
@@ -176,9 +177,10 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
     linear-gradient(160deg, var(--ink-3), var(--ink));
   border-bottom:1px solid var(--line);
 }
+.char-art.has-art{aspect-ratio:4/5}
 /* Concentric resonance rings behind the plate, so a card with no art still
    looks composed rather than unfinished. Hidden once real art loads. */
-.hero-art:not(.has-art)::before{
+.char-art:not(.has-art)::before{
   content:"";position:absolute;left:50%;top:52%;width:112%;aspect-ratio:1;
   transform:translate(-50%,-50%);
   background:repeating-radial-gradient(circle at 50% 50%,
@@ -188,76 +190,94 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
   mask-image:radial-gradient(circle at 50% 50%, #000 12%, transparent 62%);
   opacity:.5;
 }
-.hero-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
-.hero-art::after{
+/* Kuro's poster carries its own logo at the top and a name plate at the bottom.
+   This crop drops both, since the card states the name itself. */
+.char-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 17%}
+.char-art::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(20,19,26,.92) 4%, rgba(20,19,26,.15) 55%, transparent);
+  background:
+    /* Posters vary in framing, so scrim the top rather than trusting the crop
+       to clear Kuro's logo every time. Also lifts the badges off the art. */
+    linear-gradient(to bottom, rgba(20,19,26,.80), rgba(20,19,26,.25) 9%, transparent 20%),
+    linear-gradient(to top, rgba(20,19,26,.92) 4%, rgba(20,19,26,.15) 55%, transparent);
 }
-.hero-art .cjk{
+.char-art .cjk{
   position:relative;font-family:var(--display);font-weight:900;
   font-size:clamp(48px,9vw,80px);line-height:1;letter-spacing:.06em;
   color:color-mix(in srgb,var(--attr) 70%,var(--paper));
   opacity:.5;user-select:none;
 }
-.hero-art .initial{
+.char-art .initial{
   position:relative;font-family:var(--display);font-weight:900;
   font-size:clamp(72px,13vw,116px);line-height:1;
   color:color-mix(in srgb,var(--attr) 55%,var(--paper));opacity:.62;user-select:none;
   text-shadow:0 0 46px color-mix(in srgb,var(--attr) 45%,transparent);
 }
-.hero-art .rank{
+.char-art .rank{
   position:absolute;top:12px;left:14px;z-index:2;
   font-family:var(--mono);font-size:11px;letter-spacing:.1em;
   color:var(--gold);border:1px solid var(--gold);border-radius:2px;padding:2px 7px;
   background:rgba(20,19,26,.72);
 }
-.hero-art .phase{
+.char-art .phase{
   position:absolute;top:12px;right:14px;z-index:2;margin:0;padding:2px 8px;border:0;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink);background:var(--attr);border-radius:2px;font-weight:600;
 }
-.hero-art .attrline{
+.char-art .attrline{
   position:absolute;left:14px;right:14px;bottom:12px;z-index:2;
   display:flex;gap:8px;flex-wrap:wrap;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--paper-dim);
 }
-.hero-art .attrline b{color:var(--attr);font-weight:500}
+.char-art .attrline b{color:var(--attr);font-weight:500}
 
-.hero-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
-.hero-body h3{font-family:var(--display);font-weight:900;font-size:25px;margin:0;line-height:1.15}
-.hero-body h3 small{
+/* Art is Kuro's, hotlinked from Kuro's CDN. Say so, and link back to the post. */
+.char-credit{
+  padding:7px 20px;border-bottom:1px solid var(--line);background:var(--ink);
+  font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--paper-dim);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.char-credit a{color:var(--paper-dim);text-decoration:none;border-bottom:1px dotted var(--line)}
+.char-credit a:hover{color:var(--jade);border-bottom-color:var(--jade)}
+.char-epithet{
+  font-family:var(--display);font-style:italic;font-size:14.5px;
+  color:var(--attr);margin-top:-6px;
+}
+.char-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.char-body h3{font-family:var(--display);font-weight:900;font-size:25px;margin:0;line-height:1.15}
+.char-body h3 small{
   display:block;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.12em;
   text-transform:uppercase;color:var(--paper-dim);margin-top:6px;
 }
-.hero-body>p{margin:0;font-size:14px;color:#B7B0A4}
-.hero-gear{
+.char-body>p{margin:0;font-size:14px;color:#B7B0A4}
+.char-gear{
   display:grid;gap:6px;font-family:var(--mono);font-size:11px;color:var(--paper-dim);
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;
 }
-.hero-gear div{display:flex;gap:10px;justify-content:space-between;align-items:baseline}
-.hero-gear b{color:var(--paper);font-weight:500;font-family:var(--body);font-size:13px;text-align:right}
-.hero-know{margin-top:auto}
-.hero-know-h{
+.char-gear div{display:flex;gap:10px;justify-content:space-between;align-items:baseline}
+.char-gear b{color:var(--paper);font-weight:500;font-family:var(--body);font-size:13px;text-align:right}
+.char-know{margin-top:auto}
+.char-know-h{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-dim);
 }
-.hero-know ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
-.hero-know li{
+.char-know ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.char-know li{
   position:relative;padding-left:15px;font-size:13.5px;color:#C4BDB0;line-height:1.5;
 }
-.hero-know li::before{
+.char-know li::before{
   content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;
   background:var(--attr);border-radius:50%;
 }
-.hero-know .none{font-size:13px;color:var(--paper-dim);font-style:italic}
+.char-know .none{font-size:13px;color:var(--paper-dim);font-style:italic}
 
-.hero-reruns{margin-top:26px}
-.hero-reruns h3{
+.reruns{margin-top:26px}
+.reruns h3{
   font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--paper-dim);margin:0 0 12px;font-weight:400;
 }
-.hero-reruns-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.reruns-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .rerun-card{
   --attr:var(--grey);
   display:flex;align-items:center;gap:13px;
@@ -271,7 +291,8 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
   font-family:var(--display);font-weight:900;font-size:19px;
   color:color-mix(in srgb,var(--attr) 65%,var(--paper));
 }
-.rerun-card .glyph img{width:100%;height:100%;object-fit:cover}
+/* Key art is a full-body poster — crop to the head for a 42px thumbnail. */
+.rerun-card .glyph img{width:100%;height:100%;object-fit:cover;object-position:center 14%}
 .rerun-card .who{min-width:0;flex:1}
 .rerun-card strong{display:block;font-family:var(--display);font-size:16px;font-weight:700}
 .rerun-card span{
@@ -388,7 +409,7 @@ footer{
   .entry{padding-left:12px}
   nav{overflow-x:auto}
   .ver{padding-left:22px}
-  .hero-grid{grid-template-columns:1fr}
+  .char-grid{grid-template-columns:1fr}
   .auto-item{grid-template-columns:1fr;gap:5px}
   .auto-when{order:2}
 }
@@ -462,7 +483,8 @@ const FALLBACK = {
   versions: {"updated":"2026-08-11","current":"3.5","versions":[]},
   news: {"updated":"2026-08-11","confidenceTiers":{},"entries":[]},
   resonators: {"updated":"2026-08-11","resonators":[]},
-  feed: {"schema":"wuwa-desk/feed@2.0","fetched":"","sources":[],"errors":[],"items":[]}
+  feed: {"schema":"wuwa-desk/feed@2.0","fetched":"","sources":[],"errors":[],"items":[]},
+  art:  {"schema":"wuwa-desk/art@1.0","art":{}}
 };
 
 const TIER_ORDER = ["official","datamined","reported","rumour"];
@@ -474,7 +496,7 @@ const TIER_LABEL = {
 };
 const TIER_SHORT = { official:"Confirmed", datamined:"Beta files", reported:"Leaker claim", rumour:"Unverified" };
 
-/* Attribute drives each hero card's accent so you can read the banner line at a glance. */
+/* Attribute drives each character card's accent so the banner line reads at a glance. */
 const ATTR_COLOUR = {
   aero:"#7FD4B0", glacio:"#78BFE8", fusion:"#E8734A",
   electro:"#B98BE0", spectro:"#E8C24A", havoc:"#D4557A"
@@ -611,7 +633,7 @@ function renderLegend(){
   ).join("");
 }
 
-/* ---------------- Upcoming (hero) ---------------- */
+/* ---------------- Upcoming characters ---------------- */
 
 /* Banners carry the schedule; resonators.json carries the detail. Merge on name
    so a card shows the kit without duplicating it into versions.json. */
@@ -621,13 +643,20 @@ function resonatorFor(name){
   ) || {};
 }
 
-function heroCard(b, phaseWindow){
+/* Official key art, resolved from Kuro's own reveal posts by fetch-art.mjs.
+   Absent until Kuro reveals the character — that's the plate's whole job. */
+function artFor(name){
+  return (DATA.art?.art || {})[name] || null;
+}
+
+function characterCard(b, phaseWindow){
   const r = resonatorFor(b.name);
+  const art = artFor(b.name);
   const attribute = b.attribute || r.attribute;
   const weapon = b.weapon || r.weapon;
   const role = b.role || r.role;
   const rarity = b.rarity || r.rarity;
-  const image = b.image || r.image;           // optional — official key art if Tom adds it
+  const image = b.image || r.image || art?.url;
   const kit = r.kit || [];
   const kitTier = r.confidence?.kit;
   const summary = r.summary || b.note || "";
@@ -644,8 +673,8 @@ function heroCard(b, phaseWindow){
       ? `<span class="cjk">${esc(r.nameCN)}</span>`
       : `<span class="initial">${esc(b.name.slice(0,1))}</span>`;
 
-  return `<article class="hero-card"${attrStyle(attribute)}>
-    <div class="hero-art${image ? " has-art" : ""}">
+  return `<article class="char-card"${attrStyle(attribute)}>
+    <div class="char-art${image ? " has-art" : ""}">
       ${plate}
       ${rarity ? `<span class="rank">${esc(rarity)}★</span>` : ""}
       <span class="phase">Phase ${b.phase}</span>
@@ -655,14 +684,19 @@ function heroCard(b, phaseWindow){
         ${role ? `<span>${esc(role)}</span>` : ""}
       </span>
     </div>
-    <div class="hero-body">
+    ${art && image === art.url ? `<div class="char-credit">
+      Key art ${esc(art.credit)} —
+      <a href="${esc(art.source)}" target="_blank" rel="noopener">${esc(art.articleTitle)}</a>
+    </div>` : ""}
+    <div class="char-body">
       <h3>${esc(b.name)}${phaseWindow ? `<small>${phaseWindow}</small>` : ""}</h3>
+      ${art?.epithet ? `<div class="char-epithet">${esc(art.epithet)}</div>` : ""}
       ${summary ? `<p>${esc(summary)}</p>` : ""}
-      ${gear.length ? `<div class="hero-gear">${
+      ${gear.length ? `<div class="char-gear">${
         gear.map(([k,v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")
       }</div>` : ""}
-      <div class="hero-know">
-        <div class="hero-know-h">
+      <div class="char-know">
+        <div class="char-know-h">
           <span>What we know</span>
           ${kit.length ? `<span class="tag ${kitTier==="official"?"solid":""} t-${esc(kitTier||"rumour")}"><span>${esc(TIER_SHORT[kitTier]||"Unverified")}</span></span>` : ""}
         </div>
@@ -677,7 +711,7 @@ function heroCard(b, phaseWindow){
 function rerunCard(b){
   const r = resonatorFor(b.name);
   const attribute = b.attribute || r.attribute;
-  const image = b.image || r.image;
+  const image = b.image || r.image || artFor(b.name)?.url;
   const info = [b.rarity||r.rarity ? (b.rarity||r.rarity)+"★" : "", attribute, b.weapon||r.weapon, b.role||r.role]
     .filter(Boolean).join(" · ");
   const glyph = image
@@ -706,18 +740,18 @@ function renderUpcoming(){
   const newChars = pick(b => b.new);
   const reruns = pick(b => b.rerun);
 
-  const cards = newChars.map(b => heroCard(b, b.window)).join("");
+  const cards = newChars.map(b => characterCard(b, b.window)).join("");
 
   $("#upcoming").innerHTML = `<div class="upcoming">
-    <div class="hero-head">
+    <div class="up-head">
       <div class="label">Next patch · ${esc(next.id)}${next.start ? ` · ${fmtDate(next.start)}` : ""}</div>
       <h2>${esc(next.title || "Upcoming character banners")}</h2>
       <p>${esc(next.notes || "Confirmed banner plan, reruns and expected phases.")}</p>
     </div>
-    <div class="hero-grid">${cards || `<div class="empty">No confirmed new characters yet.</div>`}</div>
-    ${reruns.length ? `<div class="hero-reruns">
+    <div class="char-grid">${cards || `<div class="empty">No confirmed new characters yet.</div>`}</div>
+    ${reruns.length ? `<div class="reruns">
       <h3>Also rerunning — ${reruns.length} banner${reruns.length===1?"":"s"}</h3>
-      <div class="hero-reruns-list">${reruns.map(rerunCard).join("")}</div>
+      <div class="reruns-list">${reruns.map(rerunCard).join("")}</div>
     </div>` : ""}
   </div>`;
 }
@@ -849,8 +883,10 @@ function initTabs(){
 
 /* ---------------- Boot ---------------- */
 (async function(){
-  const [versions, news, resonators, feed] = await Promise.all([load("versions"), load("news"), load("resonators"), load("feed")]);
-  DATA = { versions, news, resonators, feed };
+  const [versions, news, resonators, feed, art] = await Promise.all(
+    ["versions","news","resonators","feed","art"].map(load)
+  );
+  DATA = { versions, news, resonators, feed, art };
 
   const vs = versions.versions || [];
   const next = vs.find(v => v.status === "announced");

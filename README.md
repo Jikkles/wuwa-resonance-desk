@@ -10,7 +10,9 @@ data/versions.json             patch timeline + banner phases
 data/news.json                 curated leak/news entries
 data/resonators.json           character kit database
 data/feed.json                 auto-fetched headlines (written by Actions)
-scripts/fetch-feeds.mjs        the fetcher
+data/art.json                  resolved official key art (written by Actions)
+scripts/fetch-feeds.mjs        the headline fetcher
+scripts/fetch-art.mjs          the key art resolver
 .github/workflows/update-feeds.yml   cron, every 6h
 ```
 
@@ -27,16 +29,28 @@ The split matters. Auto Feed is a machine telling you something happened; Feed i
 deciding what it was worth. A cron job can't judge whether a post is a datamine or a
 guy guessing, so nothing it fetches carries a tier.
 
-### The hero cards
+### The character cards
 
-The Timeline tab opens with big panels for the new Resonators on the next `announced`
+The Timeline tab opens with big panels for the new characters on the next `announced`
 patch, plus a rerun row. Banner rows in `versions.json` are matched by `name` against
 `resonators.json`, so the kit list ("what we know") and its confidence tier come from
 the resonator record — don't duplicate that into `versions.json`.
 
-Cards render a typographic plate by default. Add `"image": "<url>"` to a banner or a
-resonator to swap in real art — official key art only, per the rules below. `"nameCN"`
-on a resonator is used as the plate glyph when there's no image.
+### Where the art comes from
+
+`scripts/fetch-art.mjs` resolves it, no manual step. Kuro publishes a **Profile
+Reveal** post per character on their own EN news site, and the first image in it is
+the official key art card. The script finds that post by character name, pulls the
+image URL, and writes `data/art.json`. The page hotlinks it from Kuro's CDN and
+credits it back to the source post.
+
+So a character shows a typographic plate until Kuro reveals them, then picks up real
+art within 6 hours of the reveal going live. Characters absent from `art.json` are
+absent by design — it means no reveal post exists yet.
+
+Precedence is `banner.image` → `resonator.image` → resolved art → plate, so you can
+always override by hand. `"nameCN"` on a resonator becomes the plate glyph when there's
+no image at all.
 
 ## Setup
 
@@ -106,5 +120,8 @@ repo activity — if the feed genuinely goes quiet that long, push anything to r
 ## Rules
 
 - Don't host datamined art or client assets. Link out. That's what gets these sites taken down.
+- Character art is Kuro's own promotional key art, hotlinked from Kuro's CDN and credited
+  back to the post it came from. Nothing is copied into this repo, and nothing comes out of
+  a client. If you ever add an `image` by hand, hold it to the same standard.
 - Never promote a `reported` entry to `official` without an actual Kuro source.
 - Beta multipliers shift between phases. Say so on every kit entry.
