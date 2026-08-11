@@ -1,0 +1,56 @@
+{
+  "schema": "wuwa-desk/versions@1.0",
+  "updated": "2026-08-11",
+  "current": "3.5",
+  "versions": [
+    {
+      "id": "3.6",
+      "title": "Lamplight in Mirage, Sword's Resolve in Heart",
+      "status": "announced",
+      "region": "Mengzhou",
+      "livestream": "2026-08-07",
+      "start": "2026-08-20",
+      "phases": [
+        {
+          "n": 1,
+          "start": "2026-08-20",
+          "end": "2026-09-10",
+          "estimated_end": true,
+          "banners": [
+            { "name": "Qingxiao", "rarity": 5, "attribute": "Aero", "weapon": "Sword", "role": "Main DPS", "new": true, "convene": "Wind of Transcendence", "signature": "Glint of Clouds" },
+            { "name": "Denia", "rarity": 5, "attribute": "Fusion", "weapon": "Gauntlets", "rerun": true }
+          ]
+        },
+        {
+          "n": 2,
+          "start": "2026-09-10",
+          "end": "2026-10-01",
+          "estimated_start": true,
+          "estimated_end": true,
+          "banners": [
+            { "name": "Jingran", "rarity": 5, "attribute": "Fusion", "weapon": "Broadblade", "role": "Main DPS", "new": true, "signature": "Thousandfold Deliverance" },
+            { "name": "Hiyuki", "rarity": 5, "attribute": "Glacio", "weapon": "Sword", "rerun": true, "signature": "Frostburn", "note": "First rerun" },
+            { "name": "Mornye", "rarity": 5, "weapon": "Broadblade", "role": "Healer", "rerun": true, "signature": "Starfield Calibrator" }
+          ]
+        }
+      ],
+      "notes": "42-day patch, two 21-day phases. Phase 2 runs three 5-star Resonator banners and three featured 5-star weapons against Phase 1's two. Budget Astrite for the back half."
+    },
+    {
+      "id": "3.5",
+      "title": "",
+      "status": "live",
+      "region": "Mengzhou",
+      "start": "2026-07-10",
+      "phases": [],
+      "notes": "Muyu stands as the arc antagonist heading into 3.6."
+    },
+    {
+      "id": "3.7",
+      "title": "",
+      "status": "beta",
+      "phases": [],
+      "notes": "Hsin flagged as an Electro Rectifier Sentinel. Beta had not opened as of 11 Aug 2026 - expect the first real datamine wave once it does."
+    }
+  ]
+}

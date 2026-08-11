@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resonance Desk — Wuthering Waves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14131A;
+  --ink-2:#1B1A23;
+  --ink-3:#24222E;
+  --line:#332F3F;
+  --paper:#EDE6D8;
+  --paper-dim:#948C7E;
+  --cinnabar:#C8443C;
+  --jade:#6BA292;
+  --gold:#C9A227;
+  --slate:#5E7FA8;
+  --grey:#6A6577;
+  --display:"Noto Serif SC",serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--body);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% -5%, rgba(200,68,60,.10), transparent 70%),
+    radial-gradient(ellipse 60% 45% at 90% 100%, rgba(107,162,146,.07), transparent 70%);
+}
+.wrap{position:relative;z-index:1;max-width:940px;margin:0 auto;padding:0 20px 96px}
+
+/* ---- masthead ---- */
+header{padding:44px 0 28px;border-bottom:1px solid var(--line)}
+.brandline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+h1{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(30px,6vw,46px);line-height:1;margin:0;
+  letter-spacing:-.01em;
+}
+h1 .cjk{color:var(--cinnabar);margin-right:.35em}
+.tagline{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--paper-dim);margin-top:14px;
+}
+.status{
+  display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;
+  font-family:var(--mono);font-size:11.5px;color:var(--paper-dim);
+}
+.status b{color:var(--paper);font-weight:500}
+.status .live::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--jade);margin-right:7px;vertical-align:middle;
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ---- tabs ---- */
+nav{display:flex;gap:2px;margin:26px 0 34px;border-bottom:1px solid var(--line)}
+nav button{
+  background:none;border:0;border-bottom:2px solid transparent;
+  color:var(--paper-dim);font-family:var(--mono);font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:12px 16px;cursor:pointer;margin-bottom:-1px;transition:color .15s,border-color .15s;
+}
+nav button:hover{color:var(--paper)}
+nav button[aria-selected="true"]{color:var(--paper);border-bottom-color:var(--cinnabar)}
+nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+
+/* ---- confidence labels ---- */
+.t-official{color:var(--cinnabar)}
+.t-datamined{color:var(--jade)}
+.t-reported{color:var(--slate)}
+.t-rumour{color:var(--grey)}
+
+.tag{
+  display:inline-block;font-family:var(--mono);font-weight:500;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  padding:4px 10px;border-radius:2px;border:1px solid currentColor;
+  white-space:nowrap;
+}
+.tag.solid{background:currentColor;border-color:currentColor}
+.tag.solid span{color:var(--ink)}
+
+/* ---- entry cards ---- */
+.entry{
+  padding:20px 0 22px 16px;border-bottom:1px solid var(--line);
+  border-left:3px solid currentColor;
+}
+.entry:last-child{border-bottom:0}
+.entry h3{
+  font-family:var(--display);font-weight:700;font-size:19px;
+  margin:0 0 8px;line-height:1.35;
+}
+.entry p{margin:0;color:#C4BDB0;font-size:14.5px}
+.meta{
+  display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+  font-family:var(--mono);font-size:11px;color:var(--paper-dim);
+  margin-bottom:9px;letter-spacing:.05em;
+}
+.chip{
+  border:1px solid var(--line);padding:2px 8px;border-radius:2px;
+  text-transform:uppercase;letter-spacing:.09em;
+}
+.chip.ver{border-color:var(--cinnabar);color:var(--cinnabar)}
+.srcs{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:11px}
+.srcs a,.srcs span{color:var(--paper-dim);text-decoration:none;border-bottom:1px dotted var(--line)}
+.srcs a:hover{color:var(--jade);border-bottom-color:var(--jade)}
+.lang{
+  display:inline-block;font-size:9px;padding:1px 4px;margin-right:5px;
+  border:1px solid var(--line);border-radius:2px;letter-spacing:.08em;
+}
+.outcome{color:var(--jade)}
+
+/* ---- filters ---- */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.filters button{
+  background:var(--ink-2);border:1px solid var(--line);color:var(--paper-dim);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 12px;border-radius:2px;cursor:pointer;transition:.15s;
+}
+.filters button:hover{color:var(--paper);border-color:var(--paper-dim)}
+.filters button[aria-pressed="true"]{background:var(--ink-3);color:var(--paper);border-color:var(--cinnabar)}
+.filters button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+
+/* ---- timeline ---- */
+.ver{
+  position:relative;padding:0 0 40px 34px;border-left:1px solid var(--line);
+}
+.ver:last-child{border-left-color:transparent}
+.ver::before{
+  content:"";position:absolute;left:-5px;top:6px;width:9px;height:9px;
+  background:var(--ink);border:1.5px solid var(--line);border-radius:50%;
+}
+.ver.is-live::before{background:var(--jade);border-color:var(--jade)}
+.ver.is-next::before{background:var(--cinnabar);border-color:var(--cinnabar)}
+.ver-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.ver-num{font-family:var(--display);font-weight:900;font-size:28px;line-height:1}
+.ver-title{font-family:var(--display);font-size:16px;color:var(--paper-dim);font-style:italic}
+.ver-state{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid currentColor;padding:2px 7px;border-radius:2px;
+}
+.s-live{color:var(--jade)}.s-announced{color:var(--cinnabar)}.s-beta{color:var(--slate)}
+.phase{margin-top:20px;padding-left:16px;border-left:2px solid var(--ink-3)}
+.phase-h{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-dim)}
+.banners{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.banner{
+  background:var(--ink-2);border:1px solid var(--line);border-radius:2px;
+  padding:9px 13px;min-width:132px;
+}
+.banner b{font-family:var(--display);font-size:15px;font-weight:700;display:block}
+.banner small{font-family:var(--mono);font-size:10px;color:var(--paper-dim);letter-spacing:.06em}
+.banner.new{border-left:2px solid var(--cinnabar)}
+.banner.rerun{border-left:2px solid var(--grey)}
+.est{color:var(--gold);font-style:normal}
+.note{
+  margin-top:16px;font-size:13.5px;color:var(--paper-dim);
+  border-left:2px solid var(--gold);padding-left:12px;
+}
+
+/* ---- resonators ---- */
+.res{
+  background:var(--ink-2);border:1px solid var(--line);border-radius:3px;
+  padding:20px;margin-bottom:14px;
+}
+.res-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.res-h b{font-family:var(--display);font-size:21px;font-weight:900}
+.res-attrs{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--paper-dim);letter-spacing:.06em}
+.res p{margin:0;font-size:14.5px;color:#C4BDB0}
+.empty{
+  font-family:var(--mono);font-size:12px;color:var(--paper-dim);
+  padding:34px 0;text-align:center;
+}
+.legend{
+  margin-top:36px;padding-top:22px;border-top:1px solid var(--line);
+  display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+}
+.legend div{font-size:12.5px;color:var(--paper-dim)}
+.legend b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+footer{
+  margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;color:var(--paper-dim);line-height:1.8;
+}
+@media (max-width:600px){
+  .entry{padding-left:12px}
+  nav{overflow-x:auto}
+  .ver{padding-left:22px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brandline">
+    <h1><span class="cjk">共鸣</span>Resonance Desk</h1>
+  </div>
+  <div class="tagline">Wuthering Waves · signal intercept &amp; patch tracking</div>
+  <div class="status">
+    <span class="live">Live version <b id="st-live">—</b></span>
+    <span>Next <b id="st-next">—</b></span>
+    <span>Entries <b id="st-count">—</b></span>
+    <span>Data updated <b id="st-updated">—</b></span>
+  </div>
+</header>
+
+<nav role="tablist">
+  <button role="tab" id="tab-timeline" aria-selected="true" aria-controls="p-timeline">Timeline</button>
+  <button role="tab" id="tab-feed" aria-selected="false" aria-controls="p-feed">Feed</button>
+  <button role="tab" id="tab-res" aria-selected="false" aria-controls="p-res">Resonators</button>
+</nav>
+
+<section id="p-timeline" role="tabpanel" aria-labelledby="tab-timeline"></section>
+
+<section id="p-feed" role="tabpanel" aria-labelledby="tab-feed" hidden>
+  <div class="filters" id="filters"></div>
+  <div id="feed-list"></div>
+  <div class="legend" id="legend"></div>
+</section>
+
+<section id="p-res" role="tabpanel" aria-labelledby="tab-res" hidden></section>
+
+<footer>
+  Entries are compiled from official broadcasts, beta datamines and community reporting.
+  Anything not tagged <span style="color:var(--cinnabar)">OFFICIAL</span> is pre-release and can change.<br>
+  No datamined art or client assets are hosted here — sources are linked out.
+</footer>
+
+</div>
+
+<script>
+"use strict";
+
+/* Fallback data so the page works when opened directly from disk.
+   When served over http (GitHub Pages), data/*.json wins. */
+const FALLBACK = {
+  versions: {"updated":"2026-08-11","current":"3.5","versions":[]},
+  news: {"updated":"2026-08-11","confidenceTiers":{},"entries":[]},
+  resonators: {"updated":"2026-08-11","resonators":[]}
+};
+
+const TIER_ORDER = ["official","datamined","reported","rumour"];
+const TIER_LABEL = {
+  official:  "Confirmed by Kuro",
+  datamined: "Beta files",
+  reported:  "Leaker claim",
+  rumour:    "Unverified"
+};
+const TIER_SHORT = { official:"Confirmed", datamined:"Beta files", reported:"Leaker claim", rumour:"Unverified" };
+
+let DATA = {}, activeTier = "all";
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function load(name){
+  try{
+    const r = await fetch(`data/${name}.json`, {cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    return await r.json();
+  }catch(e){
+    return FALLBACK[name];
+  }
+}
+
+function fmtDate(d){
+  if(!d) return "";
+  const dt = new Date(d + "T00:00:00");
+  if(isNaN(dt)) return d;
+  return dt.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+}
+
+function tierTag(tier){
+  const label = TIER_LABEL[tier] || "Unverified";
+  const solid = tier === "official";
+  return `<span class="tag ${solid?"solid":""}"><span>${esc(label)}</span></span>`;
+}
+
+/* ---------------- Timeline ---------------- */
+function renderTimeline(){
+  const vs = DATA.versions.versions || [];
+  if(!vs.length){ $("#p-timeline").innerHTML = `<div class="empty">No versions in versions.json yet.</div>`; return; }
+
+  const order = {announced:0, live:1, beta:2};
+  const sorted = [...vs].sort((a,b) => (order[a.status] ?? 3) - (order[b.status] ?? 3));
+
+  $("#p-timeline").innerHTML = sorted.map(v => {
+    const cls = v.status === "live" ? "is-live" : v.status === "announced" ? "is-next" : "";
+    const phases = (v.phases||[]).map(p => {
+      const startEst = p.estimated_start ? ` <span class="est">(est)</span>` : "";
+      const endEst = p.estimated_end ? ` <span class="est">(est)</span>` : "";
+      const range = [p.start ? fmtDate(p.start)+startEst : "", p.end ? fmtDate(p.end)+endEst : ""]
+        .filter(Boolean).join(" &rarr; ");
+      const banners = (p.banners||[]).map(b => {
+        const bits = [b.rarity ? b.rarity+"★" : "", b.attribute, b.weapon, b.role].filter(Boolean).join(" · ");
+        return `<div class="banner ${b.new?"new":b.rerun?"rerun":""}">
+          <b>${esc(b.name)}</b>
+          <small>${esc(bits) || (b.rerun ? "Rerun" : "")}${b.rerun && bits ? " · Rerun" : ""}</small>
+        </div>`;
+      }).join("");
+      return `<div class="phase">
+        <div class="phase-h">Phase ${p.n} — ${range}</div>
+        <div class="banners">${banners || '<div class="banner"><small>TBC</small></div>'}</div>
+      </div>`;
+    }).join("");
+
+    return `<div class="ver ${cls}">
+      <div class="ver-head">
+        <span class="ver-num">${esc(v.id)}</span>
+        <span class="ver-state s-${esc(v.status)}">${esc(v.status)}</span>
+        ${v.title ? `<span class="ver-title">${esc(v.title)}</span>` : ""}
+      </div>
+      ${v.region ? `<div class="meta" style="margin-top:10px"><span class="chip">${esc(v.region)}</span>${v.start?`<span>Launches ${fmtDate(v.start)}</span>`:""}${v.livestream?`<span>Preview ${fmtDate(v.livestream)}</span>`:""}</div>`:""}
+      ${phases}
+      ${v.notes ? `<div class="note">${esc(v.notes)}</div>` : ""}
+    </div>`;
+  }).join("");
+}
+
+/* ---------------- Feed ---------------- */
+function renderFilters(){
+  const counts = {};
+  (DATA.news.entries||[]).forEach(e => counts[e.confidence] = (counts[e.confidence]||0)+1);
+  const btns = [["all","Everything"]].concat(TIER_ORDER.filter(t=>counts[t]).map(t=>[t,TIER_SHORT[t]]));
+  $("#filters").innerHTML = btns.map(([k,label]) =>
+    `<button data-tier="${k}" aria-pressed="${activeTier===k}">${label}${k!=="all"?` ${counts[k]}`:""}</button>`
+  ).join("");
+  $("#filters").querySelectorAll("button").forEach(b => b.onclick = () => {
+    activeTier = b.dataset.tier; renderFilters(); renderFeed();
+  });
+}
+
+function renderFeed(){
+  let list = [...(DATA.news.entries||[])].sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+  if(activeTier !== "all") list = list.filter(e => e.confidence === activeTier);
+
+  $("#feed-list").innerHTML = list.length ? list.map(e => {
+    const srcs = (e.sources||[]).map(s => {
+      const flag = `<span class="lang">${esc((s.lang||"??").toUpperCase())}</span>`;
+      return s.url
+        ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${flag}${esc(s.name)}</a>`
+        : `<span>${flag}${esc(s.name)}</span>`;
+    }).join("");
+    return `<article class="entry t-${esc(e.confidence)}">
+      <div class="meta">
+        ${tierTag(e.confidence)}
+        <span>${fmtDate(e.date)}</span>
+        ${e.version ? `<span class="chip ver">${esc(e.version)}</span>` : ""}
+        ${e.category ? `<span class="chip">${esc(e.category)}</span>` : ""}
+        ${e.outcome === "confirmed" ? `<span class="outcome">✓ this one turned out right</span>` : ""}
+        ${e.outcome === "superseded" ? `<span style="color:var(--gold)">✕ this one was wrong</span>` : ""}
+      </div>
+      <h3>${esc(e.title)}</h3>
+      <p>${esc(e.body)}</p>
+      ${srcs ? `<div class="srcs">${srcs}</div>` : ""}
+    </article>`;
+  }).join("") : `<div class="empty">Nothing at this confidence level.</div>`;
+}
+
+function renderLegend(){
+  const tiers = DATA.news.confidenceTiers || {};
+  const keys = TIER_ORDER.filter(t => tiers[t]);
+  $("#legend").innerHTML = keys.map(t =>
+    `<div class="t-${t}"><b>${TIER_LABEL[t]}</b><span style="color:var(--paper-dim)">${esc(tiers[t])}</span></div>`
+  ).join("");
+}
+
+/* ---------------- Resonators ---------------- */
+function renderRes(){
+  const rs = DATA.resonators.resonators || [];
+  $("#p-res").innerHTML = rs.length ? rs.map(r => {
+    const attrs = [r.rarity?r.rarity+"★":"", r.attribute, r.weapon, r.role, r.version?"v"+r.version:""]
+      .filter(Boolean).map(a=>`<span>${esc(a)}</span>`).join("");
+    const gear = [
+      r.signature ? `Signature <b style="color:var(--paper);font-weight:500">${esc(r.signature)}</b>` : "",
+      r.accessory ? `Accessory <b style="color:var(--paper);font-weight:500">${esc(r.accessory)}</b>` : "",
+      r.convene ? `Convene <b style="color:var(--paper);font-weight:500">${esc(r.convene)}</b>` : ""
+    ].filter(Boolean).join(" · ");
+    const kitTier = r.confidence && r.confidence.kit;
+    return `<div class="res">
+      <div class="res-h">
+        <b>${esc(r.name)}</b>
+        ${r.nameCN ? `<span style="font-family:var(--display);color:var(--cinnabar)">${esc(r.nameCN)}</span>`:""}
+        ${r.status ? `<span class="ver-state s-${r.status==="released"?"live":"announced"}">${esc(r.status)}</span>`:""}
+      </div>
+      <div class="res-attrs">${attrs}</div>
+      ${gear ? `<div class="res-attrs" style="margin-top:8px">${gear}</div>` : ""}
+      ${r.summary ? `<p style="margin-top:12px">${esc(r.summary)}</p>` : ""}
+      ${(r.kit&&r.kit.length) ? `
+        <div class="meta t-${esc(kitTier||"rumour")}" style="margin:16px 0 8px">
+          <span class="tag ${kitTier==="official"?"solid":""}"><span>Kit — ${esc(TIER_SHORT[kitTier]||"Unverified")}</span></span>
+        </div>
+        <ul style="margin:0;padding-left:18px;color:#C4BDB0;font-size:14px">${r.kit.map(k=>`<li>${esc(k)}</li>`).join("")}</ul>`:""}
+    </div>`;
+  }).join("") : `<div class="empty">No resonators in resonators.json yet.</div>`;
+
+  if(rs.length) $("#p-res").innerHTML += `<div class="note">Kit detail on unreleased resonators is pre-balance. Multipliers routinely shift between beta phases.</div>`;
+}
+
+/* ---------------- Tabs ---------------- */
+function initTabs(){
+  const map = {"tab-timeline":"p-timeline","tab-feed":"p-feed","tab-res":"p-res"};
+  Object.keys(map).forEach(id => {
+    document.getElementById(id).onclick = () => {
+      Object.entries(map).forEach(([t,p]) => {
+        const on = t === id;
+        document.getElementById(t).setAttribute("aria-selected", on);
+        document.getElementById(p).hidden = !on;
+      });
+    };
+  });
+}
+
+/* ---------------- Boot ---------------- */
+(async function(){
+  const [versions, news, resonators] = await Promise.all([load("versions"), load("news"), load("resonators")]);
+  DATA = { versions, news, resonators };
+
+  const vs = versions.versions || [];
+  const next = vs.find(v => v.status === "announced");
+  $("#st-live").textContent = versions.current || "—";
+  $("#st-next").textContent = next ? `${next.id} · ${fmtDate(next.start)}` : "—";
+  $("#st-count").textContent = (news.entries||[]).length;
+  $("#st-updated").textContent = fmtDate(news.updated) || "—";
+
+  initTabs();
+  renderTimeline();
+  renderFilters();
+  renderFeed();
+  renderLegend();
+  renderRes();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+{
+  "schema": "wuwa-desk/news@1.0",
+  "updated": "2026-08-11",
+  "confidenceTiers": {
+    "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
+    "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
+    "reported": "A leaker with a decent track record said it. No file evidence attached, so it could be wrong.",
+    "rumour": "One unverified source, or sources disagreeing. Assume it's wrong until something better shows up."
+  },
+  "entries": [
+    {
+      "id": "2026-08-07-36-preview",
+      "date": "2026-08-07",
+      "version": "3.6",
+      "category": "banner",
+      "confidence": "official",
+      "title": "3.6 Preview Broadcast locks the patch to 20 August",
+      "body": "Version 3.6, Lamplight in Mirage, Sword's Resolve in Heart, launches 20 August after maintenance ends at 11:00 UTC+8. The patch runs 42 days across two 21-day phases. Phase 1 pairs Qingxiao with a Denia rerun; Phase 2 brings Jingran alongside Hiyuki and Mornye. Only the Phase 2 start date remains inferred from the standard cycle.",
+      "tags": [
+        "3.6",
+        "banners",
+        "livestream"
+      ],
+      "sources": [
+        {
+          "name": "RPG Site",
+          "lang": "en",
+          "url": "https://www.rpgsite.net/news/21075-wuthering-waves-version-3-6-release-date-gameplay-trailer-dlss-4-5"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-07-36-weapons",
+      "date": "2026-08-07",
+      "version": "3.6",
+      "category": "weapon",
+      "confidence": "official",
+      "title": "Glint of Clouds and Thousandfold Deliverance headline the weapon convenes",
+      "body": "Qingxiao's signature Sword, Glint of Clouds, leads Phase 1. Jingran's Broadblade, Thousandfold Deliverance, leads Phase 2 alongside two returning signatures - Frostburn for Hiyuki and Starfield Calibrator for Mornye. Three featured 5-star weapons in the back half against two in the front.",
+      "tags": [
+        "3.6",
+        "weapons"
+      ],
+      "sources": [
+        {
+          "name": "MMORPG.com",
+          "lang": "en",
+          "url": "https://www.mmorpg.com/news/continue-the-main-story-in-wuthering-waves-36-with-two-new-resonators-optimizations-new-echoes-and-more-2000138681"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-08-thousandfold-stats",
+      "date": "2026-08-08",
+      "version": "3.6",
+      "category": "weapon",
+      "confidence": "datamined",
+      "title": "Thousandfold Deliverance stat line surfaces pre-release",
+      "body": "Pre-release data puts Jingran's signature Broadblade at 413 base ATK with a 72.2% HP secondary at level 90, plus shield-linked effects. The HP-weighted profile lines up with his Max HP scaling and empowered Heavy Attacks. Weapon substats have historically held steadier than skill multipliers between beta phases, but this is still pre-balance.",
+      "tags": [
+        "3.6",
+        "Jingran",
+        "weapons"
+      ],
+      "sources": [
+        {
+          "name": "BuffHub",
+          "lang": "en",
+          "url": "https://buffhub.com/blog/wuthering-waves/wuthering-waves-3-6-banner.html"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-07-36-events",
+      "date": "2026-08-07",
+      "version": "3.6",
+      "category": "event",
+      "confidence": "official",
+      "title": "Six events, headlined by Resonance Sim Realm",
+      "body": "Resonance Sim Realm is the standout - a Black Shores simulation that switches to a top-down camera where you control only Rover but borrow other Resonators' abilities. Landing skill hits charges a Forte Gauge that lets you summon or transform into that Resonator. Alongside it: If Dreams Still Reverberate (co-op combat), The Strings Remember (guqin melodies taught by Qingxiao over seven daily tasks), Second Coming of Solaris: Coded Deception, Wuthering Exploration: Fogveil Pagoda, and Gifts of Drifting Mist, a seven-day login track worth up to five Radiant and five Lustrous Tides.",
+      "tags": [
+        "3.6",
+        "events"
+      ],
+      "sources": [
+        {
+          "name": "Niche Gamer",
+          "lang": "en",
+          "url": "https://nichegamer.com/wuthering-waves-update-3-6-launches-this-month/"
+        },
+        {
+          "name": "u7buy livestream summary",
+          "lang": "en",
+          "url": "https://www.u7buy.com/blog/wuthering-waves-3-6-livestream-summary/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-07-36-echoes",
+      "date": "2026-08-07",
+      "version": "3.6",
+      "category": "system",
+      "confidence": "official",
+      "title": "Calamity Effigy joins as a farmable Echo",
+      "body": "Calamity Effigy becomes obtainable through normal gameplay. The patch also adds the Phantom Echo Myriad Snare: Rustfire Chassis and a matching Tactical Hologram built around the same mechanical boss.",
+      "tags": [
+        "3.6",
+        "echoes"
+      ],
+      "sources": [
+        {
+          "name": "Niche Gamer",
+          "lang": "en",
+          "url": "https://nichegamer.com/wuthering-waves-update-3-6-launches-this-month/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-07-36-qol",
+      "date": "2026-08-07",
+      "version": "3.6",
+      "category": "qol",
+      "confidence": "official",
+      "title": "Echo management overhaul, DLSS 4.5, 200-message mailbox",
+      "body": "Echo equipment recommendations get more precise, with equipment previews and build suggestions tied to the selected plan. PC picks up DLSS 4.5 frame generation with reduced ghosting. The mailbox expands to 200 messages with higher attachment limits and a collection feature to stop accidental bulk deletes.",
+      "tags": [
+        "3.6",
+        "qol"
+      ],
+      "sources": [
+        {
+          "name": "MMORPG.com",
+          "lang": "en",
+          "url": "https://www.mmorpg.com/news/continue-the-main-story-in-wuthering-waves-36-with-two-new-resonators-optimizations-new-echoes-and-more-2000138681"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-05-36-story",
+      "date": "2026-08-05",
+      "version": "3.6",
+      "category": "story",
+      "confidence": "datamined",
+      "title": "Story climaxes at the Gospel Palace of Mechas",
+      "body": "Beta files describe Muyu uploading his consciousness into a vast mecha and burning the lingering echoes of Xuanfang's dead as fuel. Malfunctioning structures convert the surrounding landscape into a metallic city, and the sequence ends in a sky collapse over the region. Chapter IV Act III and Chapter IV Segue are the official chapter labels.",
+      "tags": [
+        "3.6",
+        "story",
+        "Muyu"
+      ],
+      "sources": [
+        {
+          "name": "MMO Culture",
+          "lang": "en",
+          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+        }
+      ]
+    },
+    {
+      "id": "2026-07-26-qingxiao-kit",
+      "date": "2026-07-26",
+      "version": "3.6",
+      "category": "kit",
+      "confidence": "datamined",
+      "title": "Qingxiao runs a guqin that seals her flying swords",
+      "body": "Beta build shows all her swords sealed inside the guqin in her default state, with the instrument acting as a support weapon while the swords carry her combat. A dual-resource gauge fills to unlock an Ethereal Immortal State for heavy aerial sword barrages. Tune Strain is the associated mechanic. Multipliers in this build are pre-balance.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "kit"
+      ],
+      "sources": [
+        {
+          "name": "MMO Culture",
+          "lang": "en",
+          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+        },
+        {
+          "name": "allthings.how",
+          "lang": "en",
+          "url": "https://allthings.how/wuthering-waves-3-6-leaks-qingxiao-and-jingran-characters-and-weapons/"
+        }
+      ]
+    },
+    {
+      "id": "2026-07-26-jingran-kit",
+      "date": "2026-07-26",
+      "version": "3.6",
+      "category": "kit",
+      "confidence": "datamined",
+      "title": "Jingran alternates Negative Yin and Embracing Yang via Heavy Attack",
+      "body": "HP-scaling Fusion carry with self-generated shields, opening in Embracing Yang and swapping stance on Heavy Attack. Normal Attacks run four segments in both states. Life Fire upkeep drives specter damage. His Resonance Liberation is described as extinguishing the Life Lantern to open the gates of the underworld, pulling enemies in. Leaks also flag strong aerial combat.",
+      "tags": [
+        "3.6",
+        "Jingran",
+        "kit"
+      ],
+      "sources": [
+        {
+          "name": "TOPUPlive",
+          "lang": "en",
+          "url": "https://www.topuplive.com/news/wuwa-3-6-jingran-build.html"
+        },
+        {
+          "name": "allthings.how",
+          "lang": "en",
+          "url": "https://allthings.how/wuthering-waves-3-6-qingxiao-and-jingran-attributes-and-weapon-types/"
+        }
+      ]
+    },
+    {
+      "id": "2026-07-28-36-banner-leak",
+      "date": "2026-07-28",
+      "version": "3.6",
+      "category": "banner",
+      "confidence": "reported",
+      "title": "Banner order surfaces three weeks ahead of the broadcast",
+      "body": "Phase 1 Qingxiao and Denia, Phase 2 Jingran with Hiyuki and Mornye. Circulated via nanoka before the official preview and matched the broadcast exactly.",
+      "tags": [
+        "3.6",
+        "banners"
+      ],
+      "sources": [
+        {
+          "name": "nanoka.cc via Sportskeeda",
+          "lang": "zh",
+          "url": "https://www.sportskeeda.com/esports/wuwa-3-6-banners-leaked-wuthering-waves"
+        }
+      ],
+      "outcome": "confirmed"
+    },
+    {
+      "id": "2026-07-20-yuno-phase2",
+      "date": "2026-07-20",
+      "version": "3.6",
+      "category": "banner",
+      "confidence": "reported",
+      "title": "Early leaks put Yuno in Phase 2 - later datamines removed her",
+      "body": "Initial reporting had Yuno running alongside Jingran in the back half. Fresh beta data replaced that with a triple-rerun format. A useful reminder that early banner reporting shifts as the beta progresses, and that the later datamine usually wins.",
+      "tags": [
+        "3.6",
+        "banners"
+      ],
+      "sources": [
+        {
+          "name": "MMO Culture",
+          "lang": "en",
+          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+        }
+      ],
+      "outcome": "superseded"
+    },
+    {
+      "id": "2026-08-05-hsin-37",
+      "date": "2026-08-05",
+      "version": "3.7",
+      "category": "kit",
+      "confidence": "reported",
+      "title": "Hsin teased as an Electro Rectifier Sentinel",
+      "body": "A Mandelbrot fractal image circulated as a gameplay hint, read as pointing at a recursive, self-scaling kit. Nothing beyond the teaser is in files yet.",
+      "tags": [
+        "3.7",
+        "Hsin"
+      ],
+      "sources": [
+        {
+          "name": "MMO Culture",
+          "lang": "en",
+          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-05-federation-arc",
+      "date": "2026-08-05",
+      "version": null,
+      "category": "story",
+      "confidence": "reported",
+      "title": "4.x said to move the story to the Federation for roughly a year",
+      "body": "The next major arc is reported to run around eight version patches. Long-horizon roadmap claims like this are the least reliable category on the desk - hold at reported until something official lands.",
+      "tags": [
+        "4.x",
+        "roadmap"
+      ],
+      "sources": [
+        {
+          "name": "MMO Culture",
+          "lang": "en",
+          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-05-hiyuki-skin",
+      "date": "2026-08-05",
+      "version": null,
+      "category": "cosmetic",
+      "confidence": "rumour",
+      "title": "Hiyuki skin hinted for late 2026",
+      "body": "Loosely tied to her Phase 2 rerun. Single-source and no file evidence.",
+      "tags": [
+        "Hiyuki",
+        "cosmetic"
+      ],
+      "sources": [
+        {
+          "name": "MMO Culture",
+          "lang": "en",
+          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+        }
+      ]
+    },
+    {
+      "id": "2026-02-14-hakush-shutdown",
+      "date": "2026-02-14",
+      "version": null,
+      "category": "meta",
+      "confidence": "official",
+      "title": "hakush.in shuts down",
+      "body": "The maintainer announced he could no longer keep the site running, citing personal circumstances, and took the servers down the same day. It had served beta kit data for WuWa, Genshin, Star Rail and ZZZ for roughly two years. Its API was the backbone of a lot of third-party theorycrafting tools, several of which broke overnight.",
+      "tags": [
+        "ecosystem",
+        "datamine"
+      ],
+      "sources": [
+        {
+          "name": "Maintainer statement",
+          "lang": "en",
+          "url": ""
+        }
+      ]
+    }
+  ]
+}
