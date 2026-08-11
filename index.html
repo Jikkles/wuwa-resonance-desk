@@ -177,9 +177,10 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
     linear-gradient(160deg, var(--ink-3), var(--ink));
   border-bottom:1px solid var(--line);
 }
-.character-art.has-art{aspect-ratio:4/5}
-/* Concentric resonance rings behind the plate, so a card with no art still
-   looks composed rather than unfinished. Hidden once real art loads. */
+.character-art.has-art,
+.character-art.has-cutout{aspect-ratio:4/5}
+/* Concentric resonance rings. They back the plate when there's no art at all,
+   and stay behind a transparent cutout — only full-bleed art hides them. */
 .character-art:not(.has-art)::before{
   content:"";position:absolute;left:50%;top:52%;width:112%;aspect-ratio:1;
   transform:translate(-50%,-50%);
@@ -193,6 +194,16 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
 /* Kuro's poster carries its own logo at the top and a name plate at the bottom.
    This crop drops both, since the card states the name itself. */
 .character-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 17%}
+/* A cutout has no background of its own — show it whole, standing on the base of
+   the panel, and let the rings and the attribute glow read through behind it. */
+.character-art.has-cutout img{
+  object-fit:contain;object-position:center bottom;
+  filter:drop-shadow(0 14px 30px rgba(0,0,0,.5));
+}
+/* The full-bleed scrim would grey out a cutout's legs — keep it much lighter. */
+.character-art.has-cutout::after{
+  background:linear-gradient(to top, rgba(20,19,26,.72) 0%, rgba(20,19,26,.10) 26%, transparent 46%);
+}
 .character-art::after{
   content:"";position:absolute;inset:0;
   background:
@@ -469,7 +480,8 @@ footer{
 <footer>
   Entries are compiled from official broadcasts, beta datamines and community reporting.
   Anything not tagged <span style="color:var(--cinnabar)">OFFICIAL</span> is pre-release and can change.<br>
-  No datamined art or client assets are hosted here — sources are linked out.
+  Character art is © Kuro Games and used here unofficially; pre-release art is labelled as such on the card.
+  Not affiliated with Kuro Games. A personal fan project.
 </footer>
 
 </div>
@@ -664,6 +676,11 @@ function characterCard(b, phaseWindow){
   const shared = !b.image && !r.image && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
   const image = b.image || r.image || art?.url || shared?.url;
   const credit = art && image === art.url ? art : shared;
+
+  /* A cutout is a transparent full-body render, so it sits ON the plate rather
+     than replacing it — the resonance rings stay visible behind the figure. */
+  const cutout = image === (b.image || r.image) && (b.imageStyle || r.imageStyle) === "cutout";
+  const imageCredit = cutout ? (b.imageCredit || r.imageCredit) : null;
   const kit = r.kit || [];
   const kitTier = r.confidence?.kit;
   const summary = r.summary || b.note || "";
@@ -689,7 +706,7 @@ function characterCard(b, phaseWindow){
       : `<span class="initial">${esc(b.name.slice(0,1))}</span>`;
 
   return `<article class="character-card"${attrStyle(attribute)}>
-    <div class="character-art${image ? " has-art" : ""}">
+    <div class="character-art${cutout ? " has-cutout" : image ? " has-art" : ""}">
       ${plate}
       ${rarity ? `<span class="rank">${esc(rarity)}★</span>` : ""}
       <span class="phase">Phase ${b.phase}</span>
@@ -699,6 +716,7 @@ function characterCard(b, phaseWindow){
         ${role ? `<span>${esc(role)}</span>` : ""}
       </span>
     </div>
+    ${imageCredit ? `<div class="character-credit">${esc(imageCredit)}</div>` : ""}
     ${credit ? `<div class="character-credit">
       ${shared ? "Detail from" : "Key art"} ${esc(credit.credit)} —
       <a href="${esc(credit.source)}" target="_blank" rel="noopener">${esc(credit.articleTitle || credit.title)}</a>

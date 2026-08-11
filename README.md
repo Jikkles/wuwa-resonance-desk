@@ -11,6 +11,7 @@ data/news.json                 curated leak/news entries
 data/resonators.json           character kit database
 data/feed.json                 auto-fetched headlines (written by Actions)
 data/art.json                  resolved official key art (written by Actions)
+assets/characters/             hosted character art
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
 .github/workflows/update-feeds.yml   cron, every 6h
@@ -71,10 +72,28 @@ crop → plate. The key visual crop drops out on its own the moment a real revea
 exists, so you don't have to go back and clean it up. `"nameCN"` on a resonator becomes
 the plate glyph when there's no image at all.
 
-**What not to use:** fan wikis host extracted full-body character art (transparent
-background, no official framing) for characters Kuro hasn't revealed yet. That's beta
-client art on someone else's CDN — it breaks the rule below twice over. Crop the
-official key visual instead and let the reveal card replace it.
+### Hosted character art
+
+Full-body cutouts live in `assets/characters/<name>.webp` and win over everything else.
+Point a resonator at one:
+
+```jsonc
+"image": "assets/characters/qingxiao.webp",
+"imageStyle": "cutout",                      // transparent PNG/WebP, not a full-bleed photo
+"imageCredit": "Character art © Kuro Games · pre-release, from 3.6 beta files"
+```
+
+`imageStyle: "cutout"` switches the panel to `object-fit: contain` with the figure
+standing on the base, keeps the resonance rings and attribute glow visible behind it,
+and lightens the scrim so the legs don't grey out. Without it the image is treated as
+full-bleed and cropped.
+
+Prep before committing one: trim the fully-transparent margins and downscale to ~1100px
+on the long edge. Untrimmed 2048² files are roughly double the size for no visible gain
+at the ~490px the card actually renders.
+
+Never hotlink another fan site's CDN for these — it leeches their bandwidth and breaks
+the moment they rename a file. Download it into `assets/`.
 
 ## Setup
 
@@ -143,9 +162,11 @@ repo activity — if the feed genuinely goes quiet that long, push anything to r
 
 ## Rules
 
-- Don't host datamined art or client assets. Link out. That's what gets these sites taken down.
-- Character art is Kuro's own promotional key art, hotlinked from Kuro's CDN and credited
-  back to the post it came from. Nothing is copied into this repo, and nothing comes out of
-  a client. If you ever add an `image` by hand, hold it to the same standard.
+- Character art is hosted in `assets/characters/`, including pre-release art pulled from
+  beta files. This is a deliberate call: it's Kuro's IP, it's the thing that gets fan sites
+  taken down, and the project accepts that risk. Every such image carries an `imageCredit`
+  saying so on the card. If the risk calculus ever changes, delete the `image` fields and
+  the cards fall back to official key art on their own.
+- Everything else still links out rather than being copied — sources, articles, threads.
 - Never promote a `reported` entry to `official` without an actual Kuro source.
 - Beta multipliers shift between phases. Say so on every kit entry.
