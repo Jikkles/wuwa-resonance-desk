@@ -5,12 +5,20 @@ on:
     - cron: "0 */6 * * *"   # every 6 hours
   workflow_dispatch:
 
+# Needs Settings -> Actions -> Workflow permissions set to "Read and write",
+# or the push step fails on every run.
 permissions:
   contents: write
+
+# A slow run must not overlap the next scheduled one and race the push.
+concurrency:
+  group: update-feeds
+  cancel-in-progress: false
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -26,5 +34,11 @@ jobs:
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
           git add data/feed.json
-          git diff --staged --quiet || git commit -m "chore: refresh feed $(date -u +%Y-%m-%dT%H:%MZ)"
-          git push
+          if git diff --staged --quiet; then
+            echo "no change"
+            exit 0
+          fi
+          git commit -m "chore: refresh feed $(date -u +%Y-%m-%dT%H:%MZ)"
+          # Another run may have landed while this one was fetching.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Resonance Desk — Wuthering Waves</title>
+<meta name="description" content="Wuthering Waves patch timeline, upcoming Resonators and leak tracking, sorted by how much you should trust it.">
+<meta name="theme-color" content="#14131A">
+<!-- Tuning fork = resonance. Inline so there's no extra request and nothing to 404. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%2314131A'/%3E%3Cpath d='M17 33a15 15 0 0 1 30 0' fill='none' stroke='%236BA292' stroke-width='3.5' stroke-linecap='round' opacity='.85'/%3E%3Cpath d='M23 13v17a9 9 0 0 0 18 0V13' fill='none' stroke='%23C8443C' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M32 39v13' stroke='%23C8443C' stroke-width='6.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -23,6 +27,8 @@
   --display:"Noto Serif SC",serif;
   --body:"IBM Plex Sans",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
+  /* per-card accent, overridden inline from the resonator's attribute */
+  --attr:#C8443C;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -40,7 +46,7 @@ body::before{
     radial-gradient(ellipse 70% 50% at 15% -5%, rgba(200,68,60,.10), transparent 70%),
     radial-gradient(ellipse 60% 45% at 90% 100%, rgba(107,162,146,.07), transparent 70%);
 }
-.wrap{position:relative;z-index:1;max-width:940px;margin:0 auto;padding:0 20px 96px}
+.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 20px 96px}
 
 /* ---- masthead ---- */
 header{padding:44px 0 28px;border-bottom:1px solid var(--line)}
@@ -74,6 +80,7 @@ nav button{
   color:var(--paper-dim);font-family:var(--mono);font-size:12px;
   letter-spacing:.1em;text-transform:uppercase;
   padding:12px 16px;cursor:pointer;margin-bottom:-1px;transition:color .15s,border-color .15s;
+  white-space:nowrap;flex:none;
 }
 nav button:hover{color:var(--paper)}
 nav button[aria-selected="true"]{color:var(--paper);border-bottom-color:var(--cinnabar)}
@@ -114,7 +121,9 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
   border:1px solid var(--line);padding:2px 8px;border-radius:2px;
   text-transform:uppercase;letter-spacing:.09em;
 }
-.chip.ver{border-color:var(--cinnabar);color:var(--cinnabar)}
+/* Not `.chip.ver` — that also matches the timeline's `.ver` block and inherits
+   its 40px padding and node dot, which wrecks the chip. */
+.chip.is-ver{border-color:var(--cinnabar);color:var(--cinnabar)}
 .srcs{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:11px}
 .srcs a,.srcs span{color:var(--paper-dim);text-decoration:none;border-bottom:1px dotted var(--line)}
 .srcs a:hover{color:var(--jade);border-bottom-color:var(--jade)}
@@ -134,6 +143,187 @@ nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
 .filters button:hover{color:var(--paper);border-color:var(--paper-dim)}
 .filters button[aria-pressed="true"]{background:var(--ink-3);color:var(--paper);border-color:var(--cinnabar)}
 .filters button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
+
+/* ---- upcoming hero ---- */
+.upcoming{margin-bottom:52px}
+.hero-head{margin-bottom:22px}
+.hero-head .label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cinnabar);margin-bottom:8px;
+}
+.hero-head h2{font-family:var(--display);font-weight:900;font-size:clamp(22px,3.6vw,30px);margin:0;line-height:1.2}
+.hero-head p{margin:10px 0 0;max-width:70ch;color:#B7B0A4;font-size:14.5px}
+
+.hero-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.hero-card{
+  --attr:var(--cinnabar);
+  position:relative;display:flex;flex-direction:column;
+  background:var(--ink-2);border:1px solid var(--line);border-radius:4px;overflow:hidden;
+  transition:border-color .2s,transform .2s;
+}
+.hero-card:hover{border-color:color-mix(in srgb,var(--attr) 55%,var(--line))}
+.hero-card::before{
+  content:"";position:absolute;inset:0 0 auto;height:2px;
+  background:linear-gradient(90deg,var(--attr),transparent 70%);
+}
+
+/* portrait panel — art when we have it, typographic plate when we don't */
+.hero-art{
+  position:relative;aspect-ratio:16/10;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 115%, color-mix(in srgb,var(--attr) 42%,transparent), transparent 72%),
+    linear-gradient(160deg, var(--ink-3), var(--ink));
+  border-bottom:1px solid var(--line);
+}
+/* Concentric resonance rings behind the plate, so a card with no art still
+   looks composed rather than unfinished. Hidden once real art loads. */
+.hero-art:not(.has-art)::before{
+  content:"";position:absolute;left:50%;top:52%;width:112%;aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  background:repeating-radial-gradient(circle at 50% 50%,
+    transparent 0 17px,
+    color-mix(in srgb,var(--attr) 30%,transparent) 17px 18px);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 12%, transparent 62%);
+  mask-image:radial-gradient(circle at 50% 50%, #000 12%, transparent 62%);
+  opacity:.5;
+}
+.hero-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.hero-art::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(20,19,26,.92) 4%, rgba(20,19,26,.15) 55%, transparent);
+}
+.hero-art .cjk{
+  position:relative;font-family:var(--display);font-weight:900;
+  font-size:clamp(48px,9vw,80px);line-height:1;letter-spacing:.06em;
+  color:color-mix(in srgb,var(--attr) 70%,var(--paper));
+  opacity:.5;user-select:none;
+}
+.hero-art .initial{
+  position:relative;font-family:var(--display);font-weight:900;
+  font-size:clamp(72px,13vw,116px);line-height:1;
+  color:color-mix(in srgb,var(--attr) 55%,var(--paper));opacity:.62;user-select:none;
+  text-shadow:0 0 46px color-mix(in srgb,var(--attr) 45%,transparent);
+}
+.hero-art .rank{
+  position:absolute;top:12px;left:14px;z-index:2;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  color:var(--gold);border:1px solid var(--gold);border-radius:2px;padding:2px 7px;
+  background:rgba(20,19,26,.72);
+}
+.hero-art .phase{
+  position:absolute;top:12px;right:14px;z-index:2;margin:0;padding:2px 8px;border:0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);background:var(--attr);border-radius:2px;font-weight:600;
+}
+.hero-art .attrline{
+  position:absolute;left:14px;right:14px;bottom:12px;z-index:2;
+  display:flex;gap:8px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--paper-dim);
+}
+.hero-art .attrline b{color:var(--attr);font-weight:500}
+
+.hero-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.hero-body h3{font-family:var(--display);font-weight:900;font-size:25px;margin:0;line-height:1.15}
+.hero-body h3 small{
+  display:block;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--paper-dim);margin-top:6px;
+}
+.hero-body>p{margin:0;font-size:14px;color:#B7B0A4}
+.hero-gear{
+  display:grid;gap:6px;font-family:var(--mono);font-size:11px;color:var(--paper-dim);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;
+}
+.hero-gear div{display:flex;gap:10px;justify-content:space-between;align-items:baseline}
+.hero-gear b{color:var(--paper);font-weight:500;font-family:var(--body);font-size:13px;text-align:right}
+.hero-know{margin-top:auto}
+.hero-know-h{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-dim);
+}
+.hero-know ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.hero-know li{
+  position:relative;padding-left:15px;font-size:13.5px;color:#C4BDB0;line-height:1.5;
+}
+.hero-know li::before{
+  content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;
+  background:var(--attr);border-radius:50%;
+}
+.hero-know .none{font-size:13px;color:var(--paper-dim);font-style:italic}
+
+.hero-reruns{margin-top:26px}
+.hero-reruns h3{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--paper-dim);margin:0 0 12px;font-weight:400;
+}
+.hero-reruns-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.rerun-card{
+  --attr:var(--grey);
+  display:flex;align-items:center;gap:13px;
+  background:var(--ink-2);border:1px solid var(--line);border-left:2px solid var(--attr);
+  border-radius:3px;padding:12px 14px;
+}
+.rerun-card .glyph{
+  flex:none;width:42px;height:42px;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:linear-gradient(150deg,color-mix(in srgb,var(--attr) 34%,var(--ink-3)),var(--ink));
+  font-family:var(--display);font-weight:900;font-size:19px;
+  color:color-mix(in srgb,var(--attr) 65%,var(--paper));
+}
+.rerun-card .glyph img{width:100%;height:100%;object-fit:cover}
+.rerun-card .who{min-width:0;flex:1}
+.rerun-card strong{display:block;font-family:var(--display);font-size:16px;font-weight:700}
+.rerun-card span{
+  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  color:var(--paper-dim);text-transform:uppercase;margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.rerun-card .ph{
+  flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--paper-dim);border:1px solid var(--line);border-radius:2px;padding:2px 7px;
+}
+
+/* ---- auto feed ---- */
+.auto-summary{margin-bottom:16px}
+.auto-note{
+  font-size:13px;color:var(--paper-dim);border-left:2px solid var(--slate);
+  padding:2px 0 2px 12px;margin-bottom:18px;max-width:75ch;
+}
+.src-strip{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 4px}
+.src-pill{
+  font-family:var(--mono);font-size:10px;letter-spacing:.07em;
+  border:1px solid var(--line);border-radius:2px;padding:3px 8px;color:var(--paper-dim);
+}
+.src-pill::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:6px;vertical-align:middle;background:var(--grey)}
+.src-pill.ok::before{background:var(--jade)}
+.src-pill.skipped::before{background:var(--gold)}
+.src-pill.failed::before{background:var(--cinnabar)}
+.src-pill.failed{color:var(--cinnabar);border-color:var(--cinnabar)}
+
+.auto-item{
+  display:grid;grid-template-columns:88px 1fr;gap:16px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid var(--ink-3);
+}
+.auto-item:last-child{border-bottom:0}
+.auto-when{font-family:var(--mono);font-size:11px;color:var(--paper-dim);letter-spacing:.04em;white-space:nowrap}
+.auto-item h3{margin:0;font-size:15px;font-weight:500;line-height:1.45;font-family:var(--body)}
+.auto-item h3 a{color:var(--paper);text-decoration:none;border-bottom:1px solid transparent}
+.auto-item h3 a:hover{border-bottom-color:var(--paper-dim)}
+.auto-item.hot h3 a{color:#F0E7D6}
+.auto-meta{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:6px;
+  font-family:var(--mono);font-size:10.5px;color:var(--paper-dim);letter-spacing:.06em;
+}
+.kind{
+  text-transform:uppercase;letter-spacing:.11em;border:1px solid currentColor;
+  border-radius:2px;padding:1px 6px;
+}
+.kind.official{color:var(--cinnabar)}
+.kind.video{color:var(--gold)}
+.kind.community{color:var(--jade)}
+.kind.press{color:var(--slate)}
+.auto-hot{color:var(--gold)}
 
 /* ---- timeline ---- */
 .ver{
@@ -198,6 +388,9 @@ footer{
   .entry{padding-left:12px}
   nav{overflow-x:auto}
   .ver{padding-left:22px}
+  .hero-grid{grid-template-columns:1fr}
+  .auto-item{grid-template-columns:1fr;gap:5px}
+  .auto-when{order:2}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -221,10 +414,14 @@ footer{
 <nav role="tablist">
   <button role="tab" id="tab-timeline" aria-selected="true" aria-controls="p-timeline">Timeline</button>
   <button role="tab" id="tab-feed" aria-selected="false" aria-controls="p-feed">Feed</button>
-  <button role="tab" id="tab-res" aria-selected="false" aria-controls="p-res">Resonators</button>
+  <button role="tab" id="tab-auto" aria-selected="false" aria-controls="p-auto">Auto Feed</button>
+  <button role="tab" id="tab-res" aria-selected="false" aria-controls="p-res" tabindex="-1">Resonators</button>
 </nav>
 
-<section id="p-timeline" role="tabpanel" aria-labelledby="tab-timeline"></section>
+<section id="p-timeline" role="tabpanel" aria-labelledby="tab-timeline">
+  <div id="upcoming"></div>
+  <div id="timeline-content"></div>
+</section>
 
 <section id="p-feed" role="tabpanel" aria-labelledby="tab-feed" hidden>
   <div class="filters" id="filters"></div>
@@ -232,7 +429,21 @@ footer{
   <div class="legend" id="legend"></div>
 </section>
 
-<section id="p-res" role="tabpanel" aria-labelledby="tab-res" hidden></section>
+<section id="p-auto" role="tabpanel" aria-labelledby="tab-auto" hidden>
+  <div class="auto-note">
+    Raw headlines pulled every 6 hours from Kuro's official EN site, Kurobbs, the official
+    YouTube channel, the leak subreddits and the games press. <b>Nothing here is tiered or
+    verified</b> — it's a lead list. Anything that survives a read gets written up under Feed.
+  </div>
+  <div class="auto-summary" id="auto-summary"></div>
+  <div class="filters" id="auto-filters"></div>
+  <div id="auto-feed"></div>
+</section>
+
+<section id="p-res" role="tabpanel" aria-labelledby="tab-res" hidden>
+  <div id="res-list"></div>
+  <div id="res-note"></div>
+</section>
 
 <footer>
   Entries are compiled from official broadcasts, beta datamines and community reporting.
@@ -250,7 +461,8 @@ footer{
 const FALLBACK = {
   versions: {"updated":"2026-08-11","current":"3.5","versions":[]},
   news: {"updated":"2026-08-11","confidenceTiers":{},"entries":[]},
-  resonators: {"updated":"2026-08-11","resonators":[]}
+  resonators: {"updated":"2026-08-11","resonators":[]},
+  feed: {"schema":"wuwa-desk/feed@2.0","fetched":"","sources":[],"errors":[],"items":[]}
 };
 
 const TIER_ORDER = ["official","datamined","reported","rumour"];
@@ -262,7 +474,21 @@ const TIER_LABEL = {
 };
 const TIER_SHORT = { official:"Confirmed", datamined:"Beta files", reported:"Leaker claim", rumour:"Unverified" };
 
-let DATA = {}, activeTier = "all";
+/* Attribute drives each hero card's accent so you can read the banner line at a glance. */
+const ATTR_COLOUR = {
+  aero:"#7FD4B0", glacio:"#78BFE8", fusion:"#E8734A",
+  electro:"#B98BE0", spectro:"#E8C24A", havoc:"#D4557A"
+};
+/* Returns "" when the attribute isn't known yet, so the card keeps its own
+   neutral default rather than claiming an element it hasn't been given. */
+const attrStyle = a => {
+  const c = ATTR_COLOUR[String(a||"").toLowerCase()];
+  return c ? ` style="--attr:${c}"` : "";
+};
+
+const KIND_LABEL = { official:"Official", video:"Video", community:"Community", press:"Press" };
+
+let DATA = {}, activeTier = "all", activeKind = "all";
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -279,9 +505,15 @@ async function load(name){
 
 function fmtDate(d){
   if(!d) return "";
-  const dt = new Date(d + "T00:00:00");
+  const dt = new Date(d);
   if(isNaN(dt)) return d;
   return dt.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+}
+
+function fmtDateTime(d){
+  const dt = new Date(d);
+  if(isNaN(dt)) return String(d);
+  return dt.toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
 }
 
 function tierTag(tier){
@@ -293,12 +525,12 @@ function tierTag(tier){
 /* ---------------- Timeline ---------------- */
 function renderTimeline(){
   const vs = DATA.versions.versions || [];
-  if(!vs.length){ $("#p-timeline").innerHTML = `<div class="empty">No versions in versions.json yet.</div>`; return; }
+  if(!vs.length){ $("#timeline-content").innerHTML = `<div class="empty">No versions in versions.json yet.</div>`; return; }
 
   const order = {announced:0, live:1, beta:2};
   const sorted = [...vs].sort((a,b) => (order[a.status] ?? 3) - (order[b.status] ?? 3));
 
-  $("#p-timeline").innerHTML = sorted.map(v => {
+  $("#timeline-content").innerHTML = sorted.map(v => {
     const cls = v.status === "live" ? "is-live" : v.status === "announced" ? "is-next" : "";
     const phases = (v.phases||[]).map(p => {
       const startEst = p.estimated_start ? ` <span class="est">(est)</span>` : "";
@@ -359,7 +591,7 @@ function renderFeed(){
       <div class="meta">
         ${tierTag(e.confidence)}
         <span>${fmtDate(e.date)}</span>
-        ${e.version ? `<span class="chip ver">${esc(e.version)}</span>` : ""}
+        ${e.version ? `<span class="chip is-ver">${esc(e.version)}</span>` : ""}
         ${e.category ? `<span class="chip">${esc(e.category)}</span>` : ""}
         ${e.outcome === "confirmed" ? `<span class="outcome">✓ this one turned out right</span>` : ""}
         ${e.outcome === "superseded" ? `<span style="color:var(--gold)">✕ this one was wrong</span>` : ""}
@@ -379,10 +611,178 @@ function renderLegend(){
   ).join("");
 }
 
+/* ---------------- Upcoming (hero) ---------------- */
+
+/* Banners carry the schedule; resonators.json carries the detail. Merge on name
+   so a card shows the kit without duplicating it into versions.json. */
+function resonatorFor(name){
+  return (DATA.resonators.resonators||[]).find(
+    r => r.name.toLowerCase() === String(name||"").toLowerCase()
+  ) || {};
+}
+
+function heroCard(b, phaseWindow){
+  const r = resonatorFor(b.name);
+  const attribute = b.attribute || r.attribute;
+  const weapon = b.weapon || r.weapon;
+  const role = b.role || r.role;
+  const rarity = b.rarity || r.rarity;
+  const image = b.image || r.image;           // optional — official key art if Tom adds it
+  const kit = r.kit || [];
+  const kitTier = r.confidence?.kit;
+  const summary = r.summary || b.note || "";
+
+  const gear = [
+    ["Signature", b.signature || r.signature],
+    ["Convene", b.convene || r.convene],
+    ["Accessory", r.accessory]
+  ].filter(([, v]) => v);
+
+  const plate = image
+    ? `<img src="${esc(image)}" alt="${esc(b.name)}" loading="lazy" decoding="async">`
+    : r.nameCN
+      ? `<span class="cjk">${esc(r.nameCN)}</span>`
+      : `<span class="initial">${esc(b.name.slice(0,1))}</span>`;
+
+  return `<article class="hero-card"${attrStyle(attribute)}>
+    <div class="hero-art${image ? " has-art" : ""}">
+      ${plate}
+      ${rarity ? `<span class="rank">${esc(rarity)}★</span>` : ""}
+      <span class="phase">Phase ${b.phase}</span>
+      <span class="attrline">
+        ${attribute ? `<b>${esc(attribute)}</b>` : ""}
+        ${weapon ? `<span>${esc(weapon)}</span>` : ""}
+        ${role ? `<span>${esc(role)}</span>` : ""}
+      </span>
+    </div>
+    <div class="hero-body">
+      <h3>${esc(b.name)}${phaseWindow ? `<small>${phaseWindow}</small>` : ""}</h3>
+      ${summary ? `<p>${esc(summary)}</p>` : ""}
+      ${gear.length ? `<div class="hero-gear">${
+        gear.map(([k,v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")
+      }</div>` : ""}
+      <div class="hero-know">
+        <div class="hero-know-h">
+          <span>What we know</span>
+          ${kit.length ? `<span class="tag ${kitTier==="official"?"solid":""} t-${esc(kitTier||"rumour")}"><span>${esc(TIER_SHORT[kitTier]||"Unverified")}</span></span>` : ""}
+        </div>
+        ${kit.length
+          ? `<ul>${kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>`
+          : `<div class="none">Nothing in the files yet — identity only.</div>`}
+      </div>
+    </div>
+  </article>`;
+}
+
+function rerunCard(b){
+  const r = resonatorFor(b.name);
+  const attribute = b.attribute || r.attribute;
+  const image = b.image || r.image;
+  const info = [b.rarity||r.rarity ? (b.rarity||r.rarity)+"★" : "", attribute, b.weapon||r.weapon, b.role||r.role]
+    .filter(Boolean).join(" · ");
+  const glyph = image
+    ? `<img src="${esc(image)}" alt="" loading="lazy" decoding="async">`
+    : esc((r.nameCN || b.name).slice(0,1));
+  return `<div class="rerun-card"${attrStyle(attribute)}>
+    <div class="glyph">${glyph}</div>
+    <div class="who"><strong>${esc(b.name)}</strong><span>${esc(info || "Rerun")}</span></div>
+    <span class="ph">P${b.phase}</span>
+  </div>`;
+}
+
+function renderUpcoming(){
+  const next = DATA.versions.versions?.find(v => v.status === "announced");
+  if(!next){ $("#upcoming").innerHTML = `<div class="empty">No upcoming patch data available.</div>`; return; }
+
+  const phases = next.phases || [];
+  const windows = phases.map(p => {
+    const est = p.estimated_start ? " (est)" : "";
+    return p.start ? `From ${fmtDate(p.start)}${est}` : "";
+  });
+  const pick = test => phases.flatMap((p, i) =>
+    (p.banners||[]).filter(test).map(b => ({...b, phase: p.n ?? i + 1, window: windows[i]}))
+  );
+
+  const newChars = pick(b => b.new);
+  const reruns = pick(b => b.rerun);
+
+  const cards = newChars.map(b => heroCard(b, b.window)).join("");
+
+  $("#upcoming").innerHTML = `<div class="upcoming">
+    <div class="hero-head">
+      <div class="label">Next patch · ${esc(next.id)}${next.start ? ` · ${fmtDate(next.start)}` : ""}</div>
+      <h2>${esc(next.title || "Upcoming character banners")}</h2>
+      <p>${esc(next.notes || "Confirmed banner plan, reruns and expected phases.")}</p>
+    </div>
+    <div class="hero-grid">${cards || `<div class="empty">No confirmed new characters yet.</div>`}</div>
+    ${reruns.length ? `<div class="hero-reruns">
+      <h3>Also rerunning — ${reruns.length} banner${reruns.length===1?"":"s"}</h3>
+      <div class="hero-reruns-list">${reruns.map(rerunCard).join("")}</div>
+    </div>` : ""}
+  </div>`;
+}
+
+/* ---------------- Auto feed ---------------- */
+function autoItems(){
+  return [...(DATA.feed?.items||[])].sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+}
+
+function renderAutoSummary(){
+  const feed = DATA.feed || {};
+  const srcs = feed.sources || [];
+  const items = autoItems();
+  const strip = srcs.map(s =>
+    `<span class="src-pill ${esc(s.status)}" title="${esc(s.error || s.status)}">${esc(s.name)} ${s.count}</span>`
+  ).join("");
+
+  $("#auto-summary").innerHTML = `<div class="meta">
+      <span>Last run <b style="color:var(--paper)">${feed.fetched ? esc(fmtDateTime(feed.fetched)) : "—"}</b></span>
+      <span>${items.length} headline${items.length===1?"":"s"}</span>
+      <span>${srcs.filter(s=>s.status==="ok").length}/${srcs.length} sources responding</span>
+    </div>
+    ${strip ? `<div class="src-strip">${strip}</div>` : ""}
+    ${(feed.errors||[]).length ? `<div class="note">${esc(feed.errors.join(" · "))}</div>` : ""}`;
+}
+
+function renderAutoFilters(){
+  const counts = {};
+  autoItems().forEach(i => counts[i.kind] = (counts[i.kind]||0)+1);
+  const btns = [["all","Everything"], ["hot","Worth a look"]]
+    .concat(Object.keys(KIND_LABEL).filter(k=>counts[k]).map(k=>[k, KIND_LABEL[k]]));
+  $("#auto-filters").innerHTML = btns.map(([k,label]) => {
+    const n = k==="all" ? autoItems().length : k==="hot" ? autoItems().filter(i=>i.hot).length : counts[k];
+    return `<button data-kind="${k}" aria-pressed="${activeKind===k}">${label} ${n}</button>`;
+  }).join("");
+  $("#auto-filters").querySelectorAll("button").forEach(b => b.onclick = () => {
+    activeKind = b.dataset.kind; renderAutoFilters(); renderAutoFeed();
+  });
+}
+
+function renderAutoFeed(){
+  let items = autoItems();
+  if(activeKind === "hot") items = items.filter(i => i.hot);
+  else if(activeKind !== "all") items = items.filter(i => i.kind === activeKind);
+
+  $("#auto-feed").innerHTML = items.length ? items.map(i => `
+    <article class="auto-item ${i.hot?"hot":""}">
+      <div class="auto-when">${esc(fmtDate(i.date))}</div>
+      <div>
+        <h3><a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a></h3>
+        <div class="auto-meta">
+          <span class="kind ${esc(i.kind)}">${esc(KIND_LABEL[i.kind] || i.kind)}</span>
+          ${i.lang ? `<span class="lang">${esc(i.lang.toUpperCase())}</span>` : ""}
+          <span>${esc(i.source || "")}</span>
+          ${i.hot ? `<span class="auto-hot">◆ worth a look</span>` : ""}
+        </div>
+      </div>
+    </article>`).join("")
+    : `<div class="empty">${DATA.feed?.items?.length ? "Nothing in this category." : "No auto feed items yet — the fetcher has not run."}</div>`;
+}
+
 /* ---------------- Resonators ---------------- */
 function renderRes(){
   const rs = DATA.resonators.resonators || [];
-  $("#p-res").innerHTML = rs.length ? rs.map(r => {
+  $("#res-list").innerHTML = rs.length ? rs.map(r => {
     const attrs = [r.rarity?r.rarity+"★":"", r.attribute, r.weapon, r.role, r.version?"v"+r.version:""]
       .filter(Boolean).map(a=>`<span>${esc(a)}</span>`).join("");
     const gear = [
@@ -408,27 +808,49 @@ function renderRes(){
     </div>`;
   }).join("") : `<div class="empty">No resonators in resonators.json yet.</div>`;
 
-  if(rs.length) $("#p-res").innerHTML += `<div class="note">Kit detail on unreleased resonators is pre-balance. Multipliers routinely shift between beta phases.</div>`;
+  $("#res-note").innerHTML = rs.length
+    ? `<div class="note">Kit detail on unreleased resonators is pre-balance. Multipliers routinely shift between beta phases.</div>`
+    : "";
 }
 
 /* ---------------- Tabs ---------------- */
+const TABS = {"tab-timeline":"p-timeline","tab-feed":"p-feed","tab-auto":"p-auto","tab-res":"p-res"};
+
+function selectTab(id, focus){
+  if(!TABS[id]) return;
+  Object.entries(TABS).forEach(([t,p]) => {
+    const on = t === id;
+    const btn = document.getElementById(t);
+    btn.setAttribute("aria-selected", on);
+    btn.tabIndex = on ? 0 : -1;             // roving tabindex, one stop for the tablist
+    document.getElementById(p).hidden = !on;
+  });
+  if(focus) document.getElementById(id).focus();
+  const slug = TABS[id].slice(2);
+  if(location.hash.slice(1) !== slug) history.replaceState(null, "", "#" + slug);
+}
+
 function initTabs(){
-  const map = {"tab-timeline":"p-timeline","tab-feed":"p-feed","tab-res":"p-res"};
-  Object.keys(map).forEach(id => {
-    document.getElementById(id).onclick = () => {
-      Object.entries(map).forEach(([t,p]) => {
-        const on = t === id;
-        document.getElementById(t).setAttribute("aria-selected", on);
-        document.getElementById(p).hidden = !on;
-      });
+  const ids = Object.keys(TABS);
+  ids.forEach((id, i) => {
+    const btn = document.getElementById(id);
+    btn.onclick = () => selectTab(id);
+    btn.onkeydown = e => {
+      const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if(step) { e.preventDefault(); selectTab(ids[(i + step + ids.length) % ids.length], true); }
+      if(e.key === "Home"){ e.preventDefault(); selectTab(ids[0], true); }
+      if(e.key === "End"){ e.preventDefault(); selectTab(ids[ids.length-1], true); }
     };
   });
+  // Deep link, so "look at the auto feed" can be a shareable URL.
+  const fromHash = ids.find(id => TABS[id].slice(2) === location.hash.slice(1));
+  selectTab(fromHash || ids[0]);
 }
 
 /* ---------------- Boot ---------------- */
 (async function(){
-  const [versions, news, resonators] = await Promise.all([load("versions"), load("news"), load("resonators")]);
-  DATA = { versions, news, resonators };
+  const [versions, news, resonators, feed] = await Promise.all([load("versions"), load("news"), load("resonators"), load("feed")]);
+  DATA = { versions, news, resonators, feed };
 
   const vs = versions.versions || [];
   const next = vs.find(v => v.status === "announced");
@@ -438,11 +860,11 @@ function initTabs(){
   $("#st-updated").textContent = fmtDate(news.updated) || "—";
 
   initTabs();
-  renderTimeline();
-  renderFilters();
-  renderFeed();
-  renderLegend();
-  renderRes();
+  // Each panel is independent — one bad data file shouldn't blank the rest.
+  for(const render of [renderUpcoming, renderTimeline, renderFilters, renderFeed,
+                       renderLegend, renderRes, renderAutoSummary, renderAutoFilters, renderAutoFeed]){
+    try{ render(); }catch(err){ console.error(`${render.name} failed`, err); }
+  }
 })();
 </script>
 </body>
