@@ -1,0 +1,154 @@
+{
+  "schema": "wuwa-desk/portraits@1.0",
+  "note": "Cut-out character portraits and weapon icons — the game's own UI assets, with alpha, resolved through Prydwen's public character and weapon listings and cached in assets/portraits/. Art © Kuro Games. A name absent here has no published asset yet.",
+  "credit": "Icons via prydwen.gg · art © Kuro Games",
+  "characters": {
+    "Aemeath": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/aemeath",
+      "element": "Fusion",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/aemeath.webp",
+      "card": "assets/portraits/aemeath-card.webp"
+    },
+    "Denia": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/denia",
+      "element": "Fusion",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/denia.webp",
+      "card": "assets/portraits/denia-card.webp"
+    },
+    "Hiyuki": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/hiyuki",
+      "element": "Glacio",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/hiyuki.webp",
+      "card": "assets/portraits/hiyuki-card.webp"
+    },
+    "Hsin": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/hsin",
+      "element": "Unknown",
+      "weapon": "Unknown",
+      "rarity": 5,
+      "icon": "assets/portraits/hsin.webp",
+      "card": "assets/portraits/hsin-card.webp"
+    },
+    "Jingran": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/jingran",
+      "element": "Fusion",
+      "weapon": "Broadblade",
+      "rarity": 5,
+      "icon": "assets/portraits/jingran.webp",
+      "card": "assets/portraits/jingran-card.webp"
+    },
+    "Luuk Herssen": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/luuk-herssen",
+      "element": "Spectro",
+      "weapon": "Gauntlets",
+      "rarity": 5,
+      "icon": "assets/portraits/luuk-herssen.webp",
+      "card": "assets/portraits/luuk-herssen-card.webp"
+    },
+    "Lynae": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/lynae",
+      "element": "Spectro",
+      "weapon": "Pistols",
+      "rarity": 5,
+      "icon": "assets/portraits/lynae.webp",
+      "card": "assets/portraits/lynae-card.webp"
+    },
+    "Mornye": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/mornye",
+      "element": "Fusion",
+      "weapon": "Broadblade",
+      "rarity": 5,
+      "icon": "assets/portraits/mornye.webp",
+      "card": "assets/portraits/mornye-card.webp"
+    },
+    "Qingxiao": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/qingxiao",
+      "element": "Aero",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/qingxiao.webp",
+      "card": "assets/portraits/qingxiao-card.webp"
+    },
+    "Suisui": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/suisui",
+      "element": "Glacio",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/suisui.webp",
+      "card": "assets/portraits/suisui-card.webp"
+    },
+    "Suoming": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/suoming",
+      "element": "Unknown",
+      "weapon": "Unknown",
+      "rarity": 5,
+      "icon": "assets/portraits/suoming.webp",
+      "card": "assets/portraits/suoming-card.webp"
+    },
+    "Yangyang: Xuanling": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/yangyang-xuanling",
+      "element": "Havoc",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/yangyang-xuanling.webp",
+      "card": "assets/portraits/yangyang-xuanling-card.webp"
+    }
+  },
+  "weapons": {
+    "Azure Oath": {
+      "icon": "assets/portraits/w-azure-oath.webp",
+      "rarity": 5,
+      "id": "21020096",
+      "source": "https://www.prydwen.gg/wuthering-waves/weapons"
+    },
+    "Daybreaker's Spine": {
+      "icon": "assets/portraits/w-daybreaker-s-spine.webp",
+      "rarity": 5,
+      "id": "21040056",
+      "source": "https://www.prydwen.gg/wuthering-waves/weapons"
+    },
+    "Everbright Polestar": {
+      "icon": "assets/portraits/w-everbright-polestar.webp",
+      "rarity": 5,
+      "id": "21020076",
+      "source": "https://www.prydwen.gg/wuthering-waves/weapons"
+    },
+    "Firstlight's Herald": {
+      "icon": "assets/portraits/w-firstlight-s-herald.webp",
+      "rarity": 5,
+      "id": "21050096",
+      "source": "https://www.prydwen.gg/wuthering-waves/weapons"
+    },
+    "Forged Dwarf Star": {
+      "icon": "assets/portraits/w-forged-dwarf-star.webp",
+      "rarity": 5,
+      "id": "21050076",
+      "source": "https://www.prydwen.gg/wuthering-waves/weapons"
+    },
+    "Frostburn": {
+      "icon": "assets/portraits/w-frostburn.webp",
+      "rarity": 5,
+      "id": "21020086",
+      "source": "https://www.prydwen.gg/wuthering-waves/weapons"
+    },
+    "Spectrum Blaster": {
+      "icon": "assets/portraits/w-spectrum-blaster.webp",
+      "rarity": 5,
+      "id": "21030046",
+      "source": "https://www.prydwen.gg/wuthering-waves/weapons"
+    },
+    "Starfield Calibrator": {
+      "icon": "assets/portraits/w-starfield-calibrator.webp",
+      "rarity": 5,
+      "id": "21010066",
+      "source": "https://www.prydwen.gg/wuthering-waves/weapons"
+    }
+  },
+  "updated": "2026-08-12T18:47:49.313Z"
+}

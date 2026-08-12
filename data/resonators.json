@@ -143,12 +143,30 @@
       "role": "Sentinel",
       "version": "3.7",
       "status": "teased",
-      "summary": "Teased via a Mandelbrot fractal image, read as pointing at a recursive, self-scaling kit. No file data yet.",
+      "region": "Mengzhou",
+      "epithet": "Clear moonlight drapes the lonely keep",
+      "summary": "Teased via a Mandelbrot fractal image, read as pointing at a recursive, self-scaling kit. Appears in Kuro's second-half 3.x cast reveal poster set, filed to Mengzhou. No file data yet.",
       "kit": [],
       "materials": { "ascension": [], "skill": [] },
       "confidence": { "identity": "reported", "kit": "reported" },
       "sources": [
-        { "name": "MMO Culture", "lang": "en", "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/" }
+        { "name": "MMO Culture", "lang": "en", "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/" },
+        { "name": "Prydwen - upcoming roster", "lang": "en", "url": "https://www.prydwen.gg/wuthering-waves/characters/hsin" }
+      ]
+    },
+    {
+      "name": "Suoming",
+      "rarity": 5,
+      "status": "teased",
+      "region": "Mengzhou",
+      "epithet": "Locked in the past, the prisoner lingers long",
+      "summary": "Revealed in Kuro's second-half 3.x cast poster set alongside Hsin. Red-haired, carries a wide paper parasol with lock and songbook motifs. Element, weapon class and debut patch are all unannounced - Prydwen files them as 3.x, which is its marker for an upcoming character with no version attached.",
+      "kit": [],
+      "materials": { "ascension": [], "skill": [] },
+      "confidence": { "identity": "reported", "kit": "rumour" },
+      "sources": [
+        { "name": "Prydwen - upcoming roster", "lang": "en", "url": "https://www.prydwen.gg/wuthering-waves/characters/suoming" },
+        { "name": "r/WutheringWavesLeaks - second half of 3.x cast reveal, compiled", "lang": "en", "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1u65lvi/second_half_of_3x_cast_reveal_compiled/" }
       ]
     }
   ]

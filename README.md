@@ -13,10 +13,13 @@ data/news.json                 curated leak/news entries
 data/resonators.json           character kit database
 data/feed.json                 auto-fetched headlines (written by Actions)
 data/art.json                  resolved official key art (written by Actions)
+data/portraits.json            cut-out portrait + weapon icon map (written by Actions)
 data/translations.json         English for non-English signal headlines
 assets/characters/             hosted character art
+assets/portraits/              cached cut-out busts and weapon renders
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
+scripts/fetch-portraits.mjs    the portrait + weapon icon resolver
 .github/workflows/update-feeds.yml   cron, every 6h
 ```
 
@@ -121,8 +124,14 @@ What went, and where it went instead:
 - **The All-versions lane list.** Still there, behind the card/lane toggle in the panel
   header — the same `versionBlock` renderer, same filters.
 - **A banner row per phase.** One debut/rerun split now covers the whole patch; the
-  phase is stamped on each thumbnail and the dates run as one legend line underneath.
-  Per-phase bands were most of the height, at 450px for a two-phase patch.
+  phase is a chip on each tile. Per-phase bands were most of the height, at 450px for a
+  two-phase patch.
+- **The phase-date legend under the split.** It restated the run the head band already
+  prints in full and the track already draws — three renderings of the same dates on one
+  card, and every line came off the artwork.
+- **The key events list on each card.** The same entries, tiered and dated, are the
+  Recent intel panel one scroll down and the whole Intel view one click away. The card
+  answers *who is in this patch*; Intel answers *what has been said about it*.
 
 The `when` chips filter the card row and the lane list — whichever is on screen. They
 used to sit on this panel and quietly re-filter a list two thousand pixels further
@@ -162,16 +171,18 @@ the record from what's on hand: `weaponRuns()` finds every banner the weapon run
 (reruns mean that's a list), and the intel entries that name it come from a text match
 over titles, bodies and tags. Weapons are in the command palette too.
 
-### Art behind the whole card
+### The art gets its own space
 
-The patch card is a poster: the picture runs the full height and the version block,
-banner strip and event list sit on top of it. It was a bright header with an opaque
-panel bolted underneath, which read as two stacked things rather than one card.
+The patch card is a poster with a caption, not a picture with a table over it. The
+picture owns a band of the card — **`.pcard-stage`** — and the only thing that ever
+sits on it is the head band across the top. Everything else is below the fold of that
+band, in **`.pcard-body`**.
 
-The card is three bands: **head** at the top, **`.pcard-gap`** in the middle, which is
-nothing but a window onto the art, and **rows** at the foot. The head used to sit at the
-*bottom* of the picture, which is where the character's face is — so the version number
-landed across a face and the top of the card was empty.
+So the card reads as three parts: **head** over the picture, **window** onto the
+picture, **body** under it. The head used to sit at the *bottom* of the art, which is
+where the character's face is — so the version number landed across a face and the top
+of the card was empty. It moved up; then the rows followed it out of the picture
+altogether.
 
 The head is itself three lines, in this order for a reason:
 
@@ -181,43 +192,115 @@ The head is itself three lines, in this order for a reason:
 3. **Identity** — the version number, with the codename and dates *beside* it rather
    than under it. Stacked, four lines of metadata sat below the number and pushed the
    whole band down over the character's face; alongside, they cost one line and the
-   number gets to be 66px.
+   number gets to be 57px.
 
-`.pcard-gap` is `flex:1` with a `min-height`. The flex hands every spare pixel to the
-art on a quiet patch; the min-height stops a busy one from squeezing it to nothing —
-3.6 runs five banners and without the floor its rows climbed under the head band and
-the card showed no character at all.
+**The card is two blocks and the boundary between them is the whole layout.**
+`.pcard-stage` is the artwork's own space: the picture fills it and the *only* thing
+allowed over it is that head band, which is deliberate — the number wants a dark strip
+behind it and the top of a character card is usually sky. Everything else — the banner
+grid, the events, the footer — lives in `.pcard-body` underneath, on solid ground,
+covering nothing. The rows used to be an 80%-opaque slab lying on the lower half of the
+picture, so a busy patch quietly ate its own art.
+
+The stage has both a floor and a ceiling (`min-height` / `max-height`) and that pairing
+is the point. Three cards in a row are all as tall as the busiest one and that slack has
+to go somewhere: without the floor, a patch running five banners letterboxes its own
+art; without the ceiling, a quiet patch beside a busy one gets a picture twice its
+neighbour's height. The stage also outgrows the body 6:1, so slack becomes picture
+rather than a band of empty card above the footer — and anything past the ceiling spills
+back into the body, because flex freezes an item at its max and redistributes the rest.
 
 Both the reveal poster and the cutouts are shifted down with a transform into that
 window, because neither has vertical overflow for `object-position` to work with, and
 their faces otherwise sit behind the head band. The poster also gets zoomed past Kuro's
-name plate and role bullets along its bottom edge, which a taller card would otherwise
-reproduce inside ours.
+name plate and role bullets along its bottom edge. Retune that transform if you change
+the stage height — a crop that frames a torso at 450px frames a chin at 330px.
 
-The backdrop is the patch's **debut characters**, not a generic key visual. One fills
-the frame; two split it down the middle, each running the full card height. Hosted
-cutouts are transparent, so they stand on the patch key visual, which drops to 42%
-behind them; a rectangular reveal poster is the backdrop itself. `cardArt()` works that
-out — precedence is cutout debuts, then a flat debut image, then the key visual, then
-resonance rings.
+The backdrop is the patch's **debut characters**, not a generic key visual. Most patches
+run two, and two split the frame down the middle.
+
+**Only a cut-out can be halved.** A reveal poster is a whole composition — framing,
+backdrop, the character placed inside it — and cutting one down the middle crops
+someone else's layout rather than showing a character. So `cardArt()` draws a two-debut
+patch from cut-outs *even where a poster exists* for those characters (which is what
+`portraits.json` is for), and lets a single debut's poster fill the frame instead.
+
+**The figures live inside `.pcard-window`, not behind the whole stage**, and that one
+choice is what keeps a face out of the head band's shadow. The window *is* the space
+below the band, so a figure framed to fill it cannot be framed into the dark. Framing
+against the full stage put every head under the dark strip and no amount of nudging
+fixed it, because the band's height moves with the codename's line count. `.figs` then
+bleeds ~78px *above* the window so the picture still runs behind the band and the band
+still reads as something laid over art — the bleed is clipped by the stage.
+
+They're `object-fit: cover` at a chest-up crop. `contain` was tried and shrinks a
+waist-up UI card to a stamp in the middle of the frame; this crop puts the head just
+under the band and the shoulders across the middle of the window.
+
+Behind each one is **its own character's element colour** — a pool at the foot, a wash
+up the lower third, a dark ground under both, and the same hue again over the picture's
+feet so the figure sits *in* the light rather than in front of it. This is the card's
+only colour and it does real work: Denia's half reads Fusion-orange before you've read
+a word of the tile below.
+
+Two backdrops were tried and dropped. Standing the pair on one of their *own* posters
+put Suisui in front of a washed-out Suisui. The **patch key visual** is worse: it is a
+marketing image with the version name set across it in type, so behind two cut-outs you
+read "LAMPLIGHT IN MIRAGE" through the gap between them. A single debut with a poster
+and no partner still gets that poster full-bleed (`cardArt()`); everything else is
+figures on colour (`cardFigures()`).
 
 The figures sit at `z-index:1` inside `.pcard-art`, which puts them **above** that
-element's scrim but still below `.pcard-main` and `.pcard-rows`. The scrim exists to
-push the key visual back; painting it over the characters as well left two silhouettes
-you could barely make out.
+element's scrim but still below `.pcard-head`. The scrim exists to push the key visual
+back; painting it over the characters as well left two silhouettes you could barely make
+out.
 
-Legibility comes from washes and text shadow, **not blur** — a `backdrop-filter` was
-tried and reads as smeared rather than atmospheric, which defeats the point of putting
-art there. The head band and the rows each carry their own wash, which is why
-`.pcard-art::after` is now almost nothing: it was a left-side gradient sized for type
-that has since moved to the top of the card, and it was what made the art look muddy.
+Legibility in the head band comes from a wash and text shadow, **not blur** — a
+`backdrop-filter` was tried and reads as smeared rather than atmospheric, which defeats
+the point of putting art there. Below the band nothing needs rescuing at all, which is
+why `.pcard-art::after` is now a hairline of shade at the very bottom: it only has to
+land the crop on the body rather than stop dead against it.
+
+**Each banner is one tile, not two.** Character over weapon, split by a rule inside a
+shared border. The weapon convene is a separate pull and keeps its own click target, but
+it is *that character's* weapon — and two free-floating tiles cost a stacked pair of
+rows each, which across five banners is half a screen of card for a distinction the rule
+makes just as well. The class label (`RECTIFIER`, `SWORD`) lives on the weapon row, not
+in the character's meta: a signature weapon is by definition its holder's class, so one
+label carries both facts and the meta line stops wrapping.
+
+**The tile is lit in its element at rest, not on hover.** Ten tiles are most of what you
+look at on this page, and putting the one piece of colour they carry behind a mouse
+means the page is grey every time you aren't touching it — hover then adds a brighter
+border and a drop of glow. `.bpair` declares `--attr: var(--fg-3)` as a fallback, which
+matters: inline styles win over it, so a known element still paints itself, but a
+character whose element nobody has announced (Suoming) would otherwise compute every
+`color-mix()` against an undefined var and lose its border and background entirely.
+
+A tile gets that chrome from `.bpair`, its wrapper. `.bstrip.rows > .bmini` — the child
+combinator — catches the ones with *no* wrapper, which is the teased list on a future
+patch, where there is no banner to pair a character to.
+
+The phase is a **chip in the meta row**, not a bar across the foot of the portrait.
+Stamped on the picture it put a grey slab over the one part of a 44px tile worth
+looking at.
+
+**The card lists the whole patch, not just what's still pullable.** It used to show only
+open phases, which on a patch in its back half meant its debut headliner vanished from
+its own card — 3.5 is Yangyang: Xuanling's patch whether or not her phase has ended. A
+closed phase greys its chip and dashes the border (`.ph.past`); the character is not
+dimmed, because a finished banner is still part of the patch. The run bar in the head
+band is what says where today sits.
 
 A patch with no banners yet — 3.7 — fills its card from the resonator database instead,
 listing anything flagged for that version plus the version notes. Otherwise the card is
 a large empty box, and empty space is the thing this layout exists to avoid.
 
 On a phone the three cards become a snap-scrolling carousel — stacked, they were a
-thousand pixels before the first headline.
+thousand pixels before the first headline. The debut/rerun split collapses to one
+column there, and the four grid children get **explicit `grid-row`s**: source order is
+head-l, head-r, cell-l, cell-r, so left to itself a single column stacks both headings
+together and files every debut under "Reruns".
 
 ### Where the art comes from
 
@@ -232,12 +315,32 @@ art within 6 hours of the reveal going live. Characters absent from `art.json` a
 absent by design — it means no reveal post exists yet.
 
 Those reveal posters are a fixed template — 1080×1920, game logo at the top, name plate
-at the bottom, face about a fifth of the way down. Shrunk into a 38px or 62px thumbnail
-that reads as a tiny poster rather than a portrait, so the small thumbs pin the crop to
-the top of the frame and zoom onto the head (`img.poster` in `app.css`). It's one rule
-for every character because it's one template — don't add per-character framing for
-these. Per-character framing is only needed for **key visual** crops, where several
-characters share one wide image.
+at the bottom, face about a fifth of the way down. That is the right picture for a
+400px art window and the wrong one for a 44px tile, where you get a tiny poster rather
+than a portrait.
+
+So the small tiles use a different asset entirely. `scripts/fetch-portraits.mjs`
+resolves the game's own UI art — a 160px bust and a 374×512 full cut-out per character,
+a 256px render per weapon — through **Prydwen's** public character and weapon listings,
+which embed their whole dataset as JSON in the page source (one request each, no
+per-character crawl). All of it carries a real alpha channel, which is the point: a
+cut-out sits *on* the card, over the tile's own element gradient, instead of bringing a
+second background inside the first. The script asserts that alpha is present and says
+so per file when it runs.
+
+The files are cached into `assets/portraits/` rather than hotlinked — Prydwen is a fan
+site paying for its own CDN. Credit rides in the page footer. Note that Prydwen is
+behind Cloudflare, which 403s Node's `fetch` no matter what headers it sends; the script
+shells out to `curl` for that reason, and it is still dependency-free.
+
+A weapon debuting with an unreleased patch has no published icon yet and falls back to
+the generic weapon mark — same rule as everywhere else here: show what is known.
+
+Precedence, then, is: hand-set image → Kuro reveal poster → crop of the patch key visual
+→ Prydwen cut-out, for the big art; and the cut-out bust first for anything small.
+Per-character framing is only ever needed for **key visual** crops, where several
+characters share one wide image — never for the posters or the cut-outs, which are each
+one template and get one rule.
 
 **Before the reveal**, you can crop a character out of the patch key visual, which Kuro
 publishes with the version preview and which usually shows the new characters. Put the

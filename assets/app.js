@@ -12,6 +12,7 @@ const FALLBACK = {
   resonators: {updated:"", resonators:[]},
   feed:       {fetched:"", sources:[], errors:[], items:[]},
   art:        {art:{}},
+  portraits:  {characters:{}, weapons:{}},
   translations: {titles:{}}
 };
 
@@ -144,6 +145,16 @@ function resonatorFor(name){
 }
 function artFor(name){ return (DATA.art?.art || {})[name] || null; }
 
+/* Cut-outs, as opposed to artFor()'s posters. Kuro's reveal art is a 1080x1920
+   marketing card — logo band, name plate, its own backdrop — which is the right
+   picture at 400px and the wrong one at 54px, where you get a tiny poster
+   instead of a face. portraits.json holds the game's own UI assets with their
+   alpha intact, so a tile shows the character and nothing else: no plate, no
+   second background inside the card's. See scripts/fetch-portraits.mjs. */
+function portraitFor(name){ return (DATA.portraits?.characters || {})[name] || null; }
+function weaponArtFor(name){ return (DATA.portraits?.weapons || {})[name] || null; }
+const PORTRAIT_CREDIT = "Character art © Kuro Games · icon via prydwen.gg";
+
 /* Banner rows carry framing hints for the shared key visual, so a resonator
    card can borrow the crop its banner row already defines. */
 function bannerFor(name){
@@ -272,10 +283,16 @@ function confidenceRows(r){
 function figure(b){
   const r = resonatorFor(b.name);
   const art = artFor(b.name);
+  const port = portraitFor(b.name);
   const own = b.image || r.image;
   const shared = !own && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
-  const image = own || art?.url || shared?.url;
-  const cutout = !!own && image === own && (b.imageStyle || r.imageStyle) === "cutout";
+  /* The cut-out card is last, not first: it is 374x512 of UI asset and it will
+     stand in for anyone, which is exactly why it must not displace a real key
+     visual. It fills the holes — a character Kuro has teased but not revealed
+     — where the alternative was a letter on a gradient. */
+  const image = own || art?.url || shared?.url || port?.card;
+  const cutout = (!!own && image === own && (b.imageStyle || r.imageStyle) === "cutout")
+              || (!!port && image === port.card);
   /* A 16:9 key visual in a 4:5 box has no vertical overflow, so object-position
      can only frame horizontally — zoom picks the height. */
   const style = shared
@@ -283,8 +300,11 @@ function figure(b){
     : "";
   return {
     image, cutout, style,
+    /* What a 54px tile shows, when we hold one. Resolved separately from the
+       big picture above so the two never have to compromise on one crop. */
+    icon: port?.icon || null,
     glyph: r.nameCN || b.name?.slice(0,1) || "?",
-    credit: cutout ? (b.imageCredit || r.imageCredit) : null,
+    credit: cutout ? (b.imageCredit || r.imageCredit || (port && image === port.card ? PORTRAIT_CREDIT : null)) : null,
     source: art && image === art?.url ? art : shared,
     shared: !!shared,
     /* Kuro's Profile Reveal posters are a fixed 1080x1920 template — logo top,
@@ -312,23 +332,44 @@ function creditLine(b){
   return "";
 }
 
-/* 74px banner thumbnail used inside the patch cards. */
-function thumb(b){
+/* Banner thumbnail used inside the patch cards. `showWeapon:false` is for the
+   paired layout, where the weapon class has moved onto the signature weapon's
+   own row — a resonator's class and the class of the weapon running beside
+   them are the same fact, and printing it twice was what pushed "RECTIFIER"
+   onto a second line and made every tile in a column a different height. */
+function thumb(b, {showWeapon = true} = {}){
   const f = figure(b);
   const r = resonatorFor(b.name);
   const attr = b.attribute || r.attribute;
   const unknown = !b.name || b.name === "???";
-  const inner = f.image
+  /* The cut-out bust first. It is drawn for exactly this size — head centred,
+     background already gone — so it sits on the tile's own element gradient
+     instead of bringing a second background along. Everything else here is a
+     crop of something bigger and needs the framing hacks below. */
+  const inner = f.icon
+    ? `<img class="bust" src="${esc(f.icon)}" alt="" loading="lazy" decoding="async">`
+    : f.image
     ? `<img class="${f.poster ? "poster" : ""}" src="${esc(f.image)}" alt="" loading="lazy" decoding="async"${f.style}>`
     : `<span class="g">${esc(unknown ? "?" : f.glyph)}</span>`;
   /* Only label new/rerun when the data actually says so — an unflagged banner
      row is unknown, not a rerun. */
   const fallback = b.new ? "New" : b.rerun ? "Rerun" : "";
   const weapon = b.weapon || r.weapon;
+  /* The phase used to be stamped across the foot of the picture, which put a
+     grey bar over the one part of a 54px tile worth looking at. It is metadata,
+     so it goes where the rest of the metadata is — first in the row, because
+     "which half of the patch" is what you scan a banner list for. */
+  /* The card lists the whole patch, so some of these windows have closed. The
+     chip says which, and greys itself when that phase is over — enough to stop
+     a finished banner reading as one you can still pull, without dimming the
+     character, who is no less part of the patch for it. */
+  const phase = b.phase
+    ? `<i class="ph${b.past ? " past" : ""}"${b.past ? ` title="Phase ${esc(b.phase)} has ended"` : ""}>P${esc(b.phase)}</i>`
+    : "";
   const meta = b.rarity || attr
-    ? `${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}${
-        weapon ? `<i class="wep">${esc(weapon)}</i>` : ""}`
-    : fallback ? `<i class="rar">${fallback}</i>` : "";
+    ? `${phase}${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}${
+        weapon && showWeapon ? `<i class="wep">${esc(weapon)}</i>` : ""}`
+    : `${phase}${fallback ? `<i class="rar">${fallback}</i>` : ""}`;
   /* Clickable in its own right, and the innermost [data-act] wins over the
      card's — so a face opens that resonator's record while the rest of the
      card still opens the version. This is the path to the full kit now that
@@ -339,12 +380,23 @@ function thumb(b){
      face instead of under it — one wide row per banner fills the column, where
      a centred stack left most of it empty. */
   return `<div class="bmini${unknown ? " unknown" : ""}"${attrStyle(attr)}${act}>
-    <div class="thumb${f.cutout ? " cut" : ""}">${inner}${b.phase ? `<span class="ph">P${b.phase}</span>` : ""}</div>
+    <div class="thumb${f.icon ? " bust" : f.cutout ? " cut" : ""}">${inner}</div>
     <span class="bwho">
       <b>${esc(b.name || "???")}</b>
       <span class="bmeta">${meta}</span>
     </span>
   </div>`;
+}
+
+/* The weapon's own render, when portraits.json has resolved one. A weapon that
+   debuts with an unreleased patch has no published icon yet, and gets the
+   generic mark rather than a borrowed picture — same rule as everywhere else
+   on the desk: show what is known, say nothing you can't source. */
+function weaponIcon(name, size = 17){
+  const w = weaponArtFor(name);
+  return w?.icon
+    ? `<span class="wicon has-art"><img src="${esc(w.icon)}" alt="" loading="lazy" decoding="async"></span>`
+    : `<span class="wicon">${icon("i-weapon", size)}</span>`;
 }
 
 /* ── rail ────────────────────────────────────────────────────────── */
@@ -446,83 +498,90 @@ function renderHud(){
 
 /* ── timeline ────────────────────────────────────────────────────── */
 
-/* Banners you can still pull. A phase that has already ended is history — it
-   belongs in the full timeline below, not on the card telling you what's on
-   right now. Falls back to the last phase if the whole patch has run out, so
-   the card never empties. */
-function livePhases(v){
-  const phases = v.phases || [];
-  if(!phases.length) return [];
+/* Every banner in the patch, in phase order, each row flagged with whether its
+   window has closed. The card used to show only what you could still pull,
+   which on a patch in its back half meant its debut headliner had vanished
+   from its own card — 3.5 is Yangyang: Xuanling's patch whether or not her
+   phase has ended. The phase chip and the run bar say where today is; the
+   `past` flag lets a closed phase read as closed rather than as current. */
+function allPhases(v){
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  const open = phases.filter(p => !p.end || new Date(p.end) >= today);
-  const use = open.length ? open : phases.slice(-1);
-  return use.map(p => {
-    const rows = (p.banners || []).map(b => ({...b, phase:p.n, keyVisual:v.keyVisual}));
+  return (v.phases || []).map(p => {
+    const past = !!p.end && new Date(p.end) < today;
+    const rows = (p.banners || []).map(b => ({...b, phase:p.n, past, keyVisual:v.keyVisual}));
     return {
-      n: p.n,
+      n: p.n, past,
       range: [p.start ? fmtShort(p.start) : "", p.end ? fmtShort(p.end) : ""].filter(Boolean).join(" → "),
       est: !!(p.estimated_start || p.estimated_end),
-      fresh: rows.filter(b => b.new),
-      reruns: rows.filter(b => !b.new),
       banners: rows
     };
   });
 }
-const liveBanners = v => livePhases(v).flatMap(p => p.banners);
 
-/* The card's backdrop is the patch's debut characters. One fills the frame;
-   two split it down the middle, which is what a patch card for a two-debut
-   patch should look like. Hosted cutouts are transparent, so they stand on the
-   patch key visual; a rectangular reveal poster is the backdrop itself. */
-function cardArt(v, role){
+/* The patch's debut characters, as the card's picture. One fills the frame; two
+   split it down the middle, which is what a patch card for a two-debut patch
+   should look like.
+
+   Only a cut-out can be halved. A reveal poster is a whole composition —
+   framing, backdrop, the character placed inside it — and cutting one down the
+   middle crops someone else's layout rather than showing a character. So a
+   patch with two debuts is drawn from cut-outs even where a poster exists for
+   them, and a patch with one lets the poster fill the frame. */
+function cardFigures(v){
+  if(!v) return [];
+  return allPhases(v).flatMap(p => p.banners).filter(b => b.new).map(b => {
+    const f = figure(b);
+    const src = f.cutout ? f.image : portraitFor(b.name)?.card || null;
+    return src ? {src, name:b.name, attr:b.attribute || resonatorFor(b.name).attribute} : null;
+  }).filter(Boolean).slice(0, 2);
+}
+
+/* The layer behind the head band. Only ever a single debut's own poster now:
+   the patch key visual went, because it is a marketing image with the version
+   name set across it in type, and behind two cut-outs you read "LAMPLIGHT IN
+   MIRAGE" through the gap between them rather than a setting. The pair carry
+   their own ground instead — see .fig-cell. */
+function cardArt(v){
   if(!v) return "";
-  const phases = role === "live"
-    ? livePhases(v).map(p => p.banners)
-    : (v.phases || []).map(p => (p.banners || []).map(b => ({...b, phase:p.n})));
-  const figs = phases.flat()
-    .filter(b => b.new)
-    .map(b => figure({...b, keyVisual:v.keyVisual}))
-    .filter(f => f.image);
-
-  const cut = figs.filter(f => f.cutout).slice(0, 2);
-  const flat = figs.find(f => !f.cutout);
-  const bg = cut.length ? v.keyVisual?.url : (flat?.image || v.keyVisual?.url);
-  if(!bg && !cut.length) return "";
-
-  const cls = [!cut.length && flat?.poster ? "poster" : "", cut.length ? "has-figs" : ""]
-    .filter(Boolean).join(" ");
-  return `<div class="pcard-art${cls ? " " + cls : ""}">
-    ${bg ? `<img class="bg" src="${esc(bg)}" alt="" loading="lazy" decoding="async">` : ""}
-    ${cut.length ? `<div class="figs n${cut.length}">${cut.map(f =>
-      `<img class="fig" src="${esc(f.image)}" alt="" loading="lazy" decoding="async">`).join("")}</div>` : ""}
+  const debuts = allPhases(v).flatMap(p => p.banners).filter(b => b.new);
+  if(cardFigures(v).length >= 2) return "";
+  const flat = debuts.map(b => figure(b)).find(f => f.image && !f.cutout);
+  if(!flat) return "";
+  return `<div class="pcard-art${flat.poster ? " poster" : ""}">
+    <img class="bg" src="${esc(flat.image)}" alt="" loading="lazy" decoding="async">
   </div>`;
 }
 
 function patchCard(v, role){
   if(!v){
     return `<article class="pcard is-future">
-      <div class="rings"></div>
-      <div class="pcard-top"><span class="pill future">Future</span></div>
-      <div class="pcard-main">
-        <div class="pcard-num" style="color:var(--fg-3)">?</div>
-        <div class="pcard-title">Beyond the horizon</div>
-        <div class="pcard-dates">No version announced</div>
+      <div class="pcard-stage">
+        <div class="rings"></div>
+        <div class="pcard-head">
+          <div class="pcard-top"><span class="pill future">Future</span></div>
+          <div class="pcard-main">
+            <div class="pcard-num" style="color:var(--fg-3)">?</div>
+            <div class="pcard-idtext">
+              <div class="pcard-title">Beyond the horizon</div>
+              <div class="pcard-dates">No version announced</div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard-window"></div>
       </div>
-      <div class="pcard-note">Nothing past the current cycle has surfaced yet. Beta datamines usually
-        land first — they show up under Intel the moment they're worth writing up.</div>
+      <div class="pcard-body">
+        <div class="pcard-note">Nothing past the current cycle has surfaced yet. Beta datamines usually
+          land first — they show up under Intel the moment they're worth writing up.</div>
+      </div>
     </article>`;
   }
 
-  const openPhases = livePhases(v);
-  const banners = openPhases.flatMap(p => p.banners);
+  const banners = allPhases(v).flatMap(p => p.banners);
   const fresh = banners.filter(b => b.new);
   const reruns = banners.filter(b => !b.new);
-  const events = newsFor(v.id).slice(0, 3);
   const days = v.start ? daysTo(v.start) : null;
-  /* The picture runs the full height of the card and everything else sits on
-     top of it — the card is a poster for the patch, not a header with a table
-     bolted underneath. */
-  const art = cardArt(v, role);
+  const art = cardArt(v);
+  const figs = cardFigures(v);
 
   const state = role === "live"
     ? `<span class="pill live">Current</span>`
@@ -549,25 +608,32 @@ function patchCard(v, role){
      because what you actually want to know is who runs alongside whom: a row
      reads as "this is phase 1". Three fit a cell; say so rather than silently
      dropping the rest. */
-  /* Character and weapon side by side, at the same weight — the weapon convene
-     runs alongside the character banner in game and it is a separate pull, so
-     it gets a tile of its own rather than a footnote under the portrait. They
-     wrap to a stack when the card is too narrow to seat both. */
+  /* Character over weapon in one tile, split by a rule. The weapon convene runs
+     alongside the character banner in game and is a separate pull, so it keeps
+     a click target of its own rather than being a footnote under the portrait —
+     but it is that character's weapon, and on a card carrying five banners two
+     free-floating tiles each cost a stacked pair of rows to say so. */
   const pair = b => {
     const sig = signatureFor(b);
-    return `<div class="bpair">${thumb(b)}${sig
+    const r = resonatorFor(b.name);
+    const cls = b.weapon || r.weapon;
+    /* The element rides the tile itself, not just its two halves — the tile is
+       lit in it at rest, so a column of banners reads as a row of elements
+       before you read a single name. */
+    return `<div class="bpair"${attrStyle(b.attribute || r.attribute)}>${thumb(b, {showWeapon:false})}${sig
       ? `<button class="wtile" data-act="weapon" data-id="${esc(sig)}"${attrStyle(b.attribute || resonatorFor(b.name).attribute)}
                 title="Signature weapon — runs alongside ${esc(b.name)}">
-           <span class="wicon">${icon("i-weapon", 17)}</span>
-           <span class="wtext">
-             <b>${esc(sig)}</b>
-             <!-- Just "Signature": the weapon type is already on the character
-                  tile immediately to the left, and repeating it here only
-                  truncated to "SIGNATURE · S…". -->
-             <span class="wsub">Signature</span>
-           </span>
+           ${weaponIcon(sig)}
+           <span class="wtext"><b>${esc(sig)}</b></span>
+           <!-- The class, not the word "Signature". A signature weapon is by
+                definition the resonator's own class, so one label carries both
+                facts — and it is the fact you sort a roster by. -->
+           ${cls ? `<span class="wsub">${esc(cls)}</span>` : ""}
          </button>`
-      : `<div class="wtile empty"><span class="wsub">No weapon listed</span></div>`}</div>`;
+      : `<div class="wtile empty">
+           <span class="wsub">No weapon listed</span>
+           ${cls ? `<span class="wsub" style="margin-left:auto">${esc(cls)}</span>` : ""}
+         </div>`}</div>`;
   };
   const strip = list => list.length
     ? `<div class="bstrip rows">${list.slice(0, 4).map(pair).join("")}${
@@ -576,16 +642,16 @@ function patchCard(v, role){
 
   /* One split, not one per phase. A row per phase gave every card two full
      bands of portraits and was most of why the landing view ran to three
-     screens; the phase is already stamped on each thumbnail, and the dates
-     that used to head each band now run as a single legend line underneath. */
+     screens; the phase chip on each tile carries that fact instead.
+
+     No phase-date legend under it either. It restated the run the head band
+     already prints in full and the track already draws — three renderings of
+     the same dates on one card — and every line it took came off the artwork. */
   if(banners.length) rows.push([null, `<div class="pcard-split">
     <div class="ps-head label l">New character${fresh.length === 1 ? "" : "s"}</div>
     <div class="ps-head label r">Rerun${reruns.length === 1 ? "" : "s"}</div>
     <div class="ps-cell l">${strip(fresh)}</div>
     <div class="ps-cell r">${strip(reruns)}</div>
-    ${openPhases.some(p => p.range) ? `<div class="ps-legend">${openPhases.map(p =>
-      `<span><b>P${p.n}</b>${p.range ? ` ${p.range}` : ""}${p.est ? ` <em>est</em>` : ""}</span>`
-    ).join("")}</div>` : ""}
   </div>`]);
   /* A patch this far out has no banner rows, but the resonator database may
      already carry characters flagged for it — the only concrete thing known
@@ -597,12 +663,11 @@ function patchCard(v, role){
         name:r.name, rarity:r.rarity, attribute:r.attribute, weapon:r.weapon
       })).join("")}</div>`]);
   }
-  if(events.length) rows.push([
-    "Key events",
-    `<div class="evlist">${events.slice(0, banners.length ? 2 : 4).map(e => `<div class="evrow t-${esc(e.confidence)}">
-      <i class="dot"></i><span class="what" style="color:var(--fg-2)">${esc(e.title)}</span>
-      <span class="when">${fmtShort(e.date)}</span></div>`).join("")}</div>`
-  ]);
+  /* No key events row. The same entries, tiered and dated, are the Recent intel
+     panel one scroll down and the whole Intel view one click away — on the card
+     they were a third copy, and the two lines they cost came straight off the
+     picture. The card answers "who is in this patch"; Intel answers "what has
+     been said about it". */
   /* Notes fill whatever's left on a thin card. Shown whenever there are no
      banners, not only when the card is otherwise empty — on a future patch the
      note is usually the most substantial thing known about it. */
@@ -614,32 +679,49 @@ function patchCard(v, role){
         `<div class="pcard-row">${k ? `<div class="label">${k}</div>` : ""}${h}</div>`).join("")}</div>`
     : "";
 
+  /* Two blocks, and the boundary between them is the whole layout. The stage is
+     the artwork's own space: the picture fills it, and the only thing allowed
+     over it is the head band across the top, which is deliberate — the version
+     number wants a dark strip behind it and the top of a character card is
+     usually sky. Everything else — the banner grid, the events, the footer —
+     lives in the body underneath, on solid ground, where it covers nothing.
+     Before this the rows were an 80%-opaque slab sitting on the lower half of
+     the picture, so a busy patch quietly ate its own art. */
   return `<article class="pcard is-${role}" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
            aria-label="Version ${esc(v.id)} detail">
-    ${art || `<div class="rings"></div>`}
-    <!-- Head first, art second. The version block used to sit at the bottom of
-         the picture, which put it across the character's face and left the top
-         of the card empty; anchored up here the art gets the whole middle. -->
-    <!-- Status and the run bar ride the top rail; the version number and its
-         codename sit side by side underneath. Stacked the other way round, the
-         number was buried under four lines of metadata. -->
-    <div class="pcard-head">
-      <div class="pcard-top">${state}${status}</div>
-      ${track(v, role)}
-      <div class="pcard-main">
-        <div class="pcard-num">${esc(v.id)}</div>
-        <div class="pcard-idtext">
-          ${v.title ? `<div class="pcard-title">${esc(v.title)}</div>` : ""}
-          <div class="pcard-dates">${[v.start ? fmtDate(v.start) : "", versionEnd(v)].filter(Boolean).join(" — ") || "Dates unknown"}</div>
+    <div class="pcard-stage">
+      <!-- Rings only when there is neither a poster nor a figure — a patch we
+           know nothing about yet. They are a held signal, not a backdrop. -->
+      ${art || (figs.length ? "" : `<div class="rings"></div>`)}
+      <!-- Status and the run bar ride the top rail; the version number and its
+           codename sit side by side underneath. Stacked the other way round,
+           the number was buried under four lines of metadata. -->
+      <div class="pcard-head">
+        <div class="pcard-top">${state}${status}</div>
+        ${track(v, role)}
+        <div class="pcard-main">
+          <div class="pcard-num">${esc(v.id)}</div>
+          <div class="pcard-idtext">
+            ${v.title ? `<div class="pcard-title">${esc(v.title)}</div>` : ""}
+            <div class="pcard-dates">${[v.start ? fmtDate(v.start) : "", versionEnd(v)].filter(Boolean).join(" — ") || "Dates unknown"}</div>
+          </div>
         </div>
       </div>
+      <!-- The clear part, and where the debut figures live. Putting them in
+           here rather than behind the whole stage is what keeps a head out of
+           the head band's shadow: this box *is* the space below the band, so a
+           figure framed to it can't be framed into the dark. -->
+      <div class="pcard-window">${figs.length
+        ? `<div class="figs n${figs.length}">${figs.map(f =>
+            `<div class="fig-cell"${attrStyle(f.attr)}>
+               <img class="fig" src="${esc(f.src)}" alt="${esc(f.name)}" loading="lazy" decoding="async">
+             </div>`).join("")}</div>`
+        : ""}</div>
     </div>
-    <!-- Guarantees the artwork a window. Without it a busy patch — 3.6 runs
-         five banners — pushes its rows up under the head band and shows no
-         character at all, while a quiet one shows plenty. -->
-    <div class="pcard-gap"></div>
-    ${cellHtml}
-    <div class="pcard-foot">View details ${icon("i-arrow", 12)}</div>
+    <div class="pcard-body">
+      ${cellHtml}
+      <div class="pcard-foot">View details ${icon("i-arrow", 12)}</div>
+    </div>
   </article>`;
 }
 
@@ -1271,11 +1353,14 @@ function drawerWeapon(name){
     .sort((a, b) => (b.date||"").localeCompare(a.date||""));
   const holder = resonatorFor(runs[0].name);
 
+  const wart = weaponArtFor(name);
   openDrawer("Weapon convene", `<div class="drawer-b"${attrStyle(runs[0].attribute || holder.attribute)}>
     <div class="meta">
       <span class="pill">${esc(holder.weapon || runs[0].weapon || "Weapon")}</span>
+      ${wart?.rarity ? `<span class="pill ver">${esc(wart.rarity)}★</span>` : ""}
       ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
     </div>
+    ${wart?.icon ? `<div class="wbig"><img src="${esc(wart.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
     <h2>${esc(name)}</h2>
     <p>Signature weapon for <b>${esc(runs[0].name)}</b>. Kuro runs the weapon convene
     alongside the character banner, so it is available for the same window.</p>
@@ -1542,7 +1627,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","feed","art","translations"];
+  const names = ["versions","news","resonators","feed","art","portraits","translations"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 

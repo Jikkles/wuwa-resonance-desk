@@ -358,6 +358,31 @@ button{font:inherit;color:inherit}
   text-align:left;padding:0;cursor:pointer;color:inherit;font:inherit;
   transition:border-color .2s,transform .2s;
 }
+/* The artwork's own space. Everything inside it may sit on the picture;
+   nothing outside it may.
+
+   The floor and the ceiling are the point. Three cards in a row are all as tall
+   as the busiest one, and that slack has to go somewhere: without the floor a
+   patch running five banners letterboxes its own art, and without the ceiling a
+   quiet patch beside a busy one gets a picture twice the height of its
+   neighbour's. Between the two the art band reads as the same band on every
+   card, which is what makes the row scan as one object. Any slack past the
+   ceiling spills into the body below — flex freezes an item at its max-height
+   and hands the remainder to whatever else can grow. */
+/* grow:6 against the body's 1 — when a quiet patch is stretched to match a busy
+   neighbour, that slack should become picture, not a band of empty card above
+   the footer. It stops at the ceiling either way. */
+.pcard-stage{
+  position:relative;display:flex;flex-direction:column;
+  flex:6 1 auto;min-height:448px;max-height:536px;overflow:hidden;
+}
+/* Solid ground under the picture. The banner grid and the event list used to
+   be a translucent slab lying on the lower half of the art; down here they
+   cover nothing, and the art above them is never a backdrop for 10px type. */
+.pcard-body{
+  position:relative;z-index:2;display:flex;flex-direction:column;flex:1 1 auto;
+  background:var(--bg-1);border-top:1px solid var(--line);
+}
 .pcard:hover{border-color:var(--line-2);transform:translateY(-2px)}
 .pcard{--tc:var(--fg-3)}
 .pcard.is-live{--tc:var(--t-official);border-color:color-mix(in srgb,var(--t-official) 30%,var(--line))}
@@ -378,58 +403,72 @@ button{font:inherit;color:inherit}
 .pcard-art{position:absolute;inset:0;z-index:0;overflow:hidden}
 .pcard-art img.bg{width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:1}
 /* Kuro's reveal poster is a 1080x1920 marketing card: logo across the top,
-   name plate and a bullet list of the character's role across the bottom. On a
-   card this tall the whole thing fits vertically and both bands show, so zoom
-   past them onto the figure rather than reproducing someone else's layout
-   inside ours. */
+   name plate and a bullet list of the character's role across the bottom. Zoom
+   past both bands onto the figure rather than reproducing someone else's layout
+   inside ours — but only just past them. The stage is a band now rather than
+   the whole card, and the crop that used to frame a torso will frame a chin if
+   you leave it alone. */
 .pcard-art.poster img.bg{
-  object-position:center top;transform:translateY(19%) scale(1.42);transform-origin:50% 50%;
+  object-position:center top;transform:translateY(11%) scale(1.17);transform-origin:50% 50%;
 }
 
-/* Debut characters standing on the patch key visual. Two of them split the
-   card down the middle — a patch with two debuts should look like a patch with
-   two debuts. The key visual drops back so it reads as a setting rather than
-   competing with the figures in front of it. */
-.pcard-art.has-figs img.bg{opacity:.6;filter:saturate(.85)}
-/* z-index puts the figures above .pcard-art::after — the scrim exists to make
-   the key visual behind them recede, and painting it over the characters as
-   well left two silhouettes you could barely make out. They still sit below
-   .pcard-main and .pcard-rows, which are outside this stacking context, so the
-   type over them is unaffected. */
-/* Full height, one figure to a half. Confining them to a band above the type
-   left the bottom of the card empty and the characters shrunk to shoulders;
-   run at full height each figure is a poster panel, and the content rows' wash
-   dims its lower half without hiding it. */
-.figs{position:absolute;inset:0;z-index:1;display:flex}
-/* Pushed down out from under the head band. A cutout is exactly as tall as the
-   card, so object-position has no vertical overflow to work with — the shift
-   has to be a transform. */
+/* The debut figures, one to a half. They live inside .pcard-window rather than
+   behind the whole stage, and that is the entire trick: the window *is* the
+   space below the head band, so a figure framed to fill it cannot end up with
+   its head in the band's shadow. Framing them against the full stage put every
+   face under the dark strip and no amount of nudging fixed it, because the
+   band's height moves with the codename's line count. */
+/* Bled upward past the window's top edge, so the picture still runs behind the
+   head band and the band still reads as something laid over art rather than a
+   dark box stacked on top of one. The bleed is clipped by the stage. The
+   framing below is set against this taller box, not the window — which is why
+   the head still lands clear of the band. */
+.figs{position:absolute;left:0;right:0;bottom:0;top:-78px;display:flex}
+.fig-cell{
+  position:relative;flex:1 1 0;min-width:0;overflow:hidden;
+  /* Each half is lit in its own character's element. This is the card's only
+     colour and it is doing real work — Denia's half reads Fusion-orange before
+     you have read a word of the tile below. Three layers: a pool at the foot,
+     a wash up the lower third, and a dark ground under both so a transparent
+     cut-out has something to stand on. */
+  background:
+    radial-gradient(ellipse 92% 46% at 50% 103%,color-mix(in srgb,var(--attr,var(--tc)) 60%,transparent),transparent 72%),
+    linear-gradient(0deg,color-mix(in srgb,var(--attr,var(--tc)) 26%,transparent) 0%,transparent 46%),
+    linear-gradient(172deg,color-mix(in srgb,var(--attr,var(--tc)) 10%,var(--bg-3)),var(--bg));
+}
+/* The same colour again over the picture's feet, so the figure sits *in* the
+   light rather than in front of it, and the crop's bottom edge dissolves
+   instead of ending on a line. */
+.fig-cell::after{
+  content:"";position:absolute;inset:auto 0 0 0;height:44%;pointer-events:none;
+  background:linear-gradient(0deg,
+    color-mix(in srgb,var(--attr,var(--tc)) 42%,transparent) 0%,
+    color-mix(in srgb,var(--attr,var(--tc)) 12%,transparent) 38%,
+    transparent 100%);
+  mix-blend-mode:screen;opacity:.7;
+}
+/* Chest up, filling the half. `contain` was tried and shrinks a waist-up UI
+   card to a stamp in the middle of the frame; cover at this crop puts the head
+   just under the band and the shoulders across the middle of the window, which
+   is the part of a character worth showing at this size. */
 .figs img.fig{
-  flex:1 1 0;min-width:0;width:100%;height:100%;
-  object-fit:cover;object-position:center 14%;
-  transform:translateY(16%) scale(1.06);
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 30%;
 }
-/* Two figures turn in toward the middle rather than both facing out. */
-.figs.n2 img.fig:first-child{object-position:58% 12%}
-.figs.n2 img.fig:last-child{object-position:42% 12%}
-/* A seam between the halves, so two crops read as a deliberate split rather
-   than one picture that failed to line up. */
-.figs.n2 img.fig:last-child{border-left:1px solid rgba(255,255,255,.07)}
-/* The poster carries Kuro's logo across its top. How much of it survives the
-   crop depends on the card's aspect, which changes with the viewport — so bury
-   that band under a dark strip rather than chasing it with object-position. */
-/* The reveal poster carries Kuro's logo across its top, which the head band
-   now covers on its own — so this only has to feather the foot. */
-.pcard-art.poster::after{
-  background:linear-gradient(180deg,transparent 0%,transparent 60%,rgba(11,10,15,.24) 100%);
-}
-/* Barely anything. The head band and the rows carry their own washes now, so
-   the picture between them doesn't need a second one on top — it was a
-   left-side gradient sized for type that has since moved to the top of the
-   card, and it was the reason the art looked muddy. */
+/* Two figures lean in toward the middle rather than both drifting to their
+   outside edges — a pair standing together, not two pictures in two boxes. */
+.figs.n2 .fig-cell:first-child img.fig{object-position:62% 30%}
+.figs.n2 .fig-cell:last-child img.fig{object-position:38% 30%}
+/* A seam, so two crops read as a deliberate split rather than one picture that
+   failed to line up. */
+.figs.n2 .fig-cell:last-child{box-shadow:inset 1px 0 0 rgba(255,255,255,.09)}
+/* A hairline of shade where the picture meets the body, and nothing else. No
+   type sits on the art below the head band any more, so there is nothing left
+   for a scrim to rescue — this is purely so the crop lands on the body rather
+   than stopping dead against it. */
 .pcard-art::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 0%,transparent 62%,rgba(11,10,15,.22) 100%);
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 0%,transparent 84%,rgba(11,10,15,.34) 100%);
 }
 /* One band across the top carrying the pill, the version, the codename, the
    dates and the run bar, on one gradient that fades into the picture. The
@@ -439,7 +478,7 @@ button{font:inherit;color:inherit}
   position:relative;z-index:1;
   background:linear-gradient(180deg,
     rgba(11,10,15,.93) 0%,rgba(11,10,15,.88) 46%,rgba(11,10,15,.64) 78%,transparent 100%);
-  padding-bottom:26px;
+  padding-bottom:20px;
 }
 /* One rail: what the patch is on the left, where it is in its run on the
    right. Both are status, so they belong on the same line. */
@@ -462,7 +501,7 @@ button{font:inherit;color:inherit}
 .pcard-idtext{min-width:0;flex:1}
 .pcard-num{
   flex:none;
-  font-family:var(--mono);font-size:66px;font-weight:500;line-height:.95;letter-spacing:-.03em;
+  font-family:var(--mono);font-size:57px;font-weight:500;line-height:.95;letter-spacing:-.03em;
   font-variant-numeric:tabular-nums;
 }
 .pcard.is-live .pcard-num{color:var(--t-official)}
@@ -495,39 +534,31 @@ button{font:inherit;color:inherit}
    the point of putting the art behind the card was for it to look like art.
    The picture stays sharp; legibility comes from a flat wash plus the shadow
    on the type, which keeps the edges of everything crisp. */
-/* The art's window. flex:1 hands it every spare pixel on a quiet patch, and
-   the min-height stops a busy one from squeezing it to nothing. */
-.pcard-gap{flex:1 1 auto;min-height:186px}
-/* Pinned under that window. With the head band anchored at the top, the space
-   between the two is what the artwork gets — the point of moving the version
-   block up there in the first place. */
-.pcard-rows{position:relative;z-index:1;background:rgba(11,10,15,.8)}
+/* The clear part of the stage — the picture below the head band, with nothing
+   in front of it. It is what is left of the stage once the head has taken its
+   band, so the stage's own floor is what guarantees its size. position:relative
+   because the debut figures anchor to this box, not to the stage. */
+.pcard-window{position:relative;flex:1 1 auto;min-height:0}
+/* No wash and no shadow: this sits on the body's own solid background now,
+   not on the artwork, so the type can be plain. */
+.pcard-rows{position:relative;z-index:1}
 .pcard-row{
-  padding:12px 16px 14px;border-top:1px solid rgba(255,255,255,.09);min-width:0;
-  text-shadow:0 1px 10px rgba(13,12,17,.9);
+  padding:11px 16px 12px;border-top:1px solid var(--line);min-width:0;
 }
+/* The body's own top border already rules this off from the picture. */
+.pcard-row:first-child{border-top:0}
 .pcard-row .label{margin-bottom:9px}
 /* Portraits big enough to recognise a character at a glance. */
 .pcard-row .bstrip{--thumb:92px}
 /* Debuts and reruns side by side: what's new on the left, what's back on the
-   right. They're different decisions, so they don't share a strip. */
-/* Two columns, one band per phase. Grid rather than two stacked lists, so a
-   phase's debut and its reruns always line up on the same row — and each
-   phase gets its own dated header across the full width. */
+   right. They're different decisions — a debut is now or never, a rerun comes
+   round again — so they don't share a strip. Grid rather than two stacked
+   lists, so the two columns always start on the same line. */
 .pcard-split{display:grid;grid-template-columns:1fr 1fr;row-gap:10px;align-items:start}
 .pcard-split>*{min-width:0}
 .ps-head.l,.ps-cell.l{padding-right:14px}
 .ps-head.r,.ps-cell.r{padding-left:14px;border-left:1px solid rgba(255,255,255,.09)}
 .ps-head{padding-bottom:2px;font-size:10.5px;letter-spacing:.16em;color:var(--fg-2)}
-/* The phase dates, once, on one line — the thumbnails carry their own P1/P2
-   stamp, so this only has to say what those stamps mean. */
-.ps-legend{
-  grid-column:1/-1;display:flex;gap:14px;flex-wrap:wrap;
-  padding-top:9px;margin-top:2px;border-top:1px solid rgba(255,255,255,.09);
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);
-}
-.ps-legend b{color:var(--fg-2);font-weight:500;letter-spacing:.12em;margin-right:5px}
-.ps-legend em{font-style:normal;color:var(--amber)}
 /* Half a card is narrow — wrap rather than scroll, so no portrait is ever
    half-visible at the column edge. */
 /* Portraits grow into whatever the column gives them — half the cell, floored
@@ -537,81 +568,137 @@ button{font:inherit;color:inherit}
    Centred stacks left two thirds of each column empty when a phase had a
    single debut — a row uses the width it's given, and has space for the
    weapon as well as the rarity and element. */
-.bstrip.rows{flex-direction:column;flex-wrap:nowrap;gap:9px;overflow:visible;--thumb:54px}
-/* flex and width spelled out here rather than left to `.bpair > *`: the base
-   .bmini rule sets `flex:none; width:var(--thumb)` and sits later in the file,
-   so it wins on source order and collapses this tile to thumbnail width. */
+.bstrip.rows{flex-direction:column;flex-wrap:nowrap;gap:8px;overflow:visible;--thumb:44px}
+/* flex and width spelled out here rather than left to the pair: the base .bmini
+   rule sets `flex:none; width:var(--thumb)` and sits later in the file, so it
+   wins on source order and collapses this tile to thumbnail width. */
 .bstrip.rows .bmini{
-  display:flex;align-items:center;gap:11px;text-align:left;
-  flex:1 1 152px;width:auto;
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
-  border-radius:10px;padding:7px 10px;transition:border-color .16s,background .16s,transform .16s;
+  display:flex;align-items:center;gap:10px;text-align:left;
+  flex:1 1 auto;width:auto;padding:7px 9px;
+  transition:background .16s;
 }
 .bstrip.rows .bmini[role="button"]:hover{
-  background:color-mix(in srgb,var(--attr) 12%,rgba(255,255,255,.04));
-  border-color:color-mix(in srgb,var(--attr) 50%,transparent);transform:translateY(-2px);
+  background:color-mix(in srgb,var(--attr) 13%,transparent);
 }
-.bstrip.rows .bmini[role="button"]:hover .thumb{transform:none}
+/* A banner tile gets its border and its lit ground from .bpair, its wrapper.
+   The child selector picks out the ones with no wrapper — the teased list on a
+   future patch, which is a character with no banner to pair them to — and
+   hands them the same chrome, so 3.7's one tile doesn't sit there as bare text
+   beside ten framed ones. */
+.bstrip.rows > .bmini{
+  border:1px solid color-mix(in srgb,var(--attr,var(--fg-3)) 30%,transparent);
+  border-radius:10px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--attr,var(--fg-3)) 15%,transparent),
+      color-mix(in srgb,var(--attr,var(--fg-3)) 8%,transparent)),
+    rgba(255,255,255,.03);
+}
+.bstrip.rows .bmini[role="button"]:hover .thumb{transform:none;border-color:color-mix(in srgb,var(--attr) 65%,var(--line))}
 .bstrip.rows .bwho{min-width:0;flex:1}
-.bstrip.rows .bmini b{font-size:13.5px;margin-top:0;-webkit-line-clamp:1;line-height:1.25}
+.bstrip.rows .bmini b{font-size:13px;margin-top:0;-webkit-line-clamp:1;line-height:1.25}
 .bstrip.rows .bmini .bmeta{margin-top:4px;font-size:8.5px;gap:5px}
 .bstrip.rows .bmini .attr{padding:1px 5px}
-/* Square, to sit level with the weapon tile's icon block beside it. */
+/* Square, to sit level with the weapon icon under it. */
 .bstrip.rows .thumb{flex:none;aspect-ratio:1;border-radius:9px}
-/* Character and weapon as a pair of equal tiles. The weapon convene runs
-   alongside the character banner and is its own pull, so it reads at the same
-   weight rather than as a footnote under the portrait. flex-wrap is the whole
-   responsive story: on a wide card they sit side by side, and on a narrow one
-   the weapon drops under its character rather than being squeezed. */
-.bpair{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
-.bpair>*{flex:1 1 148px;min-width:0}
+
+/* Character and weapon in one tile, split by a rule. The weapon convene is its
+   own pull and keeps its own click target, but it is *this character's* weapon
+   and a card carrying five banners cannot afford to say so twice. Two separate
+   floating tiles cost a stacked pair each — half a screen of card across the
+   row — for a distinction the rule inside makes just as well. */
+.bpair{
+  /* Fallback for a banner whose element nobody has announced yet — Suoming,
+     an unnamed slot. Inline styles win over this, so a known element still
+     paints its own colour. Without it every color-mix below computes against
+     an undefined var and the whole tile loses its border and background. */
+  --attr:var(--fg-3);
+  display:flex;flex-direction:column;min-width:0;
+  border:1px solid color-mix(in srgb,var(--attr) 30%,transparent);
+  border-radius:10px;overflow:hidden;
+  /* Lit at rest, not on hover. Five grey tiles to a card is most of what you
+     look at on this page, and hiding the one piece of colour they carry behind
+     a mouse means the page is grey every time you aren't touching it. Warmest
+     at the top where the portrait is, dipping through the middle, up again
+     under the weapon row so the tile reads as one lamp rather than two. */
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--attr) 17%,transparent) 0%,
+      color-mix(in srgb,var(--attr) 7%,transparent) 58%,
+      color-mix(in srgb,var(--attr) 13%,transparent) 100%),
+    rgba(255,255,255,.03);
+  transition:border-color .16s,box-shadow .16s;
+}
+.bpair:hover{
+  border-color:color-mix(in srgb,var(--attr) 60%,transparent);
+  box-shadow:0 6px 22px -10px color-mix(in srgb,var(--attr) 60%,transparent);
+}
 .wtile{
-  display:flex;align-items:center;gap:10px;text-align:left;
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
-  border-radius:10px;padding:7px 10px;cursor:pointer;color:inherit;font:inherit;
-  transition:border-color .16s,background .16s,transform .16s;
+  display:flex;align-items:center;gap:9px;text-align:left;width:100%;
+  background:none;border:0;
+  border-top:1px solid color-mix(in srgb,var(--attr) 22%,transparent);
+  padding:5px 9px;cursor:pointer;color:inherit;font:inherit;
+  transition:background .16s;
 }
-.wtile:hover{
-  background:color-mix(in srgb,var(--attr) 12%,rgba(255,255,255,.04));
-  border-color:color-mix(in srgb,var(--attr) 50%,transparent);transform:translateY(-2px);
-}
-.wtile.empty{cursor:default;background:none;border-style:dashed;justify-content:center}
-.wtile.empty:hover{transform:none;border-color:rgba(255,255,255,.09);background:none}
+.wtile:hover{background:color-mix(in srgb,var(--attr) 14%,transparent)}
+.wtile.empty{cursor:default}
+.wtile.empty:hover{background:none}
 .wicon{
-  flex:none;display:flex;align-items:center;justify-content:center;width:38px;height:38px;
-  border-radius:9px;color:var(--attr);
+  position:relative;overflow:hidden;
+  flex:none;display:flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:7px;color:var(--attr);
   background:linear-gradient(150deg,color-mix(in srgb,var(--attr) 26%,var(--bg-3)),var(--bg));
   border:1px solid color-mix(in srgb,var(--attr) 26%,transparent);
 }
-.wtext{min-width:0;display:flex;flex-direction:column;gap:3px}
+/* The weapon's own render, transparent, sitting on the same gradient the glyph
+   used to. Overflowing the box slightly is deliberate: the game's icons are
+   drawn on the diagonal with a lot of air in the corners, so an exact fit reads
+   as a small grey smudge at this size. */
+.wicon.has-art{background:linear-gradient(150deg,color-mix(in srgb,var(--attr) 18%,var(--bg-3)),var(--bg))}
+.wicon img{width:100%;height:100%;object-fit:contain;transform:scale(1.2)}
+/* The same render at the size it was drawn for, heading the weapon drawer.
+   There is no weapon database behind that panel — the picture is most of what
+   the desk can actually show you about one. */
+.wbig{
+  display:flex;align-items:center;justify-content:center;height:168px;margin:4px 0 2px;
+  border-radius:var(--r);border:1px solid var(--line);
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%,color-mix(in srgb,var(--attr) 22%,transparent),transparent 72%),
+    linear-gradient(155deg,var(--bg-3),var(--bg));
+}
+.wbig img{max-width:88%;max-height:88%;object-fit:contain}
+/* The name gets the whole row. Two lines rather than an ellipsis, for the same
+   reason the character names get two: "Thousandfold …" names nothing. The row
+   only grows when a name actually needs the second line. */
+.wtext{min-width:0;flex:1}
 .wtext b{
-  font-size:12.5px;font-weight:600;line-height:1.25;color:var(--fg);letter-spacing:-.01em;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  font-size:11.5px;font-weight:600;line-height:1.3;color:var(--fg);letter-spacing:-.01em;
 }
 .wsub{
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;text-transform:uppercase;
-  color:var(--fg-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  flex:none;font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--fg-3);white-space:nowrap;
 }
 
 .pcard-notes{
   margin:0;font-size:12.5px;line-height:1.6;color:var(--fg-2);
-  text-shadow:0 1px 10px rgba(11,10,15,.9);
 }
 .bnone{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--fg-3);
   padding:12px 0;
 }
+/* margin-top:auto pins it to the bottom of the card. Three cards in a row are
+   all as tall as the busiest, and the quiet ones would otherwise leave their
+   slack in a band under the footer rather than above it. */
 .pcard-foot{
   position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-end;gap:8px;
-  padding:10px 16px;border-top:1px solid rgba(255,255,255,.09);background:rgba(11,10,15,.8);
+  margin-top:auto;padding:10px 16px;border-top:1px solid var(--line);
   font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
-  text-shadow:0 1px 10px rgba(13,12,17,.9);
 }
 .pcard:hover .pcard-foot{color:var(--fg)}
 .pcard-row .bstrip{padding-bottom:2px}
 .pcard-note{
-  position:relative;z-index:1;padding:0 16px 14px;font-size:12px;color:var(--fg-3);line-height:1.6;
-  text-shadow:0 1px 10px rgba(13,12,17,.9);
+  position:relative;z-index:1;padding:14px 16px;font-size:12px;color:var(--fg-3);line-height:1.6;
 }
 
 /* Phase track — one bar for the patch run, split where the phases change,
@@ -649,14 +736,6 @@ button{font:inherit;color:inherit}
 }
 @keyframes breathe{0%,100%{opacity:.75}50%{opacity:1}}
 
-.evlist{display:grid;gap:7px}
-.evrow{display:flex;gap:10px;align-items:baseline;font-size:12.5px;color:var(--fg-2);min-width:0}
-.evrow .when{
-  margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--fg-3);white-space:nowrap;letter-spacing:.05em;
-}
-.evrow .what{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.evrow .dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}
-
 /* banner thumbs inside patch cards */
 .bstrip{display:flex;gap:9px;flex-wrap:wrap}
 .bmini{width:var(--thumb,62px);flex:none;text-align:center}
@@ -676,6 +755,13 @@ button{font:inherit;color:inherit}
 }
 .bmini .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 12%}
 .bmini .thumb.cut img{object-fit:contain;object-position:center bottom}
+/* The cut-out bust: a square, transparent, head-centred asset drawn for this
+   size. It needs no crop and no zoom — contain, edge to edge, and the tile's
+   element gradient shows through where the background used to be. */
+.bmini .thumb.bust{background:
+  radial-gradient(ellipse 100% 80% at 50% 118%,color-mix(in srgb,var(--attr) 42%,transparent),transparent 72%),
+  linear-gradient(158deg,color-mix(in srgb,var(--attr) 13%,var(--bg-3)),var(--bg))}
+.bmini .thumb.bust img{object-fit:contain;object-position:center center;transform:scale(1.04)}
 /* Kuro's reveal poster is 1080x1920 with the face about a fifth down. Shrunk
    into a 62px box it reads as a tiny poster, logo and all — so pin the crop to
    the top of the frame and zoom onto the head. Same template every time, so
@@ -685,11 +771,17 @@ button{font:inherit;color:inherit}
   font-family:var(--cjk);font-size:24px;font-weight:700;
   color:color-mix(in srgb,var(--attr) 60%,var(--fg));opacity:.65;
 }
-.bmini .thumb .ph{
-  position:absolute;left:0;bottom:0;right:0;
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
-  background:rgba(13,12,17,.82);color:var(--fg-3);padding:2px 0;
+/* The phase, now that it is a chip in the meta row rather than a bar across
+   the bottom of the picture. Outlined rather than filled: it is the one mark
+   here that isn't about the character, so it should read as a label on the
+   banner, not another property of the resonator. */
+.bmini .ph{
+  font-style:normal;font-weight:500;color:var(--fg-2);
+  border:1px solid var(--line-2);border-radius:4px;padding:1px 5px;
 }
+/* That phase has run. Marked on the chip rather than the whole tile: the
+   banner is closed, the character is still part of the patch. */
+.bmini .ph.past{color:var(--fg-3);border-style:dashed;border-color:var(--line)}
 /* Two lines rather than an ellipsis: "Yangyang: Xuanling" is a real name and
    "Yangyan…" tells you nothing. */
 .bmini b{
@@ -1367,9 +1459,26 @@ button{font:inherit;color:inherit}
   .hero::-webkit-scrollbar{display:none}
   .hero .pcard{flex:0 0 88%;scroll-snap-align:center}
   .pcard{min-height:340px}
+  /* A phone card is one column wide and everything in it stacks, so the body
+     runs long. The art band gives some of its height back rather than putting
+     the banner list a screen and a half down. */
+  .pcard-stage{min-height:300px;max-height:360px}
   /* No horizontal scroll inside a card on touch — wrap the portraits instead,
      since a half-visible face reads as a broken image. */
-  .pcard-row .bstrip{flex-wrap:wrap;overflow:visible;--thumb:76px}
+  .pcard-row .bstrip{flex-wrap:wrap;overflow:visible;--thumb:56px}
+  /* 160px of column cannot seat a portrait and a name beside it. One column of
+     banners, full width, rather than two unreadable ones.
+
+     The rows have to be assigned explicitly. Source order is head-l, head-r,
+     cell-l, cell-r — which is what puts them side by side on a wide card, and
+     what stacks both headings together above every banner on a narrow one, so
+     the debuts end up filed under "Reruns". */
+  .pcard-split{grid-template-columns:1fr;row-gap:6px}
+  .ps-head.l,.ps-cell.l,.ps-head.r,.ps-cell.r{padding:0;border-left:0}
+  .ps-head.l{grid-row:1}
+  .ps-cell.l{grid-row:2}
+  .ps-head.r{grid-row:3;padding-top:12px;margin-top:4px;border-top:1px solid rgba(255,255,255,.09)}
+  .ps-cell.r{grid-row:4}
   .hero .pcard.is-future{grid-column:auto;min-height:0}
   .body{padding-bottom:88px}
   .sig{grid-template-columns:64px minmax(0,1fr);gap:4px 12px;padding:11px 16px}

@@ -24,7 +24,7 @@
           "estimated_end": true,
           "banners": [
             { "name": "Qingxiao", "rarity": 5, "attribute": "Aero", "weapon": "Sword", "role": "Main DPS", "new": true, "convene": "Wind of Transcendence", "signature": "Glint of Clouds", "keyVisualFocus": "left 50%", "keyVisualZoom": 1.72, "keyVisualOrigin": "47% 19%" },
-            { "name": "Denia", "rarity": 5, "attribute": "Fusion", "weapon": "Gauntlets", "rerun": true }
+            { "name": "Denia", "rarity": 5, "attribute": "Fusion", "weapon": "Rectifier", "rerun": true, "signature": "Forged Dwarf Star" }
           ]
         },
         {
@@ -36,7 +36,7 @@
           "banners": [
             { "name": "Jingran", "rarity": 5, "attribute": "Fusion", "weapon": "Broadblade", "role": "Main DPS", "new": true, "signature": "Thousandfold Deliverance", "keyVisualFocus": "right 50%", "keyVisualZoom": 1.38, "keyVisualOrigin": "60% 34%" },
             { "name": "Hiyuki", "rarity": 5, "attribute": "Glacio", "weapon": "Sword", "rerun": true, "signature": "Frostburn", "note": "First rerun" },
-            { "name": "Mornye", "rarity": 5, "weapon": "Broadblade", "role": "Healer", "rerun": true, "signature": "Starfield Calibrator" }
+            { "name": "Mornye", "rarity": 5, "attribute": "Fusion", "weapon": "Broadblade", "role": "Healer", "rerun": true, "signature": "Starfield Calibrator" }
           ]
         }
       ],
@@ -54,9 +54,9 @@
           "start": "2026-07-10",
           "end": "2026-07-30",
           "banners": [
-            { "name": "Yangyang: Xuanling", "rarity": 5, "new": true, "convene": "Voices on Azure Feathers", "signature": "Azure Oath" },
-            { "name": "Luuk Herssen", "rarity": 5, "rerun": true, "convene": "When Winter Thaws", "signature": "Daybreaker's Spine" },
-            { "name": "Lynae", "rarity": 5, "rerun": true, "convene": "Undefined Spectrum", "signature": "Spectrum Blaster" }
+            { "name": "Yangyang: Xuanling", "rarity": 5, "attribute": "Havoc", "weapon": "Sword", "new": true, "convene": "Voices on Azure Feathers", "signature": "Azure Oath" },
+            { "name": "Luuk Herssen", "rarity": 5, "attribute": "Spectro", "weapon": "Gauntlets", "rerun": true, "convene": "When Winter Thaws", "signature": "Daybreaker's Spine" },
+            { "name": "Lynae", "rarity": 5, "attribute": "Spectro", "weapon": "Pistols", "rerun": true, "convene": "Undefined Spectrum", "signature": "Spectrum Blaster" }
           ]
         },
         {
@@ -64,8 +64,8 @@
           "start": "2026-07-30",
           "end": "2026-08-19",
           "banners": [
-            { "name": "Suisui", "rarity": 5, "new": true, "convene": "Blessings From Dewy Winds", "signature": "Firstlight's Herald" },
-            { "name": "Aemeath", "rarity": 5, "rerun": true, "convene": "Take Flight in Spring", "signature": "Everbright Polestar" }
+            { "name": "Suisui", "rarity": 5, "attribute": "Glacio", "weapon": "Rectifier", "new": true, "convene": "Blessings From Dewy Winds", "signature": "Firstlight's Herald" },
+            { "name": "Aemeath", "rarity": 5, "attribute": "Fusion", "weapon": "Sword", "rerun": true, "convene": "Take Flight in Spring", "signature": "Everbright Polestar" }
           ]
         }
       ],

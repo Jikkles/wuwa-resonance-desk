@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/fetch-portraits.mjs)",
+      "Bash(node --input-type=module -e ' *)",
+      "Bash(cp \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/shot.cjs\" \"c:/Users/Tom/Test Project/playwright-automation/_wuwa-shot.cjs\")",
+      "Bash(node _wuwa-shot.cjs wide)",
+      "Bash(cp \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/sweep.cjs\" \"c:/Users/Tom/Test Project/playwright-automation/_wuwa-sweep.cjs\")",
+      "Bash(node _wuwa-sweep.cjs)",
+      "Bash(rm -f _wuwa-shot.cjs)",
+      "Bash(cp \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/gallery.cjs\" \"c:/Users/Tom/Test Project/playwright-automation/_wuwa-gal.cjs\")",
+      "Bash(node _wuwa-gal.cjs)",
+      "Bash(rm -f _wuwa-gal.cjs)",
+      "Bash(cp \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/before.cjs\" \"c:/Users/Tom/Test Project/playwright-automation/_wuwa-before.cjs\")",
+      "Bash(node _wuwa-before.cjs)",
+      "Bash(rm -f _wuwa-before.cjs)",
+      "Bash(node \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/serve.cjs\")",
+      "Bash(cp \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/check.cjs\" \"c:/Users/Tom/Test Project/playwright-automation/_wuwa-check.cjs\")",
+      "Bash(node _wuwa-check.cjs)",
+      "Bash(rm -f _wuwa-check.cjs _wuwa-shot.cjs)",
+      "Bash(rm -f _wuwa-check.cjs)",
+      "Bash(curl -s -o /dev/null -w \"server still up: %{http_code}\\\\n\" --max-time 8 \"http://localhost:8080/\")",
+      "Bash(node suoming.mjs)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('data/resonators.json','utf8'\\)\\);console.log\\('resonators.json valid'\\)\")",
+      "Bash(rm -f _wuwa-sweep.cjs _wuwa-shot.cjs)",
+      "Bash(cp \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/res.cjs\" \"c:/Users/Tom/Test Project/playwright-automation/_wuwa-res.cjs\")",
+      "Bash(node _wuwa-res.cjs)",
+      "Bash(rm -f _wuwa-res.cjs)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" --max-time 5 \"http://localhost:8080/\")",
+      "WebFetch(domain:www.reddit.com)",
+      "Bash(cp \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/tiles.cjs\" \"c:/Users/Tom/Test Project/playwright-automation/_wuwa-tiles.cjs\")",
+      "Bash(node _wuwa-tiles.cjs)",
+      "Bash(rm -f _wuwa-tiles.cjs)",
+      "Bash(cp \"C:/Users/Tom/AppData/Local/Temp/claude/c--Users-Tom-ClaudeProjects-wuwa-resonance-desk/406905a5-5db2-4150-bd15-a3af79b55453/scratchpad/sweep.cjs\" _wuwa-sweep.cjs)",
+      "Bash(git log *)",
+      "Bash(git check-ignore *)",
+      "Bash(grep -v '^$')"
+    ]
+  }
+}
