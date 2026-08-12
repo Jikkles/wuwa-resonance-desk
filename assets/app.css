@@ -12,10 +12,12 @@
   --line:#2B2833;
   --line-2:#393540;
 
-  /* ink */
-  --fg:#EDEAE6;
-  --fg-2:#A7A2AA;
-  --fg-3:#7A7480;
+  /* Ink. Secondary and tertiary sit brighter than a typical dark theme would
+     put them — this is a page of small mono labels, and at 10px a dim grey
+     stops being readable and starts being decoration. */
+  --fg:#F2EFEB;
+  --fg-2:#C6C1C9;
+  --fg-3:#968F9C;
 
   --accent:#55C9D3;
   --accent-soft:rgba(85,201,211,.13);
@@ -72,7 +74,7 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 
 .label{
-  font-family:var(--mono);font-size:10px;font-weight:500;
+  font-family:var(--mono);font-size:10.5px;font-weight:500;
   letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);
 }
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
@@ -124,7 +126,7 @@ button{font:inherit;color:inherit}
 
 .rail-about{
   margin:0 18px;padding:14px;border:1px solid var(--line);border-radius:var(--r-sm);
-  background:var(--bg-2);font-size:12px;line-height:1.6;color:var(--fg-2);
+  background:var(--bg-2);font-size:12.5px;line-height:1.6;color:var(--fg-2);
 }
 .rail-about .label{margin-bottom:8px}
 .linkout{
@@ -144,7 +146,7 @@ button{font:inherit;color:inherit}
 .hud{padding:18px 24px 0;max-width:var(--page);width:100%}
 .hud-strip{
   display:flex;align-items:center;gap:18px;flex-wrap:wrap;
-  font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
   color:var(--fg-3);padding-bottom:16px;
 }
 .hud-strip .title{color:var(--fg-2);letter-spacing:.2em;margin-right:auto}
@@ -169,7 +171,7 @@ button{font:inherit;color:inherit}
 .metric-v.accent{color:var(--accent)}
 .metric-v.small{font-size:15px;font-weight:500;padding-top:8px}
 .metric-row{display:flex;align-items:baseline;gap:12px}
-.metric-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--fg-3);line-height:1.5}
+.metric-k{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--fg-3);line-height:1.5}
 .metric-k b{display:block;color:var(--fg-2);font-weight:500}
 .bar{height:3px;border-radius:2px;background:var(--bg-3);margin-top:11px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--accent);border-radius:2px}
@@ -250,7 +252,7 @@ button{font:inherit;color:inherit}
 .chips button{
   background:var(--bg-2);border:1px solid var(--line);border-radius:20px;
   padding:5px 12px;cursor:pointer;color:var(--fg-3);
-  font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
   transition:.15s;display:inline-flex;align-items:center;gap:7px;
 }
 .chips button:hover{color:var(--fg);border-color:var(--line-2)}
@@ -291,7 +293,7 @@ button{font:inherit;color:inherit}
    is the cheapest way to do that. */
 .tier{
   display:inline-flex;align-items:center;gap:7px;flex:none;
-  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
   border:1px solid color-mix(in srgb,currentColor 42%,transparent);
   background:color-mix(in srgb,currentColor 11%,transparent);
   border-radius:6px;padding:3px 8px;white-space:nowrap;
@@ -300,11 +302,11 @@ button{font:inherit;color:inherit}
 .tier.solid{background:currentColor;border-color:currentColor}
 .tier.solid span{color:var(--bg)}
 .tier-note{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
 }
 
 .pill{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
   border:1px solid var(--line-2);border-radius:6px;padding:3px 8px;color:var(--fg-3);white-space:nowrap;
 }
 .pill.ver{border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
@@ -346,6 +348,18 @@ button{font:inherit;color:inherit}
    banner strip. */
 .pcard-art{position:absolute;inset:0;z-index:0;overflow:hidden}
 .pcard-art img{width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:.82}
+/* A character poster rather than a wide key visual: crop left of centre so the
+   figure lands on the right half, clear of the type. */
+.pcard-art.poster img{object-position:32% 40%}
+/* The poster carries Kuro's logo across its top. How much of it survives the
+   crop depends on the card's aspect, which changes with the viewport — so bury
+   that band under a dark strip rather than chasing it with object-position. */
+.pcard-art.poster::after{
+  background:
+    linear-gradient(180deg,rgba(13,12,17,.94) 0%,rgba(13,12,17,.6) 13%,transparent 28%),
+    linear-gradient(90deg,rgba(13,12,17,.97) 0%,rgba(13,12,17,.92) 34%,rgba(13,12,17,.55) 68%,rgba(13,12,17,.12) 100%),
+    linear-gradient(180deg,rgba(13,12,17,.20) 0%,rgba(13,12,17,.28) 34%,rgba(13,12,17,.86) 68%,rgba(13,12,17,.99) 88%);
+}
 .pcard-art::after{
   content:"";position:absolute;inset:0;
   background:
@@ -390,14 +404,36 @@ button{font:inherit;color:inherit}
 .pcard-row .label{margin-bottom:11px}
 /* Portraits big enough to recognise a character at a glance. */
 .pcard-row .bstrip{--thumb:84px}
+/* Debuts and reruns side by side: what's new on the left, what's back on the
+   right. They're different decisions, so they don't share a strip. */
+/* Two columns, one row per phase. Grid rather than two stacked lists, so a
+   phase's debut and its reruns always line up on the same row. */
+.pcard-split{position:relative;display:grid;grid-template-columns:1fr 1fr;row-gap:14px}
+.pcard-split>*{min-width:0}
+.pcard-split>*:nth-child(odd){padding-right:16px}
+.pcard-split>*:nth-child(even){padding-left:16px}
+/* One continuous divider, drawn on the container — a per-cell border would
+   break at every row gap. */
+.pcard-split::before{
+  content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line);
+}
+/* Rule between phase rows (children 1-2 are the headers, 3-4 the first phase). */
+.pcard-split>*:nth-child(n+5){border-top:1px solid var(--line);padding-top:14px}
+.pcard-split .label{margin-bottom:0}
+/* Half a card is narrow — wrap rather than scroll, so no portrait is ever
+   half-visible at the column edge. */
+.pcard-split .bstrip{flex-wrap:wrap;overflow:visible;--thumb:76px}
+.bnone{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--fg-3);
+  padding:12px 0;
+}
 .pcard-foot{
   position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-end;gap:8px;
   padding:12px 18px;border-top:1px solid var(--line);
   font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
 }
 .pcard:hover .pcard-foot{color:var(--fg)}
-.pcard-row .bstrip{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
-.pcard-row .bstrip::-webkit-scrollbar{display:none}
+.pcard-row .bstrip{padding-bottom:2px}
 .pcard-note{
   position:relative;z-index:1;padding:0 17px 16px;font-size:12px;color:var(--fg-3);line-height:1.6;
 }
@@ -433,7 +469,7 @@ button{font:inherit;color:inherit}
 }
 
 .evlist{display:grid;gap:9px}
-.evrow{display:flex;gap:10px;align-items:baseline;font-size:12px;color:var(--fg-2);min-width:0}
+.evrow{display:flex;gap:10px;align-items:baseline;font-size:13px;color:var(--fg-2);min-width:0}
 .evrow .when{
   margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--fg-3);white-space:nowrap;letter-spacing:.05em;
 }
@@ -515,7 +551,7 @@ button{font:inherit;color:inherit}
   padding:11px 12px;border-radius:var(--r-sm);background:var(--bg-2);
 }
 .lane-k{
-  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
   display:flex;flex-direction:column;gap:3px;
 }
 .lane-k b{color:var(--fg-2);font-weight:500;letter-spacing:.13em}
@@ -524,7 +560,7 @@ button{font:inherit;color:inherit}
 .btag{
   display:inline-flex;align-items:center;gap:9px;
   border:1px solid var(--line-2);border-left:2px solid var(--attr);border-radius:8px;
-  background:var(--bg-1);padding:5px 11px 5px 6px;font-size:12px;
+  background:var(--bg-1);padding:5px 11px 5px 6px;font-size:12.5px;
 }
 /* A face in the timeline lane, not just a name. */
 .btag .av{
@@ -548,7 +584,7 @@ button{font:inherit;color:inherit}
   margin-top:14px;padding:10px 13px;border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--amber) 7%,transparent);
   border-left:2px solid color-mix(in srgb,var(--amber) 55%,transparent);
-  font-size:12.5px;color:var(--fg-2);line-height:1.6;
+  font-size:13px;color:var(--fg-2);line-height:1.6;
 }
 
 /* ══ character cards (next-patch hero grid) ═════════════════════════ */
@@ -636,7 +672,7 @@ button{font:inherit;color:inherit}
 .cwhen{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);margin-top:-6px}
 .cepithet{font-size:12.5px;font-style:italic;color:var(--attr);margin-top:-4px}
 .csum{
-  margin:0;font-size:12.5px;color:var(--fg-2);line-height:1.6;
+  margin:0;font-size:13px;color:var(--fg-2);line-height:1.6;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
 .cgear{
@@ -649,7 +685,7 @@ button{font:inherit;color:inherit}
 .cknow-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:9px}
 .cknow ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .cknow li{
-  position:relative;padding-left:14px;font-size:12.5px;color:var(--fg-2);line-height:1.5;
+  position:relative;padding-left:14px;font-size:13px;color:var(--fg-2);line-height:1.5;
 }
 .cknow li::before{content:"";position:absolute;left:0;top:.6em;width:4px;height:4px;border-radius:50%;background:var(--attr)}
 .cknow .none{font-size:12px;color:var(--fg-3);font-style:italic}
@@ -703,9 +739,9 @@ button{font:inherit;color:inherit}
 }
 .intel-h{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
 .intel-h .when{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--fg-3)}
-.intel h3{margin:0 0 5px;font-size:14.5px;font-weight:600;line-height:1.45;color:var(--fg);letter-spacing:-.01em}
+.intel h3{margin:0 0 5px;font-size:15px;font-weight:600;line-height:1.45;color:var(--fg);letter-spacing:-.01em}
 .intel p{
-  margin:0;font-size:12.5px;color:var(--fg-2);line-height:1.6;
+  margin:0;font-size:13px;color:var(--fg-2);line-height:1.6;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .intel-f{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
@@ -753,7 +789,7 @@ button{font:inherit;color:inherit}
 .srcstrip:last-child{border-bottom:0}
 .srcpill{
   display:inline-flex;align-items:center;gap:7px;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;color:var(--fg-3);
+  font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--fg-3);
   border:1px solid var(--line);border-radius:6px;padding:3px 8px;
 }
 .srcpill .dot{width:5px;height:5px;border-radius:50%;background:var(--fg-3)}
@@ -770,7 +806,7 @@ button{font:inherit;color:inherit}
 }
 .sig:last-child{border-bottom:0}
 .sig:hover{background:var(--bg-2)}
-.sig .t{font-size:10.5px;color:var(--fg-3);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.sig .t{font-size:11px;color:var(--fg-3);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .sig .src{display:flex;flex-direction:column;gap:1px;min-width:0}
 .sig .src b{
   font-size:10px;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
@@ -778,7 +814,7 @@ button{font:inherit;color:inherit}
 }
 .sig .src i{font-style:normal;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
 .sig .head{
-  font-family:var(--sans);font-size:13px;color:var(--fg-2);line-height:1.45;
+  font-family:var(--sans);font-size:13.5px;color:var(--fg-2);line-height:1.45;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;
 }
 /* Original headline under the translation, so nothing is hidden by it. */
@@ -835,7 +871,7 @@ button{font:inherit;color:inherit}
 }
 .rec-attrs b{color:var(--attr);font-weight:500}
 .rec-sum{
-  margin:0;font-size:12px;color:var(--fg-2);line-height:1.55;
+  margin:0;font-size:12.5px;color:var(--fg-2);line-height:1.55;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
 .rec-role{
@@ -843,8 +879,13 @@ button{font:inherit;color:inherit}
   border-top:1px solid var(--line);padding-top:10px;
 }
 .rec-foot{
-  margin-top:auto;display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding-top:4px;
+  margin-top:auto;display:flex;align-items:flex-end;gap:9px;flex-wrap:wrap;padding-top:4px;
 }
+/* Identity and kit confirm separately, so they're labelled separately — a bare
+   tier badge reads as a verdict on the whole character. */
+.ctiers{display:grid;gap:8px;flex:1;min-width:0}
+.ctiers>div{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ctiers .label{min-width:52px}
 .rec-when{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--fg-3)}
 
 /* ══ aside ══════════════════════════════════════════════════════════ */
@@ -855,7 +896,7 @@ button{font:inherit;color:inherit}
 .mini-h h3{margin:0;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
 .mini-b{padding:13px 14px}
 .glance{display:grid;gap:11px}
-.glance-row{display:flex;align-items:baseline;gap:10px;font-size:12px;color:var(--fg-2)}
+.glance-row{display:flex;align-items:baseline;gap:10px;font-size:12.5px;color:var(--fg-2)}
 .glance-row b{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--fg);font-variant-numeric:tabular-nums}
 .glance-row b.accent{color:var(--accent)}
 
@@ -865,6 +906,7 @@ button{font:inherit;color:inherit}
 .feat-b h3{margin:0 0 3px;font-size:19px;font-weight:600}
 .feat-b .cjk{font-family:var(--cjk);font-size:13px;color:var(--attr)}
 .feat-b .rec-attrs{margin-top:9px}
+.feat-b .ctiers{margin-top:13px}
 .feat-b .btn{margin-top:13px}
 
 .btn{
@@ -902,11 +944,11 @@ button{font:inherit;color:inherit}
 .drawer-b h2{margin:0 0 10px;font-size:21px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
 .drawer-b h2 .cjk{font-size:15px;color:var(--attr);margin-left:9px;font-weight:500}
 .drawer-b .meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.drawer-b p{font-size:13.5px;line-height:1.7;color:var(--fg-2)}
+.drawer-b p{font-size:14px;line-height:1.7;color:var(--fg-2)}
 .dsec{margin-top:22px}
 .dsec>.label{padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px;display:block}
 .dsec ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
-.dsec li{position:relative;padding-left:16px;font-size:13px;color:var(--fg-2);line-height:1.6}
+.dsec li{position:relative;padding-left:16px;font-size:13.5px;color:var(--fg-2);line-height:1.6}
 .dsec li::before{content:"";position:absolute;left:0;top:.62em;width:4px;height:4px;border-radius:50%;background:var(--attr)}
 .dgear{display:grid;gap:8px}
 .dgear div{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:13px}

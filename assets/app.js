@@ -159,6 +159,21 @@ function confMeter(tier){
     <b>${TIER_CONF[t]}</b></span>`;
 }
 
+/* Identity and kit confirm independently — Kuro announces who a character is
+   long before their numbers stop moving in the beta. An unlabelled badge on a
+   card reads as a verdict on the whole character, which is how a confirmed
+   Resonator ends up looking like a rumour. Always say which claim it covers. */
+function confidenceRows(r){
+  const id = r.confidence?.identity;
+  const kit = r.confidence?.kit;
+  return `<div class="ctiers">
+    ${id ? `<div><span class="label">Identity</span>${tierBadge(id, id === "official")}</div>` : ""}
+    <div><span class="label">Kit</span>${r.kit?.length
+      ? tierBadge(kit, kit === "official")
+      : `<span class="pill">No kit notes</span>`}</div>
+  </div>`;
+}
+
 /* Resolve the best available image for a banner row or resonator.
    Precedence: hand-set image → reveal key art → crop of the patch key visual →
    typographic plate. The crop drops out on its own once a reveal card exists. */
@@ -240,7 +255,7 @@ function renderRail(){
 
   $("#rail-links").innerHTML = [
     ["Official news", "https://wutheringwaves.kurogames.com/en/main/news"],
-    ["Kuro on YouTube", "https://www.youtube.com/@WutheringWaves"],
+    ["Kuro on YouTube", "https://www.youtube.com/channel/UC0Bi5KMcECRVYis5Gb_ZYZQ"],
     ["Leak subreddit", "https://www.reddit.com/r/WutheringWavesLeaks/"]
   ].map(([label, href]) => `
     <a class="tierlink" href="${href}" target="_blank" rel="noopener">
@@ -301,6 +316,33 @@ function renderHud(){
 }
 
 /* ── timeline ────────────────────────────────────────────────────── */
+
+/* Banners you can still pull. A phase that has already ended is history — it
+   belongs in the full timeline below, not on the card telling you what's on
+   right now. Falls back to the last phase if the whole patch has run out, so
+   the card never empties. */
+function liveBanners(v){
+  const phases = v.phases || [];
+  if(!phases.length) return [];
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const open = phases.filter(p => !p.end || new Date(p.end) >= today);
+  const use = open.length ? open : phases.slice(-1);
+  return use.flatMap(p => (p.banners || []).map(b => ({...b, phase:p.n, keyVisual:v.keyVisual})));
+}
+
+/* The most recent debut on this patch, for the card's backdrop — the newest
+   character you can actually pull right now. */
+function newestDebutArt(v){
+  const debuts = (v.phases || [])
+    .flatMap(p => (p.banners || []).filter(b => b.new).map(b => ({...b, start:p.start})))
+    .sort((a, b) => String(b.start || "").localeCompare(String(a.start || "")));
+  for(const b of debuts){
+    const f = figure({...b, keyVisual:v.keyVisual});
+    if(f.image) return {url:f.image, poster:f.poster, name:b.name};
+  }
+  return null;
+}
+
 function patchCard(v, role){
   if(!v){
     return `<article class="pcard is-future">
@@ -316,10 +358,15 @@ function patchCard(v, role){
     </article>`;
   }
 
-  const banners = (v.phases || []).flatMap(p => (p.banners || []).map(b => ({...b, phase:p.n, keyVisual:v.keyVisual})));
+  const banners = liveBanners(v);
+  const fresh = banners.filter(b => b.new);
+  const reruns = banners.filter(b => !b.new);
   const events = newsFor(v.id).slice(0, 3);
   const days = v.start ? daysTo(v.start) : null;
-  const f = v.keyVisual;
+  /* A live patch shows the newest debut's own art; an upcoming one has no
+     debut art yet, so it falls back to the patch key visual. */
+  const face = role === "live" ? newestDebutArt(v) : null;
+  const f = face || v.keyVisual;
 
   const state = role === "live"
     ? `<span class="pill live">Current</span>`
@@ -337,12 +384,28 @@ function patchCard(v, role){
   }
 
   const rows = [];
-  /* Four fit the card; say so rather than silently dropping the rest. */
-  if(banners.length) rows.push([
-    role === "next" ? "Banners (tentative)" : "Banners",
-    `<div class="bstrip">${banners.slice(0, 4).map(thumb).join("")}${
-      banners.length > 4 ? `<span class="bmini-more">+${banners.length - 4}</span>` : ""}</div>`
-  ]);
+  /* Debuts and reruns are different decisions — a debut is now or never, a
+     rerun comes round again — so they get their own columns. Rows are phases,
+     because what you actually want to know is who runs alongside whom: a row
+     reads as "this is phase 1". Three fit a cell; say so rather than silently
+     dropping the rest. */
+  const strip = list => list.length
+    ? `<div class="bstrip">${list.slice(0, 3).map(thumb).join("")}${
+        list.length > 3 ? `<span class="bmini-more">+${list.length - 3}</span>` : ""}</div>`
+    : `<div class="bnone">—</div>`;
+
+  const byPhase = [];
+  for(const b of banners){
+    let row = byPhase.find(r => r.phase === b.phase);
+    if(!row) byPhase.push(row = {phase:b.phase, fresh:[], reruns:[]});
+    (b.new ? row.fresh : row.reruns).push(b);
+  }
+
+  if(banners.length) rows.push([null, `<div class="pcard-split">
+    <div class="label">New character${fresh.length === 1 ? "" : "s"}</div>
+    <div class="label">Rerun${reruns.length === 1 ? "" : "s"}</div>
+    ${byPhase.map(r => strip(r.fresh) + strip(r.reruns)).join("")}
+  </div>`]);
   if(events.length) rows.push([
     "Key events",
     `<div class="evlist">${events.slice(0, banners.length ? 2 : 3).map(e => `<div class="evrow t-${esc(e.confidence)}">
@@ -352,13 +415,15 @@ function patchCard(v, role){
   if(!rows.length && v.notes) rows.push(["Status", `<p style="margin:0;font-size:12px;color:var(--fg-2)">${esc(v.notes)}</p>`]);
 
   const cellHtml = rows.length
-    ? `<div class="pcard-rows">${rows.map(([k, h]) => `<div class="pcard-row"><div class="label">${k}</div>${h}</div>`).join("")}</div>`
+    ? `<div class="pcard-rows">${rows.map(([k, h]) =>
+        `<div class="pcard-row">${k ? `<div class="label">${k}</div>` : ""}${h}</div>`).join("")}</div>`
     : "";
 
   return `<article class="pcard is-${role}" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
            aria-label="Version ${esc(v.id)} detail">
     ${f?.url
-      ? `<div class="pcard-art"><img src="${esc(f.url)}" alt="" loading="lazy" decoding="async"></div>`
+      ? `<div class="pcard-art${face?.poster ? " poster" : ""}">
+           <img src="${esc(f.url)}" alt="" loading="lazy" decoding="async"></div>`
       : `<div class="rings"></div>`}
     <div class="pcard-top">${state}</div>
     <div class="pcard-main">
@@ -711,7 +776,6 @@ function renderSignals(){
 /* ── resonators ──────────────────────────────────────────────────── */
 function recordCard(r){
   const b = bannerFor(r.name) || {};
-  const kitTier = r.confidence?.kit;
   return `<article class="rec" role="button" tabindex="0" data-act="resonator" data-id="${esc(r.name)}"${attrStyle(r.attribute)}>
     ${artPanel({name:r.name, ...b}, `${r.rarity ? `<span class="rank">${esc(r.rarity)}★</span>` : ""}
       ${r.version ? `<span class="phase">${esc(r.version)}</span>` : ""}`)}
@@ -724,12 +788,8 @@ function recordCard(r){
       ${r.summary ? `<p class="rec-sum">${esc(r.summary)}</p>` : ""}
       ${r.role ? `<div class="rec-role">${esc(r.role)}</div>` : ""}
       <div class="rec-foot">
-        <span class="label" style="width:100%">Kit status</span>
-        ${r.kit?.length
-          ? `${tierBadge(kitTier, kitTier === "official")}
-             <span class="rec-when">${plural(r.kit.length, "note")}</span>`
-          /* No kit notes is an absence, not a rumour — don't badge it as one. */
-          : `<span class="pill">No kit notes</span>`}
+        ${confidenceRows(r)}
+        ${r.kit?.length ? `<span class="rec-when">${plural(r.kit.length, "note")}</span>` : ""}
       </div>
     </div>
   </article>`;
@@ -797,7 +857,7 @@ function renderAside(){
         ${feat.weapon ? `<span>${esc(feat.weapon)}</span>` : ""}
         ${feat.role ? `<span>${esc(feat.role)}</span>` : ""}
       </div>
-      <div style="margin-top:11px">${tierBadge(feat.confidence?.kit, feat.confidence?.kit === "official")}</div>
+      ${confidenceRows(feat)}
       <button class="btn" data-act="resonator" data-id="${esc(feat.name)}">View profile ${icon("i-arrow", 12)}</button>
     </div>
   </div>` : "";
