@@ -2,6 +2,15 @@
   "schema": "wuwa-desk/art@1.0",
   "note": "Official key art from Kuro's own Profile Reveal posts, hotlinked from Kuro's CDN. Not rehosted, not datamined. Characters with no reveal post yet are absent by design.",
   "art": {
+    "Aemeath": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1769788800000/npdp436vcs67tw9h61-1769853356206.jpg",
+      "epithet": "Guiding Starlance",
+      "articleId": 4140,
+      "articleTitle": "Profile Reveal | Guiding Starlance — Aemeath",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4140",
+      "published": "2026-02-01",
+      "credit": "© Kuro Games"
+    },
     "Denia": {
       "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1778688000000/1m2w8dfhnxgpz9fl6t-1778730440505.jpg",
       "epithet": "Bubbles of Nihility",
@@ -20,6 +29,24 @@
       "published": "2026-04-26",
       "credit": "© Kuro Games"
     },
+    "Luuk Herssen": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1770825600000/sj3h4dkabg5qd70ev1-1770907357330.jpg",
+      "epithet": "Phase Transition",
+      "articleId": 4302,
+      "articleTitle": "Profile Reveal | Phase Transition — Luuk Herssen",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4302",
+      "published": "2026-02-22",
+      "credit": "© Kuro Games"
+    },
+    "Lynae": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1766160000000/9c31b5kkx6t277ci1a-1766236339793.jpg",
+      "epithet": "Radiant Spectrum",
+      "articleId": 3842,
+      "articleTitle": "Profile Reveal | Radiant Spectrum — Lynae",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3842",
+      "published": "2025-12-21",
+      "credit": "© Kuro Games"
+    },
     "Mornye": {
       "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1767888000000/v8ovakuptj99hwtk28-1767954561638.jpg",
       "epithet": "Astral Mapping",
@@ -28,7 +55,25 @@
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3990",
       "published": "2026-01-11",
       "credit": "© Kuro Games"
+    },
+    "Suisui": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1784822400000/bf7bns1taqiqke56cp-1784890636855.jpg",
+      "epithet": "Host of Harmony",
+      "articleId": 5200,
+      "articleTitle": "Profile Reveal | Host of Harmony - Suisui",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5200",
+      "published": "2026-07-26",
+      "credit": "© Kuro Games"
+    },
+    "Yangyang: Xuanling": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1783180800000/3mqqoqnno90hzx0ft5-1783235312259.png",
+      "epithet": "Voices of Azure Plume",
+      "articleId": 5007,
+      "articleTitle": "Profile Reveal | Voices of Azure Plume - Yangyang: Xuanling",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5007",
+      "published": "2026-07-06",
+      "credit": "© Kuro Games"
     }
   },
-  "updated": "2026-08-11T20:50:17.426Z"
+  "updated": "2026-08-12T00:14:47.563Z"
 }

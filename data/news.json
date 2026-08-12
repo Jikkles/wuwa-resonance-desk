@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-11",
+  "updated": "2026-08-12",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -8,6 +8,61 @@
     "rumour": "One unverified source, or sources disagreeing. Assume it's wrong until something better shows up."
   },
   "entries": [
+    {
+      "id": "2026-07-29-35-phase2",
+      "date": "2026-07-29",
+      "version": "3.5",
+      "category": "banner",
+      "confidence": "official",
+      "title": "Suisui debuts in 3.5 Phase 2 alongside an Aemeath rerun",
+      "body": "Phase 2 runs 30 July to 19 August. Suisui is the new 5-star, on [Blessings From Dewy Winds], with Firstlight's Herald as the paired weapon convene. Aemeath returns on [Take Flight in Spring] with Everbright Polestar. Two 5-star Resonator banners in the back half against Phase 1's three, and 3.5 closes the day before 3.6 opens.",
+      "tags": [
+        "3.5",
+        "banners"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games - 3.5 Convene Phase II",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5220"
+        },
+        {
+          "name": "Kuro Games - [Blessings From Dewy Winds]",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5227"
+        }
+      ]
+    },
+    {
+      "id": "2026-07-09-35-phase1",
+      "date": "2026-07-09",
+      "version": "3.5",
+      "category": "banner",
+      "confidence": "official",
+      "title": "3.5 Phase 1 debuts Yangyang: Xuanling against two reruns",
+      "body": "Phase 1 runs 10 to 30 July with three 5-star Resonator convenes. Yangyang: Xuanling is the new one, on [Voices on Azure Feathers] with Azure Oath. Luuk Herssen returns on [When Winter Thaws] with Daybreaker's Spine, and Lynae on [Undefined Spectrum] with Spectrum Blaster. A [Starpath Reverbs] selector also runs the whole patch, offering one pick from Jiyan, Yinlin, Jinhsi, Changli, Zhezhi or Xiangli Yao.",
+      "tags": [
+        "3.5",
+        "banners"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games - 3.5 Convene Phase I",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5039"
+        },
+        {
+          "name": "Kuro Games - [Voices on Azure Feathers]",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5047"
+        },
+        {
+          "name": "Kuro Games - [Starpath Reverbs]",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5065"
+        }
+      ]
+    },
     {
       "id": "2026-08-07-36-preview",
       "date": "2026-08-07",
@@ -230,13 +285,13 @@
       "outcome": "confirmed"
     },
     {
-      "id": "2026-07-20-yuno-phase2",
+      "id": "2026-07-20-iuno-phase2",
       "date": "2026-07-20",
       "version": "3.6",
       "category": "banner",
       "confidence": "reported",
-      "title": "Early leaks put Yuno in Phase 2 - later datamines removed her",
-      "body": "Initial reporting had Yuno running alongside Jingran in the back half. Fresh beta data replaced that with a triple-rerun format. A useful reminder that early banner reporting shifts as the beta progresses, and that the later datamine usually wins.",
+      "title": "Early leaks put Iuno in Phase 2 - later datamines removed her",
+      "body": "Initial reporting had Iuno running alongside Jingran in the back half. Fresh beta data replaced that with a triple-rerun format. A useful reminder that early banner reporting shifts as the beta progresses, and that the later datamine usually wins.",
       "tags": [
         "3.6",
         "banners"

@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-08-11",
+  "updated": "2026-08-12",
   "current": "3.5",
   "versions": [
     {
@@ -44,12 +44,32 @@
     },
     {
       "id": "3.5",
-      "title": "",
+      "title": "Blade of Past Resounds, Lingering Dream Hymns",
       "status": "live",
       "region": "Mengzhou",
       "start": "2026-07-10",
-      "phases": [],
-      "notes": "Muyu stands as the arc antagonist heading into 3.6."
+      "phases": [
+        {
+          "n": 1,
+          "start": "2026-07-10",
+          "end": "2026-07-30",
+          "banners": [
+            { "name": "Yangyang: Xuanling", "rarity": 5, "new": true, "convene": "Voices on Azure Feathers", "signature": "Azure Oath" },
+            { "name": "Luuk Herssen", "rarity": 5, "rerun": true, "convene": "When Winter Thaws", "signature": "Daybreaker's Spine" },
+            { "name": "Lynae", "rarity": 5, "rerun": true, "convene": "Undefined Spectrum", "signature": "Spectrum Blaster" }
+          ]
+        },
+        {
+          "n": 2,
+          "start": "2026-07-30",
+          "end": "2026-08-19",
+          "banners": [
+            { "name": "Suisui", "rarity": 5, "new": true, "convene": "Blessings From Dewy Winds", "signature": "Firstlight's Herald" },
+            { "name": "Aemeath", "rarity": 5, "rerun": true, "convene": "Take Flight in Spring", "signature": "Everbright Polestar" }
+          ]
+        }
+      ],
+      "notes": "Ends 19 August, one day before 3.6. A [Starpath Reverbs] selector runs the full patch alongside the phase banners - one pick from Jiyan, Yinlin, Jinhsi, Changli, Zhezhi or Xiangli Yao. Muyu stands as the arc antagonist heading into 3.6."
     },
     {
       "id": "3.7",

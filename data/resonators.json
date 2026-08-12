@@ -1,7 +1,81 @@
 {
   "schema": "wuwa-desk/resonators@1.0",
-  "updated": "2026-08-11",
+  "updated": "2026-08-12",
   "resonators": [
+    {
+      "name": "Suisui",
+      "rarity": 5,
+      "version": "3.5",
+      "status": "released",
+      "convene": "Blessings From Dewy Winds",
+      "signature": "Firstlight's Herald",
+      "region": "Mingting",
+      "summary": "Young director of the Zhaoming Commerce Guild, born into a noble Mingting family. Fights with a water fan rather than a sword - Kuro's reveal frames her as brokering peace through trade rather than swordplay.",
+      "kit": [],
+      "confidence": { "identity": "official" },
+      "sources": [
+        { "name": "Kuro Games - Profile Reveal: Host of Harmony", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5200" },
+        { "name": "Kuro Games - [Blessings From Dewy Winds]", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5227" }
+      ]
+    },
+    {
+      "name": "Yangyang: Xuanling",
+      "rarity": 5,
+      "version": "3.5",
+      "status": "released",
+      "convene": "Voices on Azure Feathers",
+      "signature": "Azure Oath",
+      "region": "Mingting",
+      "summary": "Second daughter of a Mingting musical family and a Votary of the Voice, able to commune with the Streams. Formerly an Outrider of the Midnight Rangers in Jinzhou, now an acting Xuan Watcher of Xuanfang Hold.",
+      "kit": [],
+      "confidence": { "identity": "official" },
+      "sources": [
+        { "name": "Kuro Games - Profile Reveal: Voices of Azure Plume", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5007" },
+        { "name": "Kuro Games - [Voices on Azure Feathers]", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5047" }
+      ]
+    },
+    {
+      "name": "Aemeath",
+      "rarity": 5,
+      "version": "3.5",
+      "status": "released",
+      "convene": "Take Flight in Spring",
+      "signature": "Everbright Polestar",
+      "summary": "Once an Exostrider Synchronist of Rabelle College, described by Kuro as a digital ghost singing quietly among the stars. Reran in 3.5 Phase 2.",
+      "kit": [],
+      "confidence": { "identity": "official" },
+      "sources": [
+        { "name": "Kuro Games - Profile Reveal: Guiding Starlance", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/4140" }
+      ]
+    },
+    {
+      "name": "Lynae",
+      "rarity": 5,
+      "version": "3.5",
+      "status": "released",
+      "convene": "Undefined Spectrum",
+      "signature": "Spectrum Blaster",
+      "summary": "A Startorch Academy prep student whose electric public style covers a much harder inner focus. Reran in 3.5 Phase 1 on the same banner name as her debut.",
+      "kit": [],
+      "confidence": { "identity": "official" },
+      "sources": [
+        { "name": "Kuro Games - Profile Reveal: Radiant Spectrum", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/3842" }
+      ]
+    },
+    {
+      "name": "Luuk Herssen",
+      "rarity": 5,
+      "version": "3.5",
+      "status": "released",
+      "convene": "When Winter Thaws",
+      "signature": "Daybreaker's Spine",
+      "summary": "Attending physician of Startorch Academy's Resonator Nursing Unit, known for composure under pressure. Reran in 3.5 Phase 1.",
+      "kit": [],
+      "confidence": { "identity": "official" },
+      "sources": [
+        { "name": "Kuro Games - Profile Reveal: Phase Transition", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/4302" }
+      ]
+    },
     {
       "name": "Qingxiao",
       "rarity": 5,
