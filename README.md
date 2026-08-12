@@ -5,37 +5,76 @@ Wuthering Waves patch timeline, leak feed and resonator database. Static site, n
 ## Layout
 
 ```
-index.html                     shell — reads the JSON, renders four tabs
+index.html                     shell markup — rail, HUD, panels, drawer, palette
+assets/app.css                 all styling
+assets/app.js                  reads the JSON, renders every view
 data/versions.json             patch timeline + banner phases
 data/news.json                 curated leak/news entries
 data/resonators.json           character kit database
 data/feed.json                 auto-fetched headlines (written by Actions)
 data/art.json                  resolved official key art (written by Actions)
+data/translations.json         English for non-English signal headlines
 assets/characters/             hosted character art
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
 .github/workflows/update-feeds.yml   cron, every 6h
 ```
 
-Four tabs:
+Four views:
 
-| Tab | Source | Tiered? |
+| View | Source | Tiered? |
 |---|---|---|
-| Timeline | `versions.json` + `resonators.json` | — |
-| Feed | `news.json` | yes, by hand |
-| Auto Feed | `feed.json` | **no** — raw lead list |
+| Timeline | `versions.json` + `resonators.json` + `art.json` | — |
+| Intel | `news.json` | yes, by hand |
+| Live Signals | `feed.json` | **no** — raw lead list |
 | Resonators | `resonators.json` | yes, per kit |
 
-The split matters. Auto Feed is a machine telling you something happened; Feed is you
-deciding what it was worth. A cron job can't judge whether a post is a datamine or a
-guy guessing, so nothing it fetches carries a tier.
+The split matters. Live Signals is a machine telling you something happened; Intel is
+you deciding what it was worth. A cron job can't judge whether a post is a datamine or
+a guy guessing, so nothing it fetches carries a tier — which is why the two look
+different on purpose: Intel is card-and-tier, Signals is a raw terminal log behind a
+hatched "unverified" bar.
+
+### Translating the signal feed
+
+About a fifth of captured signals are Kurobbs CN. `feed.json` is machine-written and
+replaced every 6 hours, so translations can't live in it — they live in
+`data/translations.json`, keyed by the item URL:
+
+```jsonc
+"https://www.kurobbs.com/mc/post/1536324402000961536": "Post-Lament Anthropocene: …"
+```
+
+The row then shows English with the original underneath and a `ZH→EN` badge; anything
+without an entry shows as published with a plain language badge. Game terms use the
+**English client's** names — 星声 is Astrite, 玄方地界 is Land of Xuanfang, 穗穗 is
+Suisui. Adding new ones is part of a desk update, same as tiering an entry.
+
+Character names get checked against Kuro's own EN article titles rather than community
+spelling — that's how `Yuno` was caught and corrected to **Iuno**.
+
+### The shell
+
+Persistent left rail (nav + tier counts + methodology), a HUD strip carrying live
+patch progress and feed status, and a sticky tab strip. Below 860px the rail collapses
+to a brand bar and the tabs become a bottom dock.
+
+Clicking anything — a patch card, an intel entry, a resonator, a banner thumbnail —
+opens a right-side **drawer** rather than navigating away, so the list you were reading
+stays put behind it. `Ctrl/⌘+K` or `/` opens a **command palette** over versions,
+resonators, intel and the last 60 signals.
+
+No framework and no build step. Each view renders its whole panel to `innerHTML` and
+every click is caught by one delegated `[data-act]` handler on `document`, so a
+re-render can't leave a stale listener behind.
 
 ### The character cards
 
-The Timeline tab opens with big panels for the new characters on the next `announced`
-patch, plus a rerun row. Banner rows in `versions.json` are matched by `name` against
-`resonators.json`, so the kit list ("what we know") and its confidence tier come from
-the resonator record — don't duplicate that into `versions.json`.
+The Timeline view leads with a Now / Next / Future card row, then big panels for the
+new characters on the next `announced` patch, plus a rerun row. Banner rows in
+`versions.json` are matched by `name` against `resonators.json`, so the kit list ("what
+we know") and its confidence tier come from the resonator record — don't duplicate that
+into `versions.json`.
 
 ### Where the art comes from
 
@@ -48,6 +87,14 @@ credits it back to the source post.
 So a character shows a typographic plate until Kuro reveals them, then picks up real
 art within 6 hours of the reveal going live. Characters absent from `art.json` are
 absent by design — it means no reveal post exists yet.
+
+Those reveal posters are a fixed template — 1080×1920, game logo at the top, name plate
+at the bottom, face about a fifth of the way down. Shrunk into a 38px or 62px thumbnail
+that reads as a tiny poster rather than a portrait, so the small thumbs pin the crop to
+the top of the frame and zoom onto the head (`img.poster` in `app.css`). It's one rule
+for every character because it's one template — don't add per-character framing for
+these. Per-character framing is only needed for **key visual** crops, where several
+characters share one wide image.
 
 **Before the reveal**, you can crop a character out of the patch key visual, which Kuro
 publishes with the version preview and which usually shows the new characters. Put the
@@ -109,7 +156,7 @@ git push -u origin main
 2. Settings → Actions → General → Workflow permissions → **Read and write**. Without this the bot commit fails.
 3. Add more YouTube channels to `SOURCES` in `scripts/fetch-feeds.mjs`. The `UC...` string, not the `@handle` — find it in the channel page source.
 
-Opening `index.html` straight off disk works but the JSON won't load (browsers block `file://` fetch). Run `python3 -m http.server` in the folder to preview locally.
+Opening `index.html` straight off disk works but the JSON won't load (browsers block `file://` fetch), so every panel falls back to empty. Serve the folder to preview locally — `python3 -m http.server`, or `npx serve`.
 
 Run the fetcher by hand with `node scripts/fetch-feeds.mjs` — it prints kept/fetched
 counts per source and only writes when something changed.
@@ -118,14 +165,22 @@ counts per source and only writes when something changed.
 
 The whole point of the desk. Every entry gets one.
 
-| Tier | Shows as | Means |
-|---|---|---|
-| `official` | Confirmed by Kuro | Kuro said it. Livestream, patch notes, in-client notice. |
-| `datamined` | Beta files | Pulled from beta client files. Real numbers, pre-balance. |
-| `reported` | Leaker claim | Leaker with a track record. No file evidence attached. |
-| `rumour` | Unverified | Single source or contested. |
+| Tier | Colour | Confidence | Means |
+|---|---|---|---|
+| `official` | green | Confirmed (4/4) | Kuro said it. Livestream, patch notes, in-client notice. |
+| `datamined` | blue | High (3/4) | Pulled from beta client files. Real numbers, pre-balance. |
+| `reported` | amber | Medium (2/4) | Leaker with a track record. No file evidence attached. |
+| `rumour` | red | Low (1/4) | Single source or contested. |
 
-Set `"outcome": "confirmed"` on an old entry once official confirmation lands — the feed marks it, which is how you build a visible track record for each source over time.
+Tier colour is load-bearing, not decoration: it drives the rail on every intel card,
+the filter chips, the dots in the palette and the confidence meter. The two unverified
+tiers also get a hatched rail instead of a solid one, so "someone claimed this" reads
+differently from "this is in the files" at a glance. The `.t-*` classes sit at the very
+bottom of `app.css` on purpose — they have to win on source order against component
+defaults of equal specificity.
+
+Set `"outcome": "confirmed"` on an old entry once official confirmation lands — the
+entry marks it, which is how you build a visible track record for each source over time.
 
 ## Sources
 

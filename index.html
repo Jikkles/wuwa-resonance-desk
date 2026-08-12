@@ -3,948 +3,198 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Resonance Desk — Wuthering Waves</title>
+<title>Wuthering Waves Resonance Desk</title>
 <meta name="description" content="Wuthering Waves patch timeline, upcoming Resonators and leak tracking, sorted by how much you should trust it.">
-<meta name="theme-color" content="#14131A">
+<meta name="theme-color" content="#0B0D11">
 <!-- Tuning fork = resonance. Inline so there's no extra request and nothing to 404. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%2314131A'/%3E%3Cpath d='M17 33a15 15 0 0 1 30 0' fill='none' stroke='%236BA292' stroke-width='3.5' stroke-linecap='round' opacity='.85'/%3E%3Cpath d='M23 13v17a9 9 0 0 0 18 0V13' fill='none' stroke='%23C8443C' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M32 39v13' stroke='%23C8443C' stroke-width='6.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%230B0D11'/%3E%3Cpath d='M17 33a15 15 0 0 1 30 0' fill='none' stroke='%234FC7D4' stroke-width='3.5' stroke-linecap='round' opacity='.5'/%3E%3Cpath d='M23 13v17a9 9 0 0 0 18 0V13' fill='none' stroke='%234FC7D4' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M32 39v13' stroke='%234FC7D4' stroke-width='6.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#14131A;
-  --ink-2:#1B1A23;
-  --ink-3:#24222E;
-  --line:#332F3F;
-  --paper:#EDE6D8;
-  --paper-dim:#948C7E;
-  --cinnabar:#C8443C;
-  --jade:#6BA292;
-  --gold:#C9A227;
-  --slate:#5E7FA8;
-  --grey:#6A6577;
-  --display:"Noto Serif SC",serif;
-  --body:"IBM Plex Sans",system-ui,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,monospace;
-  /* per-card accent, overridden inline from the resonator's attribute */
-  --attr:#C8443C;
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  background:var(--ink);
-  color:var(--paper);
-  font-family:var(--body);
-  font-size:15px;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse 70% 50% at 15% -5%, rgba(200,68,60,.10), transparent 70%),
-    radial-gradient(ellipse 60% 45% at 90% 100%, rgba(107,162,146,.07), transparent 70%);
-}
-.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 20px 96px}
-
-/* ---- masthead ---- */
-header{padding:44px 0 28px;border-bottom:1px solid var(--line)}
-.brandline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-h1{
-  font-family:var(--display);font-weight:900;
-  font-size:clamp(30px,6vw,46px);line-height:1;margin:0;
-  letter-spacing:-.01em;
-}
-h1 .cjk{color:var(--cinnabar);margin-right:.35em}
-.tagline{
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--paper-dim);margin-top:14px;
-}
-.status{
-  display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;
-  font-family:var(--mono);font-size:11.5px;color:var(--paper-dim);
-}
-.status b{color:var(--paper);font-weight:500}
-.status .live::before{
-  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
-  background:var(--jade);margin-right:7px;vertical-align:middle;
-  animation:pulse 2.4s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
-
-/* ---- tabs ---- */
-nav{display:flex;gap:2px;margin:26px 0 34px;border-bottom:1px solid var(--line)}
-nav button{
-  background:none;border:0;border-bottom:2px solid transparent;
-  color:var(--paper-dim);font-family:var(--mono);font-size:12px;
-  letter-spacing:.1em;text-transform:uppercase;
-  padding:12px 16px;cursor:pointer;margin-bottom:-1px;transition:color .15s,border-color .15s;
-  white-space:nowrap;flex:none;
-}
-nav button:hover{color:var(--paper)}
-nav button[aria-selected="true"]{color:var(--paper);border-bottom-color:var(--cinnabar)}
-nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
-
-/* ---- confidence labels ---- */
-.t-official{color:var(--cinnabar)}
-.t-datamined{color:var(--jade)}
-.t-reported{color:var(--slate)}
-.t-rumour{color:var(--grey)}
-
-.tag{
-  display:inline-block;font-family:var(--mono);font-weight:500;
-  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  padding:4px 10px;border-radius:2px;border:1px solid currentColor;
-  white-space:nowrap;
-}
-.tag.solid{background:currentColor;border-color:currentColor}
-.tag.solid span{color:var(--ink)}
-
-/* ---- entry cards ---- */
-.entry{
-  padding:20px 0 22px 16px;border-bottom:1px solid var(--line);
-  border-left:3px solid currentColor;
-}
-.entry:last-child{border-bottom:0}
-.entry h3{
-  font-family:var(--display);font-weight:700;font-size:19px;
-  margin:0 0 8px;line-height:1.35;
-}
-.entry p{margin:0;color:#C4BDB0;font-size:14.5px}
-.meta{
-  display:flex;gap:14px;flex-wrap:wrap;align-items:center;
-  font-family:var(--mono);font-size:11px;color:var(--paper-dim);
-  margin-bottom:9px;letter-spacing:.05em;
-}
-.chip{
-  border:1px solid var(--line);padding:2px 8px;border-radius:2px;
-  text-transform:uppercase;letter-spacing:.09em;
-}
-/* Not `.chip.ver` — that also matches the timeline's `.ver` block and inherits
-   its 40px padding and node dot, which wrecks the chip. */
-.chip.is-ver{border-color:var(--cinnabar);color:var(--cinnabar)}
-.srcs{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:11px}
-.srcs a,.srcs span{color:var(--paper-dim);text-decoration:none;border-bottom:1px dotted var(--line)}
-.srcs a:hover{color:var(--jade);border-bottom-color:var(--jade)}
-.lang{
-  display:inline-block;font-size:9px;padding:1px 4px;margin-right:5px;
-  border:1px solid var(--line);border-radius:2px;letter-spacing:.08em;
-}
-.outcome{color:var(--jade)}
-
-/* ---- filters ---- */
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.filters button{
-  background:var(--ink-2);border:1px solid var(--line);color:var(--paper-dim);
-  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-  padding:6px 12px;border-radius:2px;cursor:pointer;transition:.15s;
-}
-.filters button:hover{color:var(--paper);border-color:var(--paper-dim)}
-.filters button[aria-pressed="true"]{background:var(--ink-3);color:var(--paper);border-color:var(--cinnabar)}
-.filters button:focus-visible{outline:2px solid var(--slate);outline-offset:2px}
-
-/* ---- upcoming characters ---- */
-.upcoming{margin-bottom:52px}
-.up-head{margin-bottom:22px}
-.up-head .label{
-  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--cinnabar);margin-bottom:8px;
-}
-.up-head h2{font-family:var(--display);font-weight:900;font-size:clamp(22px,3.6vw,30px);margin:0;line-height:1.2}
-.up-head p{margin:10px 0 0;max-width:70ch;color:#B7B0A4;font-size:14.5px}
-
-.character-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
-.character-card{
-  --attr:var(--cinnabar);
-  position:relative;display:flex;flex-direction:column;
-  background:var(--ink-2);border:1px solid var(--line);border-radius:4px;overflow:hidden;
-  transition:border-color .2s,transform .2s;
-}
-.character-card:hover{border-color:color-mix(in srgb,var(--attr) 55%,var(--line))}
-.character-card::before{
-  content:"";position:absolute;inset:0 0 auto;height:2px;
-  background:linear-gradient(90deg,var(--attr),transparent 70%);
-}
-
-/* Portrait panel. Kuro's key art is a 9:16 poster, so the panel goes tall when
-   there's art and stays shorter for the plate, which has nothing to show off. */
-.character-art{
-  position:relative;aspect-ratio:16/10;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  background:
-    radial-gradient(ellipse 80% 70% at 50% 115%, color-mix(in srgb,var(--attr) 42%,transparent), transparent 72%),
-    linear-gradient(160deg, var(--ink-3), var(--ink));
-  border-bottom:1px solid var(--line);
-}
-.character-art.has-art,
-.character-art.has-cutout{aspect-ratio:4/5}
-/* Concentric resonance rings. They back the plate when there's no art at all,
-   and stay behind a transparent cutout — only full-bleed art hides them. */
-.character-art:not(.has-art)::before{
-  content:"";position:absolute;left:50%;top:52%;width:112%;aspect-ratio:1;
-  transform:translate(-50%,-50%);
-  background:repeating-radial-gradient(circle at 50% 50%,
-    transparent 0 17px,
-    color-mix(in srgb,var(--attr) 30%,transparent) 17px 18px);
-  -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 12%, transparent 62%);
-  mask-image:radial-gradient(circle at 50% 50%, #000 12%, transparent 62%);
-  opacity:.5;
-}
-/* Kuro's poster carries its own logo at the top and a name plate at the bottom.
-   This crop drops both, since the card states the name itself. */
-.character-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 17%}
-/* A cutout has no background of its own — show it whole, standing on the base of
-   the panel, and let the rings and the attribute glow read through behind it. */
-.character-art.has-cutout img{
-  object-fit:contain;object-position:center bottom;
-  filter:drop-shadow(0 14px 30px rgba(0,0,0,.5));
-}
-/* The full-bleed scrim would grey out a cutout's legs — keep it much lighter. */
-.character-art.has-cutout::after{
-  background:linear-gradient(to top, rgba(20,19,26,.72) 0%, rgba(20,19,26,.10) 26%, transparent 46%);
-}
-.character-art::after{
-  content:"";position:absolute;inset:0;
-  background:
-    /* Posters vary in framing, so scrim the top rather than trusting the crop
-       to clear Kuro's logo every time. Also lifts the badges off the art. */
-    linear-gradient(to bottom, rgba(20,19,26,.80), rgba(20,19,26,.25) 9%, transparent 20%),
-    linear-gradient(to top, rgba(20,19,26,.92) 4%, rgba(20,19,26,.15) 55%, transparent);
-}
-.character-art .cjk{
-  position:relative;font-family:var(--display);font-weight:900;
-  font-size:clamp(48px,9vw,80px);line-height:1;letter-spacing:.06em;
-  color:color-mix(in srgb,var(--attr) 70%,var(--paper));
-  opacity:.5;user-select:none;
-}
-.character-art .initial{
-  position:relative;font-family:var(--display);font-weight:900;
-  font-size:clamp(72px,13vw,116px);line-height:1;
-  color:color-mix(in srgb,var(--attr) 55%,var(--paper));opacity:.62;user-select:none;
-  text-shadow:0 0 46px color-mix(in srgb,var(--attr) 45%,transparent);
-}
-.character-art .rank{
-  position:absolute;top:12px;left:14px;z-index:2;
-  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
-  color:var(--gold);border:1px solid var(--gold);border-radius:2px;padding:2px 7px;
-  background:rgba(20,19,26,.72);
-}
-.character-art .phase{
-  position:absolute;top:12px;right:14px;z-index:2;margin:0;padding:2px 8px;border:0;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--ink);background:var(--attr);border-radius:2px;font-weight:600;
-}
-.character-art .attrline{
-  position:absolute;left:14px;right:14px;bottom:12px;z-index:2;
-  display:flex;gap:8px;flex-wrap:wrap;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--paper-dim);
-}
-.character-art .attrline b{color:var(--attr);font-weight:500}
-
-/* Art is Kuro's, hotlinked from Kuro's CDN. Say so, and link back to the post. */
-.character-credit{
-  padding:7px 20px;border-bottom:1px solid var(--line);background:var(--ink);
-  font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--paper-dim);
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.character-credit a{color:var(--paper-dim);text-decoration:none;border-bottom:1px dotted var(--line)}
-.character-credit a:hover{color:var(--jade);border-bottom-color:var(--jade)}
-.character-epithet{
-  font-family:var(--display);font-style:italic;font-size:14.5px;
-  color:var(--attr);margin-top:-6px;
-}
-.character-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
-.character-body h3{font-family:var(--display);font-weight:900;font-size:25px;margin:0;line-height:1.15}
-.character-body h3 small{
-  display:block;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--paper-dim);margin-top:6px;
-}
-.character-body>p{margin:0;font-size:14px;color:#B7B0A4}
-.character-gear{
-  display:grid;gap:6px;font-family:var(--mono);font-size:11px;color:var(--paper-dim);
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;
-}
-.character-gear div{display:flex;gap:10px;justify-content:space-between;align-items:baseline}
-.character-gear b{color:var(--paper);font-weight:500;font-family:var(--body);font-size:13px;text-align:right}
-.character-know{margin-top:auto}
-.character-know-h{
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-dim);
-}
-.character-know ul{margin:0;padding:0;list-style:none;display:grid;gap:7px}
-.character-know li{
-  position:relative;padding-left:15px;font-size:13.5px;color:#C4BDB0;line-height:1.5;
-}
-.character-know li::before{
-  content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;
-  background:var(--attr);border-radius:50%;
-}
-.character-know .none{font-size:13px;color:var(--paper-dim);font-style:italic}
-
-.reruns{margin-top:26px}
-.reruns h3{
-  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--paper-dim);margin:0 0 12px;font-weight:400;
-}
-.reruns-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.rerun-card{
-  --attr:var(--grey);
-  display:flex;align-items:center;gap:13px;
-  background:var(--ink-2);border:1px solid var(--line);border-left:2px solid var(--attr);
-  border-radius:3px;padding:12px 14px;
-}
-.rerun-card .glyph{
-  flex:none;width:42px;height:42px;border-radius:3px;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-  background:linear-gradient(150deg,color-mix(in srgb,var(--attr) 34%,var(--ink-3)),var(--ink));
-  font-family:var(--display);font-weight:900;font-size:19px;
-  color:color-mix(in srgb,var(--attr) 65%,var(--paper));
-}
-/* Key art is a full-body poster — crop to the head for a 42px thumbnail. */
-.rerun-card .glyph img{width:100%;height:100%;object-fit:cover;object-position:center 14%}
-.rerun-card .who{min-width:0;flex:1}
-.rerun-card strong{display:block;font-family:var(--display);font-size:16px;font-weight:700}
-.rerun-card span{
-  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
-  color:var(--paper-dim);text-transform:uppercase;margin-top:2px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.rerun-card .ph{
-  flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--paper-dim);border:1px solid var(--line);border-radius:2px;padding:2px 7px;
-}
-
-/* ---- auto feed ---- */
-.auto-summary{margin-bottom:16px}
-.auto-note{
-  font-size:13px;color:var(--paper-dim);border-left:2px solid var(--slate);
-  padding:2px 0 2px 12px;margin-bottom:18px;max-width:75ch;
-}
-.src-strip{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 4px}
-.src-pill{
-  font-family:var(--mono);font-size:10px;letter-spacing:.07em;
-  border:1px solid var(--line);border-radius:2px;padding:3px 8px;color:var(--paper-dim);
-}
-.src-pill::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:6px;vertical-align:middle;background:var(--grey)}
-.src-pill.ok::before{background:var(--jade)}
-.src-pill.skipped::before{background:var(--gold)}
-.src-pill.failed::before{background:var(--cinnabar)}
-.src-pill.failed{color:var(--cinnabar);border-color:var(--cinnabar)}
-
-.auto-item{
-  display:grid;grid-template-columns:88px 1fr;gap:16px;align-items:baseline;
-  padding:13px 0;border-bottom:1px solid var(--ink-3);
-}
-.auto-item:last-child{border-bottom:0}
-.auto-when{font-family:var(--mono);font-size:11px;color:var(--paper-dim);letter-spacing:.04em;white-space:nowrap}
-.auto-item h3{margin:0;font-size:15px;font-weight:500;line-height:1.45;font-family:var(--body)}
-.auto-item h3 a{color:var(--paper);text-decoration:none;border-bottom:1px solid transparent}
-.auto-item h3 a:hover{border-bottom-color:var(--paper-dim)}
-.auto-item.hot h3 a{color:#F0E7D6}
-.auto-meta{
-  display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:6px;
-  font-family:var(--mono);font-size:10.5px;color:var(--paper-dim);letter-spacing:.06em;
-}
-.kind{
-  text-transform:uppercase;letter-spacing:.11em;border:1px solid currentColor;
-  border-radius:2px;padding:1px 6px;
-}
-.kind.official{color:var(--cinnabar)}
-.kind.video{color:var(--gold)}
-.kind.community{color:var(--jade)}
-.kind.press{color:var(--slate)}
-.auto-hot{color:var(--gold)}
-
-/* ---- timeline ---- */
-.ver{
-  position:relative;padding:0 0 40px 34px;border-left:1px solid var(--line);
-}
-.ver:last-child{border-left-color:transparent}
-.ver::before{
-  content:"";position:absolute;left:-5px;top:6px;width:9px;height:9px;
-  background:var(--ink);border:1.5px solid var(--line);border-radius:50%;
-}
-.ver.is-live::before{background:var(--jade);border-color:var(--jade)}
-.ver.is-next::before{background:var(--cinnabar);border-color:var(--cinnabar)}
-.ver-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-.ver-num{font-family:var(--display);font-weight:900;font-size:28px;line-height:1}
-.ver-title{font-family:var(--display);font-size:16px;color:var(--paper-dim);font-style:italic}
-.ver-state{
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-  border:1px solid currentColor;padding:2px 7px;border-radius:2px;
-}
-.s-live{color:var(--jade)}.s-announced{color:var(--cinnabar)}.s-beta{color:var(--slate)}
-.phase{margin-top:20px;padding-left:16px;border-left:2px solid var(--ink-3)}
-.phase-h{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--paper-dim)}
-.banners{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.banner{
-  background:var(--ink-2);border:1px solid var(--line);border-radius:2px;
-  padding:9px 13px;min-width:132px;
-}
-.banner b{font-family:var(--display);font-size:15px;font-weight:700;display:block}
-.banner small{font-family:var(--mono);font-size:10px;color:var(--paper-dim);letter-spacing:.06em}
-.banner.new{border-left:2px solid var(--cinnabar)}
-.banner.rerun{border-left:2px solid var(--grey)}
-.est{color:var(--gold);font-style:normal}
-.note{
-  margin-top:16px;font-size:13.5px;color:var(--paper-dim);
-  border-left:2px solid var(--gold);padding-left:12px;
-}
-
-/* ---- resonators ---- */
-.res{
-  background:var(--ink-2);border:1px solid var(--line);border-radius:3px;
-  padding:20px;margin-bottom:14px;
-}
-.res-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-.res-h b{font-family:var(--display);font-size:21px;font-weight:900}
-.res-attrs{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--paper-dim);letter-spacing:.06em}
-.res p{margin:0;font-size:14.5px;color:#C4BDB0}
-.empty{
-  font-family:var(--mono);font-size:12px;color:var(--paper-dim);
-  padding:34px 0;text-align:center;
-}
-.legend{
-  margin-top:36px;padding-top:22px;border-top:1px solid var(--line);
-  display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-}
-.legend div{font-size:12.5px;color:var(--paper-dim)}
-.legend b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
-footer{
-  margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:11px;color:var(--paper-dim);line-height:1.8;
-}
-@media (max-width:600px){
-  .entry{padding-left:12px}
-  nav{overflow-x:auto}
-  .ver{padding-left:22px}
-  .character-grid{grid-template-columns:1fr}
-  .auto-item{grid-template-columns:1fr;gap:5px}
-  .auto-when{order:2}
-}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
-<div class="wrap">
 
-<header>
-  <div class="brandline">
-    <h1><span class="cjk">共鸣</span>Resonance Desk</h1>
+<!-- Icon sprite. Referenced by <use> from both the markup and the renderers. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="i-timeline" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <rect x="2.8" y="3.4" width="10.4" height="9.6" rx="1.6"/><path d="M2.8 6.6h10.4M6 2v2.6M10 2v2.6M5.6 9.6h1.6M8.8 9.6h1.6"/>
+    </g>
+    <g id="i-intel" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 1.9 3 3.9v4c0 3 2.1 5 5 6.2 2.9-1.2 5-3.2 5-6.2v-4Z"/><path d="M6.2 7.9 7.5 9.2l2.6-2.7"/>
+    </g>
+    <g id="i-signals" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1.6 8h2.2l1.6-4 2.2 8 1.8-5.4L11 8h3.4"/>
+    </g>
+    <g id="i-res" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="8" cy="5.6" r="2.9"/><path d="M2.9 14c.6-2.7 2.6-4.2 5.1-4.2s4.5 1.5 5.1 4.2"/>
+    </g>
+    <g id="i-search" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <circle cx="7.2" cy="7.2" r="4.6"/><path d="m10.6 10.6 3 3"/>
+    </g>
+    <g id="i-arrow" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 8h10M9.4 4.4 13 8l-3.6 3.6"/>
+    </g>
+    <g id="i-close" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <path d="m4 4 8 8M12 4l-8 8"/>
+    </g>
+    <g id="i-book" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2.6 3.2h4a2 2 0 0 1 2 2v8a1.6 1.6 0 0 0-1.6-1.6H2.6Z"/><path d="M13.4 3.2h-4a2 2 0 0 0-2 2v8a1.6 1.6 0 0 1 1.6-1.6h4.4Z"/>
+    </g>
+    <g id="i-github" fill="currentColor">
+      <path d="M8 .8a7.2 7.2 0 0 0-2.28 14c.36.07.5-.15.5-.35v-1.2c-2 .44-2.43-.97-2.43-.97-.33-.83-.8-1.06-.8-1.06-.66-.45.05-.44.05-.44.73.05 1.11.75 1.11.75.65 1.1 1.7.79 2.11.6.07-.47.25-.79.46-.97-1.6-.18-3.28-.8-3.28-3.56 0-.79.28-1.43.74-1.93-.07-.19-.32-.92.07-1.91 0 0 .6-.2 1.98.73a6.9 6.9 0 0 1 3.6 0c1.37-.93 1.97-.73 1.97-.73.4.99.15 1.72.07 1.9.47.51.75 1.15.75 1.94 0 2.77-1.69 3.38-3.29 3.56.26.22.49.66.49 1.34v1.98c0 .2.13.42.5.35A7.2 7.2 0 0 0 8 .8Z"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="app">
+
+  <!-- ══ left rail ══════════════════════════════════════════════════ -->
+  <aside class="rail">
+    <a class="brand" href="./" aria-label="Wuthering Waves Resonance Desk">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M13 1.6 24.4 13 13 24.4 1.6 13Z" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".45"/>
+        <path d="M13 6.4 19.6 13 13 19.6 6.4 13Z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+        <circle cx="13" cy="13" r="2.1" fill="currentColor"/>
+      </svg>
+      <span>
+        <span class="brand-name">RESONANCE DESK</span>
+        <span class="brand-sub">Wuthering Waves</span>
+      </span>
+    </a>
+
+    <div class="rail-group" id="rail-nav"></div>
+
+    <div class="rail-group">
+      <div class="label">Filter by tier</div>
+      <div id="rail-tiers"></div>
+    </div>
+
+    <div class="rail-group">
+      <div class="label">Quick links</div>
+      <div id="rail-links"></div>
+    </div>
+
+    <div class="rail-about">
+      <div class="label">About the desk</div>
+      Patch timeline, curated intel and automated signal capture for Wuthering
+      Waves — everything tagged by how much you should trust it.
+      <button class="linkout" data-open="methodology">Methodology <svg width="12" height="12"><use href="#i-arrow"/></svg></button>
+    </div>
+
+    <div class="rail-foot">
+      <a href="https://github.com/Jikkles/wuwa-resonance-desk" target="_blank" rel="noopener" title="Source on GitHub" aria-label="Source on GitHub">
+        <svg width="16" height="16" viewBox="0 0 16 16"><use href="#i-github"/></svg>
+      </a>
+      <a href="https://wutheringwaves.kurogames.com/en/main/news" target="_blank" rel="noopener" title="Kuro Games official news" aria-label="Kuro Games official news">
+        <svg width="16" height="16" viewBox="0 0 16 16"><use href="#i-book"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ══ stage ══════════════════════════════════════════════════════ -->
+  <div class="stage">
+
+    <header class="hud">
+      <div class="hud-strip">
+        <span class="title">Signal intelligence / Patch monitoring</span>
+        <button class="searchbtn" data-act="search" aria-label="Search the desk">
+          <svg width="13" height="13" viewBox="0 0 16 16"><use href="#i-search"/></svg>
+          <span>Search</span><kbd>Ctrl K</kbd>
+        </button>
+        <span class="pulse" id="hud-online">System online</span>
+        <span>Data updated <b id="hud-updated">—</b></span>
+        <span>Feed <b>6h cycle</b></span>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-row">
+            <span class="metric-v accent" id="m-live">—</span>
+            <span class="metric-k">Live<b>Current version</b></span>
+          </div>
+          <div class="bar" id="m-progress" hidden><i style="width:0"></i></div>
+          <div class="metric-k" id="m-progress-k" style="margin-top:7px"></div>
+        </div>
+        <div class="metric">
+          <div class="metric-row">
+            <span class="metric-v" id="m-next">—</span>
+            <span class="metric-k">Next up<b id="m-next-k">—</b></span>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="metric-row">
+            <span class="metric-v" id="m-entries">—</span>
+            <span class="metric-k">Curated entries<b>Across 4 tiers</b></span>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="metric-v small" id="m-updated">—</div>
+          <div class="metric-k" style="margin-top:4px">Last curated update</div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Views"></nav>
+
+    <div class="body">
+      <div class="col">
+        <section id="p-timeline" role="tabpanel" aria-labelledby="tab-timeline" tabindex="-1"></section>
+        <section id="p-intel" role="tabpanel" aria-labelledby="tab-intel" tabindex="-1" hidden></section>
+        <section id="p-signals" role="tabpanel" aria-labelledby="tab-signals" tabindex="-1" hidden></section>
+        <section id="p-resonators" role="tabpanel" aria-labelledby="tab-resonators" tabindex="-1" hidden></section>
+      </div>
+      <aside class="aside" id="aside"></aside>
+    </div>
+
+    <footer class="foot">
+      <span>
+        Anything not tagged <span class="warn">OFFICIAL</span> is pre-release and can change.
+        Character art © Kuro Games, used unofficially. Not affiliated with Kuro Games — a personal fan project.
+      </span>
+      <span class="links">
+        <a href="https://github.com/Jikkles/wuwa-resonance-desk" target="_blank" rel="noopener" aria-label="Source on GitHub">
+          <svg width="15" height="15" viewBox="0 0 16 16"><use href="#i-github"/></svg>
+        </a>
+      </span>
+    </footer>
   </div>
-  <div class="tagline">Wuthering Waves · signal intercept &amp; patch tracking</div>
-  <div class="status">
-    <span class="live">Live version <b id="st-live">—</b></span>
-    <span>Next <b id="st-next">—</b></span>
-    <span>Entries <b id="st-count">—</b></span>
-    <span>Data updated <b id="st-updated">—</b></span>
-  </div>
-</header>
-
-<nav role="tablist">
-  <button role="tab" id="tab-timeline" aria-selected="true" aria-controls="p-timeline">Timeline</button>
-  <button role="tab" id="tab-feed" aria-selected="false" aria-controls="p-feed">Feed</button>
-  <button role="tab" id="tab-auto" aria-selected="false" aria-controls="p-auto">Auto Feed</button>
-  <button role="tab" id="tab-res" aria-selected="false" aria-controls="p-res" tabindex="-1">Resonators</button>
-</nav>
-
-<section id="p-timeline" role="tabpanel" aria-labelledby="tab-timeline">
-  <div id="upcoming"></div>
-  <div id="timeline-content"></div>
-</section>
-
-<section id="p-feed" role="tabpanel" aria-labelledby="tab-feed" hidden>
-  <div class="filters" id="filters"></div>
-  <div id="feed-list"></div>
-  <div class="legend" id="legend"></div>
-</section>
-
-<section id="p-auto" role="tabpanel" aria-labelledby="tab-auto" hidden>
-  <div class="auto-note">
-    Raw headlines pulled every 6 hours from Kuro's official EN site, Kurobbs, the official
-    YouTube channel, the leak subreddits and the games press. <b>Nothing here is tiered or
-    verified</b> — it's a lead list. Anything that survives a read gets written up under Feed.
-  </div>
-  <div class="auto-summary" id="auto-summary"></div>
-  <div class="filters" id="auto-filters"></div>
-  <div id="auto-feed"></div>
-</section>
-
-<section id="p-res" role="tabpanel" aria-labelledby="tab-res" hidden>
-  <div id="res-list"></div>
-  <div id="res-note"></div>
-</section>
-
-<footer>
-  Entries are compiled from official broadcasts, beta datamines and community reporting.
-  Anything not tagged <span style="color:var(--cinnabar)">OFFICIAL</span> is pre-release and can change.<br>
-  Character art is © Kuro Games and used here unofficially; pre-release art is labelled as such on the card.
-  Not affiliated with Kuro Games. A personal fan project.
-</footer>
-
 </div>
 
-<script>
-"use strict";
+<!-- ══ mobile dock ══════════════════════════════════════════════════ -->
+<nav class="dock" id="dock" aria-label="Views"></nav>
 
-/* Fallback data so the page works when opened directly from disk.
-   When served over http (GitHub Pages), data/*.json wins. */
-const FALLBACK = {
-  versions: {"updated":"2026-08-11","current":"3.5","versions":[]},
-  news: {"updated":"2026-08-11","confidenceTiers":{},"entries":[]},
-  resonators: {"updated":"2026-08-11","resonators":[]},
-  feed: {"schema":"wuwa-desk/feed@2.0","fetched":"","sources":[],"errors":[],"items":[]},
-  art:  {"schema":"wuwa-desk/art@1.0","art":{}}
-};
-
-const TIER_ORDER = ["official","datamined","reported","rumour"];
-const TIER_LABEL = {
-  official:  "Confirmed by Kuro",
-  datamined: "Beta files",
-  reported:  "Leaker claim",
-  rumour:    "Unverified"
-};
-const TIER_SHORT = { official:"Confirmed", datamined:"Beta files", reported:"Leaker claim", rumour:"Unverified" };
-
-/* Attribute drives each character card's accent so the banner line reads at a glance. */
-const ATTR_COLOUR = {
-  aero:"#7FD4B0", glacio:"#78BFE8", fusion:"#E8734A",
-  electro:"#B98BE0", spectro:"#E8C24A", havoc:"#D4557A"
-};
-/* Returns "" when the attribute isn't known yet, so the card keeps its own
-   neutral default rather than claiming an element it hasn't been given. */
-const attrStyle = a => {
-  const c = ATTR_COLOUR[String(a||"").toLowerCase()];
-  return c ? ` style="--attr:${c}"` : "";
-};
-
-const KIND_LABEL = { official:"Official", video:"Video", community:"Community", press:"Press" };
-
-let DATA = {}, activeTier = "all", activeKind = "all";
-
-const $ = s => document.querySelector(s);
-const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-
-async function load(name){
-  try{
-    const r = await fetch(`data/${name}.json`, {cache:"no-store"});
-    if(!r.ok) throw new Error(r.status);
-    return await r.json();
-  }catch(e){
-    return FALLBACK[name];
-  }
-}
-
-function fmtDate(d){
-  if(!d) return "";
-  const dt = new Date(d);
-  if(isNaN(dt)) return d;
-  return dt.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
-}
-
-function fmtDateTime(d){
-  const dt = new Date(d);
-  if(isNaN(dt)) return String(d);
-  return dt.toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
-}
-
-function tierTag(tier){
-  const label = TIER_LABEL[tier] || "Unverified";
-  const solid = tier === "official";
-  return `<span class="tag ${solid?"solid":""}"><span>${esc(label)}</span></span>`;
-}
-
-/* ---------------- Timeline ---------------- */
-function renderTimeline(){
-  const vs = DATA.versions.versions || [];
-  if(!vs.length){ $("#timeline-content").innerHTML = `<div class="empty">No versions in versions.json yet.</div>`; return; }
-
-  const order = {announced:0, live:1, beta:2};
-  const sorted = [...vs].sort((a,b) => (order[a.status] ?? 3) - (order[b.status] ?? 3));
-
-  $("#timeline-content").innerHTML = sorted.map(v => {
-    const cls = v.status === "live" ? "is-live" : v.status === "announced" ? "is-next" : "";
-    const phases = (v.phases||[]).map(p => {
-      const startEst = p.estimated_start ? ` <span class="est">(est)</span>` : "";
-      const endEst = p.estimated_end ? ` <span class="est">(est)</span>` : "";
-      const range = [p.start ? fmtDate(p.start)+startEst : "", p.end ? fmtDate(p.end)+endEst : ""]
-        .filter(Boolean).join(" &rarr; ");
-      const banners = (p.banners||[]).map(b => {
-        const bits = [b.rarity ? b.rarity+"★" : "", b.attribute, b.weapon, b.role].filter(Boolean).join(" · ");
-        return `<div class="banner ${b.new?"new":b.rerun?"rerun":""}">
-          <b>${esc(b.name)}</b>
-          <small>${esc(bits) || (b.rerun ? "Rerun" : "")}${b.rerun && bits ? " · Rerun" : ""}</small>
-        </div>`;
-      }).join("");
-      return `<div class="phase">
-        <div class="phase-h">Phase ${p.n} — ${range}</div>
-        <div class="banners">${banners || '<div class="banner"><small>TBC</small></div>'}</div>
-      </div>`;
-    }).join("");
-
-    return `<div class="ver ${cls}">
-      <div class="ver-head">
-        <span class="ver-num">${esc(v.id)}</span>
-        <span class="ver-state s-${esc(v.status)}">${esc(v.status)}</span>
-        ${v.title ? `<span class="ver-title">${esc(v.title)}</span>` : ""}
-      </div>
-      ${v.region ? `<div class="meta" style="margin-top:10px"><span class="chip">${esc(v.region)}</span>${v.start?`<span>Launches ${fmtDate(v.start)}</span>`:""}${v.livestream?`<span>Preview ${fmtDate(v.livestream)}</span>`:""}</div>`:""}
-      ${phases}
-      ${v.notes ? `<div class="note">${esc(v.notes)}</div>` : ""}
-    </div>`;
-  }).join("");
-}
-
-/* ---------------- Feed ---------------- */
-function renderFilters(){
-  const counts = {};
-  (DATA.news.entries||[]).forEach(e => counts[e.confidence] = (counts[e.confidence]||0)+1);
-  const btns = [["all","Everything"]].concat(TIER_ORDER.filter(t=>counts[t]).map(t=>[t,TIER_SHORT[t]]));
-  $("#filters").innerHTML = btns.map(([k,label]) =>
-    `<button data-tier="${k}" aria-pressed="${activeTier===k}">${label}${k!=="all"?` ${counts[k]}`:""}</button>`
-  ).join("");
-  $("#filters").querySelectorAll("button").forEach(b => b.onclick = () => {
-    activeTier = b.dataset.tier; renderFilters(); renderFeed();
-  });
-}
-
-function renderFeed(){
-  let list = [...(DATA.news.entries||[])].sort((a,b)=> (b.date||"").localeCompare(a.date||""));
-  if(activeTier !== "all") list = list.filter(e => e.confidence === activeTier);
-
-  $("#feed-list").innerHTML = list.length ? list.map(e => {
-    const srcs = (e.sources||[]).map(s => {
-      const flag = `<span class="lang">${esc((s.lang||"??").toUpperCase())}</span>`;
-      return s.url
-        ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${flag}${esc(s.name)}</a>`
-        : `<span>${flag}${esc(s.name)}</span>`;
-    }).join("");
-    return `<article class="entry t-${esc(e.confidence)}">
-      <div class="meta">
-        ${tierTag(e.confidence)}
-        <span>${fmtDate(e.date)}</span>
-        ${e.version ? `<span class="chip is-ver">${esc(e.version)}</span>` : ""}
-        ${e.category ? `<span class="chip">${esc(e.category)}</span>` : ""}
-        ${e.outcome === "confirmed" ? `<span class="outcome">✓ this one turned out right</span>` : ""}
-        ${e.outcome === "superseded" ? `<span style="color:var(--gold)">✕ this one was wrong</span>` : ""}
-      </div>
-      <h3>${esc(e.title)}</h3>
-      <p>${esc(e.body)}</p>
-      ${srcs ? `<div class="srcs">${srcs}</div>` : ""}
-    </article>`;
-  }).join("") : `<div class="empty">Nothing at this confidence level.</div>`;
-}
-
-function renderLegend(){
-  const tiers = DATA.news.confidenceTiers || {};
-  const keys = TIER_ORDER.filter(t => tiers[t]);
-  $("#legend").innerHTML = keys.map(t =>
-    `<div class="t-${t}"><b>${TIER_LABEL[t]}</b><span style="color:var(--paper-dim)">${esc(tiers[t])}</span></div>`
-  ).join("");
-}
-
-/* ---------------- Upcoming characters ---------------- */
-
-/* Banners carry the schedule; resonators.json carries the detail. Merge on name
-   so a card shows the kit without duplicating it into versions.json. */
-function resonatorFor(name){
-  return (DATA.resonators.resonators||[]).find(
-    r => r.name.toLowerCase() === String(name||"").toLowerCase()
-  ) || {};
-}
-
-/* Official key art, resolved from Kuro's own reveal posts by fetch-art.mjs.
-   Absent until Kuro reveals the character — that's the plate's whole job. */
-function artFor(name){
-  return (DATA.art?.art || {})[name] || null;
-}
-
-function characterCard(b, phaseWindow){
-  const r = resonatorFor(b.name);
-  const art = artFor(b.name);
-  const attribute = b.attribute || r.attribute;
-  const weapon = b.weapon || r.weapon;
-  const role = b.role || r.role;
-  const rarity = b.rarity || r.rarity;
-
-  /* Precedence: hand-set image, then the character's own reveal card, then a
-     crop of the patch key visual, then the plate. The key visual is a wide
-     shared banner, so each banner row carries the side its character stands on
-     and it drops out the moment a real reveal card exists. */
-  const shared = !b.image && !r.image && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
-  const image = b.image || r.image || art?.url || shared?.url;
-  const credit = art && image === art.url ? art : shared;
-
-  /* A cutout is a transparent full-body render, so it sits ON the plate rather
-     than replacing it — the resonance rings stay visible behind the figure. */
-  const cutout = image === (b.image || r.image) && (b.imageStyle || r.imageStyle) === "cutout";
-  const imageCredit = cutout ? (b.imageCredit || r.imageCredit) : null;
-  const kit = r.kit || [];
-  const kitTier = r.confidence?.kit;
-  const summary = r.summary || b.note || "";
-
-  const gear = [
-    ["Signature", b.signature || r.signature],
-    ["Convene", b.convene || r.convene],
-    ["Accessory", r.accessory]
-  ].filter(([, v]) => v);
-
-  /* A 16:9 key visual dropped into a 4:5 box has no vertical overflow, so
-     object-position alone can only frame horizontally. Zoom picks the height. */
-  const kvStyle = shared
-    ? ` style="object-position:${esc(b.keyVisualFocus)};` +
-      `transform:scale(${Number(b.keyVisualZoom) || 1});` +
-      `transform-origin:${esc(b.keyVisualOrigin || "50% 50%")}"`
-    : "";
-
-  const plate = image
-    ? `<img src="${esc(image)}" alt="${esc(b.name)}" loading="lazy" decoding="async"${kvStyle}>`
-    : r.nameCN
-      ? `<span class="cjk">${esc(r.nameCN)}</span>`
-      : `<span class="initial">${esc(b.name.slice(0,1))}</span>`;
-
-  return `<article class="character-card"${attrStyle(attribute)}>
-    <div class="character-art${cutout ? " has-cutout" : image ? " has-art" : ""}">
-      ${plate}
-      ${rarity ? `<span class="rank">${esc(rarity)}★</span>` : ""}
-      <span class="phase">Phase ${b.phase}</span>
-      <span class="attrline">
-        ${attribute ? `<b>${esc(attribute)}</b>` : ""}
-        ${weapon ? `<span>${esc(weapon)}</span>` : ""}
-        ${role ? `<span>${esc(role)}</span>` : ""}
-      </span>
+<!-- ══ detail drawer ════════════════════════════════════════════════ -->
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-scrim" data-close></div>
+  <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-kind" tabindex="-1">
+    <div class="drawer-h">
+      <span class="label" id="drawer-kind">Detail</span>
+      <button class="iconbtn" data-close aria-label="Close (Esc)">
+        <svg width="14" height="14" viewBox="0 0 16 16"><use href="#i-close"/></svg>
+      </button>
     </div>
-    ${imageCredit ? `<div class="character-credit">${esc(imageCredit)}</div>` : ""}
-    ${credit ? `<div class="character-credit">
-      ${shared ? "Detail from" : "Key art"} ${esc(credit.credit)} —
-      <a href="${esc(credit.source)}" target="_blank" rel="noopener">${esc(credit.articleTitle || credit.title)}</a>
-    </div>` : ""}
-    <div class="character-body">
-      <h3>${esc(b.name)}${phaseWindow ? `<small>${phaseWindow}</small>` : ""}</h3>
-      ${art?.epithet ? `<div class="character-epithet">${esc(art.epithet)}</div>` : ""}
-      ${summary ? `<p>${esc(summary)}</p>` : ""}
-      ${gear.length ? `<div class="character-gear">${
-        gear.map(([k,v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")
-      }</div>` : ""}
-      <div class="character-know">
-        <div class="character-know-h">
-          <span>What we know</span>
-          ${kit.length ? `<span class="tag ${kitTier==="official"?"solid":""} t-${esc(kitTier||"rumour")}"><span>${esc(TIER_SHORT[kitTier]||"Unverified")}</span></span>` : ""}
-        </div>
-        ${kit.length
-          ? `<ul>${kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>`
-          : `<div class="none">Nothing in the files yet — identity only.</div>`}
-      </div>
+    <div id="drawer-body"></div>
+  </aside>
+</div>
+
+<!-- ══ command palette ══════════════════════════════════════════════ -->
+<div class="cmd" id="cmd" hidden>
+  <div class="cmd-scrim" data-close></div>
+  <div class="cmd-box" role="dialog" aria-modal="true" aria-label="Search the desk">
+    <div class="cmd-in">
+      <svg width="16" height="16" viewBox="0 0 16 16"><use href="#i-search"/></svg>
+      <input id="cmd-input" type="text" placeholder="Search versions, resonators, intel, signals…" autocomplete="off" spellcheck="false" aria-controls="cmd-res">
+      <kbd style="font-family:var(--mono);font-size:9px;color:var(--fg-3)">ESC</kbd>
     </div>
-  </article>`;
-}
-
-function rerunCard(b){
-  const r = resonatorFor(b.name);
-  const attribute = b.attribute || r.attribute;
-  const image = b.image || r.image || artFor(b.name)?.url;
-  const info = [b.rarity||r.rarity ? (b.rarity||r.rarity)+"★" : "", attribute, b.weapon||r.weapon, b.role||r.role]
-    .filter(Boolean).join(" · ");
-  const glyph = image
-    ? `<img src="${esc(image)}" alt="" loading="lazy" decoding="async">`
-    : esc((r.nameCN || b.name).slice(0,1));
-  return `<div class="rerun-card"${attrStyle(attribute)}>
-    <div class="glyph">${glyph}</div>
-    <div class="who"><strong>${esc(b.name)}</strong><span>${esc(info || "Rerun")}</span></div>
-    <span class="ph">P${b.phase}</span>
-  </div>`;
-}
-
-function renderUpcoming(){
-  const next = DATA.versions.versions?.find(v => v.status === "announced");
-  if(!next){ $("#upcoming").innerHTML = `<div class="empty">No upcoming patch data available.</div>`; return; }
-
-  const phases = next.phases || [];
-  const windows = phases.map(p => {
-    const est = p.estimated_start ? " (est)" : "";
-    return p.start ? `From ${fmtDate(p.start)}${est}` : "";
-  });
-  const pick = test => phases.flatMap((p, i) =>
-    (p.banners||[]).filter(test)
-      .map(b => ({...b, phase: p.n ?? i + 1, window: windows[i], keyVisual: next.keyVisual}))
-  );
-
-  const newChars = pick(b => b.new);
-  const reruns = pick(b => b.rerun);
-
-  const cards = newChars.map(b => characterCard(b, b.window)).join("");
-
-  $("#upcoming").innerHTML = `<div class="upcoming">
-    <div class="up-head">
-      <div class="label">Next patch · ${esc(next.id)}${next.start ? ` · ${fmtDate(next.start)}` : ""}</div>
-      <h2>${esc(next.title || "Upcoming character banners")}</h2>
-      <p>${esc(next.notes || "Confirmed banner plan, reruns and expected phases.")}</p>
+    <div class="cmd-res" id="cmd-res" role="listbox" aria-label="Results"></div>
+    <div class="cmd-foot">
+      <span>↑↓ navigate</span><span>↵ open</span><span>esc close</span>
     </div>
-    <div class="character-grid">${cards || `<div class="empty">No confirmed new characters yet.</div>`}</div>
-    ${reruns.length ? `<div class="reruns">
-      <h3>Also rerunning — ${reruns.length} banner${reruns.length===1?"":"s"}</h3>
-      <div class="reruns-list">${reruns.map(rerunCard).join("")}</div>
-    </div>` : ""}
-  </div>`;
-}
+  </div>
+</div>
 
-/* ---------------- Auto feed ---------------- */
-function autoItems(){
-  return [...(DATA.feed?.items||[])].sort((a,b)=> (b.date||"").localeCompare(a.date||""));
-}
-
-function renderAutoSummary(){
-  const feed = DATA.feed || {};
-  const srcs = feed.sources || [];
-  const items = autoItems();
-  const strip = srcs.map(s =>
-    `<span class="src-pill ${esc(s.status)}" title="${esc(s.error || s.status)}">${esc(s.name)} ${s.count}</span>`
-  ).join("");
-
-  $("#auto-summary").innerHTML = `<div class="meta">
-      <span>Last run <b style="color:var(--paper)">${feed.fetched ? esc(fmtDateTime(feed.fetched)) : "—"}</b></span>
-      <span>${items.length} headline${items.length===1?"":"s"}</span>
-      <span>${srcs.filter(s=>s.status==="ok").length}/${srcs.length} sources responding</span>
-    </div>
-    ${strip ? `<div class="src-strip">${strip}</div>` : ""}
-    ${(feed.errors||[]).length ? `<div class="note">${esc(feed.errors.join(" · "))}</div>` : ""}`;
-}
-
-function renderAutoFilters(){
-  const counts = {};
-  autoItems().forEach(i => counts[i.kind] = (counts[i.kind]||0)+1);
-  const btns = [["all","Everything"], ["hot","Worth a look"]]
-    .concat(Object.keys(KIND_LABEL).filter(k=>counts[k]).map(k=>[k, KIND_LABEL[k]]));
-  $("#auto-filters").innerHTML = btns.map(([k,label]) => {
-    const n = k==="all" ? autoItems().length : k==="hot" ? autoItems().filter(i=>i.hot).length : counts[k];
-    return `<button data-kind="${k}" aria-pressed="${activeKind===k}">${label} ${n}</button>`;
-  }).join("");
-  $("#auto-filters").querySelectorAll("button").forEach(b => b.onclick = () => {
-    activeKind = b.dataset.kind; renderAutoFilters(); renderAutoFeed();
-  });
-}
-
-function renderAutoFeed(){
-  let items = autoItems();
-  if(activeKind === "hot") items = items.filter(i => i.hot);
-  else if(activeKind !== "all") items = items.filter(i => i.kind === activeKind);
-
-  $("#auto-feed").innerHTML = items.length ? items.map(i => `
-    <article class="auto-item ${i.hot?"hot":""}">
-      <div class="auto-when">${esc(fmtDate(i.date))}</div>
-      <div>
-        <h3><a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a></h3>
-        <div class="auto-meta">
-          <span class="kind ${esc(i.kind)}">${esc(KIND_LABEL[i.kind] || i.kind)}</span>
-          ${i.lang ? `<span class="lang">${esc(i.lang.toUpperCase())}</span>` : ""}
-          <span>${esc(i.source || "")}</span>
-          ${i.hot ? `<span class="auto-hot">◆ worth a look</span>` : ""}
-        </div>
-      </div>
-    </article>`).join("")
-    : `<div class="empty">${DATA.feed?.items?.length ? "Nothing in this category." : "No auto feed items yet — the fetcher has not run."}</div>`;
-}
-
-/* ---------------- Resonators ---------------- */
-function renderRes(){
-  const rs = DATA.resonators.resonators || [];
-  $("#res-list").innerHTML = rs.length ? rs.map(r => {
-    const attrs = [r.rarity?r.rarity+"★":"", r.attribute, r.weapon, r.role, r.version?"v"+r.version:""]
-      .filter(Boolean).map(a=>`<span>${esc(a)}</span>`).join("");
-    const gear = [
-      r.signature ? `Signature <b style="color:var(--paper);font-weight:500">${esc(r.signature)}</b>` : "",
-      r.accessory ? `Accessory <b style="color:var(--paper);font-weight:500">${esc(r.accessory)}</b>` : "",
-      r.convene ? `Convene <b style="color:var(--paper);font-weight:500">${esc(r.convene)}</b>` : ""
-    ].filter(Boolean).join(" · ");
-    const kitTier = r.confidence && r.confidence.kit;
-    return `<div class="res">
-      <div class="res-h">
-        <b>${esc(r.name)}</b>
-        ${r.nameCN ? `<span style="font-family:var(--display);color:var(--cinnabar)">${esc(r.nameCN)}</span>`:""}
-        ${r.status ? `<span class="ver-state s-${r.status==="released"?"live":"announced"}">${esc(r.status)}</span>`:""}
-      </div>
-      <div class="res-attrs">${attrs}</div>
-      ${gear ? `<div class="res-attrs" style="margin-top:8px">${gear}</div>` : ""}
-      ${r.summary ? `<p style="margin-top:12px">${esc(r.summary)}</p>` : ""}
-      ${(r.kit&&r.kit.length) ? `
-        <div class="meta t-${esc(kitTier||"rumour")}" style="margin:16px 0 8px">
-          <span class="tag ${kitTier==="official"?"solid":""}"><span>Kit — ${esc(TIER_SHORT[kitTier]||"Unverified")}</span></span>
-        </div>
-        <ul style="margin:0;padding-left:18px;color:#C4BDB0;font-size:14px">${r.kit.map(k=>`<li>${esc(k)}</li>`).join("")}</ul>`:""}
-    </div>`;
-  }).join("") : `<div class="empty">No resonators in resonators.json yet.</div>`;
-
-  $("#res-note").innerHTML = rs.length
-    ? `<div class="note">Kit detail on unreleased resonators is pre-balance. Multipliers routinely shift between beta phases.</div>`
-    : "";
-}
-
-/* ---------------- Tabs ---------------- */
-const TABS = {"tab-timeline":"p-timeline","tab-feed":"p-feed","tab-auto":"p-auto","tab-res":"p-res"};
-
-function selectTab(id, focus){
-  if(!TABS[id]) return;
-  Object.entries(TABS).forEach(([t,p]) => {
-    const on = t === id;
-    const btn = document.getElementById(t);
-    btn.setAttribute("aria-selected", on);
-    btn.tabIndex = on ? 0 : -1;             // roving tabindex, one stop for the tablist
-    document.getElementById(p).hidden = !on;
-  });
-  if(focus) document.getElementById(id).focus();
-  syncHash(id);
-}
-
-/* Timeline is the landing tab, so it gets the bare URL — no #timeline hanging
-   off the address bar on arrival, and switching back to it clears the hash. */
-function syncHash(id){
-  const isLanding = id === Object.keys(TABS)[0];
-  const url = location.pathname + location.search + (isLanding ? "" : "#" + TABS[id].slice(2));
-  if(location.pathname + location.search + location.hash !== url) history.replaceState(null, "", url);
-}
-
-function initTabs(){
-  const ids = Object.keys(TABS);
-  ids.forEach((id, i) => {
-    const btn = document.getElementById(id);
-    btn.onclick = () => selectTab(id);
-    btn.onkeydown = e => {
-      const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-      if(step) { e.preventDefault(); selectTab(ids[(i + step + ids.length) % ids.length], true); }
-      if(e.key === "Home"){ e.preventDefault(); selectTab(ids[0], true); }
-      if(e.key === "End"){ e.preventDefault(); selectTab(ids[ids.length-1], true); }
-    };
-  });
-  // Deep link, so "look at the auto feed" can be a shareable URL.
-  const fromHash = () => ids.find(id => TABS[id].slice(2) === location.hash.slice(1));
-  // Changing only the fragment doesn't reload the page, so catch it here too.
-  addEventListener("hashchange", () => selectTab(fromHash() || ids[0]));
-  selectTab(fromHash() || ids[0]);
-}
-
-/* ---------------- Boot ---------------- */
-(async function(){
-  const [versions, news, resonators, feed, art] = await Promise.all(
-    ["versions","news","resonators","feed","art"].map(load)
-  );
-  DATA = { versions, news, resonators, feed, art };
-
-  const vs = versions.versions || [];
-  const next = vs.find(v => v.status === "announced");
-  $("#st-live").textContent = versions.current || "—";
-  $("#st-next").textContent = next ? `${next.id} · ${fmtDate(next.start)}` : "—";
-  $("#st-count").textContent = (news.entries||[]).length;
-  $("#st-updated").textContent = fmtDate(news.updated) || "—";
-
-  initTabs();
-  // Each panel is independent — one bad data file shouldn't blank the rest.
-  for(const render of [renderUpcoming, renderTimeline, renderFilters, renderFeed,
-                       renderLegend, renderRes, renderAutoSummary, renderAutoFilters, renderAutoFeed]){
-    try{ render(); }catch(err){ console.error(`${render.name} failed`, err); }
-  }
-})();
-</script>
+<script src="assets/app.js"></script>
 </body>
 </html>
