@@ -161,6 +161,15 @@ Opening `index.html` straight off disk works but the JSON won't load (browsers b
 Run the fetcher by hand with `node scripts/fetch-feeds.mjs` — it prints kept/fetched
 counts per source and only writes when something changed.
 
+### Bump the asset version when you touch CSS or JS
+
+`index.html` references `assets/app.css?v=N` and `assets/app.js?v=N`. **Bump `N` on both
+whenever either file changes.** GitHub Pages serves assets with `max-age=600`, and
+browsers hold them longer than that, so without the bump a deploy can look like nothing
+happened — the new HTML loads against yesterday's stylesheet. The query string changes
+the URL, which is the only thing a cache reliably keys on. `index.html` and the JSON
+under `data/` are re-fetched normally, so they need no such treatment.
+
 ## Confidence tiers
 
 The whole point of the desk. Every entry gets one.
