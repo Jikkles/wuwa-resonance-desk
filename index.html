@@ -15,7 +15,7 @@
      browser (and Pages' CDN, which sends max-age=600) will happily serve you
      yesterday's stylesheet on a normal refresh. Bump this on every change to
      either asset — it is the whole reason a deploy shows up immediately. -->
-<link rel="stylesheet" href="assets/app.css?v=8">
+<link rel="stylesheet" href="assets/app.css?v=9">
 </head>
 <body>
 
@@ -51,6 +51,13 @@
     </g>
     <g id="i-info" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
       <circle cx="8" cy="8" r="6.3"/><path d="M8 7.2v4M8 4.9v.1"/>
+    </g>
+    <!-- Card view / lane view toggle on the patch timeline. -->
+    <g id="i-grid" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <rect x="2" y="2.6" width="4.7" height="10.8" rx="1.2"/><rect x="9.3" y="2.6" width="4.7" height="10.8" rx="1.2"/>
+    </g>
+    <g id="i-rows" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <rect x="2" y="3" width="12" height="4" rx="1.2"/><rect x="2" y="9" width="12" height="4" rx="1.2"/>
     </g>
 
     <!-- Signal source marks. One per fetcher in scripts/fetch-feeds.mjs, keyed
@@ -232,6 +239,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=8"></script>
+<script src="assets/app.js?v=9"></script>
 </body>
 </html>

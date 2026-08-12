@@ -107,13 +107,50 @@ No framework and no build step. Each view renders its whole panel to `innerHTML`
 every click is caught by one delegated `[data-act]` handler on `document`, so a
 re-render can't leave a stale listener behind.
 
-### The character cards
+### The landing view fits a screen
 
-The Timeline view leads with a Now / Next / Future card row, then big panels for the
-new characters on the next `announced` patch, plus a rerun row. Banner rows in
-`versions.json` are matched by `name` against `resonators.json`, so the kit list ("what
-we know") and its confidence tier come from the resonator record — don't duplicate that
-into `versions.json`.
+Timeline is Now / Next / Future across the top and the intel + signals duo underneath.
+That is the whole page — roughly 1560px at 1080p, where it used to be about 4500.
+
+What went, and where it went instead:
+
+- **The full-screen character panels.** Every character on them is a face on a patch
+  card, and clicking that face opens the resonator drawer, which already carried the
+  same summary, gear and kit list. A screen of panels to say what a drawer says on
+  demand is the definition of a page that doesn't fit.
+- **The All-versions lane list.** Still there, behind the card/lane toggle in the panel
+  header — the same `versionBlock` renderer, same filters.
+- **A banner row per phase.** One debut/rerun split now covers the whole patch; the
+  phase is stamped on each thumbnail and the dates run as one legend line underneath.
+  Per-phase bands were most of the height, at 450px for a two-phase patch.
+
+The `when` chips filter the card row and the lane list — whichever is on screen. They
+used to sit on this panel and quietly re-filter a list two thousand pixels further
+down, which reads as a button that does nothing.
+
+**Banner thumbnails are clickable** and their `[data-act]` is the innermost one, so a
+face opens that resonator while the rest of the card opens the version. That is the
+route to a full kit now, so don't remove it.
+
+Banner rows in `versions.json` are matched by `name` against `resonators.json`, so the
+kit list ("what we know") and its confidence tier come from the resonator record —
+don't duplicate that into `versions.json`.
+
+### Art behind the whole card
+
+The patch card is a poster: the picture runs the full height and the version block,
+banner strip and event list sit on top of it. It was a bright header with an opaque
+panel bolted underneath, which read as two stacked things rather than one card.
+
+Legibility is bought two ways, and both matter. The version block carries **its own
+gradient** rather than relying on a fixed ramp painted on the picture — how far down it
+sits depends on how many banners the patch has, so a ramp tuned for one card is wrong
+on the next. The rows below it are **blurred** rather than blacked out: an opaque wash
+makes 9px mono readable by deleting the art, while `backdrop-filter` keeps the colour
+and shape and only destroys the fine detail that fights small type.
+
+On a phone the three cards become a snap-scrolling carousel — stacked, they were a
+thousand pixels before the first headline.
 
 ### Where the art comes from
 

@@ -57,7 +57,7 @@ let DATA = {};
    flat bag so a filter control never has to know which view it is in. */
 const S = {
   view:"timeline", sigLimit:60, drawer:null,
-  when:"all",                      // timeline
+  when:"all", tlMode:"cards",      // timeline
   tier:"all", ver:"all", cat:"all", // intel
   kind:"all", src:"all",           // signals
   elem:"all", weapon:"all"         // resonators
@@ -295,7 +295,13 @@ function thumb(b){
   const meta = b.rarity || attr
     ? `${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}`
     : fallback ? `<i class="rar">${fallback}</i>` : "";
-  return `<div class="bmini${unknown ? " unknown" : ""}"${attrStyle(attr)}>
+  /* Clickable in its own right, and the innermost [data-act] wins over the
+     card's — so a face opens that resonator's record while the rest of the
+     card still opens the version. This is the path to the full kit now that
+     the landing view doesn't carry a screen of character panels. An unnamed
+     banner has no record to open, so it stays inert. */
+  const act = unknown ? "" : ` role="button" tabindex="0" data-act="resonator" data-id="${esc(b.name)}"`;
+  return `<div class="bmini${unknown ? " unknown" : ""}"${attrStyle(attr)}${act}>
     <div class="thumb${f.cutout ? " cut" : ""}">${inner}${b.phase ? `<span class="ph">P${b.phase}</span>` : ""}</div>
     <b>${esc(b.name || "???")}</b>
     <span class="bmeta">${meta}</span>
@@ -460,7 +466,10 @@ function patchCard(v, role){
   const events = newsFor(v.id).slice(0, 3);
   const days = v.start ? daysTo(v.start) : null;
   /* A live patch shows the newest debut's own art; an upcoming one has no
-     debut art yet, so it falls back to the patch key visual. */
+     debut art yet, so it falls back to the patch key visual. Either way the
+     picture runs the full height of the card and everything else sits on top
+     of it — the card is a poster for the patch, not a header with a table
+     bolted underneath. */
   const face = role === "live" ? newestDebutArt(v) : null;
   const f = face || v.keyVisual;
 
@@ -477,6 +486,10 @@ function patchCard(v, role){
   }else if(days != null){
     status = `<div class="pcard-state">${days > 0 ? `<span class="t-datamined">In ${plural(days, "day")}</span>`
       : `<span class="t-datamined">Launching now</span>`}</div>`;
+  }else if(role === "future"){
+    /* No dates, no art, no banners — say why the card is nearly empty rather
+       than leaving a hole and letting it read as something failing to load. */
+    status = `<div class="pcard-state"><span style="color:var(--fg-3)">Highly speculative</span></div>`;
   }
 
   const rows = [];
@@ -490,20 +503,22 @@ function patchCard(v, role){
         list.length > 4 ? `<span class="bmini-more">+${list.length - 4}</span>` : ""}</div>`
     : `<div class="bnone">—</div>`;
 
+  /* One split, not one per phase. A row per phase gave every card two full
+     bands of portraits and was most of why the landing view ran to three
+     screens; the phase is already stamped on each thumbnail, and the dates
+     that used to head each band now run as a single legend line underneath. */
   if(banners.length) rows.push([null, `<div class="pcard-split">
     <div class="ps-head label l">New character${fresh.length === 1 ? "" : "s"}</div>
     <div class="ps-head label r">Rerun${reruns.length === 1 ? "" : "s"}</div>
-    ${openPhases.map(p => `
-      <div class="ps-phase">
-        <span class="n">Phase ${p.n}</span><i></i>
-        ${p.range ? `<span class="when">${p.range}${p.est ? ` <em>est</em>` : ""}</span>` : ""}
-      </div>
-      <div class="ps-cell l">${strip(p.fresh)}</div>
-      <div class="ps-cell r">${strip(p.reruns)}</div>`).join("")}
+    <div class="ps-cell l">${strip(fresh)}</div>
+    <div class="ps-cell r">${strip(reruns)}</div>
+    ${openPhases.some(p => p.range) ? `<div class="ps-legend">${openPhases.map(p =>
+      `<span><b>P${p.n}</b>${p.range ? ` ${p.range}` : ""}${p.est ? ` <em>est</em>` : ""}</span>`
+    ).join("")}</div>` : ""}
   </div>`]);
   if(events.length) rows.push([
     "Key events",
-    `<div class="evlist">${events.slice(0, banners.length ? 2 : 3).map(e => `<div class="evrow t-${esc(e.confidence)}">
+    `<div class="evlist">${events.slice(0, banners.length ? 2 : 4).map(e => `<div class="evrow t-${esc(e.confidence)}">
       <i class="dot"></i><span class="what" style="color:var(--fg-2)">${esc(e.title)}</span>
       <span class="when">${fmtShort(e.date)}</span></div>`).join("")}</div>`
   ]);
@@ -619,124 +634,53 @@ function versionBlock(v){
   </article>`;
 }
 
-function characterCard(b){
-  const r = resonatorFor(b.name);
-  const f = figure(b);
-  const attribute = b.attribute || r.attribute;
-  const rarity = b.rarity || r.rarity;
-  const kit = r.kit || [];
-  const kitTier = r.confidence?.kit;
-  const gear = [
-    ["Signature", b.signature || r.signature],
-    ["Convene", b.convene || r.convene],
-    ["Accessory", r.accessory]
-  ].filter(([, v]) => v);
-
-  const overlay = `
-    ${rarity ? `<span class="rank">${esc(rarity)}★</span>` : ""}
-    <span class="phase">Phase ${esc(b.phase)}</span>
-    <span class="attrline">
-      ${attribute ? `<b>${esc(attribute)}</b>` : ""}
-      ${b.weapon || r.weapon ? `<span>${esc(b.weapon || r.weapon)}</span>` : ""}
-      ${b.role || r.role ? `<span>${esc(b.role || r.role)}</span>` : ""}
-    </span>`;
-
-  return `<article class="ccard" role="button" tabindex="0" data-act="resonator" data-id="${esc(b.name)}"${attrStyle(attribute)}>
-    ${artPanel(b, overlay)}
-    ${creditLine(b)}
-    <div class="cbody">
-      <h3>${esc(b.name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h3>
-      ${b.window ? `<div class="cwhen">${esc(b.window)}</div>` : ""}
-      ${f.epithet ? `<div class="cepithet">${esc(f.epithet)}</div>` : ""}
-      ${r.summary || b.note ? `<p class="csum">${esc(r.summary || b.note)}</p>` : ""}
-      ${gear.length ? `<div class="cgear">${gear.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div>` : ""}
-      <div class="cknow">
-        <div class="cknow-h">
-          <span class="label">What we know</span>
-          ${kit.length ? tierBadge(kitTier) : ""}
-        </div>
-        ${kit.length
-          ? `<ul>${kit.slice(0, 3).map(k => `<li>${esc(k)}</li>`).join("")}</ul>`
-          : `<div class="none">Nothing in the files yet — identity only.</div>`}
-        <div class="cmore">Full record ${icon("i-arrow", 12)}</div>
-      </div>
-    </div>
-  </article>`;
-}
-
-function rerunCard(b){
-  const r = resonatorFor(b.name);
-  const attr = b.attribute || r.attribute;
-  const f = figure(b);
-  const bits = [b.rarity || r.rarity ? (b.rarity || r.rarity) + "★" : "", attr, b.weapon || r.weapon, b.role || r.role]
-    .filter(Boolean).join(" · ");
-  return `<article class="recard" role="button" tabindex="0" data-act="resonator" data-id="${esc(b.name)}"${attrStyle(attr)}>
-    <div class="g">${f.image
-      ? `<img class="${f.poster ? "poster" : ""}" src="${esc(f.image)}" alt="" loading="lazy" decoding="async">`
-      : esc(f.glyph)}</div>
-    <div class="who"><strong>${esc(b.name)}</strong><span>${esc(bits || "Rerun")} · P${esc(b.phase)}</span></div>
-    <span class="pill">Rerun</span>
-  </article>`;
-}
+/* Which bucket a version falls in. One definition — the chips, the card row and
+   the lane list all have to agree or the filter looks broken. */
+const bucketOf = v => v.status === "live" ? "current"
+  : (v.status === "announced" || v.status === "beta") ? "upcoming" : "past";
+const roleOf = v => v.status === "live" ? "live" : v.status === "announced" ? "next" : "future";
 
 function renderTimeline(){
   const live = liveVersion(), next = nextVersion(), future = futureVersion();
 
-  /* Hero */
+  const rank = v => v.status === "live" ? 0 : v.status === "announced" ? 1 : v.status === "beta" ? 2 : 3;
+  const inWindow = v => S.when === "all" || bucketOf(v) === S.when;
+  const list = [...versions()].filter(inWindow)
+    .sort((a, b) => rank(a) - rank(b) || parseFloat(b.id) - parseFloat(a.id));
+
+  /* Now / Next / Future as three cards across, narrowing to whichever the
+     chips asked for. The filter has to change the thing directly underneath
+     it — it used to sit on this panel and quietly re-filter a lane list two
+     thousand pixels further down, which reads as a button that does nothing. */
+  const cards = S.when === "all"
+    ? [[live, "live"], [next, "next"], [future, "future"]]
+    : list.map(v => [v, roleOf(v)]);
+
+  const body = S.tlMode === "list"
+    ? (list.length ? `<div class="vlist">${list.map(versionBlock).join("")}</div>`
+                   : `<div class="empty">No patch in this window.</div>`)
+    : (cards.length ? `<div class="hero${S.when === "all" ? "" : " narrow"}">${
+        cards.map(([v, r]) => patchCard(v, r)).join("")}</div>`
+                    : `<div class="empty">No patch in this window.</div>`);
+
   const hero = `<div class="panel">
     <div class="panel-h">
-      <h2>Patch timeline</h2><span class="sub">Now / Next / Future</span>
-      <div class="right chips">${chips("when", [
-        ["all","All"], ["current","Current"], ["upcoming","Upcoming"], ["past","Past"]
-      ], S.when)}</div>
+      <h2>Patch timeline</h2><span class="sub">${S.when === "all" ? "Now / Next / Future" : plural(list.length, "patch")}</span>
+      <div class="right">
+        <div class="chips">${chips("when", [
+          ["all","All"], ["current","Current"], ["upcoming","Upcoming"], ["past","Past"]
+        ], S.when)}</div>
+        <div class="seg">${[["cards","i-grid","Card view"], ["list","i-rows","Lane view"]].map(([m, ic, lbl]) =>
+          `<button data-act="tlmode" data-id="${m}" aria-pressed="${S.tlMode === m}" title="${lbl}" aria-label="${lbl}">${icon(ic, 14)}</button>`
+        ).join("")}</div>
+      </div>
     </div>
-    <div class="panel-b"><div class="hero">
-      ${patchCard(live, "live")}
-      ${patchCard(next, "next")}
-      ${patchCard(future, "future")}
-    </div></div>
-  </div>`;
-
-  /* Next-patch resonators */
-  const phases = next?.phases || [];
-  const rows = phases.flatMap((p, i) => (p.banners || []).map(b => ({
-    ...b, phase:p.n ?? i+1, keyVisual:next.keyVisual,
-    window: p.start ? `From ${fmtShort(p.start)}${p.estimated_start ? " (est)" : ""}` : ""
-  })));
-  const fresh = rows.filter(b => b.new), reruns = rows.filter(b => b.rerun);
-
-  const upcoming = next ? `<div class="panel">
-    <div class="panel-h">
-      <h2>Next up — new resonators</h2>
-      <span class="sub">${esc(next.id)}${next.start ? ` · ${fmtDate(next.start)}` : ""}</span>
-    </div>
-    <div class="panel-b">
-      <div class="cgrid">${fresh.map(characterCard).join("") || `<div class="empty">No confirmed new characters yet.</div>`}</div>
-      ${reruns.length ? `<div style="margin-top:20px">
-        <div class="label" style="margin-bottom:10px">Also rerunning — ${plural(reruns.length, "banner")}</div>
-        <div class="rerow">${reruns.map(rerunCard).join("")}</div>
-      </div>` : ""}
-    </div>
-  </div>` : "";
-
-  /* Full version list */
-  const rank = v => v.status === "live" ? 0 : v.status === "announced" ? 1 : v.status === "beta" ? 2 : 3;
-  const bucket = v => v.status === "live" ? "current" : (v.status === "announced" || v.status === "beta") ? "upcoming" : "past";
-  const list = [...versions()]
-    .filter(v => S.when === "all" || bucket(v) === S.when)
-    .sort((a, b) => rank(a) - rank(b) || parseFloat(a.id) - parseFloat(b.id));
-
-  const full = `<div class="panel">
-    <div class="panel-h"><h2>All versions</h2><span class="sub">${plural(list.length, "patch")} · banners by phase</span></div>
-    <div class="panel-b flush">
-      ${list.length ? `<div class="vlist">${list.map(versionBlock).join("")}</div>`
-        : `<div class="empty">Nothing in this window.</div>`}
-    </div>
+    <div class="panel-b${S.tlMode === "list" ? " flush" : ""}">${body}</div>
   </div>`;
 
   /* Dashboard duo */
-  const recent = [...entries()].sort((a, b) => (b.date||"").localeCompare(a.date||"")).slice(0, 4);
-  const sigs = signals().slice(0, 6);
+  const recent = [...entries()].sort((a, b) => (b.date||"").localeCompare(a.date||"")).slice(0, 3);
+  const sigs = signals().slice(0, 5);
   const duo = `<div class="duo">
     <div class="panel">
       <div class="panel-h"><h2>Recent intel</h2><span class="sub">Curated &amp; tiered</span>
@@ -750,7 +694,7 @@ function renderTimeline(){
     </div>
   </div>`;
 
-  $("#p-timeline").innerHTML = `<div class="stack">${hero}${upcoming}${full}${duo}</div>`;
+  $("#p-timeline").innerHTML = `<div class="stack">${hero}${duo}</div>`;
 }
 
 /* ── intel ───────────────────────────────────────────────────────── */
@@ -1395,6 +1339,7 @@ function bind(){
       S.sigLimit = 60;
       setView(id);
     }
+    else if(act === "tlmode"){ S.tlMode = id; draw("timeline"); }
     else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
     else if(act === "noop"){ /* decorative */ }
     else dispatch(act, id);
