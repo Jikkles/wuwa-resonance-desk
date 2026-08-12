@@ -231,12 +231,14 @@ function thumb(b){
     : `<span class="g">${esc(unknown ? "?" : f.glyph)}</span>`;
   /* Only label new/rerun when the data actually says so — an unflagged banner
      row is unknown, not a rerun. */
-  const bits = [b.rarity ? b.rarity + "★" : "", attr].filter(Boolean).join(" ")
-    || (b.new ? "New" : b.rerun ? "Rerun" : "");
+  const fallback = b.new ? "New" : b.rerun ? "Rerun" : "";
+  const meta = b.rarity || attr
+    ? `${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}`
+    : fallback ? `<i class="rar">${fallback}</i>` : "";
   return `<div class="bmini${unknown ? " unknown" : ""}"${attrStyle(attr)}>
     <div class="thumb${f.cutout ? " cut" : ""}">${inner}${b.phase ? `<span class="ph">P${b.phase}</span>` : ""}</div>
     <b>${esc(b.name || "???")}</b>
-    <span>${esc(bits)}</span>
+    <span class="bmeta">${meta}</span>
   </div>`;
 }
 
@@ -321,14 +323,25 @@ function renderHud(){
    belongs in the full timeline below, not on the card telling you what's on
    right now. Falls back to the last phase if the whole patch has run out, so
    the card never empties. */
-function liveBanners(v){
+function livePhases(v){
   const phases = v.phases || [];
   if(!phases.length) return [];
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const open = phases.filter(p => !p.end || new Date(p.end) >= today);
   const use = open.length ? open : phases.slice(-1);
-  return use.flatMap(p => (p.banners || []).map(b => ({...b, phase:p.n, keyVisual:v.keyVisual})));
+  return use.map(p => {
+    const rows = (p.banners || []).map(b => ({...b, phase:p.n, keyVisual:v.keyVisual}));
+    return {
+      n: p.n,
+      range: [p.start ? fmtShort(p.start) : "", p.end ? fmtShort(p.end) : ""].filter(Boolean).join(" → "),
+      est: !!(p.estimated_start || p.estimated_end),
+      fresh: rows.filter(b => b.new),
+      reruns: rows.filter(b => !b.new),
+      banners: rows
+    };
+  });
 }
+const liveBanners = v => livePhases(v).flatMap(p => p.banners);
 
 /* The most recent debut on this patch, for the card's backdrop — the newest
    character you can actually pull right now. */
@@ -358,7 +371,8 @@ function patchCard(v, role){
     </article>`;
   }
 
-  const banners = liveBanners(v);
+  const openPhases = livePhases(v);
+  const banners = openPhases.flatMap(p => p.banners);
   const fresh = banners.filter(b => b.new);
   const reruns = banners.filter(b => !b.new);
   const events = newsFor(v.id).slice(0, 3);
@@ -390,21 +404,20 @@ function patchCard(v, role){
      reads as "this is phase 1". Three fit a cell; say so rather than silently
      dropping the rest. */
   const strip = list => list.length
-    ? `<div class="bstrip">${list.slice(0, 3).map(thumb).join("")}${
-        list.length > 3 ? `<span class="bmini-more">+${list.length - 3}</span>` : ""}</div>`
+    ? `<div class="bstrip">${list.slice(0, 4).map(thumb).join("")}${
+        list.length > 4 ? `<span class="bmini-more">+${list.length - 4}</span>` : ""}</div>`
     : `<div class="bnone">—</div>`;
 
-  const byPhase = [];
-  for(const b of banners){
-    let row = byPhase.find(r => r.phase === b.phase);
-    if(!row) byPhase.push(row = {phase:b.phase, fresh:[], reruns:[]});
-    (b.new ? row.fresh : row.reruns).push(b);
-  }
-
   if(banners.length) rows.push([null, `<div class="pcard-split">
-    <div class="label">New character${fresh.length === 1 ? "" : "s"}</div>
-    <div class="label">Rerun${reruns.length === 1 ? "" : "s"}</div>
-    ${byPhase.map(r => strip(r.fresh) + strip(r.reruns)).join("")}
+    <div class="ps-head label l">New character${fresh.length === 1 ? "" : "s"}</div>
+    <div class="ps-head label r">Rerun${reruns.length === 1 ? "" : "s"}</div>
+    ${openPhases.map(p => `
+      <div class="ps-phase">
+        <span class="n">Phase ${p.n}</span><i></i>
+        ${p.range ? `<span class="when">${p.range}${p.est ? ` <em>est</em>` : ""}</span>` : ""}
+      </div>
+      <div class="ps-cell l">${strip(p.fresh)}</div>
+      <div class="ps-cell r">${strip(p.reruns)}</div>`).join("")}
   </div>`]);
   if(events.length) rows.push([
     "Key events",

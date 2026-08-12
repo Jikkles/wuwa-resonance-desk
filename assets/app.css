@@ -43,9 +43,11 @@
   --r-sm:9px;
 
   --rail-w:238px;
-  --aside-w:318px;
+  --aside-w:340px;
   --tabs-h:53px;
-  --page:1880px;
+  /* No cap. A 2560 monitor was leaving ~400px of dead gutter on the right,
+     and the timeline is the kind of thing that genuinely wants the width. */
+  --page:100%;
 
   /* per-card accent, overridden inline from the resonator's attribute */
   --attr:var(--accent);
@@ -347,7 +349,7 @@ button{font:inherit;color:inherit}
    the left where the type sits, near-clear top right, solid again before the
    banner strip. */
 .pcard-art{position:absolute;inset:0;z-index:0;overflow:hidden}
-.pcard-art img{width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:.82}
+.pcard-art img{width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:1}
 /* A character poster rather than a wide key visual: crop left of centre so the
    figure lands on the right half, clear of the type. */
 .pcard-art.poster img{object-position:32% 40%}
@@ -356,33 +358,39 @@ button{font:inherit;color:inherit}
    that band under a dark strip rather than chasing it with object-position. */
 .pcard-art.poster::after{
   background:
-    linear-gradient(180deg,rgba(13,12,17,.94) 0%,rgba(13,12,17,.6) 13%,transparent 28%),
-    linear-gradient(90deg,rgba(13,12,17,.97) 0%,rgba(13,12,17,.92) 34%,rgba(13,12,17,.55) 68%,rgba(13,12,17,.12) 100%),
-    linear-gradient(180deg,rgba(13,12,17,.20) 0%,rgba(13,12,17,.28) 34%,rgba(13,12,17,.86) 68%,rgba(13,12,17,.99) 88%);
+    linear-gradient(180deg,rgba(13,12,17,.94) 0%,rgba(13,12,17,.62) 12%,transparent 27%),
+    linear-gradient(90deg,rgba(13,12,17,.86) 0%,rgba(13,12,17,.52) 34%,rgba(13,12,17,.1) 68%,transparent 100%),
+    linear-gradient(180deg,transparent 0%,transparent 64%,rgba(13,12,17,.5) 88%,rgba(13,12,17,.8) 100%);
 }
+/* Enough scrim to read the version block over, and no more. The art is the
+   point of the card — the type gets a shadow instead of the picture getting a
+   blanket, and everything below the header sits on its own opaque ground. */
 .pcard-art::after{
   content:"";position:absolute;inset:0;
   background:
-    linear-gradient(90deg,rgba(13,12,17,.97) 0%,rgba(13,12,17,.92) 34%,rgba(13,12,17,.55) 68%,rgba(13,12,17,.12) 100%),
-    linear-gradient(180deg,rgba(13,12,17,.20) 0%,rgba(13,12,17,.28) 34%,rgba(13,12,17,.86) 68%,rgba(13,12,17,.99) 88%);
+    linear-gradient(90deg,rgba(13,12,17,.88) 0%,rgba(13,12,17,.58) 34%,rgba(13,12,17,.14) 68%,transparent 100%),
+    linear-gradient(180deg,transparent 0%,transparent 62%,rgba(13,12,17,.5) 88%,rgba(13,12,17,.8) 100%);
 }
 .pcard-top{position:relative;z-index:1;padding:16px 18px 0;display:flex;gap:10px;align-items:flex-start}
-/* A soft shadow on the type instead of a heavier scrim — keeps the art bright
-   where it lands behind a date. */
+/* The scrim rides the text block rather than the picture: it scales with the
+   content instead of with the card, so the version number and the phase track
+   always sit on something dark while the rest of the art stays untouched. */
 .pcard-main{
-  position:relative;z-index:1;padding:14px 18px 0;margin-top:auto;
+  position:relative;z-index:1;padding:20px 18px 18px;margin-top:auto;
   text-shadow:0 1px 14px rgba(13,12,17,.9),0 0 3px rgba(13,12,17,.7);
+  background:linear-gradient(180deg,
+    transparent 0%,rgba(13,12,17,.42) 20%,rgba(13,12,17,.78) 55%,rgba(13,12,17,.92) 100%);
 }
 .pcard-num{
-  font-family:var(--mono);font-size:52px;font-weight:500;line-height:1;letter-spacing:-.02em;
+  font-family:var(--mono);font-size:60px;font-weight:500;line-height:1;letter-spacing:-.02em;
   font-variant-numeric:tabular-nums;
 }
 .pcard.is-live .pcard-num{color:var(--t-official)}
 .pcard.is-next .pcard-num{color:var(--t-datamined)}
 /* [ LAMPLIGHT IN MIRAGE ] — the patch codename reads as a designation. */
 .pcard-title{
-  font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--fg);margin-top:13px;line-height:1.5;
+  font-family:var(--mono);font-size:13px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--fg);margin-top:14px;line-height:1.5;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 /* Non-breaking spaces inside the brackets, or a long codename wraps and leaves
@@ -390,46 +398,59 @@ button{font:inherit;color:inherit}
 .pcard-title::before{content:"[\00a0"}
 .pcard-title::after{content:"\00a0]"}
 .pcard-dates{
-  font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--fg-3);margin-top:9px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--fg-2);margin-top:10px;
 }
 .pcard-state{
   display:flex;align-items:center;gap:9px;margin-top:13px;
   font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2);
 }
 /* Sections stack full width rather than side by side — a two-column split
-   wraps the banner strip into a tower. */
-.pcard-rows{position:relative;z-index:1;margin-top:16px}
-.pcard-row{padding:13px 18px 15px;border-top:1px solid var(--line);min-width:0}
-.pcard-row .label{margin-bottom:11px}
+   wraps the banner strip into a tower.
+   Opaque, deliberately: the art gets the whole header to itself at full
+   brightness, and the rows never have to fight a key visual for legibility.
+   Scrimming the picture until small text reads over it makes both worse. */
+/* No margin: a gap here would show a bright strip of unscrimmed art between
+   the header block and the opaque rows. */
+.pcard-rows{position:relative;z-index:1;margin-top:0;background:var(--bg-1)}
+.pcard-row{padding:16px 18px 18px;border-top:1px solid var(--line);min-width:0}
+.pcard-row .label{margin-bottom:12px}
 /* Portraits big enough to recognise a character at a glance. */
-.pcard-row .bstrip{--thumb:84px}
+.pcard-row .bstrip{--thumb:104px}
 /* Debuts and reruns side by side: what's new on the left, what's back on the
    right. They're different decisions, so they don't share a strip. */
-/* Two columns, one row per phase. Grid rather than two stacked lists, so a
-   phase's debut and its reruns always line up on the same row. */
-.pcard-split{position:relative;display:grid;grid-template-columns:1fr 1fr;row-gap:14px}
+/* Two columns, one band per phase. Grid rather than two stacked lists, so a
+   phase's debut and its reruns always line up on the same row — and each
+   phase gets its own dated header across the full width. */
+.pcard-split{display:grid;grid-template-columns:1fr 1fr;row-gap:12px;align-items:start}
 .pcard-split>*{min-width:0}
-.pcard-split>*:nth-child(odd){padding-right:16px}
-.pcard-split>*:nth-child(even){padding-left:16px}
-/* One continuous divider, drawn on the container — a per-cell border would
-   break at every row gap. */
-.pcard-split::before{
-  content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line);
+.ps-head.l,.ps-cell.l{padding-right:18px}
+.ps-head.r,.ps-cell.r{padding-left:18px;border-left:1px solid var(--line)}
+.ps-head{padding-bottom:2px;font-size:11px;letter-spacing:.17em;color:var(--fg-2)}
+.ps-phase{
+  grid-column:1/-1;display:flex;align-items:center;gap:12px;margin-top:4px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-2);
 }
-/* Rule between phase rows (children 1-2 are the headers, 3-4 the first phase). */
-.pcard-split>*:nth-child(n+5){border-top:1px solid var(--line);padding-top:14px}
-.pcard-split .label{margin-bottom:0}
+.ps-phase i{flex:1;height:1px;background:var(--line)}
+.ps-phase .when{color:var(--fg-3);letter-spacing:.08em}
+.ps-phase .when em{font-style:normal;color:var(--amber)}
 /* Half a card is narrow — wrap rather than scroll, so no portrait is ever
    half-visible at the column edge. */
-.pcard-split .bstrip{flex-wrap:wrap;overflow:visible;--thumb:76px}
+/* Portraits grow into whatever the column gives them — half the cell, floored
+   at 104px so they stay legible and capped at 172px so a lone debut on a wide
+   monitor doesn't become a poster. */
+.pcard-split .bstrip{
+  flex-wrap:wrap;overflow:visible;
+  --thumb:clamp(104px, calc(50% - 5px), 172px);
+}
 .bnone{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--fg-3);
   padding:12px 0;
 }
 .pcard-foot{
   position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-end;gap:8px;
-  padding:12px 18px;border-top:1px solid var(--line);
+  padding:12px 18px;border-top:1px solid var(--line);background:var(--bg-1);
   font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
 }
 .pcard:hover .pcard-foot{color:var(--fg)}
@@ -468,8 +489,8 @@ button{font:inherit;color:inherit}
   mask-image:radial-gradient(circle at 50% 42%,#000 8%,transparent 66%);
 }
 
-.evlist{display:grid;gap:9px}
-.evrow{display:flex;gap:10px;align-items:baseline;font-size:13px;color:var(--fg-2);min-width:0}
+.evlist{display:grid;gap:11px}
+.evrow{display:flex;gap:11px;align-items:baseline;font-size:13.5px;color:var(--fg-2);min-width:0}
 .evrow .when{
   margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--fg-3);white-space:nowrap;letter-spacing:.05em;
 }
@@ -507,9 +528,21 @@ button{font:inherit;color:inherit}
    "Yangyan…" tells you nothing. */
 .bmini b{
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
-  font-size:12px;font-weight:500;margin-top:8px;line-height:1.3;overflow:hidden;
+  font-size:14px;font-weight:600;margin-top:9px;line-height:1.28;overflow:hidden;
+  letter-spacing:-.01em;color:var(--fg);
 }
-.bmini span{font-size:9.5px;margin-top:2px}
+/* Rarity and element as separate marks rather than one grey string — the
+   element is the thing people scan a banner row for. */
+.bmini .bmeta{
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+}
+.bmini .bmeta i{font-style:normal}
+.bmini .rar{color:var(--amber);font-weight:500}
+.bmini .attr{
+  color:var(--attr);border-radius:5px;padding:2px 7px;font-weight:500;
+  background:color-mix(in srgb,var(--attr) 16%,transparent);
+}
 .bmini-more{
   flex:none;align-self:center;padding:0 2px;
   font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--fg-3);
