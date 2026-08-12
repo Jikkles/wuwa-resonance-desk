@@ -426,26 +426,21 @@ button{font:inherit;color:inherit}
 .figs{position:absolute;left:0;right:0;bottom:0;top:-78px;display:flex}
 .fig-cell{
   position:relative;flex:1 1 0;min-width:0;overflow:hidden;
-  /* Each half is lit in its own character's element. This is the card's only
-     colour and it is doing real work — Denia's half reads Fusion-orange before
-     you have read a word of the tile below. Three layers: a pool at the foot,
-     a wash up the lower third, and a dark ground under both so a transparent
-     cut-out has something to stand on. */
-  background:
-    radial-gradient(ellipse 92% 46% at 50% 103%,color-mix(in srgb,var(--attr,var(--tc)) 60%,transparent),transparent 72%),
-    linear-gradient(0deg,color-mix(in srgb,var(--attr,var(--tc)) 26%,transparent) 0%,transparent 46%),
-    linear-gradient(172deg,color-mix(in srgb,var(--attr,var(--tc)) 10%,var(--bg-3)),var(--bg));
+  /* A neutral ground, and nothing else. Each half used to be lit in its own
+     character's element — a pool of colour at the foot, a wash up the lower
+     third — which meant every debut was shown standing in coloured light that
+     was not in the artist's picture. The element is a fact about a kit, so it
+     belongs on the tiles below, attached to a name, where it is read rather
+     than atmosphere. This gradient stays only because a cut-out is transparent
+     and needs something to stand on. */
+  background:linear-gradient(172deg,var(--bg-3),var(--bg));
 }
-/* The same colour again over the picture's feet, so the figure sits *in* the
-   light rather than in front of it, and the crop's bottom edge dissolves
-   instead of ending on a line. */
+/* The crop's bottom edge dissolves into the body instead of ending on a line.
+   Shade, not colour — the same job the coloured wash used to do second. */
 .fig-cell::after{
-  content:"";position:absolute;inset:auto 0 0 0;height:44%;pointer-events:none;
+  content:"";position:absolute;inset:auto 0 0 0;height:38%;pointer-events:none;
   background:linear-gradient(0deg,
-    color-mix(in srgb,var(--attr,var(--tc)) 42%,transparent) 0%,
-    color-mix(in srgb,var(--attr,var(--tc)) 12%,transparent) 38%,
-    transparent 100%);
-  mix-blend-mode:screen;opacity:.7;
+    rgba(11,10,15,.62) 0%,rgba(11,10,15,.20) 42%,transparent 100%);
 }
 /* Chest up, filling the half. `contain` was tried and shrinks a waist-up UI
    card to a stamp in the middle of the frame; cover at this crop puts the head
@@ -550,15 +545,26 @@ button{font:inherit;color:inherit}
 .pcard-row .label{margin-bottom:9px}
 /* Portraits big enough to recognise a character at a glance. */
 .pcard-row .bstrip{--thumb:92px}
-/* Debuts and reruns side by side: what's new on the left, what's back on the
-   right. They're different decisions — a debut is now or never, a rerun comes
-   round again — so they don't share a strip. Grid rather than two stacked
-   lists, so the two columns always start on the same line. */
-.pcard-split{display:grid;grid-template-columns:1fr 1fr;row-gap:10px;align-items:start}
+/* A column per phase, laid out under the debut it is drawn from, so the picture
+   at the top of a column and the first tile beneath it are the same character.
+   Debuts and reruns were the two columns before, which read as an answer to
+   "what is new" but filed phase 2's headliner beside phase 1's reruns — two
+   banners you cannot pull in the same fortnight, sitting together under a
+   picture of someone else. The column count comes from the card: two is the
+   usual patch, but a phase count is data, not a layout constant. */
+.pcard-split{display:grid;grid-template-columns:repeat(var(--cols,2),1fr);align-items:start}
 .pcard-split>*{min-width:0}
-.ps-head.l,.ps-cell.l{padding-right:14px}
-.ps-head.r,.ps-cell.r{padding-left:14px;border-left:1px solid rgba(255,255,255,.09)}
-.ps-head{padding-bottom:2px;font-size:10.5px;letter-spacing:.16em;color:var(--fg-2)}
+.ps-col{padding-right:14px}
+/* A rule between phases, matching the seam between the two crops above it. */
+.ps-col.div{padding-left:14px;border-left:1px solid rgba(255,255,255,.09)}
+.ps-head{
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+  padding-bottom:9px;font-size:10.5px;letter-spacing:.16em;color:var(--fg-2);
+}
+/* That phase has run. Said once, on the heading, rather than repeated on a chip
+   on every tile in the column. */
+.ps-head.past{color:var(--fg-3)}
+.ps-when{letter-spacing:.08em;color:var(--fg-3);font-weight:400}
 /* Half a card is narrow — wrap rather than scroll, so no portrait is ever
    half-visible at the column edge. */
 /* Portraits grow into whatever the column gives them — half the cell, floored
@@ -798,6 +804,14 @@ button{font:inherit;color:inherit}
 .bmini .bmeta i{font-style:normal}
 .bmini .rar{color:var(--amber);font-weight:500}
 .bmini .wep{color:var(--fg-3)}
+/* A debut, inside a phase column where grouping no longer says so. Solid, in
+   the card's own accent rather than the character's element — it is a fact
+   about the banner, not about the kit, and the element chip is right beside it
+   doing the other job. */
+.bmini .new{
+  color:var(--bg);background:var(--accent);font-weight:600;
+  border-radius:5px;padding:2px 6px;letter-spacing:.1em;
+}
 .bmini .attr{
   color:var(--attr);border-radius:5px;padding:2px 7px;font-weight:500;
   background:color-mix(in srgb,var(--attr) 16%,transparent);
@@ -1466,19 +1480,14 @@ button{font:inherit;color:inherit}
   /* No horizontal scroll inside a card on touch — wrap the portraits instead,
      since a half-visible face reads as a broken image. */
   .pcard-row .bstrip{flex-wrap:wrap;overflow:visible;--thumb:56px}
-  /* 160px of column cannot seat a portrait and a name beside it. One column of
-     banners, full width, rather than two unreadable ones.
-
-     The rows have to be assigned explicitly. Source order is head-l, head-r,
-     cell-l, cell-r — which is what puts them side by side on a wide card, and
-     what stacks both headings together above every banner on a narrow one, so
-     the debuts end up filed under "Reruns". */
-  .pcard-split{grid-template-columns:1fr;row-gap:6px}
-  .ps-head.l,.ps-cell.l,.ps-head.r,.ps-cell.r{padding:0;border-left:0}
-  .ps-head.l{grid-row:1}
-  .ps-cell.l{grid-row:2}
-  .ps-head.r{grid-row:3;padding-top:12px;margin-top:4px;border-top:1px solid rgba(255,255,255,.09)}
-  .ps-cell.r{grid-row:4}
+  /* 160px of column cannot seat a portrait and a name beside it. One phase to
+     a row, full width, rather than two unreadable ones. Each phase is one
+     element carrying its own heading, so stacking them needs no row juggling —
+     source order is already phase order. The rule between columns turns on its
+     side to become the rule between them. */
+  .pcard-split{grid-template-columns:1fr;row-gap:14px}
+  .ps-col{padding:0}
+  .ps-col.div{padding:14px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.09)}
   .hero .pcard.is-future{grid-column:auto;min-height:0}
   .body{padding-bottom:88px}
   .sig{grid-template-columns:64px minmax(0,1fr);gap:4px 12px;padding:11px 16px}

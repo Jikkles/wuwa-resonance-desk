@@ -337,7 +337,7 @@ function creditLine(b){
    own row — a resonator's class and the class of the weapon running beside
    them are the same fact, and printing it twice was what pushed "RECTIFIER"
    onto a second line and made every tile in a column a different height. */
-function thumb(b, {showWeapon = true} = {}){
+function thumb(b, {showWeapon = true, showPhase = true, showNew = false} = {}){
   const f = figure(b);
   const r = resonatorFor(b.name);
   const attr = b.attribute || r.attribute;
@@ -363,13 +363,21 @@ function thumb(b, {showWeapon = true} = {}){
      chip says which, and greys itself when that phase is over — enough to stop
      a finished banner reading as one you can still pull, without dimming the
      character, who is no less part of the patch for it. */
-  const phase = b.phase
+  /* Off inside a phase column, where the column heading already says which
+     phase this is and a chip on every tile would only repeat it five times. */
+  const phase = showPhase && b.phase
     ? `<i class="ph${b.past ? " past" : ""}"${b.past ? ` title="Phase ${esc(b.phase)} has ended"` : ""}>P${esc(b.phase)}</i>`
     : "";
+  /* A debut, marked on the tile. Grouping used to carry this — one column of
+     new characters, one of reruns — and once the columns became phases the
+     distinction had nothing left to ride on. Only debuts are marked: "new" is
+     the exception worth flagging, and stamping RERUN on the other three tiles
+     is three labels to say "ordinary". */
+  const debut = showNew && b.new ? `<i class="new">New</i>` : "";
   const meta = b.rarity || attr
-    ? `${phase}${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}${
+    ? `${phase}${debut}${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}${
         weapon && showWeapon ? `<i class="wep">${esc(weapon)}</i>` : ""}`
-    : `${phase}${fallback ? `<i class="rar">${fallback}</i>` : ""}`;
+    : `${phase}${debut}${fallback ? `<i class="rar">${fallback}</i>` : ""}`;
   /* Clickable in its own right, and the innermost [data-act] wins over the
      card's — so a face opens that resonator's record while the rest of the
      card still opens the version. This is the path to the full kit now that
@@ -532,7 +540,7 @@ function cardFigures(v){
   return allPhases(v).flatMap(p => p.banners).filter(b => b.new).map(b => {
     const f = figure(b);
     const src = f.cutout ? f.image : portraitFor(b.name)?.card || null;
-    return src ? {src, name:b.name, attr:b.attribute || resonatorFor(b.name).attribute} : null;
+    return src ? {src, name:b.name} : null;
   }).filter(Boolean).slice(0, 2);
 }
 
@@ -576,9 +584,8 @@ function patchCard(v, role){
     </article>`;
   }
 
-  const banners = allPhases(v).flatMap(p => p.banners);
-  const fresh = banners.filter(b => b.new);
-  const reruns = banners.filter(b => !b.new);
+  const phases = allPhases(v);
+  const banners = phases.flatMap(p => p.banners);
   const days = v.start ? daysTo(v.start) : null;
   const art = cardArt(v);
   const figs = cardFigures(v);
@@ -603,11 +610,14 @@ function patchCard(v, role){
   }
 
   const rows = [];
-  /* Debuts and reruns are different decisions — a debut is now or never, a
-     rerun comes round again — so they get their own columns. Rows are phases,
-     because what you actually want to know is who runs alongside whom: a row
-     reads as "this is phase 1". Three fit a cell; say so rather than silently
-     dropping the rest. */
+  /* A column per phase, in phase order — which is the order the debuts are
+     drawn in above, so the second column of tiles sits under the character its
+     first tile names. Debuts and reruns used to be the two columns, which read
+     as an answer to "what is new" but put phase 2's headliner beside phase 1's
+     reruns: two characters you cannot pull in the same fortnight, side by side,
+     under a picture of somebody else. Who runs alongside whom is the fact you
+     scan a patch card for, and now the columns are it. Four fit a cell; say so
+     rather than silently dropping the rest. */
   /* Character over weapon in one tile, split by a rule. The weapon convene runs
      alongside the character banner in game and is a separate pull, so it keeps
      a click target of its own rather than being a footnote under the portrait —
@@ -620,7 +630,7 @@ function patchCard(v, role){
     /* The element rides the tile itself, not just its two halves — the tile is
        lit in it at rest, so a column of banners reads as a row of elements
        before you read a single name. */
-    return `<div class="bpair"${attrStyle(b.attribute || r.attribute)}>${thumb(b, {showWeapon:false})}${sig
+    return `<div class="bpair"${attrStyle(b.attribute || r.attribute)}>${thumb(b, {showWeapon:false, showPhase:false, showNew:true})}${sig
       ? `<button class="wtile" data-act="weapon" data-id="${esc(sig)}"${attrStyle(b.attribute || resonatorFor(b.name).attribute)}
                 title="Signature weapon — runs alongside ${esc(b.name)}">
            ${weaponIcon(sig)}
@@ -640,18 +650,22 @@ function patchCard(v, role){
         list.length > 4 ? `<span class="bmini-more">+${list.length - 4}</span>` : ""}</div>`
     : `<div class="bnone">—</div>`;
 
-  /* One split, not one per phase. A row per phase gave every card two full
-     bands of portraits and was most of why the landing view ran to three
-     screens; the phase chip on each tile carries that fact instead.
+  /* Debut first, then the reruns running beside them — the headliner is why
+     the phase is the phase, and it is the one drawn above the column. A stable
+     sort keeps the data's own order inside each group. */
+  const inPhaseOrder = list => [...list].sort((a, b) => (b.new ? 1 : 0) - (a.new ? 1 : 0));
 
-     No phase-date legend under it either. It restated the run the head band
-     already prints in full and the track already draws — three renderings of
-     the same dates on one card — and every line it took came off the artwork. */
-  if(banners.length) rows.push([null, `<div class="pcard-split">
-    <div class="ps-head label l">New character${fresh.length === 1 ? "" : "s"}</div>
-    <div class="ps-head label r">Rerun${reruns.length === 1 ? "" : "s"}</div>
-    <div class="ps-cell l">${strip(fresh)}</div>
-    <div class="ps-cell r">${strip(reruns)}</div>
+  /* The phase dates come back here, on the heading, now that a column *is* a
+     phase — one line, in the place that has to be labelled anyway. They were
+     dropped as a legend under the old split, where they restated the head band
+     for no gain; earning back "when can I pull this" is a different trade. */
+  const cols = phases.filter(p => p.banners.length);
+  if(cols.length) rows.push([null, `<div class="pcard-split" style="--cols:${cols.length}">
+    ${cols.map((p, i) => `<div class="ps-col${i ? " div" : ""}">
+      <div class="ps-head label${p.past ? " past" : ""}">Phase ${esc(p.n)}${
+        p.range ? `<span class="ps-when">${esc(p.range)}${p.est ? " est" : ""}</span>` : ""}</div>
+      ${strip(inPhaseOrder(p.banners))}
+    </div>`).join("")}
   </div>`]);
   /* A patch this far out has no banner rows, but the resonator database may
      already carry characters flagged for it — the only concrete thing known
@@ -713,7 +727,7 @@ function patchCard(v, role){
            figure framed to it can't be framed into the dark. -->
       <div class="pcard-window">${figs.length
         ? `<div class="figs n${figs.length}">${figs.map(f =>
-            `<div class="fig-cell"${attrStyle(f.attr)}>
+            `<div class="fig-cell">
                <img class="fig" src="${esc(f.src)}" alt="${esc(f.name)}" loading="lazy" decoding="async">
              </div>`).join("")}</div>`
         : ""}</div>
