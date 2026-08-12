@@ -46,21 +46,26 @@
   --aside-w:340px;
   --tabs-h:62px;
 
-  /* Backdrop dials, up here so the whole effect is two numbers rather than a
-     hunt through the rules. --bd-blur is how far past recognition the key
-     visual goes; --bd-dim is how much of the ground is painted back over it.
-     Turn --bd-dim to 1 and the picture is gone with nothing else disturbed. */
-  --bd-blur:58px;
-  --bd-dim:.30;
+  /* Backdrop dials. The blur used to live here, at 58px, which made the key
+     visual weather — and weather you cannot see is just an uneven black. The
+     picture is sharp now and the panels frost it instead: --panel-frost is the
+     blur, applied per panel, so the image stays legible in the gutters and
+     goes soft only where type sits on it. Glass, rather than fog.
 
-  /* Panel surfaces. These were flat --bg-1 and --bg-2; they are the whole page
-     by area, so with a picture behind them the desk is only as lit as they let
-     it be. Held at 86% — enough that the patch's colour reaches the middle of
-     the page rather than surviving in the 16px gutters, and far short of
-     letting a 10px mono label sit on anything but a still ground. One number
-     for every surface, so the page can be dialled back to solid in one edit. */
-  --panel:color-mix(in srgb,var(--bg-1) 86%,transparent);
-  --panel-2:color-mix(in srgb,var(--bg-2) 86%,transparent);
+     --bd-dim is still how much ground is painted back over the picture; set it
+     to 1 and the backdrop is gone with nothing else disturbed. */
+  --bd-blur:3px;
+  --bd-dim:.10;
+  --panel-frost:22px;
+
+  /* Panel surfaces. These are the whole page by area, so with a picture behind
+     them the desk is only as lit as they let it be. At 86% over a blurred
+     backdrop they read as solid; over a sharp one they are the frosting, and
+     they can afford to give up much more, because --panel-frost is what keeps
+     a 10px mono label off a face rather than the alpha. One number for every
+     surface, so the page dials back to solid in a single edit. */
+  --panel:color-mix(in srgb,var(--bg-1) 52%,transparent);
+  --panel-2:color-mix(in srgb,var(--bg-2) 50%,transparent);
   /* No cap. A 2560 monitor was leaving ~400px of dead gutter on the right,
      and the timeline is the kind of thing that genuinely wants the width. */
   --page:100%;
@@ -103,8 +108,8 @@ body::after{
   background-position:center 34%;background-size:cover;background-repeat:no-repeat;
   /* Blur samples transparency past the edges and leaves the frame washed out,
      so the layer is oversized and the soft border is pushed off-screen. */
-  transform:scale(1.18);
-  filter:blur(var(--bd-blur)) saturate(.92) brightness(.95);
+  transform:scale(1.03);
+  filter:blur(var(--bd-blur)) saturate(1.02) brightness(.92);
   opacity:0;transition:opacity 1.1s ease;
 }
 .backdrop.in{opacity:1}
@@ -124,6 +129,14 @@ body::before{
     color-mix(in srgb,var(--bg) 94%,transparent) 130px,
     color-mix(in srgb,var(--bg) calc(var(--bd-dim) * 100%),transparent) 400px,
     color-mix(in srgb,var(--bg) calc(var(--bd-dim) * 100%),transparent) 100%);
+}
+/* A 16:9 key visual covering a portrait viewport is magnified about two and a
+   half times, and at that scale the version title set across the middle of it
+   stops being texture and starts being letterforms at the edge of the screen.
+   The blur is scaled with the crop: same picture, same treatment relative to
+   how big it is being shown. */
+@media (max-width:900px){
+  :root{--bd-blur:20px}
 }
 /* Reduced motion covers "I do not want the page moving under me" — a picture
    fading in behind the whole desk is that. Show it immediately instead. */
@@ -147,12 +160,14 @@ button{font:inherit;color:inherit}
 
 .rail{
   position:sticky;top:0;height:100vh;overflow-y:auto;overscroll-behavior:contain;
-  /* Not quite opaque, so the backdrop reaches the full width of the page
-     rather than starting 238px in. The rail is a column of 10px mono labels,
-     which is the least forgiving type on the desk, so it only gives up a
-     little — and what shows through is already blurred flat. */
-  background:color-mix(in srgb,var(--bg-1) 88%,transparent);
-  backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  /* The same glass as the panels, so the backdrop reaches the full width of
+     the page rather than starting 238px in, and the rail doesn't read as the
+     one opaque slab on a page of frosted ones. It is a column of 10px mono
+     labels — the least forgiving type on the desk — so the frost is what
+     makes this safe, not the alpha. */
+  background:var(--panel);
+  backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
+  -webkit-backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
   border-right:1px solid var(--line);
   display:flex;flex-direction:column;gap:26px;padding:20px 0 28px;
   scrollbar-width:thin;
@@ -281,8 +296,22 @@ button{font:inherit;color:inherit}
   display:flex;flex-direction:column;gap:16px;
 }
 
+/* Frosted, not merely translucent. The backdrop behind these is a sharp
+   picture with faces and lettering in it, and 12px body copy laid over that at
+   any alpha is unreadable — the blur has to happen between the picture and the
+   panel, not in the picture itself. Applied at the panel, so the same image
+   stays crisp in the 16px gutters either side. */
 .panel{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
+  -webkit-backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
+}
+/* No backdrop-filter fallback: the alphas above assume something is softening
+   the picture, and without it they would leave type sitting on bare artwork.
+   Anything that can't frost gets the flat surfaces it always had. */
+@supports not (backdrop-filter:blur(1px)){
+  :root{--panel:var(--bg-1);--panel-2:var(--bg-2)}
+  .fig-cell{background:linear-gradient(172deg,var(--bg-3),var(--bg))}
 }
 .panel-h{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
@@ -408,6 +437,8 @@ button{font:inherit;color:inherit}
 .pcard{
   position:relative;display:flex;flex-direction:column;min-height:400px;overflow:hidden;
   background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
+  -webkit-backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
   text-align:left;padding:0;cursor:pointer;color:inherit;font:inherit;
   transition:border-color .2s,transform .2s;
 }
@@ -484,9 +515,19 @@ button{font:inherit;color:inherit}
      third — which meant every debut was shown standing in coloured light that
      was not in the artist's picture. The element is a fact about a kit, so it
      belongs on the tiles below, attached to a name, where it is read rather
-     than atmosphere. This gradient stays only because a cut-out is transparent
-     and needs something to stand on. */
-  background:linear-gradient(172deg,var(--bg-3),var(--bg));
+     than atmosphere.
+
+     A cut-out is transparent and still needs something to stand on, but that
+     something no longer has to be opaque black: frosted, it is the patch's own
+     key visual behind them, which is the ground these characters were drawn
+     against in the first place. This is the largest single surface on the page
+     and it was the reason the backdrop read as a rumour. Still neutral — the
+     light here belongs to the patch, not to anybody's damage type. */
+  background:linear-gradient(172deg,
+    color-mix(in srgb,var(--bg-3) 46%,transparent),
+    color-mix(in srgb,var(--bg) 56%,transparent));
+  backdrop-filter:blur(14px) saturate(1.2);
+  -webkit-backdrop-filter:blur(14px) saturate(1.2);
 }
 /* The crop's bottom edge dissolves into the body instead of ending on a line.
    Shade, not colour — the same job the coloured wash used to do second. */
