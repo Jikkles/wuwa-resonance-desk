@@ -292,8 +292,10 @@ function thumb(b){
   /* Only label new/rerun when the data actually says so — an unflagged banner
      row is unknown, not a rerun. */
   const fallback = b.new ? "New" : b.rerun ? "Rerun" : "";
+  const weapon = b.weapon || r.weapon;
   const meta = b.rarity || attr
-    ? `${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}`
+    ? `${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}${
+        weapon ? `<i class="wep">${esc(weapon)}</i>` : ""}`
     : fallback ? `<i class="rar">${fallback}</i>` : "";
   /* Clickable in its own right, and the innermost [data-act] wins over the
      card's — so a face opens that resonator's record while the rest of the
@@ -301,10 +303,15 @@ function thumb(b){
      the landing view doesn't carry a screen of character panels. An unnamed
      banner has no record to open, so it stays inert. */
   const act = unknown ? "" : ` role="button" tabindex="0" data-act="resonator" data-id="${esc(b.name)}"`;
+  /* Name and meta in their own box so the patch cards can set them beside the
+     face instead of under it — one wide row per banner fills the column, where
+     a centred stack left most of it empty. */
   return `<div class="bmini${unknown ? " unknown" : ""}"${attrStyle(attr)}${act}>
     <div class="thumb${f.cutout ? " cut" : ""}">${inner}${b.phase ? `<span class="ph">P${b.phase}</span>` : ""}</div>
-    <b>${esc(b.name || "???")}</b>
-    <span class="bmeta">${meta}</span>
+    <span class="bwho">
+      <b>${esc(b.name || "???")}</b>
+      <span class="bmeta">${meta}</span>
+    </span>
   </div>`;
 }
 
@@ -431,17 +438,32 @@ function livePhases(v){
 }
 const liveBanners = v => livePhases(v).flatMap(p => p.banners);
 
-/* The most recent debut on this patch, for the card's backdrop — the newest
-   character you can actually pull right now. */
-function newestDebutArt(v){
-  const debuts = (v.phases || [])
-    .flatMap(p => (p.banners || []).filter(b => b.new).map(b => ({...b, start:p.start})))
-    .sort((a, b) => String(b.start || "").localeCompare(String(a.start || "")));
-  for(const b of debuts){
-    const f = figure({...b, keyVisual:v.keyVisual});
-    if(f.image) return {url:f.image, poster:f.poster, name:b.name};
-  }
-  return null;
+/* The card's backdrop is the patch's debut characters. One fills the frame;
+   two split it down the middle, which is what a patch card for a two-debut
+   patch should look like. Hosted cutouts are transparent, so they stand on the
+   patch key visual; a rectangular reveal poster is the backdrop itself. */
+function cardArt(v, role){
+  if(!v) return "";
+  const phases = role === "live"
+    ? livePhases(v).map(p => p.banners)
+    : (v.phases || []).map(p => (p.banners || []).map(b => ({...b, phase:p.n})));
+  const figs = phases.flat()
+    .filter(b => b.new)
+    .map(b => figure({...b, keyVisual:v.keyVisual}))
+    .filter(f => f.image);
+
+  const cut = figs.filter(f => f.cutout).slice(0, 2);
+  const flat = figs.find(f => !f.cutout);
+  const bg = cut.length ? v.keyVisual?.url : (flat?.image || v.keyVisual?.url);
+  if(!bg && !cut.length) return "";
+
+  const cls = [!cut.length && flat?.poster ? "poster" : "", cut.length ? "has-figs" : ""]
+    .filter(Boolean).join(" ");
+  return `<div class="pcard-art${cls ? " " + cls : ""}">
+    ${bg ? `<img class="bg" src="${esc(bg)}" alt="" loading="lazy" decoding="async">` : ""}
+    ${cut.length ? `<div class="figs n${cut.length}">${cut.map(f =>
+      `<img class="fig" src="${esc(f.image)}" alt="" loading="lazy" decoding="async">`).join("")}</div>` : ""}
+  </div>`;
 }
 
 function patchCard(v, role){
@@ -465,13 +487,10 @@ function patchCard(v, role){
   const reruns = banners.filter(b => !b.new);
   const events = newsFor(v.id).slice(0, 3);
   const days = v.start ? daysTo(v.start) : null;
-  /* A live patch shows the newest debut's own art; an upcoming one has no
-     debut art yet, so it falls back to the patch key visual. Either way the
-     picture runs the full height of the card and everything else sits on top
-     of it — the card is a poster for the patch, not a header with a table
+  /* The picture runs the full height of the card and everything else sits on
+     top of it — the card is a poster for the patch, not a header with a table
      bolted underneath. */
-  const face = role === "live" ? newestDebutArt(v) : null;
-  const f = face || v.keyVisual;
+  const art = cardArt(v, role);
 
   const state = role === "live"
     ? `<span class="pill live">Current</span>`
@@ -499,7 +518,7 @@ function patchCard(v, role){
      reads as "this is phase 1". Three fit a cell; say so rather than silently
      dropping the rest. */
   const strip = list => list.length
-    ? `<div class="bstrip">${list.slice(0, 4).map(thumb).join("")}${
+    ? `<div class="bstrip rows">${list.slice(0, 4).map(thumb).join("")}${
         list.length > 4 ? `<span class="bmini-more">+${list.length - 4}</span>` : ""}</div>`
     : `<div class="bnone">—</div>`;
 
@@ -516,13 +535,27 @@ function patchCard(v, role){
       `<span><b>P${p.n}</b>${p.range ? ` ${p.range}` : ""}${p.est ? ` <em>est</em>` : ""}</span>`
     ).join("")}</div>` : ""}
   </div>`]);
+  /* A patch this far out has no banner rows, but the resonator database may
+     already carry characters flagged for it — the only concrete thing known
+     about the version, and it was going unshown while the card sat empty. */
+  if(!banners.length){
+    const teased = resonators().filter(r => r.version === v.id);
+    if(teased.length) rows.push(["Teased for this patch",
+      `<div class="bstrip rows">${teased.slice(0, 3).map(r => thumb({
+        name:r.name, rarity:r.rarity, attribute:r.attribute, weapon:r.weapon
+      })).join("")}</div>`]);
+  }
   if(events.length) rows.push([
     "Key events",
     `<div class="evlist">${events.slice(0, banners.length ? 2 : 4).map(e => `<div class="evrow t-${esc(e.confidence)}">
       <i class="dot"></i><span class="what" style="color:var(--fg-2)">${esc(e.title)}</span>
       <span class="when">${fmtShort(e.date)}</span></div>`).join("")}</div>`
   ]);
-  if(!rows.length && v.notes) rows.push(["Status", `<p style="margin:0;font-size:12px;color:var(--fg-2)">${esc(v.notes)}</p>`]);
+  /* Notes fill whatever's left on a thin card. Shown whenever there are no
+     banners, not only when the card is otherwise empty — on a future patch the
+     note is usually the most substantial thing known about it. */
+  if(!banners.length && v.notes) rows.push(["What we know",
+    `<p class="pcard-notes">${esc(v.notes)}</p>`]);
 
   const cellHtml = rows.length
     ? `<div class="pcard-rows">${rows.map(([k, h]) =>
@@ -531,10 +564,7 @@ function patchCard(v, role){
 
   return `<article class="pcard is-${role}" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
            aria-label="Version ${esc(v.id)} detail">
-    ${f?.url
-      ? `<div class="pcard-art${face?.poster ? " poster" : ""}">
-           <img src="${esc(f.url)}" alt="" loading="lazy" decoding="async"></div>`
-      : `<div class="rings"></div>`}
+    ${art || `<div class="rings"></div>`}
     <div class="pcard-top">${state}</div>
     <div class="pcard-main">
       <div class="pcard-num">${esc(v.id)}</div>

@@ -142,12 +142,28 @@ The patch card is a poster: the picture runs the full height and the version blo
 banner strip and event list sit on top of it. It was a bright header with an opaque
 panel bolted underneath, which read as two stacked things rather than one card.
 
-Legibility is bought two ways, and both matter. The version block carries **its own
-gradient** rather than relying on a fixed ramp painted on the picture — how far down it
-sits depends on how many banners the patch has, so a ramp tuned for one card is wrong
-on the next. The rows below it are **blurred** rather than blacked out: an opaque wash
-makes 9px mono readable by deleting the art, while `backdrop-filter` keeps the colour
-and shape and only destroys the fine detail that fights small type.
+The backdrop is the patch's **debut characters**, not a generic key visual. One fills
+the frame; two split it down the middle, each running the full card height. Hosted
+cutouts are transparent, so they stand on the patch key visual, which drops to 42%
+behind them; a rectangular reveal poster is the backdrop itself. `cardArt()` works that
+out — precedence is cutout debuts, then a flat debut image, then the key visual, then
+resonance rings.
+
+The figures sit at `z-index:1` inside `.pcard-art`, which puts them **above** that
+element's scrim but still below `.pcard-main` and `.pcard-rows`. The scrim exists to
+push the key visual back; painting it over the characters as well left two silhouettes
+you could barely make out.
+
+Legibility comes from washes and text shadow, **not blur** — a `backdrop-filter` was
+tried and reads as smeared rather than atmospheric, which defeats the point of putting
+art there. The version block carries its own gradient rather than relying on a fixed
+ramp painted on the picture: how far down it sits depends on how many banners the patch
+has, so a ramp tuned for one card is wrong on the next. The status pill carries its own
+too, because it can land on a character's hair.
+
+A patch with no banners yet — 3.7 — fills its card from the resonator database instead,
+listing anything flagged for that version plus the version notes. Otherwise the card is
+a large empty box, and empty space is the thing this layout exists to avoid.
 
 On a phone the three cards become a snap-scrolling carousel — stacked, they were a
 thousand pixels before the first headline.

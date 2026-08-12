@@ -376,10 +376,36 @@ button{font:inherit;color:inherit}
    the middle so the version block, banner strip and event list all land on
    something dark enough to read 10px mono over. */
 .pcard-art{position:absolute;inset:0;z-index:0;overflow:hidden}
-.pcard-art img{width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:1}
+.pcard-art img.bg{width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:1}
 /* A character poster rather than a wide key visual: crop left of centre so the
    figure lands on the right half, clear of the type. */
-.pcard-art.poster img{object-position:34% 26%}
+.pcard-art.poster img.bg{object-position:34% 22%}
+
+/* Debut characters standing on the patch key visual. Two of them split the
+   card down the middle — a patch with two debuts should look like a patch with
+   two debuts. The key visual drops back so it reads as a setting rather than
+   competing with the figures in front of it. */
+.pcard-art.has-figs img.bg{opacity:.42;filter:saturate(.75)}
+/* z-index puts the figures above .pcard-art::after — the scrim exists to make
+   the key visual behind them recede, and painting it over the characters as
+   well left two silhouettes you could barely make out. They still sit below
+   .pcard-main and .pcard-rows, which are outside this stacking context, so the
+   type over them is unaffected. */
+/* Full height, one figure to a half. Confining them to a band above the type
+   left the bottom of the card empty and the characters shrunk to shoulders;
+   run at full height each figure is a poster panel, and the content rows' wash
+   dims its lower half without hiding it. */
+.figs{position:absolute;inset:0;z-index:1;display:flex}
+.figs img.fig{
+  flex:1 1 0;min-width:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 14%;
+}
+/* Two figures turn in toward the middle rather than both facing out. */
+.figs.n2 img.fig:first-child{object-position:58% 12%}
+.figs.n2 img.fig:last-child{object-position:42% 12%}
+/* A seam between the halves, so two crops read as a deliberate split rather
+   than one picture that failed to line up. */
+.figs.n2 img.fig:last-child{border-left:1px solid rgba(255,255,255,.07)}
 /* The poster carries Kuro's logo across its top. How much of it survives the
    crop depends on the card's aspect, which changes with the viewport — so bury
    that band under a dark strip rather than chasing it with object-position. */
@@ -400,7 +426,15 @@ button{font:inherit;color:inherit}
       rgba(13,12,17,.3) 62%,rgba(13,12,17,.5) 100%),
     linear-gradient(90deg,rgba(13,12,17,.64) 0%,rgba(13,12,17,.22) 46%,transparent 82%);
 }
-.pcard-top{position:relative;z-index:1;padding:14px 16px 0;display:flex;gap:10px;align-items:flex-start}
+/* The status pill can land on a character's hair, so it brings its own ground
+   — a bordered 10px pill on a bright highlight is unreadable. */
+.pcard-top{
+  position:relative;z-index:1;padding:14px 16px 22px;margin-bottom:-22px;
+  display:flex;gap:10px;align-items:flex-start;
+  background:linear-gradient(180deg,rgba(11,10,15,.88) 0%,rgba(11,10,15,.5) 50%,transparent 100%);
+}
+/* Solid, not translucent — the pill is 10px type and it can land anywhere. */
+.pcard-top .pill{background:rgba(11,10,15,.72)}
 /* The wash rides the text block rather than the picture: it scales with the
    content instead of with the card, so the version number and the phase track
    sit on something dark wherever the banner strip below happens to push them. */
@@ -408,7 +442,7 @@ button{font:inherit;color:inherit}
   position:relative;z-index:1;padding:18px 16px 14px;margin-top:auto;
   text-shadow:0 1px 14px rgba(13,12,17,.92),0 0 3px rgba(13,12,17,.8);
   background:linear-gradient(180deg,
-    transparent 0%,rgba(13,12,17,.5) 26%,rgba(13,12,17,.72) 62%,rgba(13,12,17,.78) 100%);
+    transparent 0%,rgba(11,10,15,.62) 22%,rgba(11,10,15,.8) 58%,rgba(11,10,15,.84) 100%);
 }
 .pcard-num{
   font-family:var(--mono);font-size:52px;font-weight:500;line-height:1;letter-spacing:-.02em;
@@ -440,14 +474,11 @@ button{font:inherit;color:inherit}
    poster. The card's own scrim is already ~90% dense this far down, so small
    type stays legible; the dividers go to a light hairline because a solid
    --line rule over artwork reads as a seam. */
-/* Blurred rather than blacked out. A flat 93% wash made small type readable by
-   deleting the picture; blurring keeps the art's colour and shape — you can
-   still see whose card this is — while destroying the fine detail that fights
-   9px mono. Same trick the tab strip and the mobile dock already use. */
-.pcard-rows{
-  position:relative;z-index:1;margin-top:0;background:rgba(13,12,17,.74);
-  backdrop-filter:blur(18px) saturate(.85);-webkit-backdrop-filter:blur(18px) saturate(.85);
-}
+/* No blur. A blurred backdrop reads as smeared rather than atmospheric, and
+   the point of putting the art behind the card was for it to look like art.
+   The picture stays sharp; legibility comes from a flat wash plus the shadow
+   on the type, which keeps the edges of everything crisp. */
+.pcard-rows{position:relative;z-index:1;margin-top:0;background:rgba(11,10,15,.8)}
 .pcard-row{
   padding:12px 16px 14px;border-top:1px solid rgba(255,255,255,.09);min-width:0;
   text-shadow:0 1px 10px rgba(13,12,17,.9);
@@ -479,24 +510,32 @@ button{font:inherit;color:inherit}
 /* Portraits grow into whatever the column gives them — half the cell, floored
    at 104px so they stay legible and capped at 172px so a lone debut on a wide
    monitor doesn't become a poster. */
-/* Small. A card that has to show two phases of debuts and reruns and still
-   land inside one screen can't spend 100px a face — these are recognition
-   marks, and the full-size portrait is one click away in the drawer. */
-.pcard-split .bstrip{
-  flex-wrap:wrap;gap:7px;overflow:visible;
-  --thumb:clamp(48px, calc(33.33% - 5px), 66px);
+/* One banner to a row, face left and everything known about them beside it.
+   Centred stacks left two thirds of each column empty when a phase had a
+   single debut — a row uses the width it's given, and has space for the
+   weapon as well as the rarity and element. */
+.bstrip.rows{flex-direction:column;flex-wrap:nowrap;gap:6px;overflow:visible;--thumb:44px}
+.bstrip.rows .bmini{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  padding:4px;border-radius:9px;transition:background .16s;
 }
-.pcard-split .bmini b{font-size:11.5px;margin-top:6px;-webkit-line-clamp:1;line-height:1.2}
-.pcard-split .bmini .bmeta{margin-top:3px;font-size:8.5px;gap:4px}
-.pcard-split .bmini .attr{padding:1px 5px}
+.bstrip.rows .bmini[role="button"]:hover{background:rgba(255,255,255,.06)}
+.bstrip.rows .bmini[role="button"]:hover .thumb{transform:none}
+.bstrip.rows .bwho{min-width:0;flex:1}
+.bstrip.rows .bmini b{font-size:12.5px;margin-top:0;-webkit-line-clamp:1;line-height:1.25}
+.bstrip.rows .bmini .bmeta{margin-top:3px;font-size:8.5px;gap:5px}
+.bstrip.rows .bmini .attr{padding:1px 5px}
+.pcard-notes{
+  margin:0;font-size:12.5px;line-height:1.6;color:var(--fg-2);
+  text-shadow:0 1px 10px rgba(11,10,15,.9);
+}
 .bnone{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--fg-3);
   padding:12px 0;
 }
 .pcard-foot{
   position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-end;gap:8px;
-  padding:10px 16px;border-top:1px solid rgba(255,255,255,.09);background:rgba(13,12,17,.74);
-  backdrop-filter:blur(18px) saturate(.85);-webkit-backdrop-filter:blur(18px) saturate(.85);
+  padding:10px 16px;border-top:1px solid rgba(255,255,255,.09);background:rgba(11,10,15,.8);
   font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
   text-shadow:0 1px 10px rgba(13,12,17,.9);
 }
@@ -593,6 +632,7 @@ button{font:inherit;color:inherit}
 }
 .bmini .bmeta i{font-style:normal}
 .bmini .rar{color:var(--amber);font-weight:500}
+.bmini .wep{color:var(--fg-3)}
 .bmini .attr{
   color:var(--attr);border-radius:5px;padding:2px 7px;font-weight:500;
   background:color-mix(in srgb,var(--attr) 16%,transparent);
