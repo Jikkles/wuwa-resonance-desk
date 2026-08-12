@@ -17,7 +17,11 @@
      stops being readable and starts being decoration. */
   --fg:#F2EFEB;
   --fg-2:#C6C1C9;
-  --fg-3:#968F9C;
+  /* Lifted once the panels went to glass. The tertiary grey was tuned against
+     a flat charcoal panel, where it measured 4.5:1 — exactly on the line. Over
+     a picture it has to hold up against whatever the patch art puts behind it,
+     and a value chosen for the best case is the wrong value for that. */
+  --fg-3:#A9A2AE;
 
   --accent:#55C9D3;
   --accent-soft:rgba(85,201,211,.13);
@@ -59,13 +63,21 @@
   --panel-frost:22px;
 
   /* Panel surfaces. These are the whole page by area, so with a picture behind
-     them the desk is only as lit as they let it be. At 86% over a blurred
-     backdrop they read as solid; over a sharp one they are the frosting, and
-     they can afford to give up much more, because --panel-frost is what keeps
-     a 10px mono label off a face rather than the alpha. One number for every
-     surface, so the page dials back to solid in a single edit. */
+     them the desk is only as lit as they let it be. --panel-frost is what
+     keeps a 10px mono label off a face, not the alpha, so the alpha can go a
+     long way down. One number for every surface.
+
+     The glass is painted ONCE per stack, and that rule is the whole reason
+     this reads evenly. Two 52% layers on top of each other are 77% opaque, not
+     52% — so a patch card inside a panel came out nearly twice as dense as the
+     rail, which is a single layer over the backdrop and the one surface that
+     looked right. Anything nested inside a glass surface takes a tint below
+     instead: it shifts against the glass it sits on without repainting it. */
   --panel:color-mix(in srgb,var(--bg-1) 52%,transparent);
-  --panel-2:color-mix(in srgb,var(--bg-2) 50%,transparent);
+  /* A nested surface lifting off its glass — a card on a panel. */
+  --tint:rgba(255,255,255,.05);
+  /* A nested surface sinking into it — a header or footer bar. */
+  --tint-sink:rgba(0,0,0,.20);
   /* No cap. A 2560 monitor was leaving ~400px of dead gutter on the right,
      and the timeline is the kind of thing that genuinely wants the width. */
   --page:100%;
@@ -310,12 +322,12 @@ button{font:inherit;color:inherit}
    the picture, and without it they would leave type sitting on bare artwork.
    Anything that can't frost gets the flat surfaces it always had. */
 @supports not (backdrop-filter:blur(1px)){
-  :root{--panel:var(--bg-1);--panel-2:var(--bg-2)}
+  :root{--panel:var(--bg-1)}
   .fig-cell{background:linear-gradient(172deg,var(--bg-3),var(--bg))}
 }
 .panel-h{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel-2);
+  padding:10px 16px;border-bottom:1px solid var(--line);background:var(--tint-sink);
 }
 .panel-h h2{
   margin:0;font-size:12px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
@@ -327,7 +339,7 @@ button{font:inherit;color:inherit}
 .panel-b.flush{padding:0}
 .panel-f{
   padding:11px 18px;border-top:1px solid var(--line);
-  display:flex;justify-content:center;background:var(--panel-2);
+  display:flex;justify-content:center;background:var(--tint-sink);
 }
 
 .more{
@@ -436,9 +448,7 @@ button{font:inherit;color:inherit}
 .hero.narrow{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .pcard{
   position:relative;display:flex;flex-direction:column;min-height:400px;overflow:hidden;
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
-  backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
-  -webkit-backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
+  background:var(--tint);border:1px solid var(--line);border-radius:var(--r);
   text-align:left;padding:0;cursor:pointer;color:inherit;font:inherit;
   transition:border-color .2s,transform .2s;
 }
@@ -463,15 +473,19 @@ button{font:inherit;color:inherit}
 /* Solid ground under the picture. The banner grid and the event list used to
    be a translucent slab lying on the lower half of the art; down here they
    cover nothing, and the art above them is never a backdrop for 10px type. */
+/* Barely a ground — the gaps between the tiles are meant to show the patch art
+   behind them, and this is only enough to stop the column reading as type
+   floating loose on a picture. Everything on it that has to be read carries
+   its own ground instead: see .bpair and .ps-head. */
 .pcard-body{
   position:relative;z-index:2;display:flex;flex-direction:column;flex:1 1 auto;
-  background:transparent;border-top:1px solid var(--line);
+  background:rgba(0,0,0,.22);border-top:1px solid var(--line);
 }
 .pcard:hover{border-color:var(--line-2);transform:translateY(-2px)}
 .pcard{--tc:var(--fg-3)}
 .pcard.is-live{--tc:var(--t-official);border-color:color-mix(in srgb,var(--t-official) 30%,var(--line))}
 .pcard.is-next{--tc:var(--t-datamined);border-color:color-mix(in srgb,var(--t-datamined) 26%,var(--line))}
-.pcard.is-future{cursor:default;background:linear-gradient(160deg,var(--panel),color-mix(in srgb,var(--bg) 86%,transparent))}
+.pcard.is-future{cursor:default;background:linear-gradient(160deg,var(--tint),rgba(0,0,0,.10))}
 .pcard.is-future:hover{transform:none}
 /* Nothing to push down to. The other two cards bottom-align their version
    block under a picture; this one has no picture, so margin-top:auto just
@@ -651,9 +665,16 @@ button{font:inherit;color:inherit}
 .ps-col{padding-right:14px}
 /* A rule between phases, matching the seam between the two crops above it. */
 .ps-col.div{padding-left:14px;border-left:1px solid rgba(255,255,255,.09)}
+/* A chip, not a line of type. It sits on the card body with nothing else
+   behind it, and on glass that means it sits on the patch art — which put it
+   at 1.8:1, the worst reading on the page. Wrapping it in its own ground costs
+   a few pixels of padding and takes it to 5.9:1, and it lines the column up
+   with the tiles below, which are objects on the same glass. */
 .ps-head{
   display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
-  padding-bottom:9px;font-size:10.5px;letter-spacing:.16em;color:var(--fg-2);
+  width:max-content;max-width:100%;margin-bottom:9px;
+  padding:5px 10px;border-radius:8px;background:rgba(8,7,12,.55);
+  font-size:10.5px;letter-spacing:.16em;color:var(--fg-2);
 }
 /* That phase has run. Said once, on the heading, rather than repeated on a chip
    on every tile in the column. */
@@ -721,12 +742,18 @@ button{font:inherit;color:inherit}
      a mouse means the page is grey every time you aren't touching it. Warmest
      at the top where the portrait is, dipping through the middle, up again
      under the weapon row so the tile reads as one lamp rather than two. */
+  /* The base under the element wash is dark and largely opaque, and it has to
+     be: this tile carries the smallest type on the desk — a rarity, an element,
+     a weapon class at 8.5px — and behind the card is now a picture rather than
+     a panel. The tile is the ground those labels stand on. It used to be a 3%
+     white lift, which was fine over solid charcoal and left the labels at
+     1.7:1 over artwork. */
   background:
     linear-gradient(180deg,
       color-mix(in srgb,var(--attr) 17%,transparent) 0%,
       color-mix(in srgb,var(--attr) 7%,transparent) 58%,
       color-mix(in srgb,var(--attr) 13%,transparent) 100%),
-    rgba(255,255,255,.03);
+    rgba(8,7,12,.70);
   transition:border-color .16s,box-shadow .16s;
 }
 .bpair:hover{
@@ -1358,7 +1385,7 @@ button{font:inherit;color:inherit}
 /* ══ aside ══════════════════════════════════════════════════════════ */
 .mini-h{
   display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line);
-  background:var(--panel-2);
+  background:var(--tint-sink);
 }
 .mini-h h3{margin:0;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
 .mini-b{padding:13px 14px}
