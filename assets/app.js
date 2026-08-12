@@ -549,14 +549,25 @@ function patchCard(v, role){
      because what you actually want to know is who runs alongside whom: a row
      reads as "this is phase 1". Three fit a cell; say so rather than silently
      dropping the rest. */
-  /* Character, then the weapon convene that runs beside it — a separate pull,
-     so a separate row you can open on its own. */
+  /* Character and weapon side by side, at the same weight — the weapon convene
+     runs alongside the character banner in game and it is a separate pull, so
+     it gets a tile of its own rather than a footnote under the portrait. They
+     wrap to a stack when the card is too narrow to seat both. */
   const pair = b => {
     const sig = signatureFor(b);
     return `<div class="bpair">${thumb(b)}${sig
-      ? `<button class="wchip" data-act="weapon" data-id="${esc(sig)}" title="Signature weapon — runs alongside">
-           ${icon("i-weapon", 12)}<span>${esc(sig)}</span></button>`
-      : ""}</div>`;
+      ? `<button class="wtile" data-act="weapon" data-id="${esc(sig)}"${attrStyle(b.attribute || resonatorFor(b.name).attribute)}
+                title="Signature weapon — runs alongside ${esc(b.name)}">
+           <span class="wicon">${icon("i-weapon", 17)}</span>
+           <span class="wtext">
+             <b>${esc(sig)}</b>
+             <!-- Just "Signature": the weapon type is already on the character
+                  tile immediately to the left, and repeating it here only
+                  truncated to "SIGNATURE · S…". -->
+             <span class="wsub">Signature</span>
+           </span>
+         </button>`
+      : `<div class="wtile empty"><span class="wsub">No weapon listed</span></div>`}</div>`;
   };
   const strip = list => list.length
     ? `<div class="bstrip rows">${list.slice(0, 4).map(pair).join("")}${
@@ -609,14 +620,18 @@ function patchCard(v, role){
     <!-- Head first, art second. The version block used to sit at the bottom of
          the picture, which put it across the character's face and left the top
          of the card empty; anchored up here the art gets the whole middle. -->
+    <!-- Status and the run bar ride the top rail; the version number and its
+         codename sit side by side underneath. Stacked the other way round, the
+         number was buried under four lines of metadata. -->
     <div class="pcard-head">
-      <div class="pcard-top">${state}</div>
+      <div class="pcard-top">${state}${status}</div>
+      ${track(v, role)}
       <div class="pcard-main">
         <div class="pcard-num">${esc(v.id)}</div>
-        ${v.title ? `<div class="pcard-title">${esc(v.title)}</div>` : ""}
-        <div class="pcard-dates">${[v.start ? fmtDate(v.start) : "", versionEnd(v)].filter(Boolean).join(" — ") || "Dates unknown"}</div>
-        ${status}
-        ${track(v, role)}
+        <div class="pcard-idtext">
+          ${v.title ? `<div class="pcard-title">${esc(v.title)}</div>` : ""}
+          <div class="pcard-dates">${[v.start ? fmtDate(v.start) : "", versionEnd(v)].filter(Boolean).join(" — ") || "Dates unknown"}</div>
+        </div>
       </div>
     </div>
     <!-- Guarantees the artwork a window. Without it a busy patch — 3.6 runs

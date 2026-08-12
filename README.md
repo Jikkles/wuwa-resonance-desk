@@ -139,7 +139,16 @@ don't duplicate that into `versions.json`.
 ### Signature weapons
 
 Kuro runs the weapon convene alongside the character banner, so it sits alongside the
-character on the card — its own clickable row under each face, opening its own drawer.
+character on the card: a pair of equal tiles, character left and weapon right, each
+opening its own drawer. It reads at the same weight as the character because it is a
+separate pull, not a footnote on one.
+
+`.bpair` is a flex row with `flex-wrap`, and that is the whole responsive story — side
+by side on a wide card, stacked on a narrow one, no media query. Two gotchas if you
+touch it: the base `.bmini` rule sets `flex:none; width:var(--thumb)` and sits **later**
+in the file, so `.bstrip.rows .bmini` has to spell out `flex` and `width` or the
+character tile collapses to thumbnail width; and the weapon tile's subtitle says only
+"Signature" because the weapon type is already on the character tile beside it.
 
 **The name is already in the data**: `signature` on the banner row in `versions.json`,
 falling back to the resonator record. `signatureFor()` is the one accessor. Nine of the
@@ -159,11 +168,20 @@ The patch card is a poster: the picture runs the full height and the version blo
 banner strip and event list sit on top of it. It was a bright header with an opaque
 panel bolted underneath, which read as two stacked things rather than one card.
 
-The card is three bands: **head** at the top carrying the pill, version, codename,
-dates and run bar on one gradient; **`.pcard-gap`** in the middle, which is nothing but
-a window onto the art; **rows** at the foot. The head used to sit at the *bottom* of the
-picture, which is where the character's face is — so the version number landed across a
-face and the top of the card was empty.
+The card is three bands: **head** at the top, **`.pcard-gap`** in the middle, which is
+nothing but a window onto the art, and **rows** at the foot. The head used to sit at the
+*bottom* of the picture, which is where the character's face is — so the version number
+landed across a face and the top of the card was empty.
+
+The head is itself three lines, in this order for a reason:
+
+1. **Status rail** — the state pill left, live/countdown right. Both are status, so
+   they share a line.
+2. **Run bar** — where the patch is in its own cycle.
+3. **Identity** — the version number, with the codename and dates *beside* it rather
+   than under it. Stacked, four lines of metadata sat below the number and pushed the
+   whole band down over the character's face; alongside, they cost one line and the
+   number gets to be 66px.
 
 `.pcard-gap` is `flex:1` with a `min-height`. The flex hands every spare pixel to the
 art on a quiet patch; the min-height stops a busy one from squeezing it to nothing —
