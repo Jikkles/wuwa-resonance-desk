@@ -44,7 +44,23 @@
 
   --rail-w:238px;
   --aside-w:340px;
-  --tabs-h:53px;
+  --tabs-h:62px;
+
+  /* Backdrop dials, up here so the whole effect is two numbers rather than a
+     hunt through the rules. --bd-blur is how far past recognition the key
+     visual goes; --bd-dim is how much of the ground is painted back over it.
+     Turn --bd-dim to 1 and the picture is gone with nothing else disturbed. */
+  --bd-blur:58px;
+  --bd-dim:.30;
+
+  /* Panel surfaces. These were flat --bg-1 and --bg-2; they are the whole page
+     by area, so with a picture behind them the desk is only as lit as they let
+     it be. Held at 86% — enough that the patch's colour reaches the middle of
+     the page rather than surviving in the 16px gutters, and far short of
+     letting a 10px mono label sit on anything but a still ground. One number
+     for every surface, so the page can be dialled back to solid in one edit. */
+  --panel:color-mix(in srgb,var(--bg-1) 86%,transparent);
+  --panel-2:color-mix(in srgb,var(--bg-2) 86%,transparent);
   /* No cap. A 2560 monitor was leaving ~400px of dead gutter on the right,
      and the timeline is the kind of thing that genuinely wants the width. */
   --page:100%;
@@ -71,6 +87,49 @@ body::after{
   background:repeating-linear-gradient(180deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px);
   opacity:.6;
 }
+
+/* ══ backdrop ═══════════════════════════════════════════════════════
+   The live patch's key visual, blurred until it is weather rather than a
+   picture. The page is still read on --bg: everything below paints the ground
+   back over this at --bd-dim, and what gets through is a slow colour drift —
+   3.5's gold on the left, its blue on the right — instead of a flat charcoal
+   field. Nothing here is legible by design; if you can make out a face or a
+   letter of the version title, the blur is too low.
+
+   Set from JS once the bytes have arrived, so this is an empty box until then
+   and there is no half-loaded picture behind the desk. */
+.backdrop{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background-position:center 34%;background-size:cover;background-repeat:no-repeat;
+  /* Blur samples transparency past the edges and leaves the frame washed out,
+     so the layer is oversized and the soft border is pushed off-screen. */
+  transform:scale(1.18);
+  filter:blur(var(--bd-blur)) saturate(.92) brightness(.95);
+  opacity:0;transition:opacity 1.1s ease;
+}
+.backdrop.in{opacity:1}
+/* The ground, painted back over the picture.
+
+   The top 130px is nearly solid and that is the whole reason this is a
+   gradient rather than a flat wash. 3.5's key visual is a sunburst in its
+   upper third, and at the crop above it lands exactly behind the HUD strip and
+   the tab row — the two places on the desk running the smallest grey mono type
+   there is, over what came out as a band of pale gold. So the ground stays
+   nearly opaque past the tabs, then opens up over the body, where every line
+   of type is already on a panel of its own. */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--bg) 94%,transparent) 0,
+    color-mix(in srgb,var(--bg) 94%,transparent) 130px,
+    color-mix(in srgb,var(--bg) calc(var(--bd-dim) * 100%),transparent) 400px,
+    color-mix(in srgb,var(--bg) calc(var(--bd-dim) * 100%),transparent) 100%);
+}
+/* Reduced motion covers "I do not want the page moving under me" — a picture
+   fading in behind the whole desk is that. Show it immediately instead. */
+@media (prefers-reduced-motion:reduce){
+  .backdrop{transition:none}
+}
 a{color:inherit}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
@@ -88,7 +147,13 @@ button{font:inherit;color:inherit}
 
 .rail{
   position:sticky;top:0;height:100vh;overflow-y:auto;overscroll-behavior:contain;
-  background:var(--bg-1);border-right:1px solid var(--line);
+  /* Not quite opaque, so the backdrop reaches the full width of the page
+     rather than starting 238px in. The rail is a column of 10px mono labels,
+     which is the least forgiving type on the desk, so it only gives up a
+     little — and what shows through is already blurred flat. */
+  background:color-mix(in srgb,var(--bg-1) 88%,transparent);
+  backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  border-right:1px solid var(--line);
   display:flex;flex-direction:column;gap:26px;padding:20px 0 28px;
   scrollbar-width:thin;
 }
@@ -168,46 +233,34 @@ button{font:inherit;color:inherit}
 }
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.22}}
 
-.metrics{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--bg-1);
-}
-.metric{padding:11px 16px 12px;border-right:1px solid var(--line);position:relative;min-width:0}
-.metric:last-child{border-right:0}
-.metric-v{
-  font-family:var(--mono);font-size:25px;font-weight:600;line-height:1.1;
-  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
-}
-.metric-v.accent{color:var(--accent)}
-.metric-v.small{font-size:15px;font-weight:500;padding-top:8px}
-.metric-row{display:flex;align-items:baseline;gap:12px}
-.metric-k{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--fg-3);line-height:1.5}
-.metric-k b{display:block;color:var(--fg-2);font-weight:500}
-.bar{height:3px;border-radius:2px;background:var(--bg-3);margin-top:11px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--accent);border-radius:2px}
-
-/* ══ tabs ═══════════════════════════════════════════════════════════ */
+/* ══ tabs ═══════════════════════════════════════════════════════════
+   These are the top-level navigation and now the first thing under the HUD,
+   with the metrics strip gone from above them. At 11.5px they were the same
+   size as the metadata inside the cards — the loudest thing on the page was a
+   box restating the version number. Sized up to lead. */
 .tabs{
-  position:sticky;top:0;z-index:8;display:flex;gap:4px;
-  padding:0 20px;margin-top:13px;
+  position:sticky;top:0;z-index:8;display:flex;gap:2px;
+  padding:0 20px;margin-top:10px;
   border-bottom:1px solid var(--line);
-  background:rgba(13,12,17,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(13,12,17,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   overflow-x:auto;scrollbar-width:none;
 }
 .tabs::-webkit-scrollbar{display:none}
 .tabs button{
-  display:flex;align-items:center;gap:9px;white-space:nowrap;
-  background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
-  padding:12px 13px;cursor:pointer;color:var(--fg-3);
-  font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
-  transition:color .15s,border-color .15s;
+  display:flex;align-items:center;gap:10px;white-space:nowrap;
+  background:none;border:0;border-bottom:2.5px solid transparent;margin-bottom:-1px;
+  padding:17px 17px 15px;cursor:pointer;color:var(--fg-3);
+  font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.11em;text-transform:uppercase;
+  transition:color .15s,border-color .15s,background .15s;
 }
 .tabs button svg{opacity:.7}
-.tabs button:hover{color:var(--fg-2)}
+/* The hover ground stops short of the underline, so it reads as the tab
+   lighting up rather than a box growing under the word. */
+.tabs button:hover{color:var(--fg-2);background:linear-gradient(180deg,rgba(255,255,255,.045),transparent 82%)}
 .tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
 .tabs button[aria-selected="true"] svg{color:var(--accent);opacity:1}
 .tabs .warn{
-  font-size:9px;letter-spacing:.12em;padding:2px 6px;border-radius:6px;
+  font-size:9.5px;letter-spacing:.12em;padding:2px 7px;border-radius:6px;
   border:1px dashed var(--t-rumour);color:var(--t-rumour);
 }
 
@@ -229,11 +282,11 @@ button{font:inherit;color:inherit}
 }
 
 .panel{
-  background:var(--bg-1);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
 }
 .panel-h{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  padding:10px 16px;border-bottom:1px solid var(--line);background:var(--bg-2);
+  padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel-2);
 }
 .panel-h h2{
   margin:0;font-size:12px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
@@ -245,7 +298,7 @@ button{font:inherit;color:inherit}
 .panel-b.flush{padding:0}
 .panel-f{
   padding:11px 18px;border-top:1px solid var(--line);
-  display:flex;justify-content:center;background:var(--bg-2);
+  display:flex;justify-content:center;background:var(--panel-2);
 }
 
 .more{
@@ -354,7 +407,7 @@ button{font:inherit;color:inherit}
 .hero.narrow{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .pcard{
   position:relative;display:flex;flex-direction:column;min-height:400px;overflow:hidden;
-  background:var(--bg-1);border:1px solid var(--line);border-radius:var(--r);
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
   text-align:left;padding:0;cursor:pointer;color:inherit;font:inherit;
   transition:border-color .2s,transform .2s;
 }
@@ -381,13 +434,13 @@ button{font:inherit;color:inherit}
    cover nothing, and the art above them is never a backdrop for 10px type. */
 .pcard-body{
   position:relative;z-index:2;display:flex;flex-direction:column;flex:1 1 auto;
-  background:var(--bg-1);border-top:1px solid var(--line);
+  background:transparent;border-top:1px solid var(--line);
 }
 .pcard:hover{border-color:var(--line-2);transform:translateY(-2px)}
 .pcard{--tc:var(--fg-3)}
 .pcard.is-live{--tc:var(--t-official);border-color:color-mix(in srgb,var(--t-official) 30%,var(--line))}
 .pcard.is-next{--tc:var(--t-datamined);border-color:color-mix(in srgb,var(--t-datamined) 26%,var(--line))}
-.pcard.is-future{cursor:default;background:linear-gradient(160deg,var(--bg-1),var(--bg))}
+.pcard.is-future{cursor:default;background:linear-gradient(160deg,var(--panel),color-mix(in srgb,var(--bg) 86%,transparent))}
 .pcard.is-future:hover{transform:none}
 /* Nothing to push down to. The other two cards bottom-align their version
    block under a picture; this one has no picture, so margin-top:auto just
@@ -1264,7 +1317,7 @@ button{font:inherit;color:inherit}
 /* ══ aside ══════════════════════════════════════════════════════════ */
 .mini-h{
   display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line);
-  background:var(--bg-2);
+  background:var(--panel-2);
 }
 .mini-h h3{margin:0;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
 .mini-b{padding:13px 14px}
@@ -1538,16 +1591,6 @@ button{font:inherit;color:inherit}
   .warnbar span{font-size:11.5px;line-height:1.5}
 }
 @media (max-width:520px){
-  /* Four stacked tiles push the actual content a whole screen down. Live and
-     last-updated span the width; next/entries pair up. */
-  .metrics{grid-template-columns:1fr 1fr}
-  .metric{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 14px 12px}
-  .metric:first-child,.metric:last-child{grid-column:1/-1;border-right:0}
-  .metric:last-child{border-bottom:0}
-  .metric-v{font-size:23px}
-  /* The feed clock is already spelled out in the strip directly above; on a
-     phone that repetition costs a line of a screen worth having. */
-  #m-updated-k{display:none}
   .hud-strip{gap:12px 16px}
   .hud-strip .title{display:none}
   .cgrid,.rgrid{grid-template-columns:1fr}

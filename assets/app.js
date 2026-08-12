@@ -467,41 +467,52 @@ function renderTabs(){
     <button role="tab" id="tab-${v.id}" data-act="view" data-id="${v.id}"
             aria-selected="${S.view === v.id}" aria-controls="p-${v.id}"
             tabindex="${S.view === v.id ? 0 : -1}">
-      ${icon(v.icon)}${v.label}${v.warn ? `<span class="warn">${v.warn}</span>` : ""}
+      ${icon(v.icon, 17)}${v.label}${v.warn ? `<span class="warn">${v.warn}</span>` : ""}
     </button>`).join("");
 }
 
 /* ── hud ─────────────────────────────────────────────────────────── */
 function renderHud(){
-  const live = liveVersion(), next = nextVersion();
   const feed = DATA.feed || {};
-
   $("#hud-updated").textContent = feed.fetched ? `${fmtTime(feed.fetched)} ${tzLabel()}` : "—";
   $("#hud-online").style.opacity = feed.fetched ? "" : ".5";
+}
 
-  $("#m-live").textContent = DATA.versions?.current || live?.id || "—";
-  $("#m-entries").textContent = entries().length || "—";
-  $("#m-updated").textContent = DATA.news?.updated ? fmtDate(DATA.news.updated) : "—";
-  $("#m-updated-k").textContent = feed.fetched
-    ? `Feed ${fmtTime(feed.fetched)} · ${tzLabel()}` : tzLabel();
+/* Kuro's CDN is Alibaba OSS and takes a resize on the query string. The
+   original 3.5 key visual is 3840x2160 and 4MB — fine as a poster, absurd as
+   a page background, and doubly absurd for one we blur past recognition. At
+   1440 wide and q72 the same image is about 210KB, and after a 60px blur no
+   pixel of the difference survives. Any other host is left alone. */
+function cdnWidth(url, w){
+  return /(^|\.)kurogame\.com\//.test(url)
+    ? `${url}${url.includes("?") ? "&" : "?"}x-oss-process=image/resize,w_${w}/quality,q_72`
+    : url;
+}
 
-  const days = next?.start ? daysTo(next.start) : null;
-  $("#m-next").textContent = next?.id || "—";
-  $("#m-next-k").textContent = days == null ? "Not announced"
-    : days > 0 ? `In ${plural(days, "day")}` : days === 0 ? "Launches today" : "Live now";
+/* The live patch's key visual, behind the whole desk.
 
-  const win = patchWindow(live);
-  const bar = $("#m-progress"), key = $("#m-progress-k");
-  if(win){
-    const total = Math.round((win.end - win.start) / DAY);
-    const gone = Math.min(Math.max(Math.round((Date.now() - win.start) / DAY), 0), total);
-    bar.hidden = false;
-    bar.firstElementChild.style.width = `${Math.round(gone / total * 100)}%`;
-    key.innerHTML = `Day ${gone} of ${total} · <b style="display:inline">${plural(total - gone, "day")} left</b>`;
-  }else{
-    bar.hidden = true;
-    key.textContent = live?.start ? `Live since ${fmtDate(live.start)}` : "";
-  }
+   It is a marketing image — the game logo across one corner, the version name
+   set in display type across the middle — which is exactly why it was taken
+   off the patch cards, where it sat behind two cut-outs and you read
+   "LAMPLIGHT IN MIRAGE" through the gap between them. None of that survives
+   the treatment in .backdrop: at this blur it is weather, not a poster, and
+   what is left is the patch's own palette — 3.5's gold and deep blue — under
+   a page that is otherwise unrelieved charcoal.
+
+   Decorative, so it is loaded last and faded in, and the class only lands once
+   the bytes are actually here. A slow connection gets the desk on the ground
+   it has always had rather than a half-painted picture. */
+function renderBackdrop(){
+  const el = $("#backdrop");
+  const url = liveVersion()?.keyVisual?.url;
+  if(!el || !url) return;
+  const src = cdnWidth(url, 1440);
+  const img = new Image();
+  img.onload = () => {
+    el.style.backgroundImage = `url("${src}")`;
+    el.classList.add("in");
+  };
+  img.src = src;
 }
 
 /* ── timeline ────────────────────────────────────────────────────── */
@@ -1175,10 +1186,11 @@ function renderAside(){
   const featName = (next?.phases || []).flatMap(p => (p.banners || []).filter(b => b.new))[0]?.name;
   const feat = featName ? resonatorFor(featName) : resonators()[0];
 
-  /* Live version, next patch and entry count are already the three biggest
-     numbers on the page, in the metrics strip directly above. Repeating them
-     here spent a whole panel saying nothing new — what's left is the part the
-     strip doesn't carry: the shape of the tier split and the feed's volume. */
+  /* Live version, next patch and entry count are already answered by the patch
+     timeline this panel sits beside — in full, with dates and banners, rather
+     than as three numbers. Repeating them here spent a whole panel saying
+     nothing new; what's left is the part the timeline doesn't carry: the shape
+     of the tier split and the feed's volume. */
   const glance = `<div class="panel">
     <div class="mini-h"><h3>At a glance</h3></div>
     <div class="mini-b"><div class="glance">
@@ -1651,4 +1663,7 @@ async function load(name){
   renderLegend();
   bind();
   setView(location.hash.slice(1) || "timeline");
+  /* Last, and after the view is up: it is scenery, and it competes with the
+     card art for the same connection. */
+  renderBackdrop();
 })();
