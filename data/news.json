@@ -9,6 +9,51 @@
   },
   "entries": [
     {
+      "id": "2026-08-11-35-echo-double",
+      "date": "2026-08-11",
+      "version": "3.5",
+      "category": "event",
+      "confidence": "official",
+      "title": "Double Echo material event posted on Kuro's CN community, not yet on EN",
+      "body": "Kuro put up a limited-time double-drop event for Echo materials on Kurobbs, their own CN community board - CN event name 声弦涤荡. Nothing equivalent has gone up on the EN site, where the most recent post is still the 3.6 preview from 7 August. Global normally mirrors these drop events inside the same patch, so this is worth budgeting waveplates for, but the schedule is the CN one until an EN notice lands.",
+      "tags": [
+        "3.5",
+        "events"
+      ],
+      "sources": [
+        {
+          "name": "Kurobbs (official CN)",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1536322251883290624"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-08-38-lily",
+      "date": "2026-08-08",
+      "version": "3.8",
+      "category": "banner",
+      "confidence": "rumour",
+      "title": "Hint-reading points to a 3.8 Resonator called Lily",
+      "body": "The leaks subreddit read a run of teasers from the leaker Step as pointing to a 3.8 Resonator named Lily, with a separate thread reading a Seele hint as the next male unit. This is hint interpretation, not file evidence: no beta client exists for 3.8, and the name has not turned up in a datamine. That is three versions past live, so it stays a placeholder until something with files behind it lands.",
+      "tags": [
+        "3.8",
+        "characters"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Step hints",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1visltr/all_of_steps_hints_were_for_lily_38_char/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - next male unit",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vikzhc/hint_about_next_male_unit_via_seele/"
+        }
+      ]
+    },
+    {
       "id": "2026-07-29-35-phase2",
       "date": "2026-07-29",
       "version": "3.5",
