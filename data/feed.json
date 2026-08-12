@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-12T08:41:57.242Z",
+  "fetched": "2026-08-12T12:38:58.875Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 662,
-      "ms": 203
+      "ms": 680
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 869
+      "ms": 910
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 187
+      "ms": 161
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 755
+      "ms": 555
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2744,
+      "ms": 2631,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 71,
-      "ms": 714
+      "fetched": 67,
+      "ms": 488
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 1211
+      "ms": 856
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "鸣潮 x 月薪喵「共鸣日常」表情包现已上架！^喵⩊喵^",
+      "url": "https://www.kurobbs.com/mc/post/1536377449044021248",
+      "date": "2026-08-12T11:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
     {
       "title": "Wuthering Waves, Shop Titans, Uncharted Waters Origin - We've Gacha Covered",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5MaGZRX2lfZDFuWkdGazA0V3ZXZHRpakxoelZIbjlGUG1Vekl2T0tiYjVYN3hOR1JROE5GcWRtcmZhNXVHWGNENi1oSmI5WUhKanQtTE5Cam10T20tdzJEMHJiUnBWM2dVYnhMYUJUX0FOdw?oc=5",
@@ -501,7 +511,7 @@
       "title": "Wuthering Waves Codes (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9Qal9Uc2xHRzZmcUdmalVEOS1ZVkNRVTZYYklCYVVwZDVGdDB4S20tYzBaYV9PVGJSTlNNcjVsX0V6bXpXdFMtWW50czVFd1V1NWFqTm1YVlpPbVgx0gFiQVVfeXFMTzBoc00td21SRmdDaGJ0Nk5QSEdaeXdpelgzTWljZFFrUmViemhYSjYzVXlBMkVQd1RwOUdJWHA0RmdxNG9SQVVjNkFVMHRybnh4U1EwY2dYWjQ5UE4wVTdOa0E?oc=5",
       "date": "2026-08-07T11:43:46.000Z",
-      "source": "Beebom",
+      "source": "beebom.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -611,7 +621,7 @@
       "title": "Wuthering Waves 3.6 Livestream Time & Codes",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE1Rd0g4emNLcUxkNTZqeHdrZF9jbGFmU1otQWthbXVHZWJlYVNJY2Y4MU9pSVctcHFZbWhib0EtTGMxVEI1N1BTRC1CUENCZTh4eTZKRDF0a3ZrMUhRS211WC1BemlnaUt3VkJCbkU3NWd6b19wOFo0Q1V2dkhIY3RXMmc4MVlTRW9XSHpxOXY2UDdtV0xVWWZrMVA3RnJX?oc=5",
       "date": "2026-08-07T09:00:14.000Z",
-      "source": "GameRant",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -751,7 +761,7 @@
       "title": "Wuthering Waves Tier List – Best WuWa Characters Ranked (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBhZVZyUlhXWVdKSkpGM0RsbnptRl9ZcmdmXzFpYXhXWng0cFhyczBuQXJwa004N0xlbjlOZE5KYXo1dXhUaWN1ZGN2RmtER1JDM3NCUEpTTmJ6bTA1MURvR28yeUFLZ9IBa0FVX3lxTFBfd3RjVDh0SDM3eklvMDd5NE1MVjNyMHpib1JMRVJUSTB2cERDQkM5d0FEODdRNGVER0pabXc5d0FJc3YxTjdxOWRqVzR0cGZGbVk1bjVrclRodmRiRDB4QnJTaGg0V3FkVEtn?oc=5",
       "date": "2026-08-04T18:19:26.000Z",
-      "source": "Beebom",
+      "source": "beebom.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -780,7 +790,7 @@
     {
       "title": "Wuthering Waves tier list and who to pick at the start",
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9FNTBaRkQ1NnNfU2NJVUVTa1Frck5QZXRNbDFCVkEydl9ndXZTZzJ3TTVYeVAtaXFhdWNZZEExWTAtOHF1aWU5bU9BS0ZFdEhxNF95Vk9WSFg4Zjh3b0NScXZKWHI?oc=5",
-      "date": "2026-08-04T05:32:00.000Z",
+      "date": "2026-08-04T07:00:00.000Z",
       "source": "Pocket Gamer",
       "sourceId": "google-news",
       "kind": "press",
@@ -796,16 +806,6 @@
       "kind": "official",
       "lang": "zh",
       "hot": false
-    },
-    {
-      "title": "Wuthering Waves update 3.5 release date and summary",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBNbERMTURmVE94Q0tRNWlpcEt4QWxRV2dYMDlXVHBhTXF2LWo0Q0lJTmlOU195SkR6TXVtYVpzbS1LczgtV1ZZUXd1UWh0V1k5QUx2SGgyckRkaUxBbi1NUHVn?oc=5",
-      "date": "2026-08-03T15:25:30.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "Wuthering Waves 3.6 stream date, banners, & free codes",
@@ -826,6 +826,16 @@
       "kind": "press",
       "lang": "en",
       "hot": false
+    },
+    {
+      "title": "Wuthering Waves update 3.5 release date and summary",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBNbERMTURmVE94Q0tRNWlpcEt4QWxRV2dYMDlXVHBhTXF2LWo0Q0lJTmlOU195SkR6TXVtYVpzbS1LczgtV1ZZUXd1UWh0V1k5QUx2SGgyckRkaUxBbi1NUHVn?oc=5",
+      "date": "2026-08-03T07:00:00.000Z",
+      "source": "Pocket Tactics",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "WuWa Qingxiao materials leaked (Wuthering Waves)",
@@ -906,16 +916,6 @@
       "kind": "official",
       "lang": "zh",
       "hot": false
-    },
-    {
-      "title": "Wuthering Waves Version 3.6 Leaks: New Resonators, Banners, Events, and more",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQWHN0aFpRRHllcFVvZWNjRU5BZ1FDYkdySFRoNUtRNGhpME1iQzJIbnZ1bnlsYlpkaXpteldETDF3VmplUUNHcWgyUUo3Mi13STZUZ1d3eXhBekJwOHRNRlF2SzNMMDNfdGdFM2NiUUxyWkxEdEstTVpZclB6YldiTTNBS1I2T2h0MUhud3EwcjZ4b05JVDZXeVk1SlBFcng3SlZ4OFVJWQ?oc=5",
-      "date": "2026-08-01T17:34:28.000Z",
-      "source": "GamingonPhone",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "15 Best Webstore deals of the week - Genshin Impact, Pokémon GO, and Wuthering Waves",
@@ -1058,16 +1058,6 @@
       "hot": false
     },
     {
-      "title": "「秘玉寻踪记」网页活动开启，参与领取星声等奖励！",
-      "url": "https://www.kurobbs.com/mc/post/1532327809260728320",
-      "date": "2026-07-30T03:30:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Resonator Review | Guiding Starlance — Aemeath",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5224",
       "date": "2026-07-29T10:00:00.000Z",
@@ -1082,6 +1072,16 @@
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbjFXMFRyT0xBX1lXY2JuUmdFT185cUF2X0YwNEdtZWxTdE8wSDVwYlpkZjVzX0JJLTJJZjBfdmNjVlNDVlpIa1ZlUHF0STJNMFdpS0xLR2Y1N3ppN3o2bHhtTG9XNUIzbHpJcmowYi0wZm9LVEtwTjBPRk43WU85V1Rtd01uTHBR?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
       "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves Current Banner, Next Banner, And Past Banners",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOVjBFMDI3c2doa2I5aURyeVFKUVRaNWl5NUFHMDRqV3NlMVhFYXkxN0lGSWJKbERhMElZaUlkbXZRTzFvZGxKQ21Hc29RR0xJT3FSWnZrNktlTkRoSDFVLTFIRFhVVTNnVm1ra0dfOEM1ZHNmQlo1Vm5ISVlSZlNPTE43V1EyNGRiR0VfcA?oc=5",
+      "date": "2026-07-29T07:00:00.000Z",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
