@@ -35,6 +35,19 @@ a guy guessing, so nothing it fetches carries a tier — which is why the two lo
 different on purpose: Intel is card-and-tier, Signals is a raw terminal log behind a
 hatched "unverified" bar.
 
+Each signal row leads with a **source mark** keyed off `sourceId` (falling back to
+`kind`), coloured by kind — so finding the one official post in forty community threads
+is a colour-and-shape task rather than a reading task. The mark replaced the kind
+caption that used to sit under the source name: mark, caption and the badge at the end
+of the row were three printings of the same word.
+
+Intel rows carry a **thumbnail**, and it is never invented. A tag naming a resonator
+lends that resonator's art; everything else gets a plate showing the entry's version in
+its own tier colour. The version key visual was tried as a middle fallback and made
+eight consecutive rows show the same washed-out crop — decoration pretending to be
+information. Every row keeps the slot either way, so the headlines stay on one left
+edge.
+
 ### Translating the signal feed
 
 About a fifth of captured signals are Kurobbs CN. `feed.json` is machine-written and
@@ -55,14 +68,40 @@ spelling — that's how `Yuno` was caught and corrected to **Iuno**.
 
 ### The shell
 
-Persistent left rail (nav + tier counts + methodology), a HUD strip carrying live
-patch progress and feed status, and a sticky tab strip. Below 860px the rail collapses
-to a brand bar and the tabs become a bottom dock.
+Persistent left rail (nav + tier counts + saved views + methodology), a HUD strip
+carrying live patch progress and feed status, and a sticky tab strip. Below 860px the
+rail collapses to a brand bar and the tabs become a bottom dock.
 
 Clicking anything — a patch card, an intel entry, a resonator, a banner thumbnail —
 opens a right-side **drawer** rather than navigating away, so the list you were reading
 stays put behind it. `Ctrl/⌘+K` or `/` opens a **command palette** over versions,
 resonators, intel and the last 60 signals.
+
+Every button on the page dispatches through the single delegated `[data-act]` handler.
+Any other attribute is a button that silently does nothing — which is exactly what the
+rail's Methodology link was until it was moved onto `data-act="open"`.
+
+### Filters
+
+Two tiers of control, and the split is deliberate:
+
+- **Chips** in each panel header carry the view's *primary* axis — tier on Intel, kind
+  on Signals, element and rarity on Resonators, now/next/past on Timeline. These are
+  the questions the desk exists to answer, so they're always visible and pre-counted.
+- **Quick-filter selects** carry the secondary axes: version and category on Intel,
+  weapon on Resonators, source on Signals. Too many values to spend a chip each on.
+  Options are read off the data, so a category nothing is filed under never appears.
+
+The selects render **twice** — into the aside on desktop, and inline under the panel
+header below 1340px where the aside is gone. Both copies write to the same `S` state
+through the same delegated handler and both are rebuilt on every `draw()`, so they
+cannot drift. `VIEW_FILTERS` says which axes a view actually reads, which is what Reset
+clears and what the empty state names when a filter has emptied a list.
+
+The rail's first three quick links are **saved views** — a view plus a filter
+combination, applied before the switch so the list never visibly re-filters a frame
+later. They're arrow-marked; the external links below them are ↗-marked. Nothing in
+that list points at a page that doesn't exist.
 
 No framework and no build step. Each view renders its whole panel to `innerHTML` and
 every click is caught by one delegated `[data-act]` handler on `document`, so a
@@ -182,11 +221,14 @@ The whole point of the desk. Every entry gets one.
 | `rumour` | red | Low (1/4) | Single source or contested. |
 
 Tier colour is load-bearing, not decoration: it drives the rail on every intel card,
-the filter chips, the dots in the palette and the confidence meter. The two unverified
-tiers also get a hatched rail instead of a solid one, so "someone claimed this" reads
-differently from "this is in the files" at a glance. The `.t-*` classes sit at the very
-bottom of `app.css` on purpose — they have to win on source order against component
-defaults of equal specificity.
+the intel plate, the filter chips, the dots in the palette, the confidence meter and
+the footer legend. The two unverified tiers also get a hatched rail instead of a solid
+one, so "someone claimed this" reads differently from "this is in the files" at a
+glance. The `.t-*` classes sit at the very bottom of `app.css` on purpose — they have
+to win on source order against component defaults of equal specificity.
+
+The legend is repeated in the footer of every view, because that's where you end up
+after reading something and wanting to know what its colour meant.
 
 Set `"outcome": "confirmed"` on an old entry once official confirmation lands — the
 entry marks it, which is how you build a visible track record for each source over time.

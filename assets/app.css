@@ -101,8 +101,8 @@ button{font:inherit;color:inherit}
 .rail-group>.label{padding:0 6px 8px}
 
 .navlink{
-  display:flex;align-items:center;gap:12px;width:100%;
-  background:none;border:0;border-radius:var(--r-sm);padding:10px 12px;cursor:pointer;
+  display:flex;align-items:center;gap:11px;width:100%;
+  background:none;border:0;border-radius:var(--r-sm);padding:10px 11px;cursor:pointer;
   font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.11em;
   text-transform:uppercase;color:var(--fg-2);text-align:left;
   transition:background .15s,color .15s;
@@ -111,7 +111,15 @@ button{font:inherit;color:inherit}
 .navlink:hover{background:var(--bg-2);color:var(--fg)}
 .navlink[aria-current="true"]{background:var(--accent-soft);color:var(--accent)}
 .navlink[aria-current="true"] svg{opacity:1}
+.navlink>span:first-of-type{white-space:nowrap}
 .navlink .n{margin-left:auto;font-size:10px;color:var(--fg-3);letter-spacing:.04em}
+/* Live Signals carries its warning in the rail, not just once you're inside
+   it — the dashed border is the same mark the tab strip uses. flex:none or the
+   label gives way first and "Live Signals" wraps onto two lines. */
+.navlink .warn{
+  margin-left:auto;flex:none;font-size:8px;letter-spacing:.09em;padding:2px 5px;border-radius:5px;
+  border:1px dashed color-mix(in srgb,var(--t-rumour) 60%,transparent);color:var(--t-rumour);
+}
 
 .tierlink{
   display:flex;align-items:center;gap:10px;width:100%;
@@ -248,6 +256,12 @@ button{font:inherit;color:inherit}
   font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--fg-3);
   padding:38px 16px;text-align:center;
 }
+
+/* Filtering replaces a list wholesale, which without this reads as the page
+   flickering. 160ms of rise is enough to say "this is the same list, fewer
+   rows" and short enough that it never delays a second click. */
+@keyframes rise{from{opacity:0;transform:translateY(6px)}}
+.intel-list,.term,.rgrid,.vlist,.hero,.cgrid{animation:rise .16s ease}
 
 /* ══ chips / filters ════════════════════════════════════════════════ */
 .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -770,9 +784,42 @@ button{font:inherit;color:inherit}
 .intel.unverified::before{
   background:repeating-linear-gradient(180deg,currentColor 0 4px,transparent 4px 8px);
 }
+/* Thumbnail beside the text, not above it: the list has to stay scannable at
+   one row per story, and a stacked image doubles the height of every row. */
+.intel.has-art{display:grid;grid-template-columns:112px minmax(0,1fr);gap:15px;align-items:start}
+.itext{min-width:0}
+.ithumb{
+  position:relative;aspect-ratio:3/2;border-radius:9px;overflow:hidden;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--bg-3),var(--bg));
+}
+.ithumb img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block;transition:transform .3s ease}
+/* Reveal posters are 1080x1920 with the face a fifth down — in a 3:2 crop that
+   is the logo and nothing else without a zoom onto the head. */
+.ithumb img.poster{object-position:center top;transform:scale(1.9);transform-origin:50% 21%}
+.ithumb.cut img{object-fit:contain;object-position:center 12%;transform:scale(1.35);transform-origin:50% 8%}
+/* No face to show: the version, set in the entry's own tier colour. Keeps the
+   headline column on one edge and still says something true about the row. */
+.ithumb.plate{
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse 80% 80% at 50% 120%,color-mix(in srgb,currentColor 22%,transparent),transparent 70%),
+    linear-gradient(160deg,var(--bg-2),var(--bg));
+}
+.ithumb.plate span{
+  font-family:var(--mono);font-size:16px;font-weight:500;letter-spacing:.06em;
+  color:currentColor;opacity:.72;font-variant-numeric:tabular-nums;
+}
+.intel:hover .ithumb img{transform:scale(1.05)}
+.intel:hover .ithumb img.poster{transform:scale(2)}
+.intel:hover .ithumb.cut img{transform:scale(1.42)}
+
 .intel-h{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
 .intel-h .when{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--fg-3)}
 .intel h3{margin:0 0 5px;font-size:15px;font-weight:600;line-height:1.45;color:var(--fg);letter-spacing:-.01em}
+/* A measure, not the full column. On a wide monitor the intel column is over
+   1000px and a body line runs to 180 characters, which is a paragraph you skip
+   rather than read. */
+.intel h3,.intel p{max-width:88ch}
 .intel p{
   margin:0;font-size:13px;color:var(--fg-2);line-height:1.6;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
@@ -798,16 +845,13 @@ button{font:inherit;color:inherit}
 .outcome.ok{color:var(--t-official)}
 .outcome.no{color:var(--amber)}
 
-/* compact variant on the dashboard */
+/* compact variant on the dashboard, where the column is half width */
 .intel.mini{padding:12px 16px 13px 18px}
 .intel.mini h3{font-size:13px;margin-bottom:4px}
 .intel.mini p{-webkit-line-clamp:2;font-size:12px}
 .intel.mini .intel-f,.intel.mini .conf{display:none}
-.intel.mini .thumb{
-  float:right;width:66px;height:44px;border-radius:7px;overflow:hidden;margin:0 0 8px 12px;
-  border:1px solid var(--line);
-}
-.intel.mini .thumb img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.intel.mini.has-art{grid-template-columns:64px minmax(0,1fr);gap:12px}
+.intel.mini .ithumb{aspect-ratio:1/1}
 
 /* ══ live signals ═══════════════════════════════════════════════════ */
 .warnbar{
@@ -833,19 +877,35 @@ button{font:inherit;color:inherit}
 
 .term{display:flex;flex-direction:column;font-family:var(--mono)}
 .sig{
-  display:grid;grid-template-columns:76px 150px minmax(0,1fr) auto;gap:14px;align-items:center;
+  display:grid;grid-template-columns:76px 200px minmax(0,1fr) auto;gap:14px;align-items:center;
   padding:9px 18px;border-bottom:1px solid var(--bg-2);text-decoration:none;color:inherit;
   transition:background .12s;
 }
 .sig:last-child{border-bottom:0}
 .sig:hover{background:var(--bg-2)}
 .sig .t{font-size:11px;color:var(--fg-3);letter-spacing:.04em;font-variant-numeric:tabular-nums}
-.sig .src{display:flex;flex-direction:column;gap:1px;min-width:0}
+.sig .src{display:flex;align-items:center;gap:9px;min-width:0}
+.sig .sname{display:flex;flex-direction:column;gap:1px;min-width:0}
 .sig .src b{
   font-size:10px;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
-.sig .src i{font-style:normal;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
+/* The source mark. Carries the kind's colour, so scanning for the one official
+   post in forty community threads is a colour-and-shape task rather than a
+   reading task. It also replaced the kind caption that used to sit under the
+   source name — mark, caption and the badge at the end of the row were three
+   printings of the same word. Dim until hover: 60 of these down a page at
+   full strength would be the loudest thing on the screen. */
+.smark{
+  flex:none;display:flex;align-items:center;justify-content:center;width:25px;height:25px;
+  border-radius:50%;border:1px solid var(--line);background:var(--bg-2);
+  color:var(--fg-3);opacity:.85;transition:opacity .12s,border-color .12s;
+}
+.sig:hover .smark{opacity:1;border-color:var(--line-2)}
+.smark.official{color:var(--t-official)}
+.smark.video{color:var(--red)}
+.smark.community{color:var(--t-datamined)}
+.smark.press{color:var(--fg-3)}
 .sig .head{
   font-family:var(--sans);font-size:13.5px;color:var(--fg-2);line-height:1.45;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;
@@ -863,7 +923,10 @@ button{font:inherit;color:inherit}
    instead of squeezing it into 150px. */
 .term.mini .sig{grid-template-columns:70px minmax(0,1fr) auto;gap:3px 12px;padding:10px 16px}
 .term.mini .sig .t{grid-row:1}
-.term.mini .sig .src{grid-column:2;grid-row:1;flex-direction:row;gap:8px;align-items:baseline}
+.term.mini .sig .src{grid-column:2;grid-row:1;gap:8px}
+.term.mini .sig .sname{flex-direction:row;gap:8px;align-items:baseline}
+.term.mini .smark{width:20px;height:20px}
+.term.mini .smark svg{width:11px;height:11px}
 .term.mini .sig .flags{grid-column:3;grid-row:1}
 .term.mini .sig .flags .kind{display:none}
 .term.mini .sig .head{
@@ -892,14 +955,19 @@ button{font:inherit;color:inherit}
   cursor:pointer;color:inherit;font:inherit;transition:border-color .2s,transform .2s;
 }
 .rec:hover{border-color:color-mix(in srgb,var(--attr) 50%,var(--line));transform:translateY(-2px)}
-.rec .cart{aspect-ratio:1/1}
-.rec .cart.has-cutout,.rec .cart.has-art{aspect-ratio:4/5}
+/* One ratio for every record, art or not. A square plate next to a 4:5
+   portrait pushed the two cards' bodies onto different lines and left the
+   whole grid looking ragged — a database of records should line up. */
+.rec .cart{aspect-ratio:4/5}
 .rec-b{padding:13px 14px 15px;display:flex;flex-direction:column;gap:9px;flex:1}
 .rec-b h3{margin:0;font-size:16px;font-weight:600;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .rec-b h3 .cjk{font-size:12px;font-weight:500;color:var(--attr)}
-.stars{font-size:11px;color:var(--amber);letter-spacing:.14em}
+/* Five marks always, the unearned ones greyed — the shape of the rating reads
+   before the count does, which is the point of stars over "5★". */
+.stars{font-size:11px;color:var(--amber);letter-spacing:.12em;line-height:1}
+.stars i{font-style:normal;color:var(--line-2)}
 .rec-attrs{
-  display:flex;gap:8px;flex-wrap:wrap;
+  display:flex;gap:8px;flex-wrap:wrap;align-items:center;
   font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-3);
 }
 .rec-attrs b{color:var(--attr);font-weight:500}
@@ -911,9 +979,22 @@ button{font:inherit;color:inherit}
   font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
   border-top:1px solid var(--line);padding-top:10px;
 }
-.rec-foot{
-  margin-top:auto;display:flex;align-items:flex-end;gap:9px;flex-wrap:wrap;padding-top:4px;
+.rec-foot{margin-top:auto;padding-top:4px}
+/* Its own row rather than a column beside the tiers: sharing the width made
+   "Identity" and its badge wrap onto separate lines on the narrower cards. */
+.rec-meta{
+  display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap;margin-top:9px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--fg-3);
 }
+/* The card is a button; say so. Also the row that carries the record's age,
+   which is the thing you check before trusting a pre-release kit. */
+.rec-more{
+  display:flex;align-items:center;justify-content:flex-end;gap:7px;
+  margin:12px -14px -15px;padding:10px 14px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--fg-3);transition:color .18s,background .18s;
+}
+.rec:hover .rec-more{color:var(--attr);background:var(--bg-2)}
 /* Identity and kit confirm separately, so they're labelled separately — a bare
    tier badge reads as a verdict on the whole character. */
 .ctiers{display:grid;gap:8px;flex:1;min-width:0}
@@ -941,6 +1022,40 @@ button{font:inherit;color:inherit}
 .feat-b .rec-attrs{margin-top:9px}
 .feat-b .ctiers{margin-top:13px}
 .feat-b .btn{margin-top:13px}
+
+/* ══ quick filters ══════════════════════════════════════════════════
+   The secondary filter axes. Rendered into the aside on desktop and inline
+   under the panel header below 1340px, where there is no aside to put them
+   in — same markup, same handler, one of the two hidden at any width. */
+.qf{display:grid;gap:11px;padding:13px 14px}
+.qf-row{display:grid;gap:5px}
+.qf-row .label{padding-left:1px}
+.qf select{
+  width:100%;appearance:none;-webkit-appearance:none;cursor:pointer;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-sm);
+  padding:8px 30px 8px 11px;color:var(--fg-2);
+  font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  /* Chevron drawn in the border colour so there is no second icon system. */
+  background-image:linear-gradient(45deg,transparent 50%,var(--fg-3) 50%),
+                   linear-gradient(135deg,var(--fg-3) 50%,transparent 50%);
+  background-position:calc(100% - 15px) 55%,calc(100% - 10px) 55%;
+  background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+  transition:border-color .15s,color .15s;
+}
+.qf select:hover{border-color:var(--line-2);color:var(--fg)}
+/* An active filter is the reason a list looks short, so it carries the accent
+   — you should be able to see which control emptied the page without opening
+   any of them. */
+.qf select.on{border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
+.qf select option{background:var(--bg-1);color:var(--fg-2);text-transform:none;letter-spacing:0}
+.qf-reset{margin-top:2px}
+.qf-reset:disabled{opacity:.4;cursor:default}
+.qf-reset:disabled:hover{background:var(--bg-3);border-color:var(--line-2);color:var(--fg-2)}
+/* Desktop shows the aside copy; the inline copy only appears once the aside
+   is gone. Both are always in the DOM, so state can't drift between them. */
+.qf-inline{display:none;border-bottom:1px solid var(--line);background:var(--bg-2)}
+.qf-inline .qf{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));align-items:end;padding:12px 18px}
+.qf-inline .qf-reset{margin-top:0}
 
 .btn{
   display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
@@ -1038,7 +1153,16 @@ button{font:inherit;color:inherit}
   max-width:var(--page);
 }
 .foot .warn{color:var(--t-official)}
-.foot .links{margin-left:auto;display:flex;gap:14px}
+.foot-i{flex:none;color:var(--fg-3);opacity:.7}
+/* The legend, repeated where you end up after reading something. Same dots as
+   the rail and the chips, so there is one vocabulary for confidence. */
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-left:auto;flex:none}
+.legend span{
+  display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+  font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+}
+.legend .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.foot .links{margin-left:18px;display:flex;gap:14px}
 .foot a{color:var(--fg-3);display:flex}
 .foot a:hover{color:var(--accent)}
 
@@ -1048,12 +1172,17 @@ button{font:inherit;color:inherit}
 @media (max-width:1340px){
   .body{grid-template-columns:minmax(0,1fr)}
   .aside{display:none}
+  /* The aside took the quick filters with it — bring the inline copy up. */
+  .qf-inline{display:block}
   .hero{grid-template-columns:1fr 1fr}
   .hero .pcard.is-future{grid-column:span 2;min-height:180px}
 }
 @media (max-width:1080px){
   :root{--rail-w:200px}
   .lane{grid-template-columns:120px minmax(0,1fr)}
+  /* 200px of rail can't hold the label and the badge on one line. The tab
+     strip and the hatched bar on the view itself both still carry it. */
+  .navlink .warn{display:none}
 }
 @media (max-width:860px){
   .app{grid-template-columns:minmax(0,1fr)}
@@ -1080,7 +1209,10 @@ button{font:inherit;color:inherit}
   .hero .pcard.is-future .pcard-foot{border-top:1px solid var(--line)}
   .body{padding-bottom:96px}
   .sig{grid-template-columns:64px minmax(0,1fr);gap:4px 12px;padding:11px 16px}
-  .sig .src{grid-row:2;grid-column:1/-1;flex-direction:row;gap:8px;align-items:center}
+  .sig .src{grid-row:2;grid-column:1/-1;gap:8px;align-items:center}
+  .sig .sname{flex-direction:row;gap:8px;align-items:baseline}
+  .smark{width:20px;height:20px}
+  .smark svg{width:11px;height:11px}
   .sig .head{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .sig .flags{grid-row:2;justify-self:end}
   .lane{grid-template-columns:minmax(0,1fr);gap:9px}
@@ -1099,7 +1231,29 @@ button{font:inherit;color:inherit}
   }
   .dock button[aria-current="true"]{color:var(--accent)}
   .foot{margin-bottom:64px;flex-direction:column;align-items:flex-start}
-  .foot .links{margin-left:0}
+  .foot .links,.legend{margin-left:0}
+  .foot-i{display:none}
+  /* 112px of thumbnail out of a 360px row leaves no headline. */
+  .intel.has-art{grid-template-columns:78px minmax(0,1fr);gap:12px}
+  .intel{padding-left:16px}
+  /* Two selects to a row, reset alongside. Stacked, the filter block plus the
+     chips pushed the first story clean off a 390px screen. */
+  .qf-inline .qf{grid-template-columns:repeat(auto-fit,minmax(146px,1fr));padding:12px 16px;gap:10px}
+  .qf-inline .qf-reset{align-self:end}
+
+  /* Signals is the one view with three bands of furniture between the header
+     and the feed. The source report is diagnostics — it goes under the log,
+     where you look for it deliberately rather than scroll past it. */
+  .sigpanel{display:flex;flex-direction:column}
+  .sigpanel .panel-b{order:8}
+  .sigpanel .srcstrip{order:9;border-bottom:0;border-top:1px solid var(--line)}
+  .sigpanel .panel-f{order:10}
+  /* One scrolling row rather than three wrapped ones. */
+  .srcstrip{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .srcstrip::-webkit-scrollbar{display:none}
+  .srcpill{flex:none}
+  .warnbar{flex-direction:column;align-items:flex-start;gap:4px;padding:10px 16px}
+  .warnbar span{font-size:11.5px;line-height:1.5}
 }
 @media (max-width:520px){
   /* Four stacked tiles push the actual content a whole screen down. Live and
@@ -1109,6 +1263,9 @@ button{font:inherit;color:inherit}
   .metric:first-child,.metric:last-child{grid-column:1/-1;border-right:0}
   .metric:last-child{border-bottom:0}
   .metric-v{font-size:23px}
+  /* The feed clock is already spelled out in the strip directly above; on a
+     phone that repetition costs a line of a screen worth having. */
+  #m-updated-k{display:none}
   .hud-strip{gap:12px 16px}
   .hud-strip .title{display:none}
   .cgrid,.rgrid{grid-template-columns:1fr}

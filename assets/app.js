@@ -28,6 +28,16 @@ const TIER_CONF = {official:"Confirmed", datamined:"High", reported:"Medium", ru
 
 const KIND_LABEL = {official:"Official", video:"Video", community:"Community", press:"Press"};
 
+/* A mark per fetcher, so the terminal reads as sources rather than a wall of
+   names. Keyed on sourceId first — Google News carries a dozen different
+   press outlets under one id — then by kind for anything unmapped. */
+const SOURCE_ICON = {
+  "kuro-en":"i-kuro", kurobbs:"i-kuro", youtube:"i-youtube",
+  "reddit-leaks":"i-reddit", "reddit-main":"i-reddit",
+  "google-news":"i-press", mmoculture:"i-press"
+};
+const KIND_ICON = {official:"i-kuro", video:"i-youtube", community:"i-comm", press:"i-press"};
+
 /* Attribute drives each card's accent so a banner row reads at a glance. */
 const ATTR_COLOUR = {
   aero:"#7FD4B0", glacio:"#78BFE8", fusion:"#E8734A",
@@ -42,7 +52,22 @@ const VIEWS = [
 ];
 
 let DATA = {};
-const S = {view:"timeline", tier:"all", kind:"all", when:"all", elem:"all", sigLimit:60, drawer:null};
+/* Primary axis per view lives in chips at the top of the panel; the secondary
+   axes (ver/cat/weapon/src) are the quick-filter selects. All of them are one
+   flat bag so a filter control never has to know which view it is in. */
+const S = {
+  view:"timeline", sigLimit:60, drawer:null,
+  when:"all",                      // timeline
+  tier:"all", ver:"all", cat:"all", // intel
+  kind:"all", src:"all",           // signals
+  elem:"all", weapon:"all"         // resonators
+};
+/* Which of those a view actually reads — drives Reset, and stops a stale
+   element filter from silently narrowing a list you have navigated away from. */
+const VIEW_FILTERS = {
+  timeline:["when"], intel:["tier","ver","cat"],
+  signals:["kind","src"], resonators:["elem","weapon"]
+};
 
 /* ── helpers ─────────────────────────────────────────────────────── */
 const $  = s => document.querySelector(s);
@@ -75,6 +100,14 @@ function fmtClock(d){
 function fmtTime(d){
   const dt = new Date(d);
   return isNaN(dt) ? "—" : dt.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+}
+/* Every clock on the page is the reader's own local time, which is worth
+   saying out loud on a site about a game with staggered regional maintenance —
+   "22:04" means nothing until you know whose 22:04. */
+function tzLabel(){
+  const mins = -new Date().getTimezoneOffset();
+  const h = Math.trunc(Math.abs(mins) / 60), m = Math.abs(mins) % 60;
+  return `UTC${mins < 0 ? "−" : "+"}${h}${m ? ":" + String(m).padStart(2, "0") : ""}`;
 }
 /* Whole days from today to d. Negative once it's in the past. */
 function daysTo(d){
@@ -123,6 +156,33 @@ function bannerFor(name){
 }
 const newsFor = id => entries().filter(e => e.version === id)
   .sort((a,b) => (b.date||"").localeCompare(a.date||""));
+
+/* Intel entries carry no art of their own, and none is invented for them: a
+   row borrows a face the desk already holds, when one of its tags names a
+   resonator with art. Only then — the version key visual was tried here first
+   and made eight consecutive rows show the same washed-out crop, which is
+   decoration pretending to be information. Everything else gets a plate. */
+function intelArt(e){
+  for(const t of e.tags || []){
+    const r = resonatorFor(t);
+    if(r.name){
+      const f = figure({name:r.name, ...(bannerFor(r.name) || {})});
+      if(f.image) return {url:f.image, poster:f.poster, cutout:f.cutout, alt:r.name};
+    }
+  }
+  return null;
+}
+
+/* When the desk last wrote anything about this resonator — read off the intel
+   entries tagged with their name, so it reports desk activity rather than the
+   JSON's mtime. A record nobody has learned anything new about doesn't get a
+   fresh date just because the file was touched. */
+function lastIntelFor(name){
+  const k = String(name||"").toLowerCase();
+  return entries()
+    .filter(e => (e.tags || []).some(t => String(t).toLowerCase() === k))
+    .map(e => e.date).sort().pop() || "";
+}
 
 const tierCounts = () => entries().reduce((a,e) => (a[e.confidence] = (a[e.confidence]||0)+1, a), {});
 
@@ -244,9 +304,12 @@ function thumb(b){
 
 /* ── rail ────────────────────────────────────────────────────────── */
 function renderRail(){
+  /* The unverified flag rides the nav item itself, not just the tab strip —
+     it should be readable before you click into the view, not after. */
   $("#rail-nav").innerHTML = VIEWS.map(v => `
     <button class="navlink" data-act="view" data-id="${v.id}" aria-current="${S.view === v.id}">
-      ${icon(v.icon)}<span>${v.label}</span>${railCount(v.id)}
+      ${icon(v.icon)}<span>${v.label}</span>
+      ${v.warn ? `<span class="warn">${v.warn}</span>` : railCount(v.id)}
     </button>`).join("");
 
   const counts = tierCounts();
@@ -255,14 +318,24 @@ function renderRail(){
       <i class="dot t-${t}"></i><span>${TIER_LABEL[t]}</span><span class="n">${counts[t] || 0}</span>
     </button>`).join("");
 
+  /* Two kinds of shortcut, told apart by the mark on the right. The first
+     three are saved views — a filter combination you'd otherwise have to set
+     by hand — and the rest leave the site. Nothing here is a page that doesn't
+     exist: a link that goes nowhere is worse than no link. */
   $("#rail-links").innerHTML = [
-    ["Official news", "https://wutheringwaves.kurogames.com/en/main/news"],
-    ["Kuro on YouTube", "https://www.youtube.com/channel/UC0Bi5KMcECRVYis5Gb_ZYZQ"],
-    ["Leak subreddit", "https://www.reddit.com/r/WutheringWavesLeaks/"]
-  ].map(([label, href]) => `
-    <a class="tierlink" href="${href}" target="_blank" rel="noopener">
-      <span>${label}</span><span class="n" style="border:0">↗</span>
-    </a>`).join("");
+    ["Patch notes",    {view:"intel",    set:{tier:"official", cat:"all", ver:"all"}}],
+    ["Banner history", {view:"timeline", set:{when:"past"}}],
+    ["Hot signals",    {view:"signals",  set:{kind:"hot", src:"all"}}],
+    ["Official news",  {href:"https://wutheringwaves.kurogames.com/en/main/news"}],
+    ["Kuro on YouTube",{href:"https://www.youtube.com/channel/UC0Bi5KMcECRVYis5Gb_ZYZQ"}],
+    ["Leak subreddit", {href:"https://www.reddit.com/r/WutheringWavesLeaks/"}]
+  ].map(([label, to]) => to.href
+    ? `<a class="tierlink" href="${to.href}" target="_blank" rel="noopener">
+         <span>${label}</span><span class="n out">↗</span></a>`
+    : `<button class="tierlink" data-act="jump" data-id="${esc(to.view)}"
+               data-set="${esc(JSON.stringify(to.set))}">
+         <span>${label}</span><span class="n out">${icon("i-arrow", 11)}</span></button>`
+  ).join("");
 
   $("#dock").innerHTML = VIEWS.map(v => `
     <button data-act="view" data-id="${v.id}" aria-current="${S.view === v.id}">
@@ -275,6 +348,13 @@ function railCount(id){
           : id === "resonators" ? resonators().length
           : versions().length;
   return `<span class="n">${n}</span>`;
+}
+
+/* Static once the data is in — the legend can't change without a reload. */
+function renderLegend(){
+  $("#foot-legend").innerHTML = TIERS.map(t =>
+    `<span class="t-${t}" title="${esc(TIER_MEANS[t])}"><i class="dot"></i>${TIER_LABEL[t]}</span>`
+  ).join("");
 }
 
 function renderTabs(){
@@ -291,12 +371,14 @@ function renderHud(){
   const live = liveVersion(), next = nextVersion();
   const feed = DATA.feed || {};
 
-  $("#hud-updated").textContent = feed.fetched ? fmtTime(feed.fetched) : "—";
+  $("#hud-updated").textContent = feed.fetched ? `${fmtTime(feed.fetched)} ${tzLabel()}` : "—";
   $("#hud-online").style.opacity = feed.fetched ? "" : ".5";
 
   $("#m-live").textContent = DATA.versions?.current || live?.id || "—";
   $("#m-entries").textContent = entries().length || "—";
   $("#m-updated").textContent = DATA.news?.updated ? fmtDate(DATA.news.updated) : "—";
+  $("#m-updated-k").textContent = feed.fetched
+    ? `Feed ${fmtTime(feed.fetched)} · ${tzLabel()}` : tzLabel();
 
   const days = next?.start ? daysTo(next.start) : null;
   $("#m-next").textContent = next?.id || "—";
@@ -679,33 +761,120 @@ function chips(scope, items, active){
     </button>`).join("");
 }
 
+/* ── quick filters ───────────────────────────────────────────────────
+   Every view's primary axis is a chip row in its panel header — tier on
+   Intel, kind on Signals, element on Resonators. These are the secondary
+   axes: too many values to spend a chip each on, so they get selects.
+   Options are read off the data, so a category nothing is filed under never
+   appears and can't produce an empty list. */
+function filterSpec(){
+  const uniq = xs => [...new Set(xs.filter(Boolean))];
+  const byVer = (a, b) => parseFloat(b) - parseFloat(a);
+  if(S.view === "intel") return [
+    {k:"ver",    label:"Version",  all:"All versions",   opts:uniq(entries().map(e => e.version)).sort(byVer)},
+    {k:"cat",    label:"Category", all:"All categories", opts:uniq(entries().map(e => e.category)).sort()}
+  ];
+  if(S.view === "resonators") return [
+    {k:"weapon", label:"Weapon",   all:"All weapons",    opts:uniq(resonators().map(r => r.weapon)).sort()}
+  ];
+  if(S.view === "signals") return [
+    {k:"src",    label:"Source",   all:"All sources",    opts:uniq(signals().map(i => i.source)).sort()}
+  ];
+  /* Timeline's now/next/past chips are the whole filter — there is no second
+     axis worth inventing for three patches. */
+  return [];
+}
+
+const filtersOn = () => VIEW_FILTERS[S.view].filter(k => S[k] !== "all");
+
+/* Rendered twice on purpose: into the aside on desktop, and inline under the
+   panel header at the widths where the aside is gone. Both write to the same
+   state through the same delegated handler, and every draw() rebuilds both, so
+   they cannot drift apart. */
+function quickFilters(inline){
+  const spec = filterSpec();
+  if(!spec.length) return "";
+  const rows = spec.map(f => `
+    <label class="qf-row">
+      <span class="label">${f.label}</span>
+      <select data-sel="${f.k}" aria-label="${f.label}" class="${S[f.k] === "all" ? "" : "on"}">
+        <option value="all"${S[f.k] === "all" ? " selected" : ""}>${f.all}</option>
+        ${f.opts.map(o => `<option value="${esc(o)}"${S[f.k] === o ? " selected" : ""}>${esc(o)}</option>`).join("")}
+      </select>
+    </label>`).join("");
+  const on = filtersOn().length;
+  const body = `<div class="qf">${rows}
+    <button class="btn qf-reset" data-act="reset"${on ? "" : " disabled"}>
+      ${icon("i-close", 11)} Reset filters${on ? ` (${on})` : ""}
+    </button></div>`;
+
+  return inline
+    ? `<div class="qf-inline">${body}</div>`
+    : `<div class="panel qf-panel"><div class="mini-h"><h3>Quick filters</h3></div>${body}</div>`;
+}
+
+/* An empty list should say which control emptied it, and undo itself. */
+function emptyWhy(what){
+  const on = filtersOn();
+  if(!on.length) return `Nothing here yet.`;
+  const names = {tier:"confidence", ver:"version", cat:"category", kind:"kind",
+                 src:"source", elem:"element", weapon:"weapon", when:"window"};
+  return `No ${what} matches this ${on.map(k => names[k]).join(" + ")} filter.
+    <button class="more" data-act="reset" style="margin-left:10px">Reset ${icon("i-arrow", 12)}</button>`;
+}
+
 function intelCard(e, mini){
   const tier = TIERS.includes(e.confidence) ? e.confidence : "rumour";
   const unverified = tier === "reported" || tier === "rumour";
   const srcs = (e.sources || []).map(s => `<span><span class="lang">${esc((s.lang || "??").toUpperCase())}</span>${esc(s.name)}</span>`).join("");
-  return `<article class="intel t-${tier}${unverified ? " unverified" : ""}${mini ? " mini" : ""}"
+  const art = intelArt(e);
+  /* Small on purpose. The picture is a landmark for finding a row again on a
+     second pass, not the reason to read it — the headline is. Every row gets
+     the slot whether or not art resolved, so the headlines stay on one left
+     edge; an entry with no face to show falls back to a plate carrying the
+     version it's about, in its own confidence colour. */
+  const fig = art
+    ? `<div class="ithumb${art.cutout ? " cut" : ""}">
+         <img class="${art.poster ? "poster" : ""}" src="${esc(art.url)}" alt="${esc(art.alt)}"
+              loading="lazy" decoding="async"></div>`
+    : `<div class="ithumb plate" aria-hidden="true"><span>${esc(e.version || e.category || "—")}</span></div>`;
+
+  return `<article class="intel t-${tier}${unverified ? " unverified" : ""}${mini ? " mini" : ""} has-art"
            role="button" tabindex="0" data-act="intel" data-id="${esc(e.id)}">
-    <div class="intel-h">
-      ${tierBadge(tier, tier === "official")}
-      <span class="when">${fmtDate(e.date)}</span>
-      ${e.version ? `<span class="pill ver">${esc(e.version)}</span>` : ""}
-      ${!mini && e.category ? `<span class="pill">${esc(e.category)}</span>` : ""}
-      ${e.outcome === "confirmed" ? `<span class="outcome ok">✓ turned out right</span>` : ""}
-      ${e.outcome === "superseded" ? `<span class="outcome no">✕ was wrong</span>` : ""}
+    ${fig}
+    <div class="itext">
+      <div class="intel-h">
+        ${tierBadge(tier, tier === "official")}
+        <span class="when">${fmtDate(e.date)}</span>
+        ${e.version ? `<span class="pill ver">${esc(e.version)}</span>` : ""}
+        ${!mini && e.category ? `<span class="pill">${esc(e.category)}</span>` : ""}
+        ${e.outcome === "confirmed" ? `<span class="outcome ok">✓ turned out right</span>` : ""}
+        ${e.outcome === "superseded" ? `<span class="outcome no">✕ was wrong</span>` : ""}
+      </div>
+      <h3>${esc(e.title)}</h3>
+      <p>${esc(e.body)}</p>
+      ${mini ? "" : `<div class="intel-f">
+        ${srcs ? `<div class="srcs">${srcs}</div>` : ""}
+        ${confMeter(tier)}
+      </div>`}
     </div>
-    <h3>${esc(e.title)}</h3>
-    <p>${esc(e.body)}</p>
-    ${mini ? "" : `<div class="intel-f">
-      ${srcs ? `<div class="srcs">${srcs}</div>` : ""}
-      ${confMeter(tier)}
-    </div>`}
   </article>`;
+}
+
+/* Tier is the chip row because it is the question the desk exists to answer.
+   Version and category are the quick-filter selects — narrower questions, and
+   there are too many categories to spend a chip each on. */
+function intelList(){
+  let list = [...entries()].sort((a, b) => (b.date||"").localeCompare(a.date||""));
+  if(S.tier !== "all") list = list.filter(e => e.confidence === S.tier);
+  if(S.ver  !== "all") list = list.filter(e => e.version === S.ver);
+  if(S.cat  !== "all") list = list.filter(e => e.category === S.cat);
+  return list;
 }
 
 function renderIntel(){
   const counts = tierCounts();
-  let list = [...entries()].sort((a, b) => (b.date||"").localeCompare(a.date||""));
-  if(S.tier !== "all") list = list.filter(e => e.confidence === S.tier);
+  const list = intelList();
 
   const filters = chips("tier",
     [["all", "All", entries().length]].concat(TIERS.map(t => [t, TIER_LABEL[t], counts[t] || 0, `t-${t}`])),
@@ -717,9 +886,10 @@ function renderIntel(){
         <h2>Intel</h2><span class="sub">Read, judged, tiered by hand</span>
         <div class="right chips tiered">${filters}</div>
       </div>
+      ${quickFilters(true)}
       <div class="panel-b flush">
         ${list.length ? `<div class="intel-list">${list.map(e => intelCard(e)).join("")}</div>`
-          : `<div class="empty">Nothing at this confidence level.</div>`}
+          : `<div class="empty">${emptyWhy("intel")}</div>`}
       </div>
       <div class="panel-f"><button class="more" data-act="open" data-id="methodology">How the tiers work ${icon("i-arrow", 12)}</button></div>
     </div>
@@ -729,10 +899,17 @@ function renderIntel(){
 /* ── signals ─────────────────────────────────────────────────────── */
 function signalRow(i){
   const h = headline(i);
+  /* The mark is the fastest read in the row — you scan for the Kuro diamond to
+     find the one official post in forty community threads. Coloured by kind so
+     it carries the same information as the badge at the far end of the row. */
+  const mark = SOURCE_ICON[i.sourceId] || KIND_ICON[i.kind] || "i-comm";
   return `<a class="sig ${i.hot ? "hot" : ""}" href="${esc(i.url)}" target="_blank" rel="noopener"
      ${h.translated ? `title="${esc(h.original)}"` : ""}>
     <span class="t">${fmtClock(i.date)}</span>
-    <span class="src"><b>${esc(i.source || "")}</b><i>${esc(KIND_LABEL[i.kind] || i.kind || "")}</i></span>
+    <span class="src">
+      <i class="smark ${esc(i.kind || "")}">${icon(mark, 13)}</i>
+      <span class="sname"><b>${esc(i.source || "")}</b></span>
+    </span>
     <span class="head">${esc(h.text)}${
       h.translated ? `<em class="orig">${esc(h.original)}</em>` : ""}</span>
     <span class="flags">
@@ -752,6 +929,7 @@ function renderSignals(){
   let list = all;
   if(S.kind === "hot") list = list.filter(i => i.hot);
   else if(S.kind !== "all") list = list.filter(i => i.kind === S.kind);
+  if(S.src !== "all") list = list.filter(i => i.source === S.src);
   const shown = list.slice(0, S.sigLimit);
 
   const filters = chips("kind",
@@ -762,7 +940,7 @@ function renderSignals(){
   const ok = (feed.sources || []).filter(s => s.status === "ok").length;
 
   $("#p-signals").innerHTML = `<div class="stack">
-    <div class="panel">
+    <div class="panel sigpanel">
       <div class="panel-h">
         <h2>Live signals</h2>
         <span class="sub">Last run ${feed.fetched ? esc(fmtDate(feed.fetched)) + " " + esc(fmtTime(feed.fetched)) : "—"} · ${ok}/${(feed.sources||[]).length} sources</span>
@@ -775,9 +953,10 @@ function renderSignals(){
       <div class="srcstrip">${(feed.sources || []).map(s =>
         `<span class="srcpill ${esc(s.status)}" title="${esc(s.error || s.status)}"><i class="dot"></i>${esc(s.name)} ${s.count}</span>`
       ).join("") || `<span class="srcpill">No source report</span>`}</div>
+      ${quickFilters(true)}
       <div class="panel-b flush">
         ${shown.length ? `<div class="term">${shown.map(signalRow).join("")}</div>`
-          : `<div class="empty">${all.length ? "Nothing in this category." : "No signals yet — the fetcher has not run."}</div>`}
+          : `<div class="empty">${all.length ? emptyWhy("signal") : "No signals yet — the fetcher has not run."}</div>`}
       </div>
       ${list.length > shown.length ? `<div class="panel-f">
         <button class="more" data-act="morelogs">Show more — ${list.length - shown.length} older ${icon("i-arrow", 12)}</button>
@@ -787,23 +966,36 @@ function renderSignals(){
 }
 
 /* ── resonators ──────────────────────────────────────────────────── */
+/* ★★★★★ rather than "5★". Rarity is the one attribute you compare across a
+   whole grid at once, and five marks read as more than four without being
+   parsed. Screen readers get the number, not sixty stars. */
+function stars(n){
+  const r = Number(n);
+  return r > 0 && r <= 5
+    ? `<span class="stars" role="img" aria-label="${r} star">${"★".repeat(r)}<i>${"★".repeat(5 - r)}</i></span>`
+    : "";
+}
+
 function recordCard(r){
   const b = bannerFor(r.name) || {};
+  const seen = lastIntelFor(r.name);
   return `<article class="rec" role="button" tabindex="0" data-act="resonator" data-id="${esc(r.name)}"${attrStyle(r.attribute)}>
-    ${artPanel({name:r.name, ...b}, `${r.rarity ? `<span class="rank">${esc(r.rarity)}★</span>` : ""}
-      ${r.version ? `<span class="phase">${esc(r.version)}</span>` : ""}`)}
+    ${artPanel({name:r.name, ...b}, `${r.version ? `<span class="phase">${esc(r.version)}</span>` : ""}`)}
     <div class="rec-b">
       <h3>${esc(r.name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h3>
       <div class="rec-attrs">
+        ${stars(r.rarity)}
         ${r.attribute ? `<b>${esc(r.attribute)}</b>` : ""}
         ${r.weapon ? `<span>${esc(r.weapon)}</span>` : ""}
       </div>
       ${r.summary ? `<p class="rec-sum">${esc(r.summary)}</p>` : ""}
       ${r.role ? `<div class="rec-role">${esc(r.role)}</div>` : ""}
-      <div class="rec-foot">
-        ${confidenceRows(r)}
-        ${r.kit?.length ? `<span class="rec-when">${plural(r.kit.length, "note")}</span>` : ""}
-      </div>
+      <div class="rec-foot">${confidenceRows(r)}</div>
+      ${r.kit?.length || seen ? `<div class="rec-meta">
+        ${r.kit?.length ? `<span>${plural(r.kit.length, "kit note")}</span>` : ""}
+        ${seen ? `<span>Last intel ${fmtShort(seen)}</span>` : ""}
+      </div>` : ""}
+      <div class="rec-more">View profile ${icon("i-arrow", 12)}</div>
     </div>
   </article>`;
 }
@@ -814,6 +1006,7 @@ function renderResonators(){
   let list = all;
   if(S.elem === "5" || S.elem === "4") list = list.filter(r => String(r.rarity) === S.elem);
   else if(S.elem !== "all") list = list.filter(r => r.attribute === S.elem);
+  if(S.weapon !== "all") list = list.filter(r => r.weapon === S.weapon);
 
   const filters = chips("elem",
     [["all", "All", all.length], ["5", "5★"], ["4", "4★"]].concat(elems.map(e => [e, e])),
@@ -825,9 +1018,10 @@ function renderResonators(){
         <h2>Resonator database</h2><span class="sub">${plural(all.length, "record")} · kit confidence per entry</span>
         <div class="right chips">${filters}</div>
       </div>
+      ${quickFilters(true)}
       <div class="panel-b">
         ${list.length ? `<div class="rgrid">${list.map(recordCard).join("")}</div>`
-          : `<div class="empty">No records match.</div>`}
+          : `<div class="empty">${emptyWhy("record")}</div>`}
       </div>
       <div class="panel-f"><span class="tier-note">Kit detail on unreleased resonators is pre-balance — multipliers routinely shift between beta phases.</span></div>
     </div>
@@ -838,7 +1032,7 @@ function renderResonators(){
 function renderAside(){
   const feed = DATA.feed || {};
   const all = signals();
-  const live = liveVersion(), next = nextVersion();
+  const next = nextVersion();
   const days = next?.start ? daysTo(next.start) : null;
   const counts = tierCounts();
 
@@ -846,31 +1040,38 @@ function renderAside(){
   const featName = (next?.phases || []).flatMap(p => (p.banners || []).filter(b => b.new))[0]?.name;
   const feat = featName ? resonatorFor(featName) : resonators()[0];
 
+  /* Live version, next patch and entry count are already the three biggest
+     numbers on the page, in the metrics strip directly above. Repeating them
+     here spent a whole panel saying nothing new — what's left is the part the
+     strip doesn't carry: the shape of the tier split and the feed's volume. */
   const glance = `<div class="panel">
     <div class="mini-h"><h3>At a glance</h3></div>
     <div class="mini-b"><div class="glance">
-      <div class="glance-row">Live version <b class="accent">${esc(DATA.versions?.current || live?.id || "—")}</b></div>
-      <div class="glance-row">Next patch <b>${days == null ? "—" : days > 0 ? plural(days, "day") : "now"}</b></div>
-      <div class="glance-row">Curated entries <b>${entries().length}</b></div>
       <div class="glance-row">Official / datamined <b>${(counts.official||0)} / ${(counts.datamined||0)}</b></div>
+      <div class="glance-row">Reported / rumour <b>${(counts.reported||0)} / ${(counts.rumour||0)}</b></div>
       <div class="glance-row">Signals captured <b>${all.length}</b></div>
       <div class="glance-row">Flagged hot <b>${all.filter(i => i.hot).length}</b></div>
+      ${days != null && days > 0
+        ? `<div class="glance-row">${esc(next.id)} in <b class="accent">${plural(days, "day")}</b></div>` : ""}
     </div></div>
   </div>`;
 
+  const featSeen = feat ? lastIntelFor(feat.name) : "";
   const featured = feat ? `<div class="panel feat"${attrStyle(feat.attribute)}>
-    <div class="mini-h"><h3>Featured resonator</h3></div>
-    ${artPanel({name:feat.name, ...(bannerFor(feat.name) || {})},
-      feat.rarity ? `<span class="rank">${esc(feat.rarity)}★</span>` : "")}
+    <div class="mini-h"><h3>Featured resonator</h3>
+      ${feat.version ? `<span class="pill ver">${esc(feat.version)}</span>` : ""}</div>
+    ${artPanel({name:feat.name, ...(bannerFor(feat.name) || {})})}
     <div class="feat-b">
       <h3>${esc(feat.name)}</h3>
       ${feat.nameCN ? `<div class="cjk">${esc(feat.nameCN)}</div>` : ""}
       <div class="rec-attrs">
+        ${stars(feat.rarity)}
         ${feat.attribute ? `<b>${esc(feat.attribute)}</b>` : ""}
         ${feat.weapon ? `<span>${esc(feat.weapon)}</span>` : ""}
-        ${feat.role ? `<span>${esc(feat.role)}</span>` : ""}
       </div>
+      ${feat.role ? `<div class="rec-role">${esc(feat.role)}</div>` : ""}
       ${confidenceRows(feat)}
+      ${featSeen ? `<div class="rec-when" style="margin-top:11px">Last intel ${fmtDate(featSeen)}</div>` : ""}
       <button class="btn" data-act="resonator" data-id="${esc(feat.name)}">View profile ${icon("i-arrow", 12)}</button>
     </div>
   </div>` : "";
@@ -882,7 +1083,7 @@ function renderAside(){
     ).join("") || `<span class="srcpill">No report</span>`}</div>
   </div>`;
 
-  $("#aside").innerHTML = glance + featured + health;
+  $("#aside").innerHTML = quickFilters(false) + glance + featured + health;
 }
 
 /* ── drawer ──────────────────────────────────────────────────────── */
@@ -1183,11 +1384,36 @@ function bind(){
 
     if(act === "search"){ openCmd(); }
     else if(act === "view"){ setView(id); }
-    else if(act === "tier"){ S.tier = id; setView("intel"); }
-    else if(act === "filter"){ S[scope] = id; if(scope === "kind") S.sigLimit = 60; draw(S.view); }
+    else if(act === "tier"){ S.tier = id; S.ver = S.cat = "all"; setView("intel"); }
+    else if(act === "filter"){ S[scope] = id; S.sigLimit = 60; draw(S.view); }
+    else if(act === "reset"){ VIEW_FILTERS[S.view].forEach(k => S[k] = "all"); S.sigLimit = 60; draw(S.view); }
+    /* A rail shortcut is a view plus a filter combination — set the filters
+       before switching, or setView draws the old ones first and the list
+       visibly re-filters a frame later. */
+    else if(act === "jump"){
+      try{ Object.assign(S, JSON.parse(el.dataset.set || "{}")); }catch{ /* ignore a malformed shortcut */ }
+      S.sigLimit = 60;
+      setView(id);
+    }
     else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
     else if(act === "noop"){ /* decorative */ }
     else dispatch(act, id);
+  });
+
+  /* Quick-filter selects. One listener for both copies of the control — the
+     aside's and the inline one — since they carry the same data-sel. */
+  document.addEventListener("change", e => {
+    const sel = e.target.closest("[data-sel]");
+    if(!sel) return;
+    const key = sel.dataset.sel;
+    const inAside = !!sel.closest(".aside");
+    S[key] = sel.value;
+    S.sigLimit = 60;
+    draw(S.view);
+    /* The draw replaces the select that fired this, so put the caret back on
+       its replacement — otherwise a keyboard user is dumped at the top of the
+       document every time they narrow the list. */
+    document.querySelector(`${inAside ? ".aside " : ".qf-inline "}[data-sel="${key}"]`)?.focus();
   });
 
   /* Cards are role=button, so Enter/Space have to act like a click. */
@@ -1241,6 +1467,7 @@ async function load(name){
   renderRail();
   renderTabs();
   renderHud();
+  renderLegend();
   bind();
   setView(location.hash.slice(1) || "timeline");
 })();
