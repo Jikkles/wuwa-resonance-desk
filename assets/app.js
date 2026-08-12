@@ -173,6 +173,38 @@ function intelArt(e){
   return null;
 }
 
+/* A banner's signature weapon. Kuro runs the weapon convene alongside the
+   character one, so it belongs beside the character on the card. Already in
+   the data as `signature` — on the banner row first, falling back to the
+   resonator record. A banner with neither shows no weapon rather than a
+   guessed one. */
+const signatureFor = b => b.signature || resonatorFor(b.name).signature || "";
+
+/* Everywhere a weapon runs. Reruns mean the same weapon comes back with its
+   character, so this is a list, not a single hit. */
+function weaponRuns(name){
+  const k = String(name||"").toLowerCase();
+  const out = [];
+  for(const v of versions())
+    for(const p of v.phases || [])
+      for(const b of p.banners || [])
+        if(signatureFor(b).toLowerCase() === k)
+          out.push({...b, phase:p.n, version:v.id, start:p.start, end:p.end, status:v.status});
+  return out;
+}
+
+/* Every distinct signature weapon the timeline knows about, for the palette. */
+function allWeapons(){
+  const seen = new Map();
+  for(const v of versions())
+    for(const p of v.phases || [])
+      for(const b of p.banners || []){
+        const s = signatureFor(b);
+        if(s && !seen.has(s.toLowerCase())) seen.set(s.toLowerCase(), {name:s, holder:b.name, version:v.id});
+      }
+  return [...seen.values()];
+}
+
 /* When the desk last wrote anything about this resonator — read off the intel
    entries tagged with their name, so it reports desk activity rather than the
    JSON's mtime. A record nobody has learned anything new about doesn't get a
@@ -517,8 +549,17 @@ function patchCard(v, role){
      because what you actually want to know is who runs alongside whom: a row
      reads as "this is phase 1". Three fit a cell; say so rather than silently
      dropping the rest. */
+  /* Character, then the weapon convene that runs beside it — a separate pull,
+     so a separate row you can open on its own. */
+  const pair = b => {
+    const sig = signatureFor(b);
+    return `<div class="bpair">${thumb(b)}${sig
+      ? `<button class="wchip" data-act="weapon" data-id="${esc(sig)}" title="Signature weapon — runs alongside">
+           ${icon("i-weapon", 12)}<span>${esc(sig)}</span></button>`
+      : ""}</div>`;
+  };
   const strip = list => list.length
-    ? `<div class="bstrip rows">${list.slice(0, 4).map(thumb).join("")}${
+    ? `<div class="bstrip rows">${list.slice(0, 4).map(pair).join("")}${
         list.length > 4 ? `<span class="bmini-more">+${list.length - 4}</span>` : ""}</div>`
     : `<div class="bnone">—</div>`;
 
@@ -565,14 +606,23 @@ function patchCard(v, role){
   return `<article class="pcard is-${role}" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
            aria-label="Version ${esc(v.id)} detail">
     ${art || `<div class="rings"></div>`}
-    <div class="pcard-top">${state}</div>
-    <div class="pcard-main">
-      <div class="pcard-num">${esc(v.id)}</div>
-      ${v.title ? `<div class="pcard-title">${esc(v.title)}</div>` : ""}
-      <div class="pcard-dates">${[v.start ? fmtDate(v.start) : "", versionEnd(v)].filter(Boolean).join(" — ") || "Dates unknown"}</div>
-      ${status}
-      ${track(v, role)}
+    <!-- Head first, art second. The version block used to sit at the bottom of
+         the picture, which put it across the character's face and left the top
+         of the card empty; anchored up here the art gets the whole middle. -->
+    <div class="pcard-head">
+      <div class="pcard-top">${state}</div>
+      <div class="pcard-main">
+        <div class="pcard-num">${esc(v.id)}</div>
+        ${v.title ? `<div class="pcard-title">${esc(v.title)}</div>` : ""}
+        <div class="pcard-dates">${[v.start ? fmtDate(v.start) : "", versionEnd(v)].filter(Boolean).join(" — ") || "Dates unknown"}</div>
+        ${status}
+        ${track(v, role)}
+      </div>
     </div>
+    <!-- Guarantees the artwork a window. Without it a busy patch — 3.6 runs
+         five banners — pushes its rows up under the head band and shows no
+         character at all, while a quiet one shows plenty. -->
+    <div class="pcard-gap"></div>
     ${cellHtml}
     <div class="pcard-foot">View details ${icon("i-arrow", 12)}</div>
   </article>`;
@@ -1193,6 +1243,44 @@ function drawerVersion(id){
   </div>`);
 }
 
+/* There is no weapon database — a weapon is defined by whose banner it runs
+   beside and what the desk has written about it. Both are already on hand, so
+   the record is assembled rather than stored. */
+function drawerWeapon(name){
+  const runs = weaponRuns(name);
+  if(!runs.length) return;
+  const k = name.toLowerCase();
+  const mentions = entries()
+    .filter(e => `${e.title} ${e.body}`.toLowerCase().includes(k) ||
+                 (e.tags || []).some(t => String(t).toLowerCase() === k))
+    .sort((a, b) => (b.date||"").localeCompare(a.date||""));
+  const holder = resonatorFor(runs[0].name);
+
+  openDrawer("Weapon convene", `<div class="drawer-b"${attrStyle(runs[0].attribute || holder.attribute)}>
+    <div class="meta">
+      <span class="pill">${esc(holder.weapon || runs[0].weapon || "Weapon")}</span>
+      ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
+    </div>
+    <h2>${esc(name)}</h2>
+    <p>Signature weapon for <b>${esc(runs[0].name)}</b>. Kuro runs the weapon convene
+    alongside the character banner, so it is available for the same window.</p>
+    <div class="dsec"><span class="label">Runs alongside</span>
+      <div style="display:grid;gap:8px">${runs.map(r => `
+        <span class="dsrc" role="button" tabindex="0" data-act="resonator" data-id="${esc(r.name)}">
+          <span class="lang">${esc(r.version)}</span>${esc(r.name)} — phase ${esc(r.phase)}
+          ${r.new ? "· debut" : "· rerun"}
+          <span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div>
+    </div>
+    ${mentions.length ? `<div class="dsec"><span class="label">Intel mentioning it — ${mentions.length}</span>
+      <div style="display:grid;gap:8px">${mentions.map(e => `
+        <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(e.id)}">
+          <i class="dot t-${esc(e.confidence)}" style="width:7px;height:7px;border-radius:50%;background:currentColor;flex:none"></i>
+          ${esc(e.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div></div>`
+      : `<div class="dsec"><span class="label">Intel mentioning it</span>
+         <p style="margin:0;color:var(--fg-3)">Nothing written up yet — only the banner listing.</p></div>`}
+  </div>`);
+}
+
 function drawerMethodology(){
   const tiers = DATA.news?.confidenceTiers || {};
   const srcs = DATA.feed?.sources || [];
@@ -1254,6 +1342,9 @@ function cmdIndex(){
   resonators().forEach(r => out.push({
     group:"Resonators", label:`${r.name}${r.nameCN ? " " + r.nameCN : ""}`,
     hint:[r.rarity ? r.rarity + "★" : "", r.attribute].filter(Boolean).join(" "), act:["resonator", r.name], tier:null
+  }));
+  allWeapons().forEach(w => out.push({
+    group:"Weapons", label:w.name, hint:`${w.holder} · ${w.version}`, act:["weapon", w.name], tier:null
   }));
   entries().forEach(e => out.push({
     group:"Intel", label:e.title, hint:fmtShort(e.date), act:["intel", e.id], tier:e.confidence
@@ -1341,6 +1432,7 @@ function dispatch(kind, id){
   if(kind === "intel") drawerIntel(id);
   else if(kind === "resonator") drawerResonator(id);
   else if(kind === "version") drawerVersion(id);
+  else if(kind === "weapon") drawerWeapon(id);
   else if(kind === "open" && id === "methodology") drawerMethodology();
 }
 

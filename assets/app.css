@@ -369,7 +369,7 @@ button{font:inherit;color:inherit}
    opened a 300px hole above the number. */
 .pcard.is-future .pcard-main{margin-top:0}
 .pcard.is-future .pcard-num{font-size:40px}
-.pcard.is-future .pcard-rows{margin-top:auto}
+
 /* The art runs the whole card and every other element sits on top of it. The
    scrim is a vertical ramp rather than a floor: the top third stays near-clear
    so the character's face is the first thing you see, and it thickens through
@@ -377,15 +377,20 @@ button{font:inherit;color:inherit}
    something dark enough to read 10px mono over. */
 .pcard-art{position:absolute;inset:0;z-index:0;overflow:hidden}
 .pcard-art img.bg{width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:1}
-/* A character poster rather than a wide key visual: crop left of centre so the
-   figure lands on the right half, clear of the type. */
-.pcard-art.poster img.bg{object-position:34% 22%}
+/* Kuro's reveal poster is a 1080x1920 marketing card: logo across the top,
+   name plate and a bullet list of the character's role across the bottom. On a
+   card this tall the whole thing fits vertically and both bands show, so zoom
+   past them onto the figure rather than reproducing someone else's layout
+   inside ours. */
+.pcard-art.poster img.bg{
+  object-position:center top;transform:translateY(20%) scale(1.22);transform-origin:50% 50%;
+}
 
 /* Debut characters standing on the patch key visual. Two of them split the
    card down the middle — a patch with two debuts should look like a patch with
    two debuts. The key visual drops back so it reads as a setting rather than
    competing with the figures in front of it. */
-.pcard-art.has-figs img.bg{opacity:.42;filter:saturate(.75)}
+.pcard-art.has-figs img.bg{opacity:.6;filter:saturate(.85)}
 /* z-index puts the figures above .pcard-art::after — the scrim exists to make
    the key visual behind them recede, and painting it over the characters as
    well left two silhouettes you could barely make out. They still sit below
@@ -396,9 +401,13 @@ button{font:inherit;color:inherit}
    run at full height each figure is a poster panel, and the content rows' wash
    dims its lower half without hiding it. */
 .figs{position:absolute;inset:0;z-index:1;display:flex}
+/* Pushed down out from under the head band. A cutout is exactly as tall as the
+   card, so object-position has no vertical overflow to work with — the shift
+   has to be a transform. */
 .figs img.fig{
   flex:1 1 0;min-width:0;width:100%;height:100%;
   object-fit:cover;object-position:center 14%;
+  transform:translateY(16%) scale(1.06);
 }
 /* Two figures turn in toward the middle rather than both facing out. */
 .figs.n2 img.fig:first-child{object-position:58% 12%}
@@ -409,43 +418,42 @@ button{font:inherit;color:inherit}
 /* The poster carries Kuro's logo across its top. How much of it survives the
    crop depends on the card's aspect, which changes with the viewport — so bury
    that band under a dark strip rather than chasing it with object-position. */
+/* The reveal poster carries Kuro's logo across its top, which the head band
+   now covers on its own — so this only has to feather the foot. */
 .pcard-art.poster::after{
-  background:
-    linear-gradient(180deg,rgba(13,12,17,.94) 0%,rgba(13,12,17,.44) 10%,rgba(13,12,17,.1) 26%,
-      rgba(13,12,17,.34) 62%,rgba(13,12,17,.5) 100%),
-    linear-gradient(90deg,rgba(13,12,17,.62) 0%,rgba(13,12,17,.2) 46%,transparent 82%);
+  background:linear-gradient(180deg,transparent 0%,transparent 60%,rgba(11,10,15,.24) 100%);
 }
-/* Only the top quarter, where the art is doing its job. The heavy lifting is
-   done by the text blocks below, each carrying its own wash — a fixed ramp on
-   the picture can't work here because how far down the version block sits
-   depends on how many banners the patch has. */
+/* Barely anything. The head band and the rows carry their own washes now, so
+   the picture between them doesn't need a second one on top — it was a
+   left-side gradient sized for type that has since moved to the top of the
+   card, and it was the reason the art looked muddy. */
 .pcard-art::after{
   content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(180deg,rgba(13,12,17,.46) 0%,rgba(13,12,17,.08) 22%,
-      rgba(13,12,17,.3) 62%,rgba(13,12,17,.5) 100%),
-    linear-gradient(90deg,rgba(13,12,17,.64) 0%,rgba(13,12,17,.22) 46%,transparent 82%);
+  background:linear-gradient(180deg,transparent 0%,transparent 62%,rgba(11,10,15,.22) 100%);
 }
-/* The status pill can land on a character's hair, so it brings its own ground
-   — a bordered 10px pill on a bright highlight is unreadable. */
+/* One band across the top carrying the pill, the version, the codename, the
+   dates and the run bar, on one gradient that fades into the picture. The
+   whole block used to sit at the foot of the art, which is where the character
+   is — so the number landed on a face and the top of the card was empty. */
+.pcard-head{
+  position:relative;z-index:1;
+  background:linear-gradient(180deg,
+    rgba(11,10,15,.93) 0%,rgba(11,10,15,.88) 46%,rgba(11,10,15,.64) 78%,transparent 100%);
+  padding-bottom:26px;
+}
 .pcard-top{
-  position:relative;z-index:1;padding:14px 16px 22px;margin-bottom:-22px;
+  position:relative;z-index:1;padding:14px 18px 0;
   display:flex;gap:10px;align-items:flex-start;
-  background:linear-gradient(180deg,rgba(11,10,15,.88) 0%,rgba(11,10,15,.5) 50%,transparent 100%);
 }
 /* Solid, not translucent — the pill is 10px type and it can land anywhere. */
 .pcard-top .pill{background:rgba(11,10,15,.72)}
-/* The wash rides the text block rather than the picture: it scales with the
-   content instead of with the card, so the version number and the phase track
-   sit on something dark wherever the banner strip below happens to push them. */
+/* No wash of its own — .pcard-head carries it for the whole band. */
 .pcard-main{
-  position:relative;z-index:1;padding:18px 16px 14px;margin-top:auto;
-  text-shadow:0 1px 14px rgba(13,12,17,.92),0 0 3px rgba(13,12,17,.8);
-  background:linear-gradient(180deg,
-    transparent 0%,rgba(11,10,15,.62) 22%,rgba(11,10,15,.8) 58%,rgba(11,10,15,.84) 100%);
+  position:relative;z-index:1;padding:10px 18px 0;
+  text-shadow:0 1px 14px rgba(11,10,15,.92),0 0 3px rgba(11,10,15,.8);
 }
 .pcard-num{
-  font-family:var(--mono);font-size:52px;font-weight:500;line-height:1;letter-spacing:-.02em;
+  font-family:var(--mono);font-size:64px;font-weight:500;line-height:1;letter-spacing:-.03em;
   font-variant-numeric:tabular-nums;
 }
 .pcard.is-live .pcard-num{color:var(--t-official)}
@@ -478,7 +486,13 @@ button{font:inherit;color:inherit}
    the point of putting the art behind the card was for it to look like art.
    The picture stays sharp; legibility comes from a flat wash plus the shadow
    on the type, which keeps the edges of everything crisp. */
-.pcard-rows{position:relative;z-index:1;margin-top:0;background:rgba(11,10,15,.8)}
+/* The art's window. flex:1 hands it every spare pixel on a quiet patch, and
+   the min-height stops a busy one from squeezing it to nothing. */
+.pcard-gap{flex:1 1 auto;min-height:186px}
+/* Pinned under that window. With the head band anchored at the top, the space
+   between the two is what the artwork gets — the point of moving the version
+   block up there in the first place. */
+.pcard-rows{position:relative;z-index:1;background:rgba(11,10,15,.8)}
 .pcard-row{
   padding:12px 16px 14px;border-top:1px solid rgba(255,255,255,.09);min-width:0;
   text-shadow:0 1px 10px rgba(13,12,17,.9);
@@ -525,6 +539,21 @@ button{font:inherit;color:inherit}
 .bstrip.rows .bmini b{font-size:12.5px;margin-top:0;-webkit-line-clamp:1;line-height:1.25}
 .bstrip.rows .bmini .bmeta{margin-top:3px;font-size:8.5px;gap:5px}
 .bstrip.rows .bmini .attr{padding:1px 5px}
+/* The weapon convene runs beside the character banner in game, so it sits
+   beside it here — indented under the face it belongs to, and openable on its
+   own because it is a separate pull. */
+.bpair{display:grid;gap:2px}
+.wchip{
+  display:flex;align-items:center;gap:7px;width:100%;margin-left:54px;width:calc(100% - 54px);
+  background:none;border:0;border-left:1px solid rgba(255,255,255,.14);
+  border-radius:0 7px 7px 0;padding:3px 8px 3px 9px;cursor:pointer;text-align:left;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--fg-3);transition:color .16s,background .16s,border-color .16s;
+}
+.wchip svg{flex:none;opacity:.8}
+.wchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wchip:hover{color:var(--attr);background:rgba(255,255,255,.06);border-left-color:var(--attr)}
+
 .pcard-notes{
   margin:0;font-size:12.5px;line-height:1.6;color:var(--fg-2);
   text-shadow:0 1px 10px rgba(11,10,15,.9);
@@ -568,13 +597,18 @@ button{font:inherit;color:inherit}
 /* The middle label is the one that gives, not the dates either side of it. */
 .track-k .mid{color:var(--fg-2);flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .track-k em{font-style:normal;color:var(--amber)}
-/* A patch with no key visual yet gets resonance rings rather than a void. */
+/* A patch with no key visual yet gets resonance rings rather than a void. The
+   other two cards spend their middle on a character; this one has none to
+   show, so the rings have to be visible enough that the space reads as a
+   held signal rather than something that failed to load. */
 .pcard .rings{
-  position:absolute;inset:0;z-index:0;opacity:.75;
-  background:repeating-radial-gradient(circle at 50% 42%,transparent 0 21px,rgba(79,199,212,.09) 21px 22px);
-  -webkit-mask-image:radial-gradient(circle at 50% 42%,#000 8%,transparent 66%);
-  mask-image:radial-gradient(circle at 50% 42%,#000 8%,transparent 66%);
+  position:absolute;inset:0;z-index:0;opacity:1;
+  background:repeating-radial-gradient(circle at 50% 46%,transparent 0 19px,rgba(85,201,211,.16) 19px 21px);
+  -webkit-mask-image:radial-gradient(circle at 50% 46%,#000 6%,transparent 74%);
+  mask-image:radial-gradient(circle at 50% 46%,#000 6%,transparent 74%);
+  animation:breathe 7s ease-in-out infinite;
 }
+@keyframes breathe{0%,100%{opacity:.75}50%{opacity:1}}
 
 .evlist{display:grid;gap:7px}
 .evrow{display:flex;gap:10px;align-items:baseline;font-size:12.5px;color:var(--fg-2);min-width:0}

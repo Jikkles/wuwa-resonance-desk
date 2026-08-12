@@ -136,11 +136,45 @@ Banner rows in `versions.json` are matched by `name` against `resonators.json`, 
 kit list ("what we know") and its confidence tier come from the resonator record —
 don't duplicate that into `versions.json`.
 
+### Signature weapons
+
+Kuro runs the weapon convene alongside the character banner, so it sits alongside the
+character on the card — its own clickable row under each face, opening its own drawer.
+
+**The name is already in the data**: `signature` on the banner row in `versions.json`,
+falling back to the resonator record. `signatureFor()` is the one accessor. Nine of the
+ten banner rows currently carry one; Denia's is missing, and that row simply shows no
+weapon. **Don't fill it in from memory** — a wrong weapon name is exactly the kind of
+error the tier system exists to prevent. Add it to `versions.json` from a Kuro source
+and it appears.
+
+There is no weapon database and there doesn't need to be one. `drawerWeapon()` assembles
+the record from what's on hand: `weaponRuns()` finds every banner the weapon runs beside
+(reruns mean that's a list), and the intel entries that name it come from a text match
+over titles, bodies and tags. Weapons are in the command palette too.
+
 ### Art behind the whole card
 
 The patch card is a poster: the picture runs the full height and the version block,
 banner strip and event list sit on top of it. It was a bright header with an opaque
 panel bolted underneath, which read as two stacked things rather than one card.
+
+The card is three bands: **head** at the top carrying the pill, version, codename,
+dates and run bar on one gradient; **`.pcard-gap`** in the middle, which is nothing but
+a window onto the art; **rows** at the foot. The head used to sit at the *bottom* of the
+picture, which is where the character's face is — so the version number landed across a
+face and the top of the card was empty.
+
+`.pcard-gap` is `flex:1` with a `min-height`. The flex hands every spare pixel to the
+art on a quiet patch; the min-height stops a busy one from squeezing it to nothing —
+3.6 runs five banners and without the floor its rows climbed under the head band and
+the card showed no character at all.
+
+Both the reveal poster and the cutouts are shifted down with a transform into that
+window, because neither has vertical overflow for `object-position` to work with, and
+their faces otherwise sit behind the head band. The poster also gets zoomed past Kuro's
+name plate and role bullets along its bottom edge, which a taller card would otherwise
+reproduce inside ours.
 
 The backdrop is the patch's **debut characters**, not a generic key visual. One fills
 the frame; two split it down the middle, each running the full card height. Hosted
@@ -156,10 +190,9 @@ you could barely make out.
 
 Legibility comes from washes and text shadow, **not blur** — a `backdrop-filter` was
 tried and reads as smeared rather than atmospheric, which defeats the point of putting
-art there. The version block carries its own gradient rather than relying on a fixed
-ramp painted on the picture: how far down it sits depends on how many banners the patch
-has, so a ramp tuned for one card is wrong on the next. The status pill carries its own
-too, because it can land on a character's hair.
+art there. The head band and the rows each carry their own wash, which is why
+`.pcard-art::after` is now almost nothing: it was a left-side gradient sized for type
+that has since moved to the top of the card, and it was what made the art look muddy.
 
 A patch with no banners yet — 3.7 — fills its card from the resonator database instead,
 listing anything flagged for that version plus the version notes. Otherwise the card is
