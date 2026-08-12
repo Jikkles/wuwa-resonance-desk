@@ -3,6 +3,8 @@
   "note": "Hand-written English for non-English signal headlines, keyed by the item URL. feed.json is machine-written and gets overwritten every 6 hours, so translations cannot live there. Game terms use the English client's names (星声 = Astrite, 玄方地界 = Land of Xuanfang, 穗穗 = Suisui, 爱弥斯 = Aemeath). Anything without an entry here shows its original headline with a language badge.",
   "updated": "2026-08-12",
   "titles": {
+    "https://www.kurobbs.com/mc/post/1537050878447546368": "[Wuthering Waves · To the New World] The Bilibili themed collection set goes live 14 August at 12:00",
+    "https://www.kurobbs.com/mc/post/1536387856158638080": "WUWA! Rover! — And it was such a nice cup of tea",
     "https://www.kurobbs.com/mc/post/1536324402000961536": "Post-Lament Anthropocene: Threat Records — Celestial Puppet Calamity",
     "https://www.kurobbs.com/mc/post/1536322251883290624": "[Resonant Strings] Limited-time double Echo materials event",
     "https://www.kurobbs.com/mc/post/1535289968788258816": "Save your dance win streak!",
