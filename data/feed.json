@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-11T20:33:39.836Z",
+  "fetched": "2026-08-12T00:53:11.760Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 662,
-      "ms": 349
+      "ms": 1027
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 813
+      "ms": 758
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 199
+      "ms": 254
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 672
+      "ms": 579
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2701,
+      "ms": 2641,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 72,
-      "ms": 442
+      "fetched": 70,
+      "ms": 614
     },
     {
       "id": "mmoculture",
@@ -72,7 +72,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 146
+      "ms": 742
     }
   ],
   "errors": [],
@@ -86,16 +86,6 @@
       "kind": "press",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "[EN, RU] JINGRAN QUICK GUIDE | BUILDS | ROTATION | TEAM & SYNERGIES",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vl9uee/en_ru_jingran_quick_guide_builds_rotation_team/",
-      "date": "2026-08-11T06:45:19.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "《寰宇人类注疏：威胁集录》——天傀劫煞",
@@ -301,7 +291,7 @@
       "title": "Wuthering Waves - Official Version 3.6 Official Trailer",
       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNNTdtUTd1ZEtSOU93Z0VzcWl4T0dhMW94UlVicHlIRGtqcDNNLXFVT0s2aXIyOFpqU1U2akkwUjUxMkk1VVo3LTg4M2pyLVlldWF5STZDNmd2QzY0amdZb2xaSmhMc2JLbUFPZnpBRlFiWXNibzUwUm9SYmJKWjBuRFVCd0Y4WjNfRWxtNnplLTFRdWpqREF3YmVn?oc=5",
       "date": "2026-08-07T13:52:30.000Z",
-      "source": "IGN Africa",
+      "source": "za.ign.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -586,6 +576,16 @@
       "kind": "community",
       "lang": "en",
       "hot": false
+    },
+    {
+      "title": "3.6.5 beta updates via seele",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhwxd6/365_beta_updates_via_seele/",
+      "date": "2026-08-07T10:31:40.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "Wuthering Waves 3.6 Livestream Time & Codes",
@@ -888,16 +888,6 @@
       "hot": true
     },
     {
-      "title": "Wuthering Waves tier list August 2026",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE83X3pQWThWelNncE8weFBQZXZNV0ZjOUM4T3VOay02SUxSeTU0WHlpd0pXc29Nal8yb1kzSndrUEpPVTBYbmxIZ1JsZkJfOFljVTdwSU01YUVMMExrV2hwNlFOcUp0dw?oc=5",
-      "date": "2026-08-01T09:43:34.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "15 Best Webstore deals of the week - Genshin Impact, Pokémon GO, and Wuthering Waves",
       "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9QTTZjX0s5YXA5WDFnenV3T0RJMTZqTUVQb0xsSENRNGxHTHhadnhNSFhnY25QaVBiemwtX1BHeWpqcHZoTmlycy1YRE5OOUJBcGJxQ1o4aW9JV1BzV2xKWDk2OTBGejRTcl8tRUlldFFVWm8tcldBdWRn?oc=5",
       "date": "2026-08-01T02:57:49.000Z",
@@ -1082,6 +1072,16 @@
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbjFXMFRyT0xBX1lXY2JuUmdFT185cUF2X0YwNEdtZWxTdE8wSDVwYlpkZjVzX0JJLTJJZjBfdmNjVlNDVlpIa1ZlUHF0STJNMFdpS0xLR2Y1N3ppN3o2bHhtTG9XNUIzbHpJcmowYi0wZm9LVEtwTjBPRk43WU85V1Rtd01uTHBR?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
       "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves Current Banner, Next Banner, And Past Banners",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOVjBFMDI3c2doa2I5aURyeVFKUVRaNWl5NUFHMDRqV3NlMVhFYXkxN0lGSWJKbERhMElZaUlkbXZRTzFvZGxKQ21Hc29RR0xJT3FSWnZrNktlTkRoSDFVLTFIRFhVVTNnVm1ra0dfOEM1ZHNmQlo1Vm5ISVlSZlNPTE43V1EyNGRiR0VfcA?oc=5",
+      "date": "2026-07-29T07:00:00.000Z",
+      "source": "GameRant",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
