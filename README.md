@@ -24,7 +24,8 @@ scripts/fetch-art.mjs          the key art resolver
 scripts/fetch-portraits.mjs    the character art resolver
 scripts/fetch-weapons.mjs      the weapon stat, passive and icon resolver
 scripts/fetch-kits.mjs         the roster, kit and banner-history builder
-.github/workflows/update-feeds.yml   cron, every 6h
+.github/workflows/update-feeds.yml   cron, every 6h — feed, art, portraits, weapons
+.github/workflows/update-kits.yml    cron, daily — resonators.json + kits.json
 ```
 
 Five views:
@@ -718,8 +719,10 @@ git push -u origin main
 
 Opening `index.html` straight off disk works but the JSON won't load (browsers block `file://` fetch), so every panel falls back to empty. Serve the folder to preview locally — `python3 -m http.server`, or `npx serve`.
 
-Run the fetcher by hand with `node scripts/fetch-feeds.mjs` — it prints kept/fetched
-counts per source and only writes when something changed.
+Run any fetcher by hand — each prints what it kept and only writes when something
+changed. `node scripts/fetch-feeds.mjs` for the headlines; `node scripts/fetch-kits.mjs`
+for the roster and kits, which is the slow one at ~140 requests across two hosts and is
+worth running manually on patch day rather than waiting for the daily cron.
 
 ### Bump the asset version when you touch CSS or JS
 
@@ -729,6 +732,88 @@ browsers hold them longer than that, so without the bump a deploy can look like 
 happened — the new HTML loads against yesterday's stylesheet. The query string changes
 the URL, which is the only thing a cache reliably keys on. `index.html` and the JSON
 under `data/` are re-fetched normally, so they need no such treatment.
+
+## What updates itself, and what doesn't
+
+Two crons and one derived field between them cover everything that is a fact. What's
+left is the editorial, which is the part worth your time.
+
+**Automatic, no commit needed** — computed in the browser on every page load:
+
+- Which patch is `live`, `announced` or `past`, and therefore which one is "current"
+- Phase open/closed state, the progress marker, "Day 14 of 42", "In 6 days"
+- The New / Upcoming corner flags across the whole resonator grid
+- Every clock, in the reader's own timezone
+
+**Automatic, by cron** — `update-feeds.yml` every 6h, `update-kits.yml` daily:
+
+| Writes | From |
+|---|---|
+| `feed.json` | six news sources |
+| `art.json` | Kuro's reveal posts |
+| `portraits.json` + `assets/portraits/` | Prydwen galleries |
+| `weapons.json` + `assets/weapons/` | Prydwen weapon pages |
+| `resonators.json` + `kits.json` | Fandom + Prydwen |
+
+All of them are driven off the names already in `versions.json`, so writing a banner row
+is what pulls that character's art, portrait, weapon and kit. You never place an image
+by hand.
+
+**Still yours**, and no script will ever do it: `news.json` entries and their tiers,
+`outcome` on a leak that resolved, `translations.json`, and the `keyVisual*` crop values.
+
+### The timeline keeps its own time
+
+`status` in `versions.json` used to be hand-set, which meant the desk called 3.5 current
+until somebody edited a string — at midnight, on the day a patch drops, which is the one
+moment the timeline is actually being read. The dates sat in the same object saying
+otherwise. So `statusOf()` in `app.js` derives it, and `versions.json`'s own value now
+only survives where arithmetic has nothing to say:
+
+- **Live and past are computed** from `start` and the last phase's `end`, against the
+  reader's own clock. A patch flips at their midnight, with no commit and no cron lag.
+- **`beta` is never upgraded.** `beta` → `announced` means "Kuro has announced this",
+  which is a confidence call on a par with the intel tiers, and no amount of date
+  arithmetic earns it. A beta patch with a projected start stays beta until you say
+  otherwise — and then flips itself on the day.
+- **An estimated end never retires a patch.** A patch goes `past` when a later one has
+  actually started, or when its own *confirmed* end has passed. 3.6's phase 2 end is a
+  guess, and a guess that runs short must not blank the timeline mid-patch.
+
+`current` is read off the live patch the same way. The `current` and `status` fields are
+kept in the file as a fallback for a desk with no dated versions at all — they are no
+longer the source of truth, so don't bother maintaining them.
+
+`scripts/fetch-kits.mjs` carries a copy of this rule in `deriveCurrent()`, because that
+is what decides when a kit is promoted to `official`, and the two must agree — otherwise
+a character can read as released on the grid next to a kit still marked pre-release.
+**Change the rule and you change it in both places.** A shared module would be tidier
+and would cost the project its no-build-step property, which is a bad trade for fifteen
+lines.
+
+### The kit builder refuses to write a thin file
+
+Prydwen is Cloudflare-gated and turns a datacenter runner away at random, which is why
+`fetch-kits.mjs` was manual for so long: `pool()` records a blocked page as an error and
+carries on, so a fully-blocked run would once have reached the end, built an empty
+`kits` object and written it over 636KB of kit text. Three things now stop that, in
+order of how often they fire:
+
+1. **The kit map merges over what's on disk** rather than being rebuilt from nothing, so
+   a page that failed keeps yesterday's kit and only a page that actually parsed
+   replaces one. `hasKit` counts a carried-over kit, so a blocked run can't strip the
+   badge off sixty cards either.
+2. **An empty roster aborts the run.** A Cloudflare interstitial is a 200 with a valid
+   HTML body, so `curl --fail` lets it through and the parser finds nobody in it — which
+   would otherwise read as "no character has a kit".
+3. **Any shrinkage aborts the run.** Kits and records only ever get added, so a fall in
+   either count means the markup changed, and yesterday's file is worth more than
+   today's.
+
+A run that trips 2 or 3 exits non-zero and writes nothing, so the job goes red and the
+data is untouched. One consequence of the merge worth knowing: `kits.json` is additive
+now, so renaming a character in `resonators.json` leaves their old kit behind under the
+old key. It's inert — nothing looks it up — but delete it if you're tidying.
 
 ## Confidence tiers
 

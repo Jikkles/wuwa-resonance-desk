@@ -10,9 +10,11 @@ on:
 permissions:
   contents: write
 
-# A slow run must not overlap the next scheduled one and race the push.
+# A slow run must not overlap the next scheduled one and race the push. Shared
+# with update-kits.yml, which commits to the same branch — one queue for
+# everything that writes to data/ is simpler than two that have to be lucky.
 concurrency:
-  group: update-feeds
+  group: desk-data
   cancel-in-progress: false
 
 jobs:

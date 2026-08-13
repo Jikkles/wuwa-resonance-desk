@@ -518,10 +518,37 @@ function shipped(current) {
   return v => !!v && cmpVer(v, current) <= 0;
 }
 
+/* Which patch is live, from the dates rather than the `current` field.
+   This is the twin of statusOf()/currentVersion() in assets/app.js and has to
+   agree with it: that one decides whether a card reads "New", this one decides
+   whether a kit is `official`, and the two disagreeing would put a character
+   on the grid as released next to a kit still marked pre-release. Both say a
+   patch is live once its start has passed and nothing later has started, and
+   both refuse to retire one on an estimated end date.
+
+   Kept as a copy rather than a shared module on purpose: app.js is a plain
+   <script> with no build step and cannot import, and a build step to spare
+   fifteen lines would cost the project the thing it is built around. **If you
+   change the rule, change it in both places.** */
+function deriveCurrent(doc) {
+  const today = new Date().toISOString().slice(0, 10);
+  const list = doc.versions || [];
+  const started = list.filter(v => {
+    const start = v.start || (v.phases || []).slice(-1)[0]?.start;
+    return start && start <= today;
+  });
+  if (!started.length) return doc.current || "0.0";
+  /* The newest patch that has started. Anything earlier is superseded by it,
+     which is the same supersession rule the desk draws the timeline with. */
+  return started.sort((a, b) => cmpVer(b.id, a.id))[0].id;
+}
+
 (async function main() {
   const versions = await readJson("data/versions.json").catch(() => ({}));
-  const current = versions.current || "0.0";
+  const current = deriveCurrent(versions);
   const prev = await readJson(OUT_INDEX).catch(() => ({ resonators: [] }));
+  const prevKits = (await readJson(OUT_KITS).catch(() => ({}))).kits || {};
+  console.log(`current patch: ${current} (derived from dates)`);
 
   /* Roster: the union of the two wiki categories — one lists the four Rover
      forms, the other the characters announced but not yet playable — keyed
@@ -538,6 +565,15 @@ function shipped(current) {
   const roster = parseRoster(listHtml);
   const bySlug = new Map(roster.map(r => [ckey(r.name), r]));
   console.log(`wiki: ${titles.length} resonator pages · prydwen: ${roster.length} listed\n`);
+
+  /* A Cloudflare interstitial is a 200 with a valid HTML body, so curl --fail
+     lets it through and parseRoster finds no characters in it. Without this
+     the run would carry on, scrape nothing, and quietly conclude that nobody
+     has a kit. Fail loudly instead — an empty roster is never a real answer. */
+  if (!roster.length) {
+    console.error("prydwen returned no roster — blocked or restructured. Refusing to write.");
+    process.exit(1);
+  }
 
   const pages = await wikitextFor(titles);
   const roverParent = parseCharacter("Rover", pages.get("Rover") || "") || {};
@@ -564,7 +600,13 @@ function shipped(current) {
     return { name: c.name, slug, ...parseKit(html) };
   });
 
-  const kits = {};
+  /* Start from what is already on disk rather than from nothing. Prydwen is
+     Cloudflare-gated and turns a datacenter runner away at random — pool()
+     records that as an error per page and carries on, so a blocked run used to
+     reach this point with sixty failures, build an empty `kits`, and write it
+     over 636KB of kit text. Merging means a page that failed keeps yesterday's
+     kit, and only a page that actually parsed replaces one. */
+  const kits = { ...prevKits };
   const isShipped = shipped(current);
   const index = [];
   const byName = new Map(prev.resonators?.map(r => [ckey(r.name), r]) || []);
@@ -601,8 +643,12 @@ function shipped(current) {
       .filter(v => v !== debut);
 
     const kit = kitPages.find(k => k && ckey(k.name) === ckey(c.name));
-    const hasKit = kit && Object.keys(kit.skills || {}).length >= 4;
-    if (hasKit) kits[name] = { slug: kit.slug, skills: kit.skills, inherent: kit.inherent, chain: kit.chain, ...(kit.extra?.length ? { extra: kit.extra } : {}) };
+    const scraped = kit && Object.keys(kit.skills || {}).length >= 4;
+    if (scraped) kits[name] = { slug: kit.slug, skills: kit.skills, inherent: kit.inherent, chain: kit.chain, ...(kit.extra?.length ? { extra: kit.extra } : {}) };
+    /* Carried over from a previous run counts: the record has a kit to open
+       either way, and a turned-away request must not strip the badge off
+       sixty cards. */
+    const hasKit = scraped || !!kits[name];
 
     /* Old record first so nothing hand-written is lost, then the wiki fills
        the blanks. `version`, `reruns` and `runs` are the exception — they are
@@ -658,6 +704,22 @@ function shipped(current) {
      character in four elements rather than four debuts, so threading them
      through the timeline by release date separates them for no reason. */
   index.sort((a, b) => (isRover(a) - isRover(b)) || debutKey(a).localeCompare(debutKey(b)));
+
+  /* Last backstop before the writes. Merging already means a failed page keeps
+     its old kit, so the only way to arrive here materially short is something
+     structural — Prydwen changing its markup, or the wiki dropping a category
+     — and in both cases yesterday's file is worth more than today's. Kits only
+     ever get added, so any real shrinkage is a bug. */
+  const before = Object.keys(prevKits).length;
+  const after = Object.keys(kits).length;
+  if (before && after < before) {
+    console.error(`kits fell from ${before} to ${after} — parser or source changed. Refusing to write.`);
+    process.exit(1);
+  }
+  if (prev.resonators?.length && index.length < prev.resonators.length) {
+    console.error(`index fell from ${prev.resonators.length} to ${index.length}. Refusing to write.`);
+    process.exit(1);
+  }
 
   const today = new Date().toISOString().slice(0, 10);
   await writeFile(OUT_INDEX, JSON.stringify({

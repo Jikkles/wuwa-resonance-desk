@@ -596,6 +596,11 @@ button{font:inherit;color:inherit}
 /* Filtered down to one or two patches, they share the width evenly instead of
    leaving a hole where the other cards were. */
 .hero.narrow{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+/* Live + Future with no announced patch between them — the normal state for
+   most of a cycle. The live card takes the width the empty Next slot gave up;
+   the future card keeps its narrow column, because what is in it is still two
+   names and a paragraph of hedging. */
+.hero.pair{grid-template-columns:1.84fr .68fr}
 .pcard{
   position:relative;display:flex;flex-direction:column;min-height:400px;overflow:hidden;
   background:var(--tint);border:1px solid var(--line);border-radius:var(--r);

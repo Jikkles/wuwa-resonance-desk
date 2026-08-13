@@ -1,0 +1,59 @@
+name: Update kits
+
+# Separate from update-feeds.yml, and daily rather than 6-hourly, because this
+# job is a different shape: ~140 requests across Fandom and Prydwen for data
+# that changes when a patch ships, not when someone posts a video. Running it
+# on the feed's cadence would be four times the traffic at two fan sites for
+# the same answer.
+#
+# The useful run is the one on patch day: fetch-kits.mjs derives the live
+# version from the dates in versions.json, so the morning 3.6 starts it
+# promotes Qingxiao's and Jingran's kits from `datamined` to `official` on its
+# own. Nothing to trigger, nothing to edit first.
+
+on:
+  schedule:
+    - cron: "40 3 * * *"   # daily, 03:40 UTC — after the 00:00 feed run
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Shared with update-feeds.yml: both jobs commit to the same branch, and the
+# rebase-then-push dance is far less likely to matter if they simply never run
+# at once.
+concurrency:
+  group: desk-data
+  cancel-in-progress: false
+
+jobs:
+  kits:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # No continue-on-error here, unlike the portrait and weapon steps in
+      # update-feeds.yml. Those degrade to "no new art this cycle", which is
+      # invisible and harmless. This one owns the resonator index, so a failure
+      # is worth seeing — and the script now refuses to write rather than
+      # writing something thin, so a red run means the files were left alone.
+      - name: Build resonator index and kits
+        run: node scripts/fetch-kits.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "feed-bot"
+          git config user.email "feed-bot@users.noreply.github.com"
+          git add data/resonators.json data/kits.json
+          if git diff --staged --quiet; then
+            echo "no change"
+            exit 0
+          fi
+          git commit -m "chore: refresh kits $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

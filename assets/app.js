@@ -164,9 +164,79 @@ function headline(i){
   return en ? {text:en, original:i.title, translated:true} : {text:i.title, original:"", translated:false};
 }
 
-const liveVersion   = () => versions().find(v => v.status === "live");
-const nextVersion   = () => versions().find(v => v.status === "announced");
-const futureVersion = () => versions().find(v => v.status === "beta");
+/* A patch's own dates, read raw — no inference, no reference to any other
+   version. statusOf() needs a window before the statuses exist, so this one
+   cannot be patchWindow(): that fills a missing end from the *next* version,
+   which is a question about statuses, and asking it here would close a loop. */
+function versionWindow(v){
+  const last = (v?.phases || []).slice(-1)[0];
+  return {
+    start: v?.start || last?.start || "",
+    end:   last?.end || "",
+    est:   !!last?.estimated_end
+  };
+}
+
+/* `status` in versions.json used to be hand-set, which meant the desk called
+   3.5 current until someone edited a string — at midnight, on the day a patch
+   drops, which is the one moment the timeline is actually being read. The
+   dates were already sitting in the same object saying otherwise, so the
+   string was a second copy of a fact the file already carried, and the copy
+   went stale. Now it is derived, and the JSON's own value survives only where
+   arithmetic has nothing to say.
+
+   Two rules, and the split between them is the desk's usual one — a date is a
+   fact, a tier is a judgement:
+
+   - **Live and past are computed.** Both are pure date arithmetic against
+     today, so they flip on the reader's own midnight with no commit, no bot
+     and no six-hour cron lag.
+   - **Beta is never upgraded.** `beta` → `announced` means "Kuro has announced
+     this", which is a confidence call on a par with the intel tiers, and no
+     amount of arithmetic earns it. A beta patch with a projected start stays
+     beta until a human says otherwise — then flips itself on the day.
+
+   A patch retires on the firmer of two signals: a later version has actually
+   started, or its own *confirmed* end has passed. An estimated end never
+   retires anything — 3.6's phase 2 end is a guess, and a guess that runs short
+   must not blank the timeline mid-patch. So a patch outstaying its estimate
+   keeps the lights on until its successor turns up, which is both the safer
+   failure and the likelier truth. */
+function statusOf(v){
+  if(!v) return "";
+  const {start, end, est} = versionWindow(v);
+  if(!start) return v.status || "";                    /* undated — 3.7 stays beta */
+  if(daysTo(start) > 0) return v.status === "beta" ? "beta" : "announced";
+  const superseded = versions().some(o =>
+    o !== v && o.start && cmpVer(o.id, v.id) > 0 && daysTo(o.start) <= 0);
+  if(superseded) return "past";
+  if(end && !est && daysTo(end) < 0) return "past";
+  return "live";
+}
+
+const liveVersion   = () => versions().find(v => statusOf(v) === "live");
+const nextVersion   = () => versions().find(v => statusOf(v) === "announced");
+const futureVersion = () => versions().find(v => statusOf(v) === "beta");
+
+/* The patch running now, by number. `current` in versions.json is the same
+   fact as "which version is live", so it is read off the live patch and the
+   file's own field is only a fallback for a desk with no dated versions at
+   all. It drives the New/Upcoming flags on all sixty resonator cards, so
+   letting it drift from the timeline used to mis-flag the whole grid.
+
+   The middle term matters more than it looks. If a patch has a confirmed end
+   that has passed and no successor has been added yet, statusOf() retires it
+   and there is no live version — and falling straight to the file's field
+   there would answer with the patch *before* it, walking the whole grid's
+   flags backwards a version. The newest patch that has actually started is
+   never wrong in that direction, and it is the same rule deriveCurrent() in
+   scripts/fetch-kits.mjs uses to decide when a kit becomes official. */
+const currentVersion = () =>
+  liveVersion()?.id
+  || [...versions()]
+       .filter(v => { const s = versionWindow(v).start; return s && daysTo(s) <= 0; })
+       .sort((a, b) => cmpVer(b.id, a.id))[0]?.id
+  || DATA.versions?.current || "";
 
 function resonatorFor(name){
   const k = String(name||"").toLowerCase();
@@ -285,7 +355,7 @@ function weaponRuns(name){
     for(const p of v.phases || [])
       for(const b of p.banners || [])
         if(signatureFor(b).toLowerCase() === k)
-          add({...b, phase:p.n, version:v.id, start:p.start, end:p.end, status:v.status});
+          add({...b, phase:p.n, version:v.id, start:p.start, end:p.end, status:statusOf(v)});
   /* versions.json only carries the arc the desk is currently watching — two
      patches — so on its own it makes every weapon older than that a dead end,
      and the signature weapon card on a 1.0 Resonator's record links nowhere.
@@ -338,7 +408,7 @@ function patchWindow(v){
   const start = v.start ? new Date(v.start) : last?.start ? new Date(last.start) : null;
   let end = last?.end ? new Date(last.end) : null;
   let est = !!last?.estimated_end;
-  if(!end && v.status === "live"){
+  if(!end && statusOf(v) === "live"){
     const n = nextVersion();
     if(n?.start){ end = new Date(n.start); est = true; }
   }
@@ -1077,14 +1147,14 @@ function streamVideo(v){
 
 /* Which bucket a version falls in. One definition — the chips and the card row
    have to agree or the filter looks broken. */
-const bucketOf = v => v.status === "live" ? "current"
-  : (v.status === "announced" || v.status === "beta") ? "upcoming" : "past";
-const roleOf = v => v.status === "live" ? "live" : v.status === "announced" ? "next" : "future";
+const bucketOf = v => statusOf(v) === "live" ? "current"
+  : (statusOf(v) === "announced" || statusOf(v) === "beta") ? "upcoming" : "past";
+const roleOf = v => statusOf(v) === "live" ? "live" : statusOf(v) === "announced" ? "next" : "future";
 
 function renderTimeline(){
   const live = liveVersion(), next = nextVersion(), future = futureVersion();
 
-  const rank = v => v.status === "live" ? 0 : v.status === "announced" ? 1 : v.status === "beta" ? 2 : 3;
+  const rank = v => statusOf(v) === "live" ? 0 : statusOf(v) === "announced" ? 1 : statusOf(v) === "beta" ? 2 : 3;
   const inWindow = v => S.when === "all" || bucketOf(v) === S.when;
   const list = [...versions()].filter(inWindow)
     .sort((a, b) => rank(a) - rank(b) || parseFloat(b.id) - parseFloat(a.id));
@@ -1093,12 +1163,21 @@ function renderTimeline(){
      chips asked for. The filter has to change the thing directly underneath
      it — it used to sit on this panel and quietly re-filter a lane list two
      thousand pixels further down, which reads as a button that does nothing. */
+  /* The Next slot goes empty for most of a patch's life: the moment one ships,
+     the patch after it is a beta rumour rather than an announcement, and stays
+     that way until Kuro's preview broadcast a month later. Its placeholder
+     says "nothing past the current cycle has surfaced yet", which is the right
+     thing to say when the row really is bare and a plain falsehood printed
+     beside a populated 3.7 card — the exact shape of every patch day. So the
+     slot is dropped when there is a future card to carry the message instead,
+     and the row closes to two. */
+  const trio = [[live, "live"], [next, "next"], [future, "future"]];
   const cards = S.when === "all"
-    ? [[live, "live"], [next, "next"], [future, "future"]]
+    ? trio.filter(([v], i) => v || !(i === 1 && future))
     : list.map(v => [v, roleOf(v)]);
 
   const body = cards.length
-    ? `<div class="hero${S.when === "all" ? "" : " narrow"}">${
+    ? `<div class="hero${S.when === "all" ? (cards.length === 2 ? " pair" : "") : " narrow"}">${
         cards.map(([v, r]) => patchCard(v, r)).join("")}</div>`
     : `<div class="empty">No patch in this window.</div>`;
 
@@ -1468,7 +1547,7 @@ function cmpVer(a, b){
   return (am - bm) || (an - bn);
 }
 function hasDebuted(r){
-  const live = DATA.versions?.current;
+  const live = currentVersion();
   return !!(r.version && live && cmpVer(r.version, live) <= 0);
 }
 
@@ -1516,7 +1595,7 @@ function debutBadge(r){
    debut is simply in the game — a flag on fifty-six of sixty cards marks
    nothing. */
 function releaseFlag(r){
-  const live = DATA.versions?.current;
+  const live = currentVersion();
   if(!r.version || !live) return "";
   const d = cmpVer(r.version, live);
   return d > 0 ? `<i class="flag up">Upcoming</i>`
@@ -2018,7 +2097,8 @@ function fillKit(name){
 function drawerVersion(id){
   const v = versions().find(x => x.id === id);
   if(!v) return;
-  const role = v.status === "live" ? "live" : v.status === "announced" ? "next" : "future";
+  const status = statusOf(v);
+  const role = status === "live" ? "live" : status === "announced" ? "next" : "future";
   const news = newsFor(v.id);
   const phases = (v.phases || []).map(p => `
     <div class="dsec">
@@ -2066,7 +2146,7 @@ function drawerVersion(id){
 
   openDrawer("Version", `<div class="drawer-b">
     <div class="meta">
-      <span class="pill ${role === "live" ? "live" : role === "next" ? "next" : "future"}">${esc(v.status)}</span>
+      <span class="pill ${role === "live" ? "live" : role === "next" ? "next" : "future"}">${esc(status)}</span>
       ${v.region ? `<span class="pill">${esc(v.region)}</span>` : ""}
       ${stream}
     </div>
@@ -2214,7 +2294,7 @@ function cmdIndex(){
     group:"Views", label:v.label, hint:v.soon ? "View · not built" : "View", act:["view", v.id], tier:null
   }));
   versions().forEach(v => out.push({
-    group:"Versions", label:`${v.id}${v.title ? " — " + v.title : ""}`, hint:v.status, act:["version", v.id], tier:null
+    group:"Versions", label:`${v.id}${v.title ? " — " + v.title : ""}`, hint:statusOf(v), act:["version", v.id], tier:null
   }));
   resonators().forEach(r => out.push({
     group:"Resonators", label:`${r.name}${r.nameCN ? " " + r.nameCN : ""}`,
