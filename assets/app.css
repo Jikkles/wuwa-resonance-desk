@@ -563,12 +563,15 @@ button{font:inherit;color:inherit}
    person about 380px tall and a head the size of a full stop. The zoom brings
    it back to chest-up — the framing the cell has always had, now cut from
    2048px of source rather than 374. */
-/* The origin is a little above the head rather than on it: the top 78px of this
-   box sits behind the head band, so a crop centred on the face puts the face in
-   the band's shadow. Starting the visible range just off the top of the canvas
-   spends that 78px on the empty air the illustration already has above the
-   head, and the face lands clear of the band. */
-.figs img.fig.full{transform:scale(1.92);transform-origin:50% 25%}
+/* The origin sits well above the head, not on it. This box is bled 78px up
+   behind the head band, and those 78px are spent before the picture starts —
+   otherwise the band clips the top of the hair and drops the face into its own
+   shadow. So the visible range begins off the top of the canvas: the first
+   fifth of it is the empty air the illustration already carries above the head,
+   the band covers exactly that, and the figure starts where the band ends.
+   Horns, ears and hair ornaments all clear it, which is what these designs put
+   up there. */
+.figs img.fig.full{transform:scale(1.92);transform-origin:50% 13%}
 /* Two figures lean in toward the middle rather than both drifting to their
    outside edges — a pair standing together, not two pictures in two boxes. */
 .figs.n2 .fig-cell:first-child img.fig{object-position:62% 30%}
@@ -1648,7 +1651,7 @@ button{font:inherit;color:inherit}
      third of the picture rather than a fifth, and a crop that cleared it at
      full height puts a face behind the codename here. Start the figure a touch
      lower down the frame. */
-  .figs img.fig.full{transform-origin:50% 22%}
+  .figs img.fig.full{transform-origin:50% 8%}
   /* No horizontal scroll inside a card on touch — wrap the portraits instead,
      since a half-visible face reads as a broken image. */
   .pcard-row .bstrip{flex-wrap:wrap;overflow:visible;--thumb:56px}
