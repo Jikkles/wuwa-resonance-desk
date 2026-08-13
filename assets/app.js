@@ -663,21 +663,15 @@ function renderRail(){
 }
 
 /* Right-hand mark on a nav item, in precedence order: the standing warning
-   Live Signals carries, then the unbuilt flag, then the record count. A view
-   with nothing behind it has no count worth printing — a bare 0 next to
-   Weapons reads as "no weapons exist" rather than "not written yet". */
+   Live Signals carries, then the unbuilt flag. Both say something you need
+   before you open the view. The record counts that used to sit here said
+   nothing you'd act on — sixty is how many Resonators exist either way — and
+   four figures down one edge read as a scoreboard. Each view still counts
+   itself in its own words once you are in it. */
 function navBadge(v){
   if(v.warn) return `<span class="warn">${v.warn}</span>`;
   if(v.soon) return `<span class="soon">Soon</span>`;
-  return railCount(v.id);
-}
-function railCount(id){
-  const n = id === "intel" ? entries().length
-          : id === "signals" ? signals().length
-          : id === "resonators" ? resonators().length
-          : id === "weapons" ? weapons().length
-          : versions().length;
-  return `<span class="n">${n}</span>`;
+  return "";
 }
 
 /* Static once the data is in — the legend can't change without a reload. */
@@ -1502,10 +1496,25 @@ function debutBadge(r){
    roster into six screens of small print nobody reads. What survives earns its
    place at a glance: the art identifies them, the accent is their element, and
    the corner is the patch they debuted in. */
+/* The opposite corner to the debut badge, and only two patches earn one: the
+   one running now and anything past it. "New" and "Upcoming" are the two
+   questions a roster sorted newest-first is opened with, and they are the two
+   the patch number alone makes you do arithmetic to answer. Every earlier
+   debut is simply in the game — a flag on fifty-six of sixty cards marks
+   nothing. */
+function releaseFlag(r){
+  const live = DATA.versions?.current;
+  if(!r.version || !live) return "";
+  const d = cmpVer(r.version, live);
+  return d > 0 ? `<i class="flag up">Upcoming</i>`
+       : d === 0 ? `<i class="flag new">New</i>`
+       : "";
+}
+
 function recordCard(r){
   const b = bannerFor(r.name) || {};
   return `<article class="rec" role="button" tabindex="0" data-act="resonator" data-id="${esc(r.name)}"${attrStyle(r.attribute)}>
-    ${artPanel({name:r.name, ...b}, debutBadge(r))}
+    ${artPanel({name:r.name, ...b}, releaseFlag(r) + debutBadge(r))}
     <h3 class="rec-n">${esc(r.name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h3>
   </article>`;
 }

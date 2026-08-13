@@ -210,7 +210,6 @@ button{font:inherit;color:inherit}
 .navlink[aria-current="true"]{background:var(--accent-soft);color:var(--accent);font-weight:700}
 .navlink[aria-current="true"] svg{opacity:1}
 .navlink>span:first-of-type{white-space:nowrap}
-.navlink .n{margin-left:auto;font-size:11px;color:var(--fg-2);letter-spacing:.04em}
 /* Live Signals carries its warning in the nav itself rather than only once you
    are inside the view. flex:none or the label gives way first and
    "Live Signals" wraps onto two lines. */
@@ -235,10 +234,10 @@ button{font:inherit;color:inherit}
    panel is gone, and with it the header that carried it. */
 .navitem{display:flex;flex-direction:column}
 /* The badge keeps the right edge; the caret sits outside it, so an item with a
-   count and an item with none still line their marks up. */
-.navlink .n,.navlink .warn,.navlink .soon{margin-left:auto}
+   badge and an item with none still line their marks up. */
+.navlink .warn,.navlink .soon{margin-left:auto}
 .navlink .caret{display:flex;flex:none;margin-left:9px;color:var(--fg-3);transition:transform .18s,color .15s}
-.navlink:not(:has(.n,.warn,.soon)) .caret{margin-left:auto}
+.navlink:not(:has(.warn,.soon)) .caret{margin-left:auto}
 .navlink[aria-expanded="true"] .caret{transform:rotate(90deg)}
 .navlink[aria-current="true"] .caret{color:currentColor}
 
@@ -1203,6 +1202,21 @@ button{font:inherit;color:inherit}
   .cart .debut-tip{display:none}
 }
 
+/* ── release flag ─────────────────────────────────────────────────
+   Top-left, facing the debut badge across the art. It takes the tier colours
+   the patch cards already use for the same two states — green for the patch
+   running now, blue for one that hasn't landed — so "New" here and "Current"
+   on the timeline are visibly the same claim. Filled rather than outlined:
+   it sits on artwork, where a hairline border and a colour disappear. */
+.cart .flag{
+  position:absolute;top:11px;left:13px;z-index:3;
+  font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:600;
+  color:var(--bg);border-radius:6px;padding:3px 8px;
+}
+.cart .flag.new{background:var(--t-official)}
+.cart .flag.up{background:var(--t-datamined)}
+
 .cart .attrline{
   position:absolute;left:13px;right:13px;bottom:11px;z-index:2;
   display:flex;gap:8px;flex-wrap:wrap;
@@ -1472,6 +1486,7 @@ button{font:inherit;color:inherit}
 /* At card width the badge and its `+n` were wider than the art they sit on. */
 .rec .cart .debut{top:8px;right:8px;font-size:8.5px;padding:2px 6px;gap:4px}
 .rec .cart .debut i{font-size:8px}
+.rec .cart .flag{top:8px;left:8px;font-size:8.5px;padding:2px 6px}
 
 /* Five marks always, the unearned ones greyed — the shape of the rating reads
    before the count does, which is the point of stars over "5★". */
