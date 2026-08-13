@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-08-12",
+  "updated": "2026-08-13",
   "current": "3.5",
   "versions": [
     {
@@ -82,7 +82,7 @@
       "title": "",
       "status": "beta",
       "phases": [],
-      "notes": "Hsin flagged as an Electro Rectifier Sentinel. Beta had not opened as of 11 Aug 2026 - expect the first real datamine wave once it does."
+      "notes": "Hsin flagged as an Electro Rectifier Sentinel, now also reported to run two switchable stances and coordinated attack damage. Suoming is the second new Resonator, listed as an Electro Sword on 9 Aug after the same list called her Havoc a week earlier - contested, and no beta has opened to settle it. Community arithmetic on past patch lengths projects drip around 28-29 Aug, beta 4 Sep, broadcast 18 Sep, Phase 1 2 Oct and Phase 2 24 Oct; none of that is from Kuro. Beta had not opened as of 13 Aug 2026 - expect the first real datamine wave once it does."
     }
   ]
 }

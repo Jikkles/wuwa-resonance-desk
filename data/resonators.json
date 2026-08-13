@@ -3153,7 +3153,7 @@
       "status": "teased",
       "region": "Mengzhou",
       "epithet": "Clear moonlight drapes the lonely keep",
-      "summary": "Teased via a Mandelbrot fractal image, read as pointing at a recursive, self-scaling kit. Appears in Kuro's second-half 3.x cast reveal poster set, filed to Mengzhou. No file data yet.",
+      "summary": "Teased via a Mandelbrot fractal image, read as pointing at a recursive, self-scaling kit. Appears in Kuro's second-half 3.x cast reveal poster set, filed to Mengzhou. The leaker Sleep since described two switchable modes - one named Electro Flare, one built on Tune Strain with a field component - plus coordinated attack damage, which would make her the first coordinated attacker able to hold the on-field slot. No file data yet; 3.7 beta has not opened.",
       "kit": [],
       "materials": {
         "ascension": [],
@@ -3173,23 +3173,31 @@
           "name": "Prydwen - upcoming roster",
           "lang": "en",
           "url": "https://www.prydwen.gg/wuthering-waves/characters/hsin"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Hsin info via Sleep",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vikye9/37_info_about_hsin_via_sleep/"
         }
       ]
     },
     {
       "name": "Suoming",
       "rarity": 5,
+      "attribute": "Electro",
+      "weapon": "Sword",
+      "version": "3.7",
       "status": "teased",
       "region": "Mengzhou",
       "epithet": "Locked in the past, the prisoner lingers long",
-      "summary": "Revealed in Kuro's second-half 3.x cast poster set alongside Hsin. Red-haired, carries a wide paper parasol with lock and songbook motifs. Element, weapon class and debut patch are all unannounced - Prydwen files them as 3.x, which is its marker for an upcoming character with no version attached.",
+      "summary": "Revealed in Kuro's second-half 3.x cast poster set alongside Hsin. Red-haired, carries a wide paper parasol with lock and songbook motifs. Element and weapon are contested: the leaks subreddit's tracked list called her Havoc on 2 August and Electro Sword on 9 August, without explaining the switch, and no beta has opened to settle it. She appeared in the 3.6 broadcast in a scene with Yinlin, and the community reading ties her to Hsin's disappearance. Treat the Electro Sword line as the later claim rather than a confirmed one.",
       "kit": [],
       "materials": {
         "ascension": [],
         "skill": []
       },
       "confidence": {
-        "identity": "reported",
+        "identity": "rumour",
         "kit": "rumour"
       },
       "sources": [
@@ -3197,6 +3205,11 @@
           "name": "Prydwen - upcoming roster",
           "lang": "en",
           "url": "https://www.prydwen.gg/wuthering-waves/characters/suoming"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - megathread, 9 August",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vjtsgv/the_adventures_of_suisui_and_suicune_weekly/"
         },
         {
           "name": "r/WutheringWavesLeaks - second half of 3.x cast reveal, compiled",

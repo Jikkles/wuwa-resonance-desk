@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-12",
+  "updated": "2026-08-13",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -8,6 +8,215 @@
     "rumour": "One unverified source, or sources disagreeing. Assume it's wrong until something better shows up."
   },
   "entries": [
+    {
+      "id": "2026-08-07-36-beta-365",
+      "date": "2026-08-07",
+      "version": "3.6",
+      "category": "kit",
+      "confidence": "reported",
+      "title": "Second beta pass buffs Qingxiao's resource generation and Jingran's Ghost Ward",
+      "body": "A three-hour test server maintenance on 7 August took the beta to 3.6.5, and the leaker Seele relayed the notice. Qingxiao gets the larger share: Lucid Emptiness now doubles Qin Heart and Sword Rhythm generation whenever Sheathed or Drawn Sword Stance deals damage, base generation rates were retuned, and the Celestial Light, Cloudshadow, Azure Tides Arise Liberation multiplier went up. Her Sequence 6 was rebuilt around Mind-Lock - each stack raises damage taken from Juque: Erasure of Traces by 2%, with the first seven stacks adding a further 5% each, and the same scaling was mirrored onto Inherent Skill: Comprehension of All Things. Jingran picks up an anti-friction fix: entering combat below 25 Ghost Ward tops him back up to 25, once every 4s. His Sequence 2 gained 46% on both Heavy Attack multipliers plus a 25% Resonance Energy refund while Nether Passage is active, and Myriad Malevolent Spirits now triggers on dealing damage, capped at 8. This is a relayed patch notice rather than an extracted file, so it sits at reported rather than datamined, and everything in it is still pre-balance.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "Jingran",
+        "kit",
+        "beta"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - 3.6.5 beta updates via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhwxd6/365_beta_updates_via_seele/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-07-36-performance",
+      "date": "2026-08-07",
+      "version": "3.6",
+      "category": "qol",
+      "confidence": "official",
+      "title": "Around 10 extra frames per second across every platform",
+      "body": "The preview broadcast put a number on the 3.6 performance work: roughly 10 additional FPS. Kuro said the optimisation ships on all platforms, with the gain most noticeable on iOS, PC and PS5. This sits alongside the DLSS 4.5 frame generation already announced for PC.",
+      "tags": [
+        "3.6",
+        "qol",
+        "performance"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - broadcast slides, compiled",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhybxk/performance_optimization_in_36/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-07-36-jp-va",
+      "date": "2026-08-07",
+      "version": "3.6",
+      "category": "meta",
+      "confidence": "official",
+      "title": "Kengo Kawanishi voices Jingran in Japanese",
+      "body": "Both 3.6 Japanese casting announcements landed on broadcast day. Jingran goes to Kengo Kawanishi; Qingxiao's Japanese VA was revealed in the same wave.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "Jingran",
+        "voice"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Jingran JP VA",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhx533/jingrans_jp_va_kengo_kawanishi/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Qingxiao JP VA",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhz2nm/qingxiao_jp_va_officially_revealed/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-09-37-schedule-estimate",
+      "date": "2026-08-09",
+      "version": "3.7",
+      "category": "banner",
+      "confidence": "rumour",
+      "title": "Community extrapolation puts 3.7 drip at the end of August",
+      "body": "The leaks subreddit maintains a projected calendar built by assuming every patch runs 42 days and every phase 21. It puts 3.7 drip marketing at 28 or 29 August, beta opening 4 September, the preview broadcast on 18 September, Phase 1 on 2 October and Phase 2 on 24 October, with Hsin and Suoming as the new Resonators. None of this comes from Kuro or from files - it is arithmetic on past patch lengths, and the subreddit labels it as such. Useful for rough pull budgeting, worthless as a commitment.",
+      "tags": [
+        "3.7",
+        "banners",
+        "roadmap"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - weekly megathread",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vjtsgv/the_adventures_of_suisui_and_suicune_weekly/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-09-37-suoming-element",
+      "date": "2026-08-09",
+      "version": "3.7",
+      "category": "banner",
+      "confidence": "rumour",
+      "title": "Suoming listed as an Electro Sword after an earlier Havoc claim",
+      "body": "The leaks subreddit's tracked character list now files Suoming as a 5-star Electro Sword user releasing in 3.7 alongside Hsin. The same list called her Havoc a week earlier, on 2 August, and switched to Electro without a stated reason. Two Electro Resonators sharing a patch would be unusual, which is part of why the entry is contested. Her beta has not opened, so there is no file evidence on either side - the desk carries Electro as the current claim only because it is the later one.",
+      "tags": [
+        "3.7",
+        "Suoming",
+        "characters"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - megathread, 9 August",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vjtsgv/the_adventures_of_suisui_and_suicune_weekly/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - megathread, 2 August (Havoc)",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vdlf5j/sui_sauced_dumplings_weekly_questions_discussions/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vh1s0n/37_about_suoming_via_seele/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-08-37-hsin-modes",
+      "date": "2026-08-08",
+      "version": "3.7",
+      "category": "kit",
+      "confidence": "reported",
+      "title": "Hsin said to carry two stances and a coordinated attack",
+      "body": "The leaker Sleep describes Hsin running two switchable modes - one called Electro Flare, the other built around Tune Strain with a field or domain component - and doing coordinated attack damage. Coordinated attackers in this game have all been off-field units so far, which is the basis for the reading that one stance carries a support or sub-DPS role while the other is the on-field one. Nothing is in files: 3.7 beta has not opened. CN and EN comment sections both converged on the same worry, that a Tune Strain stance makes her dependent on Denia in the way Qingxiao already is.",
+      "tags": [
+        "3.7",
+        "Hsin",
+        "kit"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Hsin info via Sleep",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vikye9/37_info_about_hsin_via_sleep/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-01-36-beta-361",
+      "date": "2026-08-01",
+      "version": "3.6",
+      "category": "kit",
+      "confidence": "datamined",
+      "title": "First beta pass moves Jingran fully onto HP scaling",
+      "body": "Build 8296177 rewrote how Jingran converts stats. His DEF is now pinned at 0 at all times, his Resonance Liberation cuts him to 50% Max HP if he is above it, and Max HP feeds three separate conversions - 36 ATK per 1000 HP capped at 1800, 6.2% bonus healing per 1000 capped at 310%, and 1.5% Fusion DMG per 1000 capped at 75%. Fortune in Disguise caps at 50 stacks, each granting up to 2.5% further Fusion DMG, and ends the moment you swap off him. Fixation acquisition was reworked so entering combat grants it on a 4s cadence, and allies gaining shields converts it into 15 Ghost Shroud. Qingxiao's changes were lighter and mostly naming and flow: Sword Intent became Sword Cadence, her Intro Skill no longer counts as Drawn Stance, Sword Step stopped consuming Flight Qi, and Gathered Mind now applies Mindlock equal to her stack count once per target. Every multiplier here is pre-balance, and the 3.6.5 pass a week later moved several of them again.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "Jingran",
+        "kit",
+        "beta"
+      ],
+      "sources": [
+        {
+          "name": "nanoka.cc via r/WutheringWavesLeaks",
+          "lang": "zh",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vcbnri/36_beta_updated_to_361_8296177_via_nanokacc/"
+        }
+      ],
+      "outcome": "superseded"
+    },
+    {
+      "id": "2026-08-02-36-muyu-boss",
+      "date": "2026-08-02",
+      "version": "3.6",
+      "category": "story",
+      "confidence": "reported",
+      "title": "Why Muyu's ascension fails, in his own boss description",
+      "body": "Seele relayed the beta's writeup of the 3.6 boss. Muyu of Zhuojun Hall abandoned his flesh in imitation of the Celestials, anchoring his consciousness frequency to a Celestial Type Shard and building a mechanical body from mecha wreckage inside the Divine Palace Illusion, burning Echoes of All Beings as fuel. Linking that body to the Divine Shuttle appeared to hand him control of the realm. It had not: the He Civilization technology ran past him, trapping parts of his body in a disintegration and repair loop, and his consciousness frequency degraded during the failed transfer until he was closer to an echo than a person. The text is explicit that the failure is moral rather than technical - Celestialhood requires keeping a regard for the value of life, and he had already lost it. Fills in the boss fight behind the Gospel Palace of Mechas sequence.",
+      "tags": [
+        "3.6",
+        "story",
+        "Muyu"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - new boss via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vdr7nt/36_about_the_new_boss_spoiler_warning_via_seele/"
+        }
+      ]
+    },
+    {
+      "id": "2026-07-31-40-revamp",
+      "date": "2026-07-31",
+      "version": null,
+      "category": "system",
+      "confidence": "reported",
+      "title": "1.0 content said to be getting a revamp in 4.0",
+      "body": "Seele reports Kuro is planning to rework the game's 1.0 content to land with 4.0. No scope is attached - it is not stated whether this means the opening story, the Huanglong map, early quest pacing, or all three. Sits alongside the reported move of the story arc to the Federation in 4.x. Roadmap claims this far out are the weakest category on the desk regardless of source.",
+      "tags": [
+        "4.0",
+        "roadmap"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - 1.0 revamp via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vbo4w3/10_content_revamp_planned_for_40_via_seele/"
+        }
+      ]
+    },
     {
       "id": "2026-08-11-35-echo-double",
       "date": "2026-08-11",
@@ -35,7 +244,7 @@
       "category": "banner",
       "confidence": "rumour",
       "title": "Hint-reading points to a 3.8 Resonator called Lily",
-      "body": "The leaks subreddit read a run of teasers from the leaker Step as pointing to a 3.8 Resonator named Lily, with a separate thread reading a Seele hint as the next male unit. This is hint interpretation, not file evidence: no beta client exists for 3.8, and the name has not turned up in a datamine. That is three versions past live, so it stays a placeholder until something with files behind it lands.",
+      "body": "The leaks subreddit read a run of teasers from the leaker Step as pointing to a 3.8 Resonator named Lily, with a separate thread reading a Seele hint as the next male unit. The name itself traces back to a Tieba post rather than to Step, and the weapon read comes from Step posting separately that a girl was holding him at gunpoint, taken as a gun user. This is hint interpretation, not file evidence: no beta client exists for 3.8, and the name has not turned up in a datamine. That is three versions past live, so it stays a placeholder until something with files behind it lands.",
       "tags": [
         "3.8",
         "characters"
@@ -45,6 +254,11 @@
           "name": "r/WutheringWavesLeaks - Step hints",
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1visltr/all_of_steps_hints_were_for_lily_38_char/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - future character via Step",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vfi2ja/future_character_spoilers_via_step/"
         },
         {
           "name": "r/WutheringWavesLeaks - next male unit",
