@@ -76,10 +76,18 @@ spelling — that's how `Yuno` was caught and corrected to **Iuno**.
 
 ### The shell
 
-Persistent left rail (nav + tier counts + saved views + methodology). The rail **is** the
-tablist — there was a horizontal tab strip across the stage too, listing the same six
-views 40px to its right, and it went. Below 860px the rail collapses to a brand bar and
-the nav becomes a bottom dock.
+Persistent left rail (nav + saved views + methodology). The rail **is** the navigation —
+there was a horizontal tab strip across the stage too, listing the same six views 40px to
+its right, and it went. It is also the filter surface: each view's primary axis unfolds
+as a list under its own name when you open it, an accordion of one, so Timeline carries
+all/current/upcoming/past, Resonators its elements, Weapons its classes and Intel the
+four confidence tiers with their counts. Clicking the view you are already on folds its
+list away and back. Below 860px the rail collapses to a brand bar, the nav becomes a
+bottom dock and the filters reappear inside the panel — see below.
+
+A plain nav rather than a tablist, which is what it was until the items grew disclosure
+lists: a tab cannot own one. The `tab-<id>` ids stayed, because the panels are labelled
+by them.
 
 The HUD — search, feed status, page title — is the first panel of the **aside** rather
 than a band across the top, so a view starts level with the top of the page instead of a
@@ -101,23 +109,32 @@ rail's Methodology link was until it was moved onto `data-act="open"`.
 
 Two tiers of control, and the split is deliberate:
 
-- **Chips** in each panel header carry the view's *primary* axis — tier on Intel, kind
-  on Signals, element on Resonators, class on Weapons, now/next/past on Timeline. These
-  are the questions the desk exists to answer, so they're always visible and pre-counted.
+- **The rail's filter lists** carry each view's *primary* axis — tier on Intel, element
+  on Resonators, class on Weapons, now/next/past on Timeline (`RAIL_FILTERS`). These are
+  the questions the desk exists to answer. They used to be a chip strip across the top of
+  every panel, in a header that said the view's name a second time and held the content a
+  header's height down the page; both went. Signals is the exception, and keeps its kind
+  chips in its own header: it has a hatched warning bar under them, so that header was
+  never the bare strip the others were. Events has nothing to filter yet.
 - **Quick-filter selects** carry the secondary axes: version and category on Intel,
   weapon on Resonators, sub-stat on Weapons, source on Signals. Too many values to spend
   a chip each on. Options are read off the data, so a category nothing is filed under
-  never appears.
+  never appears — and the rail lists are built the same way, so an element or a class
+  nothing is filed under is never a filter that can only empty the page.
 
 The ascension slider is neither, which is part of why it lives in the weapon record
 rather than on the view: it doesn't change which weapons you can see, only what one
-passive says. It sits outside `VIEW_FILTERS` and Reset leaves it alone.
+passive says. It sits outside `VIEW_FILTERS` and Reset leaves it alone. In the record it
+rides the *stats* heading rather than the passive's — the band of empty column beside the
+summary — with the line it changes directly under it either way.
 
-The selects render **twice** — into the aside on desktop, and inline under the panel
-header below 1340px where the aside is gone. Both copies write to the same `S` state
-through the same delegated handler and both are rebuilt on every `draw()`, so they
-cannot drift. `VIEW_FILTERS` says which axes a view actually reads, which is what Reset
-clears and what the empty state names when a filter has emptied a list.
+Both kinds of control render **twice**, and exactly one copy is visible at any width. The
+selects go into the aside on desktop and inline in the panel below 1340px, where the
+aside is gone; the primary axis goes into the rail on desktop and into the panel's `.fbar`
+below 860px, where the rail is gone. Every copy writes to the same `S` state through the
+same delegated handler and is rebuilt on every `draw()`, so they cannot drift.
+`VIEW_FILTERS` says which axes a view actually reads, which is what Reset clears and what
+the empty state names when a filter has emptied a list.
 
 The rail's first three quick links are **saved views** — a view plus a filter
 combination, applied before the switch so the list never visibly re-filters a frame

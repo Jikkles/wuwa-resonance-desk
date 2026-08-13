@@ -229,6 +229,57 @@ button{font:inherit;color:inherit}
 /* An unbuilt view is dimmer than a built one until you land on it. */
 .navlink:has(.soon):not([aria-current="true"]){opacity:.78}
 
+/* ── rail filters ─────────────────────────────────────────────────
+   Each view's primary axis, unfolded under its own name. This is the desk's
+   only filter surface above 860px — the chip strip that used to head every
+   panel is gone, and with it the header that carried it. */
+.navitem{display:flex;flex-direction:column}
+/* The badge keeps the right edge; the caret sits outside it, so an item with a
+   count and an item with none still line their marks up. */
+.navlink .n,.navlink .warn,.navlink .soon{margin-left:auto}
+.navlink .caret{display:flex;flex:none;margin-left:9px;color:var(--fg-3);transition:transform .18s,color .15s}
+.navlink:not(:has(.n,.warn,.soon)) .caret{margin-left:auto}
+.navlink[aria-expanded="true"] .caret{transform:rotate(90deg)}
+.navlink[aria-current="true"] .caret{color:currentColor}
+
+/* Indented under the item and hung off a rule, so a list of six elements
+   cannot be misread as six more views. */
+.subnav{
+  display:flex;flex-direction:column;gap:1px;
+  margin:3px 0 9px 20px;padding:1px 0 1px 11px;
+  border-left:1px solid var(--line);
+}
+.subnav[hidden]{display:none}
+.sublink{
+  display:flex;align-items:center;gap:9px;width:100%;
+  background:none;border:0;border-radius:7px;padding:6px 10px;cursor:pointer;
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-3);text-align:left;
+  transition:background .15s,color .15s;
+}
+.sublink:hover{background:var(--bg-2);color:var(--fg)}
+.sublink[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
+.sublink>span:first-of-type{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sublink .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.sublink .n{margin-left:auto;font-size:10px;opacity:.65;letter-spacing:.04em}
+/* Tier rows keep their tier colour whether or not they are on — same bargain
+   the tier chips struck: the legend and the filter are one control. Written
+   under .subnav so they outrank the pressed rule above, which would otherwise
+   repaint the selected tier in the accent. */
+.subnav .sublink.t-official{color:var(--t-official)}
+.subnav .sublink.t-datamined{color:var(--t-datamined)}
+.subnav .sublink.t-reported{color:var(--t-reported)}
+.subnav .sublink.t-rumour{color:var(--t-rumour)}
+.subnav.tiered .sublink[aria-pressed="true"]{background:color-mix(in srgb,currentColor 14%,transparent)}
+
+/* The timeline's layout toggle. Not a filter, so it is set apart from the four
+   rows above it rather than pretending to be a fifth. */
+.subseg{
+  display:flex;align-items:center;gap:10px;margin-top:7px;padding:8px 10px 0;
+  border-top:1px solid var(--line);
+}
+.subseg .label{font-size:9.5px;letter-spacing:.13em}
+
 .tierlink{
   display:flex;align-items:center;gap:10px;width:100%;
   background:none;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;
@@ -439,6 +490,18 @@ button{font:inherit;color:inherit}
   background:color-mix(in srgb,currentColor 12%,transparent);
   border-color:color-mix(in srgb,currentColor 45%,transparent);
 }
+
+/* The primary filter again, inside the panel, for the widths where the rail
+   has collapsed to a strip carrying only the brand and there is nowhere else
+   for it to be. Same buttons, same handler, same state — exactly one of the
+   two copies is ever visible, so they cannot drift apart. It is the panel
+   header's old furniture minus the title the rail already gives you. */
+.fbar{
+  display:none;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;border-bottom:1px solid var(--line);background:var(--tint-sink);
+}
+.fbar .seg{margin-left:auto}
+@media (max-width:860px){.fbar{display:flex}}
 
 /* Card view / lane view. A pair, so it reads as one control with two states
    rather than two buttons that happen to sit together. */
@@ -1539,6 +1602,10 @@ button{font:inherit;color:inherit}
    pips down a grid is a texture, not information. */
 .wpanel .panel-h{box-shadow:inset 3px 0 0 var(--rar)}
 .wpanel .panel-h h2{color:var(--rar)}
+/* The 5★ table has no header to carry it — it is the top of the page and its
+   caption went with the class filter — so the edge moves to the panel. Same
+   3px of gold in the same place; it was never the header's to own. */
+.wpanel.bare{box-shadow:inset 3px 0 0 var(--rar)}
 .wrec{--attr:var(--rar)}
 
 /* Wider cells than the resonator grid. A weapon's name runs to "Rime-Draped
@@ -1612,6 +1679,10 @@ button{font:inherit;color:inherit}
    and hope; at 340 the steps are far enough apart to aim at. */
 .ascend-c{display:flex;align-items:center;gap:12px;flex:1 1 340px;max-width:540px}
 .ascend-c .label{flex:none}
+/* On the stats heading it shares a line with that heading, so it gives up the
+   340px floor and takes the half of the row the summary was leaving empty. */
+.dsec-h .ascend{flex:1 1 280px;max-width:440px;padding:7px 13px}
+.dsec-h .ascend-c{flex:1 1 auto;max-width:none}
 .ascend-v{
   flex:none;min-width:30px;font-family:var(--mono);font-size:12px;font-weight:500;
   color:var(--rar,var(--attr));font-variant-numeric:tabular-nums;

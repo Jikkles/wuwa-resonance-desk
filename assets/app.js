@@ -68,6 +68,10 @@ let DATA = {};
    flat bag so a filter control never has to know which view it is in. */
 const S = {
   view:"timeline", sigLimit:60, drawer:null,
+  /* Which rail item has its filter list unfolded. An accordion of one: opening
+     a view opens its list and closes whatever was open, and clicking the view
+     you are already on folds it away. Null is "all folded". */
+  railOpen:"timeline",
   /* Skill cards open condensed — first sentence of every paragraph — and the
      toggle in the Skills header swaps them to the client's full text. A kit is
      five thousand words; the default has to be the one you can scan. */
@@ -538,26 +542,105 @@ function weaponIcon(name, size = 17){
     : `<span class="wicon">${icon("i-weapon", size)}</span>`;
 }
 
-/* ── rail ────────────────────────────────────────────────────────── */
-function renderRail(){
-  /* These are the tablist: the horizontal strip that used to own role=tab is
-     gone, so the ids, aria-controls and roving tabindex live here. aria-current
-     stays alongside aria-selected because the dock renders from the same
-     VIEWS array and styles off it, and setView sets it on every [data-act=view]
-     in one pass. */
-  $("#rail-nav").innerHTML = VIEWS.map(v => `
-    <button class="navlink" role="tab" id="tab-${v.id}" data-act="view" data-id="${v.id}"
-            aria-selected="${S.view === v.id}" aria-controls="p-${v.id}"
-            aria-current="${S.view === v.id}" tabindex="${S.view === v.id ? 0 : -1}">
-      ${icon(v.icon)}<span>${v.label}</span>
-      ${navBadge(v)}
-    </button>`).join("");
+/* ── rail ────────────────────────────────────────────────────────────
+   Every view's primary filter axis, one entry per view, unfolding under its
+   own name in the rail. This is the whole filter surface above 860px: it
+   replaced the chip strip that headed each panel, which said the view's name a
+   second time forty pixels from the rail item already saying it and held the
+   content a header's height down the page.
 
-  const counts = tierCounts();
-  $("#rail-tiers").innerHTML = TIERS.map(t => `
-    <button class="tierlink" data-act="tier" data-id="${t}" title="${esc(TIER_MEANS[t])}">
-      <i class="dot t-${t}"></i><span>${TIER_LABEL[t]}</span><span class="n">${counts[t] || 0}</span>
-    </button>`).join("");
+   Values come off the data, not out of a list — an element or a weapon class
+   nothing is filed under would be a filter that can only ever empty the page.
+   A view with no entry here (Events, Live Signals) is a plain nav item: Events
+   has nothing to filter yet, and Signals' kind row still heads its own panel,
+   where the warning bar means it was never the bare strip the others were. */
+const RAIL_FILTERS = {
+  timeline: {
+    scope:"when", label:"Window",
+    items: () => [["all","All"], ["current","Current"], ["upcoming","Upcoming"], ["past","Past"]],
+    /* Not a filter — it doesn't change which patches you see — but it was the
+       other half of the strip this replaced and it has to live somewhere. */
+    seg: () => `<div class="seg">${[["cards","i-grid","Card view"], ["list","i-rows","Lane view"]].map(([m, ic, lbl]) =>
+      `<button data-act="tlmode" data-id="${m}" aria-pressed="${S.tlMode === m}" title="${lbl}" aria-label="${lbl}">${icon(ic, 14)}</button>`
+    ).join("")}</div>`
+  },
+  resonators: {
+    scope:"elem", label:"Element",
+    items: () => [["all","All"]].concat(
+      [...new Set(resonators().map(r => r.attribute).filter(Boolean))].map(e => [e, e]))
+  },
+  weapons: {
+    scope:"wtype", label:"Class",
+    items: () => [["all","All"]].concat(
+      WTYPES.filter(t => weapons().some(w => w.type === t)).map(t => [t, t]))
+  },
+  /* Tier carries counts and its own colours — it is the legend and the filter
+     at once, which is what the standalone "Filter by tier" group was for
+     before it became Intel's own list. */
+  intel: {
+    scope:"tier", label:"Confidence", tiered:true,
+    items: () => {
+      const c = tierCounts();
+      return [["all", "All", entries().length]]
+        .concat(TIERS.map(t => [t, TIER_LABEL[t], c[t] || 0, `t-${t}`]));
+    }
+  }
+};
+
+/* One button, rendered into the rail and into the panel's mobile filter bar
+   from the same row of the same spec — both carry data-act=railfilter and go
+   through one handler, so the two copies cannot disagree about what is on. */
+function filterBtn(view, f, [k, label, n, cls], cl){
+  return `<button class="${cl} ${cls || ""}" data-act="railfilter" data-view="${view}"
+          data-scope="${f.scope}" data-id="${esc(k)}" aria-pressed="${S[f.scope] === k}">
+    ${cls ? `<i class="dot"></i>` : ""}<span>${esc(label)}</span>${n != null ? `<span class="n">${n}</span>` : ""}
+  </button>`;
+}
+
+/* The list under a nav item. Always in the DOM and hidden when folded, so
+   aria-controls always resolves to something. */
+function railSub(v){
+  const f = RAIL_FILTERS[v.id];
+  if(!f) return "";
+  const open = S.railOpen === v.id;
+  return `<div class="subnav${f.tiered ? " tiered" : ""}" id="sub-${v.id}" role="group"
+       aria-label="${esc(f.label)}"${open ? "" : " hidden"}>
+    ${f.items().map(it => filterBtn(v.id, f, it, "sublink")).join("")}
+    ${f.seg ? `<div class="subseg"><span class="label">Layout</span>${f.seg()}</div>` : ""}
+  </div>`;
+}
+
+/* The same controls again, inside the panel, for the widths where the rail has
+   collapsed to a strip carrying only the brand. Exactly one of the two is
+   visible at any width — see .fbar in the stylesheet. */
+function fbar(view){
+  const f = RAIL_FILTERS[view];
+  if(!f) return "";
+  return `<div class="fbar">
+    <div class="chips${f.tiered ? " tiered" : ""}">${
+      f.items().map(it => filterBtn(view, f, it, "")).join("")}</div>
+    ${f.seg ? f.seg() : ""}
+  </div>`;
+}
+
+function renderRail(){
+  /* A nav, not a tablist — a tab cannot own a disclosure list. The tab-<id>
+     ids stay: the panels are labelled by them. aria-current is what the dock
+     styles off too, and it renders from the same VIEWS array. */
+  $("#rail-nav").innerHTML = VIEWS.map(v => {
+    const f = RAIL_FILTERS[v.id];
+    const open = !!f && S.railOpen === v.id;
+    return `<div class="navitem${open ? " open" : ""}">
+      <button class="navlink" id="tab-${v.id}" data-act="view" data-id="${v.id}"
+              aria-current="${S.view === v.id}"
+              ${f ? `aria-expanded="${open}" aria-controls="sub-${v.id}"` : ""}>
+        ${icon(v.icon)}<span>${v.label}</span>
+        ${navBadge(v)}
+        ${f ? `<span class="caret" aria-hidden="true">${icon("i-caret", 11)}</span>` : ""}
+      </button>
+      ${railSub(v)}
+    </div>`;
+  }).join("");
 
   /* Two kinds of shortcut, told apart by the mark on the right. The first
      three are saved views — a filter combination you'd otherwise have to set
@@ -1013,18 +1096,13 @@ function renderTimeline(){
         cards.map(([v, r]) => patchCard(v, r)).join("")}</div>`
                     : `<div class="empty">No patch in this window.</div>`);
 
+  /* No header. It was the view's name a second time — the rail item saying
+     "Timeline" is lit forty pixels to the left — plus the window filter and
+     the layout toggle, both of which now sit under that rail item. What is
+     left is the patch cards, at the top of the page where they belong. The bar
+     below only appears once the rail has collapsed and taken them with it. */
   const hero = `<div class="panel">
-    <div class="panel-h">
-      <h2>Patch timeline</h2><span class="sub">${S.when === "all" ? "Now / Next / Future" : plural(list.length, "patch")}</span>
-      <div class="right">
-        <div class="chips">${chips("when", [
-          ["all","All"], ["current","Current"], ["upcoming","Upcoming"], ["past","Past"]
-        ], S.when)}</div>
-        <div class="seg">${[["cards","i-grid","Card view"], ["list","i-rows","Lane view"]].map(([m, ic, lbl]) =>
-          `<button data-act="tlmode" data-id="${m}" aria-pressed="${S.tlMode === m}" title="${lbl}" aria-label="${lbl}">${icon(ic, 14)}</button>`
-        ).join("")}</div>
-      </div>
-    </div>
+    ${fbar("timeline")}
     <div class="panel-b${S.tlMode === "list" ? " flush" : ""}">${body}</div>
   </div>`;
 
@@ -1175,19 +1253,16 @@ function intelList(){
 }
 
 function renderIntel(){
-  const counts = tierCounts();
   const list = intelList();
 
-  const filters = chips("tier",
-    [["all", "All", entries().length]].concat(TIERS.map(t => [t, TIER_LABEL[t], counts[t] || 0, `t-${t}`])),
-    S.tier);
-
+  /* Header gone, same bargain as the timeline: the tier row it carried is the
+     list under Intel in the rail — which is also where "Filter by tier" used
+     to sit as a group of its own, one rail section away from the view it
+     filtered. The methodology link stays in the footer, where you land after
+     reading rather than before. */
   $("#p-intel").innerHTML = `<div class="stack">
     <div class="panel">
-      <div class="panel-h">
-        <h2>Intel</h2><span class="sub">Read, judged, tiered by hand</span>
-        <div class="right chips tiered">${filters}</div>
-      </div>
+      ${fbar("intel")}
       ${quickFilters(true)}
       <div class="panel-b flush">
         ${list.length ? `<div class="intel-list">${list.map(e => intelCard(e)).join("")}</div>`
@@ -1516,13 +1591,12 @@ const byNewest = (a, b) => (isRover(a) - isRover(b)) || debutKey(b).localeCompar
    instead of a toggle between two states of one grid. The element and weapon
    filters still cross both, so one table can empty while the other fills — and
    the count says "12 of 48" rather than just "12" whenever that happens. */
-function recordTable(title, rows, total, {right = "", under = "", foot = ""} = {}){
-  return `<div class="panel">
-    <div class="panel-h">
+function recordTable(title, rows, total, {under = "", foot = "", bare = false} = {}){
+  return `<div class="panel${bare ? " bare" : ""}">
+    ${bare ? "" : `<div class="panel-h">
       <h2>${title}</h2>
       <span class="sub">${plural(rows.length, "record")}${rows.length === total ? "" : ` of ${total}`} · newest debut first</span>
-      ${right ? `<div class="right chips">${right}</div>` : ""}
-    </div>
+    </div>`}
     ${under}
     <div class="panel-b">
       ${rows.length ? `<div class="rgrid">${rows.map(recordCard).join("")}</div>`
@@ -1534,27 +1608,22 @@ function recordTable(title, rows, total, {right = "", under = "", foot = ""} = {
 
 function renderResonators(){
   const all = [...resonators()].sort(byNewest);
-  const elems = [...new Set(all.map(r => r.attribute).filter(Boolean))];
   let list = all;
   if(S.elem !== "all") list = list.filter(r => r.attribute === S.elem);
   if(S.weapon !== "all") list = list.filter(r => r.weapon === S.weapon);
 
-  /* No count on the All chip any more. It carried the whole roster, and now it
-     sits in the 5★ table's header next to that table's own count — "All 60"
-     over "48 records" reads as an arithmetic error. Each table counts itself. */
-  const filters = chips("elem",
-    [["all", "All"]].concat(elems.map(e => [e, e])),
-    S.elem);
   const rows  = rarity => list.filter(r => String(r.rarity) === rarity);
   const total = rarity => all.filter(r => String(r.rarity) === rarity).length;
 
-  /* The chips and the selects head the 5★ table rather than getting a strip of
-     their own — they are the top of the view either way, and a filter bar in an
-     empty panel above two tables is a third panel to explain. */
+  /* The 5★ table has no header at all: the element row it carried is the list
+     under Resonators in the rail, and the caption went with it — this is the
+     top of the page, the rail item already says Resonators, and the roster is
+     what you came for. The 4★ header below stays, and that is what says where
+     one rarity ends and the next begins; everything above it is the 5★ set. */
   $("#p-resonators").innerHTML = `<div class="stack">
     ${recordTable("5★ Resonators", rows("5"), total("5"), {
-      right: filters,
-      under: quickFilters(true),
+      bare: true,
+      under: fbar("resonators") + quickFilters(true),
       foot: "Kit detail on unreleased resonators is pre-balance — multipliers routinely shift between beta phases."
     })}
     ${recordTable("4★ Resonators", rows("4"), total("4"))}
@@ -1647,14 +1716,13 @@ function weaponCard(w){
   </article>`;
 }
 
-function weaponTable(title, rows, total, {right = "", under = "", foot = ""} = {}){
+function weaponTable(title, rows, total, {under = "", foot = "", bare = false} = {}){
   const r = String(title).charAt(0);
-  return `<div class="panel wpanel r-${r}">
-    <div class="panel-h">
+  return `<div class="panel wpanel r-${r}${bare ? " bare" : ""}">
+    ${bare ? "" : `<div class="panel-h">
       <h2>${title}</h2>
       <span class="sub">${plural(rows.length, "weapon")}${rows.length === total ? "" : ` of ${total}`} · by class</span>
-      ${right ? `<div class="right chips">${right}</div>` : ""}
-    </div>
+    </div>`}
     ${under}
     <div class="panel-b">
       ${rows.length ? `<div class="rgrid wgrid">${rows.map(weaponCard).join("")}</div>`
@@ -1676,19 +1744,20 @@ function renderWeapons(){
   if(S.wtype !== "all") list = list.filter(w => w.type === S.wtype);
   if(S.wstat !== "all") list = list.filter(w => w.stat === S.wstat);
 
-  /* Only the classes the data actually holds, in the game's own order rather
-     than alphabetically — a class with nothing filed under it would be a chip
-     that can only ever empty the page. */
-  const present = WTYPES.filter(t => all.some(w => w.type === t));
-  const filters = chips("wtype", [["all", "All"]].concat(present.map(t => [t, t])), S.wtype);
-
   const rows  = rarity => list.filter(w => String(w.rarity) === rarity);
   const total = rarity => all.filter(w => String(w.rarity) === rarity).length;
 
+  /* Class moved to the rail with every other view's primary axis — see
+     RAIL_FILTERS, which reads the classes off the data for the same reason
+     this used to: a class nothing is filed under would be a filter that can
+     only ever empty the page. The 5★ header went with it; the two below stay
+     as the dividers between rarities. The rarity colour this view is banded
+     with does not depend on that header — see .wpanel.bare in the stylesheet,
+     which puts the gold edge on the panel instead. */
   $("#p-weapons").innerHTML = `<div class="stack">
     ${weaponTable("5★ Weapons", rows("5"), total("5"), {
-      right: filters,
-      under: quickFilters(true),
+      bare: true,
+      under: fbar("weapons") + quickFilters(true),
       foot: "Stats are level 90 throughout. Open a weapon for its passive and the ascension slider."
     })}
     ${weaponTable("4★ Weapons", rows("4"), total("4"))}
@@ -2052,15 +2121,23 @@ function drawerWeapon(name){
       <b class="wholder" role="button" tabindex="0" data-act="resonator" data-id="${esc(holderName)}">${esc(holderName)}</b>,
       and its convene runs alongside their banner.</p>` : ""}
 
-    ${w ? `<div class="dsec"><span class="label">Stats at level 90</span>
+    <!-- The slider rides the stats heading rather than the passive's. It is
+         the record's one control and it was buried two thirds down, under a
+         heading, in the band of empty column beside the summary — while the
+         line it actually changes sits directly under it either way. Reading
+         order is unchanged: set the ascension, then read the passive.
+
+         It does not move the two figures below it, which is why the heading it
+         sits on says level 90 out loud. -->
+    ${w ? `<div class="dsec">
+      <div class="dsec-h"><span class="label">Stats at level 90</span>${ascendBar()}</div>
       <div class="wstats">
         <div><span class="k">Base ATK</span><b>${w.atk90 || "—"}</b></div>
         <div><span class="k">${esc(w.stat || "Sub-stat")}</span><b>${w.statValue90 ? esc(w.statValue90) + "%" : "—"}</b></div>
       </div></div>` : ""}
 
     ${w ? `<div class="dsec"><span class="label">Passive</span>
-      ${ascendBar()}
-      <p class="weff" data-eff="${esc(w.name)}" style="margin:12px 0 0">${effectHtml(w, S.rank)}</p>
+      <p class="weff" data-eff="${esc(w.name)}" style="margin:0">${effectHtml(w, S.rank)}</p>
     </div>` : ""}
 
     ${mentions.length ? `<div class="dsec"><span class="label">Intel mentioning it — ${mentions.length}</span>
@@ -2205,13 +2282,14 @@ const RENDER = {
 function setView(id, focus){
   if(!RENDER[id]) id = "timeline";
   S.view = id;
-  VIEWS.forEach(v => {
-    document.getElementById(`p-${v.id}`).hidden = v.id !== id;
-    const tab = document.getElementById(`tab-${v.id}`);
-    if(tab){ tab.setAttribute("aria-selected", v.id === id); tab.tabIndex = v.id === id ? 0 : -1; }
-  });
-  document.querySelectorAll("[data-act='view']").forEach(b =>
-    b.setAttribute("aria-current", b.dataset.id === id));
+  /* Arriving at a view unfolds its filters. They are the view's own controls,
+     and a list that has to be opened by a second click before you can see what
+     the page can be narrowed by is a list nobody finds. */
+  S.railOpen = id;
+  VIEWS.forEach(v => { document.getElementById(`p-${v.id}`).hidden = v.id !== id; });
+  /* Rebuilds the nav, its filter lists and the dock — aria-current, the open
+     item and every count come out of S and the data in one pass. */
+  renderRail();
   draw(id);
   /* Timeline is the landing view, so it keeps the bare URL — no #timeline
      hanging off the address bar on arrival. replaceState can throw on
@@ -2263,11 +2341,44 @@ function bind(){
     if(!el) return;
     const {act, id, scope} = el.dataset;
 
+    /* Both copies of a rail control — the rail's and the panel's mobile bar —
+       are replaced by the redraw that follows the click, so the keyboard is
+       left standing on a removed node. Put it back on the replacement, in the
+       copy it was clicked in; the other one is hidden at this width. */
+    const home = el.closest(".rail") ? ".rail " : ".fbar ";
+    const back = sel => document.querySelector(home + sel)?.focus();
+
     if(act === "search"){ openCmd(); }
-    else if(act === "view"){ setView(id); }
-    else if(act === "tier"){ S.tier = id; S.ver = S.cat = "all"; setView("intel"); }
+    else if(act === "view"){
+      /* Clicking the view you are already on folds its filter list away and
+         back. Anything else navigates, which opens its own. */
+      if(S.view === id && RAIL_FILTERS[id] && el.closest(".rail")){
+        S.railOpen = S.railOpen === id ? null : id;
+        renderRail();
+        document.getElementById(`tab-${id}`)?.focus();
+      }
+      else setView(id);
+    }
+    /* The primary axis, from the rail or from the panel bar. */
+    else if(act === "railfilter"){
+      const view = el.dataset.view;
+      S[scope] = id;
+      S.sigLimit = 60;
+      /* Tier is the axis Intel's two selects hang under — a new tier with last
+         tier's version still set on it lands on an empty page. */
+      if(scope === "tier") S.ver = S.cat = "all";
+      if(S.view !== view) setView(view);
+      else { renderRail(); draw(view); }
+      back(`[data-act="railfilter"][data-view="${view}"][data-scope="${scope}"][aria-pressed="true"]`);
+    }
     else if(act === "filter"){ S[scope] = id; S.sigLimit = 60; draw(S.view); }
-    else if(act === "reset"){ VIEW_FILTERS[S.view].forEach(k => S[k] = "all"); S.sigLimit = 60; draw(S.view); }
+    /* Reset clears the primary axis too, and that one is drawn in the rail. */
+    else if(act === "reset"){
+      VIEW_FILTERS[S.view].forEach(k => S[k] = "all");
+      S.sigLimit = 60;
+      renderRail();
+      draw(S.view);
+    }
     /* A rail shortcut is a view plus a filter combination — set the filters
        before switching, or setView draws the old ones first and the list
        visibly re-filters a frame later. */
@@ -2276,7 +2387,12 @@ function bind(){
       S.sigLimit = 60;
       setView(id);
     }
-    else if(act === "tlmode"){ S.tlMode = id; draw("timeline"); }
+    else if(act === "tlmode"){
+      S.tlMode = id;
+      renderRail();
+      draw("timeline");
+      back(`[data-act="tlmode"][data-id="${id}"]`);
+    }
     else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
     else if(act === "noop"){ /* decorative */ }
     else dispatch(act, id);
@@ -2326,11 +2442,12 @@ function bind(){
     if((e.key === "Enter" || e.key === " ") && t?.getAttribute?.("role") === "button" && t.dataset.act){
       e.preventDefault(); t.click(); return;
     }
-    /* Arrow keys walk the tablist, as a tablist should. The list runs down the
-       rail now rather than across the stage, so up/down are the axis that
-       matches what you see — left/right stay bound because they were the keys
-       for two years and cost nothing to keep. */
-    if(t?.getAttribute?.("role") === "tab"){
+    /* Arrow keys walk the rail's view list. Up/down are the axis that matches
+       what you see — left/right stay bound because they were the keys for two
+       years and cost nothing to keep. Bound to the rail's own buttons, not to
+       every [data-act=view]: the dock is a row of six on a phone and the arrow
+       keys are not how anyone drives it. */
+    if(t?.closest?.(".rail .navlink")){
       const step = /^Arrow(Right|Down)$/.test(e.key) ? 1 : /^Arrow(Left|Up)$/.test(e.key) ? -1 : 0;
       const i = VIEWS.findIndex(v => v.id === S.view);
       if(step){ e.preventDefault(); setView(VIEWS[(i + step + VIEWS.length) % VIEWS.length].id, true); }
