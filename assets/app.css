@@ -1616,16 +1616,93 @@ button{font:inherit;color:inherit}
 .drawer-b p{font-size:14px;line-height:1.7;color:var(--fg-2);max-width:76ch}
 .dsec{margin-top:22px}
 .dsec>.label{padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px;display:block}
+/* A section heading that carries a control — the rule runs under both, so the
+   button sits on the line rather than floating above the cards. */
+.dsec-h{
+  display:flex;align-items:center;gap:14px;
+  padding-bottom:9px;border-bottom:1px solid var(--line);margin-bottom:12px;
+}
+.dsec-h>.label{padding:0;border:0;margin:0;flex:1;min-width:0}
+
+/* ── record layout ────────────────────────────────────────────────
+   Two columns under the art: who they are on the left, what they are on the
+   right. The left column is prose and wants a measure; the right is a card and
+   a list of one-line facts and wants to be narrow. Below 900px of panel there
+   is room for one of them, so they stack in reading order. */
+.rlay{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);gap:10px 30px;align-items:start}
+.rlay-main{min-width:0}
+.rlay-side{min-width:0;display:grid;gap:12px;align-content:start}
+/* The right column's boxes have their own frame, so they do not take .dsec's
+   top margin — they start level with the character's name. */
+.dpanel{
+  border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 15px 14px;
+  background:color-mix(in srgb,var(--bg-2) 62%,transparent);
+}
+.dpanel>.label{display:block;padding-bottom:9px;border-bottom:1px solid var(--line);margin-bottom:11px}
+
+/* The signature weapon. The only row of the old record that went anywhere, so
+   it stops pretending to be a row: icon, label, name, and the arrow that says
+   there is a panel behind it. `.is-flat` is the same card without the link,
+   for a weapon the timeline has no run for yet. */
+.wcard{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 13px;
+  background:color-mix(in srgb,var(--bg-2) 62%,transparent);
+  cursor:pointer;transition:.15s;font:inherit;color:inherit;
+}
+.wcard.is-flat{cursor:default}
+.wcard:not(.is-flat):hover{
+  border-color:color-mix(in srgb,var(--attr,var(--accent)) 45%,transparent);
+  background:var(--bg-2);
+}
+.wcard-art{
+  flex:none;width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);border-radius:8px;color:var(--attr,var(--accent));
+  background:linear-gradient(160deg,var(--bg-3),var(--bg));overflow:hidden;
+}
+.wcard-art img{width:100%;height:100%;object-fit:contain;padding:3px}
+.wcard-t{display:grid;gap:3px;min-width:0;flex:1}
+.wcard-t b{font-size:13.5px;font-weight:600;color:var(--fg);line-height:1.35}
+.wcard:not(.is-flat):hover .wcard-t b{color:var(--attr,var(--accent))}
+.wcard-r{
+  flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--amber);
+}
+.wcard .arrow{flex:none;color:var(--fg-3);display:flex}
 .dsec ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
 .dsec li{position:relative;padding-left:16px;font-size:13.5px;color:var(--fg-2);line-height:1.6}
 .dsec li::before{content:"";position:absolute;left:0;top:.62em;width:4px;height:4px;border-radius:50%;background:var(--attr)}
 /* ── kit ──────────────────────────────────────────────────────────
-   A full Resonator kit is around five thousand words. Flat, it buries the
-   sources and the tier note under six screens; so each skill is a <details>,
-   closed, and the drawer stays a page you can see the shape of. The summary
-   row is the whole hit area — slot name on the left in mono, the skill's own
-   name in sans on the right — so it reads as an index until you open one. */
+   A full Resonator kit is around five thousand words, and a column of closed
+   <details> is an index you have to click six times to read. In the centred
+   panel there is width for a grid instead: the six slots are open cards, three
+   across, and the Simplified toggle is what keeps them short enough to be a
+   grid at all. The Resonance Chain is still disclosure — six nodes are six
+   duplicates away for nearly everyone, so it is reference, not the record. */
 .skills{display:grid;gap:7px}
+.skills.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+/* Inherent skills are a pair, and three columns would leave a hole. */
+.skills.grid.duo{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* Full text is not a grid at all. A Forte Circuit runs forty paragraphs where
+   an Outro Skill runs one, and in a two-track grid that is a column of prose
+   beside twelve hundred pixels of nothing. Multi-column flows the cards
+   instead — they pack down one side and up the other, which is the order they
+   are already meant to be read in, and no card is left holding open a row. */
+.skills.grid.wide{
+  display:block;column-count:2;column-gap:12px;
+}
+.skills.grid.wide .skill{
+  break-inside:avoid;margin-bottom:12px;
+  /* Chrome will still split a card taller than the column without this. */
+  display:inline-block;width:100%;
+}
+/* A card header, not a summary row: at a third of the panel the slot name and
+   the skill name cannot share a line, so the slot sits above it as a kicker. */
+.skill-h{
+  display:grid;gap:3px;padding:10px 13px 9px;
+  border-bottom:1px solid var(--line);background:var(--bg-2);
+}
+.skill-h b{font-size:13.5px;font-weight:600;color:var(--fg);line-height:1.35}
+.skill-h .skill-k{width:auto;color:var(--attr,var(--fg-3))}
 .skill{
   border:1px solid var(--line);border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--bg-2) 62%,transparent);
@@ -1670,7 +1747,38 @@ button{font:inherit;color:inherit}
   letter-spacing:.12em;text-transform:uppercase;color:var(--attr,var(--accent));
 }
 .skill-t h5:first-child{margin-top:0}
+/* What the condensed card left out. Set apart from the text above it so it
+   reads as the card's own note rather than another line of the skill. */
+.skill-t .gist-more{
+  margin:11px 0 0;padding-top:9px;border-top:1px dashed var(--line);
+  font-size:11px;line-height:1.5;color:var(--fg-3);
+}
 .skills.chain .skill-k{width:34px}
+
+/* The Simplified switch. A real switch rather than a button that changes its
+   own label — the track shows the state where the words only describe it, and
+   aria-pressed is what a screen reader reads off the same element. */
+.kitmode{
+  display:flex;align-items:center;gap:8px;flex:none;
+  background:none;border:0;padding:0;cursor:pointer;color:var(--fg-3);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  transition:color .15s;
+}
+.kitmode i{
+  width:28px;height:15px;border-radius:20px;flex:none;position:relative;
+  border:1px solid var(--line-2);background:var(--bg-3);transition:.16s;
+}
+.kitmode i::after{
+  content:"";position:absolute;top:1.5px;left:2px;width:9px;height:9px;border-radius:50%;
+  background:var(--fg-3);transition:.16s;
+}
+.kitmode[aria-pressed="true"]{color:var(--accent)}
+.kitmode[aria-pressed="true"] i{
+  border-color:color-mix(in srgb,var(--accent) 55%,transparent);background:var(--accent-soft);
+}
+.kitmode[aria-pressed="true"] i::after{transform:translateX(12px);background:var(--accent)}
+.kitmode:hover{color:var(--fg)}
+.kitmode:hover i{border-color:var(--line-2)}
 /* `.drawer-b p` sets 14px and outranks `.tier-note`'s 10px on specificity, so
    a note dropped into the drawer came out at body size and shouting. */
 .drawer-b .tier-note{font-size:10px;line-height:1.6}
@@ -1829,8 +1937,15 @@ button{font:inherit;color:inherit}
      two lines well before the nav under it runs out of room. The wordmark steps
      down rather than wrapping — a two-line brand reads as a layout fault. */
   .brand-name{font-size:13px;letter-spacing:.08em;white-space:nowrap}
+  /* The panel is viewport-width minus its padding from here down, so a third
+     of it is no longer a card — two skills to a row. */
+  .skills.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:860px){
+  /* One column for both. The record follows the summary rather than sitting
+     beside it, which is the order you read them in anyway. */
+  .rlay{grid-template-columns:minmax(0,1fr);gap:20px}
+  .skills.grid,.skills.grid.duo{grid-template-columns:minmax(0,1fr)}
   .app{grid-template-columns:minmax(0,1fr)}
   .rail{
     position:static;height:auto;flex-direction:row;align-items:center;gap:14px;

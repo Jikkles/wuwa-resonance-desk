@@ -67,6 +67,10 @@ let DATA = {};
    flat bag so a filter control never has to know which view it is in. */
 const S = {
   view:"timeline", sigLimit:60, drawer:null,
+  /* Skill cards open condensed — first sentence of every paragraph — and the
+     toggle in the Skills header swaps them to the client's full text. A kit is
+     five thousand words; the default has to be the one you can scan. */
+  kitSimple:true,
   when:"all", tlMode:"cards",      // timeline
   tier:"all", ver:"all", cat:"all", // intel
   kind:"all", src:"all",           // signals
@@ -1230,16 +1234,72 @@ function kitBody(blocks){
     ${(b.p || []).map(p => `<p>${kitText(p)}</p>`).join("")}`).join("");
 }
 
-/* Every skill is a <details>, closed. A full kit is about five thousand words;
-   opened flat it buries the sources and the tier note at the foot of the
-   drawer under six screens of scrolling. Native disclosure rather than a
-   scripted accordion — it survives a re-render, it is keyboard-operable and
-   findable by the browser's own in-page search, and it costs no JS. */
-function kitEntry(label, s){
+/* The end of the first sentence, on a string that still carries its `**` and
+   `__` markers. A plain split on ". " cuts "lasts for **1.5s.**" in half and
+   trips over every abbreviation, so the stop only counts when what follows it
+   — past any closing marker — is whitespace and then a capital or a quote,
+   which is what the start of the next sentence actually looks like. */
+function firstSentence(s){
+  const t = String(s || "").trim();
+  const re = /[.!?]+(?:\*\*|__)*\s+/g;
+  let m;
+  while((m = re.exec(t))){
+    const rest = t.slice(re.lastIndex).replace(/^(?:\*\*|__)+/, "");
+    if(/^["“'(]?[A-Z]/.test(rest)) return t.slice(0, m.index + 1);
+  }
+  return t;
+}
+
+/* How many lines a condensed card is allowed. Cutting each paragraph to its
+   first sentence is not enough on its own: a Forte Circuit is forty paragraphs
+   where an Outro Skill is one, so trimming alone leaves a card ten times the
+   height of the card beside it and the grid is a column with three holes in
+   it. Five lines is about what fits before a card stops being scannable. */
+const GIST_LINES = 5;
+
+/* Condensed skill text: headings kept, every paragraph cut to its opening
+   sentence, and the card stopped at GIST_LINES. What was dropped is counted
+   and said out loud — a summary that quietly loses thirty lines of a kit is
+   worse than no summary, and the count is also the argument for the toggle. */
+function kitGist(blocks){
+  let used = 0, cut = 0;
+  const body = (blocks || []).map(b => {
+    const ps = b.p || [];
+    const take = Math.max(0, Math.min(ps.length, GIST_LINES - used));
+    cut += ps.length - take;
+    used += take;
+    /* No heading over nothing — once the budget is spent the whole block goes,
+       its paragraphs counted into `cut` on the way out. */
+    if(!take) return "";
+    return `${b.h ? `<h5>${kitText(b.h)}</h5>` : ""}
+      ${ps.slice(0, take).map(p => `<p>${kitText(firstSentence(p))}</p>`).join("")}`;
+  }).join("");
+  return body + (cut
+    ? `<p class="gist-more">+${cut} more line${cut === 1 ? "" : "s"} — switch off Simplified for the full text.</p>`
+    : "");
+}
+
+/* One skill, one card. These used to be <details> in a single column, closed,
+   because a full kit laid flat buried everything under it. In the grid they
+   are open cards instead and the Simplified toggle is what keeps them short —
+   six boxes you can read across beats six rows you have to click. */
+function kitEntry(label, s, simple = S.kitSimple){
+  if(!s) return "";
+  return `<article class="skill">
+    <header class="skill-h"><span class="skill-k">${esc(label)}</span><b>${esc(s.name)}</b></header>
+    <div class="skill-t">${simple ? kitGist(s.blocks) : kitBody(s.blocks)}</div>
+  </article>`;
+}
+
+/* The Resonance Chain stays shut. Six nodes are six duplicates away for almost
+   everyone reading, so it is reference rather than the record — and native
+   disclosure survives a re-render, takes the keyboard, and is findable by the
+   browser's own in-page search for nothing. */
+function chainEntry(label, s, simple = S.kitSimple){
   if(!s) return "";
   return `<details class="skill">
     <summary><span class="skill-k">${esc(label)}</span><b>${esc(s.name)}</b></summary>
-    <div class="skill-t">${kitBody(s.blocks)}</div>
+    <div class="skill-t">${simple ? kitGist(s.blocks) : kitBody(s.blocks)}</div>
   </details>`;
 }
 
@@ -1253,24 +1313,45 @@ const KIT_ORDER = [
 
 function kitPanel(kit){
   if(!kit) return "";
-  const skills = KIT_ORDER.map(([k, label]) => kitEntry(label, kit.skills?.[k])).join("");
+  const simple = S.kitSimple;
+  const skills = KIT_ORDER.map(([k, label]) => kitEntry(label, kit.skills?.[k], simple)).join("");
   /* Prydwen occasionally labels two blocks with the same slot name — a second
      Forte Circuit where the Intro Skill should be. The scraper keeps both
      rather than letting one overwrite the other, and the spare lands here. */
-  const extra = (kit.extra || []).map(e => kitEntry(e.kind, e)).join("");
+  const extra = (kit.extra || []).map(e => kitEntry(e.kind, e, simple)).join("");
+  /* Their own section rather than cards seven and eight of the grid: passives
+     are a different kind of thing to the six slots you press, and folded in
+     among them they read as skills you have somehow never found the button for. */
   const inherent = (kit.inherent || [])
-    .map(s => kitEntry("Inherent Skill", s)).join("");
+    .map(s => kitEntry("Inherent Skill", s, simple)).join("");
   const chain = (kit.chain || [])
-    .map(n => kitEntry(`S${n.n}`, {name:n.name, blocks:n.blocks})).join("");
+    .map(n => chainEntry(`S${n.n}`, {name:n.name, blocks:n.blocks}, simple)).join("");
 
   return `
-    <div class="dsec"><span class="label">Skills</span>
-      <div class="skills">${skills}${extra}${inherent}</div>
+    <div class="dsec"><div class="dsec-h"><span class="label">Skills</span>${kitModeToggle(simple)}</div>
+      <!-- Two columns for the full text rather than three. Condensed, the cards
+           are five lines each and three across reads as a grid; at full length
+           a third of the panel is a 38-character measure for a wall of prose. -->
+      <div class="skills grid${simple ? "" : " wide"}">${skills}${extra}</div>
     </div>
+    ${inherent ? `<div class="dsec"><span class="label">Inherent Skills</span>
+      <div class="skills grid duo">${inherent}</div>
+    </div>` : ""}
     ${chain ? `<div class="dsec"><span class="label">Resonance Chain</span>
       <div class="skills chain">${chain}</div>
       <p class="tier-note" style="margin-top:12px">Each node needs a duplicate of the Resonator. S6 is six.</p>
     </div>` : ""}`;
+}
+
+/* The Simplified switch. aria-pressed carries the state — it is one control
+   with two positions, not two radio buttons — and the label names what you get
+   now, not what clicking would do, because a toggle that renames itself under
+   the cursor is the oldest way to make a switch unreadable. */
+function kitModeToggle(simple){
+  return `<button class="kitmode" data-act="kitmode" aria-pressed="${simple}"
+    title="${simple ? "Show the full skill text from the client" : "Cut every paragraph to its first sentence"}">
+    <i aria-hidden="true"></i><span>Simplified</span>
+  </button>`;
 }
 
 /* ── debut and reruns ────────────────────────────────────────────── */
@@ -1592,16 +1673,42 @@ function drawerIntel(id){
   </div>`);
 }
 
+/* The signature weapon, as a card rather than a row of the record. It is the
+   one line in there that goes somewhere — the weapon convene has its own panel
+   — and a link buried in a column of plain facts reads as another fact. Only
+   clickable when the timeline actually has a run for it, because drawerWeapon
+   is assembled out of banner rows and returns nothing without one. */
+function sigWeaponCard(wname){
+  if(!wname) return "";
+  const w = weaponArtFor(wname);
+  const live = weaponRuns(wname).length > 0;
+  const art = w?.icon
+    ? `<img src="${esc(w.icon)}" alt="" loading="lazy" decoding="async">`
+    : icon("i-weapon", 20);
+  const inner = `<span class="wcard-art">${art}</span>
+    <span class="wcard-t">
+      <span class="label">Signature weapon</span>
+      <b>${esc(wname)}</b>
+    </span>
+    ${w?.rarity ? `<span class="wcard-r">${esc(w.rarity)}★</span>` : ""}
+    ${live ? `<span class="arrow">${icon("i-arrow", 13)}</span>` : ""}`;
+  return live
+    ? `<button class="wcard" data-act="weapon" data-id="${esc(wname)}">${inner}</button>`
+    : `<div class="wcard is-flat">${inner}</div>`;
+}
+
 function drawerResonator(name){
   const r = resonatorFor(name);
   const b = bannerFor(name) || {};
   if(!r.name && !b.name) return;
   const f = figure({name, ...b});
   const kitTier = r.confidence?.kit;
+  const sig = r.signature || b.signature;
   /* Debut and reruns are written out in full here, not just hung off the
      corner badge's tooltip — this is the record, and a patch history you can
-     only reach by holding a mouse still is not in the record. */
-  const gear = [["Signature weapon", r.signature || b.signature], ["Convene", r.convene || b.convene],
+     only reach by holding a mouse still is not in the record. The signature
+     weapon is the one row that left: it is the card above this list now. */
+  const gear = [["Convene", r.convene || b.convene],
                 ["Accessory", r.accessory], ["Weapon", r.weapon || b.weapon], ["Role", r.role || b.role],
                 ["Region", r.region], ["Debut", r.version || b.version],
                 /* "None yet" only once they have actually had a banner to not
@@ -1620,23 +1727,35 @@ function drawerResonator(name){
       ${creditLine({name, ...b})}
     </div>
     <div class="drawer-b"${attrStyle(r.attribute || b.attribute)}>
-      <h2>${esc(name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h2>
-      ${f.epithet ? `<div class="cepithet" style="margin:-4px 0 12px">${esc(f.epithet)}</div>` : ""}
-      <div class="meta">
-        ${r.confidence?.identity ? tierBadge(r.confidence.identity, r.confidence.identity === "official") : ""}
-        ${r.status ? `<span class="pill">${esc(r.status)}</span>` : ""}
-        ${b.phase ? `<span class="pill">Phase ${esc(b.phase)}</span>` : ""}
+      <!-- Who they are on the left, what they are on the right. The record used
+           to run the full width under the summary, which put eight two-word
+           rows across a thousand pixels with the label at one edge and the
+           value at the other. Side by side, both columns are a readable width
+           and the panel opens on everything the card could not hold. -->
+      <div class="rlay">
+        <div class="rlay-main">
+          <h2>${esc(name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h2>
+          ${f.epithet ? `<div class="cepithet" style="margin:-4px 0 12px">${esc(f.epithet)}</div>` : ""}
+          <div class="meta">
+            ${r.confidence?.identity ? tierBadge(r.confidence.identity, r.confidence.identity === "official") : ""}
+            ${r.status ? `<span class="pill">${esc(r.status)}</span>` : ""}
+            ${b.phase ? `<span class="pill">Phase ${esc(b.phase)}</span>` : ""}
+          </div>
+          ${r.summary ? `<p>${esc(r.summary)}</p>` : `<p>No written record yet — identity only.</p>`}
+          ${r.kit?.length ? `<div class="dsec">
+            <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
+            <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
+            <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
+            <p style="font-size:12px;color:var(--fg-3);margin-top:14px">Pre-balance. Multipliers and mechanics
+            routinely shift between beta phases.</p>
+          </div>` : ""}
+        </div>
+        <div class="rlay-side">
+          ${sigWeaponCard(sig)}
+          ${gear.length ? `<div class="dpanel"><span class="label">Record</span>
+            <div class="dgear">${gear.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div></div>` : ""}
+        </div>
       </div>
-      ${r.summary ? `<p>${esc(r.summary)}</p>` : `<p>No written record yet — identity only.</p>`}
-      ${gear.length ? `<div class="dsec"><span class="label">Record</span>
-        <div class="dgear">${gear.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div></div>` : ""}
-      ${r.kit?.length ? `<div class="dsec">
-        <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
-        <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
-        <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
-        <p style="font-size:12px;color:var(--fg-3);margin-top:14px">Pre-balance. Multipliers and mechanics
-        routinely shift between beta phases.</p>
-      </div>` : ""}
       <div id="kitwrap"><div class="dsec"><span class="label">Skills</span>
         <p style="margin:0;color:var(--fg-3)">Loading kit…</p></div></div>
       ${sourceList(r.sources)}
@@ -1653,7 +1772,7 @@ function drawerResonator(name){
    one says something different: a kit, a character whose kit is not published
    anywhere yet, or a file that would not load. */
 function fillKit(name){
-  loadKits().then(() => {
+  return loadKits().then(() => {
     const wrap = $("#kitwrap");
     if(!wrap || S.drawer !== `resonator:${name}`) return;
     const kit = kitFor(name);
@@ -1898,6 +2017,19 @@ function draw(id){
 }
 
 function dispatch(kind, id){
+  /* Redraws the kit in place. The preference lives on S rather than in the
+     markup, so the next record you open is already in the mode you chose —
+     flipping it back on every character is the whole reason a toggle like this
+     gets abandoned. */
+  if(kind === "kitmode"){
+    S.kitSimple = !S.kitSimple;
+    const cur = String(S.drawer || "");
+    /* The toggle is inside the markup it just replaced, so the keyboard is
+       standing on a removed node by the time this resolves. Put it back on the
+       new one — otherwise focus falls to <body> and Tab restarts at the top. */
+    if(cur.startsWith("resonator:")) fillKit(cur.slice(10)).then(() => $(".kitmode")?.focus());
+    return;
+  }
   if(kind === "intel") drawerIntel(id);
   else if(kind === "resonator") drawerResonator(id);
   else if(kind === "version") drawerVersion(id);
