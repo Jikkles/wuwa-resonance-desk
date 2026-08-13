@@ -1,7 +1,7 @@
 {
   "schema": "wuwa-desk/portraits@1.0",
-  "note": "Cut-out character portraits and weapon icons — the game's own UI assets, with alpha, resolved through Prydwen's public character and weapon listings and cached in assets/portraits/. Art © Kuro Games. A name absent here has no published asset yet.",
-  "credit": "Icons via prydwen.gg · art © Kuro Games",
+  "note": "Character art at three sizes — 160px bust, 374x512 card, 2048x2048 gallery render — and weapon icons. All cut-outs with alpha, resolved through Prydwen's public character and weapon listings and cached in assets/portraits/. Art © Kuro Games. gallery:\"scene\" means Prydwen's gallery holds the Resonance Liberation splash rather than a standing render — no portrait to crop, so the desk uses Kuro's reveal art instead. A name absent here has no published asset yet.",
+  "credit": "Art via prydwen.gg · art © Kuro Games",
   "characters": {
     "Aemeath": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/aemeath",
@@ -9,7 +9,8 @@
       "weapon": "Sword",
       "rarity": 5,
       "icon": "assets/portraits/aemeath.webp",
-      "card": "assets/portraits/aemeath-card.webp"
+      "card": "assets/portraits/aemeath-card.webp",
+      "gallery": "scene"
     },
     "Denia": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/denia",
@@ -17,7 +18,8 @@
       "weapon": "Rectifier",
       "rarity": 5,
       "icon": "assets/portraits/denia.webp",
-      "card": "assets/portraits/denia-card.webp"
+      "card": "assets/portraits/denia-card.webp",
+      "gallery": "scene"
     },
     "Hiyuki": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/hiyuki",
@@ -25,7 +27,8 @@
       "weapon": "Sword",
       "rarity": 5,
       "icon": "assets/portraits/hiyuki.webp",
-      "card": "assets/portraits/hiyuki-card.webp"
+      "card": "assets/portraits/hiyuki-card.webp",
+      "gallery": "scene"
     },
     "Hsin": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/hsin",
@@ -33,7 +36,10 @@
       "weapon": "Unknown",
       "rarity": 5,
       "icon": "assets/portraits/hsin.webp",
-      "card": "assets/portraits/hsin-card.webp"
+      "card": "assets/portraits/hsin-card.webp",
+      "full": "assets/portraits/hsin-full.webp",
+      "gallery": "render",
+      "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/hsin_full.webp"
     },
     "Jingran": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/jingran",
@@ -41,7 +47,10 @@
       "weapon": "Broadblade",
       "rarity": 5,
       "icon": "assets/portraits/jingran.webp",
-      "card": "assets/portraits/jingran-card.webp"
+      "card": "assets/portraits/jingran-card.webp",
+      "full": "assets/portraits/jingran-full.webp",
+      "gallery": "render",
+      "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/jingran_full.webp"
     },
     "Luuk Herssen": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/luuk-herssen",
@@ -49,7 +58,8 @@
       "weapon": "Gauntlets",
       "rarity": 5,
       "icon": "assets/portraits/luuk-herssen.webp",
-      "card": "assets/portraits/luuk-herssen-card.webp"
+      "card": "assets/portraits/luuk-herssen-card.webp",
+      "gallery": "scene"
     },
     "Lynae": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/lynae",
@@ -57,7 +67,8 @@
       "weapon": "Pistols",
       "rarity": 5,
       "icon": "assets/portraits/lynae.webp",
-      "card": "assets/portraits/lynae-card.webp"
+      "card": "assets/portraits/lynae-card.webp",
+      "gallery": "scene"
     },
     "Mornye": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/mornye",
@@ -65,7 +76,8 @@
       "weapon": "Broadblade",
       "rarity": 5,
       "icon": "assets/portraits/mornye.webp",
-      "card": "assets/portraits/mornye-card.webp"
+      "card": "assets/portraits/mornye-card.webp",
+      "gallery": "scene"
     },
     "Qingxiao": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/qingxiao",
@@ -73,7 +85,10 @@
       "weapon": "Sword",
       "rarity": 5,
       "icon": "assets/portraits/qingxiao.webp",
-      "card": "assets/portraits/qingxiao-card.webp"
+      "card": "assets/portraits/qingxiao-card.webp",
+      "full": "assets/portraits/qingxiao-full.webp",
+      "gallery": "render",
+      "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/qingxiao_full.webp"
     },
     "Suisui": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/suisui",
@@ -81,7 +96,10 @@
       "weapon": "Rectifier",
       "rarity": 5,
       "icon": "assets/portraits/suisui.webp",
-      "card": "assets/portraits/suisui-card.webp"
+      "card": "assets/portraits/suisui-card.webp",
+      "full": "assets/portraits/suisui-full.webp",
+      "gallery": "render",
+      "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/suisui_full.webp"
     },
     "Suoming": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/suoming",
@@ -89,7 +107,10 @@
       "weapon": "Unknown",
       "rarity": 5,
       "icon": "assets/portraits/suoming.webp",
-      "card": "assets/portraits/suoming-card.webp"
+      "card": "assets/portraits/suoming-card.webp",
+      "full": "assets/portraits/suoming-full.webp",
+      "gallery": "render",
+      "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/suoming_full.webp"
     },
     "Yangyang: Xuanling": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/yangyang-xuanling",
@@ -97,7 +118,10 @@
       "weapon": "Sword",
       "rarity": 5,
       "icon": "assets/portraits/yangyang-xuanling.webp",
-      "card": "assets/portraits/yangyang-xuanling-card.webp"
+      "card": "assets/portraits/yangyang-xuanling-card.webp",
+      "full": "assets/portraits/yangyang-xuanling-full.webp",
+      "gallery": "render",
+      "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/yangyang-xuanling_full.webp"
     }
   },
   "weapons": {
@@ -150,5 +174,5 @@
       "source": "https://www.prydwen.gg/wuthering-waves/weapons"
     }
   },
-  "updated": "2026-08-12T18:47:49.313Z"
+  "updated": "2026-08-13T00:01:36.768Z"
 }

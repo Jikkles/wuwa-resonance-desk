@@ -88,9 +88,6 @@
       "signature": "Glint of Clouds",
       "accessory": "Cloudbloom",
       "region": "Mengzhou",
-      "image": "assets/characters/qingxiao.webp",
-      "imageStyle": "cutout",
-      "imageCredit": "Character art © Kuro Games · pre-release, from 3.6 beta files",
       "summary": "Reclusive sword cultivator, Xuan Paragon of Xuanfang Hold. Xianxia sword-immortal archetype - her swordplay appeared in a main story cutscene before the drip reveal.",
       "kit": [
         "All swords sit sealed inside her guqin in the default state; the guqin acts as a support weapon while the flying swords carry her damage.",
@@ -116,9 +113,6 @@
       "signature": "Thousandfold Deliverance",
       "accessory": "Snowpaw",
       "region": "Mengzhou",
-      "image": "assets/characters/jingran.webp",
-      "imageStyle": "cutout",
-      "imageCredit": "Character art © Kuro Games · pre-release, from 3.6 beta files",
       "summary": "Mengzhou-born Nethermancer who travels between mirage realms and the ruins of the old world. Assisted Suisui during the main story quest. HP-scaling self-shielding carry.",
       "kit": [
         "Two alternating stances - Negative Yin and Embracing Yang - swapped via Heavy Attack. Combat opens in Embracing Yang.",

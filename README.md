@@ -13,13 +13,12 @@ data/news.json                 curated leak/news entries
 data/resonators.json           character kit database
 data/feed.json                 auto-fetched headlines (written by Actions)
 data/art.json                  resolved official key art (written by Actions)
-data/portraits.json            cut-out portrait + weapon icon map (written by Actions)
+data/portraits.json            character art + weapon icon map (written by Actions)
 data/translations.json         English for non-English signal headlines
-assets/characters/             hosted character art
-assets/portraits/              cached cut-out busts and weapon renders
+assets/portraits/              cached busts, cut-outs and gallery illustrations
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
-scripts/fetch-portraits.mjs    the portrait + weapon icon resolver
+scripts/fetch-portraits.mjs    the character art + weapon icon resolver
 .github/workflows/update-feeds.yml   cron, every 6h
 ```
 
@@ -320,13 +319,32 @@ at the bottom, face about a fifth of the way down. That is the right picture for
 than a portrait.
 
 So the small tiles use a different asset entirely. `scripts/fetch-portraits.mjs`
-resolves the game's own UI art — a 160px bust and a 374×512 full cut-out per character,
-a 256px render per weapon — through **Prydwen's** public character and weapon listings,
-which embed their whole dataset as JSON in the page source (one request each, no
-per-character crawl). All of it carries a real alpha channel, which is the point: a
+resolves the game's own UI art — a 160px bust and a 374×512 waist-up cut-out per
+character, a 256px render per weapon — through **Prydwen's** public character and weapon
+listings, which embed their whole dataset as JSON in the page source (one request each,
+no per-character crawl). All of it carries a real alpha channel, which is the point: a
 cut-out sits *on* the card, over the tile's own element gradient, instead of bringing a
 second background inside the first. The script asserts that alpha is present and says
 so per file when it runs.
+
+The same script also resolves the **gallery illustration** — the 2048×2048 picture at
+the foot of a character's own Prydwen page — and that is what the big art panels use
+now. The 374px cut-out was being stretched across a 360px-wide panel and sat beside
+patches whose art happened to be hand-placed at 750px, so half the desk looked like a
+different site. This is one source for everybody, cut out, at eight times the pixels.
+Its URL is derived from the character's slug; the page is only fetched when that misses.
+
+That gallery slot holds two different kinds of picture, though. Before a character
+releases it is a standing render — one figure, head at the top, clear air either side —
+and that crops like a portrait. After release Prydwen tends to swap in the Resonance
+Liberation splash: a wide painted scene with the character somewhere inside it at a
+tenth of the size, which has no crop that is a picture of the character. Nothing on the
+page distinguishes them, so the file does. A standing figure's alpha plane is one smooth
+silhouette and costs 6–19% of the file; a scene's is a lace of glow and debris across
+the whole canvas and costs 38–49%. The script reads the `ALPH` chunk length straight out
+of the WebP container — no decoding, no dependency — draws the line at 28%, and logs
+scenes as `gallery: "scene"` without keeping them. Those characters fall back to Kuro's
+reveal poster, which is a portrait and is already sharp.
 
 The files are cached into `assets/portraits/` rather than hotlinked — Prydwen is a fan
 site paying for its own CDN. Credit rides in the page footer. Note that Prydwen is
@@ -336,8 +354,9 @@ shells out to `curl` for that reason, and it is still dependency-free.
 A weapon debuting with an unreleased patch has no published icon yet and falls back to
 the generic weapon mark — same rule as everywhere else here: show what is known.
 
-Precedence, then, is: hand-set image → Kuro reveal poster → crop of the patch key visual
-→ Prydwen cut-out, for the big art; and the cut-out bust first for anything small.
+Precedence, then, is: hand-set image → Prydwen gallery illustration → Kuro reveal poster
+→ crop of the patch key visual → Prydwen waist-up cut-out, for the big art; and the
+cut-out bust first for anything small.
 Per-character framing is only ever needed for **key visual** crops, where several
 characters share one wide image — never for the posters or the cut-outs, which are each
 one template and get one rule.
@@ -360,21 +379,25 @@ All three are needed together: `keyVisualFocus` alone can only frame left/right,
 `object-fit: cover` on a 16:9 source in a 4:5 box overflows horizontally only. Zoom in
 until the poster's own title and logo fall outside the crop.
 
-Full precedence: `banner.image` → `resonator.image` → resolved reveal art → key visual
-crop → plate. The key visual crop drops out on its own the moment a real reveal card
+Full precedence: `banner.image` → `resonator.image` → Prydwen gallery illustration →
+resolved reveal art → key visual crop → waist-up cut-out → plate. The key visual crop drops out on its own the moment a real reveal card
 exists, so you don't have to go back and clean it up. `"nameCN"` on a resonator becomes
 the plate glyph when there's no image at all.
 
-### Hosted character art
+### Overriding the art for one character
 
-Full-body cutouts live in `assets/characters/<name>.webp` and win over everything else.
-Point a resonator at one:
+A hand-set image wins over everything, including the gallery illustration. Point a
+resonator (or a banner row) at a file you have added to the repo:
 
 ```jsonc
 "image": "assets/characters/qingxiao.webp",
 "imageStyle": "cutout",                      // transparent PNG/WebP, not a full-bleed photo
 "imageCredit": "Character art © Kuro Games · pre-release, from 3.6 beta files"
 ```
+
+Use it sparingly. Qingxiao and Jingran were carried this way through the 3.6 beta, when
+the fetcher only had a 374px cut-out to offer; the gallery illustration is sharper than
+either, so both overrides went and nothing is hand-placed today.
 
 `imageStyle: "cutout"` switches the panel to `object-fit: contain` with the figure
 standing on the base, keeps the resonance rings and attribute glow visible behind it,
@@ -475,11 +498,12 @@ repo activity — if the feed genuinely goes quiet that long, push anything to r
 
 ## Rules
 
-- Character art is hosted in `assets/characters/`, including pre-release art pulled from
-  beta files. This is a deliberate call: it's Kuro's IP, it's the thing that gets fan sites
-  taken down, and the project accepts that risk. Every such image carries an `imageCredit`
-  saying so on the card. If the risk calculus ever changes, delete the `image` fields and
-  the cards fall back to official key art on their own.
+- Character art is cached into `assets/portraits/` by the fetcher, and a hand-set override
+  may be added under `assets/characters/`. This is a deliberate call: it's Kuro's IP, it's
+  the thing that gets fan sites taken down, and the project accepts that risk. Every such
+  image carries a credit line on the card. If the risk calculus ever changes, delete the
+  `image` fields and the cached files and the cards fall back to hotlinked key art on
+  their own.
 - Everything else still links out rather than being copied — sources, articles, threads.
 - Never promote a `reported` entry to `official` without an actual Kuro source.
 - Beta multipliers shift between phases. Say so on every kit entry.

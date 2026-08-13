@@ -148,12 +148,14 @@ function artFor(name){ return (DATA.art?.art || {})[name] || null; }
 /* Cut-outs, as opposed to artFor()'s posters. Kuro's reveal art is a 1080x1920
    marketing card — logo band, name plate, its own backdrop — which is the right
    picture at 400px and the wrong one at 54px, where you get a tiny poster
-   instead of a face. portraits.json holds the game's own UI assets with their
-   alpha intact, so a tile shows the character and nothing else: no plate, no
+   instead of a face. portraits.json holds the character cut out of any backdrop
+   at three sizes — `icon` for a tile, `card` waist-up, `full` the 2048px
+   illustration — so a tile shows the character and nothing else: no plate, no
    second background inside the card's. See scripts/fetch-portraits.mjs. */
 function portraitFor(name){ return (DATA.portraits?.characters || {})[name] || null; }
 function weaponArtFor(name){ return (DATA.portraits?.weapons || {})[name] || null; }
 const PORTRAIT_CREDIT = "Character art © Kuro Games · icon via prydwen.gg";
+const GALLERY_CREDIT = "Character art © Kuro Games · gallery via prydwen.gg";
 
 /* Banner rows carry framing hints for the shared key visual, so a resonator
    card can borrow the crop its banner row already defines. */
@@ -178,7 +180,7 @@ function intelArt(e){
     const r = resonatorFor(t);
     if(r.name){
       const f = figure({name:r.name, ...(bannerFor(r.name) || {})});
-      if(f.image) return {url:f.image, poster:f.poster, cutout:f.cutout, alt:r.name};
+      if(f.image) return {url:f.image, poster:f.poster, cutout:f.cutout, full:f.full, alt:r.name};
     }
   }
   return null;
@@ -278,20 +280,37 @@ function confidenceRows(r){
 }
 
 /* Resolve the best available image for a banner row or resonator.
-   Precedence: hand-set image → reveal key art → crop of the patch key visual →
-   typographic plate. The crop drops out on its own once a reveal card exists. */
+   Precedence: hand-set image → gallery illustration → reveal key art → crop of
+   the patch key visual → waist-up card → typographic plate. */
 function figure(b){
   const r = resonatorFor(b.name);
   const art = artFor(b.name);
   const port = portraitFor(b.name);
   const own = b.image || r.image;
-  const shared = !own && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
-  /* The cut-out card is last, not first: it is 374x512 of UI asset and it will
+  /* The gallery illustration is the desk's artwork now, for everyone who has
+     one. It ranks above Kuro's own reveal poster deliberately: the poster is a
+     finished composition — logo band, name plate, painted backdrop — so a row
+     of them reads as a row of adverts, and every one is a different layout. It
+     ranks above the patch key visual for the same reason in reverse: a crop of
+     a group shot is a picture of a patch, not of a person. What it fixes first
+     is sharpness. The card below is 374px wide and was being stretched across
+     a 360px panel; this is 2048px and cut out, so the art window and a
+     hand-placed picture no longer look like two different sites.
+
+     Absent for characters whose Prydwen gallery holds the Resonance Liberation
+     splash instead of a standing render — a composition, not a portrait, and
+     there is no crop of it that is a picture of the character. Those fall
+     through to the poster, which is what they were using anyway. The fetcher
+     decides and says so in portraits.json; see scripts/fetch-portraits.mjs. */
+  const gallery = !own ? port?.full || null : null;
+  const shared = !own && !gallery && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
+  /* The waist-up card is last, not first: it is 374x512 of UI asset and it will
      stand in for anyone, which is exactly why it must not displace a real key
-     visual. It fills the holes — a character Kuro has teased but not revealed
-     — where the alternative was a letter on a gradient. */
-  const image = own || art?.url || shared?.url || port?.card;
+     visual. It fills the holes — a character with a Prydwen entry but no
+     illustration drawn yet — where the alternative was a letter on a gradient. */
+  const image = own || gallery || art?.url || shared?.url || port?.card;
   const cutout = (!!own && image === own && (b.imageStyle || r.imageStyle) === "cutout")
+              || !!gallery
               || (!!port && image === port.card);
   /* A 16:9 key visual in a 4:5 box has no vertical overflow, so object-position
      can only frame horizontally — zoom picks the height. */
@@ -300,11 +319,19 @@ function figure(b){
     : "";
   return {
     image, cutout, style,
+    /* The gallery illustration is a 2048x2048 square with the figure standing
+       head-near-the-top, feet-at-the-bottom and clear air either side. Every
+       other picture here is already cropped to something. Flagging it lets the
+       CSS frame a full body instead of inheriting a crop meant for a bust. */
+    full: !!gallery,
     /* What a 54px tile shows, when we hold one. Resolved separately from the
        big picture above so the two never have to compromise on one crop. */
     icon: port?.icon || null,
     glyph: r.nameCN || b.name?.slice(0,1) || "?",
-    credit: cutout ? (b.imageCredit || r.imageCredit || (port && image === port.card ? PORTRAIT_CREDIT : null)) : null,
+    credit: !cutout ? null
+          : own ? (b.imageCredit || r.imageCredit || null)
+          : gallery ? GALLERY_CREDIT
+          : PORTRAIT_CREDIT,
     source: art && image === art?.url ? art : shared,
     shared: !!shared,
     /* Kuro's Profile Reveal posters are a fixed 1080x1920 template — logo top,
@@ -319,7 +346,7 @@ function figure(b){
 /* Full-size art panel, shared by character cards, resonator records and the drawer. */
 function artPanel(b, extra = ""){
   const f = figure(b);
-  const cls = f.cutout ? " has-cutout" : f.image ? " has-art" : "";
+  const cls = f.full ? " has-cutout has-full" : f.cutout ? " has-cutout" : f.image ? " has-art" : "";
   const inner = f.image
     ? `<img src="${esc(f.image)}" alt="${esc(b.name)}" loading="lazy" decoding="async"${f.style}>`
     : `<span class="glyph">${esc(f.glyph)}</span>`;
@@ -548,10 +575,18 @@ function allPhases(v){
    them, and a patch with one lets the poster fill the frame. */
 function cardFigures(v){
   if(!v) return [];
-  return allPhases(v).flatMap(p => p.banners).filter(b => b.new).map(b => {
+  const debuts = allPhases(v).flatMap(p => p.banners).filter(b => b.new);
+  /* A patch too far out to have banner rows still has characters flagged for it
+     in the resonator database — the same list the card prints under "Teased for
+     this patch", and the only faces the version has. Drawing the card with them
+     is a weaker claim than a debut and it is made in the right place: the tile
+     underneath carries the tier, and the card is already stamped Highly
+     speculative. The alternative was a screen of rings above a name we know. */
+  const subjects = debuts.length ? debuts : resonators().filter(r => r.version === v.id);
+  return subjects.map(b => {
     const f = figure(b);
     const src = f.cutout ? f.image : portraitFor(b.name)?.card || null;
-    return src ? {src, name:b.name} : null;
+    return src ? {src, name:b.name, full:f.full} : null;
   }).filter(Boolean).slice(0, 2);
 }
 
@@ -739,7 +774,7 @@ function patchCard(v, role){
       <div class="pcard-window">${figs.length
         ? `<div class="figs n${figs.length}">${figs.map(f =>
             `<div class="fig-cell">
-               <img class="fig" src="${esc(f.src)}" alt="${esc(f.name)}" loading="lazy" decoding="async">
+               <img class="fig${f.full ? " full" : ""}" src="${esc(f.src)}" alt="${esc(f.name)}" loading="lazy" decoding="async">
              </div>`).join("")}</div>`
         : ""}</div>
     </div>
@@ -980,7 +1015,7 @@ function intelCard(e, mini){
      edge; an entry with no face to show falls back to a plate carrying the
      version it's about, in its own confidence colour. */
   const fig = art
-    ? `<div class="ithumb${art.cutout ? " cut" : ""}">
+    ? `<div class="ithumb${art.cutout ? " cut" : ""}${art.full ? " full" : ""}">
          <img class="${art.poster ? "poster" : ""}" src="${esc(art.url)}" alt="${esc(art.alt)}"
               loading="lazy" decoding="async"></div>`
     : `<div class="ithumb plate" aria-hidden="true"><span>${esc(e.version || e.category || "—")}</span></div>`;

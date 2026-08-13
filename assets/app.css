@@ -558,10 +558,25 @@ button{font:inherit;color:inherit}
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center 30%;
 }
+/* Same crop, taken from a full-body square instead of a waist-up card. Cover on
+   a square in a tall cell fills the height, which at this size means a whole
+   person about 380px tall and a head the size of a full stop. The zoom brings
+   it back to chest-up — the framing the cell has always had, now cut from
+   2048px of source rather than 374. */
+/* The origin is a little above the head rather than on it: the top 78px of this
+   box sits behind the head band, so a crop centred on the face puts the face in
+   the band's shadow. Starting the visible range just off the top of the canvas
+   spends that 78px on the empty air the illustration already has above the
+   head, and the face lands clear of the band. */
+.figs img.fig.full{transform:scale(1.92);transform-origin:50% 25%}
 /* Two figures lean in toward the middle rather than both drifting to their
    outside edges — a pair standing together, not two pictures in two boxes. */
 .figs.n2 .fig-cell:first-child img.fig{object-position:62% 30%}
 .figs.n2 .fig-cell:last-child img.fig{object-position:38% 30%}
+/* The lean is gentler on a zoomed square: the crop is already narrow, and the
+   full 62/38 walks the head out of the frame rather than tilting a shoulder. */
+.figs.n2 .fig-cell:first-child img.fig.full{object-position:56% 30%}
+.figs.n2 .fig-cell:last-child img.fig.full{object-position:44% 30%}
 /* A seam, so two crops read as a deliberate split rather than one picture that
    failed to line up. */
 .figs.n2 .fig-cell:last-child{box-shadow:inset 1px 0 0 rgba(255,255,255,.09)}
@@ -1056,6 +1071,18 @@ button{font:inherit;color:inherit}
   object-fit:contain;object-position:center bottom;
   filter:drop-shadow(0 14px 30px rgba(0,0,0,.55));
 }
+/* The gallery illustration is a different shape of problem to the waist-up card
+   above it. It arrives on a 2048x2048 square with the figure standing in the
+   middle of it — head a tenth of the way down, feet at the foot, clear air
+   either side — so `contain` fits the empty canvas to the panel and leaves the
+   character as a stamp in the middle of it. Cover fills the panel from the
+   square's own height, and the zoom then crops off the air above the head and
+   the legs below the knee: head near the top, figure through the frame, which
+   is the shape the panel was drawn for. */
+.cart.has-full img{
+  object-fit:cover;object-position:center;
+  transform:scale(1.3);transform-origin:50% 32%;
+}
 .cart::after{
   content:"";position:absolute;inset:0;
   background:
@@ -1177,6 +1204,10 @@ button{font:inherit;color:inherit}
    is the logo and nothing else without a zoom onto the head. */
 .ithumb img.poster{object-position:center top;transform:scale(1.9);transform-origin:50% 21%}
 .ithumb.cut img{object-fit:contain;object-position:center 12%;transform:scale(1.35);transform-origin:50% 8%}
+/* A full-body square at 112px is a person 20px tall. This slot is a landmark
+   for finding a row again, so it wants a face — zoom to the head and let the
+   rest of the illustration fall outside. */
+.ithumb.cut.full img{object-fit:cover;object-position:center top;transform:scale(2.1);transform-origin:50% 6%}
 /* No face to show: the version, set in the entry's own tier colour. Keeps the
    headline column on one edge and still says something true about the row. */
 .ithumb.plate{
@@ -1192,6 +1223,7 @@ button{font:inherit;color:inherit}
 .intel:hover .ithumb img{transform:scale(1.05)}
 .intel:hover .ithumb img.poster{transform:scale(2)}
 .intel:hover .ithumb.cut img{transform:scale(1.42)}
+.intel:hover .ithumb.cut.full img{transform:scale(2.2)}
 
 .intel-h{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
 .intel-h .when{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--fg-3)}
@@ -1491,6 +1523,15 @@ button{font:inherit;color:inherit}
 .dart{position:relative;border-bottom:1px solid var(--line)}
 .dart .cart{aspect-ratio:16/11;border-bottom:0}
 .dart .cart.has-cutout,.dart .cart.has-art{aspect-ratio:4/3}
+/* The one landscape art panel on the site, and a square illustration behaves
+   backwards in it: cover fits the square to the panel's *width*, so the
+   overflow is vertical and centring it throws away the top of the head. Anchor
+   the crop to the top of the canvas instead and zoom from there — head, torso,
+   whatever the character is holding, which is what a record wants. */
+.dart .cart.has-full img{
+  object-position:center top;
+  transform:scale(1.86);transform-origin:50% 5%;
+}
 
 /* ══ command palette ════════════════════════════════════════════════ */
 /* align-items:flex-start so the box is as tall as its results, not the gap. */
@@ -1563,6 +1604,11 @@ button{font:inherit;color:inherit}
   .hero{grid-template-columns:1fr 1fr}
   .hero .pcard.is-future{grid-column:1/-1;min-height:0}
   .hero .pcard.is-future .pcard-main{margin-top:0}
+  /* And its stage turns on its side with it. The zoom that reads as chest-up
+     in a tall half-cell is a face across a whole row here, so drop it: at this
+     width the square already fills the band from its own width, and the crop
+     only has to choose how far down the figure to start. */
+  .hero .pcard.is-future .figs img.fig.full{transform:none;object-position:center 12%}
 }
 @media (max-width:1080px){
   :root{--rail-w:200px}
@@ -1598,6 +1644,11 @@ button{font:inherit;color:inherit}
      runs long. The art band gives some of its height back rather than putting
      the banner list a screen and a half down. */
   .pcard-stage{min-height:300px;max-height:360px}
+  /* The band over the top of it does not shrink with it, so it now covers a
+     third of the picture rather than a fifth, and a crop that cleared it at
+     full height puts a face behind the codename here. Start the figure a touch
+     lower down the frame. */
+  .figs img.fig.full{transform-origin:50% 22%}
   /* No horizontal scroll inside a card on touch — wrap the portraits instead,
      since a half-visible face reads as a broken image. */
   .pcard-row .bstrip{flex-wrap:wrap;overflow:visible;--thumb:56px}
