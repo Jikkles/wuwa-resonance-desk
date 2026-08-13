@@ -50,7 +50,13 @@
      rail is the desk's only navigation now, so it has to read as the loudest
      thing on the page rather than as a column of captions. "Live Signals" plus
      its UNVERIFIED badge is the widest row and what actually sets this number. */
-  --rail-w:256px;
+  /* Cut to the nav at its type size — see .navlink — and no wider. Every pixel
+     here comes off the stage, where the patch cards are already tight enough
+     to be truncating names, so the rail takes the smallest width that holds
+     "Resonators" and its caret on one line. The one row that doesn't fit,
+     Live Signals with its warning badge, wraps instead of setting the width
+     for everything else. */
+  --rail-w:272px;
   --aside-w:340px;
 
   /* Backdrop dials. The blur used to live here, at 58px, which made the key
@@ -189,19 +195,27 @@ button{font:inherit;color:inherit}
 }
 .brand{display:flex;align-items:center;gap:11px;padding:2px 18px 0;text-decoration:none}
 .brand svg{flex:none;color:var(--accent)}
-.brand-name{display:block;font-size:15px;font-weight:700;letter-spacing:.14em;line-height:1.15}
-.brand-sub{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--fg-3);text-transform:uppercase}
+/* Sized to the rail, not to the nav under it: "Resonance Desk" is 14 tracked-out
+   characters and it breaks in two before anything else in the rail runs out of
+   room. A two-line wordmark reads as a layout fault, so this is the one line
+   here that stops short of the step the rest took. */
+.brand-name{display:block;font-size:18px;font-weight:700;letter-spacing:.12em;line-height:1.15;white-space:nowrap}
+.brand-sub{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.18em;color:var(--fg-3);text-transform:uppercase}
 
 .rail-group{display:flex;flex-direction:column;gap:2px;padding:0 12px}
 .rail-group>.label{padding:0 6px 8px}
 /* The section headings in the rail sit a step above the 10.5px .label used
    inside panels — they head the navigation, not a card's metadata row. */
-.rail .label{font-size:11px;color:var(--fg-2)}
+.rail .label{font-size:15px;color:var(--fg-2)}
 
+/* The rail runs about half again the size of the type inside the panels. It is
+   read at a glance and from further back than a card is — it says where you
+   are and where you can go, and both were being read off 13px mono. The width
+   above follows from this, not the other way round. */
 .navlink{
-  display:flex;align-items:center;gap:11px;width:100%;
-  background:none;border:0;border-radius:var(--r-sm);padding:11px 11px;cursor:pointer;
-  font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.1em;
+  display:flex;align-items:center;gap:11px;width:100%;flex-wrap:wrap;
+  background:none;border:0;border-radius:var(--r-sm);padding:12px 12px;cursor:pointer;
+  font-family:var(--mono);font-size:19px;font-weight:500;letter-spacing:.1em;
   text-transform:uppercase;color:var(--fg);text-align:left;
   transition:background .15s,color .15s;
 }
@@ -212,18 +226,23 @@ button{font:inherit;color:inherit}
 .navlink>span:first-of-type{white-space:nowrap}
 /* Live Signals carries its warning in the nav itself rather than only once you
    are inside the view. flex:none or the label gives way first and
-   "Live Signals" wraps onto two lines. */
+   "Live Signals" wraps onto two lines. At the rail's type size the two no
+   longer fit side by side, so the badge takes the second line rather than the
+   rail taking another 90px off the stage for one item — the label stays whole,
+   which is the part that was worth protecting. It is also the one thing here
+   that did not grow with the rest: it is a caveat on the item above it, not a
+   destination. */
 .navlink .warn{
-  margin-left:auto;flex:none;font-size:8.5px;letter-spacing:.09em;padding:2px 6px;border-radius:5px;
+  margin-left:auto;flex:none;font-size:10px;letter-spacing:.09em;padding:2px 6px;border-radius:5px;
   border:1px dashed color-mix(in srgb,var(--t-rumour) 60%,transparent);color:var(--t-rumour);
 }
 /* Same slot, different claim: .warn is "don't trust this yet", .soon is
    "there's nothing here yet". Solid rather than dashed, and in the muted grey
    rather than a tier colour, so an unbuilt view never reads as a warning. */
 .navlink .soon{
-  margin-left:auto;flex:none;border-radius:5px;font-family:var(--mono);text-transform:uppercase;
+  margin-left:auto;flex:none;border-radius:6px;font-family:var(--mono);text-transform:uppercase;
   background:var(--bg-2);border:1px solid var(--line);color:var(--fg-3);
-  font-size:8.5px;letter-spacing:.09em;padding:2px 6px;
+  font-size:12px;letter-spacing:.09em;padding:3px 8px;
 }
 /* An unbuilt view is dimmer than a built one until you land on it. */
 .navlink:has(.soon):not([aria-current="true"]){opacity:.78}
@@ -251,16 +270,16 @@ button{font:inherit;color:inherit}
 .subnav[hidden]{display:none}
 .sublink{
   display:flex;align-items:center;gap:9px;width:100%;
-  background:none;border:0;border-radius:7px;padding:6px 10px;cursor:pointer;
-  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;
+  background:none;border:0;border-radius:7px;padding:8px 11px;cursor:pointer;
+  font-family:var(--mono);font-size:16px;font-weight:500;letter-spacing:.1em;
   text-transform:uppercase;color:var(--fg-3);text-align:left;
   transition:background .15s,color .15s;
 }
 .sublink:hover{background:var(--bg-2);color:var(--fg)}
 .sublink[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
 .sublink>span:first-of-type{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sublink .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
-.sublink .n{margin-left:auto;font-size:10px;opacity:.65;letter-spacing:.04em}
+.sublink .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
+.sublink .n{margin-left:auto;font-size:14px;opacity:.65;letter-spacing:.04em}
 /* Tier rows keep their tier colour whether or not they are on — same bargain
    the tier chips struck: the legend and the filter are one control. Written
    under .subnav so they outrank the pressed rule above, which would otherwise
@@ -273,20 +292,20 @@ button{font:inherit;color:inherit}
 
 .tierlink{
   display:flex;align-items:center;gap:10px;width:100%;
-  background:none;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;
-  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
+  background:none;border:0;border-radius:8px;padding:10px 12px;cursor:pointer;
+  font-family:var(--mono);font-size:17px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
   color:var(--fg-2);text-align:left;transition:background .15s,color .15s;
 }
 .tierlink:hover{background:var(--bg-2);color:var(--fg)}
-.tierlink .dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.tierlink .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
 .tierlink .n{
-  margin-left:auto;font-size:10.5px;color:var(--fg-2);
-  border:1px solid var(--line);border-radius:6px;padding:0 6px;min-width:26px;text-align:center;
+  margin-left:auto;font-size:14px;color:var(--fg-2);
+  border:1px solid var(--line);border-radius:6px;padding:1px 7px;min-width:30px;text-align:center;
 }
 
 .rail-about{
-  margin:0 18px;padding:14px;border:1px solid var(--line);border-radius:var(--r-sm);
-  background:var(--bg-2);font-size:13px;line-height:1.6;color:var(--fg-2);
+  margin:0 18px;padding:15px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--bg-2);font-size:15px;line-height:1.6;color:var(--fg-2);
 }
 .rail-about .label{margin-bottom:8px}
 .linkout{
@@ -1158,12 +1177,12 @@ button{font:inherit;color:inherit}
 .cart .debut{
   position:absolute;top:11px;right:13px;z-index:3;
   display:inline-flex;align-items:center;gap:5px;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
-  color:var(--bg);background:var(--attr,var(--accent));border-radius:6px;padding:3px 8px;
+  font-family:var(--mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:var(--bg);background:var(--attr,var(--accent));border-radius:6px;padding:3px 9px;
   cursor:default;
 }
 .cart .debut i{
-  font-style:normal;font-size:8.5px;letter-spacing:.06em;
+  font-style:normal;font-size:12px;letter-spacing:.04em;
   padding:0 4px;border-radius:4px;
   background:color-mix(in srgb,var(--bg) 26%,transparent);
 }
@@ -1210,9 +1229,9 @@ button{font:inherit;color:inherit}
    it sits on artwork, where a hairline border and a colour disappear. */
 .cart .flag{
   position:absolute;top:11px;left:13px;z-index:3;
-  font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+  font-style:normal;font-family:var(--mono);font-size:14px;letter-spacing:.08em;
   text-transform:uppercase;font-weight:600;
-  color:var(--bg);border-radius:6px;padding:3px 8px;
+  color:var(--bg);border-radius:6px;padding:3px 9px;
 }
 .cart .flag.new{background:var(--t-official)}
 .cart .flag.up{background:var(--t-datamined)}
@@ -1483,10 +1502,12 @@ button{font:inherit;color:inherit}
 }
 .rec-n .cjk{font-size:11px;font-weight:500;color:var(--attr)}
 .rec:hover .rec-n{color:var(--attr)}
-/* At card width the badge and its `+n` were wider than the art they sit on. */
-.rec .cart .debut{top:8px;right:8px;font-size:8.5px;padding:2px 6px;gap:4px}
-.rec .cart .debut i{font-size:8px}
-.rec .cart .flag{top:8px;left:8px;font-size:8.5px;padding:2px 6px}
+/* At card width the two corners are within a few pixels of meeting, so the
+   tracking comes off before the size does — "Upcoming" facing a patch number
+   across 180px of art is the tightest row on the desk. */
+.rec .cart .debut{top:8px;right:8px;font-size:12.5px;letter-spacing:.06em;padding:2px 7px;gap:4px}
+.rec .cart .debut i{font-size:11px}
+.rec .cart .flag{top:8px;left:8px;font-size:12.5px;letter-spacing:.05em;padding:2px 7px}
 
 /* Five marks always, the unearned ones greyed — the shape of the rating reads
    before the count does, which is the point of stars over "5★". */
@@ -1683,40 +1704,6 @@ button{font:inherit;color:inherit}
 .feat-b .rec-attrs{margin-top:9px}
 .feat-b .ctiers{margin-top:13px}
 .feat-b .btn{margin-top:13px}
-
-/* ══ quick filters ══════════════════════════════════════════════════
-   The secondary filter axes. Rendered into the aside on desktop and inline
-   under the panel header below 1340px, where there is no aside to put them
-   in — same markup, same handler, one of the two hidden at any width. */
-.qf{display:grid;gap:11px;padding:13px 14px}
-.qf-row{display:grid;gap:5px}
-.qf-row .label{padding-left:1px}
-.qf select{
-  width:100%;appearance:none;-webkit-appearance:none;cursor:pointer;
-  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-sm);
-  padding:8px 30px 8px 11px;color:var(--fg-2);
-  font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
-  /* Chevron drawn in the border colour so there is no second icon system. */
-  background-image:linear-gradient(45deg,transparent 50%,var(--fg-3) 50%),
-                   linear-gradient(135deg,var(--fg-3) 50%,transparent 50%);
-  background-position:calc(100% - 15px) 55%,calc(100% - 10px) 55%;
-  background-size:5px 5px,5px 5px;background-repeat:no-repeat;
-  transition:border-color .15s,color .15s;
-}
-.qf select:hover{border-color:var(--line-2);color:var(--fg)}
-/* An active filter is the reason a list looks short, so it carries the accent
-   — you should be able to see which control emptied the page without opening
-   any of them. */
-.qf select.on{border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
-.qf select option{background:var(--bg-1);color:var(--fg-2);text-transform:none;letter-spacing:0}
-.qf-reset{margin-top:2px}
-.qf-reset:disabled{opacity:.4;cursor:default}
-.qf-reset:disabled:hover{background:var(--bg-3);border-color:var(--line-2);color:var(--fg-2)}
-/* Desktop shows the aside copy; the inline copy only appears once the aside
-   is gone. Both are always in the DOM, so state can't drift between them. */
-.qf-inline{display:none;border-bottom:1px solid var(--line);background:var(--bg-2)}
-.qf-inline .qf{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));align-items:end;padding:12px 18px}
-.qf-inline .qf-reset{margin-top:0}
 
 .btn{
   display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
@@ -2036,9 +2023,7 @@ button{font:inherit;color:inherit}
 @media (max-width:1340px){
   .body{grid-template-columns:minmax(0,1fr)}
   .aside{display:none}
-  /* The aside took the quick filters with it — bring the inline copy up. */
-  .qf-inline{display:block}
-  /* And it took the header's column with it. There is nowhere left to put a
+  /* It takes the header's column with it. There is nowhere left to put a
      panel, so it unbuilds itself: the frost and border come off, the parts
      unstack, and it is a right-aligned strip across the top of the stage
      again — readings on one line, the desk's name under them. The views drop
@@ -2076,17 +2061,22 @@ button{font:inherit;color:inherit}
   .hero .pcard.is-future .figs img.fig.full{transform:none;object-position:center 12%}
 }
 @media (max-width:1080px){
-  :root{--rail-w:214px}
-  /* 214px of rail can't hold "Live Signals" and "Unverified" on one line at
+  /* The rail steps down with the viewport, but by less than the page does: at
+     this width it is a bigger share of the screen than at 1440, and that is
+     the trade — the nav is what the desk is steered with. */
+  :root{--rail-w:270px}
+  /* This much rail can't hold "Live Signals" and "Unverified" on one line at
      this type size. The hatched bar on the view itself still carries it.
      "Events"/"Soon" fits in the same space with room to spare, and has to
      stay: the rail is the only nav there is. */
   .navlink .warn{display:none}
-  .navlink{font-size:12px;gap:9px;padding:10px}
-  /* "RESONANCE DESK" is 14 characters of tracked-out 15px and it breaks across
+  .navlink{font-size:17px;gap:9px;padding:11px 10px}
+  .sublink{font-size:14.5px}
+  .tierlink{font-size:15px}
+  /* "RESONANCE DESK" is 14 characters of tracked-out type and it breaks across
      two lines well before the nav under it runs out of room. The wordmark steps
      down rather than wrapping — a two-line brand reads as a layout fault. */
-  .brand-name{font-size:13px;letter-spacing:.08em;white-space:nowrap}
+  .brand-name{font-size:17px;letter-spacing:.08em;white-space:nowrap}
   /* The panel is viewport-width minus its padding from here down, so a third
      of it is no longer a card — two skills to a row. */
   .skills.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -2174,10 +2164,6 @@ button{font:inherit;color:inherit}
   /* 112px of thumbnail out of a 360px row leaves no headline. */
   .intel.has-art{grid-template-columns:78px minmax(0,1fr);gap:12px}
   .intel{padding-left:16px}
-  /* Two selects to a row, reset alongside. Stacked, the filter block plus the
-     chips pushed the first story clean off a 390px screen. */
-  .qf-inline .qf{grid-template-columns:repeat(auto-fit,minmax(146px,1fr));padding:12px 16px;gap:10px}
-  .qf-inline .qf-reset{align-self:end}
 
   /* The source report used to be reordered below the log here. With it gone
      Signals is header → warning → filters → feed in source order, which is the

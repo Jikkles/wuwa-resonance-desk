@@ -81,18 +81,18 @@ const S = {
      Reset leaves it alone. The stats never move with it: those are level 90,
      full stop. */
   rank:1,
-  when:"all",                      // timeline
-  tier:"all", ver:"all", cat:"all", // intel
-  kind:"all", src:"all",           // signals
-  elem:"all", weapon:"all",        // resonators
-  wtype:"all", wstat:"all"         // weapons
+  when:"all",   // timeline
+  tier:"all",   // intel
+  kind:"all",   // signals
+  elem:"all",   // resonators
+  wtype:"all"   // weapons
 };
 /* Which of those a view actually reads — drives Reset, and stops a stale
    element filter from silently narrowing a list you have navigated away from. */
 const VIEW_FILTERS = {
-  timeline:["when"], intel:["tier","ver","cat"],
-  signals:["kind","src"], resonators:["elem","weapon"],
-  weapons:["wtype","wstat"],
+  timeline:["when"], intel:["tier"],
+  signals:["kind"], resonators:["elem"],
+  weapons:["wtype"],
   /* Every view needs a row here even with nothing in it — filtersOn() and
      Reset both index this table unguarded. */
   events:[]
@@ -627,7 +627,7 @@ function renderRail(){
       <button class="navlink" id="tab-${v.id}" data-act="view" data-id="${v.id}"
               aria-current="${S.view === v.id}"
               ${f ? `aria-expanded="${open}" aria-controls="sub-${v.id}"` : ""}>
-        ${icon(v.icon)}<span>${v.label}</span>
+        ${icon(v.icon, 19)}<span>${v.label}</span>
         ${navBadge(v)}
         ${f ? `<span class="caret" aria-hidden="true">${icon("i-caret", 11)}</span>` : ""}
       </button>
@@ -640,9 +640,9 @@ function renderRail(){
      by hand — and the rest leave the site. Nothing here is a page that doesn't
      exist: a link that goes nowhere is worse than no link. */
   $("#rail-links").innerHTML = [
-    ["Patch notes",    {view:"intel",    set:{tier:"official", cat:"all", ver:"all"}}],
+    ["Patch notes",    {view:"intel",    set:{tier:"official"}}],
     ["Banner history", {view:"timeline", set:{when:"past"}}],
-    ["Hot signals",    {view:"signals",  set:{kind:"hot", src:"all"}}],
+    ["Hot signals",    {view:"signals",  set:{kind:"hot"}}],
     ["Official news",  {href:"https://wutheringwaves.kurogames.com/en/main/news"}],
     ["Kuro on YouTube",{href:"https://www.youtube.com/channel/UC0Bi5KMcECRVYis5Gb_ZYZQ"}],
     /* Main sub above the leak sub, in the same order the desk trusts them. */
@@ -1075,72 +1075,22 @@ function chips(scope, items, active){
     </button>`).join("");
 }
 
-/* ── quick filters ───────────────────────────────────────────────────
-   Every view's primary axis is a chip row in its panel header — tier on
-   Intel, kind on Signals, element on Resonators. These are the secondary
-   axes: too many values to spend a chip each on, so they get selects.
-   Options are read off the data, so a category nothing is filed under never
-   appears and can't produce an empty list. */
-function filterSpec(){
-  const uniq = xs => [...new Set(xs.filter(Boolean))];
-  const byVer = (a, b) => parseFloat(b) - parseFloat(a);
-  if(S.view === "intel") return [
-    {k:"ver",    label:"Version",  all:"All versions",   opts:uniq(entries().map(e => e.version)).sort(byVer)},
-    {k:"cat",    label:"Category", all:"All categories", opts:uniq(entries().map(e => e.category)).sort()}
-  ];
-  if(S.view === "resonators") return [
-    {k:"weapon", label:"Weapon",   all:"All weapons",    opts:uniq(resonators().map(r => r.weapon)).sort()}
-  ];
-  if(S.view === "signals") return [
-    {k:"src",    label:"Source",   all:"All sources",    opts:uniq(signals().map(i => i.source)).sort()}
-  ];
-  /* Class is the chip row on Weapons — five values, and it is the question the
-     view is opened with. Sub-stat is the second axis: "which Broadblade gives
-     crit rate" is the next question after it, and six more chips across the
-     same header would have made the two rows indistinguishable. */
-  if(S.view === "weapons") return [
-    {k:"wstat",  label:"Sub-stat", all:"All sub-stats",  opts:uniq(weapons().map(w => w.stat)).sort()}
-  ];
-  /* Timeline's now/next/past chips are the whole filter — there is no second
-     axis worth inventing for three patches. */
-  return [];
-}
-
+/* ── filters ─────────────────────────────────────────────────────────
+   Every view's filter is now its rail axis and nothing else. A Quick filters
+   panel used to stand in the aside — and again inline once the aside dropped
+   — carrying a select per view for a second axis: version and category on
+   Intel, weapon on Resonators, source on Signals, sub-stat on Weapons. It
+   went with the panel. One filter surface is the point of moving them into
+   the rail; a second one in the opposite margin, in a different control, was
+   the arrangement the rail replaced, still standing. */
 const filtersOn = () => VIEW_FILTERS[S.view].filter(k => S[k] !== "all");
-
-/* Rendered twice on purpose: into the aside on desktop, and inline under the
-   panel header at the widths where the aside is gone. Both write to the same
-   state through the same delegated handler, and every draw() rebuilds both, so
-   they cannot drift apart. */
-function quickFilters(inline){
-  const spec = filterSpec();
-  if(!spec.length) return "";
-  const rows = spec.map(f => `
-    <label class="qf-row">
-      <span class="label">${f.label}</span>
-      <select data-sel="${f.k}" aria-label="${f.label}" class="${S[f.k] === "all" ? "" : "on"}">
-        <option value="all"${S[f.k] === "all" ? " selected" : ""}>${f.all}</option>
-        ${f.opts.map(o => `<option value="${esc(o)}"${S[f.k] === o ? " selected" : ""}>${esc(o)}</option>`).join("")}
-      </select>
-    </label>`).join("");
-  const on = filtersOn().length;
-  const body = `<div class="qf">${rows}
-    <button class="btn qf-reset" data-act="reset"${on ? "" : " disabled"}>
-      ${icon("i-close", 11)} Reset filters${on ? ` (${on})` : ""}
-    </button></div>`;
-
-  return inline
-    ? `<div class="qf-inline">${body}</div>`
-    : `<div class="panel qf-panel"><div class="mini-h"><h3>Quick filters</h3></div>${body}</div>`;
-}
 
 /* An empty list should say which control emptied it, and undo itself. */
 function emptyWhy(what){
   const on = filtersOn();
   if(!on.length) return `Nothing here yet.`;
-  const names = {tier:"confidence", ver:"version", cat:"category", kind:"kind",
-                 src:"source", elem:"element", weapon:"weapon", when:"window",
-                 wtype:"class", wstat:"sub-stat"};
+  const names = {tier:"confidence", kind:"kind", elem:"element",
+                 when:"window", wtype:"class"};
   return `No ${what} matches this ${on.map(k => names[k]).join(" + ")} filter.
     <button class="more" data-act="reset" style="margin-left:10px">Reset ${icon("i-arrow", 12)}</button>`;
 }
@@ -1183,14 +1133,13 @@ function intelCard(e, mini){
   </article>`;
 }
 
-/* Tier is the chip row because it is the question the desk exists to answer.
-   Version and category are the quick-filter selects — narrower questions, and
-   there are too many categories to spend a chip each on. */
+/* Tier is the whole filter, because it is the question the desk exists to
+   answer. Version and category were selects beside it and went with the Quick
+   filters panel — both are printed on every card, and an entry's version is a
+   click away in the patch drawer, which lists its own intel. */
 function intelList(){
   let list = [...entries()].sort((a, b) => (b.date||"").localeCompare(a.date||""));
   if(S.tier !== "all") list = list.filter(e => e.confidence === S.tier);
-  if(S.ver  !== "all") list = list.filter(e => e.version === S.ver);
-  if(S.cat  !== "all") list = list.filter(e => e.category === S.cat);
   return list;
 }
 
@@ -1205,7 +1154,6 @@ function renderIntel(){
   $("#p-intel").innerHTML = `<div class="stack">
     <div class="panel">
       ${fbar("intel")}
-      ${quickFilters(true)}
       <div class="panel-b flush">
         ${list.length ? `<div class="intel-list">${list.map(e => intelCard(e)).join("")}</div>`
           : `<div class="empty">${emptyWhy("intel")}</div>`}
@@ -1248,7 +1196,6 @@ function renderSignals(){
   let list = all;
   if(S.kind === "hot") list = list.filter(i => i.hot);
   else if(S.kind !== "all") list = list.filter(i => i.kind === S.kind);
-  if(S.src !== "all") list = list.filter(i => i.source === S.src);
   const shown = list.slice(0, S.sigLimit);
 
   const filters = chips("kind",
@@ -1269,7 +1216,6 @@ function renderSignals(){
         Unverified automated signals
         <span>Raw headlines pulled every 6 hours. Nothing here is tiered or read — it's a lead list. Anything that survives a read gets written up under Intel.</span>
       </div>
-      ${quickFilters(true)}
       <div class="panel-b flush">
         ${shown.length ? `<div class="term">${shown.map(signalRow).join("")}</div>`
           : `<div class="empty">${all.length ? emptyWhy("signal") : "No signals yet — the fetcher has not run."}</div>`}
@@ -1567,7 +1513,6 @@ function renderResonators(){
   const all = [...resonators()].sort(byNewest);
   let list = all;
   if(S.elem !== "all") list = list.filter(r => r.attribute === S.elem);
-  if(S.weapon !== "all") list = list.filter(r => r.weapon === S.weapon);
 
   const rows  = rarity => list.filter(r => String(r.rarity) === rarity);
   const total = rarity => all.filter(r => String(r.rarity) === rarity).length;
@@ -1580,7 +1525,7 @@ function renderResonators(){
   $("#p-resonators").innerHTML = `<div class="stack">
     ${recordTable("5★ Resonators", rows("5"), total("5"), {
       bare: true,
-      under: fbar("resonators") + quickFilters(true),
+      under: fbar("resonators"),
       foot: "Kit detail on unreleased resonators is pre-balance — multipliers routinely shift between beta phases."
     })}
     ${recordTable("4★ Resonators", rows("4"), total("4"))}
@@ -1699,7 +1644,6 @@ function renderWeapons(){
   const all = [...weapons()].sort(byClassThenName);
   let list = all;
   if(S.wtype !== "all") list = list.filter(w => w.type === S.wtype);
-  if(S.wstat !== "all") list = list.filter(w => w.stat === S.wstat);
 
   const rows  = rarity => list.filter(w => String(w.rarity) === rarity);
   const total = rarity => all.filter(w => String(w.rarity) === rarity).length;
@@ -1714,7 +1658,7 @@ function renderWeapons(){
   $("#p-weapons").innerHTML = `<div class="stack">
     ${weaponTable("5★ Weapons", rows("5"), total("5"), {
       bare: true,
-      under: fbar("weapons") + quickFilters(true),
+      under: fbar("weapons"),
       foot: "Stats are level 90 throughout. Open a weapon for its passive and the ascension slider."
     })}
     ${weaponTable("4★ Weapons", rows("4"), total("4"))}
@@ -1819,7 +1763,7 @@ function renderAside(){
      which is one person, and meaningless to everyone reading the desk. The run
      summary in the Live Signals header is what a reader actually needs. */
 
-  $("#aside").innerHTML = quickFilters(false) + glance + featured;
+  $("#aside").innerHTML = glance + featured;
 }
 
 /* ── drawer ──────────────────────────────────────────────────────── */
@@ -2321,9 +2265,6 @@ function bind(){
       const view = el.dataset.view;
       S[scope] = id;
       S.sigLimit = 60;
-      /* Tier is the axis Intel's two selects hang under — a new tier with last
-         tier's version still set on it lands on an empty page. */
-      if(scope === "tier") S.ver = S.cat = "all";
       if(S.view !== view) setView(view);
       else { renderRail(); draw(view); }
       back(`[data-act="railfilter"][data-view="${view}"][data-scope="${scope}"][aria-pressed="true"]`);
@@ -2347,22 +2288,6 @@ function bind(){
     else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
     else if(act === "noop"){ /* decorative */ }
     else dispatch(act, id);
-  });
-
-  /* Quick-filter selects. One listener for both copies of the control — the
-     aside's and the inline one — since they carry the same data-sel. */
-  document.addEventListener("change", e => {
-    const sel = e.target.closest("[data-sel]");
-    if(!sel) return;
-    const key = sel.dataset.sel;
-    const inAside = !!sel.closest(".aside");
-    S[key] = sel.value;
-    S.sigLimit = 60;
-    draw(S.view);
-    /* The draw replaces the select that fired this, so put the caret back on
-       its replacement — otherwise a keyboard user is dumped at the top of the
-       document every time they narrow the list. */
-    document.querySelector(`${inAside ? ".aside " : ".qf-inline "}[data-sel="${key}"]`)?.focus();
   });
 
   /* The ascension slider. `input` rather than `change` so the passives track a

@@ -107,20 +107,23 @@ rail's Methodology link was until it was moved onto `data-act="open"`.
 
 ### Filters
 
-Two tiers of control, and the split is deliberate:
+One control, in one place: **the rail's filter lists**, carrying each view's single axis
+— tier on Intel, element on Resonators, class on Weapons, now/next/past on Timeline
+(`RAIL_FILTERS`). These are the questions the desk exists to answer. They used to be a
+chip strip across the top of every panel, in a header that said the view's name a second
+time and held the content a header's height down the page; both went. Signals is the
+exception, and keeps its kind chips in its own header: it has a hatched warning bar under
+them, so that header was never the bare strip the others were. Events has nothing to
+filter yet. Values are read off the data, so an element or a class nothing is filed under
+is never a filter that can only empty the page.
 
-- **The rail's filter lists** carry each view's *primary* axis — tier on Intel, element
-  on Resonators, class on Weapons, now/next/past on Timeline (`RAIL_FILTERS`). These are
-  the questions the desk exists to answer. They used to be a chip strip across the top of
-  every panel, in a header that said the view's name a second time and held the content a
-  header's height down the page; both went. Signals is the exception, and keeps its kind
-  chips in its own header: it has a hatched warning bar under them, so that header was
-  never the bare strip the others were. Events has nothing to filter yet.
-- **Quick-filter selects** carry the secondary axes: version and category on Intel,
-  weapon on Resonators, sub-stat on Weapons, source on Signals. Too many values to spend
-  a chip each on. Options are read off the data, so a category nothing is filed under
-  never appears — and the rail lists are built the same way, so an element or a class
-  nothing is filed under is never a filter that can only empty the page.
+A **Quick filters** panel used to stand in the aside — and again inline once the aside
+dropped — carrying a select per view for a second axis: version and category on Intel,
+weapon on Resonators, sub-stat on Weapons, source on Signals. It went. One filter surface
+is the whole point of moving them into the rail, and a second one in the opposite margin,
+in a different kind of control, was the arrangement the rail replaced, still standing.
+What those selects answered is on the cards themselves — every intel entry prints its
+version and category, every weapon its sub-stat.
 
 The ascension slider is neither, which is part of why it lives in the weapon record
 rather than on the view: it doesn't change which weapons you can see, only what one
@@ -128,11 +131,10 @@ passive says. It sits outside `VIEW_FILTERS` and Reset leaves it alone. In the r
 rides the *stats* heading rather than the passive's — the band of empty column beside the
 summary — with the line it changes directly under it either way.
 
-Both kinds of control render **twice**, and exactly one copy is visible at any width. The
-selects go into the aside on desktop and inline in the panel below 1340px, where the
-aside is gone; the primary axis goes into the rail on desktop and into the panel's `.fbar`
-below 860px, where the rail is gone. Every copy writes to the same `S` state through the
-same delegated handler and is rebuilt on every `draw()`, so they cannot drift.
+The filter renders **twice**, and exactly one copy is visible at any width: into the rail
+on desktop, and into the panel's `.fbar` below 860px, where the rail is gone. Both write
+to the same `S` state through the same delegated handler and are rebuilt on every
+`draw()`, so they cannot drift.
 `VIEW_FILTERS` says which axes a view actually reads, which is what Reset clears and what
 the empty state names when a filter has emptied a list.
 
