@@ -186,7 +186,7 @@ function kitFor(name){
 
 function portraitFor(name){ return (DATA.portraits?.characters || {})[name] || null; }
 function weaponArtFor(name){ return (DATA.portraits?.weapons || {})[name] || null; }
-const PORTRAIT_CREDIT = "Character art © Kuro Games · icon via prydwen.gg";
+const PORTRAIT_CREDIT = "Character art © Kuro Games · portrait via prydwen.gg";
 const GALLERY_CREDIT = "Character art © Kuro Games · gallery via prydwen.gg";
 
 /* Banner rows carry framing hints for the shared key visual, so a resonator
@@ -341,11 +341,16 @@ function figure(b){
      decides and says so in portraits.json; see scripts/fetch-portraits.mjs. */
   const gallery = !own ? port?.full || null : null;
   const shared = !own && !gallery && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
-  /* The waist-up card is last, not first: it is 374x512 of UI asset and it will
-     stand in for anyone, which is exactly why it must not displace a real key
-     visual. It fills the holes — a character with a Prydwen entry but no
-     illustration drawn yet — where the alternative was a letter on a gradient. */
-  const image = own || gallery || art?.url || shared?.url || port?.card;
+  /* The waist-up card now outranks Kuro's reveal poster, where it used to sit
+     below it. The poster is the one picture on the desk that is not a cut-out —
+     logo band, name plate, its own painted backdrop — so the eight characters
+     who had one were the eight who looked like they belonged to a different
+     site, standing in boxes in a grid where everyone else stands on the card.
+     Sharpness was the argument for the poster and it is real; consistency wins
+     it, because a record grid is read across, not one card at a time. The
+     poster stays as the fallback for anyone Prydwen has no portrait for at all,
+     and its epithet and credit are still read off it either way. */
+  const image = own || gallery || port?.card || art?.url || shared?.url;
   const cutout = (!!own && image === own && (b.imageStyle || r.imageStyle) === "cutout")
               || !!gallery
               || (!!port && image === port.card);
@@ -1295,25 +1300,32 @@ function hasDebuted(r){
   return !!(r.version && live && cmpVer(r.version, live) <= 0);
 }
 
+/* Reruns are a 5★ question. A 4★ is rate-up filler on nearly every banner that
+   runs — nine to twelve appearances each, and climbing by two a patch — so the
+   list is a wall of patch numbers that takes a paragraph to say "they come back
+   constantly". Their badge keeps the debut patch, drops the `+n` count, and the
+   tooltip says the debut and stops there. */
 function debutBadge(r){
   const v = r.version;
   if(!v) return "";
-  const reruns = r.reruns || [];
-  const tip = r.standard ? "Standard pool — always available"
+  const filler = String(r.rarity) === "4";
+  const reruns = filler ? [] : r.reruns || [];
+  const tip = filler ? ""
+    : r.standard ? "Standard pool — always available"
     : reruns.length ? `Rerun in ${reruns.join(", ")}`
     : hasDebuted(r) ? "No rerun yet"
     : "Not released yet";
-  return `<span class="debut" role="note" aria-label="Debut ${esc(v)}. ${esc(tip)}">
+  return `<span class="debut" role="note" aria-label="Debut ${esc(v)}${tip ? `. ${esc(tip)}` : ""}">
     <b>${esc(v)}</b>${reruns.length ? `<i>+${reruns.length}</i>` : ""}
     <span class="debut-tip" aria-hidden="true">
       <em>Debut</em>${esc(v)}
-      <span class="debut-runs">${r.standard
+      ${filler ? "" : `<span class="debut-runs">${r.standard
         ? `<em>Pool</em>Standard`
         : reruns.length
         ? `<em>${reruns.length === 1 ? "Rerun" : "Reruns"}</em>${reruns.map(x => `<i>${esc(x)}</i>`).join("")}`
         : hasDebuted(r)
         ? `<em>Reruns</em>None yet`
-        : `<em>Status</em>Unreleased`}</span>
+        : `<em>Status</em>Unreleased`}</span>`}
     </span>
   </span>`;
 }
@@ -1338,40 +1350,72 @@ function recordCard(r){
    of grid for no reason, so they go to the end as a set. */
 const isRover = r => (/^Rover\b/.test(r.name) ? 1 : 0);
 
-/* Oldest debut first. A released Resonator sorts on the day they arrived; one
-   who hasn't yet has no date, so they sort on their announced patch behind a
-   `9` — every real date starts with a `2`, so the unreleased land after the
-   timeline rather than before it. */
+/* A released Resonator sorts on the day they arrived; one who hasn't yet has no
+   date, so they sort on their announced patch behind a `9` — every real date
+   starts with a `2`, so the unreleased sit at the newest end of the run rather
+   than the oldest, which is where an announced character belongs. Both halves
+   are zero-padded, because a patch number is two integers and not a decimal:
+   unpadded, 3.10 sorts behind 3.6 and the next character to be announced lands
+   in the middle of the grid. */
 function debutKey(r){
-  return r.released || r.runs?.[0]?.start || `9${r.version || "9.9"}`;
+  const dated = r.released || r.runs?.[0]?.start;
+  if(dated) return dated;
+  const [maj, min] = String(r.version || "99.99").split(".");
+  return `9${String(maj).padStart(2, "0")}.${String(min ?? 0).padStart(2, "0")}`;
 }
-const byDebut = (a, b) => (isRover(a) - isRover(b)) || debutKey(a).localeCompare(debutKey(b));
+/* Newest debut first: what's next and what just landed are the two things this
+   database is opened for, and both were four screens down when it ran oldest
+   first. Rover is the exception the comparator handles before the dates — one
+   character in four elements, not four debuts, so the set goes to the end. */
+const byNewest = (a, b) => (isRover(a) - isRover(b)) || debutKey(b).localeCompare(debutKey(a));
+
+/* One table per rarity, 5★ above 4★. This is what retired the 5★/4★ chips: the
+   answer they gave is the shape of the page now, both halves readable at once
+   instead of a toggle between two states of one grid. The element and weapon
+   filters still cross both, so one table can empty while the other fills — and
+   the count says "12 of 48" rather than just "12" whenever that happens. */
+function recordTable(title, rows, total, {right = "", under = "", foot = ""} = {}){
+  return `<div class="panel">
+    <div class="panel-h">
+      <h2>${title}</h2>
+      <span class="sub">${plural(rows.length, "record")}${rows.length === total ? "" : ` of ${total}`} · newest debut first</span>
+      ${right ? `<div class="right chips">${right}</div>` : ""}
+    </div>
+    ${under}
+    <div class="panel-b">
+      ${rows.length ? `<div class="rgrid">${rows.map(recordCard).join("")}</div>`
+        : `<div class="empty">${emptyWhy("record")}</div>`}
+    </div>
+    ${foot ? `<div class="panel-f"><span class="tier-note">${foot}</span></div>` : ""}
+  </div>`;
+}
 
 function renderResonators(){
-  const all = [...resonators()].sort(byDebut);
+  const all = [...resonators()].sort(byNewest);
   const elems = [...new Set(all.map(r => r.attribute).filter(Boolean))];
   let list = all;
-  if(S.elem === "5" || S.elem === "4") list = list.filter(r => String(r.rarity) === S.elem);
-  else if(S.elem !== "all") list = list.filter(r => r.attribute === S.elem);
+  if(S.elem !== "all") list = list.filter(r => r.attribute === S.elem);
   if(S.weapon !== "all") list = list.filter(r => r.weapon === S.weapon);
 
+  /* No count on the All chip any more. It carried the whole roster, and now it
+     sits in the 5★ table's header next to that table's own count — "All 60"
+     over "48 records" reads as an arithmetic error. Each table counts itself. */
   const filters = chips("elem",
-    [["all", "All", all.length], ["5", "5★"], ["4", "4★"]].concat(elems.map(e => [e, e])),
+    [["all", "All"]].concat(elems.map(e => [e, e])),
     S.elem);
+  const rows  = rarity => list.filter(r => String(r.rarity) === rarity);
+  const total = rarity => all.filter(r => String(r.rarity) === rarity).length;
 
+  /* The chips and the selects head the 5★ table rather than getting a strip of
+     their own — they are the top of the view either way, and a filter bar in an
+     empty panel above two tables is a third panel to explain. */
   $("#p-resonators").innerHTML = `<div class="stack">
-    <div class="panel">
-      <div class="panel-h">
-        <h2>Resonator database</h2><span class="sub">${plural(all.length, "record")} · oldest debut first</span>
-        <div class="right chips">${filters}</div>
-      </div>
-      ${quickFilters(true)}
-      <div class="panel-b">
-        ${list.length ? `<div class="rgrid">${list.map(recordCard).join("")}</div>`
-          : `<div class="empty">${emptyWhy("record")}</div>`}
-      </div>
-      <div class="panel-f"><span class="tier-note">Kit detail on unreleased resonators is pre-balance — multipliers routinely shift between beta phases.</span></div>
-    </div>
+    ${recordTable("5★ Resonators", rows("5"), total("5"), {
+      right: filters,
+      under: quickFilters(true),
+      foot: "Kit detail on unreleased resonators is pre-balance — multipliers routinely shift between beta phases."
+    })}
+    ${recordTable("4★ Resonators", rows("4"), total("4"))}
   </div>`;
 }
 

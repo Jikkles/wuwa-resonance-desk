@@ -345,8 +345,16 @@ page distinguishes them, so the file does. A standing figure's alpha plane is on
 silhouette and costs 6–19% of the file; a scene's is a lace of glow and debris across
 the whole canvas and costs 38–49%. The script reads the `ALPH` chunk length straight out
 of the WebP container — no decoding, no dependency — draws the line at 28%, and logs
-scenes as `gallery: "scene"` without keeping them. Those characters fall back to Kuro's
-reveal poster, which is a portrait and is already sharp.
+scenes as `gallery: "scene"` without keeping them. Those characters fall back to the
+waist-up cut-out, which is a portrait and frames like every other record.
+
+The measurement has one blind spot, and it is named rather than tuned around. Iuno's
+splash is painted inside a circle — a disc of scene on an otherwise empty square — so
+its alpha plane is one smooth closed curve costing 23%, on the portrait side of the
+line, while the nearest genuine standing render measures 19%. There is no room left to
+move the threshold, so `SCENES` in the fetcher lists the slug outright. Add to it when a
+gallery picture gets through that clearly isn't a portrait; the run logs every
+percentage, so you can see which way a new character fell.
 
 The files are cached into `assets/portraits/` rather than hotlinked — Prydwen is a fan
 site paying for its own CDN. Credit rides in the page footer. Note that Prydwen is
@@ -356,9 +364,18 @@ shells out to `curl` for that reason, and it is still dependency-free.
 A weapon debuting with an unreleased patch has no published icon yet and falls back to
 the generic weapon mark — same rule as everywhere else here: show what is known.
 
-Precedence, then, is: hand-set image → Prydwen gallery illustration → Kuro reveal poster
-→ crop of the patch key visual → Prydwen waist-up cut-out, for the big art; and the
+Precedence, then, is: hand-set image → Prydwen gallery illustration → Prydwen waist-up
+cut-out → Kuro reveal poster → crop of the patch key visual, for the big art; and the
 cut-out bust first for anything small.
+
+The cut-out sits above the reveal poster, where it used to sit below it. The poster is
+the one picture here that isn't a cut-out — logo band, name plate, its own painted
+backdrop — so the handful of characters holding one were the handful that looked like
+they came from a different site, standing in boxes in a grid where everyone else stands
+on the card. Sharpness was the argument for ranking the poster first and it is a real
+one; consistency wins it, because a record grid is read across rather than one card at a
+time. The poster is still the fallback for anyone Prydwen has no portrait for at all,
+and its epithet and credit are read off it either way.
 Per-character framing is only ever needed for **key visual** crops, where several
 characters share one wide image — never for the posters or the cut-outs, which are each
 one template and get one rule.
@@ -382,9 +399,10 @@ All three are needed together: `keyVisualFocus` alone can only frame left/right,
 until the poster's own title and logo fall outside the crop.
 
 Full precedence: `banner.image` → `resonator.image` → Prydwen gallery illustration →
-resolved reveal art → key visual crop → waist-up cut-out → plate. The key visual crop drops out on its own the moment a real reveal card
-exists, so you don't have to go back and clean it up. `"nameCN"` on a resonator becomes
-the plate glyph when there's no image at all.
+waist-up cut-out → resolved reveal art → key visual crop → plate. The key visual crop
+drops out on its own the moment Prydwen lists the character, so you don't have to go
+back and clean it up. `"nameCN"` on a resonator becomes the plate glyph when there's no
+image at all.
 
 ### Overriding the art for one character
 
@@ -458,10 +476,24 @@ screens of small print nobody read. What's left earns its place at a glance: the
 art identifies them, the card's accent is their element, the corner is their
 debut patch.
 
-Cards are ordered **oldest debut first**, which is how every community banner
-chart is drawn. The sort key is the release date, not the version — Zani and
-Ciaccona both debuted in 2.3, but Zani was Phase 1 and Ciaccona Phase 2, and
-only the date knows that. Sorting by version and then by name got it backwards.
+The grid is **two tables**: every 5-star above every 4-star. That split is what
+retired the 5★/4★ filter chips — the answer they gave is the shape of the page
+now, and both halves are readable at once instead of being two states of one
+grid you toggle between. The element and weapon filters still cross both tables,
+so one can empty while the other fills; each table counts itself, and says "12 of
+48" rather than bare "12" whenever a filter is narrowing it.
+
+Cards are ordered **newest debut first**. What ships next and what just landed
+are the two things this database gets opened for, and both were four screens down
+when it ran oldest-first. Characters with an announced patch but no release date
+sort ahead of everyone, which is where an unreleased character belongs.
+
+The sort key is the release date, not the version — Zani and Ciaccona both
+debuted in 2.3, but Zani was Phase 1 and Ciaccona Phase 2, and only the date
+knows that. Sorting by version and then by name got it backwards. Undated
+characters fall back to their patch number, zero-padded, because a patch number
+is two integers and not a decimal: unpadded, 3.10 sorts behind 3.6 and the next
+character announced lands in the middle of the grid.
 
 Debut itself is the *earlier* of two things that can mean it: the first banner
 they headlined, and the patch the wiki says introduced them. For a limited
@@ -482,6 +514,12 @@ The badge top-right of every record card is the debut patch, with `+n` counting 
 hover or focus it and it names them. Reruns are the question this database gets asked
 most and they're a list of two-character strings, so they cost a tooltip rather than a
 row of the card.
+
+Reruns are a 5-star question, though, so only 5-stars carry them. A 4-star is rate-up
+filler on nearly every banner that runs — nine to twelve appearances each, climbing by
+two a patch — so the list is a wall of patch numbers that takes a paragraph to say "they
+come back constantly". Their badge keeps the debut patch, drops the `+n`, and the
+tooltip stops after the debut.
 
 The same numbers are written out as plain rows inside the record, and the tooltip is
 hidden entirely under `@media (hover:none)`. A tooltip that only opens by holding a

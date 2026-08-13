@@ -28,8 +28,10 @@
 // elbow. Nothing on the page says which is which, so the file does: a standing
 // figure's alpha plane is one smooth silhouette and costs 6-19% of the file,
 // while a scene's is a lace of glow and shards across the whole canvas and
-// costs 38-49%. Scenes are measured, logged and dropped — the desk keeps Kuro's
-// reveal poster for those characters, which is a portrait and is already sharp.
+// costs 38-49%. Scenes are measured, logged and dropped — the desk falls back to
+// the waist-up card for those characters, which is a cut-out portrait and frames
+// like every other record. A splash painted inside a closed shape measures like
+// a silhouette and slips through; see SCENES below.
 //
 // Where does the gallery picture come from? Kuro's own EN site is a client-side
 // app with no public asset index, and the reveal-post CDN that fetch-art.mjs
@@ -184,6 +186,17 @@ function alphaShare(buf) {
 }
 const SCENE_ALPHA = 0.28;
 
+/* One correction the measurement cannot make on its own. Iuno's gallery picture
+   is a Liberation splash painted inside a circle — a disc of scene on an
+   otherwise empty square — so its alpha plane is one smooth closed curve and
+   costs 23% of the file, on the portrait side of the line, while every scene the
+   threshold was drawn against is a ragged full-canvas spray at 38-49%. The
+   nearest genuine render measures 19%, which leaves no room to move the line.
+   Named here with the number instead, so the next one is a one-line edit rather
+   than a re-tuned heuristic. Keyed by Prydwen slug, the same key everything
+   else in this file is fetched by. */
+const SCENES = new Set(["iuno"]);
+
 async function fetchImage(url) {
   const { stdout: buf } = await curl(url, ["-H", "Accept: image/webp,image/*"]);
   if (buf.length < 512) throw new Error("suspiciously small");
@@ -220,7 +233,7 @@ async function resolveGallery(slug, path) {
   const url = await galleryUrl(slug);
   const buf = await fetchImage(url);
   const share = alphaShare(buf);
-  if (share >= SCENE_ALPHA) return { url, share, scene: true };
+  if (SCENES.has(slug) || share >= SCENE_ALPHA) return { url, share, scene: true, named: SCENES.has(slug) };
   await writeFile(path, buf);
   return { url, share, scene: false, bytes: buf.length, alpha: hasAlpha(buf) };
 }
@@ -277,7 +290,7 @@ async function resolveGallery(slug, path) {
       const pct = `${(g.share * 100).toFixed(0)}% alpha`;
       if (g.scene) {
         rec.gallery = "scene";
-        console.log(`full ${name.padEnd(20)} ${" ".repeat(7)}  scene — ${pct}, not a portrait`);
+        console.log(`full ${name.padEnd(20)} ${" ".repeat(7)}  scene — ${pct}${g.named ? ", named in SCENES" : ""}, not a portrait`);
       } else {
         rec.full = fullFile;
         rec.gallery = "render";
@@ -324,7 +337,7 @@ async function resolveGallery(slug, path) {
       "and weapon icons. All cut-outs with alpha, resolved through Prydwen's public character and " +
       "weapon listings and cached in assets/portraits/. Art © Kuro Games. " +
       "gallery:\"scene\" means Prydwen's gallery holds the Resonance Liberation splash rather than " +
-      "a standing render — no portrait to crop, so the desk uses Kuro's reveal art instead. " +
+      "a standing render — no portrait to crop, so the desk falls back to the waist-up card. " +
       "A name absent here has no published asset yet.",
     credit: "Art via prydwen.gg · art © Kuro Games",
     characters,

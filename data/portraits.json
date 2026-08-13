@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/portraits@1.0",
-  "note": "Character art at three sizes — 160px bust, 374x512 card, 2048x2048 gallery render — and weapon icons. All cut-outs with alpha, resolved through Prydwen's public character and weapon listings and cached in assets/portraits/. Art © Kuro Games. gallery:\"scene\" means Prydwen's gallery holds the Resonance Liberation splash rather than a standing render — no portrait to crop, so the desk uses Kuro's reveal art instead. A name absent here has no published asset yet.",
+  "note": "Character art at three sizes — 160px bust, 374x512 card, 2048x2048 gallery render — and weapon icons. All cut-outs with alpha, resolved through Prydwen's public character and weapon listings and cached in assets/portraits/. Art © Kuro Games. gallery:\"scene\" means Prydwen's gallery holds the Resonance Liberation splash rather than a standing render — no portrait to crop, so the desk falls back to the waist-up card. A name absent here has no published asset yet.",
   "credit": "Art via prydwen.gg · art © Kuro Games",
   "characters": {
     "Aalto": {
@@ -201,9 +201,7 @@
       "rarity": 5,
       "icon": "assets/portraits/iuno.webp",
       "card": "assets/portraits/iuno-card.webp",
-      "full": "assets/portraits/iuno-full.webp",
-      "gallery": "render",
-      "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/iuno_full.webp"
+      "gallery": "scene"
     },
     "Jianxin": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/jianxin",
