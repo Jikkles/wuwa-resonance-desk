@@ -1,54 +1,37 @@
-// Resolves character art — bust, card and gallery — and writes
-// data/portraits.json. Node 20+. No dependencies. No API keys.
+// Resolves character art — bust and card — and writes data/portraits.json.
+// Node 20+. No dependencies. No API keys.
 //
 // Weapon icons used to be this script's other half. They live in
 // scripts/fetch-weapons.mjs now, which resolves all 120 of them alongside the
 // stats and passives the Weapons view is built out of, rather than the 36 that
 // happen to be somebody's signature.
 //
-// Three sizes per character, because the desk asks three different questions:
+// Two sizes per character, because the desk asks two different questions:
 //
-//   icon  160px bust        — a 54px banner tile. Head only, already centred.
-//   card  374x512 cut-out   — waist-up. The old stand-in for the big art panel.
-//   full  2048x2048 cut-out — the official full-body illustration. The picture
-//                             at the foot of a Prydwen character page, under
-//                             "Gallery", and now the desk's artwork everywhere
-//                             the frame is bigger than a thumbnail.
+//   icon  160px bust      — a 54px banner tile. Head only, already centred.
+//   card  374x512 cut-out — waist-up. Every frame bigger than a thumbnail.
 //
-// The card image was doing the full picture's job and it shows: 374px of source
-// stretched across a 360px-wide art panel is soft, and it sat beside patches
-// whose art happened to be hand-placed at 750px and read as a different site.
-// One source for every character fixes both.
+// Both carry a real alpha channel, so on the desk they stand on the card rather
+// than in a box of their own.
 //
-// All three carry a real alpha channel, so on the desk they stand on the card
-// rather than in a box of their own.
-//
-// One catch, and it is the reason for alphaShare() below. That gallery slot
-// holds one image but two kinds of picture. Before a character releases it is a
-// standing render — one figure, head at the top, clear air either side. After
-// they release Prydwen tends to swap in the Resonance Liberation splash: a wide
-// painted scene with the character somewhere inside it at a tenth of the size.
-// The first is a portrait and can be cropped like one. The second is a
-// composition, and cropping it to a 4:5 panel produces a picture of somebody's
-// elbow. Nothing on the page says which is which, so the file does: a standing
-// figure's alpha plane is one smooth silhouette and costs 6-19% of the file,
-// while a scene's is a lace of glow and shards across the whole canvas and
-// costs 38-49%. Scenes are measured, logged and dropped — the desk falls back to
-// the waist-up card for those characters, which is a cut-out portrait and frames
-// like every other record. A splash painted inside a closed shape measures like
-// a silhouette and slips through; see SCENES below.
-//
-// Where does the gallery picture come from? Kuro's own EN site is a client-side
-// app with no public asset index, and the reveal-post CDN that fetch-art.mjs
-// reads only ever carries the 1080x1920 marketing poster — logo band, name
-// plate, painted backdrop, no alpha. The cut-out illustration is not published
-// anywhere upstream that can be resolved from a URL, so Prydwen is the source
-// and is credited as such.
+// A third size used to be resolved here: the 2048x2048 illustration at the foot
+// of a Prydwen character page, under "Gallery", which the desk preferred
+// everywhere it existed. It is gone, and the reason is consistency. That slot
+// holds one image but two kinds of picture — before a character releases it is
+// a standing render, after they release Prydwen tends to swap in the Resonance
+// Liberation splash, a painted scene with the character inside it at a tenth of
+// the size. The splash is a composition; cropping it to a 4:5 panel produces a
+// picture of somebody's elbow, so those had to be detected and dropped. Which
+// left the desk with two populations: whoever released most recently drawn from
+// a full-body square, everyone before them from the waist-up card, and a
+// character silently changing from one to the other on release day. The square
+// also had to be zoomed back in at every size to find a face — a different
+// hand-tuned scale on a record, in the drawer, on a patch card, on a phone.
+// The card is sharper than nothing, identical for all sixty, already cropped to
+// what the desk shows, and stable. That is the better trade.
 //
 // The listing page embeds its whole dataset as JSON in the page source, so one
-// request resolves every bust and card. The gallery picture is the exception —
-// it appears only on a character's own page — but its URL is derived from the
-// same slug, so the page is fetched only when the derived URL misses.
+// request resolves every bust and card for every character.
 //
 // Files land in assets/portraits/ rather than being hotlinked: Prydwen is a
 // fan site paying for its own CDN, and serving the art from Pages is cheaper
@@ -65,8 +48,6 @@ const UA =
   "Chrome/126.0.0.0 Safari/537.36";
 
 const CHARACTERS_URL = "https://www.prydwen.gg/wuthering-waves/characters";
-const CHARACTER_URL = slug => `https://www.prydwen.gg/wuthering-waves/characters/${slug}`;
-const FULL_IMG = slug => `https://cdn.prydwen.gg/images/wuthering-waves/characters/${slug}_full.webp`;
 const OUT = "data/portraits.json";
 const DIR = "assets/portraits";
 const TIMEOUT_MS = 25000;
@@ -157,38 +138,6 @@ function hasAlpha(buf) {
   return false;
 }
 
-/* What share of the file the alpha plane costs. A WebP with transparency keeps
-   it in its own ALPH chunk, and the chunk table is readable without decoding a
-   single pixel: four bytes of id, four of length, skip, repeat.
-
-   It is a shape measurement in disguise. A cut-out standing figure has one
-   smooth closed silhouette, which is cheap; a painted scene full of soft glow
-   and scattered debris has an alpha plane nearly as expensive as its colour
-   plane. Across the desk's current cast the two sit at 6-19% and 38-49% with
-   nothing in between, so the line is drawn at 28% — the middle of the gap. */
-function alphaShare(buf) {
-  if (buf.toString("latin1", 0, 4) !== "RIFF") return 0;
-  for (let o = 12; o + 8 <= buf.length; ) {
-    const id = buf.toString("latin1", o, o + 4);
-    const size = buf.readUInt32LE(o + 4);
-    if (id === "ALPH") return size / buf.length;
-    o += 8 + size + (size & 1); // chunks are padded to an even length
-  }
-  return 0;
-}
-const SCENE_ALPHA = 0.28;
-
-/* One correction the measurement cannot make on its own. Iuno's gallery picture
-   is a Liberation splash painted inside a circle — a disc of scene on an
-   otherwise empty square — so its alpha plane is one smooth closed curve and
-   costs 23% of the file, on the portrait side of the line, while every scene the
-   threshold was drawn against is a ragged full-canvas spray at 38-49%. The
-   nearest genuine render measures 19%, which leaves no room to move the line.
-   Named here with the number instead, so the next one is a one-line edit rather
-   than a re-tuned heuristic. Keyed by Prydwen slug, the same key everything
-   else in this file is fetched by. */
-const SCENES = new Set(["iuno"]);
-
 async function fetchImage(url) {
   const { stdout: buf } = await curl(url, ["-H", "Accept: image/webp,image/*"]);
   if (buf.length < 512) throw new Error("suspiciously small");
@@ -199,35 +148,6 @@ async function download(url, path) {
   const buf = await fetchImage(url);
   await writeFile(path, buf);
   return { bytes: buf.length, alpha: hasAlpha(buf) };
-}
-
-/* The gallery picture. Prydwen names it after the character's own slug, which
-   is the same slug the listing page just handed us, so the ordinary case costs
-   one request and no HTML. Reading the page is the fallback rather than the
-   rule: it is 300KB of markup to learn a URL we can usually derive, but it is
-   the only thing that still works if they ever rename the file — and the tag is
-   marked `class="full-image"`, so it is a stable thing to look for. */
-async function galleryUrl(slug) {
-  try {
-    await curl(FULL_IMG(slug), ["-I"]);
-    return FULL_IMG(slug);
-  } catch {}
-  const html = await getText(CHARACTER_URL(slug));
-  const m = html.match(/class="full-image"[^>]*\ssrc="([^"]+)"/);
-  if (!m) throw new Error("no gallery image on the character page");
-  return m[1];
-}
-
-/* Measured before it is written, so a scene never lands in the repo: it is 600KB
-   the desk has no frame for, and rehosting a fan site's bandwidth for a picture
-   nothing renders is the wrong way round. */
-async function resolveGallery(slug, path) {
-  const url = await galleryUrl(slug);
-  const buf = await fetchImage(url);
-  const share = alphaShare(buf);
-  if (SCENES.has(slug) || share >= SCENE_ALPHA) return { url, share, scene: true, named: SCENES.has(slug) };
-  await writeFile(path, buf);
-  return { url, share, scene: false, bytes: buf.length, alpha: hasAlpha(buf) };
 }
 
 (async function main() {
@@ -269,29 +189,7 @@ async function resolveGallery(slug, path) {
         console.log(`${kind.padEnd(4)} ${name.padEnd(20)} failed — ${err.message}`);
       }
     }
-    /* The big one, last, and never fatal: a character Prydwen has a stub page
-       for has a bust and a card long before anyone has drawn the illustration,
-       and a released one may have a scene there instead of a portrait. Either
-       way the art panel loses a sharper picture, not a picture. */
-    const fullFile = `${DIR}/${hit.slug}-full.webp`;
-    try {
-      const g = await resolveGallery(hit.slug, fullFile);
-      const pct = `${(g.share * 100).toFixed(0)}% alpha`;
-      if (g.scene) {
-        rec.gallery = "scene";
-        console.log(`full ${name.padEnd(20)} ${" ".repeat(7)}  scene — ${pct}${g.named ? ", named in SCENES" : ""}, not a portrait`);
-      } else {
-        rec.full = fullFile;
-        rec.gallery = "render";
-        rec.fullSource = g.url;
-        keep.add(fullFile);
-        console.log(`full ${name.padEnd(20)} ${String(g.bytes).padStart(7)}b ${g.alpha ? "alpha" : "OPAQUE"} · ${pct}`);
-      }
-    } catch (err) {
-      console.log(`full ${name.padEnd(20)} failed — ${err.message}`);
-    }
-
-    if (rec.icon || rec.card || rec.full) characters[name] = rec;
+    if (rec.icon || rec.card) characters[name] = rec;
     else misses.push(`${name} (no image)`);
   }
 
@@ -299,7 +197,8 @@ async function resolveGallery(slug, path) {
      behind in the repo forever. This also sweeps out the w-*.webp icons this
      script used to write — scripts/fetch-weapons.mjs owns weapon art now, and
      keeps it in assets/weapons/ where all 120 of them live rather than the 36
-     that happen to be somebody's signature. */
+     that happen to be somebody's signature — and the *-full.webp gallery
+     renders, from back when the desk drew its newest characters from those. */
   for (const f of await readdir(DIR)) {
     const path = `${DIR}/${f}`;
     if (!keep.has(path)) { await unlink(path); console.log(`pruned ${path}`); }
@@ -308,11 +207,9 @@ async function resolveGallery(slug, path) {
   const payload = {
     schema: "wuwa-desk/portraits@1.0",
     note:
-      "Character art at three sizes — 160px bust, 374x512 card, 2048x2048 gallery render. " +
-      "All cut-outs with alpha, resolved through Prydwen's public character listing and cached " +
+      "Character art at two sizes — 160px bust and 374x512 waist-up card. " +
+      "Both cut-outs with alpha, resolved through Prydwen's public character listing and cached " +
       "in assets/portraits/. Art © Kuro Games. " +
-      "gallery:\"scene\" means Prydwen's gallery holds the Resonance Liberation splash rather than " +
-      "a standing render — no portrait to crop, so the desk falls back to the waist-up card. " +
       "A name absent here has no published asset yet. " +
       "Weapon icons moved to data/weapons.json and assets/weapons/.",
     credit: "Art via prydwen.gg · art © Kuro Games",

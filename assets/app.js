@@ -178,9 +178,9 @@ function artFor(name){ return (DATA.art?.art || {})[name] || null; }
    marketing card — logo band, name plate, its own backdrop — which is the right
    picture at 400px and the wrong one at 54px, where you get a tiny poster
    instead of a face. portraits.json holds the character cut out of any backdrop
-   at three sizes — `icon` for a tile, `card` waist-up, `full` the 2048px
-   illustration — so a tile shows the character and nothing else: no plate, no
-   second background inside the card's. See scripts/fetch-portraits.mjs. */
+   at two sizes — `icon` for a tile, `card` waist-up — so a tile shows the
+   character and nothing else: no plate, no second background inside the
+   card's. See scripts/fetch-portraits.mjs. */
 /* Kit text is a megabyte — six skills, two Inherent Skills and six Resonance
    Chain nodes for sixty Resonators, in full. That is ten times the rest of the
    desk put together, and on a first visit to the timeline none of it gets
@@ -229,7 +229,6 @@ function sigHolderFor(name){
    came through is bookkeeping, and it was sitting under every portrait on the
    desk. The README still records where the art pipeline reads from. */
 const PORTRAIT_CREDIT = "Character art © Kuro Games";
-const GALLERY_CREDIT = "Character art © Kuro Games";
 
 /* Banner rows carry framing hints for the shared key visual, so a resonator
    card can borrow the crop its banner row already defines. */
@@ -254,7 +253,7 @@ function intelArt(e){
     const r = resonatorFor(t);
     if(r.name){
       const f = figure({name:r.name, ...(bannerFor(r.name) || {})});
-      if(f.image) return {url:f.image, poster:f.poster, cutout:f.cutout, full:f.full, alt:r.name};
+      if(f.image) return {url:f.image, poster:f.poster, cutout:f.cutout, alt:r.name};
     }
   }
   return null;
@@ -383,30 +382,27 @@ function confidenceRows(r){
 }
 
 /* Resolve the best available image for a banner row or resonator.
-   Precedence: hand-set image → gallery illustration → reveal key art → crop of
-   the patch key visual → waist-up card → typographic plate. */
+   Precedence: hand-set image → waist-up card → reveal key art → crop of the
+   patch key visual → typographic plate.
+
+   The 2048px gallery illustration used to sit at the top of this list, for the
+   sharpness: the card is 374px wide and gets stretched across a 360px panel.
+   It was the wrong trade. Prydwen only holds a standing render for a character
+   in the window before they release — after that the slot is swapped for the
+   Resonance Liberation splash, which is a composition rather than a portrait
+   and gets dropped — so the picture a character was drawn with changed
+   underneath them on release day, and at any moment the newest six on the desk
+   were the six framed differently from the other fifty. It is a full-body
+   square besides, so every frame that used it had to zoom back in to find a
+   face: 1.3x on a record, 1.86x in the drawer, 1.92x on a patch card, each one
+   tuned by hand. The waist-up card is already cropped to the picture the desk
+   wants, it is the same picture for every character, and it never changes. */
 function figure(b){
   const r = resonatorFor(b.name);
   const art = artFor(b.name);
   const port = portraitFor(b.name);
   const own = b.image || r.image;
-  /* The gallery illustration is the desk's artwork now, for everyone who has
-     one. It ranks above Kuro's own reveal poster deliberately: the poster is a
-     finished composition — logo band, name plate, painted backdrop — so a row
-     of them reads as a row of adverts, and every one is a different layout. It
-     ranks above the patch key visual for the same reason in reverse: a crop of
-     a group shot is a picture of a patch, not of a person. What it fixes first
-     is sharpness. The card below is 374px wide and was being stretched across
-     a 360px panel; this is 2048px and cut out, so the art window and a
-     hand-placed picture no longer look like two different sites.
-
-     Absent for characters whose Prydwen gallery holds the Resonance Liberation
-     splash instead of a standing render — a composition, not a portrait, and
-     there is no crop of it that is a picture of the character. Those fall
-     through to the poster, which is what they were using anyway. The fetcher
-     decides and says so in portraits.json; see scripts/fetch-portraits.mjs. */
-  const gallery = !own ? port?.full || null : null;
-  const shared = !own && !gallery && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
+  const shared = !own && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
   /* The waist-up card now outranks Kuro's reveal poster, where it used to sit
      below it. The poster is the one picture on the desk that is not a cut-out —
      logo band, name plate, its own painted backdrop — so the eight characters
@@ -416,9 +412,8 @@ function figure(b){
      it, because a record grid is read across, not one card at a time. The
      poster stays as the fallback for anyone Prydwen has no portrait for at all,
      and its epithet and credit are still read off it either way. */
-  const image = own || gallery || port?.card || art?.url || shared?.url;
+  const image = own || port?.card || art?.url || shared?.url;
   const cutout = (!!own && image === own && (b.imageStyle || r.imageStyle) === "cutout")
-              || !!gallery
               || (!!port && image === port.card);
   /* A 16:9 key visual in a 4:5 box has no vertical overflow, so object-position
      can only frame horizontally — zoom picks the height. */
@@ -427,18 +422,12 @@ function figure(b){
     : "";
   return {
     image, cutout, style,
-    /* The gallery illustration is a 2048x2048 square with the figure standing
-       head-near-the-top, feet-at-the-bottom and clear air either side. Every
-       other picture here is already cropped to something. Flagging it lets the
-       CSS frame a full body instead of inheriting a crop meant for a bust. */
-    full: !!gallery,
     /* What a 54px tile shows, when we hold one. Resolved separately from the
        big picture above so the two never have to compromise on one crop. */
     icon: port?.icon || null,
     glyph: r.nameCN || b.name?.slice(0,1) || "?",
     credit: !cutout ? null
           : own ? (b.imageCredit || r.imageCredit || null)
-          : gallery ? GALLERY_CREDIT
           : PORTRAIT_CREDIT,
     source: art && image === art?.url ? art : shared,
     shared: !!shared,
@@ -454,7 +443,7 @@ function figure(b){
 /* Full-size art panel, shared by character cards, resonator records and the drawer. */
 function artPanel(b, extra = ""){
   const f = figure(b);
-  const cls = f.full ? " has-cutout has-full" : f.cutout ? " has-cutout" : f.image ? " has-art" : "";
+  const cls = f.cutout ? " has-cutout" : f.image ? " has-art" : "";
   const inner = f.image
     ? `<img src="${esc(f.image)}" alt="${esc(b.name)}" loading="lazy" decoding="async"${f.style}>`
     : `<span class="glyph">${esc(f.glyph)}</span>`;
@@ -783,7 +772,7 @@ function cardFigures(v){
   return subjects.map(b => {
     const f = figure(b);
     const src = f.cutout ? f.image : portraitFor(b.name)?.card || null;
-    return src ? {src, name:b.name, full:f.full} : null;
+    return src ? {src, name:b.name} : null;
   }).filter(Boolean).slice(0, 2);
 }
 
@@ -971,7 +960,7 @@ function patchCard(v, role){
       <div class="pcard-window">${figs.length
         ? `<div class="figs n${figs.length}">${figs.map(f =>
             `<div class="fig-cell">
-               <img class="fig${f.full ? " full" : ""}" src="${esc(f.src)}" alt="${esc(f.name)}" loading="lazy" decoding="async">
+               <img class="fig" src="${esc(f.src)}" alt="${esc(f.name)}" loading="lazy" decoding="async">
              </div>`).join("")}</div>`
         : ""}</div>
     </div>
@@ -1119,7 +1108,7 @@ function intelCard(e, mini){
      edge; an entry with no face to show falls back to a plate carrying the
      version it's about, in its own confidence colour. */
   const fig = art
-    ? `<div class="ithumb${art.cutout ? " cut" : ""}${art.full ? " full" : ""}">
+    ? `<div class="ithumb${art.cutout ? " cut" : ""}">
          <img class="${art.poster ? "poster" : ""}" src="${esc(art.url)}" alt="${esc(art.alt)}"
               loading="lazy" decoding="async"></div>`
     : `<div class="ithumb plate" aria-hidden="true"><span>${esc(e.version || e.category || "—")}</span></div>`;

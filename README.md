@@ -17,7 +17,7 @@ data/feed.json                 auto-fetched headlines (written by Actions)
 data/art.json                  resolved official key art (written by Actions)
 data/portraits.json            character art map (written by Actions)
 data/translations.json         English for non-English signal headlines
-assets/portraits/              cached busts, cut-outs and gallery illustrations
+assets/portraits/              cached busts and waist-up cut-outs
 assets/weapons/                cached weapon icons
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
@@ -408,32 +408,27 @@ cut-out sits *on* the card, over the tile's own element gradient, instead of bri
 second background inside the first. The script asserts that alpha is present and says
 so per file when it runs.
 
-The same script also resolves the **gallery illustration** — the 2048×2048 picture at
-the foot of a character's own Prydwen page — and that is what the big art panels use
-now. The 374px cut-out was being stretched across a 360px-wide panel and sat beside
-patches whose art happened to be hand-placed at 750px, so half the desk looked like a
-different site. This is one source for everybody, cut out, at eight times the pixels.
-Its URL is derived from the character's slug; the page is only fetched when that misses.
+The waist-up cut-out is the picture in every frame bigger than a tile: the record grid,
+the record's own art panel, the drawer, the patch cards. One asset, one crop rule,
+sixty characters.
 
-That gallery slot holds two different kinds of picture, though. Before a character
-releases it is a standing render — one figure, head at the top, clear air either side —
-and that crops like a portrait. After release Prydwen tends to swap in the Resonance
-Liberation splash: a wide painted scene with the character somewhere inside it at a
-tenth of the size, which has no crop that is a picture of the character. Nothing on the
-page distinguishes them, so the file does. A standing figure's alpha plane is one smooth
-silhouette and costs 6–19% of the file; a scene's is a lace of glow and debris across
-the whole canvas and costs 38–49%. The script reads the `ALPH` chunk length straight out
-of the WebP container — no decoding, no dependency — draws the line at 28%, and logs
-scenes as `gallery: "scene"` without keeping them. Those characters fall back to the
-waist-up cut-out, which is a portrait and frames like every other record.
-
-The measurement has one blind spot, and it is named rather than tuned around. Iuno's
-splash is painted inside a circle — a disc of scene on an otherwise empty square — so
-its alpha plane is one smooth closed curve costing 23%, on the portrait side of the
-line, while the nearest genuine standing render measures 19%. There is no room left to
-move the threshold, so `SCENES` in the fetcher lists the slug outright. Add to it when a
-gallery picture gets through that clearly isn't a portrait; the run logs every
-percentage, so you can see which way a new character fell.
+It used to be two. The script also pulled the **gallery illustration** — the 2048×2048
+picture at the foot of a character's own Prydwen page — and the big panels preferred it
+wherever it existed, because 374px stretched across a 360px panel is soft. That is
+gone, and consistency is why. The gallery slot holds two different kinds of picture
+depending on when you ask. Before a character releases it is a standing render — one
+figure, head at the top, clear air either side — which crops like a portrait. After
+release Prydwen tends to swap in the Resonance Liberation splash: a wide painted scene
+with the character somewhere inside it at a tenth of the size, with no crop that is a
+picture of the character. Those had to be detected and dropped, which left the desk
+with two populations at all times — whoever released most recently drawn from a
+full-body square, everyone before them from the waist-up card — and a character
+silently changing from one to the other on release day. The square is a whole standing
+figure besides, so every frame that used it had to zoom back in to find a face, at a
+different hand-tuned scale on a record, in the drawer, on a patch card and on a phone.
+The card is identical for all sixty, already cropped to what the desk shows, and never
+changes underneath anyone. That is the better trade, and it is why the newest six
+characters no longer look like they came from somewhere else.
 
 The files are cached into `assets/portraits/` rather than hotlinked — Prydwen is a fan
 site paying for its own CDN. This README is where that is recorded; the page itself no
@@ -444,9 +439,9 @@ shells out to `curl` for that reason, and it is still dependency-free.
 A weapon debuting with an unreleased patch has no published icon yet and falls back to
 the generic weapon mark — same rule as everywhere else here: show what is known.
 
-Precedence, then, is: hand-set image → Prydwen gallery illustration → Prydwen waist-up
-cut-out → Kuro reveal poster → crop of the patch key visual, for the big art; and the
-cut-out bust first for anything small.
+Precedence, then, is: hand-set image → Prydwen waist-up cut-out → Kuro reveal poster →
+crop of the patch key visual, for the big art; and the cut-out bust first for anything
+small.
 
 The cut-out sits above the reveal poster, where it used to sit below it. The poster is
 the one picture here that isn't a cut-out — logo band, name plate, its own painted
@@ -478,15 +473,15 @@ All three are needed together: `keyVisualFocus` alone can only frame left/right,
 `object-fit: cover` on a 16:9 source in a 4:5 box overflows horizontally only. Zoom in
 until the poster's own title and logo fall outside the crop.
 
-Full precedence: `banner.image` → `resonator.image` → Prydwen gallery illustration →
-waist-up cut-out → resolved reveal art → key visual crop → plate. The key visual crop
+Full precedence: `banner.image` → `resonator.image` → Prydwen waist-up cut-out →
+resolved reveal art → key visual crop → plate. The key visual crop
 drops out on its own the moment Prydwen lists the character, so you don't have to go
 back and clean it up. `"nameCN"` on a resonator becomes the plate glyph when there's no
 image at all.
 
 ### Overriding the art for one character
 
-A hand-set image wins over everything, including the gallery illustration. Point a
+A hand-set image wins over everything, including the fetched cut-out. Point a
 resonator (or a banner row) at a file you have added to the repo:
 
 ```jsonc
@@ -495,9 +490,9 @@ resonator (or a banner row) at a file you have added to the repo:
 "imageCredit": "Character art © Kuro Games · pre-release, from 3.6 beta files"
 ```
 
-Use it sparingly. Qingxiao and Jingran were carried this way through the 3.6 beta, when
-the fetcher only had a 374px cut-out to offer; the gallery illustration is sharper than
-either, so both overrides went and nothing is hand-placed today.
+Use it sparingly. Qingxiao and Jingran were carried this way through the 3.6 beta,
+before Prydwen listed them at all; the moment the fetcher could resolve a cut-out for
+each, both overrides went, and nothing is hand-placed today.
 
 `imageStyle: "cutout"` switches the panel to `object-fit: contain` with the figure
 standing on the base, keeps the resonance rings and attribute glow visible behind it,
