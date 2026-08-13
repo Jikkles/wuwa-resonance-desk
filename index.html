@@ -15,7 +15,7 @@
      browser (and Pages' CDN, which sends max-age=600) will happily serve you
      yesterday's stylesheet on a normal refresh. Bump this on every change to
      either asset — it is the whole reason a deploy shows up immediately. -->
-<link rel="stylesheet" href="assets/app.css?v=18">
+<link rel="stylesheet" href="assets/app.css?v=19">
 </head>
 <body>
 
@@ -62,6 +62,12 @@
     <g id="i-weapon" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M13.6 2.4 7.2 8.8l-.9 2.9 2.9-.9 6.4-6.4a1.4 1.4 0 0 0-2-2Z"/>
       <path d="M5.4 9.6 2.4 12.6M4.2 11.2 5.6 12.6"/>
+    </g>
+    <!-- Events. A pennant, not another calendar — i-timeline already owns the
+         calendar and the two sit four apart in the same nav. -->
+    <g id="i-events" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 2.1v12.4"/>
+      <path d="M4 3.3h8.4l-2 2.9 2 2.9H4"/>
     </g>
     <!-- Card view / lane view toggle on the patch timeline. -->
     <g id="i-grid" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
@@ -169,10 +175,15 @@
 
     <div class="body">
       <div class="col">
+        <!-- One section per entry in VIEWS, in the same order. setView hides
+             every one it doesn't want by id, so a view without a panel here
+             throws on the first navigation. -->
         <section id="p-timeline" role="tabpanel" aria-labelledby="tab-timeline" tabindex="-1"></section>
+        <section id="p-resonators" role="tabpanel" aria-labelledby="tab-resonators" tabindex="-1" hidden></section>
+        <section id="p-weapons" role="tabpanel" aria-labelledby="tab-weapons" tabindex="-1" hidden></section>
+        <section id="p-events" role="tabpanel" aria-labelledby="tab-events" tabindex="-1" hidden></section>
         <section id="p-intel" role="tabpanel" aria-labelledby="tab-intel" tabindex="-1" hidden></section>
         <section id="p-signals" role="tabpanel" aria-labelledby="tab-signals" tabindex="-1" hidden></section>
-        <section id="p-resonators" role="tabpanel" aria-labelledby="tab-resonators" tabindex="-1" hidden></section>
       </div>
       <aside class="aside" id="aside"></aside>
     </div>
@@ -235,6 +246,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=18"></script>
+<script src="assets/app.js?v=19"></script>
 </body>
 </html>

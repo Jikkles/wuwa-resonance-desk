@@ -45,11 +45,20 @@ const ATTR_COLOUR = {
   electro:"#B98BE0", spectro:"#E8C24A", havoc:"#D4557A"
 };
 
+/* Nav order, top to bottom and left to right, in one place: the rail, the tab
+   strip, the mobile dock, the command palette and the ←/→ tab cycling all read
+   this array. `soon` marks a view that is navigable but has no data behind it
+   yet — it draws the work-in-progress panel and carries a badge instead of a
+   count, so the promise is visible before you click rather than after.
+   `short` is the dock's label; six items across a phone will not take
+   "Live Signals". */
 const VIEWS = [
   {id:"timeline",   label:"Timeline",     icon:"i-timeline"},
+  {id:"resonators", label:"Resonators",   icon:"i-res"},
+  {id:"weapons",    label:"Weapons",      icon:"i-weapon",  soon:true},
+  {id:"events",     label:"Events",       icon:"i-events",  soon:true},
   {id:"intel",      label:"Intel",        icon:"i-intel"},
-  {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified"},
-  {id:"resonators", label:"Resonators",   icon:"i-res"}
+  {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified", short:"Signals"}
 ];
 
 let DATA = {};
@@ -67,7 +76,10 @@ const S = {
    element filter from silently narrowing a list you have navigated away from. */
 const VIEW_FILTERS = {
   timeline:["when"], intel:["tier","ver","cat"],
-  signals:["kind","src"], resonators:["elem","weapon"]
+  signals:["kind","src"], resonators:["elem","weapon"],
+  /* Every view needs a row here even with nothing in it — filtersOn() and
+     Reset both index this table unguarded. */
+  weapons:[], events:[]
 };
 
 /* ── helpers ─────────────────────────────────────────────────────── */
@@ -466,7 +478,7 @@ function renderRail(){
   $("#rail-nav").innerHTML = VIEWS.map(v => `
     <button class="navlink" data-act="view" data-id="${v.id}" aria-current="${S.view === v.id}">
       ${icon(v.icon)}<span>${v.label}</span>
-      ${v.warn ? `<span class="warn">${v.warn}</span>` : railCount(v.id)}
+      ${navBadge(v)}
     </button>`).join("");
 
   const counts = tierCounts();
@@ -496,8 +508,18 @@ function renderRail(){
 
   $("#dock").innerHTML = VIEWS.map(v => `
     <button data-act="view" data-id="${v.id}" aria-current="${S.view === v.id}">
-      ${icon(v.icon, 17)}<span>${v.label === "Live Signals" ? "Signals" : v.label}</span>
+      ${icon(v.icon, 17)}<span>${v.short || v.label}</span>
     </button>`).join("");
+}
+
+/* Right-hand mark on a nav item, in precedence order: the standing warning
+   Live Signals carries, then the unbuilt flag, then the record count. A view
+   with nothing behind it has no count worth printing — a bare 0 next to
+   Weapons reads as "no weapons exist" rather than "not written yet". */
+function navBadge(v){
+  if(v.warn) return `<span class="warn">${v.warn}</span>`;
+  if(v.soon) return `<span class="soon">Soon</span>`;
+  return railCount(v.id);
 }
 function railCount(id){
   const n = id === "intel" ? entries().length
@@ -519,7 +541,8 @@ function renderTabs(){
     <button role="tab" id="tab-${v.id}" data-act="view" data-id="${v.id}"
             aria-selected="${S.view === v.id}" aria-controls="p-${v.id}"
             tabindex="${S.view === v.id ? 0 : -1}">
-      ${icon(v.icon, 17)}${v.label}${v.warn ? `<span class="warn">${v.warn}</span>` : ""}
+      ${icon(v.icon, 17)}${v.label}
+      ${v.warn ? `<span class="warn">${v.warn}</span>` : v.soon ? `<span class="soon">Soon</span>` : ""}
     </button>`).join("");
 }
 
@@ -1352,6 +1375,59 @@ function renderResonators(){
   </div>`;
 }
 
+/* ── unbuilt views ───────────────────────────────────────────────────
+   Weapons and Events are in the navigation before they are in the data. That
+   is deliberate — the shape of the desk is being settled first — but a nav
+   item that opens onto nothing is a broken link with extra steps, so each one
+   states what it is going to hold. The copy is the specification: when the
+   view is built, this entry comes out and the panel below it goes in. */
+const WIP = {
+  weapons: {
+    title:"Weapon database",
+    line:"Every signature and standard weapon, and the resonators they were forged around.",
+    plan:[
+      "Full roster by type and rarity, with the same record cards the resonators use",
+      "Passive text and refinement scaling, S1 through S5",
+      "Which convene each signature ran beside, and when it last rerun",
+      "Best-in-slot notes per resonator — sourced, and tiered like everything else here"
+    ]
+  },
+  events: {
+    title:"Event calendar",
+    line:"Limited events in the live patch: what they pay out, and how long is left to claim it.",
+    plan:[
+      "Running and announced events with their open and close times, in your timezone",
+      "Astrite, Sequence and weapon rewards totalled per event",
+      "Redemption codes, with the ones that have already expired struck out",
+      "A warning on anything closing inside a week — the same countdown the timeline runs"
+    ]
+  }
+};
+
+function renderWIP(id){
+  const v = VIEWS.find(x => x.id === id);
+  const w = WIP[id];
+  $(`#p-${id}`).innerHTML = `<div class="stack">
+    <div class="panel">
+      <div class="panel-h">
+        <h2>${esc(w.title)}</h2><span class="sub">Not built yet</span>
+      </div>
+      <div class="panel-b">
+        <div class="wip">
+          <span class="wip-mark">${icon(v.icon, 30)}</span>
+          <h3>Work in progress</h3>
+          <p>${esc(w.line)}</p>
+          <ul class="wip-plan">${w.plan.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+          <button class="btn" data-act="view" data-id="timeline">Back to the timeline ${icon("i-arrow", 12)}</button>
+        </div>
+      </div>
+      <div class="panel-f">
+        <span class="tier-note">This page is a placeholder. Nothing here is sourced yet, because there is nothing here yet.</span>
+      </div>
+    </div>
+  </div>`;
+}
+
 /* ── aside ───────────────────────────────────────────────────────── */
 function renderAside(){
   const feed = DATA.feed || {};
@@ -1683,7 +1759,9 @@ function closeCmd(){
 
 function cmdIndex(){
   const out = [];
-  VIEWS.forEach(v => out.push({group:"Views", label:v.label, hint:"View", act:["view", v.id], tier:null}));
+  VIEWS.forEach(v => out.push({
+    group:"Views", label:v.label, hint:v.soon ? "View · not built" : "View", act:["view", v.id], tier:null
+  }));
   versions().forEach(v => out.push({
     group:"Versions", label:`${v.id}${v.title ? " — " + v.title : ""}`, hint:v.status, act:["version", v.id], tier:null
   }));
@@ -1743,9 +1821,15 @@ function runCmdItem(i){
 }
 
 /* ── routing ─────────────────────────────────────────────────────── */
+/* Keyed by view id and in VIEWS' order. setView falls back to timeline for
+   anything missing here, so this table is also what makes a view real. */
 const RENDER = {
-  timeline: renderTimeline, intel: renderIntel,
-  signals: renderSignals, resonators: renderResonators
+  timeline: renderTimeline,
+  resonators: renderResonators,
+  weapons: () => renderWIP("weapons"),
+  events: () => renderWIP("events"),
+  intel: renderIntel,
+  signals: renderSignals
 };
 
 function setView(id, focus){

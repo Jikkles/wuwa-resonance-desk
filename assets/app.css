@@ -212,6 +212,18 @@ button{font:inherit;color:inherit}
   margin-left:auto;flex:none;font-size:8px;letter-spacing:.09em;padding:2px 5px;border-radius:5px;
   border:1px dashed color-mix(in srgb,var(--t-rumour) 60%,transparent);color:var(--t-rumour);
 }
+/* Same slot, different claim: .warn is "don't trust this yet", .soon is
+   "there's nothing here yet". Solid rather than dashed, and in the muted grey
+   rather than a tier colour, so an unbuilt view never reads as a warning. */
+.navlink .soon,.tabs .soon{
+  flex:none;border-radius:5px;font-family:var(--mono);text-transform:uppercase;
+  background:var(--bg-2);border:1px solid var(--line);color:var(--fg-3);
+}
+.navlink .soon{margin-left:auto;font-size:8px;letter-spacing:.09em;padding:2px 5px}
+.tabs .soon{font-size:9.5px;letter-spacing:.12em;padding:2px 7px;border-radius:6px}
+/* An unbuilt view is dimmer than a built one until you land on it. */
+.navlink:has(.soon):not([aria-current="true"]),
+.tabs button:has(.soon):not([aria-selected="true"]){opacity:.72}
 
 .tierlink{
   display:flex;align-items:center;gap:10px;width:100%;
@@ -353,6 +365,54 @@ button{font:inherit;color:inherit}
   font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--fg-3);
   padding:38px 16px;text-align:center;
 }
+
+/* ══ unbuilt views ══════════════════════════════════════════════════
+   Weapons and Events. Centred and narrow rather than a full-bleed panel of
+   nothing: the reader has arrived somewhere empty, and the job of the page is
+   to say so once, say what is coming, and hand them a way back. Kept quiet —
+   grey type, no accent except the button on hover — so a placeholder never
+   out-shouts the views that have real data in them. */
+/* Given a viewport's worth of height on purpose. The backdrop is the live
+   patch's key visual, sharp, with the version name set across it — the panels
+   are what frost it, so a panel that only wraps its own copy leaves half a
+   screen of legible marketing art under a page that is meant to say "nothing
+   here yet". Fill the fold, and centre the copy in what that gives you. */
+.wip{
+  max-width:520px;margin:0 auto;padding:34px 8px 30px;text-align:center;
+  min-height:clamp(340px,44vh,520px);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.wip-mark{
+  display:inline-flex;align-items:center;justify-content:center;
+  /* Fixed width, so the flex column won't place it for us. */
+  align-self:center;width:64px;height:64px;border-radius:50%;margin-bottom:20px;
+  background:var(--bg-2);border:1px dashed var(--line-2);color:var(--fg-3);
+}
+.wip h3{
+  margin:0 0 10px;font-family:var(--mono);font-size:12px;font-weight:600;
+  letter-spacing:.19em;text-transform:uppercase;color:var(--fg);
+}
+.wip p{margin:0 auto;max-width:44ch;font-size:13.5px;line-height:1.62;color:var(--fg-2)}
+/* The plan reads as a spec, not as prose — left-aligned inside the centred
+   block so the four lines share an edge and scan as a list. */
+.wip-plan{
+  list-style:none;margin:22px 0 0;padding:16px 18px;text-align:left;
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+  display:flex;flex-direction:column;gap:9px;
+}
+.wip-plan li{
+  position:relative;padding-left:20px;
+  font-family:var(--mono);font-size:11px;line-height:1.55;letter-spacing:.03em;color:var(--fg-3);
+}
+/* A filled diamond, not an outline — a 5px hairline square over a frosted
+   panel disappears entirely. Same lozenge as the brand mark, quarter opacity
+   of the accent so the list is marked without being decorated. */
+.wip-plan li::before{
+  content:"";position:absolute;left:3px;top:.5em;
+  width:6px;height:6px;border-radius:1px;transform:rotate(45deg);
+  background:color-mix(in srgb,var(--accent) 55%,transparent);
+}
+.wip .btn{width:auto;margin:22px auto 0;padding:9px 18px}
 
 /* Filtering replaces a list wholesale, which without this reads as the page
    flickering. 160ms of rise is enough to say "this is the same list, fewer
@@ -1711,6 +1771,18 @@ button{font:inherit;color:inherit}
   .aside{display:none}
   /* The aside took the quick filters with it — bring the inline copy up. */
   .qf-inline{display:block}
+  /* Six tabs, two of them badged, is about 1050px at full size — wider than
+     the stage from here down. The strip scrolls rather than clipping, but a
+     view you have to swipe sideways to find may as well not be in the nav, so
+     it steps down instead of scrolling. Still the loudest type on the page. */
+  .tabs button{font-size:12px;padding:16px 11px 14px;gap:8px}
+  .tabs .warn,.tabs .soon{font-size:8.5px;letter-spacing:.1em;padding:2px 5px}
+}
+@media (max-width:1180px){
+  /* Out of type size to give. The mark goes and the word stays — the rail
+     beside it is carrying the same six icons anyway. */
+  .tabs button{font-size:11.5px;padding:15px 10px 13px}
+  .tabs button svg{display:none}
 }
 @media (max-width:1240px){
   /* Three cards need about 300px each before the banner grid inside them
@@ -1729,9 +1801,16 @@ button{font:inherit;color:inherit}
 @media (max-width:1080px){
   :root{--rail-w:200px}
   .lane{grid-template-columns:120px minmax(0,1fr)}
-  /* 200px of rail can't hold the label and the badge on one line. The tab
-     strip and the hatched bar on the view itself both still carry it. */
+  /* 200px of rail can't hold "Live Signals" and "Unverified" on one line. The
+     hatched bar on the view itself still carries it. "Weapons"/"Soon" fits in
+     the same space with room to spare, and has to stay: the rail is the only
+     nav left here. */
   .navlink .warn{display:none}
+  /* Six tabs will not fit a stage this narrow at any type size worth reading,
+     and they are the rail's own list a second time — the rail keeps the full
+     six in a column, where width is not the constraint. Same call the 860px
+     rule makes when the dock takes over. */
+  .tabs{display:none}
 }
 @media (max-width:860px){
   .app{grid-template-columns:minmax(0,1fr)}
@@ -1789,15 +1868,21 @@ button{font:inherit;color:inherit}
   .drawer-panel{width:100%}
   .cmd{padding-top:8vh}
   /* bottom dock replaces the rail's nav */
+  /* Six across a 360px phone is 60px a column, and "Resonators" is ten
+     characters — hence the tighter tracking and the short labels from VIEWS.
+     Anything narrower than that lets the row scroll rather than clip. */
   .dock{
-    display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;
+    display:grid;grid-template-columns:repeat(6,minmax(52px,1fr));
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
     background:rgba(19,18,24,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);
     padding-bottom:env(safe-area-inset-bottom);
+    overflow-x:auto;scrollbar-width:none;
   }
+  .dock::-webkit-scrollbar{display:none}
   .dock button{
     display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;
-    padding:9px 4px 10px;cursor:pointer;color:var(--fg-3);
-    font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:9px 2px 10px;cursor:pointer;color:var(--fg-3);white-space:nowrap;
+    font-family:var(--mono);font-size:8px;letter-spacing:.02em;text-transform:uppercase;
   }
   .dock button[aria-current="true"]{color:var(--accent)}
   .foot{margin-bottom:64px;flex-direction:column;align-items:flex-start}
