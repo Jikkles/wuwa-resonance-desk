@@ -143,10 +143,12 @@ to the same `S` state through the same delegated handler and are rebuilt on ever
 `VIEW_FILTERS` says which axes a view actually reads, which is what Reset clears and what
 the empty state names when a filter has emptied a list.
 
-The rail's first three quick links are **saved views** — a view plus a filter
-combination, applied before the switch so the list never visibly re-filters a frame
-later. They're arrow-marked; the external links below them are ↗-marked. Nothing in
-that list points at a page that doesn't exist.
+The rail's tail is four **outbound links** — official news, Kuro's YouTube, and the two
+subreddits — each carrying the mark of the site it opens. It used to be headed by three
+*saved views* (a view plus a filter, applied before the switch so the list never
+re-filtered a frame later); those went when the nav grew its own filter lists, because a
+shortcut to a control two rows above it is furniture. The `jump` action went with them.
+Nothing in that list points at a page that doesn't exist.
 
 No framework and no build step. Each view renders its whole panel to `innerHTML` and
 every click is caught by one delegated `[data-act]` handler on `document`, so a

@@ -635,25 +635,25 @@ function renderRail(){
     </div>`;
   }).join("");
 
-  /* Two kinds of shortcut, told apart by the mark on the right. The first
-     three are saved views — a filter combination you'd otherwise have to set
-     by hand — and the rest leave the site. Nothing here is a page that doesn't
-     exist: a link that goes nowhere is worse than no link. */
+  /* Everywhere the desk reads from, at the foot of the rail. These are all
+     outbound now: the three saved views that used to head the list — patch
+     notes, banner history, hot signals — were a view plus a filter, and the
+     rail's own nav grew those filters as disclosure lists underneath each
+     view. A shortcut to a control that is two rows above it is furniture.
+
+     What is left is the four sources, each with the mark of where it goes, so
+     the destination reads before the label does — the desk's own diamond for
+     Kuro, and the site's mark for the rest. Nothing here is a page that
+     doesn't exist: a link that goes nowhere is worse than no link. */
   $("#rail-links").innerHTML = [
-    ["Patch notes",    {view:"intel",    set:{tier:"official"}}],
-    ["Banner history", {view:"timeline", set:{when:"past"}}],
-    ["Hot signals",    {view:"signals",  set:{kind:"hot"}}],
-    ["Official news",  {href:"https://wutheringwaves.kurogames.com/en/main/news"}],
-    ["Kuro on YouTube",{href:"https://www.youtube.com/channel/UC0Bi5KMcECRVYis5Gb_ZYZQ"}],
+    ["Official news",   "i-kuro",    "https://wutheringwaves.kurogames.com/en/main/news"],
+    ["Kuro on YouTube", "i-youtube", "https://www.youtube.com/channel/UC0Bi5KMcECRVYis5Gb_ZYZQ"],
     /* Main sub above the leak sub, in the same order the desk trusts them. */
-    ["Subreddit",      {href:"https://www.reddit.com/r/WutheringWaves/"}],
-    ["Leak subreddit", {href:"https://www.reddit.com/r/WutheringWavesLeaks/"}]
-  ].map(([label, to]) => to.href
-    ? `<a class="tierlink" href="${to.href}" target="_blank" rel="noopener">
-         <span>${label}</span><span class="n out">↗</span></a>`
-    : `<button class="tierlink" data-act="jump" data-id="${esc(to.view)}"
-               data-set="${esc(JSON.stringify(to.set))}">
-         <span>${label}</span><span class="n out">${icon("i-arrow", 11)}</span></button>`
+    ["Subreddit",       "i-reddit",  "https://www.reddit.com/r/WutheringWaves/"],
+    ["Leak subreddit",  "i-reddit",  "https://www.reddit.com/r/WutheringWavesLeaks/"]
+  ].map(([label, ic, href]) =>
+    `<a class="tierlink" href="${href}" target="_blank" rel="noopener">
+       ${icon(ic, 14)}<span class="t">${label}</span><span class="n out">↗</span></a>`
   ).join("");
 
   $("#dock").innerHTML = VIEWS.map(v => `
@@ -2276,14 +2276,6 @@ function bind(){
       S.sigLimit = 60;
       renderRail();
       draw(S.view);
-    }
-    /* A rail shortcut is a view plus a filter combination — set the filters
-       before switching, or setView draws the old ones first and the list
-       visibly re-filters a frame later. */
-    else if(act === "jump"){
-      try{ Object.assign(S, JSON.parse(el.dataset.set || "{}")); }catch{ /* ignore a malformed shortcut */ }
-      S.sigLimit = 60;
-      setView(id);
     }
     else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
     else if(act === "noop"){ /* decorative */ }

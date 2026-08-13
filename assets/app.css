@@ -311,7 +311,32 @@ button{font:inherit;color:inherit}
 }
 .linkout:hover{color:var(--fg)}
 
-.rail-foot{margin-top:auto;padding:0 18px;display:flex;gap:14px;align-items:center}
+/* The outbound list sits on the floor of the rail, with the icon row directly
+   under it — so the auto margin that used to pin .rail-foot down moves up here
+   and the two travel together as the rail's tail.
+
+   Smaller than the navigation above it on purpose. These are set in the same
+   mono as the view names but at two thirds the size: the nav is read at a
+   glance from across the desk, and a list of places to leave for is not. */
+.rail-links{margin-top:auto;padding:0 12px 4px;display:flex;flex-direction:column;gap:1px}
+.rail-links .tierlink{font-size:13px;letter-spacing:.07em;gap:9px;padding:6px 10px}
+.rail-links .tierlink svg{flex:none;color:var(--fg-3)}
+.rail-links .tierlink:hover svg{color:var(--accent)}
+/* The underline belongs to the label, not to the row. On a flex anchor the
+   decoration propagates to every item, and it was drawing a line under the
+   boxed ↗ as well as the words. */
+.rail-links .tierlink{text-decoration:none}
+.rail-links .tierlink .t{
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;
+  text-decoration-color:color-mix(in srgb,currentColor 42%,transparent);
+}
+.rail-links .tierlink:hover .t{text-decoration-color:currentColor}
+/* Half the size it is in the tier lists: there it holds a count, here it is a
+   mark saying "this leaves the site" and the box around it was louder than the
+   link. */
+.rail-links .tierlink .n{font-size:11px;min-width:0;border:0;padding:0;color:var(--fg-3)}
+
+.rail-foot{padding:0 18px;display:flex;gap:14px;align-items:center}
 .rail-foot a{color:var(--fg-3);display:flex;transition:color .15s}
 .rail-foot a:hover{color:var(--accent)}
 
@@ -2111,7 +2136,7 @@ button{font:inherit;color:inherit}
     position:static;height:auto;flex-direction:row;align-items:center;gap:14px;
     padding:12px 16px;border-right:0;border-bottom:1px solid var(--line);
   }
-  .rail-group,.rail-foot{display:none}
+  .rail-group,.rail-links,.rail-foot{display:none}
   /* The header lives inside .body now and takes its gutters from it. */
   .body,.foot{padding-left:16px;padding-right:16px}
   /* Swipe rather than stack. Three patch cards down a phone is a thousand
