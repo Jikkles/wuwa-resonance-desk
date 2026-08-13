@@ -1,5 +1,10 @@
-// Resolves character art — bust, card and gallery — plus weapon icons, and
-// writes data/portraits.json. Node 20+. No dependencies. No API keys.
+// Resolves character art — bust, card and gallery — and writes
+// data/portraits.json. Node 20+. No dependencies. No API keys.
+//
+// Weapon icons used to be this script's other half. They live in
+// scripts/fetch-weapons.mjs now, which resolves all 120 of them alongside the
+// stats and passives the Weapons view is built out of, rather than the 36 that
+// happen to be somebody's signature.
 //
 // Three sizes per character, because the desk asks three different questions:
 //
@@ -40,11 +45,10 @@
 // anywhere upstream that can be resolved from a URL, so Prydwen is the source
 // and is credited as such.
 //
-// Both listing pages embed their whole dataset as JSON in the page source, so
-// one request each resolves the busts, the cards and every weapon. The gallery
-// picture is the exception — it appears only on a character's own page — but
-// its URL is derived from the same slug, so the page is fetched only when the
-// derived URL misses.
+// The listing page embeds its whole dataset as JSON in the page source, so one
+// request resolves every bust and card. The gallery picture is the exception —
+// it appears only on a character's own page — but its URL is derived from the
+// same slug, so the page is fetched only when the derived URL misses.
 //
 // Files land in assets/portraits/ rather than being hotlinked: Prydwen is a
 // fan site paying for its own CDN, and serving the art from Pages is cheaper
@@ -61,9 +65,7 @@ const UA =
   "Chrome/126.0.0.0 Safari/537.36";
 
 const CHARACTERS_URL = "https://www.prydwen.gg/wuthering-waves/characters";
-const WEAPONS_URL = "https://www.prydwen.gg/wuthering-waves/weapons";
 const CHARACTER_URL = slug => `https://www.prydwen.gg/wuthering-waves/characters/${slug}`;
-const WEAPON_IMG = id => `https://cdn.prydwen.gg/images/wuthering-waves/weapons/${id}.webp`;
 const FULL_IMG = slug => `https://cdn.prydwen.gg/images/wuthering-waves/characters/${slug}_full.webp`;
 const OUT = "data/portraits.json";
 const DIR = "assets/portraits";
@@ -72,7 +74,6 @@ const TIMEOUT_MS = 25000;
 /* "Yangyang: Xuanling" and "Yangyang Xuanling" are the same character. Match on
    letters and digits only, so punctuation and spacing never decide a lookup. */
 const key = s => String(s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
-const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 /* curl rather than fetch(). Prydwen sits behind Cloudflare, which turns away
    Node's TLS handshake with a 403 no matter what headers it sends; the same
@@ -125,39 +126,24 @@ function parseCharacters(html) {
   return out;
 }
 
-function parseWeapons(html) {
-  const rx = /"Name":"((?:[^"\\]|\\.)*)","Rarity":(\d),"ID":"(\d+)"/g;
-  const out = new Map();
-  for (const m of unescaped(html).matchAll(rx)) {
-    const name = m[1].replace(/\\(.)/g, "$1");
-    out.set(key(name), { name, rarity: Number(m[2]), id: m[3], icon: WEAPON_IMG(m[3]) });
-  }
-  return out;
-}
-
-/* Every character and every signature weapon the desk currently talks about.
-   Same rule as fetch-art.mjs: the data decides what gets fetched, so a patch
-   added to versions.json pulls its own art down on the next run. */
+/* Every character the desk currently talks about. Same rule as fetch-art.mjs:
+   the data decides what gets fetched, so a patch added to versions.json pulls
+   its own art down on the next run. */
 async function wanted() {
   const characters = new Set();
-  const weapons = new Set();
   try {
     const versions = await readJson("data/versions.json");
     for (const v of versions.versions || [])
       for (const p of v.phases || [])
-        for (const b of p.banners || []) {
+        for (const b of p.banners || [])
           if (b.name) characters.add(b.name);
-          if (b.signature) weapons.add(b.signature);
-        }
   } catch {}
   try {
     const res = await readJson("data/resonators.json");
-    for (const r of res.resonators || []) {
+    for (const r of res.resonators || [])
       if (r.name) characters.add(r.name);
-      if (r.signature) weapons.add(r.signature);
-    }
   } catch {}
-  return { characters: [...characters].sort(), weapons: [...weapons].sort() };
+  return [...characters].sort();
 }
 
 /* Kuro's assets are WebP with a real alpha channel. A file that decodes as
@@ -245,21 +231,18 @@ async function resolveGallery(slug, path) {
 }
 
 (async function main() {
-  const { characters: wantChars, weapons: wantWeapons } = await wanted();
-  if (!wantChars.length && !wantWeapons.length) {
+  const wantChars = await wanted();
+  if (!wantChars.length) {
     console.log("nothing named in data/*.json — nothing to resolve");
     return;
   }
 
-  const [charHtml, weaponHtml] = await Promise.all([getText(CHARACTERS_URL), getText(WEAPONS_URL)]);
-  const chars = parseCharacters(charHtml);
-  const weps = parseWeapons(weaponHtml);
-  console.log(`prydwen: ${chars.size} characters, ${weps.size} weapons\n`);
+  const chars = parseCharacters(await getText(CHARACTERS_URL));
+  console.log(`prydwen: ${chars.size} characters\n`);
 
   await mkdir(DIR, { recursive: true });
 
   const characters = {};
-  const weapons = {};
   const misses = [];
   const keep = new Set();
 
@@ -312,25 +295,11 @@ async function resolveGallery(slug, path) {
     else misses.push(`${name} (no image)`);
   }
 
-  for (const name of wantWeapons) {
-    const hit = weps.get(key(name));
-    /* A weapon that debuts with an unreleased patch has no icon yet — Prydwen
-       lists it once it ships. The tile falls back to its glyph until then,
-       which is the honest answer rather than a borrowed picture. */
-    if (!hit) { misses.push(`${name} (weapon, unreleased)`); continue; }
-    const file = `${DIR}/w-${slug(name)}.webp`;
-    try {
-      const { bytes, alpha } = await download(hit.icon, file);
-      weapons[name] = { icon: file, rarity: hit.rarity, id: hit.id, source: WEAPONS_URL };
-      keep.add(file);
-      console.log(`wep  ${name.padEnd(20)} ${String(bytes).padStart(7)}b ${alpha ? "alpha" : "OPAQUE"}`);
-    } catch (err) {
-      console.log(`wep  ${name.padEnd(20)} failed — ${err.message}`);
-    }
-  }
-
   /* A character dropped from versions.json shouldn't leave their portrait
-     behind in the repo forever. */
+     behind in the repo forever. This also sweeps out the w-*.webp icons this
+     script used to write — scripts/fetch-weapons.mjs owns weapon art now, and
+     keeps it in assets/weapons/ where all 120 of them live rather than the 36
+     that happen to be somebody's signature. */
   for (const f of await readdir(DIR)) {
     const path = `${DIR}/${f}`;
     if (!keep.has(path)) { await unlink(path); console.log(`pruned ${path}`); }
@@ -339,32 +308,32 @@ async function resolveGallery(slug, path) {
   const payload = {
     schema: "wuwa-desk/portraits@1.0",
     note:
-      "Character art at three sizes — 160px bust, 374x512 card, 2048x2048 gallery render — " +
-      "and weapon icons. All cut-outs with alpha, resolved through Prydwen's public character and " +
-      "weapon listings and cached in assets/portraits/. Art © Kuro Games. " +
+      "Character art at three sizes — 160px bust, 374x512 card, 2048x2048 gallery render. " +
+      "All cut-outs with alpha, resolved through Prydwen's public character listing and cached " +
+      "in assets/portraits/. Art © Kuro Games. " +
       "gallery:\"scene\" means Prydwen's gallery holds the Resonance Liberation splash rather than " +
       "a standing render — no portrait to crop, so the desk falls back to the waist-up card. " +
-      "A name absent here has no published asset yet.",
+      "A name absent here has no published asset yet. " +
+      "Weapon icons moved to data/weapons.json and assets/weapons/.",
     credit: "Art via prydwen.gg · art © Kuro Games",
-    characters,
-    weapons
+    characters
   };
 
-  // Same rule as the feed: don't churn the file when nothing moved.
+  /* Same rule as the feed: don't churn the file when nothing moved. Everything
+     but the timestamp is compared, not just the characters — when this script
+     stopped writing a `weapons` key, comparing one field left the old one
+     sitting in the file with nothing to refresh it. */
   let unchanged = false;
   try {
-    const prev = await readJson(OUT);
-    unchanged =
-      JSON.stringify(prev.characters) === JSON.stringify(characters) &&
-      JSON.stringify(prev.weapons) === JSON.stringify(weapons);
+    const { updated, ...prev } = await readJson(OUT);
+    unchanged = JSON.stringify(prev) === JSON.stringify(payload);
   } catch {}
   if (!unchanged) {
     await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
   }
 
   console.log(
-    `\n${Object.keys(characters).length}/${wantChars.length} characters, ` +
-      `${Object.keys(weapons).length}/${wantWeapons.length} weapons` +
+    `\n${Object.keys(characters).length}/${wantChars.length} characters` +
       (unchanged ? " (unchanged)" : "")
   );
   if (misses.length) console.log(`no asset yet: ${misses.join(", ")}`);

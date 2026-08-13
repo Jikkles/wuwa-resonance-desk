@@ -10,9 +10,10 @@ const FALLBACK = {
   versions:   {updated:"", current:"", versions:[]},
   news:       {updated:"", confidenceTiers:{}, entries:[]},
   resonators: {updated:"", resonators:[]},
+  weapons:    {updated:"", weapons:[]},
   feed:       {fetched:"", sources:[], errors:[], items:[]},
   art:        {art:{}},
-  portraits:  {characters:{}, weapons:{}},
+  portraits:  {characters:{}},
   translations: {titles:{}}
 };
 
@@ -55,7 +56,7 @@ const ATTR_COLOUR = {
 const VIEWS = [
   {id:"timeline",   label:"Timeline",     icon:"i-timeline"},
   {id:"resonators", label:"Resonators",   icon:"i-res"},
-  {id:"weapons",    label:"Weapons",      icon:"i-weapon",  soon:true},
+  {id:"weapons",    label:"Weapons",      icon:"i-weapon"},
   {id:"events",     label:"Events",       icon:"i-events",  soon:true},
   {id:"intel",      label:"Intel",        icon:"i-intel"},
   {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified", short:"Signals"}
@@ -71,19 +72,26 @@ const S = {
      toggle in the Skills header swaps them to the client's full text. A kit is
      five thousand words; the default has to be the one you can scan. */
   kitSimple:true,
+  /* Weapon ascension, 1–5. Not a filter — it doesn't change which weapons you
+     can see, only what the passive says — so it sits outside VIEW_FILTERS and
+     Reset leaves it alone. The stats never move with it: those are level 90,
+     full stop. */
+  rank:1,
   when:"all", tlMode:"cards",      // timeline
   tier:"all", ver:"all", cat:"all", // intel
   kind:"all", src:"all",           // signals
-  elem:"all", weapon:"all"         // resonators
+  elem:"all", weapon:"all",        // resonators
+  wtype:"all", wstat:"all"         // weapons
 };
 /* Which of those a view actually reads — drives Reset, and stops a stale
    element filter from silently narrowing a list you have navigated away from. */
 const VIEW_FILTERS = {
   timeline:["when"], intel:["tier","ver","cat"],
   signals:["kind","src"], resonators:["elem","weapon"],
+  weapons:["wtype","wstat"],
   /* Every view needs a row here even with nothing in it — filtersOn() and
      Reset both index this table unguarded. */
-  weapons:[], events:[]
+  events:[]
 };
 
 /* ── helpers ─────────────────────────────────────────────────────── */
@@ -140,6 +148,7 @@ const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
 const versions   = () => DATA.versions?.versions || [];
 const entries    = () => DATA.news?.entries || [];
 const resonators = () => DATA.resonators?.resonators || [];
+const weapons    = () => DATA.weapons?.weapons || [];
 const signals    = () => [...(DATA.feed?.items || [])].sort((a,b) => (b.date||"").localeCompare(a.date||""));
 
 /* Signals arrive in whatever language the source publishes in — about a fifth
@@ -189,7 +198,28 @@ function kitFor(name){
 }
 
 function portraitFor(name){ return (DATA.portraits?.characters || {})[name] || null; }
-function weaponArtFor(name){ return (DATA.portraits?.weapons || {})[name] || null; }
+/* The weapon database, by name. Case-insensitive, because a weapon's name
+   reaches this from three different hand-written places — a banner row's
+   `signature`, a resonator record's, and the palette — and one of them will
+   eventually disagree about a capital. */
+function weaponFor(name){
+  const k = String(name||"").toLowerCase();
+  return weapons().find(w => w.name.toLowerCase() === k) || null;
+}
+/* Kept as its own name because half the desk asks this the narrow way: a tile
+   only wants the picture and the rarity, and doesn't care that the record
+   behind it now carries stats and a passive too. */
+const weaponArtFor = weaponFor;
+
+/* Whose signature a weapon is. The resonator records carry the link in that
+   direction, so this is that map read backwards, falling back to the timeline's
+   banner rows for a weapon whose holder hasn't got a record yet. */
+function sigHolderFor(name){
+  const k = String(name||"").toLowerCase();
+  return resonators().find(r => String(r.signature||"").toLowerCase() === k)?.name
+    || allWeapons().find(w => w.name.toLowerCase() === k)?.holder
+    || "";
+}
 /* Both of these used to name the site the picture was resolved from. The
    copyright is the part that has to be on the page; which fan wiki the file
    came through is bookkeeping, and it was sitting under every portrait on the
@@ -569,6 +599,7 @@ function railCount(id){
   const n = id === "intel" ? entries().length
           : id === "signals" ? signals().length
           : id === "resonators" ? resonators().length
+          : id === "weapons" ? weapons().length
           : versions().length;
   return `<span class="n">${n}</span>`;
 }
@@ -1043,6 +1074,13 @@ function filterSpec(){
   if(S.view === "signals") return [
     {k:"src",    label:"Source",   all:"All sources",    opts:uniq(signals().map(i => i.source)).sort()}
   ];
+  /* Class is the chip row on Weapons — five values, and it is the question the
+     view is opened with. Sub-stat is the second axis: "which Broadblade gives
+     crit rate" is the next question after it, and six more chips across the
+     same header would have made the two rows indistinguishable. */
+  if(S.view === "weapons") return [
+    {k:"wstat",  label:"Sub-stat", all:"All sub-stats",  opts:uniq(weapons().map(w => w.stat)).sort()}
+  ];
   /* Timeline's now/next/past chips are the whole filter — there is no second
      axis worth inventing for three patches. */
   return [];
@@ -1081,7 +1119,8 @@ function emptyWhy(what){
   const on = filtersOn();
   if(!on.length) return `Nothing here yet.`;
   const names = {tier:"confidence", ver:"version", cat:"category", kind:"kind",
-                 src:"source", elem:"element", weapon:"weapon", when:"window"};
+                 src:"source", elem:"element", weapon:"weapon", when:"window",
+                 wtype:"class", wstat:"sub-stat"};
   return `No ${what} matches this ${on.map(k => names[k]).join(" + ")} filter.
     <button class="more" data-act="reset" style="margin-left:10px">Reset ${icon("i-arrow", 12)}</button>`;
 }
@@ -1522,23 +1561,171 @@ function renderResonators(){
   </div>`;
 }
 
+/* ── weapons ─────────────────────────────────────────────────────────
+   Same shape as the Resonators view — one table per rarity, a chip row for the
+   primary axis, a select for the second — and for the same reason: both halves
+   of a roster readable at once beats a toggle between two states of one grid.
+   Three tables here rather than two, because 3★ weapons exist and a database
+   that quietly omits a third of the game is not a database.
+
+   The one control this view has that no other does is the ascension slider.
+   Every weapon's passive is written once, with holes in it, and the five values
+   each hole takes are what ascension moves — so the desk carries the template
+   and the reader carries the slider, instead of the page printing five nearly
+   identical paragraphs per weapon and asking you to find the one you meant.
+
+   Stats do not move with it. atk90 and the sub-stat are level 90 figures and
+   the column headers say so: comparing two weapons is the reason anyone opens
+   this page, and a comparison at level 43 is a comparison of two grinds. */
+const WTYPES = ["Broadblade", "Sword", "Pistols", "Gauntlets", "Rectifier"];
+
+/* Which holes in a passive actually scale, and where each one lands in the
+   ascension table. The table drops the holes the source shipped no values for,
+   so the two cannot share an index — and a grid of percentages you can't map
+   back onto the sentence above it is a grid of unlabelled percentages. */
+const scaleRows = w => (w.ranks || []).filter(Boolean);
+const hasScale = w => scaleRows(w).some(r => new Set(r).size > 1);
+function rankKeys(w){
+  const out = {};
+  let i = 0;
+  (w.ranks || []).forEach((vals, n) => { if(vals) out[n] = ++i; });
+  return out;
+}
+
+/* The passive, resolved to one ascension. The scaling values are the reason
+   the sentence is worth reading twice, so they are set apart rather than run
+   into the prose — move the slider and what changes is visible without
+   re-reading the paragraph to find it. `keyed` numbers them to match the
+   ascension table, and is only for the record, where that table exists. */
+function effectHtml(w, rank, keyed){
+  const i = Math.min(5, Math.max(1, rank || 1)) - 1;
+  const keys = keyed ? rankKeys(w) : null;
+  return esc(w.effect || "").replace(/\{(\d)\}/g, (_, n) => {
+    const vals = w.ranks?.[Number(n)];
+    /* A hole the source shipped no values for. Say so rather than print a
+       number from the wrong slot — the whole desk runs on that rule. */
+    if(!vals) return `<b class="wval na">?</b>`;
+    return `<b class="wval">${esc(vals[i])}${keys ? `<sup>${keys[Number(n)]}</sup>` : ""}</b>`;
+  }) || `<span class="wnone">No passive.</span>`;
+}
+
+/* 1–5, and it redraws nothing. A full re-render would rebuild the input the
+   thumb is currently being dragged on, which ends the drag — so the numbers are
+   repainted in place and the slider is left standing. Every copy of the control
+   is updated, not just the one that moved: the view has one and an open record
+   has another, and two sliders showing different ranks for the same weapon is
+   worse than having only one of them. */
+function paintRank(){
+  document.querySelectorAll("[data-eff]").forEach(el => {
+    const w = weaponFor(el.dataset.eff);
+    if(w) el.innerHTML = effectHtml(w, S.rank, "effKeyed" in el.dataset);
+  });
+  document.querySelectorAll("[data-ranklabel]").forEach(el => el.textContent = `S${S.rank}`);
+  document.querySelectorAll("[data-rank]").forEach(el => {
+    el.value = S.rank;
+    el.setAttribute("aria-valuetext", `Ascension ${S.rank} of 5`);
+  });
+  document.querySelectorAll("[data-rankcol]").forEach(el =>
+    el.classList.toggle("on", Number(el.dataset.rankcol) === S.rank));
+}
+
+function ascendBar(){
+  return `<div class="ascend">
+    <label class="ascend-c">
+      <span class="label">Ascension</span>
+      <input type="range" min="1" max="5" step="1" value="${S.rank}" data-rank
+             aria-label="Weapon ascension" aria-valuetext="Ascension ${S.rank} of 5">
+      <output class="ascend-v" data-ranklabel>S${S.rank}</output>
+    </label>
+    <span class="ascend-note">Scales every passive below. Stats are level 90 and do not move with it.</span>
+  </div>`;
+}
+
+function weaponRow(w){
+  const holder = sigHolderFor(w.name);
+  /* Where it comes from, and whose it is. Both are one line because neither is
+     worth a column: most weapons have one or the other, few have both. */
+  const sub = [w.source, holder ? `${holder}'s signature` : ""].filter(Boolean).join(" · ");
+  return `<div class="wrow" role="button" tabindex="0" data-act="weapon" data-id="${esc(w.name)}">
+    <span class="wr-art">${w.icon
+      ? `<img src="${esc(w.icon)}" alt="" loading="lazy" decoding="async">`
+      : icon("i-weapon", 18)}</span>
+    <span class="wr-n"><b>${esc(w.name)}</b>${sub ? `<i>${esc(sub)}</i>` : ""}</span>
+    <span class="wr-c">${esc(w.type)}</span>
+    <span class="wr-atk">${w.atk90 || "—"}</span>
+    <span class="wr-sub"><b>${w.statValue90 ? esc(w.statValue90) + "%" : "—"}</b><i>${esc(w.stat)}</i></span>
+    <span class="wr-eff" data-eff="${esc(w.name)}">${effectHtml(w, S.rank)}</span>
+  </div>`;
+}
+
+/* Column labels, and the only place the rank is named beside the passive. With
+   three tables down the page the slider is off-screen by the time you reach the
+   3★ list, and a column of numbers whose ascension you have to scroll up to
+   check is a column of numbers you cannot trust. */
+function weaponHead(){
+  return `<div class="wrow whead" aria-hidden="true">
+    <span></span><span>Weapon</span><span>Class</span>
+    <span>ATK<i>Lv 90</i></span><span>Sub-stat<i>Lv 90</i></span>
+    <span>Passive<i>at <b data-ranklabel>S${S.rank}</b></i></span>
+  </div>`;
+}
+
+function weaponTable(title, rows, total, {right = "", under = "", foot = ""} = {}){
+  const r = String(title).charAt(0);
+  return `<div class="panel wpanel r-${r}">
+    <div class="panel-h">
+      <h2>${title}</h2>
+      <span class="sub">${plural(rows.length, "weapon")}${rows.length === total ? "" : ` of ${total}`} · by class</span>
+      ${right ? `<div class="right chips">${right}</div>` : ""}
+    </div>
+    ${under}
+    <div class="panel-b flush">
+      ${rows.length ? `<div class="wtable">${weaponHead()}${rows.map(weaponRow).join("")}</div>`
+        : `<div class="empty">${emptyWhy("weapon")}</div>`}
+    </div>
+    ${foot ? `<div class="panel-f"><span class="tier-note">${foot}</span></div>` : ""}
+  </div>`;
+}
+
+/* Class first, then name. With no filter on, that groups the five classes into
+   five runs you can scan past — where a flat alphabetical list interleaves them
+   and makes you read the class column on every row to find the one you use. */
+const byClassThenName = (a, b) =>
+  (WTYPES.indexOf(a.type) - WTYPES.indexOf(b.type)) || a.name.localeCompare(b.name);
+
+function renderWeapons(){
+  const all = [...weapons()].sort(byClassThenName);
+  let list = all;
+  if(S.wtype !== "all") list = list.filter(w => w.type === S.wtype);
+  if(S.wstat !== "all") list = list.filter(w => w.stat === S.wstat);
+
+  /* Only the classes the data actually holds, in the game's own order rather
+     than alphabetically — a class with nothing filed under it would be a chip
+     that can only ever empty the page. */
+  const present = WTYPES.filter(t => all.some(w => w.type === t));
+  const filters = chips("wtype", [["all", "All"]].concat(present.map(t => [t, t])), S.wtype);
+
+  const rows  = rarity => list.filter(w => String(w.rarity) === rarity);
+  const total = rarity => all.filter(w => String(w.rarity) === rarity).length;
+
+  $("#p-weapons").innerHTML = `<div class="stack">
+    ${weaponTable("5★ Weapons", rows("5"), total("5"), {
+      right: filters,
+      under: `${ascendBar()}${quickFilters(true)}`,
+      foot: "Stats are level 90. Ascension moves the passive only — the numbers in bold are what it changes."
+    })}
+    ${weaponTable("4★ Weapons", rows("4"), total("4"))}
+    ${weaponTable("3★ Weapons", rows("3"), total("3"))}
+  </div>`;
+}
+
 /* ── unbuilt views ───────────────────────────────────────────────────
-   Weapons and Events are in the navigation before they are in the data. That
-   is deliberate — the shape of the desk is being settled first — but a nav
-   item that opens onto nothing is a broken link with extra steps, so each one
-   states what it is going to hold. The copy is the specification: when the
-   view is built, this entry comes out and the panel below it goes in. */
+   Events is in the navigation before it is in the data. That is deliberate —
+   the shape of the desk is being settled first — but a nav item that opens onto
+   nothing is a broken link with extra steps, so it states what it is going to
+   hold. The copy is the specification: when the view is built, this entry comes
+   out and the panel below it goes in, which is exactly what Weapons just did. */
 const WIP = {
-  weapons: {
-    title:"Weapon database",
-    line:"Every signature and standard weapon, and the resonators they were forged around.",
-    plan:[
-      "Full roster by type and rarity, with the same record cards the resonators use",
-      "Passive text and refinement scaling, S1 through S5",
-      "Which convene each signature ran beside, and when it last rerun",
-      "Best-in-slot notes per resonator — sourced, and tiered like everything else here"
-    ]
-  },
   events: {
     title:"Event calendar",
     line:"Limited events in the live patch: what they pay out, and how long is left to claim it.",
@@ -1698,14 +1885,15 @@ function drawerIntel(id){
 }
 
 /* The signature weapon, as a card rather than a row of the record. It is the
-   one line in there that goes somewhere — the weapon convene has its own panel
-   — and a link buried in a column of plain facts reads as another fact. Only
-   clickable when the timeline actually has a run for it, because drawerWeapon
-   is assembled out of banner rows and returns nothing without one. */
+   one line in there that goes somewhere — the weapon has its own panel — and a
+   link buried in a column of plain facts reads as another fact. Clickable once
+   the desk holds anything to show: a record in the weapon database, or a
+   convene on the timeline. Before the Weapons view existed only the second
+   counted, which left the card on a 1.0 Resonator's record dead. */
 function sigWeaponCard(wname){
   if(!wname) return "";
-  const w = weaponArtFor(wname);
-  const live = weaponRuns(wname).length > 0;
+  const w = weaponFor(wname);
+  const live = !!w || weaponRuns(wname).length > 0;
   const art = w?.icon
     ? `<img src="${esc(w.icon)}" alt="" loading="lazy" decoding="async">`
     : icon("i-weapon", 20);
@@ -1844,44 +2032,88 @@ function drawerVersion(id){
   </div>`);
 }
 
-/* There is no weapon database — a weapon is defined by whose banner it runs
-   beside and what the desk has written about it. Both are already on hand, so
-   the record is assembled rather than stored. */
+/* Every value a passive takes, all five at once. The slider answers "what does
+   it do at mine"; this answers "is it worth getting to four", which is the
+   question the slider cannot show you because it only ever displays one column.
+   The current ascension's column is marked and moves with the slider — see
+   paintRank, which owns [data-rankcol]. */
+function rankScale(w){
+  if(!hasScale(w)) return "";
+  const rows = scaleRows(w);
+  return `<div class="dsec"><span class="label">Ascension scaling</span>
+    <div class="wscale">
+      <div class="wscale-r wscale-h">
+        <span></span>${[1,2,3,4,5].map(n =>
+          `<span data-rankcol="${n}" class="${n === S.rank ? "on" : ""}">S${n}</span>`).join("")}
+      </div>
+      ${rows.map((vals, i) => `<div class="wscale-r">
+        <span class="wscale-k">${i + 1}</span>
+        ${vals.map((v, n) => `<span data-rankcol="${n + 1}" class="${n + 1 === S.rank ? "on" : ""}">${esc(v)}</span>`).join("")}
+      </div>`).join("")}
+    </div>
+  </div>`;
+}
+
+/* A weapon record. It used to be assembled entirely out of banner rows — the
+   desk held no weapon data, so a weapon was defined by whose convene it ran
+   beside, and one that had never had a convene had no record at all. It has
+   stats and a passive now, so the two halves are both here: what the thing does
+   comes from weapons.json, and where you could get it still comes from the
+   timeline. Either half can be missing. */
 function drawerWeapon(name){
+  const w = weaponFor(name);
   const runs = weaponRuns(name);
-  if(!runs.length) return;
-  const k = name.toLowerCase();
+  if(!w && !runs.length) return;
+
+  const k = String(name).toLowerCase();
   const mentions = entries()
     .filter(e => `${e.title} ${e.body}`.toLowerCase().includes(k) ||
                  (e.tags || []).some(t => String(t).toLowerCase() === k))
     .sort((a, b) => (b.date||"").localeCompare(a.date||""));
-  const holder = resonatorFor(runs[0].name);
+  /* Holder for the accent colour: a signature weapon takes its resonator's
+     element, which is how it is coloured everywhere else on the desk. */
+  const holderName = runs[0]?.name || sigHolderFor(name);
+  const holder = holderName ? resonatorFor(holderName) : {};
 
-  const wart = weaponArtFor(name);
-  openDrawer("Weapon convene", `<div class="drawer-b"${attrStyle(runs[0].attribute || holder.attribute)}>
+  openDrawer("Weapon record", `<div class="drawer-b"${attrStyle(runs[0]?.attribute || holder.attribute)}>
     <div class="meta">
-      <span class="pill">${esc(holder.weapon || runs[0].weapon || "Weapon")}</span>
-      ${wart?.rarity ? `<span class="pill ver">${esc(wart.rarity)}★</span>` : ""}
+      <span class="pill">${esc(w?.type || holder.weapon || runs[0]?.weapon || "Weapon")}</span>
+      ${w?.rarity ? `<span class="pill ver">${esc(w.rarity)}★</span>` : ""}
+      ${w?.source ? `<span class="pill">${esc(w.source)}</span>` : ""}
       ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
     </div>
-    ${wart?.icon ? `<div class="wbig"><img src="${esc(wart.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
+    ${w?.icon ? `<div class="wbig"><img src="${esc(w.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
     <h2>${esc(name)}</h2>
-    <p>Signature weapon for <b>${esc(runs[0].name)}</b>. Kuro runs the weapon convene
-    alongside the character banner, so it is available for the same window.</p>
-    <div class="dsec"><span class="label">Runs alongside</span>
+    ${holderName ? `<p>Signature weapon for <b>${esc(holderName)}</b>. Kuro runs the weapon convene
+      alongside the character banner, so it is available for the same window.</p>` : ""}
+
+    ${w ? `<div class="dsec"><span class="label">Stats at level 90</span>
+      <div class="wstats">
+        <div><span class="k">Base ATK</span><b>${w.atk90 || "—"}</b></div>
+        <div><span class="k">${esc(w.stat || "Sub-stat")}</span><b>${w.statValue90 ? esc(w.statValue90) + "%" : "—"}</b></div>
+      </div></div>` : ""}
+
+    ${w ? `<div class="dsec"><span class="label">Passive</span>
+      ${ascendBar()}
+      <p class="weff" data-eff="${esc(w.name)}"${hasScale(w) ? " data-eff-keyed" : ""}
+         style="margin:12px 0 0">${effectHtml(w, S.rank, hasScale(w))}</p>
+    </div>${rankScale(w)}` : ""}
+
+    ${runs.length ? `<div class="dsec"><span class="label">Runs alongside</span>
       <div style="display:grid;gap:8px">${runs.map(r => `
         <span class="dsrc" role="button" tabindex="0" data-act="resonator" data-id="${esc(r.name)}">
           <span class="lang">${esc(r.version)}</span>${esc(r.name)}${r.phase ? ` — phase ${esc(r.phase)}` : ""}
           ${r.new ? "· debut" : "· rerun"}
           <span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div>
-    </div>
+    </div>` : ""}
+
     ${mentions.length ? `<div class="dsec"><span class="label">Intel mentioning it — ${mentions.length}</span>
       <div style="display:grid;gap:8px">${mentions.map(e => `
         <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(e.id)}">
           <i class="dot t-${esc(e.confidence)}" style="width:7px;height:7px;border-radius:50%;background:currentColor;flex:none"></i>
           ${esc(e.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div></div>`
       : `<div class="dsec"><span class="label">Intel mentioning it</span>
-         <p style="margin:0;color:var(--fg-3)">Nothing written up yet — only the banner listing.</p></div>`}
+         <p style="margin:0;color:var(--fg-3)">Nothing written up yet.</p></div>`}
   </div>`);
 }
 
@@ -1949,9 +2181,13 @@ function cmdIndex(){
     group:"Resonators", label:`${r.name}${r.nameCN ? " " + r.nameCN : ""}`,
     hint:[r.rarity ? r.rarity + "★" : "", r.attribute].filter(Boolean).join(" "), act:["resonator", r.name], tier:null
   }));
-  allWeapons().forEach(w => out.push({
-    group:"Weapons", label:w.name, hint:`${w.holder} · ${w.version}`, act:["weapon", w.name], tier:null
-  }));
+  /* The whole database when it has loaded. allWeapons() is the fallback for
+     file://, where nothing fetches and the only weapons the page knows about
+     are the ones named on a banner row in the bundled versions data. */
+  (weapons().length
+    ? weapons().map(w => ({name:w.name, hint:[`${w.rarity}★`, w.type].filter(Boolean).join(" ")}))
+    : allWeapons().map(w => ({name:w.name, hint:`${w.holder} · ${w.version}`})))
+    .forEach(w => out.push({group:"Weapons", label:w.name, hint:w.hint, act:["weapon", w.name], tier:null}));
   entries().forEach(e => out.push({
     group:"Intel", label:e.title, hint:fmtShort(e.date), act:["intel", e.id], tier:e.confidence
   }));
@@ -2006,7 +2242,7 @@ function runCmdItem(i){
 const RENDER = {
   timeline: renderTimeline,
   resonators: renderResonators,
-  weapons: () => renderWIP("weapons"),
+  weapons: renderWeapons,
   events: () => renderWIP("events"),
   intel: renderIntel,
   signals: renderSignals
@@ -2108,6 +2344,16 @@ function bind(){
     document.querySelector(`${inAside ? ".aside " : ".qf-inline "}[data-sel="${key}"]`)?.focus();
   });
 
+  /* The ascension slider. `input` rather than `change` so the passives track a
+     drag instead of jumping when the thumb is let go — and it repaints rather
+     than redraws, because redrawing would replace the input mid-drag. */
+  document.addEventListener("input", e => {
+    const r = e.target.closest("[data-rank]");
+    if(!r) return;
+    S.rank = Math.min(5, Math.max(1, Number(r.value) || 1));
+    paintRank();
+  });
+
   /* Cards are role=button, so Enter/Space have to act like a click. */
   document.addEventListener("keydown", e => {
     if(e.key === "Escape"){ closeCmd(); closeDrawer(); return; }
@@ -2155,7 +2401,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","feed","art","portraits","translations"];
+  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 

@@ -12,19 +12,22 @@ data/versions.json             patch timeline + banner phases
 data/news.json                 curated leak/news entries
 data/resonators.json           resonator index — identity, debut, reruns
 data/kits.json                 skills + Resonance Chains, loaded on demand
+data/weapons.json              weapon database — stats, passives (written by Actions)
 data/feed.json                 auto-fetched headlines (written by Actions)
 data/art.json                  resolved official key art (written by Actions)
-data/portraits.json            character art + weapon icon map (written by Actions)
+data/portraits.json            character art map (written by Actions)
 data/translations.json         English for non-English signal headlines
 assets/portraits/              cached busts, cut-outs and gallery illustrations
+assets/weapons/                cached weapon icons
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
-scripts/fetch-portraits.mjs    the character art + weapon icon resolver
+scripts/fetch-portraits.mjs    the character art resolver
+scripts/fetch-weapons.mjs      the weapon stat, passive and icon resolver
 scripts/fetch-kits.mjs         the roster, kit and banner-history builder
 .github/workflows/update-feeds.yml   cron, every 6h
 ```
 
-Four views:
+Five views:
 
 | View | Source | Tiered? |
 |---|---|---|
@@ -32,6 +35,7 @@ Four views:
 | Intel | `news.json` | yes, by hand |
 | Live Signals | `feed.json` | **no** — raw lead list |
 | Resonators | `resonators.json` + `kits.json` | yes, per kit |
+| Weapons | `weapons.json` | — |
 
 The split matters. Live Signals is a machine telling you something happened; Intel is
 you deciding what it was worth. A cron job can't judge whether a post is a datamine or
@@ -98,11 +102,16 @@ rail's Methodology link was until it was moved onto `data-act="open"`.
 Two tiers of control, and the split is deliberate:
 
 - **Chips** in each panel header carry the view's *primary* axis — tier on Intel, kind
-  on Signals, element and rarity on Resonators, now/next/past on Timeline. These are
-  the questions the desk exists to answer, so they're always visible and pre-counted.
+  on Signals, element on Resonators, class on Weapons, now/next/past on Timeline. These
+  are the questions the desk exists to answer, so they're always visible and pre-counted.
 - **Quick-filter selects** carry the secondary axes: version and category on Intel,
-  weapon on Resonators, source on Signals. Too many values to spend a chip each on.
-  Options are read off the data, so a category nothing is filed under never appears.
+  weapon on Resonators, sub-stat on Weapons, source on Signals. Too many values to spend
+  a chip each on. Options are read off the data, so a category nothing is filed under
+  never appears.
+
+The ascension slider on Weapons is neither. It doesn't change which weapons you can see,
+only what their passives say, so it sits outside `VIEW_FILTERS` and Reset leaves it
+alone.
 
 The selects render **twice** — into the aside on desktop, and inline under the panel
 header below 1340px where the aside is gone. Both copies write to the same `S` state
@@ -187,10 +196,14 @@ weapons to the limited characters of that class in debut order reproduces the pr
 attributions exactly — including the off-by-one in Swords that turned out to be Aero
 Rover holding `21020046`.
 
-There is no weapon database and there doesn't need to be one. `drawerWeapon()` assembles
-the record from what's on hand: `weaponRuns()` finds every banner the weapon runs beside
-(reruns mean that's a list), and the intel entries that name it come from a text match
-over titles, bodies and tags. Weapons are in the command palette too.
+There *is* a weapon database now — see below — and `drawerWeapon()` reads both halves.
+What the thing does comes from `weapons.json`; where you could get it is still assembled
+from what's on hand: `weaponRuns()` finds every banner the weapon runs beside (reruns
+mean that's a list), and the intel entries that name it come from a text match over
+titles, bodies and tags. Either half can be missing — a 3★ crafting sword has stats and
+no convene; the two 3.7 signatures Prydwen hasn't listed yet have a convene and no
+stats — so every section of the record is conditional. Weapons are in the command
+palette too.
 
 `weaponRuns()` reads both ends of the same fact. `versions.json` is the arc the desk is
 currently watching — two patches — so on its own it made every weapon older than that a
@@ -349,9 +362,12 @@ than a portrait.
 
 So the small tiles use a different asset entirely. `scripts/fetch-portraits.mjs`
 resolves the game's own UI art — a 160px bust and a 374×512 waist-up cut-out per
-character, a 256px render per weapon — through **Prydwen's** public character and weapon
-listings, which embed their whole dataset as JSON in the page source (one request each,
-no per-character crawl). All of it carries a real alpha channel, which is the point: a
+character — through **Prydwen's** public character listing, which embeds its whole
+dataset as JSON in the page source (one request, no per-character crawl). Weapon icons
+come from the same host and used to come from this script; they are
+`scripts/fetch-weapons.mjs`'s job now, which resolves all 120 of them alongside the
+stats rather than the 36 that happen to be somebody's signature. All of it carries a
+real alpha channel, which is the point: a
 cut-out sits *on* the card, over the tile's own element gradient, instead of bringing a
 second background inside the first. The script asserts that alpha is present and says
 so per file when it runs.
@@ -560,6 +576,84 @@ an element. `kitText()` escapes the string **first** and turns the markers into 
 **second**, so the only tags that reach `innerHTML` are the two it writes itself. Scraped
 text is untrusted input; keep it that way if you touch this.
 
+## The weapon database
+
+120 weapons — 46 5★, 43 4★, 31 3★ — in `data/weapons.json`, written by
+`scripts/fetch-weapons.mjs` on the same 6-hour cron as everything else.
+
+### Rows, not cards
+
+Resonators get a grid of portraits because a resonator *is* a face. A weapon is six
+facts, five of them numbers you are holding against the row above, so Weapons is a
+table: one CSS grid, header row and body sharing the same column track, so ATK sits
+under ATK all the way down a screen of 46.
+
+Three tables, one per rarity, same reasoning as the Resonators split — every rarity
+readable at once beats a toggle between three states of one list. Rows sort **class then
+name**: with no filter on that groups the five classes into five runs you can scan past,
+where a flat alphabetical list interleaves them and makes you read the class column on
+every row to find the one you use.
+
+Rarity is the only colour on this view. The element accent that carries the rest of the
+desk means nothing on a weapon, so `--rar` takes the accent slot per panel — but all
+three values are already in the palette (5★ is the desk's amber, 4★ and 3★ are the
+electro and glacio attribute colours), so no new hue enters the system to say something
+the system already says.
+
+### Stats are level 90, full stop
+
+`atk90` and `statValue90` are max-level figures and the column headers say so. There is
+no level curve in the source and none is inferred: comparing two weapons is the reason
+anyone opens this page, and a comparison at level 43 is a comparison of two grinds.
+Every weapon sub-stat in this game is a percentage — there is no flat one — so the unit
+is implicit in the data and the renderer appends the sign.
+
+### The ascension slider
+
+A weapon's passive is one sentence with holes in it. `effect` carries the template with
+`{0}`…`{7}` in it and `ranks[n]` carries the five values `{n}` takes at ascension 1
+through 5, so the desk stores one passive per weapon and the reader moves a slider —
+instead of the page printing five nearly identical paragraphs each and asking you to
+find the one you meant.
+
+Three things about it are load-bearing:
+
+- **It repaints, it doesn't redraw.** `paintRank()` rewrites the `[data-eff]` cells in
+  place. A `draw()` would rebuild the `<input>` the thumb is currently being dragged on,
+  which ends the drag mid-gesture.
+- **`input`, not `change`.** The passives track the drag rather than jumping when the
+  thumb is let go.
+- **Every copy updates, not the one that moved.** The view has a slider and an open
+  record has another; two sliders showing different ranks for the same weapon is worse
+  than having only one of them.
+
+The record adds the full ascension table the slider can only ever show one column of —
+which answers "is it worth getting to four", the question a single column can't. Its
+rows are numbered, and the same numbers appear as superscripts on the values in the
+sentence above it: the table drops holes the source shipped no values for, so the two
+can't share an index, and a grid of unlabelled percentages is a grid of unlabelled
+percentages. `rankKeys()` is the map between them.
+
+### Where the numbers come from
+
+Kuro publishes no weapon endpoint. Prydwen's weapons page embeds its entire dataset as
+JSON in the page source — one request for all 120 — and it is the same host
+`fetch-portraits.mjs` already reads, so it is the source here too and is credited as
+such. Same Cloudflare caveat, same `curl` workaround, still dependency-free.
+
+Two things are cleaned up on the way in and one deliberately isn't. Stat **names** are
+folded by `STAT_NAME`: the page is hand-maintained and ships "Crit. Rate" and "CRIT
+Rate", "Energy Reg." and "Energy Regen", "CRIT DMG%" and "CRIT DMG", which left alone
+produce three filter options for one stat. Unused array slots come back as `""` rather
+than as an empty array, so `ranks[]` is built by walking the placeholders the text
+actually uses. What is **not** corrected is the base ATK values that sit a point apart
+inside a tier — 412/413/414/415 for the same class of 5★ — because that is what the
+source says, and quietly rounding somebody else's data to the shape you expected is how
+a desk starts publishing its own guesses.
+
+The script refuses to overwrite the file if it parses fewer than 60 weapons, and reports
+any weapon class it doesn't recognise rather than dropping it.
+
 ## Setup
 
 ```bash
@@ -647,7 +741,8 @@ repo activity — if the feed genuinely goes quiet that long, push anything to r
 
 ## Rules
 
-- Character art is cached into `assets/portraits/` by the fetcher, and a hand-set override
+- Character art is cached into `assets/portraits/` and weapon icons into `assets/weapons/`
+  by the fetchers, and a hand-set override
   may be added under `assets/characters/`. This is a deliberate call: it's Kuro's IP, it's
   the thing that gets fan sites taken down, and the project accepts that risk. Every such
   image carries a `© Kuro Games` line on the card. If the risk calculus ever changes, delete the

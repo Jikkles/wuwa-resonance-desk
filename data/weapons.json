@@ -1,0 +1,3265 @@
+{
+  "schema": "wuwa-desk/weapons@1.0",
+  "note": "Every weapon in the game: class, rarity, level 90 stats, and the passive as a template with its five ascension values. atk90 and statValue90 are max-level figures — there is no level curve here and none is inferred. ranks[n] holds what {n} in `effect` becomes at ascension 1 through 5. Sub-stat values are percentages. Icons are cached in assets/weapons/. Stats and passives via prydwen.gg; weapon art © Kuro Games.",
+  "credit": "Stats and art via prydwen.gg · weapon art © Kuro Games",
+  "source": "https://www.prydwen.gg/wuthering-waves/weapons",
+  "weapons": [
+    {
+      "name": "Abyss Surges",
+      "rarity": 5,
+      "type": "Gauntlets",
+      "id": "21040015",
+      "atk90": 587,
+      "stat": "ATK",
+      "statValue90": 36.4,
+      "source": "Permanent Convene",
+      "effect": "Increases Energy Regen by {0}. When hitting a target with Resonance Skill, increases Basic Attack DMG Bonus by {1}, lasting for {2}. When hitting a target with Basic Attacks, increases Resonance Skill DMG Bonus by {3}, lasting for {4}s.",
+      "ranks": [
+        [
+          "12.8%",
+          "16%",
+          "19.2%",
+          "22.4%",
+          "25.6%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ],
+        [
+          "8",
+          "8",
+          "8",
+          "8",
+          "8"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ],
+        [
+          "8",
+          "8",
+          "8",
+          "8",
+          "8"
+        ]
+      ],
+      "icon": "assets/weapons/w-abyss-surges.webp"
+    },
+    {
+      "name": "Ages of Harvest",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010026",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Gacha",
+      "effect": "Grants {0} Attribute DMG Bonus. Casting Intro Skill gives the equipper Ageless Marking, which grants {1} Resonance Skill DMG Bonus for 12s. Casting Resonance Skill gives the equipper Ethereal Endowment, which grants {1} Resonance Skill DMG Bonus for 12s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-ages-of-harvest.webp"
+    },
+    {
+      "name": "Azure Oath",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020096",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "Grants {0} All-Attribute DMG Bonus. After inflicting Havoc Bane, the wielder gains {1} Heavy Attack DMG Amplification and their Heavy Attack DMG ignores {0} of the target's DEF, lasting for 8s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "36%",
+          "45%",
+          "54%",
+          "63%",
+          "72%"
+        ]
+      ],
+      "icon": "assets/weapons/w-azure-oath.webp"
+    },
+    {
+      "name": "Blazing Brilliance",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020016",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Gacha",
+      "effect": "ATK increased by {0}. The equipper gains 1 stack of Searing Feather upon dealing damage, which can be triggered once every 0.5s, and gains 5 stacks of the same effect upon casting Resonance Skill. Each stack of Searing Feather gives {1} additional Resonance Skill DMG Bonus for up to 14 stacks. All stacks will be removed within 12s after reaching the max stack.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-blazing-brilliance.webp"
+    },
+    {
+      "name": "Blazing Justice",
+      "rarity": 5,
+      "type": "Gauntlets",
+      "id": "21040036",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Casting Basic Attack grants the following effects: Dealing damage ignores {1} of the target's DEF and Amplifies Spectro Frazzle DMG dealt by {2} for 6s. Retriggering the effect resets its duration.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ],
+        [
+          "50%",
+          "62.5%",
+          "75%",
+          "87.5%",
+          "100%"
+        ]
+      ],
+      "icon": "assets/weapons/w-blazing-justice.webp"
+    },
+    {
+      "name": "Bloodpact's Pledge",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020046",
+      "atk90": 587,
+      "stat": "Energy Regen",
+      "statValue90": 38.9,
+      "source": "Rate-up",
+      "effect": "Providing Healing increases Resonance Skill DMG by {0} for 6s. When Rover: Aero casts Resonance Skill Unbound Flow, Aero DMG dealt by nearby Resonators on the field is Amplified by {0} for 30s.",
+      "ranks": [
+        [
+          "10%",
+          "14%",
+          "18%",
+          "22%",
+          "26%"
+        ]
+      ],
+      "icon": "assets/weapons/w-bloodpact-s-pledge.webp"
+    },
+    {
+      "name": "Boson Astrolabe",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050045",
+      "atk90": 525,
+      "stat": "Energy Regen",
+      "statValue90": 38.8,
+      "source": "Permanent Convene",
+      "effect": "Increases ATK by {0}. When a Resonator in the team casts a Tune Break skill, it grants a {1} ATK increase and {1} Basic Attack DMG Bonus to the wielder for 14s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "12%",
+          "13.5%",
+          "15%",
+          "16.5%",
+          "18%"
+        ]
+      ],
+      "icon": "assets/weapons/w-boson-astrolabe.webp"
+    },
+    {
+      "name": "Cosmic Ripples",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050015",
+      "atk90": 500,
+      "stat": "ATK",
+      "statValue90": 54,
+      "source": "Permanent Convene",
+      "effect": "Increases Energy Regen by {0}. When hitting a target with Basic Attacks, increases Basic Attack DMG Bonus by {1}, stacking up to {2} time(s). This effect lasts for {3}s and can be triggered 1 time(s) every 0.5s.",
+      "ranks": [
+        [
+          "12.8%",
+          "16%",
+          "19.2%",
+          "22.4%",
+          "25.6%"
+        ],
+        [
+          "3.2%",
+          "4%",
+          "4.8%",
+          "5.6%",
+          "6.4%"
+        ],
+        [
+          "5",
+          "5",
+          "5",
+          "5",
+          "5"
+        ],
+        [
+          "8",
+          "8",
+          "8",
+          "8",
+          "8"
+        ]
+      ],
+      "icon": "assets/weapons/w-cosmic-ripples.webp"
+    },
+    {
+      "name": "Daybreaker's Spine",
+      "rarity": 5,
+      "type": "Gauntlets",
+      "id": "21040056",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. After dealing Basic Attack DMG, the wielder gains {1} Spectro DMG Bonus for 4s. Each time after the wielder inflicts Tune Strain - Shifting on the target, they gain {1} Basic Attack DMG Amplification and their Basic Attack DMG ignores {2} of the target's DEF for 6s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-daybreaker-s-spine.webp"
+    },
+    {
+      "name": "Defier's Thorn",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020056",
+      "atk90": 413,
+      "stat": "HP",
+      "statValue90": 72.2,
+      "source": "Rate-up",
+      "effect": "Max HP is increased by {0}. 15s after casting Intro Skill or Basic Attacks, ignores {1} of the target's DEF when dealing damage. If the target has at least 1 stack of Aero Erosion, the DMG taken by the target is Amplified by {2}.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ],
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35",
+          "40%"
+        ]
+      ],
+      "icon": "assets/weapons/w-defier-s-thorn.webp"
+    },
+    {
+      "name": "Emerald of Genesis",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020015",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Permanent Convene",
+      "effect": "Increases Energy Regen by {0}. When Resonance Skill is released, increases ATK by {1}, stacking up to 2 time(s). This effect lasts for 10s.",
+      "ranks": [
+        [
+          "12.8%",
+          "16%",
+          "19.2%",
+          "22.4%",
+          "25.6%"
+        ],
+        [
+          "6%",
+          "7.5%",
+          "9%",
+          "10.5%",
+          "12%"
+        ]
+      ],
+      "icon": "assets/weapons/w-emerald-of-genesis.webp"
+    },
+    {
+      "name": "Emerald Sentence",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020066",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Rate-up",
+      "effect": "ATK is increased by {0}. Casting Echo Skill within 10s after casting Intro Skill or Basic Attack grants 1 stack of Bamboo Cleaver, which grants {1} Heavy Attack DMG Bonus to the wielder. This effect can be triggered by Echoes of the same name once only, stacking up to 2 times, lasting for 12s. Casting Echo Skill at max stacks does not reset the duration. This effect can be triggered once every 10s and ends early if the wielder is switched off the field. Casting Intro Skill grants {2} Echo Skill DMG Bonus to all Resonators in the team for 30s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "30%",
+          "37.5%",
+          "45%",
+          "52.5%",
+          "60%"
+        ],
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ]
+      ],
+      "icon": "assets/weapons/w-emerald-sentence.webp"
+    },
+    {
+      "name": "Everbright Polestar",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020076",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Rate-up",
+      "effect": "Increases All-Attribute DMG Bonus by {0}. When inflicting Tune Rupture - Shifting or Fusion Burst, the wielder's Resonance Liberation DMG ignores {1} DEF and {2} Fusion RES on targets for 8s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "32%",
+          "40%",
+          "48%",
+          "56%",
+          "64%"
+        ],
+        [
+          "10%",
+          "15%",
+          "20%",
+          "25%",
+          "30%"
+        ]
+      ],
+      "icon": "assets/weapons/w-everbright-polestar.webp"
+    },
+    {
+      "name": "Firstlight's Herald",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050096",
+      "atk90": 413,
+      "stat": "Energy Regen",
+      "statValue90": 77.04,
+      "source": "",
+      "effect": "Increases Max HP by {0}. Casting Resonance Liberation restores {1} points of Concerto Energy, triggered once every 20s. Inflicting Glacio Chafe grants Snow Taint for 6s. Applying healing grants Ripples for 6s. If the wielder has done both while on the field, the next Outro Skill grants both effects for 6s. When the wielder has both Snow Taint and Ripples, the ATK of all nearby Resonators in the team is increased by {2}. Effects of the same name do not stack.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ],
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ]
+      ],
+      "icon": "assets/weapons/w-firstlight-s-herald.webp"
+    },
+    {
+      "name": "Forged Dwarf Star",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050076",
+      "atk90": 500,
+      "stat": "CRIT Rate",
+      "statValue90": 36,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. After the wielder inflicts Fusion Burst or Tune Strain - Shifting on the target, their Resonance Liberation DMG Bonus is increased by {1} for 5s. While this effect lasts, after Resonators in the team inflict Fusion Burst or Tune Strain - Shifting, their ATK is increased by {2} for 15s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "36%",
+          "45%",
+          "54%",
+          "63%",
+          "72%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-forged-dwarf-star.webp"
+    },
+    {
+      "name": "Freeze Frame",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050086",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.2,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. After inflicting Glacio Chafe on the target, the wielder gains {1} Glacio DMG Bonus for 12s, and all Resonators in the team gain {2} ATK increase for 30s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "30%",
+          "37.5%",
+          "45%",
+          "52.5%",
+          "60%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-freeze-frame.webp"
+    },
+    {
+      "name": "Frostburn",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020086",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Rate-up",
+      "effect": "ATK is increased by {0}. When the wielder applies Glacio Chafe, Glacio DMG is Amplified by {1}, and Resonance Liberation DMG ignores {2} of the target's DEF. If the wielder is the active Resonator in the team, Glacio Chafe DMG dealt to all targets within a certain range is Amplified by {3} for 6s. This effect can be triggered up to 1 time every 0.1s. Only the strongest effect of the same name applies.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "28%",
+          "35%",
+          "42%",
+          "49%",
+          "56%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ],
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ]
+      ],
+      "icon": "assets/weapons/w-frostburn.webp"
+    },
+    {
+      "name": "Kumokiri",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010056",
+      "atk90": 500,
+      "stat": "CRIT Rate",
+      "statValue90": 36,
+      "source": "Rate-up",
+      "effect": "ATK is increased by {0}. When the wielder casts Intro Skill or inflicts Negative Statuses, they gain {1} Resonance Liberation DMG Bonus, stacking up to 3 times for 15s. At max stacks, when Resonators in the team inflict Negative Statuses, they gain  {2} All-Attribute DMG Bonus for 15s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-kumokiri.webp"
+    },
+    {
+      "name": "Laser Shearer",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020045",
+      "atk90": 587,
+      "stat": "Energy Regen",
+      "statValue90": 38.8,
+      "source": "Permanent Convene",
+      "effect": "Increases ATK by {0}. Dealing damage to targets under Tune Strain: Interfered grants {1} Resonance Skill Bonus for 3s. Retriggering the effect resets its duration.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "24%",
+          "27%",
+          "30%",
+          "33%",
+          "36%"
+        ]
+      ],
+      "icon": "assets/weapons/w-laser-shearer.webp"
+    },
+    {
+      "name": "Lethean Elegy",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050066",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Rate-up",
+      "effect": "ATK is increased by {0}. Within 12s after dealing Echo Skill DMG, gain {1} Resonance Skill DMG Bonus and {1} Echo Skill DMG Amplification, and ignore {2} of the target's DEF when dealing damage.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "32%",
+          "40%",
+          "48%",
+          "56%",
+          "64%"
+        ],
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-lethean-elegy.webp"
+    },
+    {
+      "name": "Luminous Hymn",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050046",
+      "atk90": 500,
+      "stat": "CRIT Rate",
+      "statValue90": 36,
+      "source": "Rate-up",
+      "effect": "Increase ATK by {0}. Dealing DMG to targets with Spectro Frazzle grants the wielder {1} Basic Attack DMG Bonus and {1} Heavy Attack DMG Bonus, stacking up to 3 times for 6s. Casting Outro Skill Amplifies the Spectro Frazzle DMG on targets around the active Resonator by {2} for 30s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "14%",
+          "17.5%",
+          "21%",
+          "24.5%",
+          "28%"
+        ],
+        [
+          "30%",
+          "37.5%",
+          "45%",
+          "52.5%",
+          "60%"
+        ]
+      ],
+      "icon": "assets/weapons/w-luminous-hymn.webp"
+    },
+    {
+      "name": "Lustrous Razor",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010015",
+      "atk90": 587,
+      "stat": "ATK",
+      "statValue90": 36.4,
+      "source": "Permanent Convene",
+      "effect": "Increases Energy Regen by {0}. When Resonance Skill is released, increases Resonance Liberation DMG by {1}, stacking up to {2} times. This effect lasts for {3}s.",
+      "ranks": [
+        [
+          "12.8%",
+          "16%",
+          "19.2%",
+          "22.4%",
+          "25.6%"
+        ],
+        [
+          "7%",
+          "8.75%",
+          "10.5%",
+          "12.5%",
+          "14%"
+        ],
+        [
+          "3",
+          "3",
+          "3",
+          "3",
+          "3"
+        ],
+        [
+          "12",
+          "12",
+          "12",
+          "12",
+          "12"
+        ]
+      ],
+      "icon": "assets/weapons/w-lustrous-razor.webp"
+    },
+    {
+      "name": "Lux & Umbra",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030036",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Rate-up",
+      "effect": "ATK is increased by {0}. Upon dealing Echo Skill DMG, gain {1} Heavy Attack DMG Amplification for 6s. Upon dealing Heavy Attack DMG, gain {1} Echo Skill DMG Amplification for 6s. DMG Amplification on each attack is capped at {1}. While both effects are active, dealing damage ignores {2} of the target's DEF.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ],
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-lux-umbra.webp"
+    },
+    {
+      "name": "Moongazer's Sigil",
+      "rarity": 5,
+      "type": "Gauntlets",
+      "id": "21040046",
+      "atk90": 500,
+      "stat": "CRIT Rate",
+      "statValue90": 36,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Casting Intro Skill or Resonance Liberation increases Resonance Liberation DMG by {1} for 15s. Obtaining Shield allows Resonance Liberation DMG to ignore {2} of the target's DEF for 7s, stacking up to 5 times. This effect is triggered once every 0.5s. Upon casting Intro Skill, this effect reaches max stacks immediately, lasting for 3s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ],
+        [
+          "7.2%",
+          "8.4%",
+          "9.6%",
+          "10.8%",
+          "12%"
+        ]
+      ],
+      "icon": "assets/weapons/w-moongazer-s-sigil.webp"
+    },
+    {
+      "name": "Phasic Homogenizer",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030045",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Permanent Convene",
+      "effect": "Increases ATK by {0}. When a Resonator in the team casts a Tune Break skill, it grants {1} All-Attribute DMG Bonus to the wielder for 14s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "20%",
+          "22.5%",
+          "25%",
+          "27.5%",
+          "30%"
+        ]
+      ],
+      "icon": "assets/weapons/w-phasic-homogenizer.webp"
+    },
+    {
+      "name": "Pulsation Bracer",
+      "rarity": 5,
+      "type": "Gauntlets",
+      "id": "21040045",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Permanent Convene",
+      "effect": "Increases ATK by {0}. Dealing damage to targets under Tune Strain: Interfered grants {1} Basic Attack DMG Bonus for 3s, stacking up to 4 times. This effect can be triggered once every 0.5s. Retriggering the effect resets its duration.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "6%",
+          "6.7%",
+          "7.5%",
+          "8.2%",
+          "9%"
+        ]
+      ],
+      "icon": "assets/weapons/w-pulsation-bracer.webp"
+    },
+    {
+      "name": "Radiance Cleaver",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010045",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Permanent Convene",
+      "effect": "Increases ATK by {0}. Dealing damage to targets under Tune Strain: Interfered grants {1} Resonance Liberation Bonus for 3s. Retriggering the effect resets its duration.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "24%",
+          "27%",
+          "30%",
+          "33%",
+          "36%"
+        ]
+      ],
+      "icon": "assets/weapons/w-radiance-cleaver.webp"
+    },
+    {
+      "name": "Red Spring",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020026",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Gacha",
+      "effect": "Increase ATK by {0}. When dealing Basic Attack DMG, the wielder gains {1} Basic Attack DMG Bonus for 14s. This effect can be triggered once per second, stacking up to 3 times. When the wielder's Concerto Energy is consumed, gain {2} Basic DMG Bonus for 10s. This effect can be triggered once per second and ends when the wielder is switched off the field.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ],
+        [
+          "40%",
+          "50%",
+          "60%",
+          "70%",
+          "80%"
+        ]
+      ],
+      "icon": "assets/weapons/w-red-spring.webp"
+    },
+    {
+      "name": "Rime-Draped Sprouts",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050026",
+      "atk90": 500,
+      "stat": "CRIT DMG",
+      "statValue90": 72,
+      "source": "Gacha",
+      "effect": "Increases ATK by {0}. Using Resonance Skill gives the equipped Resonator {0} Basic Attack DMG Bonus for 6s, stacking up to 3 times. When casting Outro Skill with 3 stacks, consume all stacks to give {1} DMG Bonus to the off-field Basic Attacks performed by the equipped Resonator, lasting for 27s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "52%",
+          "65%",
+          "78%",
+          "91%",
+          "104%"
+        ]
+      ],
+      "icon": "assets/weapons/w-rime-draped-sprouts.webp"
+    },
+    {
+      "name": "Skull Thrasher",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030066",
+      "atk90": 500,
+      "stat": "CRIT DMG",
+      "statValue90": 72,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Casting Intro Skill grants {1} Basic Attack DMG Bonus to the wielder for 14s. Inflicting Hack - Shifting grants {0} Basic Attack DMG Bonus to the wielder for 14s, and increases the ATK of Resonators in the team by {1} for 30s. Effects of the same name do not stack.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-skull-thrasher.webp"
+    },
+    {
+      "name": "Solsworn Ciphers",
+      "rarity": 5,
+      "type": "Gauntlets",
+      "id": "21040066",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Casting Intro Skill or Echo Skill grants {1} Echo Skill DMG Amplification for 15s. When dealing Echo Skill DMG, Aero DMG ignores {2} of the target's DEF for 6s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "32%",
+          "40%",
+          "48%",
+          "56%",
+          "64%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-solsworn-ciphers.webp"
+    },
+    {
+      "name": "Spectral Trigger",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030056",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Casting Resonance Skill grants 20% Spectro DMG Bonus to the wielder for 14s, stacking up to 2 times. Inflicting Hack - Shifting grants {1} Heavy Attack DMG Amplification to the wielder for 14s, during which Heavy Attack DMG ignores {2} of the target's DEF.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "30%",
+          "37.5%",
+          "45%",
+          "52.5%",
+          "60%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-spectral-trigger.webp"
+    },
+    {
+      "name": "Spectrum Blaster",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030046",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Casting Intro Skill or hitting the target with Basic Attack increases the wielder's Basic Attack DMG by {1} for 4s. Each time the wielder inflicts Tune Rupture - Shifting or Tune Strain - Shifting during Basic Attacks, all DMG dealt by Resonators in the team is increased by {2} for 30s, up to 3 stacks. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "36%",
+          "45%",
+          "54%",
+          "63%",
+          "72%"
+        ],
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-spectrum-blaster.webp"
+    },
+    {
+      "name": "Starfield Calibrator",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010066",
+      "atk90": 414,
+      "stat": "Energy Regen",
+      "statValue90": 77,
+      "source": "Rate-up",
+      "effect": "Increases DEF by {0}. Casting Resonance Liberation restores {1} points of Concerto Energy. This effect can be triggered once every 20s. When the wielder heals Resonators, increases Crit. DMG of all nearby Resonators in the team by {2} for 4s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "16%",
+          "20%",
+          "24%",
+          "28%",
+          "32%"
+        ],
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ],
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ]
+      ],
+      "icon": "assets/weapons/w-starfield-calibrator.webp"
+    },
+    {
+      "name": "Static Mist",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030015",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Permanent Convene",
+      "effect": "Increases Energy Regen by {0}. When Outro Skill is released, increases the switched-in Resonator's ATK by {1}, stacking up to 1 time(s). This effect lasts for 14s.",
+      "ranks": [
+        [
+          "12.8%",
+          "16%",
+          "19.2%",
+          "22.4%",
+          "25.6%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-static-mist.webp"
+    },
+    {
+      "name": "Stellar Symphony",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050036",
+      "atk90": 412,
+      "stat": "Energy Regen",
+      "statValue90": 77,
+      "source": "Gacha",
+      "effect": "Increase HP by {0}. Restore {1} Concerto Energy when casting Resonance Liberation. This effect can be triggered 1 time(s) every 20s. When casting Resonance Skill that heals, increase nearby party members' ATK by {2} for 30s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ],
+        [
+          "14%",
+          "17.5%",
+          "21%",
+          "24.5%",
+          "28%"
+        ]
+      ],
+      "icon": "assets/weapons/w-stellar-symphony.webp"
+    },
+    {
+      "name": "Stringmaster",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050016",
+      "atk90": 500,
+      "stat": "CRIT Rate",
+      "statValue90": 36,
+      "source": "Limited",
+      "effect": "Increases the DMG Bonus by {0}. When dealing Resonance Skill DMG, increases ATK by {1}, stacking up to 2. This effect lasts for 5s. When the equipped Resonator is not on the field, increases their ATK by an additional {2}.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ]
+      ],
+      "icon": "assets/weapons/w-stringmaster.webp"
+    },
+    {
+      "name": "The Last Dance",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030016",
+      "atk90": 500,
+      "stat": "CRIT DMG",
+      "statValue90": 72,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Every time Intro Skill or Resonance Liberation is cast, Resonance Skill DMG Bonus increases by {1} for 5s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "48%",
+          "60%",
+          "72%",
+          "84%",
+          "96%"
+        ]
+      ],
+      "icon": "assets/weapons/w-the-last-dance.webp"
+    },
+    {
+      "name": "Thunderflare Dominion",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010046",
+      "atk90": 675,
+      "stat": "CRIT Rate",
+      "statValue90": 12.1,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Casting Intro Skill or Resonance Skill increases Heavy Attack DMG by {1} for 15s. Obtaining Shield allows Heavy Attack DMG to ignore {2} of the target's DEF for 7s, stacking up to 5 times. This effect is triggered once every 0.5s",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ],
+        [
+          "7.2%",
+          "8.4%",
+          "9.6%",
+          "10.8%",
+          "12%"
+        ]
+      ],
+      "icon": "assets/weapons/w-thunderflare-dominion.webp"
+    },
+    {
+      "name": "Tragicomedy",
+      "rarity": 5,
+      "type": "Gauntlets",
+      "id": "21040026",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Every time Basic Attack or Intro Skill is cast, Heavy Attack DMG Bonus increases by {1} for 3s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "48%",
+          "60%",
+          "72%",
+          "84%",
+          "96%"
+        ]
+      ],
+      "icon": "assets/weapons/w-tragicomedy.webp"
+    },
+    {
+      "name": "Unflickering Valor",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020036",
+      "atk90": 415,
+      "stat": "Energy Regen",
+      "statValue90": 77,
+      "source": "Rate-up",
+      "effect": "Increase Crit. Rate by {0}. Casting Resonance Liberation gives {1} Basic Attack DMG Bonus for 10s. Dealing Basic Attack DMG gives {1} Basic Attack DMG Bonus for 4s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-unflickering-valor.webp"
+    },
+    {
+      "name": "Verdant Summit",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010016",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Limited",
+      "effect": "Increases the DMG Bonus of all Resonance Attributes by {0}. Every time Intro Skill or Resonance Liberation is cast, increases Heavy Attack DMG Bonus by {1}, stacking up to 2 time(s). This effect lasts for 14s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-verdant-summit.webp"
+    },
+    {
+      "name": "Verity's Handle",
+      "rarity": 5,
+      "type": "Gauntlets",
+      "id": "21040016",
+      "atk90": 587,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "Gacha",
+      "effect": "Gain {0} Attribute DMG Bonus. When using Resonance Liberation, the wielder gains {1} Resonance Liberation DMG Bonus for 8s. This effect can be extended by 5 seconds each time Resonance Skills are cast, up to 3 times.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "48%",
+          "60%",
+          "72%",
+          "84%",
+          "94%"
+        ]
+      ],
+      "icon": "assets/weapons/w-verity-s-handle.webp"
+    },
+    {
+      "name": "Whispers of Sirens",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050056",
+      "atk90": 500,
+      "stat": "CRIT DMG",
+      "statValue90": 72,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Casting Echo Skill within 10s after casting Intro Skill or Basic Attacks grants 1 stacks of Gentle Dream. Echoes with the same name can only trigger this effect once, stacking up to 2 times, lasting for 10s. When reaching 2 stacks, casting Echo Skill no longer resets the duration of this effect. This effect activates up to once per 10s. Switching to another Resonator ends this effect early.<br />With 1 stacks: Grants {1} Basic Attack DMG Bonus.<br />With 2 stacks: Ignores {0} of the target's Havoc RES.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "40%",
+          "50%",
+          "60%",
+          "70%",
+          "80%"
+        ]
+      ],
+      "icon": "assets/weapons/w-whispers-of-sirens.webp"
+    },
+    {
+      "name": "Wildfire Mark",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010036",
+      "atk90": 587,
+      "stat": "CRIT DMG",
+      "statValue90": 48.6,
+      "source": "Rate-up",
+      "effect": "Increases ATK by {0}. Performing Intro Skill or Resonance Liberation increases Resonance Liberation DMG by {1} for 6s. Dealing Heavy Attack DMG extends this effect by 4s, up to 1 time. Each successful extension gives {1} Fusion DMG Bonus to all Resonators in the team for 30s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-wildfire-mark.webp"
+    },
+    {
+      "name": "Woodland Aria",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030026",
+      "atk90": 500,
+      "stat": "CRIT Rate",
+      "statValue90": 36,
+      "source": "Rate-up",
+      "effect": "ATK is increased by {0}. Inflicting Aero Erosion on the target gives {1} Aero DMG Bonus for 10s. Hitting targets with Aero Erosion reduces their Aero RES by {2} for 20s. Effects of the same name cannot be stacked.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ],
+        [
+          "10%",
+          "11.5%",
+          "13%",
+          "14.5%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-woodland-aria.webp"
+    },
+    {
+      "name": "Aether Strike",
+      "rarity": 4,
+      "type": "Gauntlets",
+      "id": "21040104",
+      "atk90": 412,
+      "stat": "CRIT DMG",
+      "statValue90": 40.5,
+      "source": "Battle Pass",
+      "effect": "Casting Resonance Liberation increases ATK by {0} and grants {1} Resonance Liberation DMG Bonus for 15s.",
+      "ranks": [
+        [
+          "7.2%",
+          "11.1%",
+          "15.1%",
+          "19%",
+          "23%"
+        ],
+        [
+          "10.8%",
+          "16.7%",
+          "22.6%",
+          "28.6%",
+          "34.5%"
+        ]
+      ],
+      "icon": "assets/weapons/w-aether-strike.webp"
+    },
+    {
+      "name": "Amity Accord",
+      "rarity": 4,
+      "type": "Gauntlets",
+      "id": "21040044",
+      "atk90": 337,
+      "stat": "DEF",
+      "statValue90": 61.5,
+      "source": "",
+      "effect": "When Intro Skill is released, increases Resonance Liberation DMG Bonus by {0}, lasting for {1}s.",
+      "ranks": [
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ],
+        [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+        ]
+      ],
+      "icon": "assets/weapons/w-amity-accord.webp"
+    },
+    {
+      "name": "Augment",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050074",
+      "atk90": 412,
+      "stat": "CRIT Rate",
+      "statValue90": 20.2,
+      "source": "Pioneer Podcast",
+      "effect": "When Resonance Liberation is released, increases the caster's ATK by {0}, lasting for 15s.",
+      "ranks": [
+        [
+          "15%",
+          "23.25%",
+          "31.5%",
+          "39.75%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-augment.webp"
+    },
+    {
+      "name": "Aureate Zenith",
+      "rarity": 4,
+      "type": "Broadblade",
+      "id": "21010104",
+      "atk90": 412,
+      "stat": "CRIT DMG",
+      "statValue90": 40.5,
+      "source": "Battle Pass",
+      "effect": "Casting Resonance Liberation increases ATK by {0} and grants {1} Heavy Attack DMG Bonus for 15s.",
+      "ranks": [
+        [
+          "7.2%",
+          "11.1%",
+          "15.1%",
+          "19%",
+          "23%"
+        ],
+        [
+          "10.8%",
+          "16.7%",
+          "22.6%",
+          "28.6%",
+          "34.5%"
+        ]
+      ],
+      "icon": "assets/weapons/w-aureate-zenith.webp"
+    },
+    {
+      "name": "Autumntrace",
+      "rarity": 4,
+      "type": "Broadblade",
+      "id": "21010074",
+      "atk90": 412,
+      "stat": "CRIT Rate",
+      "statValue90": 20.2,
+      "source": "Pioneer Podcast",
+      "effect": "Increases ATK by {0} upon dealing Basic Attack DMG or Heavy Attack DMG, stacking up to 5 time(s). This effect lasts for 7s and can be triggered 1 time(s) every 1s.",
+      "ranks": [
+        [
+          "4%",
+          "6%",
+          "8.4%",
+          "10.6%",
+          "12.8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-autumntrace.webp"
+    },
+    {
+      "name": "Broadblade#41",
+      "rarity": 4,
+      "type": "Broadblade",
+      "id": "21010034",
+      "atk90": 412,
+      "stat": "Energy Regen",
+      "statValue90": 32.3,
+      "source": "Synthesis",
+      "effect": "When the Resonator's HP is above 80%, increases ATK by {0}. When the Resonator's HP is below {1}, restores their HP by {2}, for dealing Basic Attack DMG or Heavy Attack DMG. This effect can be triggered 1 time(s) every 8s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "40%",
+          "50%",
+          "60%",
+          "70%",
+          "80%"
+        ],
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-broadblade-41.webp"
+    },
+    {
+      "name": "Cadenza",
+      "rarity": 4,
+      "type": "Pistols",
+      "id": "21030024",
+      "atk90": 337,
+      "stat": "Energy Regen",
+      "statValue90": 51.8,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Concerto Energy by {0}. This effect can be triggered 1 time every 20s.",
+      "ranks": [
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ]
+      ],
+      "icon": "assets/weapons/w-cadenza.webp"
+    },
+    {
+      "name": "Call of the Abyss",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050017",
+      "atk90": 338,
+      "stat": "Energy Regen",
+      "statValue90": 51.8,
+      "source": "Event",
+      "effect": "Casting Resonance Liberation increases the Resonator's Healing Bonus by {0} for 15s.",
+      "ranks": [
+        [
+          "16%",
+          "20%",
+          "24%",
+          "28%",
+          "32%"
+        ]
+      ],
+      "icon": "assets/weapons/w-call-of-the-abyss.webp"
+    },
+    {
+      "name": "Celestial Spiral",
+      "rarity": 4,
+      "type": "Gauntlets",
+      "id": "21040084",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Gacha",
+      "effect": "Casting the Resonance Skill grants {0} Resonance Energy and increases ATK by {1}, lasting for 16s. This effect can be triggered once every 20s.",
+      "ranks": [
+        [
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-celestial-spiral.webp"
+    },
+    {
+      "name": "Comet Flare",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050064",
+      "atk90": 412,
+      "stat": "HP",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "When hitting a target with Basic Attacks or Heavy Attacks, increases Healing Bonus by {0}, stacking up to 3 time(s). This effect lasts for 8s and can be triggered 1 time(s) every 0.6s.",
+      "ranks": [
+        [
+          "3%",
+          "3.5%",
+          "4%",
+          "4.5%",
+          "5%"
+        ]
+      ],
+      "icon": "assets/weapons/w-comet-flare.webp"
+    },
+    {
+      "name": "Commando of Conviction",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020044",
+      "atk90": 412,
+      "stat": "ATK",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "When Intro Skill is released, increases ATK by {0}, lasting for {1}.",
+      "ranks": [
+        [
+          "15%",
+          "18.75%",
+          "22.5%",
+          "26.25%",
+          "30%"
+        ],
+        [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+        ]
+      ],
+      "icon": "assets/weapons/w-commando-of-conviction.webp"
+    },
+    {
+      "name": "Dauntless Evernight",
+      "rarity": 4,
+      "type": "Broadblade",
+      "id": "21010044",
+      "atk90": 337,
+      "stat": "DEF",
+      "statValue90": 61.5,
+      "source": "",
+      "effect": "When Intro Skill is released, increases ATK by {0} and DEF by {1}, lasting for {2}s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ],
+        [
+          "15%",
+          "18.75%",
+          "22.5%",
+          "6.25%",
+          "30%"
+        ],
+        [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+        ]
+      ],
+      "icon": "assets/weapons/w-dauntless-evernight.webp"
+    },
+    {
+      "name": "Discord",
+      "rarity": 4,
+      "type": "Broadblade",
+      "id": "21010024",
+      "atk90": 337,
+      "stat": "Energy Regen",
+      "statValue90": 51.8,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Concerto Energy by {0}. This effect can be triggered 1 time every 20s.",
+      "ranks": [
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ]
+      ],
+      "icon": "assets/weapons/w-discord.webp"
+    },
+    {
+      "name": "Endless Collapse",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020084",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Gacha",
+      "effect": "Casting the Resonance Skill grants {0} Resonance Energy and increases ATK by {1}, lasting for 16s. This effect can be triggered once every 20s.",
+      "ranks": [
+        [
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-endless-collapse.webp"
+    },
+    {
+      "name": "Fables of Wisdom",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020094",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Crafting",
+      "effect": "Dealing DMG to enemies with Negative Statuses increases the wielder's ATK by {0} for 10s. This effect can be triggered 1 time per second, stackable up to 4 times.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-fables-of-wisdom.webp"
+    },
+    {
+      "name": "Feather Edge",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020104",
+      "atk90": 412,
+      "stat": "CRIT Rate",
+      "statValue90": 20.3,
+      "source": "Battle Pass",
+      "effect": "Casting Resonance Liberation increases ATK by {0} and grants {1} Resonance Liberation DMG Bonus for 15s.",
+      "ranks": [
+        [
+          "7.2%",
+          "11.1%",
+          "15.1%",
+          "19%",
+          "23%"
+        ],
+        [
+          "10.8%",
+          "16.7%",
+          "22.6%",
+          "28.6%",
+          "34.5%"
+        ]
+      ],
+      "icon": "assets/weapons/w-feather-edge.webp"
+    },
+    {
+      "name": "Fusion Accretion",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050084",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Gacha",
+      "effect": "Casting the Resonance Skill grants {0} Resonance Energy and increases ATK by {1}, lasting for 16s. This effect can be triggered once every 20s.",
+      "ranks": [
+        [
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-fusion-accretion.webp"
+    },
+    {
+      "name": "Gauntlets#21D",
+      "rarity": 4,
+      "type": "Gauntlets",
+      "id": "21040034",
+      "atk90": 387,
+      "stat": "Energy Regen",
+      "statValue90": 38.8,
+      "source": "Synthesis",
+      "effect": "When the Resonator dashes or dodges, increases ATK by {0}. Increases Counter Attack DMG by {1}, lasting for 8s. When Counter Attack is performed, restores the Resonator's HP by {2}. This effect can be triggered 1 time(s) every 6s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ],
+        [
+          "50%",
+          "62.5%",
+          "75%",
+          "87.5%",
+          "100%"
+        ],
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-gauntlets-21d.webp"
+    },
+    {
+      "name": "Helios Cleaver",
+      "rarity": 4,
+      "type": "Broadblade",
+      "id": "21010064",
+      "atk90": 412,
+      "stat": "ATK",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "Within {0}s after Resonance Skill is cast, increases ATK by {2} every 2s, stacking up to 4 time(s). This effect can be triggered 1 time(s) every 12s. When the number of stacks reaches 4, all stacks will be reset within 6s.",
+      "ranks": [
+        [
+          "12",
+          "12",
+          "12",
+          "12",
+          "12"
+        ],
+        null,
+        [
+          "3%",
+          "3.75%",
+          "4.5%",
+          "5.25%",
+          "6%"
+        ]
+      ],
+      "icon": "assets/weapons/w-helios-cleaver.webp"
+    },
+    {
+      "name": "Hollow Mirage",
+      "rarity": 4,
+      "type": "Gauntlets",
+      "id": "21040064",
+      "atk90": 412,
+      "stat": "ATK",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "When Resonance Liberation is released, grants 3 stack(s) of Iron Armor. Each stack increases ATK and DEF by {0}, stacking up to 3 time(s). When the Resonator takes damage, reduces the number of stacks by 1.",
+      "ranks": [
+        [
+          "3%",
+          "3.5%",
+          "4%",
+          "4.5%",
+          "5%"
+        ]
+      ],
+      "icon": "assets/weapons/w-hollow-mirage.webp"
+    },
+    {
+      "name": "Jinzhou Keeper",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050044",
+      "atk90": 387,
+      "stat": "ATK",
+      "statValue90": 36.4,
+      "source": "",
+      "effect": "When Intro Skill is released, increases the caster's ATK by {0} and HP by {1}, lasting for {2}s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ],
+        [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+        ]
+      ],
+      "icon": "assets/weapons/w-jinzhou-keeper.webp"
+    },
+    {
+      "name": "Legend of Drunken Hero",
+      "rarity": 4,
+      "type": "Gauntlets",
+      "id": "21040094",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Crafting",
+      "effect": "Dealing DMG to enemies with Negative Statuses increases the wielder's ATK by {0} for 10s. This effect can be triggered 1 time per second, stackable up to 4 times.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-legend-of-drunken-hero.webp"
+    },
+    {
+      "name": "Lumingloss",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020074",
+      "atk90": 387,
+      "stat": "ATK",
+      "statValue90": 36.4,
+      "source": "Pioneer Podcast",
+      "effect": "When Resonance Skill is released, increases Basic Attack DMG and Heavy Attack DMG by {0}, stacking up to 1 time(s). This effect lasts for 10s and can be triggered 1 time(s) every 1s.",
+      "ranks": [
+        [
+          "20%",
+          "31%",
+          "42%",
+          "53%",
+          "64%"
+        ]
+      ],
+      "icon": "assets/weapons/w-lumingloss.webp"
+    },
+    {
+      "name": "Lunar Cutter",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020064",
+      "atk90": 412,
+      "stat": "ATK",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "Equipped Resonator gains 6 stack(s) of Oath upon entering the battlefield. Each stack increases ATK by {0}, up to 6 stacks. This effect can be triggered 1 time(s) every 12s. Oath reduces by 1 stack(s) every 2s. Equipped Resonator gains an additional <b>6</b> stack(s) of Oath upon defeating an enemy.",
+      "ranks": [
+        [
+          "2%",
+          "2.5%",
+          "3%",
+          "3.5%",
+          "4%"
+        ]
+      ],
+      "icon": "assets/weapons/w-lunar-cutter.webp"
+    },
+    {
+      "name": "Marcato",
+      "rarity": 4,
+      "type": "Gauntlets",
+      "id": "21040024",
+      "atk90": 337,
+      "stat": "Energy Regen",
+      "statValue90": 51.8,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Concerto Energy by {0}. This effect can be triggered 1 time every 20s.",
+      "ranks": [
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ]
+      ],
+      "icon": "assets/weapons/w-marcato.webp"
+    },
+    {
+      "name": "Meditations on Mercy",
+      "rarity": 4,
+      "type": "Broadblade",
+      "id": "21010094",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Crafting",
+      "effect": "Dealing DMG to enemies with Negative Statuses increases the wielder's ATK by {0} for 10s. This effect can be triggered 1 time per second, stackable up to 4 times.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-meditations-on-mercy.webp"
+    },
+    {
+      "name": "Novaburst",
+      "rarity": 4,
+      "type": "Pistols",
+      "id": "21030064",
+      "atk90": 412,
+      "stat": "ATK",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "When the Resonator dashes or dodges, increases ATK by {0}, stacking up to <b>3</b> time(s). This effect lasts for <b>8</b>s.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-novaburst.webp"
+    },
+    {
+      "name": "Ocean's Gift",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050027",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Event",
+      "effect": "Dealing DMG to enemies with Spectro Frazzle increases the wielder's Spectro DMG by {0}, gaining 1 stack per second for 6s, stacking up to 4 times.",
+      "ranks": [
+        [
+          "6%",
+          "7%",
+          "8%",
+          "9%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-ocean-s-gift.webp"
+    },
+    {
+      "name": "Overture",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020024",
+      "atk90": 337,
+      "stat": "Energy Regen",
+      "statValue90": 51.8,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Concerto Energy by {0}. This effect can be triggered 1 time every 20s.",
+      "ranks": [
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ]
+      ],
+      "icon": "assets/weapons/w-overture.webp"
+    },
+    {
+      "name": "Pistols#26",
+      "rarity": 4,
+      "type": "Pistols",
+      "id": "21030034",
+      "atk90": 387,
+      "stat": "ATK",
+      "statValue90": 36.4,
+      "source": "Synthesis",
+      "effect": "When the Resonator takes no damage, increases ATK by {0} every 5s, stacking up to 2 time(s). This effect lasts for 8s. When the Resonator takes damage, reduces the number of stacks by 1 and restores their HP by {1}.",
+      "ranks": [
+        [
+          "6%",
+          "7.5%",
+          "9%",
+          "10.5%",
+          "12%"
+        ],
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-pistols-26.webp"
+    },
+    {
+      "name": "Radiant Dawn",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050104",
+      "atk90": 412,
+      "stat": "CRIT DMG",
+      "statValue90": 40.5,
+      "source": "Battle Pass",
+      "effect": "Casting Resonance Skill increases ATK by {0} and grants {0} Basic Attack DMG Bonus for 10s.",
+      "ranks": [
+        [
+          "9%",
+          "13.9%",
+          "18.9%",
+          "23.8%",
+          "28.8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-radiant-dawn.webp"
+    },
+    {
+      "name": "Rectifier#25",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050034",
+      "atk90": 337,
+      "stat": "Energy Regen",
+      "statValue90": 51.8,
+      "source": "Synthesis",
+      "effect": "When Resonance Skill is released, if the Resonator's HP is below 60%, restores their HP by {0}. This effect can be triggered 1 time(s) every 8s; if the Resonator's HP is above 60%, increases ATK by {1}, lasting for 10s.",
+      "ranks": [
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ],
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ]
+      ],
+      "icon": "assets/weapons/w-rectifier-25.webp"
+    },
+    {
+      "name": "Relativistic Jet",
+      "rarity": 4,
+      "type": "Pistols",
+      "id": "21030084",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Gacha",
+      "effect": "Casting the Resonance Skill grants {0} Resonance Energy and increases ATK by {1}, lasting for 16s. This effect can be triggered once every 20s.",
+      "ranks": [
+        [
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-relativistic-jet.webp"
+    },
+    {
+      "name": "Romance in Farewell",
+      "rarity": 4,
+      "type": "Pistols",
+      "id": "21030094",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Crafting",
+      "effect": "Dealing DMG to enemies with Negative Statuses increases the wielder's ATK by {0} for 10s. This effect can be triggered 1 time per second, stackable up to 4 times.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-romance-in-farewell.webp"
+    },
+    {
+      "name": "Solar Flame",
+      "rarity": 4,
+      "type": "Pistols",
+      "id": "21030104",
+      "atk90": 412,
+      "stat": "CRIT Rate",
+      "statValue90": 20.3,
+      "source": "Battle Pass",
+      "effect": "Dealing Basic Attack or Heavy Attack DMG increases ATK by {0} and grants {0} Heavy Attack DMG Bonus for 7s, stacking up to 4 times. This effect can be triggered 1 time every 1s.",
+      "ranks": [
+        [
+          "2.2%",
+          "3.4%",
+          "4.7%",
+          "5.9%",
+          "7.2%"
+        ]
+      ],
+      "icon": "assets/weapons/w-solar-flame.webp"
+    },
+    {
+      "name": "Somnoire Anchor",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020017",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Event",
+      "effect": "Gain 1 stack of Hiss when dealing damage to the target, with 1 stack generated every 1s. Hiss: each stack increases the wielder's ATK by {0} for 3s, stacking up to 10 times. Switching off the wielder clears all stacks. Gaining 10 stacks increases the wielder's Crit. Rate by {1}.",
+      "ranks": [
+        [
+          "2%",
+          "2.5%",
+          "3%",
+          "3.5%",
+          "4%"
+        ],
+        [
+          "6%",
+          "7.5%",
+          "9%",
+          "10.5%",
+          "12%"
+        ]
+      ],
+      "icon": "assets/weapons/w-somnoire-anchor.webp"
+    },
+    {
+      "name": "Stonard",
+      "rarity": 4,
+      "type": "Gauntlets",
+      "id": "21040074",
+      "atk90": 412,
+      "stat": "CRIT Rate",
+      "statValue90": 20.2,
+      "source": "Pioneer Podcast",
+      "effect": "When Resonance Skill is released, increases the caster's Resonance Liberation DMG Bonus by {0}, lasting for 15s.",
+      "ranks": [
+        [
+          "18%",
+          "27%",
+          "36%",
+          "45%",
+          "54%"
+        ]
+      ],
+      "icon": "assets/weapons/w-stonard.webp"
+    },
+    {
+      "name": "Sword#18",
+      "rarity": 4,
+      "type": "Sword",
+      "id": "21020034",
+      "atk90": 387,
+      "stat": "ATK",
+      "statValue90": 36.4,
+      "source": "Synthesis",
+      "effect": "When Equipped Resonator's HP drops below {0}, increases Heavy Attack DMG by {1} and restores HP by {2} upon dealing Heavy Attack DMG. This effect can be triggered 1 time(s) every 8s.",
+      "ranks": [
+        [
+          "40%",
+          "50%",
+          "60%",
+          "70%",
+          "80%"
+        ],
+        [
+          "18%",
+          "22.5%",
+          "27%",
+          "31.5%",
+          "36%"
+        ],
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-sword-18.webp"
+    },
+    {
+      "name": "Thunderbolt",
+      "rarity": 4,
+      "type": "Pistols",
+      "id": "21030074",
+      "atk90": 387,
+      "stat": "ATK",
+      "statValue90": 36.4,
+      "source": "Pioneer Podcast",
+      "effect": "When hitting a target with Basic Attacks or Heavy Attacks, increases Resonance Skill DMG Bonus by {0}, stacking up to 3 time(s). This effect lasts for 10s and can be triggered 1 time(s) every 1s.",
+      "ranks": [
+        [
+          "7%",
+          "11%",
+          "15%",
+          "19%",
+          "23%"
+        ]
+      ],
+      "icon": "assets/weapons/w-thunderbolt.webp"
+    },
+    {
+      "name": "Undying Flame",
+      "rarity": 4,
+      "type": "Pistols",
+      "id": "21030044",
+      "atk90": 412,
+      "stat": "ATK",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "When Intro Skill is released, increases Resonance Skill DMG Bonus by {0} for {1}s.",
+      "ranks": [
+        [
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%"
+        ],
+        [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+        ]
+      ],
+      "icon": "assets/weapons/w-undying-flame.webp"
+    },
+    {
+      "name": "Variation",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050024",
+      "atk90": 337,
+      "stat": "Energy Regen",
+      "statValue90": 51.8,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Concerto Energy by {0}. This effect can be triggered 1 time every 20s.",
+      "ranks": [
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ]
+      ],
+      "icon": "assets/weapons/w-variation.webp"
+    },
+    {
+      "name": "Waltz in Masquerade",
+      "rarity": 4,
+      "type": "Rectifier",
+      "id": "21050094",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Crafting",
+      "effect": "Dealing DMG to enemies with Negative Statuses increases the wielder's ATK by {0} for 10s. This effect can be triggered 1 time per second, stackable up to 4 times.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-waltz-in-masquerade.webp"
+    },
+    {
+      "name": "Waning Redshift",
+      "rarity": 4,
+      "type": "Broadblade",
+      "id": "21010084",
+      "atk90": 462,
+      "stat": "ATK",
+      "statValue90": 18.2,
+      "source": "Gacha",
+      "effect": "Casting the Resonance Skill grants {0} Resonance Energy and increases ATK by {1}, lasting for 16s. This effect can be triggered once every 20s.",
+      "ranks": [
+        [
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-waning-redshift.webp"
+    },
+    {
+      "name": "Beguiling Melody",
+      "rarity": 3,
+      "type": "Broadblade",
+      "id": "21010063",
+      "atk90": 300,
+      "stat": "ATK",
+      "statValue90": 30.4,
+      "source": "Gacha",
+      "effect": "When Intro Skill is cast, restores {0} Concerto Energy. When Outro Skill is cast, restores {0} Resonance Energy.",
+      "ranks": [
+        [
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ]
+      ],
+      "icon": "assets/weapons/w-beguiling-melody.webp"
+    },
+    {
+      "name": "Broadblade of Night",
+      "rarity": 3,
+      "type": "Broadblade",
+      "id": "21010013",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "When Intro Skill is released, increases ATK by {0}, lasting for 10s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-broadblade-of-night.webp"
+    },
+    {
+      "name": "Broadblade of Voyager",
+      "rarity": 3,
+      "type": "Broadblade",
+      "id": "21010043",
+      "atk90": 300,
+      "stat": "Energy Regen",
+      "statValue90": 32.3,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Resonance Energy by {0}. This effect can be triggered 1 time every 20s.",
+      "ranks": [
+        [
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ]
+      ],
+      "icon": "assets/weapons/w-broadblade-of-voyager.webp"
+    },
+    {
+      "name": "Gauntlets of Night",
+      "rarity": 3,
+      "type": "Gauntlets",
+      "id": "21040013",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "When Intro Skill is released, increases ATK by {0}, lasting for 10s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-gauntlets-of-night.webp"
+    },
+    {
+      "name": "Gauntlets of Voyager",
+      "rarity": 3,
+      "type": "Gauntlets",
+      "id": "21040043",
+      "atk90": 325,
+      "stat": "DEF",
+      "statValue90": 30.7,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Resonance Energy by {0}. This effect can be triggered {2} time(s) every {1}.",
+      "ranks": [
+        [
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ],
+        [
+          "20",
+          "20",
+          "20",
+          "20",
+          "20"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ]
+      ],
+      "icon": "assets/weapons/w-gauntlets-of-voyager.webp"
+    },
+    {
+      "name": "Guardian Broadblade",
+      "rarity": 3,
+      "type": "Broadblade",
+      "id": "21010053",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "The damage of Basic Attack and Heavy Attack is increased by {0}.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ]
+      ],
+      "icon": "assets/weapons/w-guardian-broadblade.webp"
+    },
+    {
+      "name": "Guardian Gauntlets",
+      "rarity": 3,
+      "type": "Gauntlets",
+      "id": "21040053",
+      "atk90": 300,
+      "stat": "DEF",
+      "statValue90": 38.4,
+      "source": "",
+      "effect": "Increases Resonance Liberation DMG Bonus by {0}.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ]
+      ],
+      "icon": "assets/weapons/w-guardian-gauntlets.webp"
+    },
+    {
+      "name": "Guardian Pistols",
+      "rarity": 3,
+      "type": "Pistols",
+      "id": "21030053",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "Increases Resonance Skill DMG Bonus by {0}.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ]
+      ],
+      "icon": "assets/weapons/w-guardian-pistols.webp"
+    },
+    {
+      "name": "Guardian Rectifier",
+      "rarity": 3,
+      "type": "Rectifier",
+      "id": "21050053",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "Increases Basic Attack and Heavy Attack DMG Bonus by {0}.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ]
+      ],
+      "icon": "assets/weapons/w-guardian-rectifier.webp"
+    },
+    {
+      "name": "Guardian Sword",
+      "rarity": 3,
+      "type": "Sword",
+      "id": "21020053",
+      "atk90": 300,
+      "stat": "HP",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "Increases Resonance Skill DMG by {0}.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ]
+      ],
+      "icon": "assets/weapons/w-guardian-sword.webp"
+    },
+    {
+      "name": "Originite: Type I",
+      "rarity": 3,
+      "type": "Broadblade",
+      "id": "21010023",
+      "atk90": 300,
+      "stat": "DEF",
+      "statValue90": 38.4,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores HP by {0}. This effect can be triggered {2} time(s) every {1}s.",
+      "ranks": [
+        [
+          "3%",
+          "3.75%",
+          "4.5%",
+          "5.25%",
+          "6%"
+        ],
+        [
+          "12",
+          "12",
+          "12",
+          "12",
+          "12"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ]
+      ],
+      "icon": "assets/weapons/w-originite-type-i.webp"
+    },
+    {
+      "name": "Originite: Type II",
+      "rarity": 3,
+      "type": "Sword",
+      "id": "21020023",
+      "atk90": 325,
+      "stat": "HP",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "When Resonance Liberation is released, restores HP by {0}. This effect can be triggered 1 time(s) every 20s.",
+      "ranks": [
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%,",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-originite-type-ii.webp"
+    },
+    {
+      "name": "Originite: Type III",
+      "rarity": 3,
+      "type": "Pistols",
+      "id": "21030023",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "When Counter Attack is released, restores HP by {0}. This effect can be triggered 1 time(s) every 6s.",
+      "ranks": [
+        [
+          "1.6%",
+          "2%",
+          "2.4%",
+          "2.8%",
+          "3.2%"
+        ]
+      ],
+      "icon": "assets/weapons/w-originite-type-iii.webp"
+    },
+    {
+      "name": "Originite: Type IV",
+      "rarity": 3,
+      "type": "Gauntlets",
+      "id": "21040023",
+      "atk90": 300,
+      "stat": "CRIT DMG",
+      "statValue90": 40.5,
+      "source": "",
+      "effect": "When hitting a target with Basic Attacks, restores HP by {0}. This effect can be triggered 1 time(s) every 3s.",
+      "ranks": [
+        [
+          "0.5%",
+          "0.65%",
+          "0.8%",
+          "0.95%",
+          "1.1%"
+        ]
+      ],
+      "icon": "assets/weapons/w-originite-type-iv.webp"
+    },
+    {
+      "name": "Originite: Type V",
+      "rarity": 3,
+      "type": "Rectifier",
+      "id": "21050023",
+      "atk90": 300,
+      "stat": "ATK",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "When Intro Skill is released, restores HP by {0}%. This effect can be triggered 1 time(s) every 20s.",
+      "ranks": [
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-originite-type-v.webp"
+    },
+    {
+      "name": "Pistols of Night",
+      "rarity": 3,
+      "type": "Pistols",
+      "id": "21030013",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "When Intro Skill is released, increases ATK by {0}, lasting for 10s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-pistols-of-night.webp"
+    },
+    {
+      "name": "Pistols of Voyager",
+      "rarity": 3,
+      "type": "Pistols",
+      "id": "21030043",
+      "atk90": 300,
+      "stat": "HP",
+      "statValue90": 30.3,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Resonance Energy by {0}. This effect can be triggered 1 time(s) every 20s.",
+      "ranks": [
+        [
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ]
+      ],
+      "icon": "assets/weapons/w-pistols-of-voyager.webp"
+    },
+    {
+      "name": "Rectifier of Night",
+      "rarity": 3,
+      "type": "Rectifier",
+      "id": "21050013",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "When Intro Skill is released, increases ATK by {0}, lasting for 10s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-rectifier-of-night.webp"
+    },
+    {
+      "name": "Rectifier of Voyager",
+      "rarity": 3,
+      "type": "Rectifier",
+      "id": "21050043",
+      "atk90": 300,
+      "stat": "Energy Regen",
+      "statValue90": 32.3,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Resonance Energy by {0}. This effect can be triggered 1 time every 20s.",
+      "ranks": [
+        [
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ]
+      ],
+      "icon": "assets/weapons/w-rectifier-of-voyager.webp"
+    },
+    {
+      "name": "Sword of Night",
+      "rarity": 3,
+      "type": "Sword",
+      "id": "21020013",
+      "atk90": 325,
+      "stat": "ATK",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "When Intro Skill is released, increases ATK by {0}, lasting for 10s.",
+      "ranks": [
+        [
+          "8%",
+          "10%",
+          "12%",
+          "14%",
+          "16%"
+        ]
+      ],
+      "icon": "assets/weapons/w-sword-of-night.webp"
+    },
+    {
+      "name": "Sword of Voyager",
+      "rarity": 3,
+      "type": "Sword",
+      "id": "21020043",
+      "atk90": 300,
+      "stat": "Energy Regen",
+      "statValue90": 32.3,
+      "source": "",
+      "effect": "When Resonance Skill is released, restores Resonance Energy by {0}. This effect can be triggered 1 time every 20s.",
+      "ranks": [
+        [
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ]
+      ],
+      "icon": "assets/weapons/w-sword-of-voyager.webp"
+    },
+    {
+      "name": "Training Broadblade",
+      "rarity": 3,
+      "type": "Broadblade",
+      "id": "21010011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-broadblade.webp"
+    },
+    {
+      "name": "Training Gauntlets",
+      "rarity": 3,
+      "type": "Gauntlets",
+      "id": "21040011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-gauntlets.webp"
+    },
+    {
+      "name": "Training Pistols",
+      "rarity": 3,
+      "type": "Pistols",
+      "id": "21030011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-pistols.webp"
+    },
+    {
+      "name": "Training Rectifier",
+      "rarity": 3,
+      "type": "Rectifier",
+      "id": "21050011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-rectifier.webp"
+    },
+    {
+      "name": "Training Sword",
+      "rarity": 3,
+      "type": "Sword",
+      "id": "21020011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-sword.webp"
+    },
+    {
+      "name": "Tyro Broadblade",
+      "rarity": 3,
+      "type": "Broadblade",
+      "id": "21010012",
+      "atk90": 275,
+      "stat": "ATK",
+      "statValue90": 14.8,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-tyro-broadblade.webp"
+    },
+    {
+      "name": "Tyro Gauntlets",
+      "rarity": 3,
+      "type": "Gauntlets",
+      "id": "21040012",
+      "atk90": 275,
+      "stat": "ATK",
+      "statValue90": 14.8,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-tyro-gauntlets.webp"
+    },
+    {
+      "name": "Tyro Pistols",
+      "rarity": 3,
+      "type": "Pistols",
+      "id": "21030012",
+      "atk90": 275,
+      "stat": "ATK",
+      "statValue90": 14.8,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-tyro-pistols.webp"
+    },
+    {
+      "name": "Tyro Rectifier",
+      "rarity": 3,
+      "type": "Rectifier",
+      "id": "21050012",
+      "atk90": 275,
+      "stat": "ATK",
+      "statValue90": 14.8,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-tyro-rectifier.webp"
+    },
+    {
+      "name": "Tyro Sword",
+      "rarity": 3,
+      "type": "Sword",
+      "id": "21020012",
+      "atk90": 275,
+      "stat": "ATK",
+      "statValue90": 14.8,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "5%",
+          "6.25%",
+          "7.5%",
+          "8.75%",
+          "10%"
+        ]
+      ],
+      "icon": "assets/weapons/w-tyro-sword.webp"
+    }
+  ],
+  "updated": "2026-08-13T14:59:34.962Z"
+}
