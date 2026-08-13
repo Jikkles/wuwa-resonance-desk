@@ -72,9 +72,11 @@ spelling — that's how `Yuno` was caught and corrected to **Iuno**.
 
 ### The shell
 
-Persistent left rail (nav + tier counts + saved views + methodology), a HUD strip
-carrying live patch progress and feed status, and a sticky tab strip. Below 860px the
-rail collapses to a brand bar and the tabs become a bottom dock.
+Persistent left rail (nav + tier counts + saved views + methodology) and a right-aligned
+HUD strip carrying feed status with the page title under it. The rail **is** the tablist —
+there was a horizontal tab strip across the stage too, listing the same six views 40px to
+its right, and it went. Below 860px the rail collapses to a brand bar and the nav becomes
+a bottom dock.
 
 Clicking anything — a patch card, an intel entry, a resonator, a banner thumbnail —
 opens a right-side **drawer** rather than navigating away, so the list you were reading
@@ -357,7 +359,8 @@ gallery picture gets through that clearly isn't a portrait; the run logs every
 percentage, so you can see which way a new character fell.
 
 The files are cached into `assets/portraits/` rather than hotlinked — Prydwen is a fan
-site paying for its own CDN. Credit rides in the page footer. Note that Prydwen is
+site paying for its own CDN. This README is where that is recorded; the page itself no
+longer names its data sources under the art, only the © Kuro Games it has to. Prydwen is
 behind Cloudflare, which 403s Node's `fetch` no matter what headers it sends; the script
 shells out to `curl` for that reason, and it is still dependency-free.
 
@@ -622,7 +625,7 @@ repo activity — if the feed genuinely goes quiet that long, push anything to r
 - Character art is cached into `assets/portraits/` by the fetcher, and a hand-set override
   may be added under `assets/characters/`. This is a deliberate call: it's Kuro's IP, it's
   the thing that gets fan sites taken down, and the project accepts that risk. Every such
-  image carries a credit line on the card. If the risk calculus ever changes, delete the
+  image carries a `© Kuro Games` line on the card. If the risk calculus ever changes, delete the
   `image` fields and the cached files and the cards fall back to hotlinked key art on
   their own.
 - Everything else still links out rather than being copied — sources, articles, threads.

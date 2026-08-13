@@ -186,8 +186,12 @@ function kitFor(name){
 
 function portraitFor(name){ return (DATA.portraits?.characters || {})[name] || null; }
 function weaponArtFor(name){ return (DATA.portraits?.weapons || {})[name] || null; }
-const PORTRAIT_CREDIT = "Character art © Kuro Games · portrait via prydwen.gg";
-const GALLERY_CREDIT = "Character art © Kuro Games · gallery via prydwen.gg";
+/* Both of these used to name the site the picture was resolved from. The
+   copyright is the part that has to be on the page; which fan wiki the file
+   came through is bookkeeping, and it was sitting under every portrait on the
+   desk. The README still records where the art pipeline reads from. */
+const PORTRAIT_CREDIT = "Character art © Kuro Games";
+const GALLERY_CREDIT = "Character art © Kuro Games";
 
 /* Banner rows carry framing hints for the shared key visual, so a resonator
    card can borrow the crop its banner row already defines. */
@@ -478,10 +482,15 @@ function weaponIcon(name, size = 17){
 
 /* ── rail ────────────────────────────────────────────────────────── */
 function renderRail(){
-  /* The unverified flag rides the nav item itself, not just the tab strip —
-     it should be readable before you click into the view, not after. */
+  /* These are the tablist: the horizontal strip that used to own role=tab is
+     gone, so the ids, aria-controls and roving tabindex live here. aria-current
+     stays alongside aria-selected because the dock renders from the same
+     VIEWS array and styles off it, and setView sets it on every [data-act=view]
+     in one pass. */
   $("#rail-nav").innerHTML = VIEWS.map(v => `
-    <button class="navlink" data-act="view" data-id="${v.id}" aria-current="${S.view === v.id}">
+    <button class="navlink" role="tab" id="tab-${v.id}" data-act="view" data-id="${v.id}"
+            aria-selected="${S.view === v.id}" aria-controls="p-${v.id}"
+            aria-current="${S.view === v.id}" tabindex="${S.view === v.id ? 0 : -1}">
       ${icon(v.icon)}<span>${v.label}</span>
       ${navBadge(v)}
     </button>`).join("");
@@ -502,6 +511,8 @@ function renderRail(){
     ["Hot signals",    {view:"signals",  set:{kind:"hot", src:"all"}}],
     ["Official news",  {href:"https://wutheringwaves.kurogames.com/en/main/news"}],
     ["Kuro on YouTube",{href:"https://www.youtube.com/channel/UC0Bi5KMcECRVYis5Gb_ZYZQ"}],
+    /* Main sub above the leak sub, in the same order the desk trusts them. */
+    ["Subreddit",      {href:"https://www.reddit.com/r/WutheringWaves/"}],
     ["Leak subreddit", {href:"https://www.reddit.com/r/WutheringWavesLeaks/"}]
   ].map(([label, to]) => to.href
     ? `<a class="tierlink" href="${to.href}" target="_blank" rel="noopener">
@@ -539,16 +550,6 @@ function renderLegend(){
   $("#foot-legend").innerHTML = TIERS.map(t =>
     `<span class="t-${t}" title="${esc(TIER_MEANS[t])}"><i class="dot"></i>${TIER_LABEL[t]}</span>`
   ).join("");
-}
-
-function renderTabs(){
-  $("#tabs").innerHTML = VIEWS.map(v => `
-    <button role="tab" id="tab-${v.id}" data-act="view" data-id="${v.id}"
-            aria-selected="${S.view === v.id}" aria-controls="p-${v.id}"
-            tabindex="${S.view === v.id ? 0 : -1}">
-      ${icon(v.icon, 17)}${v.label}
-      ${v.warn ? `<span class="warn">${v.warn}</span>` : v.soon ? `<span class="soon">Soon</span>` : ""}
-    </button>`).join("");
 }
 
 /* ── hud ─────────────────────────────────────────────────────────── */
@@ -1184,9 +1185,6 @@ function renderSignals(){
         Unverified automated signals
         <span>Raw headlines pulled every 6 hours. Nothing here is tiered or read — it's a lead list. Anything that survives a read gets written up under Intel.</span>
       </div>
-      <div class="srcstrip">${(feed.sources || []).map(s =>
-        `<span class="srcpill ${esc(s.status)}" title="${esc(s.error || s.status)}"><i class="dot"></i>${esc(s.name)} ${s.count}</span>`
-      ).join("") || `<span class="srcpill">No source report</span>`}</div>
       ${quickFilters(true)}
       <div class="panel-b flush">
         ${shown.length ? `<div class="term">${shown.map(signalRow).join("")}</div>`
@@ -1521,14 +1519,12 @@ function renderAside(){
     </div>
   </div>` : "";
 
-  const health = `<div class="panel">
-    <div class="mini-h"><h3>Source health</h3></div>
-    <div class="srcstrip">${(feed.sources || []).map(s =>
-      `<span class="srcpill ${esc(s.status)}" title="${esc(s.error || s.status)}"><i class="dot"></i>${esc(s.name)}</span>`
-    ).join("") || `<span class="srcpill">No report</span>`}</div>
-  </div>`;
+  /* A Source health panel stood here, listing every fetcher by name with a
+     status dot. It is build diagnostics — useful to whoever runs the workflow,
+     which is one person, and meaningless to everyone reading the desk. The run
+     summary in the Live Signals header is what a reader actually needs. */
 
-  $("#aside").innerHTML = quickFilters(false) + glance + featured + health;
+  $("#aside").innerHTML = quickFilters(false) + glance + featured;
 }
 
 /* ── drawer ──────────────────────────────────────────────────────── */
@@ -1662,8 +1658,7 @@ function fillKit(name){
     if(!wrap || S.drawer !== `resonator:${name}`) return;
     const kit = kitFor(name);
     wrap.innerHTML = kit
-      ? kitPanel(kit) + `<p class="kit-credit">Skill text as it reads in the live client, via ${KIT_CREDIT}.
-          Skills © Kuro Games.</p>`
+      ? kitPanel(kit) + `<p class="kit-credit">Skill text as it reads in the live client. Skills © Kuro Games.</p>`
       : `<div class="dsec"><span class="label">Skills</span>
           <p style="margin:0;color:var(--fg-3)">No kit published yet — nothing has been drawn from the
           client for this Resonator.</p></div>`;
@@ -1673,8 +1668,6 @@ function fillKit(name){
       <p style="margin:0;color:var(--fg-3)">Kit data did not load.</p></div>`;
   });
 }
-const KIT_CREDIT = `<a href="https://www.prydwen.gg/wuthering-waves/" target="_blank" rel="noopener">prydwen.gg</a>`;
-
 function drawerVersion(id){
   const v = versions().find(x => x.id === id);
   if(!v) return;
@@ -1977,9 +1970,12 @@ function bind(){
     if((e.key === "Enter" || e.key === " ") && t?.getAttribute?.("role") === "button" && t.dataset.act){
       e.preventDefault(); t.click(); return;
     }
-    /* Arrow keys walk the tablist, as a tablist should. */
+    /* Arrow keys walk the tablist, as a tablist should. The list runs down the
+       rail now rather than across the stage, so up/down are the axis that
+       matches what you see — left/right stay bound because they were the keys
+       for two years and cost nothing to keep. */
     if(t?.getAttribute?.("role") === "tab"){
-      const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      const step = /^Arrow(Right|Down)$/.test(e.key) ? 1 : /^Arrow(Left|Up)$/.test(e.key) ? -1 : 0;
       const i = VIEWS.findIndex(v => v.id === S.view);
       if(step){ e.preventDefault(); setView(VIEWS[(i + step + VIEWS.length) % VIEWS.length].id, true); }
       if(e.key === "Home"){ e.preventDefault(); setView(VIEWS[0].id, true); }
@@ -2008,7 +2004,6 @@ async function load(name){
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 
   renderRail();
-  renderTabs();
   renderHud();
   renderLegend();
   bind();

@@ -46,9 +46,12 @@
   --r:13px;
   --r-sm:9px;
 
-  --rail-w:238px;
+  /* Wider than it was by 18px, and the type inside it went up with it: the
+     rail is the desk's only navigation now, so it has to read as the loudest
+     thing on the page rather than as a column of captions. "Live Signals" plus
+     its UNVERIFIED badge is the widest row and what actually sets this number. */
+  --rail-w:256px;
   --aside-w:340px;
-  --tabs-h:62px;
 
   /* Backdrop dials. The blur used to live here, at 58px, which made the key
      visual weather — and weather you cannot see is just an uneven black. The
@@ -129,11 +132,11 @@ body::after{
 
    The top 130px is nearly solid and that is the whole reason this is a
    gradient rather than a flat wash. 3.5's key visual is a sunburst in its
-   upper third, and at the crop above it lands exactly behind the HUD strip and
-   the tab row — the two places on the desk running the smallest grey mono type
-   there is, over what came out as a band of pale gold. So the ground stays
-   nearly opaque past the tabs, then opens up over the body, where every line
-   of type is already on a panel of its own. */
+   upper third, and at the crop above it lands exactly behind the HUD strip —
+   the place on the desk running the smallest grey mono type there is, over what
+   came out as a band of pale gold. So the ground stays nearly opaque past the
+   header, then opens up over the body, where every line of type is already on a
+   panel of its own. */
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:linear-gradient(180deg,
@@ -186,67 +189,68 @@ button{font:inherit;color:inherit}
 }
 .brand{display:flex;align-items:center;gap:11px;padding:2px 18px 0;text-decoration:none}
 .brand svg{flex:none;color:var(--accent)}
-.brand-name{display:block;font-size:14px;font-weight:600;letter-spacing:.14em;line-height:1.15}
-.brand-sub{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--fg-3);text-transform:uppercase}
+.brand-name{display:block;font-size:15px;font-weight:700;letter-spacing:.14em;line-height:1.15}
+.brand-sub{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--fg-3);text-transform:uppercase}
 
 .rail-group{display:flex;flex-direction:column;gap:2px;padding:0 12px}
 .rail-group>.label{padding:0 6px 8px}
+/* The section headings in the rail sit a step above the 10.5px .label used
+   inside panels — they head the navigation, not a card's metadata row. */
+.rail .label{font-size:11px;color:var(--fg-2)}
 
 .navlink{
   display:flex;align-items:center;gap:11px;width:100%;
-  background:none;border:0;border-radius:var(--r-sm);padding:10px 11px;cursor:pointer;
-  font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.11em;
-  text-transform:uppercase;color:var(--fg-2);text-align:left;
+  background:none;border:0;border-radius:var(--r-sm);padding:11px 11px;cursor:pointer;
+  font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg);text-align:left;
   transition:background .15s,color .15s;
 }
 .navlink svg{flex:none;opacity:.75}
 .navlink:hover{background:var(--bg-2);color:var(--fg)}
-.navlink[aria-current="true"]{background:var(--accent-soft);color:var(--accent)}
+.navlink[aria-current="true"]{background:var(--accent-soft);color:var(--accent);font-weight:700}
 .navlink[aria-current="true"] svg{opacity:1}
 .navlink>span:first-of-type{white-space:nowrap}
-.navlink .n{margin-left:auto;font-size:10px;color:var(--fg-3);letter-spacing:.04em}
-/* Live Signals carries its warning in the rail, not just once you're inside
-   it — the dashed border is the same mark the tab strip uses. flex:none or the
-   label gives way first and "Live Signals" wraps onto two lines. */
+.navlink .n{margin-left:auto;font-size:11px;color:var(--fg-2);letter-spacing:.04em}
+/* Live Signals carries its warning in the nav itself rather than only once you
+   are inside the view. flex:none or the label gives way first and
+   "Live Signals" wraps onto two lines. */
 .navlink .warn{
-  margin-left:auto;flex:none;font-size:8px;letter-spacing:.09em;padding:2px 5px;border-radius:5px;
+  margin-left:auto;flex:none;font-size:8.5px;letter-spacing:.09em;padding:2px 6px;border-radius:5px;
   border:1px dashed color-mix(in srgb,var(--t-rumour) 60%,transparent);color:var(--t-rumour);
 }
 /* Same slot, different claim: .warn is "don't trust this yet", .soon is
    "there's nothing here yet". Solid rather than dashed, and in the muted grey
    rather than a tier colour, so an unbuilt view never reads as a warning. */
-.navlink .soon,.tabs .soon{
-  flex:none;border-radius:5px;font-family:var(--mono);text-transform:uppercase;
+.navlink .soon{
+  margin-left:auto;flex:none;border-radius:5px;font-family:var(--mono);text-transform:uppercase;
   background:var(--bg-2);border:1px solid var(--line);color:var(--fg-3);
+  font-size:8.5px;letter-spacing:.09em;padding:2px 6px;
 }
-.navlink .soon{margin-left:auto;font-size:8px;letter-spacing:.09em;padding:2px 5px}
-.tabs .soon{font-size:9.5px;letter-spacing:.12em;padding:2px 7px;border-radius:6px}
 /* An unbuilt view is dimmer than a built one until you land on it. */
-.navlink:has(.soon):not([aria-current="true"]),
-.tabs button:has(.soon):not([aria-selected="true"]){opacity:.72}
+.navlink:has(.soon):not([aria-current="true"]){opacity:.78}
 
 .tierlink{
   display:flex;align-items:center;gap:10px;width:100%;
-  background:none;border:0;border-radius:8px;padding:7px 12px;cursor:pointer;
-  font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  background:none;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
   color:var(--fg-2);text-align:left;transition:background .15s,color .15s;
 }
 .tierlink:hover{background:var(--bg-2);color:var(--fg)}
-.tierlink .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.tierlink .dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
 .tierlink .n{
-  margin-left:auto;font-size:10px;color:var(--fg-3);
+  margin-left:auto;font-size:10.5px;color:var(--fg-2);
   border:1px solid var(--line);border-radius:6px;padding:0 6px;min-width:26px;text-align:center;
 }
 
 .rail-about{
   margin:0 18px;padding:14px;border:1px solid var(--line);border-radius:var(--r-sm);
-  background:var(--bg-2);font-size:12.5px;line-height:1.6;color:var(--fg-2);
+  background:var(--bg-2);font-size:13px;line-height:1.6;color:var(--fg-2);
 }
 .rail-about .label{margin-bottom:8px}
 .linkout{
   display:inline-flex;align-items:center;gap:6px;margin-top:10px;
   background:none;border:0;padding:0;cursor:pointer;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
   color:var(--accent);text-decoration:none;
 }
 .linkout:hover{color:var(--fg)}
@@ -258,13 +262,21 @@ button{font:inherit;color:inherit}
 /* ══ hud ════════════════════════════════════════════════════════════ */
 .stage{min-width:0;display:flex;flex-direction:column}
 .hud{padding:13px 20px 0;max-width:var(--page);width:100%}
+/* Everything in the header is right-aligned against the stage's right edge and
+   stacks in two lines — readings on top, the page's own name under them. It
+   used to run title-left / readings-right across the full width, which is a lot
+   of stage given to a line of type that is the same on every view. */
 .hud-strip{
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  display:flex;align-items:center;justify-content:flex-end;gap:16px;flex-wrap:wrap;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--fg-3);padding-bottom:12px;
+  color:var(--fg-3);
 }
-.hud-strip .title{color:var(--fg-2);letter-spacing:.2em;margin-right:auto}
 .hud-strip b{color:var(--fg-2);font-weight:500}
+.hud-sub{
+  display:flex;justify-content:flex-end;padding:6px 0 2px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--fg-2);
+}
 .pulse::before{
   content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
   background:var(--t-official);margin-right:8px;vertical-align:middle;
@@ -272,36 +284,9 @@ button{font:inherit;color:inherit}
 }
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.22}}
 
-/* ══ tabs ═══════════════════════════════════════════════════════════
-   These are the top-level navigation and now the first thing under the HUD,
-   with the metrics strip gone from above them. At 11.5px they were the same
-   size as the metadata inside the cards — the loudest thing on the page was a
-   box restating the version number. Sized up to lead. */
-.tabs{
-  position:sticky;top:0;z-index:8;display:flex;gap:2px;
-  padding:0 20px;margin-top:10px;
-  border-bottom:1px solid var(--line);
-  background:rgba(13,12,17,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  overflow-x:auto;scrollbar-width:none;
-}
-.tabs::-webkit-scrollbar{display:none}
-.tabs button{
-  display:flex;align-items:center;gap:10px;white-space:nowrap;
-  background:none;border:0;border-bottom:2.5px solid transparent;margin-bottom:-1px;
-  padding:17px 17px 15px;cursor:pointer;color:var(--fg-3);
-  font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.11em;text-transform:uppercase;
-  transition:color .15s,border-color .15s,background .15s;
-}
-.tabs button svg{opacity:.7}
-/* The hover ground stops short of the underline, so it reads as the tab
-   lighting up rather than a box growing under the word. */
-.tabs button:hover{color:var(--fg-2);background:linear-gradient(180deg,rgba(255,255,255,.045),transparent 82%)}
-.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
-.tabs button[aria-selected="true"] svg{color:var(--accent);opacity:1}
-.tabs .warn{
-  font-size:9.5px;letter-spacing:.12em;padding:2px 7px;border-radius:6px;
-  border:1px dashed var(--t-rumour);color:var(--t-rumour);
-}
+/* The horizontal tab strip stood here — the same six views the rail lists,
+   repeated 40px to its right, costing ~70px of height above every view. The
+   rail is the tablist now; on phones the bottom dock still is. */
 
 /* ══ layout ═════════════════════════════════════════════════════════ */
 /* Tighter than it was, on purpose: the landing view is meant to answer what's
@@ -316,7 +301,9 @@ button{font:inherit;color:inherit}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-width:0}
 .duo>*{min-width:0}
 .aside{
-  position:sticky;top:calc(var(--tabs-h) + 18px);align-self:start;
+  /* Nothing is pinned across the top of the stage any more, so this sticks to
+     the viewport itself rather than clearing a tab strip. */
+  position:sticky;top:18px;align-self:start;
   display:flex;flex-direction:column;gap:16px;
 }
 
@@ -1390,18 +1377,10 @@ button{font:inherit;color:inherit}
 }
 .warnbar span{color:var(--fg-3);letter-spacing:.08em;text-transform:none;font-size:11px}
 
-.srcstrip{display:flex;gap:6px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line)}
-.srcstrip:last-child{border-bottom:0}
-.srcpill{
-  display:inline-flex;align-items:center;gap:7px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--fg-3);
-  border:1px solid var(--line);border-radius:6px;padding:3px 8px;
-}
-.srcpill .dot{width:5px;height:5px;border-radius:50%;background:var(--fg-3)}
-.srcpill.ok .dot{background:var(--t-official)}
-.srcpill.skipped .dot{background:var(--amber)}
-.srcpill.failed .dot{background:var(--t-rumour)}
-.srcpill.failed{color:var(--t-rumour);border-color:color-mix(in srgb,var(--t-rumour) 40%,transparent)}
+/* .srcstrip / .srcpill — the row of per-fetcher status pills — stood here. It
+   was drawn twice, under the Live Signals header and again as a Source health
+   panel in the aside, and both are gone. The methodology drawer still lists the
+   crawler's sources for anyone who opens it. */
 
 .term{display:flex;flex-direction:column;font-family:var(--mono)}
 .sig{
@@ -1771,18 +1750,6 @@ button{font:inherit;color:inherit}
   .aside{display:none}
   /* The aside took the quick filters with it — bring the inline copy up. */
   .qf-inline{display:block}
-  /* Six tabs, two of them badged, is about 1050px at full size — wider than
-     the stage from here down. The strip scrolls rather than clipping, but a
-     view you have to swipe sideways to find may as well not be in the nav, so
-     it steps down instead of scrolling. Still the loudest type on the page. */
-  .tabs button{font-size:12px;padding:16px 11px 14px;gap:8px}
-  .tabs .warn,.tabs .soon{font-size:8.5px;letter-spacing:.1em;padding:2px 5px}
-}
-@media (max-width:1180px){
-  /* Out of type size to give. The mark goes and the word stays — the rail
-     beside it is carrying the same six icons anyway. */
-  .tabs button{font-size:11.5px;padding:15px 10px 13px}
-  .tabs button svg{display:none}
 }
 @media (max-width:1240px){
   /* Three cards need about 300px each before the banner grid inside them
@@ -1799,18 +1766,18 @@ button{font:inherit;color:inherit}
   .hero .pcard.is-future .figs img.fig.full{transform:none;object-position:center 12%}
 }
 @media (max-width:1080px){
-  :root{--rail-w:200px}
+  :root{--rail-w:214px}
   .lane{grid-template-columns:120px minmax(0,1fr)}
-  /* 200px of rail can't hold "Live Signals" and "Unverified" on one line. The
-     hatched bar on the view itself still carries it. "Weapons"/"Soon" fits in
-     the same space with room to spare, and has to stay: the rail is the only
-     nav left here. */
+  /* 214px of rail can't hold "Live Signals" and "Unverified" on one line at
+     this type size. The hatched bar on the view itself still carries it.
+     "Weapons"/"Soon" fits in the same space with room to spare, and has to
+     stay: the rail is the only nav there is. */
   .navlink .warn{display:none}
-  /* Six tabs will not fit a stage this narrow at any type size worth reading,
-     and they are the rail's own list a second time — the rail keeps the full
-     six in a column, where width is not the constraint. Same call the 860px
-     rule makes when the dock takes over. */
-  .tabs{display:none}
+  .navlink{font-size:12px;gap:9px;padding:10px}
+  /* "RESONANCE DESK" is 14 characters of tracked-out 15px and it breaks across
+     two lines well before the nav under it runs out of room. The wordmark steps
+     down rather than wrapping — a two-line brand reads as a layout fault. */
+  .brand-name{font-size:13px;letter-spacing:.08em;white-space:nowrap}
 }
 @media (max-width:860px){
   .app{grid-template-columns:minmax(0,1fr)}
@@ -1820,9 +1787,6 @@ button{font:inherit;color:inherit}
   }
   .rail-group,.rail-about,.rail-foot{display:none}
   .hud,.body,.foot{padding-left:16px;padding-right:16px}
-  /* The bottom dock is the nav here — a second scrolling tab strip above it
-     is just the same four buttons twice. */
-  .tabs{display:none}
   /* Swipe rather than stack. Three patch cards down a phone is a thousand
      pixels of scrolling before the first headline; side by side they cost one
      card's height, and the sliver of the next one showing at the edge is what
@@ -1896,23 +1860,15 @@ button{font:inherit;color:inherit}
   .qf-inline .qf{grid-template-columns:repeat(auto-fit,minmax(146px,1fr));padding:12px 16px;gap:10px}
   .qf-inline .qf-reset{align-self:end}
 
-  /* Signals is the one view with three bands of furniture between the header
-     and the feed. The source report is diagnostics — it goes under the log,
-     where you look for it deliberately rather than scroll past it. */
-  .sigpanel{display:flex;flex-direction:column}
-  .sigpanel .panel-b{order:8}
-  .sigpanel .srcstrip{order:9;border-bottom:0;border-top:1px solid var(--line)}
-  .sigpanel .panel-f{order:10}
-  /* One scrolling row rather than three wrapped ones. */
-  .srcstrip{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
-  .srcstrip::-webkit-scrollbar{display:none}
-  .srcpill{flex:none}
+  /* The source report used to be reordered below the log here. With it gone
+     Signals is header → warning → filters → feed in source order, which is the
+     order you read it in, so there is nothing left to move. */
   .warnbar{flex-direction:column;align-items:flex-start;gap:4px;padding:10px 16px}
   .warnbar span{font-size:11.5px;line-height:1.5}
 }
 @media (max-width:520px){
   .hud-strip{gap:12px 16px}
-  .hud-strip .title{display:none}
+  .hud-sub{display:none}
   .cgrid,.rgrid{grid-template-columns:1fr}
 }
 @media (max-width:1080px){.duo{grid-template-columns:1fr}}
