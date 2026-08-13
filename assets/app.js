@@ -616,6 +616,20 @@ function fbar(view){
   </div>`;
 }
 
+/* The view's own name, first line of the stage, one per view. When the panel
+   headers came off, the page lost the only thing that said where you are
+   without looking at the rail — and a page whose first element is a patch card
+   or a grid of portraits reads as content that started mid-sentence.
+
+   It is the overarching view only: "Resonators", never "Resonators — Electro".
+   Which filter is on is said by the lit item in the rail's own list, and a
+   title that changes as you filter is a title you have to re-read. Small, one
+   line, no box: it is a label on the page, not another header band. */
+function pageTitle(id){
+  const v = VIEWS.find(x => x.id === id);
+  return `<h1 class="pagetitle">${esc(v?.label || "")}</h1>`;
+}
+
 function renderRail(){
   /* A nav, not a tablist — a tab cannot own a disclosure list. The tab-<id>
      ids stay: the panels are labelled by them. aria-current is what the dock
@@ -1038,11 +1052,10 @@ function renderTimeline(){
         cards.map(([v, r]) => patchCard(v, r)).join("")}</div>`
     : `<div class="empty">No patch in this window.</div>`;
 
-  /* No header. It was the view's name a second time — the rail item saying
-     "Timeline" is lit forty pixels to the left — plus the window filter, which
-     now sits under that rail item. What is left is the patch cards, at the top
-     of the page where they belong. The bar below only appears once the rail has
-     collapsed and taken them with it. */
+  /* No panel header. It was the view's name plus the window filter and the
+     layout toggle, all of which now sit in the rail — what heads the page is
+     the one-line title above the stack. The bar below only appears once the
+     rail has collapsed and taken the filters with it. */
   const hero = `<div class="panel">
     ${fbar("timeline")}
     <div class="panel-b">${body}</div>
@@ -1064,7 +1077,7 @@ function renderTimeline(){
     </div>
   </div>`;
 
-  $("#p-timeline").innerHTML = `<div class="stack">${hero}${duo}</div>`;
+  $("#p-timeline").innerHTML = `<div class="stack">${pageTitle("timeline")}${hero}${duo}</div>`;
 }
 
 /* ── intel ───────────────────────────────────────────────────────── */
@@ -1146,12 +1159,13 @@ function intelList(){
 function renderIntel(){
   const list = intelList();
 
-  /* Header gone, same bargain as the timeline: the tier row it carried is the
-     list under Intel in the rail — which is also where "Filter by tier" used
-     to sit as a group of its own, one rail section away from the view it
+  /* Panel header gone, same bargain as the timeline: the tier row it carried
+     is the list under Intel in the rail — which is also where "Filter by tier"
+     used to sit as a group of its own, one rail section away from the view it
      filtered. The methodology link stays in the footer, where you land after
      reading rather than before. */
   $("#p-intel").innerHTML = `<div class="stack">
+    ${pageTitle("intel")}
     <div class="panel">
       ${fbar("intel")}
       <div class="panel-b flush">
@@ -1205,10 +1219,13 @@ function renderSignals(){
 
   const ok = (feed.sources || []).filter(s => s.status === "ok").length;
 
+  /* The panel header keeps the run status and the kind chips but not the name:
+     the page title above the stack says "Live Signals" already, and the two
+     would sit a header's height apart saying the same two words. */
   $("#p-signals").innerHTML = `<div class="stack">
+    ${pageTitle("signals")}
     <div class="panel sigpanel">
       <div class="panel-h">
-        <h2>Live signals</h2>
         <span class="sub">Last run ${feed.fetched ? esc(fmtDate(feed.fetched)) + " " + esc(fmtTime(feed.fetched)) : "—"} · ${ok}/${(feed.sources||[]).length} sources</span>
         <div class="right chips">${filters}</div>
       </div>
@@ -1494,12 +1511,12 @@ const byNewest = (a, b) => (isRover(a) - isRover(b)) || debutKey(b).localeCompar
    instead of a toggle between two states of one grid. The element and weapon
    filters still cross both, so one table can empty while the other fills — and
    the count says "12 of 48" rather than just "12" whenever that happens. */
-function recordTable(title, rows, total, {under = "", foot = "", bare = false} = {}){
-  return `<div class="panel${bare ? " bare" : ""}">
-    ${bare ? "" : `<div class="panel-h">
+function recordTable(title, rows, total, {under = "", foot = ""} = {}){
+  return `<div class="panel">
+    <div class="panel-h">
       <h2>${title}</h2>
       <span class="sub">${plural(rows.length, "record")}${rows.length === total ? "" : ` of ${total}`} · newest debut first</span>
-    </div>`}
+    </div>
     ${under}
     <div class="panel-b">
       ${rows.length ? `<div class="rgrid">${rows.map(recordCard).join("")}</div>`
@@ -1517,14 +1534,15 @@ function renderResonators(){
   const rows  = rarity => list.filter(r => String(r.rarity) === rarity);
   const total = rarity => all.filter(r => String(r.rarity) === rarity).length;
 
-  /* The 5★ table has no header at all: the element row it carried is the list
-     under Resonators in the rail, and the caption went with it — this is the
-     top of the page, the rail item already says Resonators, and the roster is
-     what you came for. The 4★ header below stays, and that is what says where
-     one rarity ends and the next begins; everything above it is the 5★ set. */
+  /* Every table keeps its own header, 5★ included. It went when the element
+     chips came off it, on the reasoning that the top of the page needs no
+     label — but the header is not the view's name, it is the rarity divider,
+     and with it gone the 5★ set was the one table on the desk that had to be
+     inferred from the fact that a 4★ header appeared later. The page's own
+     name is the title above the stack now, so the two no longer collide. */
   $("#p-resonators").innerHTML = `<div class="stack">
+    ${pageTitle("resonators")}
     ${recordTable("5★ Resonators", rows("5"), total("5"), {
-      bare: true,
       under: fbar("resonators"),
       foot: "Kit detail on unreleased resonators is pre-balance — multipliers routinely shift between beta phases."
     })}
@@ -1618,13 +1636,13 @@ function weaponCard(w){
   </article>`;
 }
 
-function weaponTable(title, rows, total, {under = "", foot = "", bare = false} = {}){
+function weaponTable(title, rows, total, {under = "", foot = ""} = {}){
   const r = String(title).charAt(0);
-  return `<div class="panel wpanel r-${r}${bare ? " bare" : ""}">
-    ${bare ? "" : `<div class="panel-h">
+  return `<div class="panel wpanel r-${r}">
+    <div class="panel-h">
       <h2>${title}</h2>
       <span class="sub">${plural(rows.length, "weapon")}${rows.length === total ? "" : ` of ${total}`} · by class</span>
-    </div>`}
+    </div>
     ${under}
     <div class="panel-b">
       ${rows.length ? `<div class="rgrid wgrid">${rows.map(weaponCard).join("")}</div>`
@@ -1651,13 +1669,13 @@ function renderWeapons(){
   /* Class moved to the rail with every other view's primary axis — see
      RAIL_FILTERS, which reads the classes off the data for the same reason
      this used to: a class nothing is filed under would be a filter that can
-     only ever empty the page. The 5★ header went with it; the two below stay
-     as the dividers between rarities. The rarity colour this view is banded
-     with does not depend on that header — see .wpanel.bare in the stylesheet,
-     which puts the gold edge on the panel instead. */
+     only ever empty the page. The 5★ header stays behind, as on Resonators:
+     three rarities down the page need three dividers, and the gold edge that
+     bands this table belongs on the header carrying the word "5★" rather than
+     on the panel it heads. */
   $("#p-weapons").innerHTML = `<div class="stack">
+    ${pageTitle("weapons")}
     ${weaponTable("5★ Weapons", rows("5"), total("5"), {
-      bare: true,
       under: fbar("weapons"),
       foot: "Stats are level 90 throughout. Open a weapon for its passive and the ascension slider."
     })}
@@ -1689,6 +1707,7 @@ function renderWIP(id){
   const v = VIEWS.find(x => x.id === id);
   const w = WIP[id];
   $(`#p-${id}`).innerHTML = `<div class="stack">
+    ${pageTitle(id)}
     <div class="panel">
       <div class="panel-h">
         <h2>${esc(w.title)}</h2><span class="sub">Not built yet</span>

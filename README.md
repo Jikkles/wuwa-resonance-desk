@@ -89,6 +89,13 @@ A plain nav rather than a tablist, which is what it was until the items grew dis
 lists: a tab cannot own one. The `tab-<id>` ids stayed, because the panels are labelled
 by them.
 
+Every view opens on its own name — one small mono line above the stack, drawn by
+`pageTitle()` off the same `VIEWS` array the rail renders from. It is the overarching view
+and nothing else: "Resonators", never "Resonators — Electro". Which filter is on is said
+by the lit item in the rail's list, and a title that changes as you filter is a title you
+have to re-read. Signals is the one panel whose own header used to say the view's name
+too; it now carries only its run status and kind chips.
+
 The HUD — search, feed status, page title — is the first panel of the **aside** rather
 than a band across the top, so a view starts level with the top of the page instead of a
 header's height below it. `.body` is a two-row grid and only the right column uses row
@@ -116,10 +123,10 @@ One control, in one place: **the rail's filter lists**, carrying each view's sin
 — tier on Intel, element on Resonators, class on Weapons, now/next/past on Timeline
 (`RAIL_FILTERS`). These are the questions the desk exists to answer. They used to be a
 chip strip across the top of every panel, in a header that said the view's name a second
-time and held the content a header's height down the page; both went. Signals is the
-exception, and keeps its kind chips in its own header: it has a hatched warning bar under
-them, so that header was never the bare strip the others were. Events has nothing to
-filter yet. Values are read off the data, so an element or a class nothing is filed under
+time and held the content a header's height down the page; both went, and the view's name
+is the one-line page title above the stack instead. Signals is the exception, and keeps
+its kind chips in its own header: it has a hatched warning bar under them, so that header
+was never the bare strip the others were. Events has nothing to filter yet. Values are read off the data, so an element or a class nothing is filed under
 is never a filter that can only empty the page.
 
 A **Quick filters** panel used to stand in the aside — and again inline once the aside

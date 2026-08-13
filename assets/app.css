@@ -412,6 +412,26 @@ button{font:inherit;color:inherit}
   :root{--panel:var(--bg-1)}
   .fig-cell{background:linear-gradient(172deg,var(--bg-3),var(--bg))}
 }
+/* The view's name, above its panels rather than inside one. Every page needs a
+   line saying what it is — with the panel headers gone, the timeline opened on
+   a patch card and the roster on a grid of faces, both of which start
+   mid-sentence. Deliberately small and unboxed: it labels the page, it is not a
+   third header band competing with the rail and the panel headers under it.
+
+   The negative bottom margin eats most of .stack's 16px gap. A caption belongs
+   against the thing it captions; a full gap below it reads as a heading
+   floating between two panels, unattached to either. */
+.pagetitle{
+  margin:0 0 -6px;padding:0 2px;
+  font-family:var(--mono);font-size:12px;font-weight:500;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--fg-2);
+  display:flex;align-items:center;gap:11px;
+}
+/* The same cyan tick the rail lights the current item with, so the page's name
+   and the nav item naming it are visibly the same statement. */
+.pagetitle::before{
+  content:"";flex:none;width:13px;height:2px;border-radius:1px;background:var(--accent);
+}
 .panel-h{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
   padding:10px 16px;border-bottom:1px solid var(--line);background:var(--tint-sink);
@@ -1583,10 +1603,6 @@ button{font:inherit;color:inherit}
    pips down a grid is a texture, not information. */
 .wpanel .panel-h{box-shadow:inset 3px 0 0 var(--rar)}
 .wpanel .panel-h h2{color:var(--rar)}
-/* The 5★ table has no header to carry it — it is the top of the page and its
-   caption went with the class filter — so the edge moves to the panel. Same
-   3px of gold in the same place; it was never the header's to own. */
-.wpanel.bare{box-shadow:inset 3px 0 0 var(--rar)}
 .wrec{--attr:var(--rar)}
 
 /* Wider cells than the resonator grid. A weapon's name runs to "Rime-Draped
