@@ -76,7 +76,7 @@ spelling — that's how `Yuno` was caught and corrected to **Iuno**.
 
 ### The shell
 
-Persistent left rail (nav + saved views + methodology). The rail **is** the navigation —
+Persistent left rail (nav + quick links). The rail **is** the navigation —
 there was a horizontal tab strip across the stage too, listing the same six views 40px to
 its right, and it went. It is also the filter surface: each view's primary axis unfolds
 as a list under its own name when you open it, an accordion of one, so Timeline carries
@@ -103,7 +103,12 @@ resonators, intel and the last 60 signals.
 
 Every button on the page dispatches through the single delegated `[data-act]` handler.
 Any other attribute is a button that silently does nothing — which is exactly what the
-rail's Methodology link was until it was moved onto `data-act="open"`.
+Methodology link was until it was moved onto `data-act="open"`.
+
+**About the desk** — the standing description and that Methodology link — sits centred at
+the foot of the page, directly above the copyright strip. It was a boxed card in the rail,
+competing with the filters for a column that is otherwise all controls; it is orientation
+you read once, so it goes where you finish rather than where you steer.
 
 ### Filters
 
