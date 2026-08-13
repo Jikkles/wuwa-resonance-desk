@@ -748,18 +748,49 @@ left is the editorial, which is the part worth your time.
 
 **Automatic, by cron** — `update-feeds.yml` every 6h, `update-kits.yml` daily:
 
-| Writes | From |
-|---|---|
-| `feed.json` | six news sources |
-| `art.json` | Kuro's reveal posts |
-| `portraits.json` + `assets/portraits/` | Prydwen galleries |
-| `weapons.json` + `assets/weapons/` | Prydwen weapon pages |
-| `resonators.json` + `kits.json` | Fandom + Prydwen |
-| phase dates in `versions.json` | Fandom convene pages, once a phase has run |
+| Writes | From | Works from Actions? |
+|---|---|---|
+| `feed.json` | six news sources | yes |
+| `art.json` | Kuro's reveal posts | yes |
+| `resonators.json` — identity, debut, reruns | Fandom | yes |
+| phase dates in `versions.json` | Fandom convene pages, once a phase has run | yes |
+| `kits.json` — skill text | Prydwen | **no — run locally** |
+| `portraits.json` + `assets/portraits/` | Prydwen galleries | **no — run locally** |
+| `weapons.json` + `assets/weapons/` | Prydwen weapon pages | **no — run locally** |
 
 All of them are driven off the names already in `versions.json`, so writing a banner row
-is what pulls that character's art, portrait, weapon and kit. You never place an image
-by hand.
+is what queues that character's art, portrait, weapon and kit. You never hand-place an
+image — but see below for which half of that arrives on its own.
+
+### Prydwen does not serve GitHub Actions
+
+**Prydwen returns a flat 403 to a datacenter IP.** Not a challenge page, not a rate
+limit — a refusal, in under a second, every time. The same fetch from a home connection
+is served normally. It's their bandwidth and their call, and there is nothing here that
+tries to get around it.
+
+The practical consequences, because they are easy to miss:
+
+- `fetch-portraits.mjs` and `fetch-weapons.mjs` **have never once succeeded in a
+  scheduled run.** They are marked `continue-on-error`, which paints the step green in
+  the Actions UI whatever happens, so this failed silently for a long time. Everything
+  in `assets/portraits/`, `assets/weapons/` and `data/weapons.json` got there from a
+  local run.
+- `fetch-kits.mjs` splits along the same line and carries on with the half it can reach.
+  From Actions it builds the full index off the wiki — identity, debut, rerun history,
+  and the convene dates `confirm-dates.mjs` needs — and leaves `kits.json` exactly as it
+  found it, logging which characters are waiting on a local run. It exits 0: a wiki
+  refresh is a real result, not a failure.
+
+So the daily cron keeps the timeline and the banner history current on its own, and
+**new characters' kit text, portraits and weapon icons need one local run** — realistically
+on patch day, when you're editing `news.json` anyway:
+
+```bash
+node scripts/fetch-kits.mjs && node scripts/confirm-dates.mjs
+node scripts/fetch-portraits.mjs
+node scripts/fetch-weapons.mjs
+```
 
 **Still yours**, and no script will ever do it: `news.json` entries and their tiers,
 `outcome` on a leak that resolved, `translations.json`, and the `keyVisual*` crop values.
@@ -820,24 +851,25 @@ lines.
 
 ### The kit builder refuses to write a thin file
 
-Prydwen is Cloudflare-gated and turns a datacenter runner away at random, which is why
-`fetch-kits.mjs` was manual for so long: `pool()` records a blocked page as an error and
-carries on, so a fully-blocked run would once have reached the end, built an empty
-`kits` object and written it over 636KB of kit text. Three things now stop that, in
-order of how often they fire:
+`pool()` records a blocked page as an error and carries on, so before the guards below a
+blocked run would have reached the end, built an empty `kits` object and written it over
+636KB of kit text. Four things now stop that:
 
-1. **The kit map merges over what's on disk** rather than being rebuilt from nothing, so
+1. **Prydwen being unreachable is handled, not fatal.** A 403 on the roster means the
+   kit half is skipped entirely — no kit pages are even attempted — and the run
+   continues on wiki data. See above.
+2. **The kit map merges over what's on disk** rather than being rebuilt from nothing, so
    a page that failed keeps yesterday's kit and only a page that actually parsed
-   replaces one. `hasKit` counts a carried-over kit, so a blocked run can't strip the
-   badge off sixty cards either.
-2. **An empty roster aborts the run.** A Cloudflare interstitial is a 200 with a valid
-   HTML body, so `curl --fail` lets it through and the parser finds nobody in it — which
-   would otherwise read as "no character has a kit".
-3. **Any shrinkage aborts the run.** Kits and records only ever get added, so a fall in
+   replaces one. `hasKit` counts a carried-over kit, so a bad run can't strip the badge
+   off sixty cards either.
+3. **A roster that arrives but parses to nothing aborts the run.** Being handed a page
+   and making no sense of it is a different thing from being turned away — it's how a
+   parser goes quietly stale — so that one fails loudly.
+4. **Any shrinkage aborts the run.** Kits and records only ever get added, so a fall in
    either count means the markup changed, and yesterday's file is worth more than
    today's.
 
-A run that trips 2 or 3 exits non-zero and writes nothing, so the job goes red and the
+A run that trips 3 or 4 exits non-zero and writes nothing, so the job goes red and the
 data is untouched. One consequence of the merge worth knowing: `kits.json` is additive
 now, so renaming a character in `resonators.json` leaves their old kit behind under the
 old key. It's inert — nothing looks it up — but delete it if you're tidying.

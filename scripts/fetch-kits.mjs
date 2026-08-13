@@ -552,26 +552,47 @@ function deriveCurrent(doc) {
 
   /* Roster: the union of the two wiki categories — one lists the four Rover
      forms, the other the characters announced but not yet playable — keyed
-     against Prydwen's list, which is what the art fetcher works from. */
-  const [playable, all, listHtml] = await Promise.all([
+     against Prydwen's list, which is what the art fetcher works from.
+
+     The two hosts are fetched separately because only one of them is reachable
+     from everywhere. Fandom answers anyone. Prydwen sits behind Cloudflare and
+     returns a flat 403 to a datacenter IP — not an interstitial, a refusal, in
+     under a second — so every run from GitHub Actions is refused while the
+     same run from a home connection is served. That is not something to work
+     around; it is their bandwidth and their call. It just means the two halves
+     of this script have different reach, and it should carry on with whichever
+     half it can reach rather than treating the wiki's answer as worthless
+     because a fan site declined. */
+  const [playable, all] = await Promise.all([
     categoryMembers("Playable Resonators"),
-    categoryMembers("Resonators"),
-    getText(PRYDWEN_LIST, ["-e", "https://www.prydwen.gg/", "-H", "Accept: text/html"])
+    categoryMembers("Resonators")
   ]);
   /* "Rover" itself stays in the fetch but out of the database: it is the
      parent page the four elemental forms hang off, and the only place their
      shared blurb is written. */
   const titles = [...new Set([...playable, ...all])].filter(t => t !== "Resonator");
-  const roster = parseRoster(listHtml);
-  const bySlug = new Map(roster.map(r => [ckey(r.name), r]));
-  console.log(`wiki: ${titles.length} resonator pages · prydwen: ${roster.length} listed\n`);
 
-  /* A Cloudflare interstitial is a 200 with a valid HTML body, so curl --fail
-     lets it through and parseRoster finds no characters in it. Without this
-     the run would carry on, scrape nothing, and quietly conclude that nobody
-     has a kit. Fail loudly instead — an empty roster is never a real answer. */
-  if (!roster.length) {
-    console.error("prydwen returned no roster — blocked or restructured. Refusing to write.");
+  let listHtml = null;
+  try {
+    listHtml = await getText(PRYDWEN_LIST, ["-e", "https://www.prydwen.gg/", "-H", "Accept: text/html"]);
+  } catch (err) {
+    /* The HTTP status if curl reported one — a 403 is Cloudflare turning the
+       runner away and is the expected case, so it should read as itself and
+       not as curl's exit code 22. */
+    const status = String(err.message).match(/returned error: (\d{3})/)?.[1];
+    console.log(`prydwen unreachable (${status ? `HTTP ${status}` : "connection failed"}) — wiki data only, kits kept as they are`);
+  }
+  const roster = listHtml ? parseRoster(listHtml) : [];
+  const bySlug = new Map(roster.map(r => [ckey(r.name), r]));
+  console.log(`wiki: ${titles.length} resonator pages · prydwen: ${listHtml ? `${roster.length} listed` : "skipped"}\n`);
+
+  /* Reached it but understood nothing. A Cloudflare interstitial is a 200 with
+     a valid HTML body, so curl --fail lets it through and parseRoster finds no
+     characters in it — as would a redesign of the page. Either way that is a
+     different thing from being turned away, and worth failing on: being handed
+     a page and making no sense of it is how a parser goes quietly stale. */
+  if (listHtml && !roster.length) {
+    console.error("prydwen served a page with no roster in it — parser or page changed. Refusing to write.");
     process.exit(1);
   }
 
@@ -593,6 +614,10 @@ function deriveCurrent(doc) {
 
   /* Kits, from Prydwen, one page each. A character with no published kit yet
      has a stub page and parses to nothing, which is the correct answer. */
+  /* Empty when Prydwen was skipped, so the pool does nothing, `kits` stays as
+     it was merged from disk, and the run still produces a full index off the
+     wiki alone. Kit *text* only changes when a character ships; banner history
+     and phase dates change every patch, and those are the wiki's. */
   const targets = chars.filter(c => bySlug.has(ckey(c.name)));
   const kitPages = await pool(targets, async c => {
     const slug = bySlug.get(ckey(c.name)).slug;
@@ -746,7 +771,11 @@ function deriveCurrent(doc) {
 
   const withKit = Object.keys(kits).length;
   const withDebut = index.filter(r => r.version).length;
-  console.log(`\n${index.length} records · ${withKit} with a full kit · ${withDebut} with a debut patch`);
+  console.log(`\n${index.length} records · ${withKit} with a full kit${listHtml ? "" : " (kept, prydwen skipped)"} · ${withDebut} with a debut patch`);
   const gaps = index.filter(r => !kits[r.name]).map(r => r.name);
   if (gaps.length) console.log(`no kit published yet: ${gaps.join(", ")}`);
+  /* Says the quiet part out loud, because a green run that silently stopped
+     refreshing kit text is exactly the failure this script is meant not to
+     have. Run it from a home connection to pick these up. */
+  if (!listHtml && gaps.length) console.log(`run locally to fetch kits for: ${gaps.join(", ")}`);
 })();
