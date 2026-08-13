@@ -10,7 +10,8 @@ assets/app.css                 all styling
 assets/app.js                  reads the JSON, renders every view
 data/versions.json             patch timeline + banner phases
 data/news.json                 curated leak/news entries
-data/resonators.json           character kit database
+data/resonators.json           resonator index — identity, debut, reruns
+data/kits.json                 skills + Resonance Chains, loaded on demand
 data/feed.json                 auto-fetched headlines (written by Actions)
 data/art.json                  resolved official key art (written by Actions)
 data/portraits.json            character art + weapon icon map (written by Actions)
@@ -19,6 +20,7 @@ assets/portraits/              cached busts, cut-outs and gallery illustrations
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
 scripts/fetch-portraits.mjs    the character art + weapon icon resolver
+scripts/fetch-kits.mjs         the roster, kit and banner-history builder
 .github/workflows/update-feeds.yml   cron, every 6h
 ```
 
@@ -29,7 +31,7 @@ Four views:
 | Timeline | `versions.json` + `resonators.json` + `art.json` | — |
 | Intel | `news.json` | yes, by hand |
 | Live Signals | `feed.json` | **no** — raw lead list |
-| Resonators | `resonators.json` | yes, per kit |
+| Resonators | `resonators.json` + `kits.json` | yes, per kit |
 
 The split matters. Live Signals is a machine telling you something happened; Intel is
 you deciding what it was worth. A cron job can't judge whether a post is a datamine or
@@ -410,6 +412,87 @@ at the ~490px the card actually renders.
 
 Never hotlink another fan site's CDN for these — it leeches their bandwidth and breaks
 the moment they rename a file. Download it into `assets/`.
+
+## The resonator database
+
+`node scripts/fetch-kits.mjs` builds the whole roster — sixty Resonators including the
+four Rover forms — and writes two files, split on how often they get read.
+
+`data/resonators.json` is the index: who someone is, the patch they debuted in, and
+every patch their banner has come back for. It's ~90KB and loads on every page view.
+
+`data/kits.json` is the kit text: Basic Attack, Resonance Skill, Forte Circuit,
+Resonance Liberation, Intro Skill, Outro Skill, both Inherent Skills and all six
+Resonance Chain nodes, per character, in full. It's a megabyte, nobody reading the
+timeline needs a word of it, so **app.js doesn't load it at boot** — the first record
+you open fetches it and every record after that is instant. Anything added to the
+Resonators view that needs kit text has to go through `loadKits()`, not `DATA`.
+
+Three sources, each used for the one thing it's actually authoritative on:
+
+| Source | Gives | Why that one |
+|---|---|---|
+| Fandom character page | rarity, attribute, weapon, role, epithet, nation, release date, blurb | The infobox is the game's own character sheet, and it covers the 4-stars and the Rovers that the leak sites never write up |
+| Fandom convene pages | debut patch, rerun patches, banner dates | One page per banner run, named `<Convene>/<start date>`, carrying its 5-star and the version it shipped in. Sorted by date, that's the complete history |
+| Prydwen character page | the kit | Skill names and full descriptions in a stable `skill-header` / `skill-details` pair, plus the six Sequence Nodes |
+
+### It doesn't overwrite your writing
+
+`summary`, `kit`, `sources`, `confidence`, `convene`, `signature`, `accessory` and
+`status` are the desk's editorial and survive every run. The merge only fills blanks.
+The exceptions are `version` and `reruns`, which are patch numbers rather than
+judgements, so the banner history wins — that's what fixed Aemeath carrying `3.5` for a
+rerun when she debuted in `3.1`.
+
+Kit confidence is set on one rule: a character whose debut patch has already shipped
+has a kit that's in the live client, and the live client is Kuro's own word, so it lands
+`official`. Anyone still unreleased keeps whatever tier a human gave them — their
+Prydwen page is a stub with no skill blocks at all, so there's nothing to scrape anyway.
+
+### The grid is a contact sheet
+
+A record card is a portrait, a name and the debut badge. Nothing else — no
+summary, no element, no role, no confidence rows, no kit count. All of it is in
+the record one click away, and printing it sixty times turned a roster into six
+screens of small print nobody read. What's left earns its place at a glance: the
+art identifies them, the card's accent is their element, the corner is their
+debut patch.
+
+Cards are ordered **oldest debut first**, which is how every community banner
+chart is drawn. The sort key is the release date, not the version — Zani and
+Ciaccona both debuted in 2.3, but Zani was Phase 1 and Ciaccona Phase 2, and
+only the date knows that. Sorting by version and then by name got it backwards.
+
+Debut itself is the *earlier* of two things that can mean it: the first banner
+they headlined, and the patch the wiki says introduced them. For a limited
+5-star those agree. For a 4-star they don't — Baizhi was in the game from launch
+and first got a rate-up in 1.1 — and the answer to "when did they debut" is the
+day you could first have them, so 1.1 becomes the first entry in her rate-up
+list instead.
+
+The four Rover forms go to the end as a set. Rover is one character in four
+elements, not four debuts, and threading them through by release date scattered
+them across two years of grid. (Prydwen publishes one shared portrait for all
+four, so those tiles are deliberately identical — only the element accent and
+the debut badge differ.)
+
+### Debut and reruns in the corner
+
+The badge top-right of every record card is the debut patch, with `+n` counting reruns;
+hover or focus it and it names them. Reruns are the question this database gets asked
+most and they're a list of two-character strings, so they cost a tooltip rather than a
+row of the card.
+
+The same numbers are written out as plain rows inside the record, and the tooltip is
+hidden entirely under `@media (hover:none)`. A tooltip that only opens by holding a
+mouse still must never be the only route to a fact.
+
+### Markers, not markup
+
+Kit text carries `**bold**` and `__underline__` where Kuro's copy emphasised a number or
+an element. `kitText()` escapes the string **first** and turns the markers into elements
+**second**, so the only tags that reach `innerHTML` are the two it writes itself. Scraped
+text is untrusted input; keep it that way if you touch this.
 
 ## Setup
 

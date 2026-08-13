@@ -152,6 +152,26 @@ function artFor(name){ return (DATA.art?.art || {})[name] || null; }
    at three sizes — `icon` for a tile, `card` waist-up, `full` the 2048px
    illustration — so a tile shows the character and nothing else: no plate, no
    second background inside the card's. See scripts/fetch-portraits.mjs. */
+/* Kit text is a megabyte — six skills, two Inherent Skills and six Resonance
+   Chain nodes for sixty Resonators, in full. That is ten times the rest of the
+   desk put together, and on a first visit to the timeline none of it gets
+   read, so it is the one file not in the boot set. The first record you open
+   fetches it; every record after that is instant, and the promise is cached
+   rather than the result so opening two in quick succession still fetches
+   once. Nothing here blocks: the record draws immediately and the kit fills
+   in underneath it. */
+let KITS = null, kitsInFlight = null;
+function loadKits(){
+  if(KITS) return Promise.resolve(KITS);
+  if(!kitsInFlight) kitsInFlight = load("kits").then(d => (KITS = d?.kits || {}));
+  return kitsInFlight;
+}
+function kitFor(name){
+  if(!KITS) return null;
+  const k = String(name||"").toLowerCase();
+  return KITS[name] || Object.entries(KITS).find(([n]) => n.toLowerCase() === k)?.[1] || null;
+}
+
 function portraitFor(name){ return (DATA.portraits?.characters || {})[name] || null; }
 function weaponArtFor(name){ return (DATA.portraits?.weapons || {})[name] || null; }
 const PORTRAIT_CREDIT = "Character art © Kuro Games · icon via prydwen.gg";
@@ -271,11 +291,16 @@ function confMeter(tier){
 function confidenceRows(r){
   const id = r.confidence?.identity;
   const kit = r.confidence?.kit;
+  /* Two ways to have a kit on file: the full skill breakdown in kits.json, or
+     the desk's own written notes for someone whose skills aren't published
+     yet. `hasKit` is a flag on the index rather than a lookup, because the kit
+     file is loaded on demand and a card must not have to wait for it. */
+  const known = r.hasKit || r.kit?.length;
   return `<div class="ctiers">
     ${id ? `<div><span class="label">Identity</span>${tierBadge(id, id === "official")}</div>` : ""}
-    <div><span class="label">Kit</span>${r.kit?.length
+    <div><span class="label">Kit</span>${known
       ? tierBadge(kit, kit === "official")
-      : `<span class="pill">No kit notes</span>`}</div>
+      : `<span class="pill">Not published</span>`}</div>
   </div>`;
 }
 
@@ -1157,32 +1182,150 @@ function stars(n){
     : "";
 }
 
+/* ── kit rendering ───────────────────────────────────────────────── */
+
+/* Skill text arrives from the scraper as plain strings carrying `**bold**` and
+   `__underline__` where Kuro's own copy emphasised a number or an element. The
+   escape runs first and the markers are turned into elements second, so the
+   only tags that can ever reach innerHTML are the two this function writes —
+   a scraped page cannot inject anything through here. */
+function kitText(s){
+  return esc(s)
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/__([^_]+)__/g, "<u>$1</u>");
+}
+
+/* A skill body is blocks, each optionally headed — "Heavy Attack", "Dodge
+   Counter". Those headings are the sub-abilities, and without them a Basic
+   Attack entry is one unreadable twelve-sentence paragraph. */
+function kitBody(blocks){
+  return (blocks || []).map(b => `
+    ${b.h ? `<h5>${kitText(b.h)}</h5>` : ""}
+    ${(b.p || []).map(p => `<p>${kitText(p)}</p>`).join("")}`).join("");
+}
+
+/* Every skill is a <details>, closed. A full kit is about five thousand words;
+   opened flat it buries the sources and the tier note at the foot of the
+   drawer under six screens of scrolling. Native disclosure rather than a
+   scripted accordion — it survives a re-render, it is keyboard-operable and
+   findable by the browser's own in-page search, and it costs no JS. */
+function kitEntry(label, s){
+  if(!s) return "";
+  return `<details class="skill">
+    <summary><span class="skill-k">${esc(label)}</span><b>${esc(s.name)}</b></summary>
+    <div class="skill-t">${kitBody(s.blocks)}</div>
+  </details>`;
+}
+
+/* Game order, not file order: this is the sequence the in-game Resonator
+   screen lists them in, and the order they come up in a rotation. */
+const KIT_ORDER = [
+  ["basic", "Basic Attack"], ["skill", "Resonance Skill"],
+  ["forte", "Forte Circuit"], ["liberation", "Resonance Liberation"],
+  ["intro", "Intro Skill"], ["outro", "Outro Skill"]
+];
+
+function kitPanel(kit){
+  if(!kit) return "";
+  const skills = KIT_ORDER.map(([k, label]) => kitEntry(label, kit.skills?.[k])).join("");
+  /* Prydwen occasionally labels two blocks with the same slot name — a second
+     Forte Circuit where the Intro Skill should be. The scraper keeps both
+     rather than letting one overwrite the other, and the spare lands here. */
+  const extra = (kit.extra || []).map(e => kitEntry(e.kind, e)).join("");
+  const inherent = (kit.inherent || [])
+    .map(s => kitEntry("Inherent Skill", s)).join("");
+  const chain = (kit.chain || [])
+    .map(n => kitEntry(`S${n.n}`, {name:n.name, blocks:n.blocks})).join("");
+
+  return `
+    <div class="dsec"><span class="label">Skills</span>
+      <div class="skills">${skills}${extra}${inherent}</div>
+    </div>
+    ${chain ? `<div class="dsec"><span class="label">Resonance Chain</span>
+      <div class="skills chain">${chain}</div>
+      <p class="tier-note" style="margin-top:12px">Each node needs a duplicate of the Resonator. S6 is six.</p>
+    </div>` : ""}`;
+}
+
+/* ── debut and reruns ────────────────────────────────────────────── */
+
+/* The badge in the top-right corner of every record: the patch they debuted
+   in, and — on hover, or on focus — every patch their banner has come back
+   for since. Reruns are the question this database is actually asked most
+   often, and they are a list of two-character strings, so they cost a tooltip
+   rather than a row of the card.
+
+   The same numbers are written out as plain rows inside the record itself, so
+   nothing here is the only way to reach them. A tooltip that opens on hover
+   has no equivalent on a touchscreen, and this one is decoration over data
+   that is already on the page rather than the data itself. */
+/* Whether their debut patch has actually shipped. Patch numbers are two
+   integers, not decimals — 3.10 follows 3.9 — so they compare componentwise or
+   not at all. */
+function cmpVer(a, b){
+  const [am, an] = String(a).split(".").map(Number);
+  const [bm, bn] = String(b).split(".").map(Number);
+  return (am - bm) || (an - bn);
+}
+function hasDebuted(r){
+  const live = DATA.versions?.current;
+  return !!(r.version && live && cmpVer(r.version, live) <= 0);
+}
+
+function debutBadge(r){
+  const v = r.version;
+  if(!v) return "";
+  const reruns = r.reruns || [];
+  const tip = r.standard ? "Standard pool — always available"
+    : reruns.length ? `Rerun in ${reruns.join(", ")}`
+    : hasDebuted(r) ? "No rerun yet"
+    : "Not released yet";
+  return `<span class="debut" role="note" aria-label="Debut ${esc(v)}. ${esc(tip)}">
+    <b>${esc(v)}</b>${reruns.length ? `<i>+${reruns.length}</i>` : ""}
+    <span class="debut-tip" aria-hidden="true">
+      <em>Debut</em>${esc(v)}
+      <span class="debut-runs">${r.standard
+        ? `<em>Pool</em>Standard`
+        : reruns.length
+        ? `<em>${reruns.length === 1 ? "Rerun" : "Reruns"}</em>${reruns.map(x => `<i>${esc(x)}</i>`).join("")}`
+        : hasDebuted(r)
+        ? `<em>Reruns</em>None yet`
+        : `<em>Status</em>Unreleased`}</span>
+    </span>
+  </span>`;
+}
+
+/* The grid is sixty Resonators and grows by two a patch, so a card is a
+   portrait and a name and nothing else. Everything the old card carried — the
+   summary, the element, the role, the two confidence rows, the kit count — is
+   in the record one click away, and printing it sixty times over turned a
+   roster into six screens of small print nobody reads. What survives earns its
+   place at a glance: the art identifies them, the accent is their element, and
+   the corner is the patch they debuted in. */
 function recordCard(r){
   const b = bannerFor(r.name) || {};
-  const seen = lastIntelFor(r.name);
   return `<article class="rec" role="button" tabindex="0" data-act="resonator" data-id="${esc(r.name)}"${attrStyle(r.attribute)}>
-    ${artPanel({name:r.name, ...b}, `${r.version ? `<span class="phase">${esc(r.version)}</span>` : ""}`)}
-    <div class="rec-b">
-      <h3>${esc(r.name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h3>
-      <div class="rec-attrs">
-        ${stars(r.rarity)}
-        ${r.attribute ? `<b>${esc(r.attribute)}</b>` : ""}
-        ${r.weapon ? `<span>${esc(r.weapon)}</span>` : ""}
-      </div>
-      ${r.summary ? `<p class="rec-sum">${esc(r.summary)}</p>` : ""}
-      ${r.role ? `<div class="rec-role">${esc(r.role)}</div>` : ""}
-      <div class="rec-foot">${confidenceRows(r)}</div>
-      ${r.kit?.length || seen ? `<div class="rec-meta">
-        ${r.kit?.length ? `<span>${plural(r.kit.length, "kit note")}</span>` : ""}
-        ${seen ? `<span>Last intel ${fmtShort(seen)}</span>` : ""}
-      </div>` : ""}
-      <div class="rec-more">View profile ${icon("i-arrow", 12)}</div>
-    </div>
+    ${artPanel({name:r.name, ...b}, debutBadge(r))}
+    <h3 class="rec-n">${esc(r.name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h3>
   </article>`;
 }
 
+/* Rover is one character in four elements, not four debuts. Threading the
+   forms through the timeline by release date scatters them across two years
+   of grid for no reason, so they go to the end as a set. */
+const isRover = r => (/^Rover\b/.test(r.name) ? 1 : 0);
+
+/* Oldest debut first. A released Resonator sorts on the day they arrived; one
+   who hasn't yet has no date, so they sort on their announced patch behind a
+   `9` — every real date starts with a `2`, so the unreleased land after the
+   timeline rather than before it. */
+function debutKey(r){
+  return r.released || r.runs?.[0]?.start || `9${r.version || "9.9"}`;
+}
+const byDebut = (a, b) => (isRover(a) - isRover(b)) || debutKey(a).localeCompare(debutKey(b));
+
 function renderResonators(){
-  const all = resonators();
+  const all = [...resonators()].sort(byDebut);
   const elems = [...new Set(all.map(r => r.attribute).filter(Boolean))];
   let list = all;
   if(S.elem === "5" || S.elem === "4") list = list.filter(r => String(r.rarity) === S.elem);
@@ -1196,7 +1339,7 @@ function renderResonators(){
   $("#p-resonators").innerHTML = `<div class="stack">
     <div class="panel">
       <div class="panel-h">
-        <h2>Resonator database</h2><span class="sub">${plural(all.length, "record")} · kit confidence per entry</span>
+        <h2>Resonator database</h2><span class="sub">${plural(all.length, "record")} · oldest debut first</span>
         <div class="right chips">${filters}</div>
       </div>
       ${quickFilters(true)}
@@ -1271,7 +1414,11 @@ function renderAside(){
 /* ── drawer ──────────────────────────────────────────────────────── */
 let lastFocus = null;
 
-function openDrawer(kind, html){
+/* `id` names what the drawer is currently showing. Only the resonator record
+   needs it — it is the one panel that finishes drawing after an await, and it
+   has to know whether the reader has moved on before answering. */
+function openDrawer(kind, html, id = null){
+  S.drawer = id;
   $("#drawer-kind").textContent = kind;
   $("#drawer-body").innerHTML = html;
   const d = $("#drawer");
@@ -1286,6 +1433,7 @@ function openDrawer(kind, html){
 function closeDrawer(){
   const d = $("#drawer");
   if(d.hidden) return;
+  S.drawer = null;
   d.hidden = true;
   document.body.style.overflow = "";
   lastFocus?.focus?.();
@@ -1334,13 +1482,24 @@ function drawerResonator(name){
   if(!r.name && !b.name) return;
   const f = figure({name, ...b});
   const kitTier = r.confidence?.kit;
+  /* Debut and reruns are written out in full here, not just hung off the
+     corner badge's tooltip — this is the record, and a patch history you can
+     only reach by holding a mouse still is not in the record. */
   const gear = [["Signature weapon", r.signature || b.signature], ["Convene", r.convene || b.convene],
                 ["Accessory", r.accessory], ["Weapon", r.weapon || b.weapon], ["Role", r.role || b.role],
-                ["Region", r.region], ["Debut", r.version || b.version]].filter(([, v]) => v);
+                ["Region", r.region], ["Debut", r.version || b.version],
+                /* "None yet" only once they have actually had a banner to not
+                   come back from — on an unreleased Resonator it reads as a
+                   fact about their history rather than the absence of one. */
+                ["Reruns", r.standard ? "Standard pool — always available"
+                  : r.reruns?.length ? r.reruns.join(", ")
+                  : hasDebuted(r) ? "None yet" : ""],
+                ["Released", r.released ? fmtDate(r.released) : ""]].filter(([, v]) => v);
 
   openDrawer("Resonator record", `
     <div class="dart"${attrStyle(r.attribute || b.attribute)}>
       ${artPanel({name, ...b}, `${r.rarity || b.rarity ? `<span class="rank">${esc(r.rarity || b.rarity)}★</span>` : ""}
+        ${debutBadge(r)}
         <span class="attrline">${r.attribute || b.attribute ? `<b>${esc(r.attribute || b.attribute)}</b>` : ""}</span>`)}
       ${creditLine({name, ...b})}
     </div>
@@ -1355,18 +1514,46 @@ function drawerResonator(name){
       ${r.summary ? `<p>${esc(r.summary)}</p>` : `<p>No written record yet — identity only.</p>`}
       ${gear.length ? `<div class="dsec"><span class="label">Record</span>
         <div class="dgear">${gear.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div></div>` : ""}
-      <div class="dsec">
-        <span class="label">Kit ${r.kit?.length ? `— ${TIER_MEANS[kitTier] || "Unverified"}` : ""}</span>
-        ${r.kit?.length
-          ? `<div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
-             <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
-             <p style="font-size:12px;color:var(--fg-3);margin-top:14px">Pre-balance. Multipliers and mechanics
-             routinely shift between beta phases.</p>`
-          : `<p style="margin:0;color:var(--fg-3)">Nothing in the files yet.</p>`}
-      </div>
+      ${r.kit?.length ? `<div class="dsec">
+        <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
+        <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
+        <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
+        <p style="font-size:12px;color:var(--fg-3);margin-top:14px">Pre-balance. Multipliers and mechanics
+        routinely shift between beta phases.</p>
+      </div>` : ""}
+      <div id="kitwrap"><div class="dsec"><span class="label">Skills</span>
+        <p style="margin:0;color:var(--fg-3)">Loading kit…</p></div></div>
       ${sourceList(r.sources)}
-    </div>`);
+    </div>`, `resonator:${name}`);
+
+  /* The record is on screen already; this drops the kit in underneath when the
+     file lands. Guarded on the drawer still showing this Resonator, because a
+     megabyte over a slow connection is long enough to open a record, read the
+     summary and click through to somebody else before it arrives. */
+  fillKit(name);
 }
+
+/* What goes in #kitwrap once kits.json is in hand. Three outcomes, and each
+   one says something different: a kit, a character whose kit is not published
+   anywhere yet, or a file that would not load. */
+function fillKit(name){
+  loadKits().then(() => {
+    const wrap = $("#kitwrap");
+    if(!wrap || S.drawer !== `resonator:${name}`) return;
+    const kit = kitFor(name);
+    wrap.innerHTML = kit
+      ? kitPanel(kit) + `<p class="kit-credit">Skill text as it reads in the live client, via ${KIT_CREDIT}.
+          Skills © Kuro Games.</p>`
+      : `<div class="dsec"><span class="label">Skills</span>
+          <p style="margin:0;color:var(--fg-3)">No kit published yet — nothing has been drawn from the
+          client for this Resonator.</p></div>`;
+  }).catch(() => {
+    const wrap = $("#kitwrap");
+    if(wrap) wrap.innerHTML = `<div class="dsec"><span class="label">Skills</span>
+      <p style="margin:0;color:var(--fg-3)">Kit data did not load.</p></div>`;
+  });
+}
+const KIT_CREDIT = `<a href="https://www.prydwen.gg/wuthering-waves/" target="_blank" rel="noopener">prydwen.gg</a>`;
 
 function drawerVersion(id){
   const v = versions().find(x => x.id === id);

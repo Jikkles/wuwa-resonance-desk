@@ -1111,6 +1111,59 @@ button{font:inherit;color:inherit}
   font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
   color:var(--bg);background:var(--attr);border-radius:6px;padding:3px 8px;
 }
+/* ── debut badge ──────────────────────────────────────────────────
+   Sits where the old plain patch pill sat, top-right of the art, and carries
+   the same first fact: the patch this Resonator debuted in. The `+2` counts
+   reruns, so the corner answers "have they been back?" before you hover, and
+   hovering says which patches. Kept to the attribute colour like everything
+   else on a record — it is an identity fact, not a confidence one. */
+.cart .debut{
+  position:absolute;top:11px;right:13px;z-index:3;
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  color:var(--bg);background:var(--attr,var(--accent));border-radius:6px;padding:3px 8px;
+  cursor:default;
+}
+.cart .debut i{
+  font-style:normal;font-size:8.5px;letter-spacing:.06em;
+  padding:0 4px;border-radius:4px;
+  background:color-mix(in srgb,var(--bg) 26%,transparent);
+}
+/* The tooltip. Placed below the badge rather than above because the badge is
+   already against the top edge of the card, and right-aligned so it never
+   leaves the art on the rightmost column of the grid. */
+.cart .debut-tip{
+  position:absolute;top:calc(100% + 7px);right:0;z-index:4;
+  display:grid;gap:5px;min-width:132px;
+  padding:9px 11px;border-radius:var(--r-sm);
+  background:color-mix(in srgb,var(--bg) 94%,transparent);
+  border:1px solid var(--line-2);
+  box-shadow:0 12px 28px rgba(0,0,0,.5);
+  color:var(--fg-2);text-transform:none;letter-spacing:.04em;font-weight:400;
+  opacity:0;visibility:hidden;transform:translateY(-3px);
+  transition:opacity .13s ease,transform .13s ease,visibility .13s;
+  pointer-events:none;
+}
+.cart .debut:hover .debut-tip,.cart .debut:focus-visible .debut-tip{
+  opacity:1;visibility:visible;transform:translateY(0);
+}
+.cart .debut-tip em{
+  font-style:normal;color:var(--fg-3);font-size:8.5px;letter-spacing:.14em;
+  text-transform:uppercase;display:block;margin-bottom:2px;
+}
+.cart .debut-runs{display:block}
+.cart .debut-runs i{
+  font-style:normal;display:inline-block;margin:2px 4px 0 0;padding:1px 5px;
+  border-radius:4px;background:var(--bg-3);color:var(--fg);
+}
+/* On a touchscreen there is no hover, and a tooltip that can only be opened by
+   holding a mouse still would be the only route to the rerun list. It isn't —
+   the record spells the same patches out in full — so here the corner simply
+   goes back to being the debut patch and nothing is lost. */
+@media (hover:none){
+  .cart .debut-tip{display:none}
+}
+
 .cart .attrline{
   position:absolute;left:13px;right:13px;bottom:11px;z-index:2;
   display:flex;gap:8px;flex-wrap:wrap;
@@ -1362,7 +1415,7 @@ button{font:inherit;color:inherit}
 }
 
 /* ══ resonators ═════════════════════════════════════════════════════ */
-.rgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(238px,1fr))}
+.rgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(152px,1fr))}
 .rec{
   --attr:var(--accent);
   position:relative;display:flex;flex-direction:column;text-align:left;padding:0;
@@ -1374,42 +1427,38 @@ button{font:inherit;color:inherit}
    portrait pushed the two cards' bodies onto different lines and left the
    whole grid looking ragged — a database of records should line up. */
 .rec .cart{aspect-ratio:4/5}
-.rec-b{padding:13px 14px 15px;display:flex;flex-direction:column;gap:9px;flex:1}
-.rec-b h3{margin:0;font-size:16px;font-weight:600;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.rec-b h3 .cjk{font-size:12px;font-weight:500;color:var(--attr)}
+/* The whole body of the card, now that the card is a portrait and a name. The
+   name sits on its own strip under the art rather than over it: at this size
+   the art is mostly face, and a caption bar across a face is the one place a
+   label cannot go. */
+.rec-n{
+  margin:0;padding:10px 11px 11px;font-size:13.5px;font-weight:600;line-height:1.3;
+  display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;
+  border-top:1px solid var(--line);
+}
+.rec-n .cjk{font-size:11px;font-weight:500;color:var(--attr)}
+.rec:hover .rec-n{color:var(--attr)}
+/* At card width the badge and its `+n` were wider than the art they sit on. */
+.rec .cart .debut{top:8px;right:8px;font-size:8.5px;padding:2px 6px;gap:4px}
+.rec .cart .debut i{font-size:8px}
+
 /* Five marks always, the unearned ones greyed — the shape of the rating reads
    before the count does, which is the point of stars over "5★". */
 .stars{font-size:11px;color:var(--amber);letter-spacing:.12em;line-height:1}
 .stars i{font-style:normal;color:var(--line-2)}
+/* The record grid dropped these when its cards became a portrait and a name;
+   the aside's featured Resonator still runs the full layout, and this is the
+   one place on the desk that does. */
 .rec-attrs{
   display:flex;gap:8px;flex-wrap:wrap;align-items:center;
   font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-3);
 }
 .rec-attrs b{color:var(--attr);font-weight:500}
-.rec-sum{
-  margin:0;font-size:12.5px;color:var(--fg-2);line-height:1.55;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
-}
 .rec-role{
   font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
   border-top:1px solid var(--line);padding-top:10px;
 }
-.rec-foot{margin-top:auto;padding-top:4px}
-/* Its own row rather than a column beside the tiers: sharing the width made
-   "Identity" and its badge wrap onto separate lines on the narrower cards. */
-.rec-meta{
-  display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap;margin-top:9px;
-  font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--fg-3);
-}
-/* The card is a button; say so. Also the row that carries the record's age,
-   which is the thing you check before trusting a pre-release kit. */
-.rec-more{
-  display:flex;align-items:center;justify-content:flex-end;gap:7px;
-  margin:12px -14px -15px;padding:10px 14px;border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--fg-3);transition:color .18s,background .18s;
-}
-.rec:hover .rec-more{color:var(--attr);background:var(--bg-2)}
+
 /* Identity and kit confirm separately, so they're labelled separately — a bare
    tier badge reads as a verdict on the whole character. */
 .ctiers{display:grid;gap:8px;flex:1;min-width:0}
@@ -1513,6 +1562,70 @@ button{font:inherit;color:inherit}
 .dsec ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
 .dsec li{position:relative;padding-left:16px;font-size:13.5px;color:var(--fg-2);line-height:1.6}
 .dsec li::before{content:"";position:absolute;left:0;top:.62em;width:4px;height:4px;border-radius:50%;background:var(--attr)}
+/* ── kit ──────────────────────────────────────────────────────────
+   A full Resonator kit is around five thousand words. Flat, it buries the
+   sources and the tier note under six screens; so each skill is a <details>,
+   closed, and the drawer stays a page you can see the shape of. The summary
+   row is the whole hit area — slot name on the left in mono, the skill's own
+   name in sans on the right — so it reads as an index until you open one. */
+.skills{display:grid;gap:7px}
+.skill{
+  border:1px solid var(--line);border-radius:var(--r-sm);
+  background:color-mix(in srgb,var(--bg-2) 62%,transparent);
+  overflow:hidden;
+}
+.skill summary{
+  display:flex;align-items:baseline;gap:11px;
+  padding:10px 12px;cursor:pointer;list-style:none;
+  transition:background .12s ease;
+}
+.skill summary::-webkit-details-marker{display:none}
+.skill summary:hover{background:var(--bg-2)}
+.skill[open] summary{border-bottom:1px solid var(--line);background:var(--bg-2)}
+.skill summary b{font-size:13.5px;font-weight:600;color:var(--fg);flex:1;min-width:0}
+/* The slot name is fixed-width so the skill names line up down the list and
+   the eye can run the column of "Basic Attack / Resonance Skill / …" without
+   reading it. Chain nodes get the same column, holding S1 to S6. */
+.skill-k{
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-3);flex:none;width:104px;line-height:1.45;
+}
+/* Disclosure arrow, drawn rather than fetched — rotates a quarter turn open. */
+.skill summary::after{
+  content:"";flex:none;width:6px;height:6px;margin-left:2px;align-self:center;
+  border-right:1.5px solid var(--fg-3);border-bottom:1.5px solid var(--fg-3);
+  transform:rotate(-45deg);transition:transform .15s ease;
+}
+.skill[open] summary::after{transform:rotate(45deg)}
+.skill-t{padding:12px 13px 14px}
+.skill-t p{margin:0 0 9px;font-size:13px;line-height:1.65;color:var(--fg-2)}
+.skill-t p:last-child{margin-bottom:0}
+/* The two marks the scraper preserves out of Kuro's own copy: bold on every
+   number that matters, underline on the element a hit deals. Both earn their
+   keep on a screen of prose whose whole content is multipliers — the underline
+   takes the attribute colour so "Glacio DMG" is findable at a glance. */
+.skill-t b{color:var(--fg);font-weight:600}
+.skill-t u{text-decoration:none;color:var(--attr,var(--accent))}
+/* Sub-ability headings — "Heavy Attack", "Dodge Counter". A Basic Attack entry
+   is six of these; without them it is one unreadable paragraph. */
+.skill-t h5{
+  margin:14px 0 6px;font-family:var(--mono);font-size:9.5px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--attr,var(--accent));
+}
+.skill-t h5:first-child{margin-top:0}
+.skills.chain .skill-k{width:34px}
+/* `.drawer-b p` sets 14px and outranks `.tier-note`'s 10px on specificity, so
+   a note dropped into the drawer came out at body size and shouting. */
+.drawer-b .tier-note{font-size:10px;line-height:1.6}
+/* The credit under a kit is a sentence, not a label — uppercase mono over two
+   lines made an attribution read like a warning. */
+.kit-credit{
+  margin:14px 0 0;font-size:11.5px;line-height:1.6;color:var(--fg-3);
+}
+.drawer-b p.kit-credit{font-size:11.5px}
+.kit-credit a{color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
+.kit-credit a:hover{color:var(--accent)}
+
 .dgear{display:grid;gap:8px}
 .dgear div{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:13px}
 .dgear span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}

@@ -1,22 +1,2984 @@
 {
-  "schema": "wuwa-desk/resonators@1.0",
-  "updated": "2026-08-12",
+  "schema": "wuwa-desk/resonators@1.1",
+  "updated": "2026-08-13",
+  "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg.",
   "resonators": [
     {
-      "name": "Suisui",
-      "rarity": 5,
-      "version": "3.5",
+      "name": "Aalto",
+      "rarity": 4,
+      "attribute": "Aero",
+      "weapon": "Pistols",
+      "role": "Support",
+      "region": "The Black Shores",
+      "epithet": "Mistcloak Strike",
+      "summary": "He is an information broker from the New Federation and a Consultant of the Black Shores.",
+      "version": "1.0",
       "status": "released",
-      "convene": "Blessings From Dewy Winds",
-      "signature": "Firstlight's Herald",
-      "region": "Mingting",
-      "summary": "Young director of the Zhaoming Commerce Guild, born into a noble Mingting family. Fights with a water fan rather than a sword - Kuro's reveal frames her as brokering peace through trade rather than swordplay.",
+      "convene": "When Thunder Pours",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.2",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8",
+        "3.1",
+        "3.3",
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "1.0",
+          "convene": "When Thunder Pours",
+          "start": "2024-06-06",
+          "end": "2024-06-26"
+        },
+        {
+          "version": "1.2",
+          "convene": "Celestial Revelation",
+          "start": "2024-09-07",
+          "end": "2024-09-28"
+        },
+        {
+          "version": "1.4",
+          "convene": "End of Lost Trail",
+          "start": "2024-11-14",
+          "end": "2024-12-12"
+        },
+        {
+          "version": "2.1",
+          "convene": "With Hushed Whispers",
+          "start": "2025-02-13",
+          "end": "2025-03-06"
+        },
+        {
+          "version": "2.2",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2025-04-17",
+          "end": "2025-04-28"
+        },
+        {
+          "version": "2.4",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2025-06-12",
+          "end": "2025-07-03"
+        },
+        {
+          "version": "2.6",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2025-09-17",
+          "end": "2025-10-08"
+        },
+        {
+          "version": "2.6",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-09-17",
+          "end": "2025-10-08"
+        },
+        {
+          "version": "2.8",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2025-11-20",
+          "end": "2025-12-11"
+        },
+        {
+          "version": "2.8",
+          "convene": "With Hushed Whispers",
+          "start": "2025-11-20",
+          "end": "2025-12-11"
+        },
+        {
+          "version": "3.1",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.1",
+          "convene": "Roar of Triumph",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.1",
+          "convene": "Take Flight in Spring",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.3",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.3",
+          "convene": "Distant May the Starlights Be",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.3",
+          "convene": "Thousand Futures Mirrored in Snow",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.5",
+          "convene": "Undefined Spectrum",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        },
+        {
+          "version": "3.5",
+          "convene": "Voices on Azure Feathers",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        },
+        {
+          "version": "3.5",
+          "convene": "When Winter Thaws",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Baizhi",
+      "rarity": 4,
+      "attribute": "Glacio",
+      "weapon": "Rectifier",
+      "role": "Support and Healer",
+      "region": "Huanglong",
+      "epithet": "Healing You'tan",
+      "summary": "She is a researcher in Remnant Ecoacoustics at Huaxu Academy. Baizhi's once unfulfilled wish has now manifested as her loyal companion. The Remnant Creature You'tan is her source of healing powers, and a lifelong research focus.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "Vermillion's Ploy",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.2",
+        "1.4",
+        "2.2",
+        "2.4",
+        "2.6",
+        "3.0",
+        "3.3",
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "1.1",
+          "convene": "Vermillion's Ploy",
+          "start": "2024-07-22",
+          "end": "2024-08-14"
+        },
+        {
+          "version": "1.2",
+          "convene": "Chromatic Prose",
+          "start": "2024-08-15",
+          "end": "2024-09-07"
+        },
+        {
+          "version": "1.4",
+          "convene": "Celestial Revelation",
+          "start": "2024-12-12",
+          "end": "2025-01-01"
+        },
+        {
+          "version": "1.4",
+          "convene": "When Thunder Pours",
+          "start": "2024-12-12",
+          "end": "2025-01-01"
+        },
+        {
+          "version": "2.2",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2025-04-17",
+          "end": "2025-04-28"
+        },
+        {
+          "version": "2.4",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2025-06-12",
+          "end": "2025-07-03"
+        },
+        {
+          "version": "2.6",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2025-09-17",
+          "end": "2025-10-08"
+        },
+        {
+          "version": "2.6",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-09-17",
+          "end": "2025-10-08"
+        },
+        {
+          "version": "3.0",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.0",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.0",
+          "convene": "Undefined Spectrum",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.3",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.3",
+          "convene": "Distant May the Starlights Be",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.3",
+          "convene": "Thousand Futures Mirrored in Snow",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.5",
+          "convene": "Blessings From Dewy Winds",
+          "start": "2026-07-30",
+          "end": "2026-08-19"
+        },
+        {
+          "version": "3.5",
+          "convene": "Take Flight in Spring",
+          "start": "2026-07-30",
+          "end": "2026-08-19"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Calcharo",
+      "rarity": 5,
+      "attribute": "Electro",
+      "weapon": "Broadblade",
+      "role": "Main DPS",
+      "region": "New Federation",
+      "epithet": "Phantom Hunters",
+      "summary": "He is a former Exile from the New Federation's Lawless Zone and the leader of the Ghost Hounds.",
+      "version": "1.0",
+      "status": "released",
+      "released": "2024-05-23",
+      "standard": true,
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Chixia",
+      "rarity": 4,
+      "attribute": "Fusion",
+      "weapon": "Pistols",
+      "role": "Main DPS",
+      "region": "Huanglong",
+      "epithet": "Gallant Blaze",
+      "summary": "She is a young Patroller who casts her jubilant figure along the streets of Jinzhou city.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "Prevail the Lasting Night",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.2",
+        "1.3",
+        "2.0",
+        "2.1",
+        "2.2",
+        "2.4",
+        "2.6",
+        "2.8",
+        "3.0",
+        "3.3",
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "1.0",
+          "convene": "Prevail the Lasting Night",
+          "start": "2024-05-23",
+          "end": "2024-06-13"
+        },
+        {
+          "version": "1.2",
+          "convene": "Chromatic Prose",
+          "start": "2024-08-15",
+          "end": "2024-09-07"
+        },
+        {
+          "version": "1.3",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2024-09-29",
+          "end": "2024-10-24"
+        },
+        {
+          "version": "2.0",
+          "convene": "Chromatic Prose",
+          "start": "2025-01-02",
+          "end": "2025-01-23"
+        },
+        {
+          "version": "2.0",
+          "convene": "When Silence Tolls",
+          "start": "2025-01-02",
+          "end": "2025-01-23"
+        },
+        {
+          "version": "2.1",
+          "convene": "With Hushed Whispers",
+          "start": "2025-02-13",
+          "end": "2025-03-06"
+        },
+        {
+          "version": "2.2",
+          "convene": "End of Lost Trail",
+          "start": "2025-03-27",
+          "end": "2025-04-17"
+        },
+        {
+          "version": "2.2",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-03-27",
+          "end": "2025-04-17"
+        },
+        {
+          "version": "2.4",
+          "convene": "Roar of Triumph",
+          "start": "2025-07-03",
+          "end": "2025-07-23"
+        },
+        {
+          "version": "2.6",
+          "convene": "Eternal Radiance on the Crown",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "2.6",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "2.6",
+          "convene": "When Silence Tolls",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "2.8",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-12-11",
+          "end": "2025-12-24"
+        },
+        {
+          "version": "2.8",
+          "convene": "Requiem Without End",
+          "start": "2025-12-11",
+          "end": "2025-12-24"
+        },
+        {
+          "version": "3.0",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.0",
+          "convene": "Distant May the Starlights Be",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.0",
+          "convene": "Eternal Radiance on the Crown",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.3",
+          "convene": "False Promise for Tomorrow",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        },
+        {
+          "version": "3.3",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        },
+        {
+          "version": "3.3",
+          "convene": "Requiem Without End",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        },
+        {
+          "version": "3.5",
+          "convene": "Undefined Spectrum",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        },
+        {
+          "version": "3.5",
+          "convene": "Voices on Azure Feathers",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        },
+        {
+          "version": "3.5",
+          "convene": "When Winter Thaws",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Danjin",
+      "rarity": 4,
+      "attribute": "Havoc",
+      "weapon": "Sword",
+      "role": "Support",
+      "region": "Huanglong",
+      "epithet": "Scarlet Shade",
+      "summary": "She is a member of the Midnight Rangers and hunts down thieves and bandits in order to bring them to justice.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "Prevail the Lasting Night",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.1",
+        "1.2",
+        "1.4",
+        "2.0",
+        "2.2",
+        "2.3",
+        "2.5",
+        "2.7",
+        "2.8",
+        "3.0",
+        "3.2",
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "1.0",
+          "convene": "Prevail the Lasting Night",
+          "start": "2024-05-23",
+          "end": "2024-06-13"
+        },
+        {
+          "version": "1.1",
+          "convene": "Thawborn Renewal",
+          "start": "2024-06-28",
+          "end": "2024-07-22"
+        },
+        {
+          "version": "1.2",
+          "convene": "Celestial Revelation",
+          "start": "2024-09-07",
+          "end": "2024-09-28"
+        },
+        {
+          "version": "1.4",
+          "convene": "End of Lost Trail",
+          "start": "2024-11-14",
+          "end": "2024-12-12"
+        },
+        {
+          "version": "2.0",
+          "convene": "Stage in the Box",
+          "start": "2025-01-23",
+          "end": "2025-02-12"
+        },
+        {
+          "version": "2.0",
+          "convene": "Thawborn Renewal",
+          "start": "2025-01-23",
+          "end": "2025-02-12"
+        },
+        {
+          "version": "2.2",
+          "convene": "End of Lost Trail",
+          "start": "2025-03-27",
+          "end": "2025-04-17"
+        },
+        {
+          "version": "2.2",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-03-27",
+          "end": "2025-04-17"
+        },
+        {
+          "version": "2.3",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-05-22",
+          "end": "2025-06-11"
+        },
+        {
+          "version": "2.5",
+          "convene": "Blaze Across the Deep",
+          "start": "2025-08-14",
+          "end": "2025-08-27"
+        },
+        {
+          "version": "2.5",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-08-14",
+          "end": "2025-08-27"
+        },
+        {
+          "version": "2.7",
+          "convene": "Between Light and Shadow",
+          "start": "2025-10-30",
+          "end": "2025-11-19"
+        },
+        {
+          "version": "2.7",
+          "convene": "Wanderer Knows No Far and Near",
+          "start": "2025-10-30",
+          "end": "2025-11-19"
+        },
+        {
+          "version": "2.8",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-12-11",
+          "end": "2025-12-24"
+        },
+        {
+          "version": "2.8",
+          "convene": "Requiem Without End",
+          "start": "2025-12-11",
+          "end": "2025-12-24"
+        },
+        {
+          "version": "3.0",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.0",
+          "convene": "Distant May the Starlights Be",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.0",
+          "convene": "Eternal Radiance on the Crown",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.2",
+          "convene": "Between Light and Shadow",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.2",
+          "convene": "Undefined Spectrum",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.2",
+          "convene": "With Hushed Whispers",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.5",
+          "convene": "Undefined Spectrum",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        },
+        {
+          "version": "3.5",
+          "convene": "Voices on Azure Feathers",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        },
+        {
+          "version": "3.5",
+          "convene": "When Winter Thaws",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Encore",
+      "rarity": 5,
+      "attribute": "Fusion",
+      "weapon": "Rectifier",
+      "role": "Main DPS",
+      "region": "The Black Shores",
+      "epithet": "Wooly–counting Game",
+      "summary": "She is from the New Federation and a Consultant of the Black Shores. With her vivid imagination, her Wooly companions, Cosmos and Cloudy, and a penchant for crafting fairy tales, she is responsible for finding new clients for the Black Shores alongside her fellow Consultant and brother figure Aalto.",
+      "version": "1.0",
+      "status": "released",
+      "released": "2024-05-23",
+      "standard": true,
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Jianxin",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Gauntlets",
+      "role": "Support and Healer",
+      "region": "Huanglong",
+      "epithet": "Guiding Starlance",
+      "summary": "As a Taoist monk and successor to the art of she has dedicated her life to mastering the ultimate martial art.",
+      "version": "1.0",
+      "status": "released",
+      "released": "2024-05-23",
+      "standard": true,
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Jiyan",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Broadblade",
+      "role": "Main DPS",
+      "region": "Huanglong",
+      "epithet": "Windborne Rider",
+      "summary": "He is the general of the Midnight Rangers selected by the sentinel of Jinzhou, Jué and is stationed in the same city.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "Prevail the Lasting Night",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.3"
+      ],
+      "runs": [
+        {
+          "version": "1.0",
+          "convene": "Prevail the Lasting Night",
+          "start": "2024-05-23",
+          "end": "2024-06-13"
+        },
+        {
+          "version": "1.3",
+          "convene": "Prevail the Lasting Night",
+          "start": "2024-10-24",
+          "end": "2024-11-13"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Lingyang",
+      "rarity": 5,
+      "attribute": "Glacio",
+      "weapon": "Gauntlets",
+      "role": "Main DPS",
+      "region": "Huanglong",
+      "epithet": "Frosty Gusto",
+      "summary": "He is a member of the Liondance Troupe in Jinzhou and the last living Suan'ni.",
+      "version": "1.0",
+      "status": "released",
+      "released": "2024-05-23",
+      "standard": true,
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Mortefi",
+      "rarity": 4,
+      "attribute": "Fusion",
+      "weapon": "Pistols",
+      "role": "Support",
+      "region": "New Federation",
+      "epithet": "Dragon's Breath",
+      "summary": "He hails from the New Federation and is the head of the Branch of Tacetite Weaponry within the Department of Safety in Huaxu Academy at Jinzhou.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "Prevail the Lasting Night",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.1",
+        "1.3",
+        "2.0",
+        "2.1",
+        "2.3",
+        "2.5",
+        "2.7",
+        "3.1",
+        "3.4",
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "1.0",
+          "convene": "Prevail the Lasting Night",
+          "start": "2024-05-23",
+          "end": "2024-06-13"
+        },
+        {
+          "version": "1.1",
+          "convene": "Vermillion's Ploy",
+          "start": "2024-07-22",
+          "end": "2024-08-14"
+        },
+        {
+          "version": "1.3",
+          "convene": "Prevail the Lasting Night",
+          "start": "2024-10-24",
+          "end": "2024-11-13"
+        },
+        {
+          "version": "2.0",
+          "convene": "Chromatic Prose",
+          "start": "2025-01-02",
+          "end": "2025-01-23"
+        },
+        {
+          "version": "2.0",
+          "convene": "When Silence Tolls",
+          "start": "2025-01-02",
+          "end": "2025-01-23"
+        },
+        {
+          "version": "2.1",
+          "convene": "Blaze Across the Deep",
+          "start": "2025-03-06",
+          "end": "2025-03-26"
+        },
+        {
+          "version": "2.1",
+          "convene": "Vermillion's Ploy",
+          "start": "2025-03-06",
+          "end": "2025-03-26"
+        },
+        {
+          "version": "2.3",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-05-22",
+          "end": "2025-06-11"
+        },
+        {
+          "version": "2.5",
+          "convene": "Blaze Across the Deep",
+          "start": "2025-08-14",
+          "end": "2025-08-27"
+        },
+        {
+          "version": "2.5",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-08-14",
+          "end": "2025-08-27"
+        },
+        {
+          "version": "2.7",
+          "convene": "From Ashes",
+          "start": "2025-10-09",
+          "end": "2025-10-30"
+        },
+        {
+          "version": "2.7",
+          "convene": "Roar of Triumph",
+          "start": "2025-10-09",
+          "end": "2025-10-30"
+        },
+        {
+          "version": "3.1",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.1",
+          "convene": "Roar of Triumph",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.1",
+          "convene": "Take Flight in Spring",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.4",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2026-06-18",
+          "end": "2026-07-09"
+        },
+        {
+          "version": "3.5",
+          "convene": "Blessings From Dewy Winds",
+          "start": "2026-07-30",
+          "end": "2026-08-19"
+        },
+        {
+          "version": "3.5",
+          "convene": "Take Flight in Spring",
+          "start": "2026-07-30",
+          "end": "2026-08-19"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Sanhua",
+      "rarity": 4,
+      "attribute": "Glacio",
+      "weapon": "Sword",
+      "role": "Support",
+      "region": "Huanglong",
+      "epithet": "Snow Waltz",
+      "summary": "She is the loyal and reliable guard of Jinzhou Magistrate Jinhsi who perceives a world distinctly different from that in the eyes of others.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "Thawborn Renewal",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.2",
+        "1.3",
+        "2.0",
+        "2.2",
+        "2.4",
+        "2.7",
+        "3.0",
+        "3.1",
+        "3.2"
+      ],
+      "runs": [
+        {
+          "version": "1.1",
+          "convene": "Thawborn Renewal",
+          "start": "2024-06-28",
+          "end": "2024-07-22"
+        },
+        {
+          "version": "1.2",
+          "convene": "Chromatic Prose",
+          "start": "2024-08-15",
+          "end": "2024-09-07"
+        },
+        {
+          "version": "1.3",
+          "convene": "Prevail the Lasting Night",
+          "start": "2024-10-24",
+          "end": "2024-11-13"
+        },
+        {
+          "version": "2.0",
+          "convene": "Chromatic Prose",
+          "start": "2025-01-02",
+          "end": "2025-01-23"
+        },
+        {
+          "version": "2.0",
+          "convene": "When Silence Tolls",
+          "start": "2025-01-02",
+          "end": "2025-01-23"
+        },
+        {
+          "version": "2.2",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2025-04-17",
+          "end": "2025-04-28"
+        },
+        {
+          "version": "2.4",
+          "convene": "Roar of Triumph",
+          "start": "2025-07-03",
+          "end": "2025-07-23"
+        },
+        {
+          "version": "2.7",
+          "convene": "From Ashes",
+          "start": "2025-10-09",
+          "end": "2025-10-30"
+        },
+        {
+          "version": "2.7",
+          "convene": "Roar of Triumph",
+          "start": "2025-10-09",
+          "end": "2025-10-30"
+        },
+        {
+          "version": "3.0",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.0",
+          "convene": "Distant May the Starlights Be",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.0",
+          "convene": "Eternal Radiance on the Crown",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.1",
+          "convene": "From Ashes",
+          "start": "2026-02-26",
+          "end": "2026-03-18"
+        },
+        {
+          "version": "3.1",
+          "convene": "When Winter Thaws",
+          "start": "2026-02-26",
+          "end": "2026-03-18"
+        },
+        {
+          "version": "3.2",
+          "convene": "Wanderer Knows No Far and Near",
+          "start": "2026-03-19",
+          "end": "2026-04-09"
+        },
+        {
+          "version": "3.2",
+          "convene": "When the Runes Glitter",
+          "start": "2026-03-19",
+          "end": "2026-04-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Taoqi",
+      "rarity": 4,
+      "attribute": "Havoc",
+      "weapon": "Broadblade",
+      "role": "Support and Healer",
+      "region": "Huanglong",
+      "epithet": "Blossom of Slashes",
+      "summary": "She is the director of border defense at the Ministry of Development.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "When Thunder Pours",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.1",
+        "1.3",
+        "2.1",
+        "2.3",
+        "2.4",
+        "2.5",
+        "2.6",
+        "2.7",
+        "2.8",
+        "3.1",
+        "3.2",
+        "3.4"
+      ],
+      "runs": [
+        {
+          "version": "1.0",
+          "convene": "When Thunder Pours",
+          "start": "2024-06-06",
+          "end": "2024-06-26"
+        },
+        {
+          "version": "1.1",
+          "convene": "Vermillion's Ploy",
+          "start": "2024-07-22",
+          "end": "2024-08-14"
+        },
+        {
+          "version": "1.3",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2024-09-29",
+          "end": "2024-10-24"
+        },
+        {
+          "version": "2.1",
+          "convene": "Blaze Across the Deep",
+          "start": "2025-03-06",
+          "end": "2025-03-26"
+        },
+        {
+          "version": "2.1",
+          "convene": "Vermillion's Ploy",
+          "start": "2025-03-06",
+          "end": "2025-03-26"
+        },
+        {
+          "version": "2.3",
+          "convene": "Between Light and Shadow",
+          "start": "2025-04-29",
+          "end": "2025-05-22"
+        },
+        {
+          "version": "2.4",
+          "convene": "Roar of Triumph",
+          "start": "2025-07-03",
+          "end": "2025-07-23"
+        },
+        {
+          "version": "2.5",
+          "convene": "Requiem Without End",
+          "start": "2025-07-24",
+          "end": "2025-08-14"
+        },
+        {
+          "version": "2.5",
+          "convene": "Stage in the Box",
+          "start": "2025-07-24",
+          "end": "2025-08-14"
+        },
+        {
+          "version": "2.6",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2025-09-17",
+          "end": "2025-10-08"
+        },
+        {
+          "version": "2.6",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-09-17",
+          "end": "2025-10-08"
+        },
+        {
+          "version": "2.7",
+          "convene": "Between Light and Shadow",
+          "start": "2025-10-30",
+          "end": "2025-11-19"
+        },
+        {
+          "version": "2.7",
+          "convene": "Wanderer Knows No Far and Near",
+          "start": "2025-10-30",
+          "end": "2025-11-19"
+        },
+        {
+          "version": "2.8",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2025-11-20",
+          "end": "2025-12-11"
+        },
+        {
+          "version": "2.8",
+          "convene": "With Hushed Whispers",
+          "start": "2025-11-20",
+          "end": "2025-12-11"
+        },
+        {
+          "version": "3.1",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.1",
+          "convene": "Roar of Triumph",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.1",
+          "convene": "Take Flight in Spring",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.2",
+          "convene": "Between Light and Shadow",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.2",
+          "convene": "Undefined Spectrum",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.2",
+          "convene": "With Hushed Whispers",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.4",
+          "convene": "Tomorrow in the Frame",
+          "start": "2026-06-13",
+          "end": "2026-07-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Verina",
+      "rarity": 5,
+      "attribute": "Spectro",
+      "weapon": "Rectifier",
+      "role": "Support and Healer",
+      "region": "New Federation",
+      "epithet": "Nature Calling",
+      "summary": "She is a botanist from the New Federation who dwells in Jinzhou, Huanglong.",
+      "version": "1.0",
+      "status": "released",
+      "released": "2024-05-23",
+      "standard": true,
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Yangyang",
+      "rarity": 4,
+      "attribute": "Aero",
+      "weapon": "Sword",
+      "role": "Support",
+      "region": "Huanglong",
+      "epithet": "Breath of Winds",
+      "summary": "She is an outrider of the Midnight Rangers.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "Thawborn Renewal",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.3",
+        "1.4",
+        "2.3",
+        "2.5",
+        "2.7",
+        "3.0",
+        "3.2",
+        "3.3",
+        "3.4"
+      ],
+      "runs": [
+        {
+          "version": "1.1",
+          "convene": "Thawborn Renewal",
+          "start": "2024-06-28",
+          "end": "2024-07-22"
+        },
+        {
+          "version": "1.3",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2024-09-29",
+          "end": "2024-10-24"
+        },
+        {
+          "version": "1.4",
+          "convene": "End of Lost Trail",
+          "start": "2024-11-14",
+          "end": "2024-12-12"
+        },
+        {
+          "version": "2.3",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-05-22",
+          "end": "2025-06-11"
+        },
+        {
+          "version": "2.5",
+          "convene": "Blaze Across the Deep",
+          "start": "2025-08-14",
+          "end": "2025-08-27"
+        },
+        {
+          "version": "2.5",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-08-14",
+          "end": "2025-08-27"
+        },
+        {
+          "version": "2.7",
+          "convene": "Between Light and Shadow",
+          "start": "2025-10-30",
+          "end": "2025-11-19"
+        },
+        {
+          "version": "2.7",
+          "convene": "Wanderer Knows No Far and Near",
+          "start": "2025-10-30",
+          "end": "2025-11-19"
+        },
+        {
+          "version": "3.0",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.0",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.0",
+          "convene": "Undefined Spectrum",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.2",
+          "convene": "Wanderer Knows No Far and Near",
+          "start": "2026-03-19",
+          "end": "2026-04-09"
+        },
+        {
+          "version": "3.2",
+          "convene": "When the Runes Glitter",
+          "start": "2026-03-19",
+          "end": "2026-04-09"
+        },
+        {
+          "version": "3.3",
+          "convene": "False Promise for Tomorrow",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        },
+        {
+          "version": "3.3",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        },
+        {
+          "version": "3.3",
+          "convene": "Requiem Without End",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        },
+        {
+          "version": "3.4",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2026-06-18",
+          "end": "2026-07-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Yuanwu",
+      "rarity": 4,
+      "attribute": "Electro",
+      "weapon": "Gauntlets",
+      "role": "Support",
+      "region": "Huanglong",
+      "epithet": "Fist of Thunder",
+      "summary": "He owns a boxing gym where he teaches martial arts and health management, and is well-respected in the community for his cordial demeanor and pleasant temperament.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "When Thunder Pours",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "reruns": [
+        "1.2",
+        "1.4",
+        "2.0",
+        "2.2",
+        "2.3",
+        "2.5",
+        "2.6",
+        "2.8",
+        "3.1",
+        "3.3",
+        "3.4"
+      ],
+      "runs": [
+        {
+          "version": "1.0",
+          "convene": "When Thunder Pours",
+          "start": "2024-06-06",
+          "end": "2024-06-26"
+        },
+        {
+          "version": "1.2",
+          "convene": "Celestial Revelation",
+          "start": "2024-09-07",
+          "end": "2024-09-28"
+        },
+        {
+          "version": "1.4",
+          "convene": "Celestial Revelation",
+          "start": "2024-12-12",
+          "end": "2025-01-01"
+        },
+        {
+          "version": "1.4",
+          "convene": "When Thunder Pours",
+          "start": "2024-12-12",
+          "end": "2025-01-01"
+        },
+        {
+          "version": "2.0",
+          "convene": "Stage in the Box",
+          "start": "2025-01-23",
+          "end": "2025-02-12"
+        },
+        {
+          "version": "2.0",
+          "convene": "Thawborn Renewal",
+          "start": "2025-01-23",
+          "end": "2025-02-12"
+        },
+        {
+          "version": "2.2",
+          "convene": "End of Lost Trail",
+          "start": "2025-03-27",
+          "end": "2025-04-17"
+        },
+        {
+          "version": "2.2",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-03-27",
+          "end": "2025-04-17"
+        },
+        {
+          "version": "2.3",
+          "convene": "Between Light and Shadow",
+          "start": "2025-04-29",
+          "end": "2025-05-22"
+        },
+        {
+          "version": "2.5",
+          "convene": "Requiem Without End",
+          "start": "2025-07-24",
+          "end": "2025-08-14"
+        },
+        {
+          "version": "2.5",
+          "convene": "Stage in the Box",
+          "start": "2025-07-24",
+          "end": "2025-08-14"
+        },
+        {
+          "version": "2.6",
+          "convene": "Eternal Radiance on the Crown",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "2.6",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "2.6",
+          "convene": "When Silence Tolls",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "2.8",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2025-11-20",
+          "end": "2025-12-11"
+        },
+        {
+          "version": "2.8",
+          "convene": "With Hushed Whispers",
+          "start": "2025-11-20",
+          "end": "2025-12-11"
+        },
+        {
+          "version": "3.1",
+          "convene": "From Ashes",
+          "start": "2026-02-26",
+          "end": "2026-03-18"
+        },
+        {
+          "version": "3.1",
+          "convene": "When Winter Thaws",
+          "start": "2026-02-26",
+          "end": "2026-03-18"
+        },
+        {
+          "version": "3.3",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.3",
+          "convene": "Distant May the Starlights Be",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.3",
+          "convene": "Thousand Futures Mirrored in Snow",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        },
+        {
+          "version": "3.4",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2026-06-18",
+          "end": "2026-07-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Yinlin",
+      "rarity": 5,
+      "attribute": "Electro",
+      "weapon": "Rectifier",
+      "role": "Support",
+      "region": "Huanglong",
+      "epithet": "Lightning of Execution",
+      "summary": "Once an outstanding Patroller who was suspended from her duties at the Public Security Bureau, Yinlin now pursues hidden evils in secrecy.",
+      "version": "1.0",
+      "status": "released",
+      "convene": "When Thunder Pours",
+      "released": "2024-06-06",
+      "hasKit": true,
+      "reruns": [
+        "1.4"
+      ],
+      "runs": [
+        {
+          "version": "1.0",
+          "convene": "When Thunder Pours",
+          "start": "2024-06-06",
+          "end": "2024-06-26"
+        },
+        {
+          "version": "1.4",
+          "convene": "When Thunder Pours",
+          "start": "2024-12-12",
+          "end": "2025-01-01"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Jinhsi",
+      "rarity": 5,
+      "attribute": "Spectro",
+      "weapon": "Broadblade",
+      "role": "Main DPS",
+      "region": "Huanglong",
+      "epithet": "Thawborn Renewal",
+      "summary": "She is the young Magistrate of Jinzhou with a resolute and altruistic nature and an unbreakable dedication to defending her city and countrymen to her last breath. She is also the appointed Resonator of Sentinel Jué, manifesting in the shape of a Loong, since birth, and with it the responsibility to safeguard Jinzhou's past and guide its future.",
+      "version": "1.1",
+      "status": "released",
+      "convene": "Thawborn Renewal",
+      "released": "2024-06-28",
+      "hasKit": true,
+      "reruns": [
+        "2.0"
+      ],
+      "runs": [
+        {
+          "version": "1.1",
+          "convene": "Thawborn Renewal",
+          "start": "2024-06-28",
+          "end": "2024-07-22"
+        },
+        {
+          "version": "2.0",
+          "convene": "Thawborn Renewal",
+          "start": "2025-01-23",
+          "end": "2025-02-12"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Changli",
+      "rarity": 5,
+      "attribute": "Fusion",
+      "weapon": "Sword",
+      "role": "Main DPS",
+      "region": "Huanglong",
+      "epithet": "Eternal Blaze",
+      "summary": "She is the Former Secretary-General of the Central Secretariat in Mingting, the capital, and now serves as Counselor to Jinzhou Magistrate, Jinhsi. Having flourished from an unforgiving childhood, she now stands as a calculated, knowledgeable, and mysterious official and strategist with a keen eye for both political and civilian affairs.",
+      "version": "1.1",
+      "status": "released",
+      "convene": "Vermillion's Ploy",
+      "released": "2024-07-22",
+      "hasKit": true,
+      "reruns": [
+        "2.1"
+      ],
+      "runs": [
+        {
+          "version": "1.1",
+          "convene": "Vermillion's Ploy",
+          "start": "2024-07-22",
+          "end": "2024-08-14"
+        },
+        {
+          "version": "2.1",
+          "convene": "Vermillion's Ploy",
+          "start": "2025-03-06",
+          "end": "2025-03-26"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Zhezhi",
+      "rarity": 5,
+      "attribute": "Glacio",
+      "weapon": "Rectifier",
+      "role": "Support",
+      "region": "Huanglong",
+      "epithet": "Enchanted Brush",
+      "summary": "She is a commissioned painter, quiet and shy with a dedication to her craft. She's not very eloquent, but her persistence and love for painting speak volumes.",
+      "version": "1.2",
+      "status": "released",
+      "convene": "Chromatic Prose",
+      "released": "2024-08-15",
+      "hasKit": true,
+      "reruns": [
+        "2.0"
+      ],
+      "runs": [
+        {
+          "version": "1.2",
+          "convene": "Chromatic Prose",
+          "start": "2024-08-15",
+          "end": "2024-09-07"
+        },
+        {
+          "version": "2.0",
+          "convene": "Chromatic Prose",
+          "start": "2025-01-02",
+          "end": "2025-01-23"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Xiangli Yao",
+      "rarity": 5,
+      "attribute": "Electro",
+      "weapon": "Gauntlets",
+      "role": "Main DPS",
+      "region": "Huanglong",
+      "epithet": "Matter Weaver",
+      "summary": "He is the Principal Investigator in charge of the academics at Huaxu Academy's Jinzhou Campus. He is the Academy's youngest multi-disciplinary scientist, and an expert in the research of Automata Mechanics.",
+      "version": "1.2",
+      "status": "released",
+      "convene": "Celestial Revelation",
+      "released": "2024-09-07",
+      "hasKit": true,
+      "reruns": [
+        "1.4"
+      ],
+      "runs": [
+        {
+          "version": "1.2",
+          "convene": "Celestial Revelation",
+          "start": "2024-09-07",
+          "end": "2024-09-28"
+        },
+        {
+          "version": "1.4",
+          "convene": "Celestial Revelation",
+          "start": "2024-12-12",
+          "end": "2025-01-01"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "The Shorekeeper",
+      "rarity": 5,
+      "attribute": "Spectro",
+      "weapon": "Rectifier",
+      "role": "Support and Healer",
+      "region": "The Black Shores",
+      "epithet": "Euphonic Chrysalis",
+      "summary": "She is known as \"the Second Instance,\" the Guardian of the Black Shores, and is a mythical entity composed of Sonoro Spheres and high-purity Remnant Energy crystals with the power to guide the Tethys System and control the stars themselves, only appearing during times of crisis to aid the true leader of the Black Shores. Even among the organization's guests and members, she remains an incredibly enigmatic figure.",
+      "version": "1.3",
+      "status": "released",
+      "convene": "Till the Sea Turns Clear",
+      "released": "2024-09-29",
+      "hasKit": true,
+      "reruns": [
+        "2.2",
+        "2.6"
+      ],
+      "runs": [
+        {
+          "version": "1.3",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2024-09-29",
+          "end": "2024-10-24"
+        },
+        {
+          "version": "2.2",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2025-04-17",
+          "end": "2025-04-28"
+        },
+        {
+          "version": "2.6",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Youhu",
+      "rarity": 4,
+      "attribute": "Glacio",
+      "weapon": "Gauntlets",
+      "role": "Support and Healer",
+      "region": "Huanglong",
+      "epithet": "Cryogenic Wonders",
+      "summary": "She is an antiquarian from Huanglong.",
+      "version": "1.3",
+      "status": "released",
+      "convene": "Prevail the Lasting Night",
+      "released": "2024-10-24",
+      "hasKit": true,
+      "reruns": [
+        "2.0",
+        "2.1",
+        "2.4",
+        "2.6",
+        "3.0",
+        "3.2",
+        "3.4"
+      ],
+      "runs": [
+        {
+          "version": "1.3",
+          "convene": "Prevail the Lasting Night",
+          "start": "2024-10-24",
+          "end": "2024-11-13"
+        },
+        {
+          "version": "2.0",
+          "convene": "Stage in the Box",
+          "start": "2025-01-23",
+          "end": "2025-02-12"
+        },
+        {
+          "version": "2.0",
+          "convene": "Thawborn Renewal",
+          "start": "2025-01-23",
+          "end": "2025-02-12"
+        },
+        {
+          "version": "2.1",
+          "convene": "Blaze Across the Deep",
+          "start": "2025-03-06",
+          "end": "2025-03-26"
+        },
+        {
+          "version": "2.1",
+          "convene": "Vermillion's Ploy",
+          "start": "2025-03-06",
+          "end": "2025-03-26"
+        },
+        {
+          "version": "2.4",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2025-06-12",
+          "end": "2025-07-03"
+        },
+        {
+          "version": "2.6",
+          "convene": "Eternal Radiance on the Crown",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "2.6",
+          "convene": "Till the Sea Turns Clear",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "2.6",
+          "convene": "When Silence Tolls",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "3.0",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.0",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.0",
+          "convene": "Undefined Spectrum",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.2",
+          "convene": "Between Light and Shadow",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.2",
+          "convene": "Undefined Spectrum",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.2",
+          "convene": "With Hushed Whispers",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.4",
+          "convene": "Tomorrow in the Frame",
+          "start": "2026-06-13",
+          "end": "2026-07-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Camellya",
+      "rarity": 5,
+      "attribute": "Havoc",
+      "weapon": "Sword",
+      "role": "Main DPS",
+      "region": "The Black Shores",
+      "epithet": "Sanguine Blossom",
+      "summary": "She is a Bloom Bearer of the Black Shores, and handles the combat-oriented germination tests given to new candidates. However, she refuses all sense of responsibility, delighting in satiating her unquenchable thirst for battle and personal amusement. In pursuit of the thrill of a fight, she gleefully abandons the risks to her life and the people around her.",
+      "version": "1.4",
+      "status": "released",
+      "convene": "End of Lost Trail",
+      "released": "2024-11-14",
+      "hasKit": true,
+      "reruns": [
+        "2.2"
+      ],
+      "runs": [
+        {
+          "version": "1.4",
+          "convene": "End of Lost Trail",
+          "start": "2024-11-14",
+          "end": "2024-12-12"
+        },
+        {
+          "version": "2.2",
+          "convene": "End of Lost Trail",
+          "start": "2025-03-27",
+          "end": "2025-04-17"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Lumi",
+      "rarity": 4,
+      "attribute": "Electro",
+      "weapon": "Broadblade",
+      "role": "Main DPS",
+      "region": "Huanglong",
+      "epithet": "Kaleido Refraction",
+      "summary": "She is a navigator at Lollo Logistics and leader of a transport squad team.",
+      "version": "1.4",
+      "status": "released",
+      "convene": "Celestial Revelation",
+      "released": "2024-12-12",
+      "hasKit": true,
+      "reruns": [
+        "2.1",
+        "2.3",
+        "2.5",
+        "2.7",
+        "3.1",
+        "3.4",
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "1.4",
+          "convene": "Celestial Revelation",
+          "start": "2024-12-12",
+          "end": "2025-01-01"
+        },
+        {
+          "version": "1.4",
+          "convene": "When Thunder Pours",
+          "start": "2024-12-12",
+          "end": "2025-01-01"
+        },
+        {
+          "version": "2.1",
+          "convene": "With Hushed Whispers",
+          "start": "2025-02-13",
+          "end": "2025-03-06"
+        },
+        {
+          "version": "2.3",
+          "convene": "Between Light and Shadow",
+          "start": "2025-04-29",
+          "end": "2025-05-22"
+        },
+        {
+          "version": "2.5",
+          "convene": "Requiem Without End",
+          "start": "2025-07-24",
+          "end": "2025-08-14"
+        },
+        {
+          "version": "2.5",
+          "convene": "Stage in the Box",
+          "start": "2025-07-24",
+          "end": "2025-08-14"
+        },
+        {
+          "version": "2.7",
+          "convene": "From Ashes",
+          "start": "2025-10-09",
+          "end": "2025-10-30"
+        },
+        {
+          "version": "2.7",
+          "convene": "Roar of Triumph",
+          "start": "2025-10-09",
+          "end": "2025-10-30"
+        },
+        {
+          "version": "3.1",
+          "convene": "From Ashes",
+          "start": "2026-02-26",
+          "end": "2026-03-18"
+        },
+        {
+          "version": "3.1",
+          "convene": "When Winter Thaws",
+          "start": "2026-02-26",
+          "end": "2026-03-18"
+        },
+        {
+          "version": "3.4",
+          "convene": "Tomorrow in the Frame",
+          "start": "2026-06-13",
+          "end": "2026-07-09"
+        },
+        {
+          "version": "3.5",
+          "convene": "Blessings From Dewy Winds",
+          "start": "2026-07-30",
+          "end": "2026-08-19"
+        },
+        {
+          "version": "3.5",
+          "convene": "Take Flight in Spring",
+          "start": "2026-07-30",
+          "end": "2026-08-19"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Carlotta",
+      "rarity": 5,
+      "attribute": "Glacio",
+      "weapon": "Pistols",
+      "role": "Main DPS",
+      "region": "Rinascita",
+      "epithet": "Crystal Remorph",
+      "summary": "She is the second daughter of the esteemed Montelli Family of Rinascita, embodying innate nobility and a refined appreciation for art. She wields unparalleled intelligence, confidence, cunning, and an ambition to elevate Ragunna City to new heights. Her determination extends to her work of maintaining her family's interests, as well as eliminating those standing in the way of them.",
+      "version": "2.0",
+      "status": "released",
+      "convene": "When Silence Tolls",
+      "released": "2025-01-02",
+      "hasKit": true,
+      "reruns": [
+        "2.6"
+      ],
+      "runs": [
+        {
+          "version": "2.0",
+          "convene": "When Silence Tolls",
+          "start": "2025-01-02",
+          "end": "2025-01-23"
+        },
+        {
+          "version": "2.6",
+          "convene": "When Silence Tolls",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Roccia",
+      "rarity": 5,
+      "attribute": "Havoc",
+      "weapon": "Gauntlets",
+      "role": "Support",
+      "region": "Rinascita",
+      "epithet": "Stage in the Box",
+      "summary": "She is a gifted improvisational comedian and the First Mate of the Troupe of Fools. While bashful and introverted, she, alongside Pero, her closest companion, possesses a repertoire of tools and talents to protect and nurture her friends and newfound family.",
+      "version": "2.0",
+      "status": "released",
+      "convene": "Stage in the Box",
+      "released": "2025-01-23",
+      "hasKit": true,
+      "reruns": [
+        "2.5"
+      ],
+      "runs": [
+        {
+          "version": "2.0",
+          "convene": "Stage in the Box",
+          "start": "2025-01-23",
+          "end": "2025-02-12"
+        },
+        {
+          "version": "2.5",
+          "convene": "Stage in the Box",
+          "start": "2025-07-24",
+          "end": "2025-08-14"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Phoebe",
+      "rarity": 5,
+      "attribute": "Spectro",
+      "weapon": "Rectifier",
+      "role": "Main DPS",
+      "region": "Rinascita",
+      "epithet": "Graceful Luminescence",
+      "summary": "She is an Acolyte of the Order of the Deep. A young woman of quiet devotion and compassionate, nurturing nature, she upholds the teachings of her faith with unwavering diligence. Raised her entire life as a devout Acolyte, she extends her heartfelt kindness to everyone she meets with her good graces and unquestionable reverence to Sentinel Imperator.",
+      "version": "2.1",
+      "status": "released",
+      "convene": "With Hushed Whispers",
+      "released": "2025-02-13",
+      "hasKit": true,
+      "reruns": [
+        "2.8",
+        "3.2"
+      ],
+      "runs": [
+        {
+          "version": "2.1",
+          "convene": "With Hushed Whispers",
+          "start": "2025-02-13",
+          "end": "2025-03-06"
+        },
+        {
+          "version": "2.8",
+          "convene": "With Hushed Whispers",
+          "start": "2025-11-20",
+          "end": "2025-12-11"
+        },
+        {
+          "version": "3.2",
+          "convene": "With Hushed Whispers",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Brant",
+      "rarity": 5,
+      "attribute": "Fusion",
+      "weapon": "Sword",
+      "role": "Support and Healer",
+      "region": "Rinascita",
+      "epithet": "Flamebound Compass",
+      "summary": "He is the captain of the Troupe of Fools, exuding a carefree, easygoing charm and charisma, unbound by convention. However, beneath his flamboyant persona lies a kind heart deeply devoted to ensuring his crew's safety and freedom. He views the world as one of unlimited possibilities and encourages this same optimism in the public through his spectacular performances.",
+      "version": "2.1",
+      "status": "released",
+      "convene": "Blaze Across the Deep",
+      "released": "2025-03-06",
+      "hasKit": true,
+      "reruns": [
+        "2.5"
+      ],
+      "runs": [
+        {
+          "version": "2.1",
+          "convene": "Blaze Across the Deep",
+          "start": "2025-03-06",
+          "end": "2025-03-26"
+        },
+        {
+          "version": "2.5",
+          "convene": "Blaze Across the Deep",
+          "start": "2025-08-14",
+          "end": "2025-08-27"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Cantarella",
+      "rarity": 5,
+      "attribute": "Havoc",
+      "weapon": "Rectifier",
+      "role": "Support and Healer",
+      "region": "Rinascita",
+      "epithet": "Sea of Dreams",
+      "summary": "She is the thirty-sixth matriarch of the Fisalia family, and the former Blessed Maiden of Imperator. Her elegant, composed demeanor and captivating beauty conceal a dark and disturbing past, of which she is steadfastly searching for the means to liberate herself and her lineage.",
+      "version": "2.2",
+      "status": "released",
+      "convene": "Neptune's Lullaby",
+      "released": "2025-03-27",
+      "hasKit": true,
+      "reruns": [
+        "2.5",
+        "2.8"
+      ],
+      "runs": [
+        {
+          "version": "2.2",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-03-27",
+          "end": "2025-04-17"
+        },
+        {
+          "version": "2.5",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-08-14",
+          "end": "2025-08-27"
+        },
+        {
+          "version": "2.8",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-12-11",
+          "end": "2025-12-24"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Zani",
+      "rarity": 5,
+      "attribute": "Spectro",
+      "weapon": "Gauntlets",
+      "role": "Main DPS",
+      "region": "Rinascita",
+      "epithet": "Scorched Radiance",
+      "summary": "She is a staff member of the Montelli Family's Averardo Bank in Ragunna. As a serious and reliable Montelli employee, Zani follows a strict routine and manages tasks with ease. For years, she has clocked in on time without fail, finding as much enjoyment in her well-ordered life as in her carefully planned moments of leisure.",
+      "version": "2.3",
+      "status": "released",
+      "convene": "Between Light and Shadow",
+      "released": "2025-04-29",
+      "hasKit": true,
+      "reruns": [
+        "2.7",
+        "3.2"
+      ],
+      "runs": [
+        {
+          "version": "2.3",
+          "convene": "Between Light and Shadow",
+          "start": "2025-04-29",
+          "end": "2025-05-22"
+        },
+        {
+          "version": "2.7",
+          "convene": "Between Light and Shadow",
+          "start": "2025-10-30",
+          "end": "2025-11-19"
+        },
+        {
+          "version": "3.2",
+          "convene": "Between Light and Shadow",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Ciaccona",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Pistols",
+      "role": "Support",
+      "region": "Rinascita",
+      "epithet": "Woven Melodies",
+      "summary": "She is a free-spirited, romantic, sincere, and whimsical bard wandering Rinascita in search of inspiration. A passionate musician, poet, and storyteller for both commoners as well as the Divinity, Ciaccona aims to spread her talents, truths, and discoveries of the world around her to all those daring enough to listen.",
+      "version": "2.3",
+      "status": "released",
+      "convene": "Through Verses and Rhythms",
+      "released": "2025-05-22",
+      "hasKit": true,
+      "reruns": [
+        "2.6",
+        "3.0"
+      ],
+      "runs": [
+        {
+          "version": "2.3",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-05-22",
+          "end": "2025-06-11"
+        },
+        {
+          "version": "2.6",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-09-17",
+          "end": "2025-10-08"
+        },
+        {
+          "version": "3.0",
+          "convene": "Through Verses and Rhythms",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Cartethyia",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Sword",
+      "role": "Main DPS",
+      "region": "Rinascita",
+      "epithet": "Feathered Tempest",
+      "summary": "Throughout Rinascita, she is revered as Fleurdelys, the \"Blessed Maiden,\" and in some accounts, \"The Martyred Maiden.\" As a key figure in the region’s history, she holds profound influence, with her connections to the Sentinel Imperator, the Threnodian Leviathan, and the Dark Tide. Her true desires, however, lie in freeing herself from the shackles of her titles and living out her days as a just and righteous wandering knight.",
+      "version": "2.4",
+      "status": "released",
+      "convene": "Dance in the Storm's Wake",
+      "released": "2025-06-12",
+      "hasKit": true,
+      "reruns": [
+        "3.0",
+        "3.4"
+      ],
+      "runs": [
+        {
+          "version": "2.4",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2025-06-12",
+          "end": "2025-07-03"
+        },
+        {
+          "version": "3.0",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.4",
+          "convene": "Dance in the Storm's Wake",
+          "start": "2026-06-18",
+          "end": "2026-07-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Lupa",
+      "rarity": 5,
+      "attribute": "Fusion",
+      "weapon": "Broadblade",
+      "role": "Support",
+      "region": "Rinascita",
+      "epithet": "Howling Flame",
+      "summary": "She is a gladiator from Septimont, a warrior and undefeated champion of the arena with both an untamed, competitive spirit and an honorable, valiant heart. While indulging in the adrenaline of hard-fought victories, she is also a loyal, prideful protector of her city and upholds its values with everything she holds dear.",
+      "version": "2.4",
+      "status": "released",
+      "convene": "Roar of Triumph",
+      "released": "2025-07-03",
+      "hasKit": true,
+      "reruns": [
+        "2.7",
+        "3.1"
+      ],
+      "runs": [
+        {
+          "version": "2.4",
+          "convene": "Roar of Triumph",
+          "start": "2025-07-03",
+          "end": "2025-07-23"
+        },
+        {
+          "version": "2.7",
+          "convene": "Roar of Triumph",
+          "start": "2025-10-09",
+          "end": "2025-10-30"
+        },
+        {
+          "version": "3.1",
+          "convene": "Roar of Triumph",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Phrolova",
+      "rarity": 5,
+      "attribute": "Havoc",
+      "weapon": "Rectifier",
+      "role": "Main DPS",
+      "region": "Ostina",
+      "epithet": "Symphony of Beyond",
+      "summary": "She is a particularly powerful Resonator and a former Overseer of the Fractsidus. Her forte can manipulate and transfigure the frequencies of humans, Echoes, and Tacet Discords alike.",
+      "version": "2.5",
+      "status": "released",
+      "convene": "Requiem Without End",
+      "released": "2025-07-24",
+      "hasKit": true,
+      "reruns": [
+        "2.8",
+        "3.3"
+      ],
+      "runs": [
+        {
+          "version": "2.5",
+          "convene": "Requiem Without End",
+          "start": "2025-07-24",
+          "end": "2025-08-14"
+        },
+        {
+          "version": "2.8",
+          "convene": "Requiem Without End",
+          "start": "2025-12-11",
+          "end": "2025-12-24"
+        },
+        {
+          "version": "3.3",
+          "convene": "Requiem Without End",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Augusta",
+      "rarity": 5,
+      "attribute": "Electro",
+      "weapon": "Broadblade",
+      "role": "Main DPS",
+      "region": "Rinascita",
+      "epithet": "Magnetism Before Light",
+      "summary": "The fearless Ephor of Septimont with a will of iron, she remains a fiercely resilient yet humble leader despite the immeasurable hardships of her childhood and tenure as a Gladiator. Though a mere mortal, she has mastered the arts of combat, strategy, and her Forte through countless conflicts, reaching heights few others like her have ever attempted to reach.",
+      "version": "2.6",
+      "status": "released",
+      "convene": "Eternal Radiance on the Crown",
+      "released": "2025-08-28",
+      "hasKit": true,
+      "reruns": [
+        "3.0"
+      ],
+      "runs": [
+        {
+          "version": "2.6",
+          "convene": "Eternal Radiance on the Crown",
+          "start": "2025-08-28",
+          "end": "2025-09-17"
+        },
+        {
+          "version": "3.0",
+          "convene": "Eternal Radiance on the Crown",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Iuno",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Gauntlets",
+      "role": "Support and Healer",
+      "region": "Rinascita",
+      "epithet": "Stasis, Cycle, Renewal",
+      "summary": "She is a prodigious and renowned Priestess of Septimont's Tetragon Temple, charged with delivering prophecies that shape the lives of its citizens. While both blessed and cursed with the power to foretell the futures of others, her responsibilities are contrasted by her cocky, outspoken and rebellious attitude, embodying an eagerness to defy all of fate's cruelest machinations.",
+      "version": "2.6",
+      "status": "released",
+      "convene": "Across Time's Waxes and Wanes",
+      "released": "2025-09-17",
+      "hasKit": true,
+      "reruns": [
+        "3.0",
+        "3.3"
+      ],
+      "runs": [
+        {
+          "version": "2.6",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2025-09-17",
+          "end": "2025-10-08"
+        },
+        {
+          "version": "3.0",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.3",
+          "convene": "Across Time's Waxes and Wanes",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Galbrena",
+      "rarity": 5,
+      "attribute": "Fusion",
+      "weapon": "Pistols",
+      "role": "Main DPS",
+      "region": "The Black Shores",
+      "epithet": "Infernal Descent",
+      "summary": "Once a Septimontian known as \"Angel\", she is now a formidable \"Discord Slayer\" who wields the ability to consume the frequencies and powers of Tacet Discords she hunts across Solaris-3, with the aid of the notorious Chimera. Her identity as a \"Fiend of Ever-Burning Flame\", a huntress spoken in legend corrupted by the Dark Tide, is now reborn anew with her responsibilities as a Consultant of the Black Shores.",
+      "version": "2.7",
+      "status": "released",
+      "convene": "From Ashes",
+      "released": "2025-10-09",
+      "hasKit": true,
+      "reruns": [
+        "3.1"
+      ],
+      "runs": [
+        {
+          "version": "2.7",
+          "convene": "From Ashes",
+          "start": "2025-10-09",
+          "end": "2025-10-30"
+        },
+        {
+          "version": "3.1",
+          "convene": "From Ashes",
+          "start": "2026-02-26",
+          "end": "2026-03-18"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Qiuyuan",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Sword",
+      "role": "Support",
+      "region": "Huanglong",
+      "epithet": "Bambooscape",
+      "summary": "Former senior agent of Mingting's Internal Security Agency, he is a swordsman of cool resilience and absolute integrity, wandering Huanglong alone and seeks not fame nor high office, but mastery of swordsmanship and a life guided by high morals. He was framed by the Grand Architect for the murder of his master, and is now a fugitive throughout all of Huanglong.",
+      "version": "2.7",
+      "status": "released",
+      "convene": "Wanderer Knows No Far and Near",
+      "released": "2025-10-30",
+      "hasKit": true,
+      "reruns": [
+        "3.2"
+      ],
+      "runs": [
+        {
+          "version": "2.7",
+          "convene": "Wanderer Knows No Far and Near",
+          "start": "2025-10-30",
+          "end": "2025-11-19"
+        },
+        {
+          "version": "3.2",
+          "convene": "Wanderer Knows No Far and Near",
+          "start": "2026-03-19",
+          "end": "2026-04-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Chisa",
+      "rarity": 5,
+      "attribute": "Havoc",
+      "weapon": "Broadblade",
+      "role": "Support and Healer",
+      "region": "Lahai-Roi",
+      "epithet": "Eye of Unravelling",
+      "summary": "Chisa is a conscientious, level-headed student from the Startorch Academy. To her, everything can be broken down, analyzed, and resolved, with the exception of human bonding. Bonds can be severed, but this fragility is what makes them precious.",
+      "version": "2.8",
+      "status": "released",
+      "convene": "Horizon of Dawnbreak",
+      "released": "2025-11-20",
+      "hasKit": true,
+      "reruns": [
+        "3.1",
+        "3.3"
+      ],
+      "runs": [
+        {
+          "version": "2.8",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2025-11-20",
+          "end": "2025-12-11"
+        },
+        {
+          "version": "3.1",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.3",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Buling",
+      "rarity": 4,
+      "attribute": "Electro",
+      "weapon": "Rectifier",
+      "role": "Support and Healer",
+      "region": "The Black Shores",
+      "epithet": "Divine Hearing",
+      "summary": "She is a Black Shores Consultant, known as the \"Spiritchaser Taoist,\" who wanders far and wide investigating and sharing the strange and mysterious. She is a master of fortune-telling, feng shui, and other arts of divination. To cover the expenses in her travels, she sells talismans and offers her divination services, which she thinks of as a sort of guidance for those in need.",
+      "version": "2.8",
+      "status": "released",
+      "convene": "Neptune's Lullaby",
+      "released": "2025-12-11",
+      "hasKit": true,
+      "reruns": [
+        "3.2",
+        "3.3"
+      ],
+      "runs": [
+        {
+          "version": "2.8",
+          "convene": "Neptune's Lullaby",
+          "start": "2025-12-11",
+          "end": "2025-12-24"
+        },
+        {
+          "version": "2.8",
+          "convene": "Requiem Without End",
+          "start": "2025-12-11",
+          "end": "2025-12-24"
+        },
+        {
+          "version": "3.2",
+          "convene": "Wanderer Knows No Far and Near",
+          "start": "2026-03-19",
+          "end": "2026-04-09"
+        },
+        {
+          "version": "3.2",
+          "convene": "When the Runes Glitter",
+          "start": "2026-03-19",
+          "end": "2026-04-09"
+        },
+        {
+          "version": "3.3",
+          "convene": "False Promise for Tomorrow",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        },
+        {
+          "version": "3.3",
+          "convene": "Horizon of Dawnbreak",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        },
+        {
+          "version": "3.3",
+          "convene": "Requiem Without End",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Lynae",
+      "rarity": 5,
+      "version": "3.0",
+      "status": "released",
+      "convene": "Undefined Spectrum",
+      "signature": "Spectrum Blaster",
+      "summary": "A Startorch Academy prep student whose electric public style covers a much harder inner focus. Reran in 3.5 Phase 1 on the same banner name as her debut.",
       "kit": [],
-      "confidence": { "identity": "official" },
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      },
       "sources": [
-        { "name": "Kuro Games - Profile Reveal: Host of Harmony", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5200" },
-        { "name": "Kuro Games - [Blessings From Dewy Winds]", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5227" }
+        {
+          "name": "Kuro Games - Profile Reveal: Radiant Spectrum",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/3842"
+        }
+      ],
+      "attribute": "Spectro",
+      "weapon": "Pistols",
+      "role": "Support",
+      "region": "Lahai-Roi",
+      "epithet": "Radiant Spectrum",
+      "released": "2025-12-25",
+      "hasKit": true,
+      "reruns": [
+        "3.2",
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "3.0",
+          "convene": "Undefined Spectrum",
+          "start": "2025-12-25",
+          "end": "2026-01-15"
+        },
+        {
+          "version": "3.2",
+          "convene": "Undefined Spectrum",
+          "start": "2026-04-09",
+          "end": "2026-04-29"
+        },
+        {
+          "version": "3.5",
+          "convene": "Undefined Spectrum",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        }
       ]
+    },
+    {
+      "name": "Mornye",
+      "rarity": 5,
+      "attribute": "Fusion",
+      "weapon": "Broadblade",
+      "role": "Support and Healer",
+      "region": "Lahai-Roi",
+      "epithet": "Astral Mapping",
+      "summary": "She is a researcher for the Spacetrek Collective and a professor for Exostrider Engineering at Startorch Academy. She was a student at Startorch Academy and an acquaintance of Rover 20 years before the Void Storm hit Lahai-Roi. With an unwavering dream to chart the course of humanity's exploration of the world beyond Solaris, she plays a key role in the technological developments of Lahai-Roi as a project head of the Spacetrek Collective Research Institute.",
+      "version": "3.0",
+      "status": "released",
+      "convene": "Distant May the Starlights Be",
+      "released": "2026-01-15",
+      "hasKit": true,
+      "reruns": [
+        "3.3"
+      ],
+      "runs": [
+        {
+          "version": "3.0",
+          "convene": "Distant May the Starlights Be",
+          "start": "2026-01-15",
+          "end": "2026-02-04"
+        },
+        {
+          "version": "3.3",
+          "convene": "Distant May the Starlights Be",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Aemeath",
+      "rarity": 5,
+      "version": "3.1",
+      "status": "released",
+      "convene": "Take Flight in Spring",
+      "signature": "Everbright Polestar",
+      "summary": "Once an Exostrider Synchronist of Rabelle College, described by Kuro as a digital ghost singing quietly among the stars. Reran in 3.5 Phase 2.",
+      "kit": [],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      },
+      "sources": [
+        {
+          "name": "Kuro Games - Profile Reveal: Guiding Starlance",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/4140"
+        }
+      ],
+      "attribute": "Fusion",
+      "weapon": "Sword",
+      "role": "Main DPS",
+      "region": "Lahai-Roi",
+      "epithet": "Guiding Starlance",
+      "released": "2026-02-05",
+      "hasKit": true,
+      "reruns": [
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "3.1",
+          "convene": "Take Flight in Spring",
+          "start": "2026-02-05",
+          "end": "2026-02-26"
+        },
+        {
+          "version": "3.5",
+          "convene": "Take Flight in Spring",
+          "start": "2026-07-30",
+          "end": "2026-08-19"
+        }
+      ]
+    },
+    {
+      "name": "Luuk Herssen",
+      "rarity": 5,
+      "version": "3.1",
+      "status": "released",
+      "convene": "When Winter Thaws",
+      "signature": "Daybreaker's Spine",
+      "summary": "Attending physician of Startorch Academy's Resonator Nursing Unit, known for composure under pressure. Reran in 3.5 Phase 1.",
+      "kit": [],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      },
+      "sources": [
+        {
+          "name": "Kuro Games - Profile Reveal: Phase Transition",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/4302"
+        }
+      ],
+      "attribute": "Spectro",
+      "weapon": "Gauntlets",
+      "role": "Main DPS",
+      "region": "Lahai-Roi",
+      "epithet": "Phase Transition",
+      "released": "2026-02-26",
+      "hasKit": true,
+      "reruns": [
+        "3.5"
+      ],
+      "runs": [
+        {
+          "version": "3.1",
+          "convene": "When Winter Thaws",
+          "start": "2026-02-26",
+          "end": "2026-03-18"
+        },
+        {
+          "version": "3.5",
+          "convene": "When Winter Thaws",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        }
+      ]
+    },
+    {
+      "name": "Sigrika",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Gauntlets",
+      "role": "Main DPS",
+      "region": "Lahai-Roi",
+      "epithet": "True Name Manifestation",
+      "summary": "She is a student in the Preparatory Program at Startorch Academy and a member of its Birding Fan Club as well as a from the Roya Tribe. Although she shoulders the heavy responsibility of being a Heliodic Six Successor, she is an overwhelmingly kind and gentle woman dedicated to helping her classmates through their struggles.",
+      "version": "3.2",
+      "status": "released",
+      "convene": "When the Runes Glitter",
+      "released": "2026-03-19",
+      "hasKit": true,
+      "runs": [
+        {
+          "version": "3.2",
+          "convene": "When the Runes Glitter",
+          "start": "2026-03-19",
+          "end": "2026-04-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Hiyuki",
+      "rarity": 5,
+      "attribute": "Glacio",
+      "weapon": "Sword",
+      "role": "Main DPS",
+      "region": "Lahai-Roi",
+      "epithet": "Futures' Tithe",
+      "summary": "She is a miko and member of the Special Response Force with a long-standing connection to the Threnodians. Her stoic, aloof demeanor and formidable combat experience conceal guilt and regret for failing to protect her homeland that continues to weigh heavily in her heart. Having served as a miko for over a century, Hiyuki derives her most anomalous capabilities from \"Suzu\", one of the five Legacy Talismans left behind by the Sentinels, which grants the bearer the ability to perceive and utilize \"certain possibilities\" of oneself.",
+      "version": "3.3",
+      "status": "released",
+      "convene": "Thousand Futures Mirrored in Snow",
+      "released": "2026-04-30",
+      "hasKit": true,
+      "runs": [
+        {
+          "version": "3.3",
+          "convene": "Thousand Futures Mirrored in Snow",
+          "start": "2026-04-30",
+          "end": "2026-05-21"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Denia",
+      "rarity": 5,
+      "attribute": "Fusion",
+      "weapon": "Rectifier",
+      "role": "Support",
+      "region": "Lahai-Roi",
+      "epithet": "Bubbles of Nihility",
+      "summary": "She is a student from Startorch Academy's Department of Voidmatters with a sardonic nihilism, who secretly serves as an agent for the Fractsidus. Despite being created by Schwarzloch for the purpose of becoming the Resonator of the Threnodian Aleph-1, she harbors deep-seated fear and resentment towards the Fractsidus and her creator. No matter the price, even her own existence, she is determined to use her \"gift\" to protect those dearest to her.",
+      "version": "3.3",
+      "status": "released",
+      "convene": "False Promise for Tomorrow",
+      "released": "2026-05-21",
+      "hasKit": true,
+      "runs": [
+        {
+          "version": "3.3",
+          "convene": "False Promise for Tomorrow",
+          "start": "2026-05-21",
+          "end": "2026-06-07"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Lucy",
+      "rarity": 5,
+      "attribute": "Spectro",
+      "weapon": "Pistols",
+      "role": "Main DPS",
+      "region": "Night City",
+      "epithet": "Xeno-Domain Hacking",
+      "summary": "She is a part of the collaboration with Cyberpunk: Edgerunners.",
+      "version": "3.4",
+      "status": "released",
+      "released": "2026-06-08",
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Rebecca",
+      "rarity": 5,
+      "attribute": "Electro",
+      "weapon": "Pistols",
+      "role": "Support",
+      "region": "Night City",
+      "epithet": "Fury-Type Arsenal",
+      "summary": "She is a part of the collaboration with Cyberpunk: Edgerunners.",
+      "version": "3.4",
+      "status": "released",
+      "released": "2026-06-08",
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Lucilla",
+      "rarity": 5,
+      "attribute": "Glacio",
+      "weapon": "Rectifier",
+      "role": "Support",
+      "region": "Lahai-Roi",
+      "epithet": "Memory Palace",
+      "summary": "She is the president and the head of Startorch Academy. She was the former chief editor for the New Federation's top academic journal and an associate of Mortefi.",
+      "version": "3.4",
+      "status": "released",
+      "convene": "Tomorrow in the Frame",
+      "released": "2026-06-13",
+      "hasKit": true,
+      "runs": [
+        {
+          "version": "3.4",
+          "convene": "Tomorrow in the Frame",
+          "start": "2026-06-13",
+          "end": "2026-07-09"
+        }
+      ],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
     },
     {
       "name": "Yangyang: Xuanling",
@@ -28,78 +2990,76 @@
       "region": "Mingting",
       "summary": "Second daughter of a Mingting musical family and a Votary of the Voice, able to commune with the Streams. Formerly an Outrider of the Midnight Rangers in Jinzhou, now an acting Xuan Watcher of Xuanfang Hold.",
       "kit": [],
-      "confidence": { "identity": "official" },
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      },
       "sources": [
-        { "name": "Kuro Games - Profile Reveal: Voices of Azure Plume", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5007" },
-        { "name": "Kuro Games - [Voices on Azure Feathers]", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5047" }
-      ]
-    },
-    {
-      "name": "Aemeath",
-      "rarity": 5,
-      "version": "3.5",
-      "status": "released",
-      "convene": "Take Flight in Spring",
-      "signature": "Everbright Polestar",
-      "summary": "Once an Exostrider Synchronist of Rabelle College, described by Kuro as a digital ghost singing quietly among the stars. Reran in 3.5 Phase 2.",
-      "kit": [],
-      "confidence": { "identity": "official" },
-      "sources": [
-        { "name": "Kuro Games - Profile Reveal: Guiding Starlance", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/4140" }
-      ]
-    },
-    {
-      "name": "Lynae",
-      "rarity": 5,
-      "version": "3.5",
-      "status": "released",
-      "convene": "Undefined Spectrum",
-      "signature": "Spectrum Blaster",
-      "summary": "A Startorch Academy prep student whose electric public style covers a much harder inner focus. Reran in 3.5 Phase 1 on the same banner name as her debut.",
-      "kit": [],
-      "confidence": { "identity": "official" },
-      "sources": [
-        { "name": "Kuro Games - Profile Reveal: Radiant Spectrum", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/3842" }
-      ]
-    },
-    {
-      "name": "Luuk Herssen",
-      "rarity": 5,
-      "version": "3.5",
-      "status": "released",
-      "convene": "When Winter Thaws",
-      "signature": "Daybreaker's Spine",
-      "summary": "Attending physician of Startorch Academy's Resonator Nursing Unit, known for composure under pressure. Reran in 3.5 Phase 1.",
-      "kit": [],
-      "confidence": { "identity": "official" },
-      "sources": [
-        { "name": "Kuro Games - Profile Reveal: Phase Transition", "lang": "en", "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/4302" }
-      ]
-    },
-    {
-      "name": "Qingxiao",
-      "rarity": 5,
-      "attribute": "Aero",
+        {
+          "name": "Kuro Games - Profile Reveal: Voices of Azure Plume",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5007"
+        },
+        {
+          "name": "Kuro Games - [Voices on Azure Feathers]",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5047"
+        }
+      ],
+      "attribute": "Havoc",
       "weapon": "Sword",
       "role": "Main DPS",
-      "version": "3.6",
-      "status": "announced",
-      "convene": "Wind of Transcendence",
-      "signature": "Glint of Clouds",
-      "accessory": "Cloudbloom",
-      "region": "Mengzhou",
-      "summary": "Reclusive sword cultivator, Xuan Paragon of Xuanfang Hold. Xianxia sword-immortal archetype - her swordplay appeared in a main story cutscene before the drip reveal.",
-      "kit": [
-        "All swords sit sealed inside her guqin in the default state; the guqin acts as a support weapon while the flying swords carry her damage.",
-        "Dual-resource gauge. Filling both transitions her into an Ethereal Immortal State.",
-        "Ethereal Immortal State delivers heavy aerial sword barrages.",
-        "Tune Strain is the associated mechanic."
-      ],
-      "materials": { "ascension": [], "skill": [] },
-      "confidence": { "identity": "official", "kit": "datamined" },
+      "epithet": "Voices of Azure Plume",
+      "released": "2026-07-10",
+      "hasKit": true,
+      "runs": [
+        {
+          "version": "3.5",
+          "convene": "Voices on Azure Feathers",
+          "start": "2026-07-10",
+          "end": "2026-07-30"
+        }
+      ]
+    },
+    {
+      "name": "Suisui",
+      "rarity": 5,
+      "version": "3.5",
+      "status": "released",
+      "convene": "Blessings From Dewy Winds",
+      "signature": "Firstlight's Herald",
+      "region": "Mingting",
+      "summary": "Young director of the Zhaoming Commerce Guild, born into a noble Mingting family. Fights with a water fan rather than a sword - Kuro's reveal frames her as brokering peace through trade rather than swordplay.",
+      "kit": [],
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      },
       "sources": [
-        { "name": "3.6 preview broadcast", "lang": "en", "url": "https://www.rpgsite.net/news/21075-wuthering-waves-version-3-6-release-date-gameplay-trailer-dlss-4-5" },
-        { "name": "MMO Culture (kit)", "lang": "en", "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/" }
+        {
+          "name": "Kuro Games - Profile Reveal: Host of Harmony",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5200"
+        },
+        {
+          "name": "Kuro Games - [Blessings From Dewy Winds]",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5227"
+        }
+      ],
+      "attribute": "Glacio",
+      "weapon": "Rectifier",
+      "role": "Support and Healer",
+      "epithet": "Host of Harmony",
+      "released": "2026-07-30",
+      "hasKit": true,
+      "runs": [
+        {
+          "version": "3.5",
+          "convene": "Blessings From Dewy Winds",
+          "start": "2026-07-30",
+          "end": "2026-08-19"
+        }
       ]
     },
     {
@@ -122,11 +3082,65 @@
         "Resonance Liberation extinguishes the Life Lantern to open the gates of the underworld and pull enemies in.",
         "Reported as strong in aerial combat."
       ],
-      "materials": { "ascension": [], "skill": [] },
-      "confidence": { "identity": "official", "kit": "datamined" },
+      "materials": {
+        "ascension": [],
+        "skill": []
+      },
+      "confidence": {
+        "identity": "official",
+        "kit": "datamined"
+      },
       "sources": [
-        { "name": "3.6 preview broadcast", "lang": "en", "url": "https://www.rpgsite.net/news/21075-wuthering-waves-version-3-6-release-date-gameplay-trailer-dlss-4-5" },
-        { "name": "TOPUPlive (kit)", "lang": "en", "url": "https://www.topuplive.com/news/wuwa-3-6-jingran-build.html" }
+        {
+          "name": "3.6 preview broadcast",
+          "lang": "en",
+          "url": "https://www.rpgsite.net/news/21075-wuthering-waves-version-3-6-release-date-gameplay-trailer-dlss-4-5"
+        },
+        {
+          "name": "TOPUPlive (kit)",
+          "lang": "en",
+          "url": "https://www.topuplive.com/news/wuwa-3-6-jingran-build.html"
+        }
+      ]
+    },
+    {
+      "name": "Qingxiao",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Sword",
+      "role": "Main DPS",
+      "version": "3.6",
+      "status": "announced",
+      "convene": "Wind of Transcendence",
+      "signature": "Glint of Clouds",
+      "accessory": "Cloudbloom",
+      "region": "Mengzhou",
+      "summary": "Reclusive sword cultivator, Xuan Paragon of Xuanfang Hold. Xianxia sword-immortal archetype - her swordplay appeared in a main story cutscene before the drip reveal.",
+      "kit": [
+        "All swords sit sealed inside her guqin in the default state; the guqin acts as a support weapon while the flying swords carry her damage.",
+        "Dual-resource gauge. Filling both transitions her into an Ethereal Immortal State.",
+        "Ethereal Immortal State delivers heavy aerial sword barrages.",
+        "Tune Strain is the associated mechanic."
+      ],
+      "materials": {
+        "ascension": [],
+        "skill": []
+      },
+      "confidence": {
+        "identity": "official",
+        "kit": "datamined"
+      },
+      "sources": [
+        {
+          "name": "3.6 preview broadcast",
+          "lang": "en",
+          "url": "https://www.rpgsite.net/news/21075-wuthering-waves-version-3-6-release-date-gameplay-trailer-dlss-4-5"
+        },
+        {
+          "name": "MMO Culture (kit)",
+          "lang": "en",
+          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+        }
       ]
     },
     {
@@ -141,11 +3155,25 @@
       "epithet": "Clear moonlight drapes the lonely keep",
       "summary": "Teased via a Mandelbrot fractal image, read as pointing at a recursive, self-scaling kit. Appears in Kuro's second-half 3.x cast reveal poster set, filed to Mengzhou. No file data yet.",
       "kit": [],
-      "materials": { "ascension": [], "skill": [] },
-      "confidence": { "identity": "reported", "kit": "reported" },
+      "materials": {
+        "ascension": [],
+        "skill": []
+      },
+      "confidence": {
+        "identity": "reported",
+        "kit": "reported"
+      },
       "sources": [
-        { "name": "MMO Culture", "lang": "en", "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/" },
-        { "name": "Prydwen - upcoming roster", "lang": "en", "url": "https://www.prydwen.gg/wuthering-waves/characters/hsin" }
+        {
+          "name": "MMO Culture",
+          "lang": "en",
+          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+        },
+        {
+          "name": "Prydwen - upcoming roster",
+          "lang": "en",
+          "url": "https://www.prydwen.gg/wuthering-waves/characters/hsin"
+        }
       ]
     },
     {
@@ -156,12 +3184,98 @@
       "epithet": "Locked in the past, the prisoner lingers long",
       "summary": "Revealed in Kuro's second-half 3.x cast poster set alongside Hsin. Red-haired, carries a wide paper parasol with lock and songbook motifs. Element, weapon class and debut patch are all unannounced - Prydwen files them as 3.x, which is its marker for an upcoming character with no version attached.",
       "kit": [],
-      "materials": { "ascension": [], "skill": [] },
-      "confidence": { "identity": "reported", "kit": "rumour" },
+      "materials": {
+        "ascension": [],
+        "skill": []
+      },
+      "confidence": {
+        "identity": "reported",
+        "kit": "rumour"
+      },
       "sources": [
-        { "name": "Prydwen - upcoming roster", "lang": "en", "url": "https://www.prydwen.gg/wuthering-waves/characters/suoming" },
-        { "name": "r/WutheringWavesLeaks - second half of 3.x cast reveal, compiled", "lang": "en", "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1u65lvi/second_half_of_3x_cast_reveal_compiled/" }
+        {
+          "name": "Prydwen - upcoming roster",
+          "lang": "en",
+          "url": "https://www.prydwen.gg/wuthering-waves/characters/suoming"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - second half of 3.x cast reveal, compiled",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1u65lvi/second_half_of_3x_cast_reveal_compiled/"
+        }
       ]
+    },
+    {
+      "name": "Rover (Havoc)",
+      "rarity": 5,
+      "attribute": "Havoc",
+      "weapon": "Sword",
+      "role": "Main DPS",
+      "region": "The Black Shores",
+      "epithet": "Veil of Shadows",
+      "summary": "Awakened with an unknown past by a mysterious entity, Rover is an amnesiac Arbiter from another world who embarks on a journey to uncover the truth to regain their lost memories. As secrets are unveiled, they establish deeper connections with the Solaris-3 and its nations.",
+      "version": "1.0",
+      "status": "released",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Rover (Spectro)",
+      "rarity": 5,
+      "attribute": "Spectro",
+      "weapon": "Sword",
+      "role": "Support",
+      "region": "The Black Shores",
+      "epithet": "Veil of Shadows",
+      "summary": "Awakened with an unknown past by a mysterious entity, Rover is an amnesiac Arbiter from another world who embarks on a journey to uncover the truth to regain their lost memories. As secrets are unveiled, they establish deeper connections with the Solaris-3 and its nations.",
+      "version": "1.0",
+      "status": "released",
+      "released": "2024-05-23",
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Rover (Aero)",
+      "rarity": 5,
+      "attribute": "Aero",
+      "weapon": "Sword",
+      "role": "Support and Healer",
+      "region": "The Black Shores",
+      "epithet": "Veil of Shadows",
+      "summary": "Awakened with an unknown past by a mysterious entity, Rover is an amnesiac Arbiter from another world who embarks on a journey to uncover the truth to regain their lost memories. As secrets are unveiled, they establish deeper connections with the Solaris-3 and its nations.",
+      "version": "2.2",
+      "status": "released",
+      "released": "2025-03-27",
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
+    },
+    {
+      "name": "Rover (Electro)",
+      "rarity": 5,
+      "attribute": "Electro",
+      "weapon": "Sword",
+      "role": "Support",
+      "region": "The Black Shores",
+      "epithet": "Veil of Shadows",
+      "summary": "Awakened with an unknown past by a mysterious entity, Rover is an amnesiac Arbiter from another world who embarks on a journey to uncover the truth to regain their lost memories. As secrets are unveiled, they establish deeper connections with the Solaris-3 and its nations.",
+      "version": "3.5",
+      "status": "released",
+      "released": "2026-07-10",
+      "hasKit": true,
+      "confidence": {
+        "identity": "official",
+        "kit": "official"
+      }
     }
   ]
 }

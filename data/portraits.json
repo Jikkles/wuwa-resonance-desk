@@ -3,6 +3,15 @@
   "note": "Character art at three sizes — 160px bust, 374x512 card, 2048x2048 gallery render — and weapon icons. All cut-outs with alpha, resolved through Prydwen's public character and weapon listings and cached in assets/portraits/. Art © Kuro Games. gallery:\"scene\" means Prydwen's gallery holds the Resonance Liberation splash rather than a standing render — no portrait to crop, so the desk uses Kuro's reveal art instead. A name absent here has no published asset yet.",
   "credit": "Art via prydwen.gg · art © Kuro Games",
   "characters": {
+    "Aalto": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/aalto",
+      "element": "Aero",
+      "weapon": "Pistols",
+      "rarity": 4,
+      "icon": "assets/portraits/aalto.webp",
+      "card": "assets/portraits/aalto-card.webp",
+      "gallery": "scene"
+    },
     "Aemeath": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/aemeath",
       "element": "Fusion",
@@ -12,6 +21,132 @@
       "card": "assets/portraits/aemeath-card.webp",
       "gallery": "scene"
     },
+    "Augusta": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/augusta",
+      "element": "Electro",
+      "weapon": "Broadblade",
+      "rarity": 5,
+      "icon": "assets/portraits/augusta.webp",
+      "card": "assets/portraits/augusta-card.webp",
+      "gallery": "scene"
+    },
+    "Baizhi": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/baizhi",
+      "element": "Glacio",
+      "weapon": "Rectifier",
+      "rarity": 4,
+      "icon": "assets/portraits/baizhi.webp",
+      "card": "assets/portraits/baizhi-card.webp",
+      "gallery": "scene"
+    },
+    "Brant": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/brant",
+      "element": "Fusion",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/brant.webp",
+      "card": "assets/portraits/brant-card.webp",
+      "gallery": "scene"
+    },
+    "Buling": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/buling",
+      "element": "Electro",
+      "weapon": "Rectifier",
+      "rarity": 4,
+      "icon": "assets/portraits/buling.webp",
+      "card": "assets/portraits/buling-card.webp",
+      "gallery": "scene"
+    },
+    "Calcharo": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/calcharo",
+      "element": "Electro",
+      "weapon": "Broadblade",
+      "rarity": 5,
+      "icon": "assets/portraits/calcharo.webp",
+      "card": "assets/portraits/calcharo-card.webp",
+      "gallery": "scene"
+    },
+    "Camellya": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/camellya",
+      "element": "Havoc",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/camellya.webp",
+      "card": "assets/portraits/camellya-card.webp",
+      "gallery": "scene"
+    },
+    "Cantarella": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/cantarella",
+      "element": "Havoc",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/cantarella.webp",
+      "card": "assets/portraits/cantarella-card.webp",
+      "gallery": "scene"
+    },
+    "Carlotta": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/carlotta",
+      "element": "Glacio",
+      "weapon": "Pistols",
+      "rarity": 5,
+      "icon": "assets/portraits/carlotta.webp",
+      "card": "assets/portraits/carlotta-card.webp",
+      "gallery": "scene"
+    },
+    "Cartethyia": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/cartethyia",
+      "element": "Aero",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/cartethyia.webp",
+      "card": "assets/portraits/cartethyia-card.webp",
+      "gallery": "scene"
+    },
+    "Changli": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/changli",
+      "element": "Fusion",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/changli.webp",
+      "card": "assets/portraits/changli-card.webp",
+      "gallery": "scene"
+    },
+    "Chisa": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/chisa",
+      "element": "Havoc",
+      "weapon": "Broadblade",
+      "rarity": 5,
+      "icon": "assets/portraits/chisa.webp",
+      "card": "assets/portraits/chisa-card.webp",
+      "gallery": "scene"
+    },
+    "Chixia": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/chixia",
+      "element": "Fusion",
+      "weapon": "Pistols",
+      "rarity": 4,
+      "icon": "assets/portraits/chixia.webp",
+      "card": "assets/portraits/chixia-card.webp",
+      "gallery": "scene"
+    },
+    "Ciaccona": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/ciaccona",
+      "element": "Aero",
+      "weapon": "Pistols",
+      "rarity": 5,
+      "icon": "assets/portraits/ciaccona.webp",
+      "card": "assets/portraits/ciaccona-card.webp",
+      "gallery": "scene"
+    },
+    "Danjin": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/danjin",
+      "element": "Havoc",
+      "weapon": "Sword",
+      "rarity": 4,
+      "icon": "assets/portraits/danjin.webp",
+      "card": "assets/portraits/danjin-card.webp",
+      "gallery": "scene"
+    },
     "Denia": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/denia",
       "element": "Fusion",
@@ -19,6 +154,24 @@
       "rarity": 5,
       "icon": "assets/portraits/denia.webp",
       "card": "assets/portraits/denia-card.webp",
+      "gallery": "scene"
+    },
+    "Encore": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/encore",
+      "element": "Fusion",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/encore.webp",
+      "card": "assets/portraits/encore-card.webp",
+      "gallery": "scene"
+    },
+    "Galbrena": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/galbrena",
+      "element": "Fusion",
+      "weapon": "Pistols",
+      "rarity": 5,
+      "icon": "assets/portraits/galbrena.webp",
+      "card": "assets/portraits/galbrena-card.webp",
       "gallery": "scene"
     },
     "Hiyuki": {
@@ -41,6 +194,26 @@
       "gallery": "render",
       "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/hsin_full.webp"
     },
+    "Iuno": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/iuno",
+      "element": "Aero",
+      "weapon": "Gauntlets",
+      "rarity": 5,
+      "icon": "assets/portraits/iuno.webp",
+      "card": "assets/portraits/iuno-card.webp",
+      "full": "assets/portraits/iuno-full.webp",
+      "gallery": "render",
+      "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/iuno_full.webp"
+    },
+    "Jianxin": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/jianxin",
+      "element": "Aero",
+      "weapon": "Gauntlets",
+      "rarity": 5,
+      "icon": "assets/portraits/jianxin.webp",
+      "card": "assets/portraits/jianxin-card.webp",
+      "gallery": "scene"
+    },
     "Jingran": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/jingran",
       "element": "Fusion",
@@ -51,6 +224,69 @@
       "full": "assets/portraits/jingran-full.webp",
       "gallery": "render",
       "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/jingran_full.webp"
+    },
+    "Jinhsi": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/jinhsi",
+      "element": "Spectro",
+      "weapon": "Broadblade",
+      "rarity": 5,
+      "icon": "assets/portraits/jinhsi.webp",
+      "card": "assets/portraits/jinhsi-card.webp",
+      "gallery": "scene"
+    },
+    "Jiyan": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/jiyan",
+      "element": "Aero",
+      "weapon": "Broadblade",
+      "rarity": 5,
+      "icon": "assets/portraits/jiyan.webp",
+      "card": "assets/portraits/jiyan-card.webp",
+      "gallery": "scene"
+    },
+    "Lingyang": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/lingyang",
+      "element": "Glacio",
+      "weapon": "Gauntlets",
+      "rarity": 5,
+      "icon": "assets/portraits/lingyang.webp",
+      "card": "assets/portraits/lingyang-card.webp",
+      "gallery": "scene"
+    },
+    "Lucilla": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/lucilla",
+      "element": "Glacio",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/lucilla.webp",
+      "card": "assets/portraits/lucilla-card.webp",
+      "gallery": "scene"
+    },
+    "Lucy": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/lucy",
+      "element": "Spectro",
+      "weapon": "Pistols",
+      "rarity": 5,
+      "icon": "assets/portraits/lucy.webp",
+      "card": "assets/portraits/lucy-card.webp",
+      "gallery": "scene"
+    },
+    "Lumi": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/lumi",
+      "element": "Electro",
+      "weapon": "Broadblade",
+      "rarity": 4,
+      "icon": "assets/portraits/lumi.webp",
+      "card": "assets/portraits/lumi-card.webp",
+      "gallery": "scene"
+    },
+    "Lupa": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/lupa",
+      "element": "Fusion",
+      "weapon": "Broadblade",
+      "rarity": 5,
+      "icon": "assets/portraits/lupa.webp",
+      "card": "assets/portraits/lupa-card.webp",
+      "gallery": "scene"
     },
     "Luuk Herssen": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/luuk-herssen",
@@ -79,6 +315,33 @@
       "card": "assets/portraits/mornye-card.webp",
       "gallery": "scene"
     },
+    "Mortefi": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/mortefi",
+      "element": "Fusion",
+      "weapon": "Pistols",
+      "rarity": 4,
+      "icon": "assets/portraits/mortefi.webp",
+      "card": "assets/portraits/mortefi-card.webp",
+      "gallery": "scene"
+    },
+    "Phoebe": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/phoebe",
+      "element": "Spectro",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/phoebe.webp",
+      "card": "assets/portraits/phoebe-card.webp",
+      "gallery": "scene"
+    },
+    "Phrolova": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/phrolova",
+      "element": "Havoc",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/phrolova.webp",
+      "card": "assets/portraits/phrolova-card.webp",
+      "gallery": "scene"
+    },
     "Qingxiao": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/qingxiao",
       "element": "Aero",
@@ -89,6 +352,86 @@
       "full": "assets/portraits/qingxiao-full.webp",
       "gallery": "render",
       "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/qingxiao_full.webp"
+    },
+    "Qiuyuan": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/qiuyuan",
+      "element": "Aero",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/qiuyuan.webp",
+      "card": "assets/portraits/qiuyuan-card.webp",
+      "gallery": "scene"
+    },
+    "Rebecca": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/rebecca",
+      "element": "Electro",
+      "weapon": "Pistols",
+      "rarity": 5,
+      "icon": "assets/portraits/rebecca.webp",
+      "card": "assets/portraits/rebecca-card.webp",
+      "gallery": "scene"
+    },
+    "Roccia": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/roccia",
+      "element": "Havoc",
+      "weapon": "Gauntlets",
+      "rarity": 5,
+      "icon": "assets/portraits/roccia.webp",
+      "card": "assets/portraits/roccia-card.webp",
+      "gallery": "scene"
+    },
+    "Rover (Aero)": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/rover-aero",
+      "element": "Aero",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/rover-aero.webp",
+      "card": "assets/portraits/rover-aero-card.webp",
+      "gallery": "scene"
+    },
+    "Rover (Electro)": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/rover-electro",
+      "element": "Electro",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/rover-electro.webp",
+      "card": "assets/portraits/rover-electro-card.webp"
+    },
+    "Rover (Havoc)": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/rover-havoc",
+      "element": "Havoc",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/rover-havoc.webp",
+      "card": "assets/portraits/rover-havoc-card.webp",
+      "gallery": "scene"
+    },
+    "Rover (Spectro)": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/rover-spectro",
+      "element": "Spectro",
+      "weapon": "Sword",
+      "rarity": 5,
+      "icon": "assets/portraits/rover-spectro.webp",
+      "card": "assets/portraits/rover-spectro-card.webp",
+      "gallery": "scene"
+    },
+    "Sanhua": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/sanhua",
+      "element": "Glacio",
+      "weapon": "Sword",
+      "rarity": 4,
+      "icon": "assets/portraits/sanhua.webp",
+      "card": "assets/portraits/sanhua-card.webp",
+      "gallery": "scene"
+    },
+    "Sigrika": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/sigrika",
+      "element": "Aero",
+      "weapon": "Gauntlets",
+      "rarity": 5,
+      "icon": "assets/portraits/sigrika.webp",
+      "card": "assets/portraits/sigrika-card.webp",
+      "gallery": "scene"
     },
     "Suisui": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/suisui",
@@ -112,6 +455,50 @@
       "gallery": "render",
       "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/suoming_full.webp"
     },
+    "Taoqi": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/taoqi",
+      "element": "Havoc",
+      "weapon": "Broadblade",
+      "rarity": 4,
+      "icon": "assets/portraits/taoqi.webp",
+      "card": "assets/portraits/taoqi-card.webp",
+      "gallery": "scene"
+    },
+    "The Shorekeeper": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/the-shorekeeper",
+      "element": "Spectro",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/the-shorekeeper.webp",
+      "card": "assets/portraits/the-shorekeeper-card.webp"
+    },
+    "Verina": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/verina",
+      "element": "Spectro",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/verina.webp",
+      "card": "assets/portraits/verina-card.webp",
+      "gallery": "scene"
+    },
+    "Xiangli Yao": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/xiangli-yao",
+      "element": "Electro",
+      "weapon": "Gauntlets",
+      "rarity": 5,
+      "icon": "assets/portraits/xiangli-yao.webp",
+      "card": "assets/portraits/xiangli-yao-card.webp",
+      "gallery": "scene"
+    },
+    "Yangyang": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/yangyang",
+      "element": "Aero",
+      "weapon": "Sword",
+      "rarity": 4,
+      "icon": "assets/portraits/yangyang.webp",
+      "card": "assets/portraits/yangyang-card.webp",
+      "gallery": "scene"
+    },
     "Yangyang: Xuanling": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/yangyang-xuanling",
       "element": "Havoc",
@@ -122,6 +509,51 @@
       "full": "assets/portraits/yangyang-xuanling-full.webp",
       "gallery": "render",
       "fullSource": "https://cdn.prydwen.gg/images/wuthering-waves/characters/yangyang-xuanling_full.webp"
+    },
+    "Yinlin": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/yinlin",
+      "element": "Electro",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/yinlin.webp",
+      "card": "assets/portraits/yinlin-card.webp",
+      "gallery": "scene"
+    },
+    "Youhu": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/youhu",
+      "element": "Glacio",
+      "weapon": "Gauntlets",
+      "rarity": 4,
+      "icon": "assets/portraits/youhu.webp",
+      "card": "assets/portraits/youhu-card.webp",
+      "gallery": "scene"
+    },
+    "Yuanwu": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/yuanwu",
+      "element": "Electro",
+      "weapon": "Gauntlets",
+      "rarity": 4,
+      "icon": "assets/portraits/yuanwu.webp",
+      "card": "assets/portraits/yuanwu-card.webp",
+      "gallery": "scene"
+    },
+    "Zani": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/zani",
+      "element": "Spectro",
+      "weapon": "Gauntlets",
+      "rarity": 5,
+      "icon": "assets/portraits/zani.webp",
+      "card": "assets/portraits/zani-card.webp",
+      "gallery": "scene"
+    },
+    "Zhezhi": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/zhezhi",
+      "element": "Glacio",
+      "weapon": "Rectifier",
+      "rarity": 5,
+      "icon": "assets/portraits/zhezhi.webp",
+      "card": "assets/portraits/zhezhi-card.webp",
+      "gallery": "scene"
     }
   },
   "weapons": {
@@ -174,5 +606,5 @@
       "source": "https://www.prydwen.gg/wuthering-waves/weapons"
     }
   },
-  "updated": "2026-08-13T00:01:36.768Z"
+  "updated": "2026-08-13T07:46:30.731Z"
 }
