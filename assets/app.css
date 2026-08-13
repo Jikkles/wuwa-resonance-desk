@@ -1599,14 +1599,18 @@ button{font:inherit;color:inherit}
 .wholder:hover,.wholder:focus-visible{border-bottom-color:currentColor;outline:none}
 
 /* ── ascension slider ─────────────────────────────────────────────
-   Lives in the record, beside the one thing it changes. It was a strip across
-   the top of the view while the passives were on the cards; with those in the
-   record it followed them, which is also where Prydwen puts it. S.rank is
-   global and paintRank queries the document, so the rank you set on one weapon
-   is the rank the next one opens at. */
+   Rendered twice, like the quick filters: as a box in the record, beside the
+   passive it moves, and as a strip under the 5★ header, where it sets the rank
+   every record opens at. S.rank is global and paintRank queries the document,
+   so the two are the same control in two places and cannot disagree. */
 .ascend{
   display:flex;align-items:center;gap:16px;flex-wrap:wrap;
   padding:10px 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+}
+/* The view's copy. Full width of the panel, sunk into it like the filter bar
+   below it rather than boxed — it is chrome on this page, not a field. */
+.ascend.strip{
+  padding:11px 18px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:var(--bg-2);
 }
 /* Given room to be a slider. Five stops inside 120px is a control you nudge
    and hope; at 340 the steps are far enough apart to aim at. */
@@ -1616,6 +1620,9 @@ button{font:inherit;color:inherit}
   flex:none;min-width:30px;font-family:var(--mono);font-size:12px;font-weight:500;
   color:var(--rar,var(--attr));font-variant-numeric:tabular-nums;
 }
+/* Only on the view's copy, where the control has no visible effect on the page
+   it sits on and has to say what it is for. */
+.ascend-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;color:var(--fg-3)}
 
 /* Five stops, so the track is drawn as five stops. Nothing here is the browser
    default: the native control is a light-mode widget and lands on this page as
