@@ -156,8 +156,9 @@ What went, and where it went instead:
   card, and clicking that face opens the resonator drawer, which already carried the
   same summary, gear and kit list. A screen of panels to say what a drawer says on
   demand is the definition of a page that doesn't fit.
-- **The All-versions lane list.** Still there, behind the card/lane toggle in the panel
-  header — the same `versionBlock` renderer, same filters.
+- **The All-versions lane list.** Gone with the card/lane toggle that reached it. It was
+  a second rendering of the same patches the cards already draw, and one of the two had
+  to be the answer to "what is in this patch" — the cards are.
 - **A banner row per phase.** One debut/rerun split now covers the whole patch; the
   phase is a chip on each tile. Per-phase bands were most of the height, at 450px for a
   two-phase patch.
@@ -168,9 +169,9 @@ What went, and where it went instead:
   Recent intel panel one scroll down and the whole Intel view one click away. The card
   answers *who is in this patch*; Intel answers *what has been said about it*.
 
-The `when` chips filter the card row and the lane list — whichever is on screen. They
-used to sit on this panel and quietly re-filter a list two thousand pixels further
-down, which reads as a button that does nothing.
+The `when` chips filter the card row directly. They used to sit on this panel and
+quietly re-filter a list two thousand pixels further down, which reads as a button that
+does nothing.
 
 **Banner thumbnails are clickable** and their `[data-act]` is the innermost one, so a
 face opens that resonator while the rest of the card opens the version. That is the

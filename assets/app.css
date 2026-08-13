@@ -272,14 +272,6 @@ button{font:inherit;color:inherit}
 .subnav .sublink.t-rumour{color:var(--t-rumour)}
 .subnav.tiered .sublink[aria-pressed="true"]{background:color-mix(in srgb,currentColor 14%,transparent)}
 
-/* The timeline's layout toggle. Not a filter, so it is set apart from the four
-   rows above it rather than pretending to be a fifth. */
-.subseg{
-  display:flex;align-items:center;gap:10px;margin-top:7px;padding:8px 10px 0;
-  border-top:1px solid var(--line);
-}
-.subseg .label{font-size:9.5px;letter-spacing:.13em}
-
 .tierlink{
   display:flex;align-items:center;gap:10px;width:100%;
   background:none;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;
@@ -463,7 +455,7 @@ button{font:inherit;color:inherit}
    flickering. 160ms of rise is enough to say "this is the same list, fewer
    rows" and short enough that it never delays a second click. */
 @keyframes rise{from{opacity:0;transform:translateY(6px)}}
-.intel-list,.term,.rgrid,.vlist,.hero,.cgrid{animation:rise .16s ease}
+.intel-list,.term,.rgrid,.hero,.cgrid{animation:rise .16s ease}
 
 /* ══ chips / filters ════════════════════════════════════════════════ */
 .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -500,19 +492,7 @@ button{font:inherit;color:inherit}
   display:none;align-items:center;gap:12px;flex-wrap:wrap;
   padding:10px 16px;border-bottom:1px solid var(--line);background:var(--tint-sink);
 }
-.fbar .seg{margin-left:auto}
 @media (max-width:860px){.fbar{display:flex}}
-
-/* Card view / lane view. A pair, so it reads as one control with two states
-   rather than two buttons that happen to sit together. */
-.seg{display:flex;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;flex:none}
-.seg button{
-  display:flex;align-items:center;justify-content:center;padding:5px 9px;cursor:pointer;
-  background:var(--bg-2);border:0;border-left:1px solid var(--line);color:var(--fg-3);transition:.15s;
-}
-.seg button:first-child{border-left:0}
-.seg button:hover{color:var(--fg)}
-.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
 
 /* Opens the command palette. The palette is the search — this is just the
    affordance that tells you it exists. */
@@ -1084,64 +1064,6 @@ button{font:inherit;color:inherit}
 .bmini.unknown b{color:var(--fg-3)}
 
 /* ══ version timeline ═══════════════════════════════════════════════ */
-.vlist{display:flex;flex-direction:column}
-.vblock{
-  position:relative;padding:20px 18px 22px 30px;border-bottom:1px solid var(--line);
-}
-.vblock:last-child{border-bottom:0}
-.vblock::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--line);
-}
-.vblock.is-live::before{background:linear-gradient(180deg,var(--t-official),transparent)}
-.vblock.is-next::before{background:linear-gradient(180deg,var(--t-datamined),transparent)}
-.vhead{display:flex;align-items:center;gap:13px;flex-wrap:wrap}
-.vnum{
-  font-family:var(--mono);font-size:24px;font-weight:600;line-height:1;letter-spacing:-.02em;
-}
-.vblock.is-live .vnum{color:var(--t-official)}
-.vblock.is-next .vnum{color:var(--t-datamined)}
-.vtitle{font-size:13px;color:var(--fg-2);min-width:0}
-.vmeta{
-  display:flex;gap:14px;flex-wrap:wrap;margin-top:9px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
-}
-.vmeta b{color:var(--fg-2);font-weight:500}
-
-.lanes{margin-top:16px;display:flex;flex-direction:column;gap:2px}
-.lane{
-  display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;align-items:center;
-  padding:11px 12px;border-radius:var(--r-sm);background:var(--bg-2);
-}
-.lane-k{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
-  display:flex;flex-direction:column;gap:3px;
-}
-.lane-k b{color:var(--fg-2);font-weight:500;letter-spacing:.13em}
-.lane-k .est{color:var(--amber)}
-.lane-track{display:flex;gap:7px;flex-wrap:wrap}
-.btag{
-  display:inline-flex;align-items:center;gap:9px;
-  border:1px solid var(--line-2);border-left:2px solid var(--attr);border-radius:8px;
-  background:var(--bg-1);padding:5px 11px 5px 6px;font-size:12.5px;
-}
-/* A face in the timeline lane, not just a name. */
-.btag .av{
-  flex:none;width:27px;height:27px;border-radius:50%;overflow:hidden;display:block;
-  background:linear-gradient(150deg,color-mix(in srgb,var(--attr) 32%,var(--bg-3)),var(--bg));
-  font-family:var(--cjk);font-size:12px;font-weight:700;line-height:27px;text-align:center;
-  color:color-mix(in srgb,var(--attr) 62%,var(--fg));
-}
-.btag .av img{width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block}
-.btag .av img.poster{object-position:center top;transform:scale(2.1);transform-origin:50% 38%}
-.btag .who{font-weight:500}
-.btag .bits{
-  font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
-}
-.btag.new{background:color-mix(in srgb,var(--attr) 9%,var(--bg-1))}
-.btag .new-flag{
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--attr);
-  border:1px solid color-mix(in srgb,var(--attr) 45%,transparent);border-radius:5px;padding:0 4px;
-}
 .vnote{
   margin-top:14px;padding:10px 13px;border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--amber) 7%,transparent);
@@ -2140,7 +2062,6 @@ button{font:inherit;color:inherit}
 }
 @media (max-width:1080px){
   :root{--rail-w:214px}
-  .lane{grid-template-columns:120px minmax(0,1fr)}
   /* 214px of rail can't hold "Live Signals" and "Unverified" on one line at
      this type size. The hatched bar on the view itself still carries it.
      "Events"/"Soon" fits in the same space with room to spare, and has to
@@ -2209,7 +2130,6 @@ button{font:inherit;color:inherit}
   .smark svg{width:11px;height:11px}
   .sig .head{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .sig .flags{grid-row:2;justify-self:end}
-  .lane{grid-template-columns:minmax(0,1fr);gap:9px}
   /* No room to float a card at this width — the modal goes full-bleed and
      behaves like the sheet it used to be. */
   .drawer{padding:0}

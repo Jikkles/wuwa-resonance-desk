@@ -81,7 +81,7 @@ const S = {
      Reset leaves it alone. The stats never move with it: those are level 90,
      full stop. */
   rank:1,
-  when:"all", tlMode:"cards",      // timeline
+  when:"all",                      // timeline
   tier:"all", ver:"all", cat:"all", // intel
   kind:"all", src:"all",           // signals
   elem:"all", weapon:"all",        // resonators
@@ -557,12 +557,7 @@ function weaponIcon(name, size = 17){
 const RAIL_FILTERS = {
   timeline: {
     scope:"when", label:"Window",
-    items: () => [["all","All"], ["current","Current"], ["upcoming","Upcoming"], ["past","Past"]],
-    /* Not a filter — it doesn't change which patches you see — but it was the
-       other half of the strip this replaced and it has to live somewhere. */
-    seg: () => `<div class="seg">${[["cards","i-grid","Card view"], ["list","i-rows","Lane view"]].map(([m, ic, lbl]) =>
-      `<button data-act="tlmode" data-id="${m}" aria-pressed="${S.tlMode === m}" title="${lbl}" aria-label="${lbl}">${icon(ic, 14)}</button>`
-    ).join("")}</div>`
+    items: () => [["all","All"], ["current","Current"], ["upcoming","Upcoming"], ["past","Past"]]
   },
   resonators: {
     scope:"elem", label:"Element",
@@ -606,7 +601,6 @@ function railSub(v){
   return `<div class="subnav${f.tiered ? " tiered" : ""}" id="sub-${v.id}" role="group"
        aria-label="${esc(f.label)}"${open ? "" : " hidden"}>
     ${f.items().map(it => filterBtn(v.id, f, it, "sublink")).join("")}
-    ${f.seg ? `<div class="subseg"><span class="label">Layout</span>${f.seg()}</div>` : ""}
   </div>`;
 }
 
@@ -619,7 +613,6 @@ function fbar(view){
   return `<div class="fbar">
     <div class="chips${f.tiered ? " tiered" : ""}">${
       f.items().map(it => filterBtn(view, f, it, "")).join("")}</div>
-    ${f.seg ? f.seg() : ""}
   </div>`;
 }
 
@@ -1024,51 +1017,8 @@ function versionEnd(v){
   return "";
 }
 
-function versionBlock(v){
-  const role = v.status === "live" ? "live" : v.status === "announced" ? "next" : "future";
-  const lanes = (v.phases || []).map(p => {
-    const bs = (p.banners || []).map(b => ({...b, phase:p.n}));
-    const range = [p.start ? fmtShort(p.start) : "", p.end ? fmtShort(p.end) : ""].filter(Boolean).join(" → ");
-    const est = p.estimated_start || p.estimated_end ? ` <span class="est">est</span>` : "";
-    return `<div class="lane">
-      <div class="lane-k"><b>Phase ${p.n}</b><span>${range}${est}</span></div>
-      <div class="lane-track">${bs.map(b => {
-        const r = resonatorFor(b.name);
-        const attr = b.attribute || r.attribute;
-        const f = figure({...b, keyVisual:v.keyVisual});
-        const bits = [b.rarity || r.rarity ? (b.rarity || r.rarity) + "★" : "", attr, b.weapon || r.weapon].filter(Boolean).join(" · ");
-        return `<span class="btag ${b.new ? "new" : ""}"${attrStyle(attr)}>
-          <i class="av">${f.image
-            ? `<img class="${f.poster ? "poster" : ""}" src="${esc(f.image)}" alt="" loading="lazy" decoding="async">`
-            : esc(f.glyph)}</i>
-          <span class="who">${esc(b.name)}</span>
-          <span class="bits">${esc(bits)}</span>
-          ${b.new ? `<span class="new-flag">New</span>` : b.rerun ? `<span class="bits">Rerun</span>` : ""}
-        </span>`;
-      }).join("") || `<span class="btag"><span class="bits">To be confirmed</span></span>`}</div>
-    </div>`;
-  }).join("");
-
-  return `<article class="vblock is-${role}">
-    <div class="vhead">
-      <span class="vnum">${esc(v.id)}</span>
-      <span class="pill ${role === "live" ? "live" : role === "next" ? "next" : "future"}">${esc(v.status)}</span>
-      ${v.title ? `<span class="vtitle">${esc(v.title)}</span>` : ""}
-      <button class="more" style="margin-left:auto" data-act="version" data-id="${esc(v.id)}">Detail ${icon("i-arrow", 12)}</button>
-    </div>
-    <div class="vmeta">
-      ${v.start ? `<span>Launch <b>${fmtDate(v.start)}</b></span>` : ""}
-      ${v.livestream ? `<span>Preview <b>${fmtDate(v.livestream)}</b></span>` : ""}
-      ${v.region ? `<span>Region <b>${esc(v.region)}</b></span>` : ""}
-      <span>Intel <b>${newsFor(v.id).length}</b></span>
-    </div>
-    ${lanes ? `<div class="lanes">${lanes}</div>` : ""}
-    ${v.notes ? `<div class="vnote">${esc(v.notes)}</div>` : ""}
-  </article>`;
-}
-
-/* Which bucket a version falls in. One definition — the chips, the card row and
-   the lane list all have to agree or the filter looks broken. */
+/* Which bucket a version falls in. One definition — the chips and the card row
+   have to agree or the filter looks broken. */
 const bucketOf = v => v.status === "live" ? "current"
   : (v.status === "announced" || v.status === "beta") ? "upcoming" : "past";
 const roleOf = v => v.status === "live" ? "live" : v.status === "announced" ? "next" : "future";
@@ -1089,21 +1039,19 @@ function renderTimeline(){
     ? [[live, "live"], [next, "next"], [future, "future"]]
     : list.map(v => [v, roleOf(v)]);
 
-  const body = S.tlMode === "list"
-    ? (list.length ? `<div class="vlist">${list.map(versionBlock).join("")}</div>`
-                   : `<div class="empty">No patch in this window.</div>`)
-    : (cards.length ? `<div class="hero${S.when === "all" ? "" : " narrow"}">${
+  const body = cards.length
+    ? `<div class="hero${S.when === "all" ? "" : " narrow"}">${
         cards.map(([v, r]) => patchCard(v, r)).join("")}</div>`
-                    : `<div class="empty">No patch in this window.</div>`);
+    : `<div class="empty">No patch in this window.</div>`;
 
   /* No header. It was the view's name a second time — the rail item saying
-     "Timeline" is lit forty pixels to the left — plus the window filter and
-     the layout toggle, both of which now sit under that rail item. What is
-     left is the patch cards, at the top of the page where they belong. The bar
-     below only appears once the rail has collapsed and taken them with it. */
+     "Timeline" is lit forty pixels to the left — plus the window filter, which
+     now sits under that rail item. What is left is the patch cards, at the top
+     of the page where they belong. The bar below only appears once the rail has
+     collapsed and taken them with it. */
   const hero = `<div class="panel">
     ${fbar("timeline")}
-    <div class="panel-b${S.tlMode === "list" ? " flush" : ""}">${body}</div>
+    <div class="panel-b">${body}</div>
   </div>`;
 
   /* Dashboard duo */
@@ -2386,12 +2334,6 @@ function bind(){
       try{ Object.assign(S, JSON.parse(el.dataset.set || "{}")); }catch{ /* ignore a malformed shortcut */ }
       S.sigLimit = 60;
       setView(id);
-    }
-    else if(act === "tlmode"){
-      S.tlMode = id;
-      renderRail();
-      draw("timeline");
-      back(`[data-act="tlmode"][data-id="${id}"]`);
     }
     else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
     else if(act === "noop"){ /* decorative */ }
