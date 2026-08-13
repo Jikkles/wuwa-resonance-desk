@@ -45,11 +45,17 @@ jobs:
       - name: Build resonator index and kits
         run: node scripts/fetch-kits.mjs
 
+      # Reads what the step above just wrote — every banner's real start and
+      # end, off its convene page — and retires the matching estimates in
+      # versions.json. Strictly after fetch-kits.mjs; it fetches nothing itself.
+      - name: Confirm estimated phase dates
+        run: node scripts/confirm-dates.mjs
+
       - name: Commit if changed
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/resonators.json data/kits.json
+          git add data/resonators.json data/kits.json data/versions.json
           if git diff --staged --quiet; then
             echo "no change"
             exit 0

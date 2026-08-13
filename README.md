@@ -24,6 +24,7 @@ scripts/fetch-art.mjs          the key art resolver
 scripts/fetch-portraits.mjs    the character art resolver
 scripts/fetch-weapons.mjs      the weapon stat, passive and icon resolver
 scripts/fetch-kits.mjs         the roster, kit and banner-history builder
+scripts/confirm-dates.mjs      retires estimated phase dates once they're known
 .github/workflows/update-feeds.yml   cron, every 6h — feed, art, portraits, weapons
 .github/workflows/update-kits.yml    cron, daily — resonators.json + kits.json
 ```
@@ -754,6 +755,7 @@ left is the editorial, which is the part worth your time.
 | `portraits.json` + `assets/portraits/` | Prydwen galleries |
 | `weapons.json` + `assets/weapons/` | Prydwen weapon pages |
 | `resonators.json` + `kits.json` | Fandom + Prydwen |
+| phase dates in `versions.json` | Fandom convene pages, once a phase has run |
 
 All of them are driven off the names already in `versions.json`, so writing a banner row
 is what pulls that character's art, portrait, weapon and kit. You never place an image
@@ -761,6 +763,31 @@ by hand.
 
 **Still yours**, and no script will ever do it: `news.json` entries and their tiers,
 `outcome` on a leak that resolved, `translations.json`, and the `keyVisual*` crop values.
+
+### Estimated dates retire themselves
+
+A patch is written up weeks before it ships, so its phase boundaries start as arithmetic
+on past patch lengths and carry `estimated_start` / `estimated_end`, which render as
+"(est)". Kuro confirms them later, and somebody used to have to go and edit the file.
+
+They don't. Every banner has a convene page on the wiki carrying its real start and end,
+`fetch-kits.mjs` already parses those into each Resonator's `runs`, and a phase is
+exactly the window its banners ran in — so `confirm-dates.mjs` reconciles them back into
+`versions.json`. It fetches nothing; it reads what the kit builder just wrote, which is
+why it runs immediately after it.
+
+The catch is that it is retrospective: a phase's dates are confirmed once that phase has
+started, not when Kuro announces them. It closes the estimate out mid-patch rather than
+ahead of time, which is worth having but is not a reason to skip reading the notice.
+
+Three rules keep it off your writing:
+
+- An estimate is replaced by a confirmed date, and a blank is filled. That's the job.
+- **A date not marked estimated is never overwritten.** If the wiki disagrees with
+  something you wrote down as confirmed, that wants a human, so it's reported and left
+  alone.
+- **A phase's banners must agree unanimously.** Two convenes claiming different windows
+  is a parsing problem, not a confirmation, so the phase is skipped.
 
 ### The timeline keeps its own time
 
