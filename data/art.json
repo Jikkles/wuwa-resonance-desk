@@ -2,6 +2,14 @@
   "schema": "wuwa-desk/art@1.0",
   "note": "Official key art from Kuro's own Profile Reveal posts, hotlinked from Kuro's CDN. Not rehosted, not datamined. Characters with no reveal post yet are absent by design.",
   "art": {
+    "Aalto": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1695052800000/pv2hrv8zlysux4og7w-1695125526799.jpg",
+      "articleId": 475,
+      "articleTitle": "Profile Reveal: Mistcloak Strike — Aalto",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/475",
+      "published": "2023-09-20",
+      "credit": "© Kuro Games"
+    },
     "Aemeath": {
       "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1769788800000/npdp436vcs67tw9h61-1769853356206.jpg",
       "epithet": "Guiding Starlance",
@@ -9,6 +17,128 @@
       "articleTitle": "Profile Reveal | Guiding Starlance — Aemeath",
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4140",
       "published": "2026-02-01",
+      "credit": "© Kuro Games"
+    },
+    "Augusta": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1755878400000/hbf0t6vmcnpu2xkvtm-1755880089323.jpg",
+      "epithet": "Magnetism Before Light",
+      "articleId": 3120,
+      "articleTitle": "Profile Reveal | Magnetism Before Light—Augusta",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3120",
+      "published": "2025-08-24",
+      "credit": "© Kuro Games"
+    },
+    "Baizhi": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1706976000000/3n83934z5m0jzb0v1n-1707040783943.jpg",
+      "articleId": 623,
+      "articleTitle": "Profile Reveal: Healing You'tan — Baizhi",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/623",
+      "published": "2024-02-05",
+      "credit": "© Kuro Games"
+    },
+    "Brant": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1740672000000/r0owh2fmc0rx7no0x7-1740724243957.jpg",
+      "epithet": "Flamebound Compass",
+      "articleId": 2192,
+      "articleTitle": "Profile Reveal | Flamebound Compass — Brant",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2192",
+      "published": "2025-03-02",
+      "credit": "© Kuro Games"
+    },
+    "Buling": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1764777600000/9oyj0uaj60gt28p0sh-1764847169651.jpg",
+      "epithet": "Divine Hearing",
+      "articleId": 3699,
+      "articleTitle": "Profile Reveal | Divine Hearing — Buling",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3699",
+      "published": "2025-12-08",
+      "credit": "© Kuro Games"
+    },
+    "Calcharo": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1713456000000/bg4cu1yqc4zt5jxm4v-1713515595625.jpg",
+      "articleId": 710,
+      "articleTitle": "Profile Reveal: Phantom Hunters — Calcharo",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/710",
+      "published": "2024-04-19",
+      "credit": "© Kuro Games"
+    },
+    "Camellya": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1731081600000/w50xxfwdgwe5j7590g-1731114784288.jpg",
+      "epithet": "Crimson Blossom",
+      "articleId": 1605,
+      "articleTitle": "Profile Reveal | Crimson Blossom — Camellya",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1605",
+      "published": "2024-11-09",
+      "credit": "© Kuro Games"
+    },
+    "Cantarella": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1742486400000/u35h1nb68861kt306t-1742570571440.jpg",
+      "epithet": "Sea of Dreams",
+      "articleId": 2310,
+      "articleTitle": "Profile Reveal | Sea of Dreams — Cantarella",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2310",
+      "published": "2025-03-23",
+      "credit": "© Kuro Games"
+    },
+    "Carlotta": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1735488000000/ssv33sbm38xxzc75wt-1735540436554.jpg",
+      "epithet": "Crystal Remorph",
+      "articleId": 1846,
+      "articleTitle": "Profile Reveal | Crystal Remorph — Carlotta",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1846",
+      "published": "2024-12-30",
+      "credit": "© Kuro Games"
+    },
+    "Cartethyia": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1749484800000/827rt9pwr5i00h1ktx-1749528583811.jpg",
+      "epithet": "Feathered Tempest",
+      "articleId": 2755,
+      "articleTitle": "Profile Reveal | Feathered Tempest — Cartethyia",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2755",
+      "published": "2025-06-10",
+      "credit": "© Kuro Games"
+    },
+    "Changli": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1721232000000/87gleii8j0vx2t36bm-1721299081568.jpg",
+      "epithet": "Eternal Blaze",
+      "articleId": 1061,
+      "articleTitle": "Profile Reveal | Eternal Blaze — Changli",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1061",
+      "published": "2024-07-19",
+      "credit": "© Kuro Games"
+    },
+    "Chisa": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1763136000000/tcz1fpjdqkq0ra8ntk-1763198623393.jpg",
+      "epithet": "Eye of Unraveling",
+      "articleId": 3595,
+      "articleTitle": "Profile Reveal | Eye of Unraveling — Chisa",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3595",
+      "published": "2025-11-16",
+      "credit": "© Kuro Games"
+    },
+    "Chixia": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1706976000000/zv12jwnvd1vc6f59ky-1707042574291.jpg",
+      "articleId": 622,
+      "articleTitle": "Profile Reveal: Gallant Blaze — Chixia",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/622",
+      "published": "2024-02-05",
+      "credit": "© Kuro Games"
+    },
+    "Ciaccona": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1747324800000/bgxorn1kjleaq08ql4-1747395430148.jpg",
+      "epithet": "Woven Melodies",
+      "articleId": 2616,
+      "articleTitle": "Profile Reveal | Woven Melodies — Ciaccona",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2616",
+      "published": "2025-05-18",
+      "credit": "© Kuro Games"
+    },
+    "Danjin": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1699977600000/rx4w0t39jmagssj814-1700040879706.jpg",
+      "articleId": 542,
+      "articleTitle": "Profile Reveal: Scarlet Shade — Danjin",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/542",
+      "published": "2023-11-16",
       "credit": "© Kuro Games"
     },
     "Denia": {
@@ -20,6 +150,23 @@
       "published": "2026-05-17",
       "credit": "© Kuro Games"
     },
+    "Encore": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1713801600000/7uw3a5ia9e1l3uxhix-1713866070070.jpg",
+      "articleId": 714,
+      "articleTitle": "Profile Reveal: Consultant from the Black Shores — Encore",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/714",
+      "published": "2024-04-23",
+      "credit": "© Kuro Games"
+    },
+    "Galbrena": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1759248000000/4oesyt3gci19xsf9ui-1759249981034.jpg",
+      "epithet": "Infernal Descent",
+      "articleId": 3363,
+      "articleTitle": "Profile Reveal | Infernal Descent — Galbrena",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3363",
+      "published": "2025-10-05",
+      "credit": "© Kuro Games"
+    },
     "Hiyuki": {
       "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1776960000000/9f554s5q2h9vw84tw0-1777007618905.jpg",
       "epithet": "Futures' Tithe",
@@ -27,6 +174,84 @@
       "articleTitle": "Profile Reveal | Futures' Tithe — Hiyuki",
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4570",
       "published": "2026-04-26",
+      "credit": "© Kuro Games"
+    },
+    "Iuno": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1757606400000/9q5plqmum2keg23ly8-1757671258356.jpg",
+      "epithet": "Stasis, Cycle, Renewal",
+      "articleId": 3252,
+      "articleTitle": "Profile Reveal | Stasis, Cycle, Renewal — Iuno",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3252",
+      "published": "2025-09-13",
+      "credit": "© Kuro Games"
+    },
+    "Jianxin": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1708876800000/3c9vp3p7agt99gs2tg-1708936201163.jpg",
+      "articleId": 666,
+      "articleTitle": "Profile Reveal: Cleansing Reflections — Jianxin",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/666",
+      "published": "2024-02-26",
+      "credit": "© Kuro Games"
+    },
+    "Jinhsi": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1719331200000/hc4gw44el4q9ntp954-1719387753394.jpg",
+      "epithet": "Thawborn Renewal",
+      "articleId": 965,
+      "articleTitle": "Profile Reveal | Thawborn Renewal — Jinhsi",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/965",
+      "published": "2024-06-26",
+      "credit": "© Kuro Games"
+    },
+    "Jiyan": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1716480000000/cbg5otodmjgawupul3-1716564842815.jpg",
+      "articleId": 795,
+      "articleTitle": "Profile Reveal: General of the Midnight Rangers — Jiyan",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/795",
+      "published": "2024-05-24",
+      "credit": "© Kuro Games"
+    },
+    "Lingyang": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1715184000000/ety264zywt1c0c8vew-1715240230306.jpg",
+      "articleId": 720,
+      "articleTitle": "Profile Reveal: Frosty Gusto — Lingyang",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/720",
+      "published": "2024-05-09",
+      "credit": "© Kuro Games"
+    },
+    "Lucilla": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1780934400000/d3wcfod2ps7g8r9zca-1780976093564.jpg",
+      "epithet": "Memory Palace",
+      "articleId": 4870,
+      "articleTitle": "Profile Reveal | Memory Palace - Lucilla",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4870",
+      "published": "2026-06-10",
+      "credit": "© Kuro Games"
+    },
+    "Lucy": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1780675200000/mb01scd7vq4k7eqiqy-1780714770936.jpg",
+      "epithet": "Xeno-Domain Hacking",
+      "articleId": 4800,
+      "articleTitle": "Profile Reveal | Xeno-Domain Hacking - Lucy",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4800",
+      "published": "2026-06-06",
+      "credit": "© Kuro Games"
+    },
+    "Lumi": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1733328000000/5ris99oapyrm6exdzw-1733394687464.jpg",
+      "epithet": "Kaleido Refraction",
+      "articleId": 1734,
+      "articleTitle": "Profile Reveal | Kaleido Refraction — Lumi",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1734",
+      "published": "2024-12-06",
+      "credit": "© Kuro Games"
+    },
+    "Lupa": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1750953600000/gra0unjepytxa3qua7-1751019170930.jpg",
+      "epithet": "Howling Flame",
+      "articleId": 2856,
+      "articleTitle": "Profile Reveal | Howling Flame—Lupa",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2856",
+      "published": "2025-06-28",
       "credit": "© Kuro Games"
     },
     "Luuk Herssen": {
@@ -56,6 +281,76 @@
       "published": "2026-01-11",
       "credit": "© Kuro Games"
     },
+    "Mortefi": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1697558400000/736ptfonj59609y1u0-1697597083009.jpg",
+      "articleId": 512,
+      "articleTitle": "Profile Reveal: Dragon's Breath — Mortefi",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/512",
+      "published": "2023-10-18",
+      "credit": "© Kuro Games"
+    },
+    "Phoebe": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1739116800000/fzgz16fj0qykuljdkx-1739157038069.jpg",
+      "epithet": "Graceful Luminescence",
+      "articleId": 2106,
+      "articleTitle": "Profile Reveal | Graceful Luminescence — Phoebe",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2106",
+      "published": "2025-02-10",
+      "credit": "© Kuro Games"
+    },
+    "Phrolova": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1752768000000/ykhg0klrdv6bgyb721-1752835104788.jpg",
+      "epithet": "Symphony of Beyond",
+      "articleId": 2907,
+      "articleTitle": "Profile Reveal | Symphony of Beyond — Phrolova",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2907",
+      "published": "2025-07-20",
+      "credit": "© Kuro Games"
+    },
+    "Qiuyuan": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1761235200000/49hnq56kq025754d05-1761299130631.jpg",
+      "epithet": "Bambooscape",
+      "articleId": 3479,
+      "articleTitle": "Profile Reveal | Bambooscape — Qiuyuan",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3479",
+      "published": "2025-10-26",
+      "credit": "© Kuro Games"
+    },
+    "Rebecca": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1780675200000/ds9cuzlfxfy3t7x149-1780715705283.jpg",
+      "epithet": "Fury-Type Arsenal",
+      "articleId": 4799,
+      "articleTitle": "Profile Reveal | Fury-Type Arsenal - Rebecca",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4799",
+      "published": "2026-06-06",
+      "credit": "© Kuro Games"
+    },
+    "Roccia": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1737043200000/v9yu8co7tdx0bckh8j-1737082668738.jpg",
+      "epithet": "Stage in the Box",
+      "articleId": 2000,
+      "articleTitle": "Profile Reveal | Stage in the Box — Roccia",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2000",
+      "published": "2025-01-17",
+      "credit": "© Kuro Games"
+    },
+    "Sanhua": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1692720000000/qkzm53j6qolwdcr6rt-1692772025998.jpg",
+      "articleId": 451,
+      "articleTitle": "Profile Reveal: Snow Waltz — Sanhua",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/451",
+      "published": "2023-08-23",
+      "credit": "© Kuro Games"
+    },
+    "Sigrika": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1773417600000/xhncgp3y1tj1yqvdig-1773420625006.jpg",
+      "epithet": "True Name Manifestation",
+      "articleId": 4410,
+      "articleTitle": "Profile Reveal | True Name Manifestation — Sigrika",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4410",
+      "published": "2026-03-15",
+      "credit": "© Kuro Games"
+    },
     "Suisui": {
       "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1784822400000/bf7bns1taqiqke56cp-1784890636855.jpg",
       "epithet": "Host of Harmony",
@@ -63,6 +358,48 @@
       "articleTitle": "Profile Reveal | Host of Harmony - Suisui",
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5200",
       "published": "2026-07-26",
+      "credit": "© Kuro Games"
+    },
+    "Taoqi": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1703001600000/hkv187rjoz75kypssu-1703057266964.jpg",
+      "articleId": 583,
+      "articleTitle": "Profile Reveal: Blossom of Slashes — Taoqi",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/583",
+      "published": "2023-12-20",
+      "credit": "© Kuro Games"
+    },
+    "The Shorekeeper": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1727366400000/9qjbxn1ffexqnp626j-1727429970862.jpg",
+      "epithet": "Euphonic Chrysalis",
+      "articleId": 1419,
+      "articleTitle": "Profile Reveal | Euphonic Chrysalis — The Shorekeeper",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1419",
+      "published": "2024-09-28",
+      "credit": "© Kuro Games"
+    },
+    "Verina": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1710345600000/huy3wudojse9hgrli6-1710402350086.jpg",
+      "articleId": 676,
+      "articleTitle": "Profile Reveal: Nature Calling — Verina",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/676",
+      "published": "2024-03-14",
+      "credit": "© Kuro Games"
+    },
+    "Xiangli Yao": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1725379200000/fld9x0jnb5j8wd8hu2-1725422371972.JPG",
+      "epithet": "Matter Weaver",
+      "articleId": 1255,
+      "articleTitle": "Profile Reveal | Matter Weaver — Xiangli Yao",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1255",
+      "published": "2024-09-04",
+      "credit": "© Kuro Games"
+    },
+    "Yangyang": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1706976000000/oho7xtsc1ywted2pz8-1707016888178.jpg",
+      "articleId": 621,
+      "articleTitle": "Profile Reveal: Breath of Winds — Yangyang",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/621",
+      "published": "2024-02-05",
       "credit": "© Kuro Games"
     },
     "Yangyang: Xuanling": {
@@ -73,7 +410,51 @@
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5007",
       "published": "2026-07-06",
       "credit": "© Kuro Games"
+    },
+    "Yinlin": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1717603200000/uuehvibs1s2q0go1lo-1717646370018.jpg",
+      "epithet": "Evil-conquering Puppet",
+      "articleId": 862,
+      "articleTitle": "Profile Reveal | Evil-conquering Puppet — Yinlin",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/862",
+      "published": "2024-06-06",
+      "credit": "© Kuro Games"
+    },
+    "Youhu": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1729180800000/qknq25p1sscvgti1my-1729242093370.jpg",
+      "epithet": "Cryogenic Wonders",
+      "articleId": 1525,
+      "articleTitle": "Profile Reveal | Cryogenic Wonders — Youhu",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1525",
+      "published": "2024-10-21",
+      "credit": "© Kuro Games"
+    },
+    "Yuanwu": {
+      "url": "https://dev-hw-media-cdn-mingchao.kurogame.com/akiwebsite/images/1701705600000/ex0pczplqxmm15oyd6-1701764414187.jpg",
+      "articleId": 566,
+      "articleTitle": "Profile Reveal: Fist of Thunder — Yuanwu",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/566",
+      "published": "2023-12-06",
+      "credit": "© Kuro Games"
+    },
+    "Zani": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1745510400000/jahk05em8kdbie95mv-1745580484734.jpg",
+      "epithet": "Scorched Radiance",
+      "articleId": 2509,
+      "articleTitle": "Profile Reveal | Scorched Radiance — Zani",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2509",
+      "published": "2025-04-26",
+      "credit": "© Kuro Games"
+    },
+    "Zhezhi": {
+      "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1723392000000/daald42jygytqexk5d-1723433337858.jpg",
+      "epithet": "Enchancted Brush",
+      "articleId": 1144,
+      "articleTitle": "Profile Reveal | Enchancted Brush — Zhezhi",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1144",
+      "published": "2024-08-12",
+      "credit": "© Kuro Games"
     }
   },
-  "updated": "2026-08-12T00:14:47.563Z"
+  "updated": "2026-08-13T12:40:23.130Z"
 }
