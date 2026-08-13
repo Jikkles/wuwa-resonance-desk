@@ -1513,110 +1513,100 @@ button{font:inherit;color:inherit}
 .rec-when{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--fg-3)}
 
 /* ══ weapons ════════════════════════════════════════════════════════
-   Rows, not cards. A resonator is a face and the grid is built around that; a
-   weapon is six facts, five of them numbers you are holding against the row
-   above. So this is a table — one grid, header row and body sharing the same
-   column track, so ATK sits under ATK all the way down a screen of 46.
+   The same contact sheet the resonator grid is — big art, name underneath, and
+   everything else one click away. It reuses .rec and .rgrid outright rather
+   than restating them, so the two databases stay one idea: only the art
+   treatment and the stat line under the name are its own.
+
+   It was a six-column table first, with the passive clamped into the last
+   column. Every fact was on the page and nothing was worth looking at: 120 rows
+   of dense small print, which is a spreadsheet, and a spreadsheet is what a
+   record you can open exists to avoid.
 
    Rarity is the only colour here. The element accent that carries the rest of
    the desk means nothing on a weapon, and a weapon's rarity is the first thing
-   anyone sorts on, so --rar takes the accent slot per panel. All three values
-   are already in the palette — 5★ is the desk's amber, 4★ and 3★ are borrowed
-   from the electro and glacio attribute colours — so no new hue enters the
-   system to say something the system already says. */
+   anyone sorts on, so --rar takes the accent slot per panel and the cards feed
+   it straight into --attr — which is what .rec's hover, name colour and art
+   gradient are already wired to. All three values are already in the palette:
+   5★ is the desk's amber, 4★ and 3★ are borrowed from the electro and glacio
+   attribute colours, so no new hue enters the system to say something the
+   system already says. */
 .wpanel{--rar:var(--accent)}
 .wpanel.r-5{--rar:#E3AC55}
 .wpanel.r-4{--rar:#B98BE0}
 .wpanel.r-3{--rar:#78BFE8}
-/* The rarity, stated once at the panel edge rather than on every row — 46 gold
-   pips down a column is a texture, not information. */
+/* The rarity, stated once at the panel edge rather than on every card — 46 gold
+   pips down a grid is a texture, not information. */
 .wpanel .panel-h{box-shadow:inset 3px 0 0 var(--rar)}
 .wpanel .panel-h h2{color:var(--rar)}
+.wrec{--attr:var(--rar)}
 
-.wtable{display:flex;flex-direction:column;animation:rise .16s ease}
-.wrow{
-  display:grid;align-items:center;gap:14px;
-  grid-template-columns:40px minmax(150px,1.25fr) 92px 58px 104px minmax(230px,2.4fr);
-  padding:9px 16px;border-top:1px solid var(--line);
-  text-align:left;color:inherit;font:inherit;cursor:pointer;
-  transition:background .15s,box-shadow .15s;
+/* Wider cells than the resonator grid. A weapon's name runs to "Rime-Draped
+   Sprouts" and it carries a stat line under it, where a resonator card carries
+   one word. */
+.wgrid{grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
+/* A weapon render is an object on transparent ground, not a portrait: it wants
+   air around it and a floor to stand on, so it is contained and centred rather
+   than cropped to fill. The 4:5 frame is the resonator card's, kept so the two
+   grids line up when you move between them. */
+.wart{
+  aspect-ratio:4/5;padding:14% 12%;
+  background:
+    radial-gradient(ellipse 76% 56% at 50% 108%,color-mix(in srgb,var(--attr) 36%,transparent),transparent 70%),
+    linear-gradient(163deg,var(--bg-3),var(--bg));
 }
-.wtable .wrow:first-child{border-top:0}
-.wrow:not(.whead):hover,.wrow:not(.whead):focus-visible{
-  background:var(--tint);box-shadow:inset 3px 0 0 var(--rar);outline:none;
+.wart img{
+  position:static;width:100%;height:100%;object-fit:contain;object-position:center;
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.5));
+  transition:transform .2s;
 }
-/* Sticks under nothing — the panel header scrolls with it — so this is a label
-   row and not a fixed one. It reads as chrome: no rule of its own beyond the
-   panel's, and the units set under the name they qualify. */
-.whead{
-  cursor:default;padding-top:8px;padding-bottom:8px;background:var(--tint-sink);
-  font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--fg-3);
+.rec:hover .wart img{transform:scale(1.04)}
+.wart-g{color:color-mix(in srgb,var(--attr) 55%,var(--fg-3));display:flex}
+/* .cart's own vignette is cut for a portrait — heavy at the top, where a game
+   logo sits, and heavier at the bottom, where a name used to. A weapon render
+   is centred in the frame with air above and below, so both bands land on the
+   subject. All that is wanted here is a floor for it to stand on. */
+.wart::after{
+  background:linear-gradient(0deg,rgba(13,12,17,.6),rgba(13,12,17,.06) 32%,transparent 54%);
 }
-.whead i{display:block;font-style:normal;font-size:8px;letter-spacing:.1em;opacity:.75}
-.whead b{color:var(--rar);font-weight:500}
 
-.wr-art{
-  display:flex;align-items:center;justify-content:center;
-  width:40px;height:40px;border-radius:var(--r-sm);
-  background:color-mix(in srgb,var(--rar) 12%,var(--bg-2));
-  border:1px solid color-mix(in srgb,var(--rar) 22%,transparent);
-  color:var(--fg-3);overflow:hidden;
+.wrec-b{padding:10px 11px 11px;border-top:1px solid var(--line);display:grid;gap:3px}
+.wrec-b h3{margin:0;font-size:13.5px;font-weight:600;line-height:1.3}
+.rec:hover .wrec-b h3{color:var(--attr)}
+/* The two figures the grid is scanned for, and the only text on the card
+   besides its name. Level 90, always — the ascension slider in the record does
+   not touch these. */
+.wrec-s{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--fg-3);font-variant-numeric:tabular-nums;
 }
-.wr-art img{width:100%;height:100%;object-fit:contain;display:block}
-.wr-n{min-width:0;display:flex;flex-direction:column;gap:2px}
-.wr-n b{font-size:13px;font-weight:600;line-height:1.3}
-.wrow:hover .wr-n b{color:var(--rar)}
-.wr-n i{
-  font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--fg-3);
-}
-.wr-c{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
-}
-/* Tabular numerals throughout the numeric columns — this is a comparison
-   table, and proportional digits put 587 and 412 on different widths. */
-.wr-atk{
-  font-family:var(--mono);font-size:13px;color:var(--fg);font-variant-numeric:tabular-nums;text-align:right;
-}
-.wr-sub{display:flex;flex-direction:column;gap:1px;text-align:right}
-.wr-sub b{font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
-.wr-sub i{
-  font-style:normal;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--fg-3);
-}
-/* Three lines at this width, clamped. The passive is the reason to open the
-   record, not a substitute for it — a row that grows to eight lines for one
-   verbose 5★ breaks the alignment the table exists for. */
-.wr-eff{
-  font-size:11.5px;line-height:1.5;color:var(--fg-2);
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
-}
-/* The scaling values, set apart from the prose around them. This is what the
-   ascension slider moves, and it has to be findable without re-reading. Sized
-   in em, not pixels: the same fragment is set in an 11.5px table cell and in
-   the record's 13.5px body copy, and a fixed size made it read as a typo in
-   one of the two. --rar is unset outside a weapon panel, where the record's
-   element accent takes over — the same accent everything else in the drawer
-   is already using. */
+.wrec-s b{color:var(--fg-2);font-weight:500}
+
+/* The scaling values inside a passive, set apart from the prose around them.
+   This is what the ascension slider moves, and it has to be findable without
+   re-reading. Sized in em so it tracks whatever it is set in. --rar is unset
+   in the record, where the holder's element accent takes over — the same accent
+   everything else in that drawer is already using. */
 .wval{
   color:var(--rar,var(--attr));font-weight:600;font-family:var(--mono);font-size:.94em;
   font-variant-numeric:tabular-nums;
 }
-/* The index into the ascension table below. Small enough to skip when you are
-   reading the sentence, there when you are reading the table. */
-.wval sup{font-size:.62em;font-weight:500;opacity:.7;margin-left:1px}
 .wval.na{color:var(--fg-3)}
 .wnone{color:var(--fg-3);font-style:italic}
+/* The holder's name in the record's opening sentence, which is the way back to
+   their own record now that the convene list has gone. */
+.wholder{color:var(--attr);cursor:pointer;border-bottom:1px solid transparent}
+.wholder:hover,.wholder:focus-visible{border-bottom-color:currentColor;outline:none}
 
 /* ── ascension slider ─────────────────────────────────────────────
-   The view's one control that isn't a filter. It sits in a strip of its own
-   under the 5★ header — always visible, unlike the inline quick filters, which
-   only appear once the aside is gone — because it changes what every passive
-   on the page says and a control you cannot see doing that is a bug report. */
+   Lives in the record, beside the one thing it changes. It was a strip across
+   the top of the view while the passives were on the cards; with those in the
+   record it followed them, which is also where Prydwen puts it. S.rank is
+   global and paintRank queries the document, so the rank you set on one weapon
+   is the rank the next one opens at. */
 .ascend{
   display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-  padding:11px 18px;border-bottom:1px solid var(--line);background:var(--bg-2);
+  padding:10px 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
 }
 /* Given room to be a slider. Five stops inside 120px is a control you nudge
    and hope; at 340 the steps are far enough apart to aim at. */
@@ -1626,7 +1616,6 @@ button{font:inherit;color:inherit}
   flex:none;min-width:30px;font-family:var(--mono);font-size:12px;font-weight:500;
   color:var(--rar,var(--attr));font-variant-numeric:tabular-nums;
 }
-.ascend-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;color:var(--fg-3)}
 
 /* Five stops, so the track is drawn as five stops. Nothing here is the browser
    default: the native control is a light-mode widget and lands on this page as
@@ -1656,9 +1645,8 @@ button{font:inherit;color:inherit}
   box-shadow:0 0 0 3px color-mix(in srgb,var(--rar,var(--attr)) 45%,transparent);
 }
 
-/* ── weapon record ────────────────────────────────────────────────
-   The drawer's own furniture: the two level 90 figures, and the full ascension
-   table the slider can only ever show one column of. */
+/* The two level 90 figures, in the record. Big, because they are the answer to
+   the question that opened it. */
 .wstats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .wstats>div{
   padding:11px 13px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
@@ -1666,23 +1654,6 @@ button{font:inherit;color:inherit}
 }
 .wstats .k{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
 .wstats b{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
-
-.wscale{
-  border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--tint-sink);
-}
-.wscale-r{
-  display:grid;grid-template-columns:26px repeat(5,1fr);
-  border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:10.5px;font-variant-numeric:tabular-nums;
-}
-.wscale-r:first-child{border-top:0}
-.wscale-r>span{padding:7px 4px;text-align:center;color:var(--fg-2);transition:background .15s,color .15s}
-.wscale-h>span{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
-.wscale-k{color:var(--fg-3) !important;background:var(--tint-sink)}
-/* The column the slider is standing on. Marked in both rows at once, which is
-   the only way a five-column table says "this one" without a caption. */
-.wscale-r>span.on{background:color-mix(in srgb,var(--attr) 13%,transparent);color:var(--attr)}
-.wscale-h>span.on{color:var(--attr)}
 
 /* ══ aside ══════════════════════════════════════════════════════════ */
 .mini-h{
@@ -2218,50 +2189,13 @@ button{font:inherit;color:inherit}
 }
 @media (max-width:1080px){.duo{grid-template-columns:1fr}}
 
-/* ── weapon table, narrowing ──────────────────────────────────────
-   Six columns need about 780px of panel. Above that they stay six; the two
-   steps below give the numbers back their room before the table starts
-   hyphenating names. */
-@media (max-width:1180px){
-  .wrow{
-    grid-template-columns:36px minmax(118px,1.2fr) 78px 52px 92px minmax(170px,2fr);
-    gap:11px;padding:9px 13px;
-  }
-  .wr-art{width:36px;height:36px}
-}
-/* Below this a six-column table is a scroll bar with a table attached, so it
-   stops being one. The row becomes a block — art, name and the two figures on
-   top, the passive underneath — and the header row goes, since there is
-   nothing left in a fixed column for it to label. The units it was carrying
-   move onto the values themselves: a bare 587 with no header above it is a
-   number nobody can use. */
-@media (max-width:820px){
-  .whead{display:none}
-  .wrow{
-    grid-template-columns:38px minmax(0,1fr) auto;
-    grid-template-areas:"art name sub" "art cls atk" "eff eff eff";
-    gap:5px 12px;padding:12px 14px;
-  }
-  .wr-art{grid-area:art;align-self:start;width:38px;height:38px}
-  .wr-n{grid-area:name}
-  .wr-c{grid-area:cls}
-  .wr-atk{grid-area:atk}
-  .wr-sub{grid-area:sub;flex-direction:row;align-items:baseline;justify-content:flex-end;gap:5px}
-  .wr-eff{grid-area:eff;margin-top:5px;-webkit-line-clamp:3}
-  .wr-atk::before{
-    content:"ATK ";font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--fg-3);
-  }
-}
+/* Two weapons to a row on a phone, not one. The card is art and two short
+   lines, so it stays legible at half width — where a resonator card, which is
+   a face, does not. */
 @media (max-width:520px){
-  /* A name and two figures will not share a line here, so the row takes a
-     fourth. Nothing is dropped: every column on this table is a fact you came
-     to compare, and a phone is not a reason to stop answering one of them. */
-  .wrow{
-    grid-template-areas:"art name name" "art cls cls" "atk atk sub" "eff eff eff";
-  }
-  .wr-atk{text-align:left}
-  .wscale-r{grid-template-columns:22px repeat(5,1fr);font-size:9.5px}
-  .wscale-r>span{padding:6px 2px}
+  .wgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .wrec-b{padding:9px}
+  .wrec-b h3{font-size:12.5px}
 }
 
 @media (prefers-reduced-motion:reduce){

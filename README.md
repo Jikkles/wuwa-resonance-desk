@@ -109,9 +109,9 @@ Two tiers of control, and the split is deliberate:
   a chip each on. Options are read off the data, so a category nothing is filed under
   never appears.
 
-The ascension slider on Weapons is neither. It doesn't change which weapons you can see,
-only what their passives say, so it sits outside `VIEW_FILTERS` and Reset leaves it
-alone.
+The ascension slider is neither, which is part of why it lives in the weapon record
+rather than on the view: it doesn't change which weapons you can see, only what one
+passive says. It sits outside `VIEW_FILTERS` and Reset leaves it alone.
 
 The selects render **twice** — into the aside on desktop, and inline under the panel
 header below 1340px where the aside is gone. Both copies write to the same `S` state
@@ -196,14 +196,16 @@ weapons to the limited characters of that class in debut order reproduces the pr
 attributions exactly — including the off-by-one in Swords that turned out to be Aero
 Rover holding `21020046`.
 
-There *is* a weapon database now — see below — and `drawerWeapon()` reads both halves.
-What the thing does comes from `weapons.json`; where you could get it is still assembled
-from what's on hand: `weaponRuns()` finds every banner the weapon runs beside (reruns
-mean that's a list), and the intel entries that name it come from a text match over
-titles, bodies and tags. Either half can be missing — a 3★ crafting sword has stats and
-no convene; the two 3.7 signatures Prydwen hasn't listed yet have a convene and no
-stats — so every section of the record is conditional. Weapons are in the command
-palette too.
+There *is* a weapon database now — see below — and `drawerWeapon()` reads it for the
+class, the stats and the passive. Either half can be missing: a 3★ crafting sword has
+stats and no convene, and the two 3.7 signatures Prydwen hasn't listed yet have a convene
+and no stats, so every section of the record is conditional.
+
+The convene history the record used to list is gone. It was patch numbers for the one
+weapon in four that has any, and the resonator it belongs to carries the same run history
+in full — so the holder's name in the opening sentence is a `data-act="resonator"` link
+and that is the whole navigation the record needs. `weaponRuns()` still runs, for the
+accent colour and the "running now" pill. Weapons are in the command palette too.
 
 `weaponRuns()` reads both ends of the same fact. `versions.json` is the arc the desk is
 currently watching — two patches — so on its own it made every weapon older than that a
@@ -581,32 +583,47 @@ text is untrusted input; keep it that way if you touch this.
 120 weapons — 46 5★, 43 4★, 31 3★ — in `data/weapons.json`, written by
 `scripts/fetch-weapons.mjs` on the same 6-hour cron as everything else.
 
-### Rows, not cards
+### A contact sheet, same as the resonator grid
 
-Resonators get a grid of portraits because a resonator *is* a face. A weapon is six
-facts, five of them numbers you are holding against the row above, so Weapons is a
-table: one CSS grid, header row and body sharing the same column track, so ATK sits
-under ATK all the way down a screen of 46.
+Big art, name underneath, everything else one click away. It reuses `.rec` and `.rgrid`
+outright rather than restating them, so the two databases stay one idea — only the art
+treatment (`.wart`) and the stat line under the name (`.wrec-s`) are its own.
 
-Three tables, one per rarity, same reasoning as the Resonators split — every rarity
-readable at once beats a toggle between three states of one list. Rows sort **class then
+It was built as a six-column table first, with the passive clamped into the last column,
+and that was the wrong call. Every fact was on the page and nothing was worth looking
+at: 120 rows of dense small print, which is a spreadsheet, and a spreadsheet is what a
+record you can open exists to avoid. The card carries the name and the two level 90
+figures — the only numbers anyone compares one weapon to another on — and the class, the
+source, whose signature it is and the whole passive live in the record.
+
+A weapon render is an object on transparent ground, not a portrait, so `.wart` contains
+and centres it with padding rather than cropping it to fill, and replaces `.cart`'s
+vignette with a floor for it to stand on. The 4:5 frame is the resonator card's, kept so
+the two grids line up when you move between them. `has-art` is set on the frame when an
+icon resolved — that is what suppresses the concentric-ring plate `.cart` draws behind a
+card with no picture, which is exactly what a weapon with no published icon yet should
+still get.
+
+Three panels, one per rarity, same reasoning as the Resonators split — every rarity
+readable at once beats a toggle between three states of one list. Cards sort **class then
 name**: with no filter on that groups the five classes into five runs you can scan past,
-where a flat alphabetical list interleaves them and makes you read the class column on
-every row to find the one you use.
+where a flat alphabetical list scatters the four Broadblades you actually use across
+three rows.
 
 Rarity is the only colour on this view. The element accent that carries the rest of the
-desk means nothing on a weapon, so `--rar` takes the accent slot per panel — but all
-three values are already in the palette (5★ is the desk's amber, 4★ and 3★ are the
-electro and glacio attribute colours), so no new hue enters the system to say something
-the system already says.
+desk means nothing on a weapon, so `--rar` takes the accent slot per panel and the cards
+feed it straight into `--attr`, which is what `.rec`'s hover, name colour and art
+gradient are already wired to. All three values are already in the palette (5★ is the
+desk's amber, 4★ and 3★ are the electro and glacio attribute colours), so no new hue
+enters the system to say something the system already says.
 
 ### Stats are level 90, full stop
 
-`atk90` and `statValue90` are max-level figures and the column headers say so. There is
-no level curve in the source and none is inferred: comparing two weapons is the reason
-anyone opens this page, and a comparison at level 43 is a comparison of two grinds.
-Every weapon sub-stat in this game is a percentage — there is no flat one — so the unit
-is implicit in the data and the renderer appends the sign.
+`atk90` and `statValue90` are max-level figures and the card and record both say so.
+There is no level curve in the source and none is inferred: comparing two weapons is the
+reason anyone opens this page, and a comparison at level 43 is a comparison of two
+grinds. Every weapon sub-stat in this game is a percentage — there is no flat one — so
+the unit is implicit in the data and the renderer appends the sign.
 
 ### The ascension slider
 
@@ -616,23 +633,25 @@ through 5, so the desk stores one passive per weapon and the reader moves a slid
 instead of the page printing five nearly identical paragraphs each and asking you to
 find the one you meant.
 
+It lives **in the record**, beside the one thing it changes, which is also where Prydwen
+puts it. It was a strip across the top of the view while the passives were on the cards;
+when those moved into the record it followed them.
+
 Three things about it are load-bearing:
 
-- **It repaints, it doesn't redraw.** `paintRank()` rewrites the `[data-eff]` cells in
+- **It repaints, it doesn't redraw.** `paintRank()` rewrites the `[data-eff]` elements in
   place. A `draw()` would rebuild the `<input>` the thumb is currently being dragged on,
   which ends the drag mid-gesture.
-- **`input`, not `change`.** The passives track the drag rather than jumping when the
+- **`input`, not `change`.** The passive tracks the drag rather than jumping when the
   thumb is let go.
-- **Every copy updates, not the one that moved.** The view has a slider and an open
-  record has another; two sliders showing different ranks for the same weapon is worse
-  than having only one of them.
+- **`S.rank` is global and `paintRank()` queries the document, not the record.** Set the
+  rank on one weapon and every weapon you open after it is already there, which is the
+  whole point when what you are doing is comparing two of them.
 
-The record adds the full ascension table the slider can only ever show one column of —
-which answers "is it worth getting to four", the question a single column can't. Its
-rows are numbered, and the same numbers appear as superscripts on the values in the
-sentence above it: the table drops holes the source shipped no values for, so the two
-can't share an index, and a grid of unlabelled percentages is a grid of unlabelled
-percentages. `rankKeys()` is the map between them.
+The record used to carry the full S1–S5 table as well, with its rows keyed to
+superscripts in the sentence above. It came out: for the one number in it anyone acts on
+it was a grid of unlabelled percentages, and the slider answers the same question by
+being moved.
 
 ### Where the numbers come from
 

@@ -1579,54 +1579,35 @@ function renderResonators(){
    this page, and a comparison at level 43 is a comparison of two grinds. */
 const WTYPES = ["Broadblade", "Sword", "Pistols", "Gauntlets", "Rectifier"];
 
-/* Which holes in a passive actually scale, and where each one lands in the
-   ascension table. The table drops the holes the source shipped no values for,
-   so the two cannot share an index — and a grid of percentages you can't map
-   back onto the sentence above it is a grid of unlabelled percentages. */
-const scaleRows = w => (w.ranks || []).filter(Boolean);
-const hasScale = w => scaleRows(w).some(r => new Set(r).size > 1);
-function rankKeys(w){
-  const out = {};
-  let i = 0;
-  (w.ranks || []).forEach((vals, n) => { if(vals) out[n] = ++i; });
-  return out;
-}
-
 /* The passive, resolved to one ascension. The scaling values are the reason
    the sentence is worth reading twice, so they are set apart rather than run
    into the prose — move the slider and what changes is visible without
-   re-reading the paragraph to find it. `keyed` numbers them to match the
-   ascension table, and is only for the record, where that table exists. */
-function effectHtml(w, rank, keyed){
+   re-reading the paragraph to find it. */
+function effectHtml(w, rank){
   const i = Math.min(5, Math.max(1, rank || 1)) - 1;
-  const keys = keyed ? rankKeys(w) : null;
   return esc(w.effect || "").replace(/\{(\d)\}/g, (_, n) => {
     const vals = w.ranks?.[Number(n)];
     /* A hole the source shipped no values for. Say so rather than print a
        number from the wrong slot — the whole desk runs on that rule. */
-    if(!vals) return `<b class="wval na">?</b>`;
-    return `<b class="wval">${esc(vals[i])}${keys ? `<sup>${keys[Number(n)]}</sup>` : ""}</b>`;
+    return vals ? `<b class="wval">${esc(vals[i])}</b>` : `<b class="wval na">?</b>`;
   }) || `<span class="wnone">No passive.</span>`;
 }
 
 /* 1–5, and it redraws nothing. A full re-render would rebuild the input the
    thumb is currently being dragged on, which ends the drag — so the numbers are
-   repainted in place and the slider is left standing. Every copy of the control
-   is updated, not just the one that moved: the view has one and an open record
-   has another, and two sliders showing different ranks for the same weapon is
-   worse than having only one of them. */
+   repainted in place and the slider is left standing. It queries the document
+   rather than the record, so the rank stays put between one record and the
+   next: set it once and every weapon you open after that is already there. */
 function paintRank(){
   document.querySelectorAll("[data-eff]").forEach(el => {
     const w = weaponFor(el.dataset.eff);
-    if(w) el.innerHTML = effectHtml(w, S.rank, "effKeyed" in el.dataset);
+    if(w) el.innerHTML = effectHtml(w, S.rank);
   });
   document.querySelectorAll("[data-ranklabel]").forEach(el => el.textContent = `S${S.rank}`);
   document.querySelectorAll("[data-rank]").forEach(el => {
     el.value = S.rank;
     el.setAttribute("aria-valuetext", `Ascension ${S.rank} of 5`);
   });
-  document.querySelectorAll("[data-rankcol]").forEach(el =>
-    el.classList.toggle("on", Number(el.dataset.rankcol) === S.rank));
 }
 
 function ascendBar(){
@@ -1637,37 +1618,33 @@ function ascendBar(){
              aria-label="Weapon ascension" aria-valuetext="Ascension ${S.rank} of 5">
       <output class="ascend-v" data-ranklabel>S${S.rank}</output>
     </label>
-    <span class="ascend-note">Scales every passive below. Stats are level 90 and do not move with it.</span>
   </div>`;
 }
 
-function weaponRow(w){
-  const holder = sigHolderFor(w.name);
-  /* Where it comes from, and whose it is. Both are one line because neither is
-     worth a column: most weapons have one or the other, few have both. */
-  const sub = [w.source, holder ? `${holder}'s signature` : ""].filter(Boolean).join(" · ");
-  return `<div class="wrow" role="button" tabindex="0" data-act="weapon" data-id="${esc(w.name)}">
-    <span class="wr-art">${w.icon
-      ? `<img src="${esc(w.icon)}" alt="" loading="lazy" decoding="async">`
-      : icon("i-weapon", 18)}</span>
-    <span class="wr-n"><b>${esc(w.name)}</b>${sub ? `<i>${esc(sub)}</i>` : ""}</span>
-    <span class="wr-c">${esc(w.type)}</span>
-    <span class="wr-atk">${w.atk90 || "—"}</span>
-    <span class="wr-sub"><b>${w.statValue90 ? esc(w.statValue90) + "%" : "—"}</b><i>${esc(w.stat)}</i></span>
-    <span class="wr-eff" data-eff="${esc(w.name)}">${effectHtml(w, S.rank)}</span>
-  </div>`;
-}
+/* A weapon card is the weapon's own render, its name, and the two figures that
+   are the only reason anyone compares one to another. Nothing else — the class,
+   the source, whose signature it is and the whole passive are in the record one
+   click away, and printing any of that 120 times over turns a database into a
+   wall of small print. Same bargain the resonator grid struck.
 
-/* Column labels, and the only place the rank is named beside the passive. With
-   three tables down the page the slider is off-screen by the time you reach the
-   3★ list, and a column of numbers whose ascension you have to scroll up to
-   check is a column of numbers you cannot trust. */
-function weaponHead(){
-  return `<div class="wrow whead" aria-hidden="true">
-    <span></span><span>Weapon</span><span>Class</span>
-    <span>ATK<i>Lv 90</i></span><span>Sub-stat<i>Lv 90</i></span>
-    <span>Passive<i>at <b data-ranklabel>S${S.rank}</b></i></span>
-  </div>`;
+   The stats stay on the card rather than following the passive into the record.
+   They are two numbers, they are what the grid is scanned for, and they are
+   fixed: level 90, always, whatever the ascension slider is doing. */
+function weaponCard(w){
+  return `<article class="rec wrec" role="button" tabindex="0" data-act="weapon" data-id="${esc(w.name)}">
+    <!-- has-art is what turns off the concentric-ring plate .cart draws behind
+         a card with no picture. A weapon with no published icon yet keeps it. -->
+    <div class="cart wart${w.icon ? " has-art" : ""}">${w.icon
+      ? `<img src="${esc(w.icon)}" alt="${esc(w.name)}" loading="lazy" decoding="async">`
+      : `<span class="wart-g">${icon("i-weapon", 34)}</span>`}</div>
+    <div class="wrec-b">
+      <h3>${esc(w.name)}</h3>
+      <span class="wrec-s">
+        <b>${w.atk90 || "—"}</b> ATK${w.statValue90
+          ? ` · <b>${esc(w.statValue90)}%</b> ${esc(w.stat)}` : ""}
+      </span>
+    </div>
+  </article>`;
 }
 
 function weaponTable(title, rows, total, {right = "", under = "", foot = ""} = {}){
@@ -1679,8 +1656,8 @@ function weaponTable(title, rows, total, {right = "", under = "", foot = ""} = {
       ${right ? `<div class="right chips">${right}</div>` : ""}
     </div>
     ${under}
-    <div class="panel-b flush">
-      ${rows.length ? `<div class="wtable">${weaponHead()}${rows.map(weaponRow).join("")}</div>`
+    <div class="panel-b">
+      ${rows.length ? `<div class="rgrid wgrid">${rows.map(weaponCard).join("")}</div>`
         : `<div class="empty">${emptyWhy("weapon")}</div>`}
     </div>
     ${foot ? `<div class="panel-f"><span class="tier-note">${foot}</span></div>` : ""}
@@ -1689,7 +1666,7 @@ function weaponTable(title, rows, total, {right = "", under = "", foot = ""} = {
 
 /* Class first, then name. With no filter on, that groups the five classes into
    five runs you can scan past — where a flat alphabetical list interleaves them
-   and makes you read the class column on every row to find the one you use. */
+   and scatters the four Broadblades you actually use across three rows. */
 const byClassThenName = (a, b) =>
   (WTYPES.indexOf(a.type) - WTYPES.indexOf(b.type)) || a.name.localeCompare(b.name);
 
@@ -1711,8 +1688,8 @@ function renderWeapons(){
   $("#p-weapons").innerHTML = `<div class="stack">
     ${weaponTable("5★ Weapons", rows("5"), total("5"), {
       right: filters,
-      under: `${ascendBar()}${quickFilters(true)}`,
-      foot: "Stats are level 90. Ascension moves the passive only — the numbers in bold are what it changes."
+      under: quickFilters(true),
+      foot: "Stats are level 90 throughout. Open a weapon for its passive and the ascension slider."
     })}
     ${weaponTable("4★ Weapons", rows("4"), total("4"))}
     ${weaponTable("3★ Weapons", rows("3"), total("3"))}
@@ -2032,34 +2009,18 @@ function drawerVersion(id){
   </div>`);
 }
 
-/* Every value a passive takes, all five at once. The slider answers "what does
-   it do at mine"; this answers "is it worth getting to four", which is the
-   question the slider cannot show you because it only ever displays one column.
-   The current ascension's column is marked and moves with the slider — see
-   paintRank, which owns [data-rankcol]. */
-function rankScale(w){
-  if(!hasScale(w)) return "";
-  const rows = scaleRows(w);
-  return `<div class="dsec"><span class="label">Ascension scaling</span>
-    <div class="wscale">
-      <div class="wscale-r wscale-h">
-        <span></span>${[1,2,3,4,5].map(n =>
-          `<span data-rankcol="${n}" class="${n === S.rank ? "on" : ""}">S${n}</span>`).join("")}
-      </div>
-      ${rows.map((vals, i) => `<div class="wscale-r">
-        <span class="wscale-k">${i + 1}</span>
-        ${vals.map((v, n) => `<span data-rankcol="${n + 1}" class="${n + 1 === S.rank ? "on" : ""}">${esc(v)}</span>`).join("")}
-      </div>`).join("")}
-    </div>
-  </div>`;
-}
-
 /* A weapon record. It used to be assembled entirely out of banner rows — the
    desk held no weapon data, so a weapon was defined by whose convene it ran
    beside, and one that had never had a convene had no record at all. It has
-   stats and a passive now, so the two halves are both here: what the thing does
-   comes from weapons.json, and where you could get it still comes from the
-   timeline. Either half can be missing. */
+   stats and a passive now, so that is what this is: the class, the stats, and
+   the passive under a slider. Either half can be missing — the two 3.7
+   signatures have a convene and no stats yet.
+
+   The convene history that used to sit here is gone. It is a list of patch
+   numbers for the one weapon in four that has any, and the resonator it belongs
+   to carries the same run history in full — so the holder's name in the
+   sentence above is the link to it, and that is the whole navigation this
+   record needs. */
 function drawerWeapon(name){
   const w = weaponFor(name);
   const runs = weaponRuns(name);
@@ -2084,8 +2045,12 @@ function drawerWeapon(name){
     </div>
     ${w?.icon ? `<div class="wbig"><img src="${esc(w.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
     <h2>${esc(name)}</h2>
-    ${holderName ? `<p>Signature weapon for <b>${esc(holderName)}</b>. Kuro runs the weapon convene
-      alongside the character banner, so it is available for the same window.</p>` : ""}
+    <!-- The holder's name is the link out of here, now that the convene list
+         has gone. Their record carries the same run history in full, and this
+         is one word rather than a section. -->
+    ${holderName ? `<p>Signature weapon for
+      <b class="wholder" role="button" tabindex="0" data-act="resonator" data-id="${esc(holderName)}">${esc(holderName)}</b>,
+      and its convene runs alongside their banner.</p>` : ""}
 
     ${w ? `<div class="dsec"><span class="label">Stats at level 90</span>
       <div class="wstats">
@@ -2095,25 +2060,14 @@ function drawerWeapon(name){
 
     ${w ? `<div class="dsec"><span class="label">Passive</span>
       ${ascendBar()}
-      <p class="weff" data-eff="${esc(w.name)}"${hasScale(w) ? " data-eff-keyed" : ""}
-         style="margin:12px 0 0">${effectHtml(w, S.rank, hasScale(w))}</p>
-    </div>${rankScale(w)}` : ""}
-
-    ${runs.length ? `<div class="dsec"><span class="label">Runs alongside</span>
-      <div style="display:grid;gap:8px">${runs.map(r => `
-        <span class="dsrc" role="button" tabindex="0" data-act="resonator" data-id="${esc(r.name)}">
-          <span class="lang">${esc(r.version)}</span>${esc(r.name)}${r.phase ? ` — phase ${esc(r.phase)}` : ""}
-          ${r.new ? "· debut" : "· rerun"}
-          <span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div>
+      <p class="weff" data-eff="${esc(w.name)}" style="margin:12px 0 0">${effectHtml(w, S.rank)}</p>
     </div>` : ""}
 
     ${mentions.length ? `<div class="dsec"><span class="label">Intel mentioning it — ${mentions.length}</span>
       <div style="display:grid;gap:8px">${mentions.map(e => `
         <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(e.id)}">
           <i class="dot t-${esc(e.confidence)}" style="width:7px;height:7px;border-radius:50%;background:currentColor;flex:none"></i>
-          ${esc(e.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div></div>`
-      : `<div class="dsec"><span class="label">Intel mentioning it</span>
-         <p style="margin:0;color:var(--fg-3)">Nothing written up yet.</p></div>`}
+          ${esc(e.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div></div>` : ""}
   </div>`);
 }
 
