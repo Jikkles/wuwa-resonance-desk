@@ -402,7 +402,15 @@ function figure(b){
   const art = artFor(b.name);
   const port = portraitFor(b.name);
   const own = b.image || r.image;
-  const shared = !own && !art && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
+  /* Last in the list, so it resolves only when everything above it missed —
+     including the card. The framing hints on a banner row are cut for one
+     picture, the patch key visual, and they are numbers like `scale(1.72)` at
+     `left 50%`: correct on the 16:9 group shot they were measured against, and
+     on a waist-up portrait they walk the character clean off the panel. So the
+     hints and the picture they were written for stand or fall together, and a
+     row keeps its `keyVisual*` keys harmlessly once Prydwen lists the
+     character — which is the point of them dropping out on their own. */
+  const shared = !own && !art && !port?.card && b.keyVisual && b.keyVisualFocus ? b.keyVisual : null;
   /* The waist-up card now outranks Kuro's reveal poster, where it used to sit
      below it. The poster is the one picture on the desk that is not a cut-out —
      logo band, name plate, its own painted backdrop — so the eight characters
