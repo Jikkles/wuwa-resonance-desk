@@ -1576,18 +1576,26 @@ button{font:inherit;color:inherit}
 }
 .btn:hover{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
 
-/* ══ drawer ═════════════════════════════════════════════════════════ */
-.drawer{position:fixed;inset:0;z-index:40;display:flex;justify-content:flex-end}
+/* ══ drawer ═════════════════════════════════════════════════════════
+   A detail record is a document, not a sidebar note: it wants the middle of
+   the screen and a column wide enough for two things side by side. So the
+   drawer is a centred modal — the scrim still closes it, Esc still closes it,
+   and the sticky header still rides the top of its own scroll. It keeps the
+   .drawer-* names because every renderer and the close handler speak them. */
+.drawer{
+  position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,4vh,48px) clamp(16px,4vw,48px);
+}
 .drawer[hidden]{display:none}
-.drawer-scrim{position:absolute;inset:0;background:rgba(7,6,10,.6);backdrop-filter:blur(2px);animation:fade .18s ease}
+.drawer-scrim{position:absolute;inset:0;background:rgba(7,6,10,.68);backdrop-filter:blur(3px);animation:fade .18s ease}
 .drawer-panel{
-  position:relative;width:min(480px,100%);height:100%;overflow-y:auto;overscroll-behavior:contain;
-  background:var(--bg-1);border-left:1px solid var(--line-2);
-  box-shadow:-24px 0 60px rgba(0,0,0,.45);
-  animation:slide .22s cubic-bezier(.22,.8,.3,1);
+  position:relative;width:min(1080px,100%);max-height:100%;overflow-y:auto;overscroll-behavior:contain;
+  background:var(--bg-1);border:1px solid var(--line-2);border-radius:var(--r-lg);
+  box-shadow:0 32px 90px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.35);
+  animation:rise .22s cubic-bezier(.22,.8,.3,1);
 }
 @keyframes fade{from{opacity:0}}
-@keyframes slide{from{transform:translateX(24px);opacity:.4}}
+@keyframes rise{from{transform:translateY(14px) scale(.985);opacity:0}}
 .drawer-h{
   position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;
   padding:14px 18px;border-bottom:1px solid var(--line);background:var(--bg-2);
@@ -1598,11 +1606,14 @@ button{font:inherit;color:inherit}
   cursor:pointer;color:var(--fg-3);display:flex;transition:.15s;
 }
 .iconbtn:hover{color:var(--fg);border-color:var(--line-2)}
-.drawer-b{padding:18px}
+.drawer-b{padding:20px 22px 24px}
 .drawer-b h2{margin:0 0 10px;font-size:21px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
 .drawer-b h2 .cjk{font-size:15px;color:var(--attr);margin-left:9px;font-weight:500}
 .drawer-b .meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.drawer-b p{font-size:14px;line-height:1.7;color:var(--fg-2)}
+/* Interim measure cap. Nothing in here has been laid out for a thousand-pixel
+   column yet, and a summary set across the full width runs to 140 characters a
+   line. Holds prose to a readable measure until the panel's real layout lands. */
+.drawer-b p{font-size:14px;line-height:1.7;color:var(--fg-2);max-width:76ch}
 .dsec{margin-top:22px}
 .dsec>.label{padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px;display:block}
 .dsec ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
@@ -1693,6 +1704,17 @@ button{font:inherit;color:inherit}
 .dart .cart.has-full img{
   object-position:center top;
   transform:scale(1.86);transform-origin:50% 5%;
+}
+/* Centred, the panel is a thousand pixels across, and the portrait ratios above
+   turn into either a tower or — because a constrained height feeds back through
+   aspect-ratio — a 480px picture with 600px of black beside it. Wide enough to
+   sit in a modal, the art is a banner instead: one ratio for all three kinds,
+   cropped to the head rather than zoomed for a narrow card. Below 860px the
+   panel is full-bleed again and the rules above still hold. */
+@media (min-width:861px){
+  .dart .cart,.dart .cart.has-cutout,.dart .cart.has-art{aspect-ratio:1000/320}
+  .dart .cart.has-full img{object-position:center 13%;transform:none}
+  .dart .cart.has-art img{object-position:center 22%}
 }
 
 /* ══ command palette ════════════════════════════════════════════════ */
@@ -1859,7 +1881,10 @@ button{font:inherit;color:inherit}
   .sig .head{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .sig .flags{grid-row:2;justify-self:end}
   .lane{grid-template-columns:minmax(0,1fr);gap:9px}
-  .drawer-panel{width:100%}
+  /* No room to float a card at this width — the modal goes full-bleed and
+     behaves like the sheet it used to be. */
+  .drawer{padding:0}
+  .drawer-panel{width:100%;max-height:100%;height:100%;border:0;border-radius:0}
   .cmd{padding-top:8vh}
   /* bottom dock replaces the rail's nav */
   /* Six across a 360px phone is 60px a column, and "Resonators" is ten
