@@ -15,7 +15,7 @@
      browser (and Pages' CDN, which sends max-age=600) will happily serve you
      yesterday's stylesheet on a normal refresh. Bump this on every change to
      either asset — it is the whole reason a deploy shows up immediately. -->
-<link rel="stylesheet" href="assets/app.css?v=22">
+<link rel="stylesheet" href="assets/app.css?v=23">
 </head>
 <body>
 
@@ -155,31 +155,32 @@
   <!-- ══ stage ══════════════════════════════════════════════════════ -->
   <div class="stage">
 
-    <!-- Status furniture, and nothing else: the whole header is one right-hand
-         column now. It used to open with the page title on the far left and
-         push the readings across to the right, which spent the full width of
-         the stage on a line that never changes. -->
-    <header class="hud">
-      <div class="hud-strip">
-        <button class="searchbtn" data-act="search" aria-label="Search the desk">
-          <svg width="13" height="13" viewBox="0 0 16 16"><use href="#i-search"/></svg>
-          <span>Search</span><kbd>Ctrl K</kbd>
-        </button>
-        <span class="pulse" id="hud-online">System online</span>
-        <span>Data updated <b id="hud-updated">—</b></span>
-        <span>Feed <b>6h cycle</b></span>
-      </div>
-      <div class="hud-sub"><span class="title">Signal intelligence / Patch monitoring</span></div>
-
-      <!-- The metrics strip stood here: current version, next version, entry
-           count, last update. The patch timeline sits directly below it and
-           says the first two in far more detail, the third is the Intel view's
-           own headline, and the fourth is already in the strip above. Four
-           boxes restating the page, above the fold, pushing the timeline down
-           a screen. -->
-    </header>
-
     <div class="body">
+      <!-- The header used to run across the top of the stage, above everything.
+           It is a status readout — nothing in it changes when you change view —
+           and it was holding the timeline a header's height down the page. So
+           it moved into the aside as the column's first panel, built out of the
+           same .mini-h / .mini-b parts as At a glance, and the views start at
+           the top of the stage. Below 1340px the aside is gone and the CSS
+           flattens this back into the strip it was.
+
+           It is first in the DOM but placed into column two by the grid: Tab
+           still reaches Search before the page, which is the point of it. -->
+      <header class="hud panel">
+        <div class="mini-h"><h3>Signal intelligence / Patch monitoring</h3></div>
+        <div class="mini-b">
+          <button class="searchbtn" data-act="search" aria-label="Search the desk">
+            <svg width="13" height="13" viewBox="0 0 16 16"><use href="#i-search"/></svg>
+            <span>Search</span><kbd>Ctrl K</kbd>
+          </button>
+          <div class="hud-strip">
+            <span class="pulse" id="hud-online">System online</span>
+            <span>Data updated <b id="hud-updated">—</b></span>
+            <span>Feed <b>6h cycle</b></span>
+          </div>
+        </div>
+      </header>
+
       <div class="col">
         <!-- One section per entry in VIEWS, in the same order. setView hides
              every one it doesn't want by id, so a view without a panel here
@@ -252,6 +253,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=22"></script>
+<script src="assets/app.js?v=23"></script>
 </body>
 </html>

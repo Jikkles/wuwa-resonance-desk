@@ -261,22 +261,19 @@ button{font:inherit;color:inherit}
 
 /* ══ hud ════════════════════════════════════════════════════════════ */
 .stage{min-width:0;display:flex;flex-direction:column}
-.hud{padding:13px 20px 0;max-width:var(--page);width:100%}
-/* Everything in the header is right-aligned against the stage's right edge and
-   stacks in two lines — readings on top, the page's own name under them. It
-   used to run title-left / readings-right across the full width, which is a lot
-   of stage given to a line of type that is the same on every view. */
+/* The header is the first panel of the aside column, not a band across the top
+   of the stage — it carries .panel in the markup and takes its frost, border
+   and radius from there. Everything below only has to lay the inside out: the
+   search button across the full column, the three readings stacked under it,
+   one to a line, because 340px will not seat them in a row. */
+.hud{grid-column:2;grid-row:1}
+.hud .searchbtn{width:100%}
 .hud-strip{
-  display:flex;align-items:center;justify-content:flex-end;gap:16px;flex-wrap:wrap;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:flex-start;gap:9px;margin-top:11px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
   color:var(--fg-3);
 }
 .hud-strip b{color:var(--fg-2);font-weight:500}
-.hud-sub{
-  display:flex;justify-content:flex-end;padding:6px 0 2px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--fg-2);
-}
 .pulse::before{
   content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
   background:var(--t-official);margin-right:8px;vertical-align:middle;
@@ -292,17 +289,27 @@ button{font:inherit;color:inherit}
 /* Tighter than it was, on purpose: the landing view is meant to answer what's
    live, what's next and what changed without a scroll, and 22px gutters
    between four stacked panels was most of a screen spent on nothing. */
+/* Two rows, and only the right-hand column uses the first one: the header sits
+   in it while the views span both, which is what puts the timeline level with
+   the top of the page instead of a header's height below it. Placement is
+   explicit rather than by source order, so the header can stay first in the DOM
+   where the keyboard wants it. */
 .body{
-  display:grid;grid-template-columns:minmax(0,1fr) var(--aside-w);gap:16px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) var(--aside-w);
+  grid-template-rows:auto minmax(0,1fr);
+  gap:16px;
   padding:16px 20px 72px;max-width:var(--page);width:100%;
 }
-.col{min-width:0;display:flex;flex-direction:column;gap:16px}
+.col{grid-column:1;grid-row:1/-1;min-width:0;display:flex;flex-direction:column;gap:16px}
 .stack{display:flex;flex-direction:column;gap:16px;min-width:0}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-width:0}
 .duo>*{min-width:0}
 .aside{
-  /* Nothing is pinned across the top of the stage any more, so this sticks to
-     the viewport itself rather than clearing a tab strip. */
+  /* Row two, under the header. Nothing is pinned across the top of the stage,
+     so this sticks to the viewport itself; align-self:start is what leaves the
+     grid area taller than the element, which is what sticky needs to travel. */
+  grid-column:2;grid-row:2;
   position:sticky;top:18px;align-self:start;
   display:flex;flex-direction:column;gap:16px;
 }
@@ -1750,6 +1757,28 @@ button{font:inherit;color:inherit}
   .aside{display:none}
   /* The aside took the quick filters with it — bring the inline copy up. */
   .qf-inline{display:block}
+  /* And it took the header's column with it. There is nowhere left to put a
+     panel, so it unbuilds itself: the frost and border come off, the parts
+     unstack, and it is a right-aligned strip across the top of the stage
+     again — readings on one line, the desk's name under them. The views drop
+     to row two behind it, which costs the ~40px the strip occupies. That is
+     the trade at this width, and it is cheaper than a 340px column that
+     exists to hold four lines of type. */
+  .hud{
+    grid-column:1;grid-row:1;
+    display:flex;flex-direction:column;align-items:flex-end;gap:5px;
+    background:none;border:0;border-radius:0;overflow:visible;
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+  }
+  .col{grid-row:2}
+  .hud .mini-h{order:2;padding:0;border-bottom:0;background:none}
+  .hud .mini-h h3{font-size:10.5px;letter-spacing:.18em;color:var(--fg-2)}
+  .hud .mini-b{
+    padding:0;display:flex;align-items:center;justify-content:flex-end;
+    flex-wrap:wrap;gap:16px;
+  }
+  .hud .searchbtn{width:auto}
+  .hud-strip{flex-direction:row;align-items:center;flex-wrap:wrap;gap:16px;margin-top:0}
 }
 @media (max-width:1240px){
   /* Three cards need about 300px each before the banner grid inside them
@@ -1786,7 +1815,8 @@ button{font:inherit;color:inherit}
     padding:12px 16px;border-right:0;border-bottom:1px solid var(--line);
   }
   .rail-group,.rail-about,.rail-foot{display:none}
-  .hud,.body,.foot{padding-left:16px;padding-right:16px}
+  /* The header lives inside .body now and takes its gutters from it. */
+  .body,.foot{padding-left:16px;padding-right:16px}
   /* Swipe rather than stack. Three patch cards down a phone is a thousand
      pixels of scrolling before the first headline; side by side they cost one
      card's height, and the sliver of the next one showing at the edge is what
@@ -1867,8 +1897,11 @@ button{font:inherit;color:inherit}
   .warnbar span{font-size:11.5px;line-height:1.5}
 }
 @media (max-width:520px){
-  .hud-strip{gap:12px 16px}
-  .hud-sub{display:none}
+  /* The readings wrap onto two lines at this width, so they get the same right
+     edge as the search button above them rather than a ragged one. */
+  .hud-strip{gap:8px 16px;justify-content:flex-end}
+  /* Out of room for a line that says the same thing on every view. */
+  .hud .mini-h{display:none}
   .cgrid,.rgrid{grid-template-columns:1fr}
 }
 @media (max-width:1080px){.duo{grid-template-columns:1fr}}

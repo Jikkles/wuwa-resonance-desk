@@ -72,11 +72,17 @@ spelling — that's how `Yuno` was caught and corrected to **Iuno**.
 
 ### The shell
 
-Persistent left rail (nav + tier counts + saved views + methodology) and a right-aligned
-HUD strip carrying feed status with the page title under it. The rail **is** the tablist —
-there was a horizontal tab strip across the stage too, listing the same six views 40px to
-its right, and it went. Below 860px the rail collapses to a brand bar and the nav becomes
-a bottom dock.
+Persistent left rail (nav + tier counts + saved views + methodology). The rail **is** the
+tablist — there was a horizontal tab strip across the stage too, listing the same six
+views 40px to its right, and it went. Below 860px the rail collapses to a brand bar and
+the nav becomes a bottom dock.
+
+The HUD — search, feed status, page title — is the first panel of the **aside** rather
+than a band across the top, so a view starts level with the top of the page instead of a
+header's height below it. `.body` is a two-row grid and only the right column uses row
+one; the views span both. Below 1340px the aside is gone, and the same markup flattens
+back into a right-aligned strip above the stage. It stays first in the DOM either way —
+Tab should reach Search before the page.
 
 Clicking anything — a patch card, an intel entry, a resonator, a banner thumbnail —
 opens a right-side **drawer** rather than navigating away, so the list you were reading
