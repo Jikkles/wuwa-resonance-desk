@@ -700,40 +700,14 @@ function renderHud(){
 }
 
 /* Kuro's CDN is Alibaba OSS and takes a resize on the query string. The
-   original 3.5 key visual is 3840x2160 and 4MB — fine as a poster, absurd as
-   a page background, and doubly absurd for one we blur past recognition. At
-   1440 wide and q72 the same image is about 210KB, and after a 60px blur no
-   pixel of the difference survives. Any other host is left alone. */
+   original 3.5 key visual is 3840x2160 and 4MB — fine as the poster it is,
+   absurd for a picture shown a thousand pixels wide inside a modal. At the
+   width we actually draw it and q72 the same image is a couple of hundred KB
+   and nothing of the difference is visible. Any other host is left alone. */
 function cdnWidth(url, w){
   return /(^|\.)kurogame\.com\//.test(url)
     ? `${url}${url.includes("?") ? "&" : "?"}x-oss-process=image/resize,w_${w}/quality,q_72`
     : url;
-}
-
-/* The live patch's key visual, behind the whole desk.
-
-   It is a marketing image — the game logo across one corner, the version name
-   set in display type across the middle — which is exactly why it was taken
-   off the patch cards, where it sat behind two cut-outs and you read
-   "LAMPLIGHT IN MIRAGE" through the gap between them. None of that survives
-   the treatment in .backdrop: at this blur it is weather, not a poster, and
-   what is left is the patch's own palette — 3.5's gold and deep blue — under
-   a page that is otherwise unrelieved charcoal.
-
-   Decorative, so it is loaded last and faded in, and the class only lands once
-   the bytes are actually here. A slow connection gets the desk on the ground
-   it has always had rather than a half-painted picture. */
-function renderBackdrop(){
-  const el = $("#backdrop");
-  const url = liveVersion()?.keyVisual?.url;
-  if(!el || !url) return;
-  const src = cdnWidth(url, 1440);
-  const img = new Image();
-  img.onload = () => {
-    el.style.backgroundImage = `url("${src}")`;
-    el.classList.add("in");
-  };
-  img.src = src;
 }
 
 /* ── timeline ────────────────────────────────────────────────────── */
@@ -1974,6 +1948,25 @@ function drawerVersion(id){
       <div class="bstrip">${(p.banners || []).map(b => thumb({...b, phase:p.n, keyVisual:v.keyVisual})).join("")}</div>
     </div>`).join("");
 
+  /* The patch's key visual, between the two dates that bracket it. It used to
+     be the page backdrop, where it was blurred to weather and credited in a
+     footer — here it is a picture: shown whole, at the size it was drawn to be
+     looked at, captioned with what it is and linked back to the Kuro post it
+     came off. The version record is the one place on the desk where the whole
+     subject is this patch, so it is the one place the poster belongs.
+
+     Sized at 1200: the modal is capped at 1080px and this is the widest it can
+     ever be drawn, retina aside. */
+  const kv = v.keyVisual?.url ? `
+    <figure class="dkv">
+      <img src="${esc(cdnWidth(v.keyVisual.url, 1200))}" alt="${esc(v.keyVisual.title || `Version ${v.id} key visual`)}" loading="lazy" decoding="async">
+      <figcaption>
+        ${esc(v.keyVisual.title || `Version ${v.id} key visual`)}
+        ${v.keyVisual.credit ? ` — ${esc(v.keyVisual.credit)}` : ""}
+        ${v.keyVisual.source ? `<a href="${esc(v.keyVisual.source)}" target="_blank" rel="noopener">Source</a>` : ""}
+      </figcaption>
+    </figure>` : "";
+
   openDrawer("Version", `<div class="drawer-b">
     <div class="meta">
       <span class="pill ${role === "live" ? "live" : role === "next" ? "next" : "future"}">${esc(v.status)}</span>
@@ -1983,6 +1976,7 @@ function drawerVersion(id){
     <div class="dgear" style="margin-bottom:6px">
       ${v.start ? `<div><span>Launch</span><b>${fmtDate(v.start)}</b></div>` : ""}
       ${v.livestream ? `<div><span>Preview stream</span><b>${fmtDate(v.livestream)}</b></div>` : ""}
+      ${kv}
       ${versionEnd(v) ? `<div><span>Ends</span><b>${versionEnd(v)}</b></div>` : ""}
     </div>
     ${v.notes ? `<div class="vnote" style="margin-top:16px">${esc(v.notes)}</div>` : ""}
@@ -2365,7 +2359,4 @@ async function load(name){
   renderLegend();
   bind();
   setView(location.hash.slice(1) || "timeline");
-  /* Last, and after the view is up: it is scenery, and it competes with the
-     card art for the same connection. */
-  renderBackdrop();
 })();

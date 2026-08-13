@@ -59,16 +59,16 @@
   --rail-w:272px;
   --aside-w:340px;
 
-  /* Backdrop dials. The blur used to live here, at 58px, which made the key
-     visual weather — and weather you cannot see is just an uneven black. The
-     picture is sharp now and the panels frost it instead: --panel-frost is the
-     blur, applied per panel, so the image stays legible in the gutters and
-     goes soft only where type sits on it. Glass, rather than fog.
+  /* Backdrop dials. The backdrop is the desk's own mark now rather than the
+     patch's key visual, so there is nothing behind the page that has to be
+     beaten into submission: a hair of blur to take the hard edge off the
+     strokes, and --bd-dim only barely painting the ground back over it. Set
+     --bd-dim to 1 and the backdrop is gone with nothing else disturbed.
 
-     --bd-dim is still how much ground is painted back over the picture; set it
-     to 1 and the backdrop is gone with nothing else disturbed. */
-  --bd-blur:3px;
-  --bd-dim:.10;
+     --panel-frost stays — the panels are still glass, and glass over a drawn
+     mark is what gives the ring behind them a soft edge where it crosses. */
+  --bd-blur:2px;
+  --bd-dim:.18;
   --panel-frost:22px;
 
   /* Panel surfaces. These are the whole page by area, so with a picture behind
@@ -115,54 +115,49 @@ body::after{
 }
 
 /* ══ backdrop ═══════════════════════════════════════════════════════
-   The live patch's key visual, blurred until it is weather rather than a
-   picture. The page is still read on --bg: everything below paints the ground
-   back over this at --bd-dim, and what gets through is a slow colour drift —
-   3.5's gold on the left, its blue on the right — instead of a flat charcoal
-   field. Nothing here is legible by design; if you can make out a face or a
-   letter of the version title, the blur is too low.
+   The desk's own mark, at the size of the screen: the rail's two diamonds with
+   three more rings echoing out past the edge of the viewport — a resonance
+   pattern, which is the one thing this site is named after. Abstract on
+   purpose. What used to be here was the live patch's key visual, and a
+   marketing poster behind a page of small grey type is a picture you are
+   always fighting: it had to be blurred, dimmed, re-cropped and frosted, and
+   it changed out from under the design every time Kuro shipped a patch.
 
-   Set from JS once the bytes have arrived, so this is an empty box until then
-   and there is no half-loaded picture behind the desk. */
+   Drawn, not fetched. It is an inline SVG in a background — no request, no
+   fade-in, nothing to 404, and it costs the same on a phone as on fibre. The
+   colour is the two lamps behind it: accent on the mark, one warm one low and
+   right so the field is not a flat wash of cyan.
+
+   Sized in vmin so it stays a whole mark in any window rather than a crop —
+   the outermost ring runs off the edge either way, which is what makes it read
+   as a pattern that continues rather than a logo pasted on the page. */
 .backdrop{
   position:fixed;inset:0;z-index:-2;pointer-events:none;
-  background-position:center 34%;background-size:cover;background-repeat:no-repeat;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%2355C9D3' stroke-linejoin='round'%3E%3Cpath d='M120 2 238 120 120 238 2 120Z' stroke-width='.6' opacity='.10'/%3E%3Cpath d='M120 26 214 120 120 214 26 120Z' stroke-width='.7' opacity='.14'/%3E%3Cpath d='M120 50 190 120 120 190 50 120Z' stroke-width='.9' opacity='.20'/%3E%3Cpath d='M120 68 172 120 120 172 68 120Z' stroke-width='1.1' opacity='.30'/%3E%3Cpath d='M120 90 150 120 120 150 90 120Z' stroke-width='1.3' opacity='.42'/%3E%3C/g%3E%3Ccircle cx='120' cy='120' r='6.5' fill='%2355C9D3' opacity='.46'/%3E%3C/svg%3E")
+      center 46% / min(148vmin,1500px) auto no-repeat,
+    radial-gradient(115vmin 88vmin at 50% 44%,rgba(85,201,211,.11),transparent 68%),
+    radial-gradient(90vmin 70vmin at 88% 96%,rgba(227,172,85,.07),transparent 70%),
+    radial-gradient(80vmin 64vmin at 6% 4%,rgba(123,165,242,.07),transparent 70%);
   /* Blur samples transparency past the edges and leaves the frame washed out,
      so the layer is oversized and the soft border is pushed off-screen. */
   transform:scale(1.03);
-  filter:blur(var(--bd-blur)) saturate(1.02) brightness(.92);
-  opacity:0;transition:opacity 1.1s ease;
+  filter:blur(var(--bd-blur));
 }
-.backdrop.in{opacity:1}
-/* The ground, painted back over the picture.
+/* The ground, painted back over the mark.
 
-   The top 130px is nearly solid and that is the whole reason this is a
-   gradient rather than a flat wash. 3.5's key visual is a sunburst in its
-   upper third, and at the crop above it lands exactly behind the HUD strip —
-   the place on the desk running the smallest grey mono type there is, over what
-   came out as a band of pale gold. So the ground stays nearly opaque past the
-   header, then opens up over the body, where every line of type is already on a
-   panel of its own. */
+   This used to be a steep gradient — nearly solid ground for the top 130px,
+   because the key visual put a gold sunburst directly behind the HUD's 10px
+   mono labels. A drawn mark has no such accident in it: it is the same two
+   colours everywhere and it is faint by construction, so the ground is one
+   even wash at --bd-dim, with only a slight extra weight at the very top where
+   the rail's brand and the HUD sit closest to the mark's own rings. */
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:linear-gradient(180deg,
-    color-mix(in srgb,var(--bg) 94%,transparent) 0,
-    color-mix(in srgb,var(--bg) 94%,transparent) 130px,
-    color-mix(in srgb,var(--bg) calc(var(--bd-dim) * 100%),transparent) 400px,
+    color-mix(in srgb,var(--bg) 46%,transparent) 0,
+    color-mix(in srgb,var(--bg) calc(var(--bd-dim) * 100%),transparent) 320px,
     color-mix(in srgb,var(--bg) calc(var(--bd-dim) * 100%),transparent) 100%);
-}
-/* A 16:9 key visual covering a portrait viewport is magnified about two and a
-   half times, and at that scale the version title set across the middle of it
-   stops being texture and starts being letterforms at the edge of the screen.
-   The blur is scaled with the crop: same picture, same treatment relative to
-   how big it is being shown. */
-@media (max-width:900px){
-  :root{--bd-blur:20px}
-}
-/* Reduced motion covers "I do not want the page moving under me" — a picture
-   fading in behind the whole desk is that. Show it immediately instead. */
-@media (prefers-reduced-motion:reduce){
-  .backdrop{transition:none}
 }
 a{color:inherit}
 button{font:inherit;color:inherit}
@@ -1936,6 +1931,35 @@ button{font:inherit;color:inherit}
 .dgear{display:grid;gap:8px}
 .dgear div{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:13px}
 .dgear span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+/* The version's key visual, sitting in the gear list between the date it
+   launched and the date it ends — the window on either side of the picture,
+   which is what those two rows are. It takes its own margins because 8px of
+   grid gap is a caption spacing, not a spacing for a poster.
+
+   No fixed ratio and no crop: these are 16:9 posters and the composition is
+   the point, so the picture is shown whole and the box is whatever height that
+   comes to. The frame is the same line and radius as every other card here.
+
+   Capped well short of the panel's own width, and centred. Across the full
+   1080 a 16:9 poster is 600px tall — it stops being an illustration inside the
+   record and becomes the record, with the date it ends pushed off the bottom
+   of the screen. At 720 the whole window still reads at a glance. */
+.dkv{
+  margin:14px auto;width:100%;max-width:720px;
+  border:1px solid var(--line);border-radius:var(--r-sm);
+  overflow:hidden;background:var(--bg-2);
+}
+.dkv img{display:block;width:100%;height:auto}
+.dkv figcaption{
+  display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;
+  padding:8px 11px 9px;border-top:1px solid var(--line);
+  background:var(--tint-sink);
+  font-size:11px;line-height:1.5;color:var(--fg-3);
+}
+/* Pushed to the end of the caption line, so the credit reads as a sentence and
+   the way out sits where a link on a card always sits. */
+.dkv figcaption a{margin-left:auto;color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
+.dkv figcaption a:hover{color:var(--accent)}
 .dsrc{
   display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:var(--r-sm);
   text-decoration:none;font-size:12.5px;color:var(--fg-2);transition:.15s;

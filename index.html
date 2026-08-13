@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wuthering Waves Resonance Desk</title>
 <meta name="description" content="Wuthering Waves patch timeline, upcoming Resonators and leak tracking, sorted by how much you should trust it.">
-<meta name="theme-color" content="#0B0D11">
-<!-- Tuning fork = resonance. Inline so there's no extra request and nothing to 404. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%230B0D11'/%3E%3Cpath d='M17 33a15 15 0 0 1 30 0' fill='none' stroke='%234FC7D4' stroke-width='3.5' stroke-linecap='round' opacity='.5'/%3E%3Cpath d='M23 13v17a9 9 0 0 0 18 0V13' fill='none' stroke='%234FC7D4' stroke-width='6.5' stroke-linecap='round'/%3E%3Cpath d='M32 39v13' stroke='%234FC7D4' stroke-width='6.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0D0C11">
+<!-- The desk's own mark — the same nested diamonds the rail wears, at 64px and
+     on the page's ground. Inline so there's no extra request and nothing to
+     404. Keep this in step with the .brand svg below and with the backdrop:
+     the tab, the rail and the page behind them are one mark at three sizes. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%230D0C11'/%3E%3Cpath d='M32 5.6 58.4 32 32 58.4 5.6 32Z' fill='none' stroke='%2355C9D3' stroke-width='3.2' stroke-linejoin='round' opacity='.45'/%3E%3Cpath d='M32 17.4 46.6 32 32 46.6 17.4 32Z' fill='none' stroke='%2355C9D3' stroke-width='3.2' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='32' r='5.2' fill='%2355C9D3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
@@ -15,14 +18,15 @@
      browser (and Pages' CDN, which sends max-age=600) will happily serve you
      yesterday's stylesheet on a normal refresh. Bump this on every change to
      either asset — it is the whole reason a deploy shows up immediately. -->
-<link rel="stylesheet" href="assets/app.css?v=32">
+<link rel="stylesheet" href="assets/app.css?v=33">
 </head>
 <body>
 
-<!-- The live patch's key visual, full size and sharp; the panels frost it
-     where they sit on it. Empty until the JS has read versions.json and knows
-     which patch is current, so it costs nothing on first paint and the page is
-     complete without it. -->
+<!-- The desk's own mark, blown up to fill the screen: the rail's nested
+     diamonds with three more rings echoing out of them. Drawn entirely in CSS
+     — no request, nothing to load, and it does not change under you when the
+     patch does. The patch's key visual has a home of its own now, on the
+     version record where it is captioned and credited. -->
 <div class="backdrop" id="backdrop" aria-hidden="true"></div>
 
 <!-- Icon sprite. Referenced by <use> from both the markup and the renderers. -->
@@ -217,8 +221,7 @@
              carries the same list, where whoever needs it is actually looking.
              The copyright line stays; that one is not bookkeeping. -->
         Anything not tagged <span class="warn">OFFICIAL</span> is pre-release and can change.
-        Character, weapon and version key art © Kuro Games, used unofficially — including the
-        backdrop, which is the live patch's own key visual.
+        Character, weapon and version key art © Kuro Games, used unofficially.
         Not affiliated with Kuro Games — a personal fan project.
       </span>
       <!-- The tier legend, repeated at the bottom of every view: the footer is
@@ -270,6 +273,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=32"></script>
+<script src="assets/app.js?v=33"></script>
 </body>
 </html>
