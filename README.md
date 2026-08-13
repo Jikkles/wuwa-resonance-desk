@@ -109,9 +109,9 @@ Two tiers of control, and the split is deliberate:
   a chip each on. Options are read off the data, so a category nothing is filed under
   never appears.
 
-The ascension slider is neither. It doesn't change which weapons you can see, only what a
-passive says, so it sits outside `VIEW_FILTERS` and Reset leaves it alone — even though
-it shares the strip under the 5★ header with them.
+The ascension slider is neither, which is part of why it lives in the weapon record
+rather than on the view: it doesn't change which weapons you can see, only what one
+passive says. It sits outside `VIEW_FILTERS` and Reset leaves it alone.
 
 The selects render **twice** — into the aside on desktop, and inline under the panel
 header below 1340px where the aside is gone. Both copies write to the same `S` state
@@ -633,12 +633,9 @@ through 5, so the desk stores one passive per weapon and the reader moves a slid
 instead of the page printing five nearly identical paragraphs each and asking you to
 find the one you meant.
 
-It renders **twice**, the same way the quick-filter selects do: as a box in the record,
-beside the passive it moves, and as a strip under the 5★ header. On the view it moves
-nothing you can see — the cards are art, a name and two level 90 figures, none of which
-ascension touches — so it carries a note saying what it *is* for, which is setting the
-rank every record opens at. That is the useful order when you are comparing two weapons
-at the rank you own them at rather than at S1.
+It lives **in the record**, beside the one thing it changes, which is also where Prydwen
+puts it. It was a strip across the top of the view while the passives were on the cards;
+when those moved into the record it followed them.
 
 Three things about it are load-bearing:
 
@@ -647,9 +644,9 @@ Three things about it are load-bearing:
   which ends the drag mid-gesture.
 - **`input`, not `change`.** The passive tracks the drag rather than jumping when the
   thumb is let go.
-- **`S.rank` is global and `paintRank()` queries the document, not the record.** That is
-  what keeps the two copies in step without either knowing about the other, and what
-  makes the rank you set on one weapon the rank the next one opens at.
+- **`S.rank` is global and `paintRank()` queries the document, not the record.** Set the
+  rank on one weapon and every weapon you open after it is already there, which is the
+  whole point when what you are doing is comparing two of them.
 
 The record used to carry the full S1–S5 table as well, with its rows keyed to
 superscripts in the sentence above. It came out: for the one number in it anyone acts on

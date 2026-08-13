@@ -1610,25 +1610,14 @@ function paintRank(){
   });
 }
 
-/* Two homes, one control. In the record it sits beside the passive it moves; at
-   the top of the view it moves nothing you can see — the cards are art, a name
-   and two level 90 figures, none of which ascension touches — so it says what
-   it is for instead. Setting it here is setting it for every record you open
-   after, which is the useful order when you are comparing two weapons at the
-   rank you actually own them at rather than at S1.
-
-   `strip` is the view's full-width bar; the default is the record's box. Both
-   carry [data-rank], so paintRank keeps them in step without either knowing
-   about the other. */
-function ascendBar(strip){
-  return `<div class="ascend${strip ? " strip" : ""}">
+function ascendBar(){
+  return `<div class="ascend">
     <label class="ascend-c">
       <span class="label">Ascension</span>
       <input type="range" min="1" max="5" step="1" value="${S.rank}" data-rank
              aria-label="Weapon ascension" aria-valuetext="Ascension ${S.rank} of 5">
       <output class="ascend-v" data-ranklabel>S${S.rank}</output>
     </label>
-    ${strip ? `<span class="ascend-note">The rank each weapon record opens at. Stats stay level 90.</span>` : ""}
   </div>`;
 }
 
@@ -1699,8 +1688,8 @@ function renderWeapons(){
   $("#p-weapons").innerHTML = `<div class="stack">
     ${weaponTable("5★ Weapons", rows("5"), total("5"), {
       right: filters,
-      under: `${ascendBar(true)}${quickFilters(true)}`,
-      foot: "Stats are level 90 throughout. Open a weapon for its passive."
+      under: quickFilters(true),
+      foot: "Stats are level 90 throughout. Open a weapon for its passive and the ascension slider."
     })}
     ${weaponTable("4★ Weapons", rows("4"), total("4"))}
     ${weaponTable("3★ Weapons", rows("3"), total("3"))}
