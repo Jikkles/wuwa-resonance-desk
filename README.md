@@ -169,16 +169,35 @@ character tile collapses to thumbnail width; and the weapon tile's subtitle says
 "Signature" because the weapon type is already on the character tile beside it.
 
 **The name is already in the data**: `signature` on the banner row in `versions.json`,
-falling back to the resonator record. `signatureFor()` is the one accessor. Nine of the
-ten banner rows currently carry one; Denia's is missing, and that row simply shows no
-weapon. **Don't fill it in from memory** — a wrong weapon name is exactly the kind of
-error the tier system exists to prevent. Add it to `versions.json` from a Kuro source
-and it appears.
+falling back to the resonator record. `signatureFor()` is the one accessor. Every 5★
+Resonator that has a signature weapon now carries one, and the ten that don't, don't
+have one: Calcharo, Encore, Jianxin, Lingyang and Verina are standard-pool characters
+whose best options are the permanent-convene 5★s, three of the four Rovers were never
+given one, and Hsin and Suoming are 3.7 teases with nothing published yet. Aero Rover is
+the exception among the Rovers — Bloodpact's Pledge is free from the 2.2 questline
+rather than a convene, so its card shows without a link.
+
+**Don't fill one in from memory** — a wrong weapon name is exactly the kind of error the
+tier system exists to prevent. The mapping was resolved from Prydwen and cross-checked
+two ways before it was written down: the build comments on the character pages name
+their owner in prose ("Qiuyuan's Signature gives the same stats as…"), and the weapon IDs
+are `210TSSSR`, where `T` is the weapon class, `SSS` is release order within it and `R`
+is 6 for a limited signature against 5 for a permanent-convene 5★. Pairing the `…6`
+weapons to the limited characters of that class in debut order reproduces the prose
+attributions exactly — including the off-by-one in Swords that turned out to be Aero
+Rover holding `21020046`.
 
 There is no weapon database and there doesn't need to be one. `drawerWeapon()` assembles
 the record from what's on hand: `weaponRuns()` finds every banner the weapon runs beside
 (reruns mean that's a list), and the intel entries that name it come from a text match
 over titles, bodies and tags. Weapons are in the command palette too.
+
+`weaponRuns()` reads both ends of the same fact. `versions.json` is the arc the desk is
+currently watching — two patches — so on its own it made every weapon older than that a
+dead end, and a 1.0 Resonator's signature card linked nowhere. The Resonator's own `runs`
+history goes back to launch, and a weapon convene runs beside the character banner, so
+the second pass fills in from there; the timeline wins the key where both know a version,
+because only it knows the phase and whether the patch is live.
 
 ### The art gets its own space
 

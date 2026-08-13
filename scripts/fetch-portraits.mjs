@@ -98,8 +98,14 @@ async function getText(url) {
 const readJson = async path => JSON.parse(await readFile(path, "utf8"));
 
 /* The page ships its data as a JSON string inside a script tag, so every quote
-   in it arrives escaped. Unescaping once up front lets one plain regex read it. */
-const unescaped = html => html.replace(/\\"/g, '"');
+   in it arrives escaped. Unescaping once up front lets one plain regex read it.
+   The \uXXXX escapes have to come out too: Prydwen writes an ampersand as
+   &, so "Lux & Umbra" reached the matcher as "Lux u0026 Umbra", keyed to
+   something no lookup could ever ask for, and Galbrena's signature weapon was
+   filed as unreleased for as long as the name had an & in it. */
+const unescaped = html => html
+  .replace(/\\"/g, '"')
+  .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
 
 function parseCharacters(html) {
   const rx =

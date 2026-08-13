@@ -697,6 +697,7 @@
       "version": "1.0",
       "status": "released",
       "convene": "Prevail the Lasting Night",
+      "signature": "Verdant Summit",
       "released": "2024-05-23",
       "hasKit": true,
       "reruns": [
@@ -1507,6 +1508,7 @@
       "version": "1.0",
       "status": "released",
       "convene": "When Thunder Pours",
+      "signature": "Stringmaster",
       "released": "2024-06-06",
       "hasKit": true,
       "reruns": [
@@ -1543,6 +1545,7 @@
       "version": "1.1",
       "status": "released",
       "convene": "Thawborn Renewal",
+      "signature": "Ages of Harvest",
       "released": "2024-06-28",
       "hasKit": true,
       "reruns": [
@@ -1579,6 +1582,7 @@
       "version": "1.1",
       "status": "released",
       "convene": "Vermillion's Ploy",
+      "signature": "Blazing Brilliance",
       "released": "2024-07-22",
       "hasKit": true,
       "reruns": [
@@ -1615,6 +1619,7 @@
       "version": "1.2",
       "status": "released",
       "convene": "Chromatic Prose",
+      "signature": "Rime-Draped Sprouts",
       "released": "2024-08-15",
       "hasKit": true,
       "reruns": [
@@ -1651,6 +1656,7 @@
       "version": "1.2",
       "status": "released",
       "convene": "Celestial Revelation",
+      "signature": "Verity's Handle",
       "released": "2024-09-07",
       "hasKit": true,
       "reruns": [
@@ -1687,6 +1693,7 @@
       "version": "1.3",
       "status": "released",
       "convene": "Till the Sea Turns Clear",
+      "signature": "Stellar Symphony",
       "released": "2024-09-29",
       "hasKit": true,
       "reruns": [
@@ -1856,6 +1863,7 @@
       "version": "1.4",
       "status": "released",
       "convene": "End of Lost Trail",
+      "signature": "Red Spring",
       "released": "2024-11-14",
       "hasKit": true,
       "reruns": [
@@ -2000,6 +2008,7 @@
       "version": "2.0",
       "status": "released",
       "convene": "When Silence Tolls",
+      "signature": "The Last Dance",
       "released": "2025-01-02",
       "hasKit": true,
       "reruns": [
@@ -2036,6 +2045,7 @@
       "version": "2.0",
       "status": "released",
       "convene": "Stage in the Box",
+      "signature": "Tragicomedy",
       "released": "2025-01-23",
       "hasKit": true,
       "reruns": [
@@ -2072,6 +2082,7 @@
       "version": "2.1",
       "status": "released",
       "convene": "With Hushed Whispers",
+      "signature": "Luminous Hymn",
       "released": "2025-02-13",
       "hasKit": true,
       "reruns": [
@@ -2115,6 +2126,7 @@
       "version": "2.1",
       "status": "released",
       "convene": "Blaze Across the Deep",
+      "signature": "Unflickering Valor",
       "released": "2025-03-06",
       "hasKit": true,
       "reruns": [
@@ -2151,6 +2163,7 @@
       "version": "2.2",
       "status": "released",
       "convene": "Neptune's Lullaby",
+      "signature": "Whispers of Sirens",
       "released": "2025-03-27",
       "hasKit": true,
       "reruns": [
@@ -2194,6 +2207,7 @@
       "version": "2.3",
       "status": "released",
       "convene": "Between Light and Shadow",
+      "signature": "Blazing Justice",
       "released": "2025-04-29",
       "hasKit": true,
       "reruns": [
@@ -2237,6 +2251,7 @@
       "version": "2.3",
       "status": "released",
       "convene": "Through Verses and Rhythms",
+      "signature": "Woodland Aria",
       "released": "2025-05-22",
       "hasKit": true,
       "reruns": [
@@ -2280,6 +2295,7 @@
       "version": "2.4",
       "status": "released",
       "convene": "Dance in the Storm's Wake",
+      "signature": "Defier's Thorn",
       "released": "2025-06-12",
       "hasKit": true,
       "reruns": [
@@ -2323,6 +2339,7 @@
       "version": "2.4",
       "status": "released",
       "convene": "Roar of Triumph",
+      "signature": "Wildfire Mark",
       "released": "2025-07-03",
       "hasKit": true,
       "reruns": [
@@ -2366,6 +2383,7 @@
       "version": "2.5",
       "status": "released",
       "convene": "Requiem Without End",
+      "signature": "Lethean Elegy",
       "released": "2025-07-24",
       "hasKit": true,
       "reruns": [
@@ -2409,6 +2427,7 @@
       "version": "2.6",
       "status": "released",
       "convene": "Eternal Radiance on the Crown",
+      "signature": "Thunderflare Dominion",
       "released": "2025-08-28",
       "hasKit": true,
       "reruns": [
@@ -2445,6 +2464,7 @@
       "version": "2.6",
       "status": "released",
       "convene": "Across Time's Waxes and Wanes",
+      "signature": "Moongazer's Sigil",
       "released": "2025-09-17",
       "hasKit": true,
       "reruns": [
@@ -2488,6 +2508,7 @@
       "version": "2.7",
       "status": "released",
       "convene": "From Ashes",
+      "signature": "Lux & Umbra",
       "released": "2025-10-09",
       "hasKit": true,
       "reruns": [
@@ -2524,6 +2545,7 @@
       "version": "2.7",
       "status": "released",
       "convene": "Wanderer Knows No Far and Near",
+      "signature": "Emerald Sentence",
       "released": "2025-10-30",
       "hasKit": true,
       "reruns": [
@@ -2560,6 +2582,7 @@
       "version": "2.8",
       "status": "released",
       "convene": "Horizon of Dawnbreak",
+      "signature": "Kumokiri",
       "released": "2025-11-20",
       "hasKit": true,
       "reruns": [
@@ -2722,6 +2745,7 @@
       "version": "3.0",
       "status": "released",
       "convene": "Distant May the Starlights Be",
+      "signature": "Starfield Calibrator",
       "released": "2026-01-15",
       "hasKit": true,
       "reruns": [
@@ -2848,6 +2872,7 @@
       "version": "3.2",
       "status": "released",
       "convene": "When the Runes Glitter",
+      "signature": "Solsworn Ciphers",
       "released": "2026-03-19",
       "hasKit": true,
       "runs": [
@@ -2875,6 +2900,7 @@
       "version": "3.3",
       "status": "released",
       "convene": "Thousand Futures Mirrored in Snow",
+      "signature": "Frostburn",
       "released": "2026-04-30",
       "hasKit": true,
       "runs": [
@@ -2902,6 +2928,7 @@
       "version": "3.3",
       "status": "released",
       "convene": "False Promise for Tomorrow",
+      "signature": "Forged Dwarf Star",
       "released": "2026-05-21",
       "hasKit": true,
       "runs": [
@@ -2928,6 +2955,7 @@
       "summary": "She is a part of the collaboration with Cyberpunk: Edgerunners.",
       "version": "3.4",
       "status": "released",
+      "signature": "Spectral Trigger",
       "released": "2026-06-08",
       "hasKit": true,
       "confidence": {
@@ -2946,6 +2974,7 @@
       "summary": "She is a part of the collaboration with Cyberpunk: Edgerunners.",
       "version": "3.4",
       "status": "released",
+      "signature": "Skull Thrasher",
       "released": "2026-06-08",
       "hasKit": true,
       "confidence": {
@@ -2965,6 +2994,7 @@
       "version": "3.4",
       "status": "released",
       "convene": "Tomorrow in the Frame",
+      "signature": "Freeze Frame",
       "released": "2026-06-13",
       "hasKit": true,
       "runs": [
@@ -3265,6 +3295,7 @@
       "summary": "Awakened with an unknown past by a mysterious entity, Rover is an amnesiac Arbiter from another world who embarks on a journey to uncover the truth to regain their lost memories. As secrets are unveiled, they establish deeper connections with the Solaris-3 and its nations.",
       "version": "2.2",
       "status": "released",
+      "signature": "Bloodpact's Pledge",
       "released": "2025-03-27",
       "hasKit": true,
       "confidence": {

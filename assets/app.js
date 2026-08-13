@@ -238,12 +238,36 @@ const signatureFor = b => b.signature || resonatorFor(b.name).signature || "";
 function weaponRuns(name){
   const k = String(name||"").toLowerCase();
   const out = [];
+  const seen = new Set();
+  /* One row per version per character. The timeline is richer where it
+     reaches — it knows the phase and whether the patch is live — so it goes
+     first and wins the key. */
+  const add = r => {
+    const id = `${r.version}|${r.name}`;
+    if(seen.has(id)) return;
+    seen.add(id);
+    out.push(r);
+  };
   for(const v of versions())
     for(const p of v.phases || [])
       for(const b of p.banners || [])
         if(signatureFor(b).toLowerCase() === k)
-          out.push({...b, phase:p.n, version:v.id, start:p.start, end:p.end, status:v.status});
-  return out;
+          add({...b, phase:p.n, version:v.id, start:p.start, end:p.end, status:v.status});
+  /* versions.json only carries the arc the desk is currently watching — two
+     patches — so on its own it makes every weapon older than that a dead end,
+     and the signature weapon card on a 1.0 Resonator's record links nowhere.
+     The Resonator's own run history goes back to launch, and a weapon convene
+     runs beside the character banner, so it is the same list read from the
+     other end. */
+  for(const r of resonators())
+    if(String(r.signature || "").toLowerCase() === k)
+      for(const run of r.runs || [])
+        add({
+          name:r.name, attribute:r.attribute, weapon:r.weapon,
+          version:run.version, convene:run.convene, start:run.start, end:run.end,
+          new: run.version === r.version
+        });
+  return out.sort((a, b) => cmpVer(b.version, a.version));
 }
 
 /* Every distinct signature weapon the timeline knows about, for the palette. */
@@ -1847,7 +1871,7 @@ function drawerWeapon(name){
     <div class="dsec"><span class="label">Runs alongside</span>
       <div style="display:grid;gap:8px">${runs.map(r => `
         <span class="dsrc" role="button" tabindex="0" data-act="resonator" data-id="${esc(r.name)}">
-          <span class="lang">${esc(r.version)}</span>${esc(r.name)} — phase ${esc(r.phase)}
+          <span class="lang">${esc(r.version)}</span>${esc(r.name)}${r.phase ? ` — phase ${esc(r.phase)}` : ""}
           ${r.new ? "· debut" : "· rerun"}
           <span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div>
     </div>
