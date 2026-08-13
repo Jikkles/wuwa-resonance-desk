@@ -528,6 +528,60 @@ function thumb(b, {showWeapon = true, showPhase = true, showNew = false} = {}){
   </div>`;
 }
 
+/* A banner as a card rather than a thumbnail: the character down the left, and
+   beside them the three things you actually want off a banner — who they are,
+   what their signature weapon is, and what they play as.
+
+   This is the version record's strip only. On a patch card the same banner is a
+   54px tile and has to be, because three of them sit in a column 130px wide;
+   in the record there is a full modal to spend and a tile was spending it on
+   white space. The tiles are still `thumb()` and still what the timeline draws.
+
+   The one repeated fact left out is the phase. Every card in a strip is under a
+   heading naming the phase and its dates, and a P1 chip on all three of them is
+   the heading said three more times. */
+function bannerCard(b){
+  const f = figure(b);
+  const r = resonatorFor(b.name);
+  const attr = b.attribute || r.attribute;
+  const unknown = !b.name || b.name === "???";
+  /* No `icon` branch, unlike the tile: the cut-out bust is a 54px asset and
+     this frame is three times that. The waist-up card is what figure() puts
+     first anyway, and it is drawn for exactly this — a standing figure in a
+     tall box. */
+  const inner = f.image
+    ? `<img class="${f.cutout ? "cut" : f.poster ? "poster" : ""}" src="${esc(f.image)}" alt="" loading="lazy" decoding="async"${f.style}>`
+    : `<span class="g">${esc(unknown ? "?" : f.glyph)}</span>`;
+  /* Debut or return, stamped on the picture. Both are printed here where the
+     tile only marks debuts: a tile is one of five in a column and RERUN on four
+     of them is noise, but a card is one of three and the strip is the patch's
+     banner list — "is this her first run" is the question it exists to answer. */
+  const flag = b.new ? `<i class="bflag new">New</i>` : b.rerun ? `<i class="bflag">Rerun</i>` : "";
+  const facts = [["Element", attr],
+                 ["Weapon", b.weapon || r.weapon],
+                 ["Role", r.role || b.role],
+                 ["Convene", b.convene]].filter(([, v]) => v);
+  /* Same rule as the tile: the innermost [data-act] wins, so the card opens the
+     Resonator and the weapon inside it opens the weapon. An unnamed banner —
+     a phase the leaks know the shape of but not the name — has no record to
+     open and stays inert. */
+  const act = unknown ? "" : ` role="button" tabindex="0" data-act="resonator" data-id="${esc(b.name)}" aria-label="${esc(b.name)} — Resonator record"`;
+  const rarity = b.rarity || r.rarity;
+  return `<div class="bcard${unknown ? " unknown" : ""}"${attrStyle(attr)}${act}>
+    <div class="bcard-art${f.cutout ? " cut" : ""}">${inner}${flag}</div>
+    <div class="bcard-b">
+      <div class="bcard-h">
+        <b>${esc(b.name || "???")}</b>
+        ${rarity ? `<span class="bcard-r">${esc(rarity)}★</span>` : ""}
+        ${r.epithet ? `<span class="bcard-ep">${esc(r.epithet)}</span>` : ""}
+      </div>
+      ${sigWeaponCard(b.signature || r.signature)}
+      ${facts.length ? `<div class="bcard-facts">${facts.map(([k, v]) =>
+        `<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join("")}</div>` : ""}
+    </div>
+  </div>`;
+}
+
 /* The weapon's own render, when portraits.json has resolved one. A weapon that
    debuts with an unreleased patch has no published icon yet, and gets the
    generic mark rather than a borrowed picture — same rule as everywhere else
@@ -994,6 +1048,31 @@ function versionEnd(v){
   const last = (v.phases || []).slice(-1)[0];
   if(last?.end) return fmtDate(last.end) + (last.estimated_end ? " (est)" : "");
   return "";
+}
+
+/* The preview broadcast for a version, on Kuro's own English channel.
+
+   Read off the signal feed rather than typed into versions.json: the fetcher
+   already pulls that channel every six hours, and the broadcast lands in it
+   under a title Kuro writes the same way every patch — "Wuthering Waves
+   Version 3.6 Preview Special Broadcast". So the link is a fact the desk
+   already holds, and a patch whose stream has not aired yet resolves to
+   nothing and prints no link, which is the correct thing to say about a video
+   that does not exist.
+
+   `livestreamUrl` on the version overrides it, for the one case this cannot
+   cover: a patch old enough that its broadcast has rolled off the end of a
+   150-item feed. */
+function streamVideo(v){
+  if(v.livestreamUrl) return v.livestreamUrl;
+  const id = String(v.id || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  if(!id) return "";
+  return (DATA.feed?.items || []).find(i =>
+    i.sourceId === "youtube" && i.lang === "en" &&
+    new RegExp(`(^|\\D)${id}(\\D|$)`).test(i.title || "") &&
+    /preview|special/i.test(i.title || "") &&
+    /broadcast|program|programme|stream/i.test(i.title || "")
+  )?.url || "";
 }
 
 /* Which bucket a version falls in. One definition — the chips and the card row
@@ -1945,7 +2024,8 @@ function drawerVersion(id){
     <div class="dsec">
       <span class="label">Phase ${p.n} — ${[p.start ? fmtDate(p.start) : "", p.end ? fmtDate(p.end) : ""].filter(Boolean).join(" → ")}
         ${p.estimated_start || p.estimated_end ? " (est)" : ""}</span>
-      <div class="bstrip">${(p.banners || []).map(b => thumb({...b, phase:p.n, keyVisual:v.keyVisual})).join("")}</div>
+      <div class="bstrip cards">${(p.banners || []).map(b =>
+        bannerCard({...b, phase:p.n, keyVisual:v.keyVisual})).join("")}</div>
     </div>`).join("");
 
   /* The patch's key visual, between the two dates that bracket it. It used to
@@ -1967,15 +2047,32 @@ function drawerVersion(id){
       </figcaption>
     </figure>` : "";
 
+  /* The preview stream, up on the status row rather than down among the dates.
+     It is not the same kind of fact as launch and end: those two are the window
+     the patch runs in, and this is a broadcast that happened once, a fortnight
+     before any of it. As a row in that list it read as a third date in the
+     patch's own calendar. Up here it reads as what it is — the announcement,
+     next to the status it announced — and it can carry the link, which is the
+     part you actually want from it. */
+  const stream = v.livestream ? (() => {
+    const url = streamVideo(v);
+    return `<span class="vstream">
+      <span class="label">Preview stream</span>
+      <b>${fmtDate(v.livestream)}</b>
+      ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">
+        ${icon("i-youtube", 13)}Watch on YouTube</a>` : ""}
+    </span>`;
+  })() : "";
+
   openDrawer("Version", `<div class="drawer-b">
     <div class="meta">
       <span class="pill ${role === "live" ? "live" : role === "next" ? "next" : "future"}">${esc(v.status)}</span>
       ${v.region ? `<span class="pill">${esc(v.region)}</span>` : ""}
+      ${stream}
     </div>
     <h2>${esc(v.id)}${v.title ? ` — ${esc(v.title)}` : ""}</h2>
     <div class="dgear" style="margin-bottom:6px">
       ${v.start ? `<div><span>Launch</span><b>${fmtDate(v.start)}</b></div>` : ""}
-      ${v.livestream ? `<div><span>Preview stream</span><b>${fmtDate(v.livestream)}</b></div>` : ""}
       ${kv}
       ${versionEnd(v) ? `<div><span>Ends</span><b>${versionEnd(v)}</b></div>` : ""}
     </div>

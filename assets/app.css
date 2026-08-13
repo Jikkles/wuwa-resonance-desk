@@ -1073,6 +1073,110 @@ button{font:inherit;color:inherit}
   font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
 }
 .bmini .bmeta i{font-style:normal}
+
+/* ── banner cards ───────────────────────────────────────────────────
+   The phase strip on a version record: one card per banner, the character
+   down the left and what you want off a banner down the right.
+
+   The row divides itself. `auto-fit` lays as many 260px tracks as the panel
+   holds and then collapses the ones nothing landed in, so a two-banner phase
+   is two half-width cards and a three-banner phase is three thirds — the same
+   strip, sized by how many characters ran in it, with no count in the markup
+   and nothing to keep in step when a phase gains one. Below 260px of room per
+   card they stack, which is what happens on a phone. */
+.bstrip.cards{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  gap:12px;
+}
+.bcard{
+  display:grid;grid-template-columns:minmax(84px,31%) minmax(0,1fr);gap:14px;
+  padding:12px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:color-mix(in srgb,var(--bg-2) 62%,transparent);
+  transition:border-color .16s,background .16s;min-width:0;
+}
+.bcard[role="button"]{cursor:pointer}
+.bcard[role="button"]:hover{
+  border-color:color-mix(in srgb,var(--attr,var(--accent)) 45%,transparent);background:var(--bg-2);
+}
+.bcard[role="button"]:hover .bcard-h>b{color:var(--attr,var(--accent))}
+/* No aspect ratio: the picture is a column, and how tall the column is depends
+   on how much the card beside it has to say. It stretches to the row and the
+   image is absolutely placed inside, so a card with no Role and no Convene
+   doesn't leave a gap under its own character. */
+.bcard-art{
+  position:relative;overflow:hidden;border-radius:9px;min-height:158px;
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse 95% 72% at 50% 118%,color-mix(in srgb,var(--attr) 34%,transparent),transparent 70%),
+    linear-gradient(160deg,var(--bg-3),var(--bg));
+}
+.bcard-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 12%}
+/* The waist-up card is a cut-out on transparency, and this column is taller
+   and narrower than the card is. Contained, it fits by width and leaves a
+   third of the box empty above the head; covered, it fits by height and the
+   crop comes off the transparent margin either side of the figure. So: cover,
+   and the character fills their own frame. */
+.bcard-art.cut img{object-fit:cover;object-position:center 45%;filter:drop-shadow(0 10px 22px rgba(0,0,0,.5))}
+/* Kuro's reveal poster runs the game logo across the top. Start below it. */
+.bcard-art img.poster{object-position:center 22%}
+.bcard-art .g{
+  position:relative;font-family:var(--cjk);font-size:34px;font-weight:700;
+  color:color-mix(in srgb,var(--attr) 62%,var(--fg));opacity:.6;
+}
+/* Debut or return. Bottom-left of the picture, where a cut-out has its darkest
+   corner and nothing worth covering. */
+.bcard-art .bflag{
+  position:absolute;left:7px;bottom:7px;z-index:2;font-style:normal;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;text-transform:uppercase;
+  padding:2px 6px;border-radius:5px;background:rgba(13,12,17,.78);
+  border:1px solid var(--line-2);color:var(--fg-2);
+}
+.bcard-art .bflag.new{
+  color:var(--t-official);border-color:color-mix(in srgb,var(--t-official) 55%,transparent);
+}
+.bcard-b{min-width:0;display:flex;flex-direction:column}
+.bcard-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin-bottom:10px}
+.bcard-h>b{
+  font-size:15px;font-weight:600;line-height:1.3;letter-spacing:-.01em;color:var(--fg);
+  flex:1 1 auto;min-width:0;transition:color .16s;
+}
+.bcard-h .bcard-r{
+  flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--amber);
+}
+/* The epithet on its own line under the name — "Voices of Azure Plume" is a
+   title, not a property, and beside the name it fights the name. */
+.bcard-h .bcard-ep{flex:1 1 100%;font-size:11.5px;line-height:1.45;color:var(--fg-3)}
+/* The signature weapon card, at card scale. It is the same component the
+   Resonator record heads its side column with — same markup, same behaviour,
+   one size down because here it shares a card with a picture. */
+.bcard .wcard{padding:8px 10px;gap:9px;border-radius:8px}
+.bcard .wcard-art{width:34px;height:34px;border-radius:7px}
+.bcard .wcard-t b{font-size:12.5px;line-height:1.3}
+.bcard .wcard-t .label{font-size:9px;letter-spacing:.12em}
+.bcard .wcard-r{font-size:9.5px}
+/* Label left, value right — the same shape the version's own dates take a few
+   rows up, so the record reads as one document at two scales. Pushed to the
+   foot of the card so the weapon card sits under the name whether or not the
+   facts below it are three rows or one. */
+.bcard-facts{display:grid;gap:6px;margin-top:11px}
+.bcard-facts>div{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.bcard-facts span{
+  flex:none;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.bcard-facts b{
+  min-width:0;font-size:12.5px;font-weight:500;line-height:1.45;
+  color:var(--fg-2);text-align:right;
+}
+/* Under about 300px of card the two columns stop being columns: the picture
+   takes the full width as a band and everything else runs under it. */
+@media (max-width:560px){
+  .bcard{grid-template-columns:minmax(0,1fr);gap:11px}
+  .bcard-art{min-height:0;aspect-ratio:16/9}
+  .bcard-art img{object-position:center 8%}
+  .bcard-art.cut img{object-position:center 12%;object-fit:cover}
+}
 .bmini .rar{color:var(--amber);font-weight:500}
 .bmini .wep{color:var(--fg-3)}
 /* A debut, inside a phase column where grouping no longer says so. Solid, in
@@ -1927,6 +2031,25 @@ button{font:inherit;color:inherit}
 .drawer-b p.kit-credit{font-size:11.5px}
 .kit-credit a{color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
 .kit-credit a:hover{color:var(--accent)}
+
+/* The preview broadcast, riding the status row. Not a pill: a pill is a one
+   word state and this is a sentence — the label, the date it aired, and the
+   way to watch it. Separated from the pills by a rule rather than another
+   border, so the row reads as two things and not four chips. */
+.vstream{
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 9px;
+  padding-left:11px;margin-left:2px;border-left:1px solid var(--line-2);
+  font-size:12.5px;color:var(--fg-2);
+}
+.vstream>.label{padding:0}
+.vstream b{font-weight:500;color:var(--fg);white-space:nowrap}
+.vstream a{
+  display:inline-flex;align-items:center;gap:5px;align-self:center;
+  color:var(--fg-3);text-decoration:underline;text-underline-offset:2px;transition:color .15s;
+}
+.vstream a:hover{color:var(--accent)}
+.vstream a svg{flex:none;opacity:.8}
+.vstream a:hover svg{opacity:1}
 
 .dgear{display:grid;gap:8px}
 .dgear div{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:13px}
