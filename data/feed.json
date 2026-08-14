@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-14T07:03:32.038Z",
+  "fetched": "2026-08-14T12:36:11.926Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 663,
-      "ms": 881
+      "ms": 810
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 30,
       "fetched": 30,
-      "ms": 883
+      "ms": 999
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 340
+      "ms": 183
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 560
+      "ms": 456
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2632,
+      "ms": 2515,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 60,
-      "ms": 489
+      "fetched": 61,
+      "ms": 626
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,41 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 203
+      "ms": 296
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "3.6| About the ending (MAJOR SPOILERS OPEN AT YOUR OWN RISK)",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vo2siz/36_about_the_ending_major_spoilers_open_at_your/",
+      "date": "2026-08-14T09:46:50.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "3.6 | Jingran 2nd Form Environmental Effects via Reversed Rooms",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vo11ge/36_jingran_2nd_form_environmental_effects_via/",
+      "date": "2026-08-14T08:02:07.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "3.6| Qingxiao's thought voice lines via team gemberry",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vo0cl8/36_qingxiaos_thought_voice_lines_via_team_gemberry/",
+      "date": "2026-08-14T07:20:35.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "3.6| Qingxiao's about voice lines via team gemberry",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vnymw9/36_qingxiaos_about_voice_lines_via_team_gemberry/",
@@ -175,6 +205,16 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves codes (August 2026) and how to redeem",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wZkFzeGowc0poaHpKVmRVRFMxd19POUQyNzltR00zakduR1kyOEVocUQta3IyWjQyRURPYlZheFlYcElOUDV0dEFrRUlDMzgwWnhUeFhpWUNqZw?oc=5",
+      "date": "2026-08-11T17:30:57.000Z",
+      "source": "PCGamesN",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
       "hot": false
     },
     {
@@ -628,40 +668,10 @@
       "hot": false
     },
     {
-      "title": "Version 3.6 Trailer",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhxnzt/version_36_trailer/",
-      "date": "2026-08-07T11:11:21.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.6 | Event BGs via Gamedata Leaks",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhxbwv/36_event_bgs_via_gamedata_leaks/",
-      "date": "2026-08-07T10:53:55.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Jingran's JP VA - Kengo Kawanishi",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhx533/jingrans_jp_va_kengo_kawanishi/",
-      "date": "2026-08-07T10:43:36.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves 3.6 Livestream Time & Codes",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE1Rd0g4emNLcUxkNTZqeHdrZF9jbGFmU1otQWthbXVHZWJlYVNJY2Y4MU9pSVctcHFZbWhib0EtTGMxVEI1N1BTRC1CUENCZTh4eTZKRDF0a3ZrMUhRS211WC1BemlnaUt3VkJCbkU3NWd6b19wOFo0Q1V2dkhIY3RXMmc4MVlTRW9XSHpxOXY2UDdtV0xVWWZrMVA3RnJX?oc=5",
       "date": "2026-08-07T09:00:14.000Z",
-      "source": "gamerant.com",
+      "source": "GameRant",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1061,7 +1071,7 @@
       "title": "Suisui Banner Release Date In WuWa: When Does She Comes Out?",
       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOWVNFQTVBNHl5a2NZX1JaVUZiMGZsdTNKcXFRbXh5dExnTjFiMUI4elhMaFhXRzlVWlRtbUIzaW9INExxb1lVcUVaX1Vma3QyekowdDRyTUx1X2Nmc3JUdU1RVDR1QWJtbGZzSkFJRUI3aHlfQ194N2g0V1M1N2g1SFVHN3V2cm5yVTZ2VWNKT3d3ZU1GX1d4MEhWWk9XRzdGeVl1WEpwOU8?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
-      "source": "gamerant.com",
+      "source": "GameRant",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1081,7 +1091,7 @@
       "title": "Wuthering Waves Current Banner, Next Banner, And Past Banners",
       "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOVjBFMDI3c2doa2I5aURyeVFKUVRaNWl5NUFHMDRqV3NlMVhFYXkxN0lGSWJKbERhMElZaUlkbXZRTzFvZGxKQ21Hc29RR0xJT3FSWnZrNktlTkRoSDFVLTFIRFhVVTNnVm1ra0dfOEM1ZHNmQlo1Vm5ISVlSZlNPTE43V1EyNGRiR0VfcA?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
-      "source": "gamerant.com",
+      "source": "GameRant",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1154,16 +1164,6 @@
       "source": "Kuro Games (official EN)",
       "sourceId": "kuro-en",
       "kind": "official",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 Qingxiao kit leaks (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOTXpHZGdwV0NaS09SclBibEZ6QWJnT3JLaUUzTkhIRW9QZHBuM25jMVF2cEJTM3EwWDNwR0RwX0hpazVaT05mYUR0YUw0Mkk2Y2lnT3duVDRrUlYtWE5UN04wVkNJOW54d0hhS18tMktfbHRpbEdBcUZxT3BQMy1pSklRZE40QQ?oc=5",
-      "date": "2026-07-28T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": true
     },
