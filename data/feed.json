@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-14T00:54:16.916Z",
+  "fetched": "2026-08-14T07:03:32.038Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 663,
-      "ms": 819
+      "ms": 881
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 30,
       "fetched": 30,
-      "ms": 720
+      "ms": 883
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 520
+      "ms": 340
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 562
+      "ms": 560
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2628,
+      "ms": 2632,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 63,
-      "ms": 438
+      "fetched": 60,
+      "ms": 489
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,31 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 736
+      "ms": 203
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "3.6| Qingxiao's about voice lines via team gemberry",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vnymw9/36_qingxiaos_about_voice_lines_via_team_gemberry/",
+      "date": "2026-08-14T05:43:33.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "旅途中所见所得的兵刃锋芒各异，各有千秋。",
+      "url": "https://www.kurobbs.com/mc/post/1537106183160483840",
+      "date": "2026-08-14T03:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
     {
       "title": "关于《鸣潮》卓易通平台调整的相关说明",
       "url": "https://www.kurobbs.com/mc/post/1537435358014623744",
@@ -166,6 +186,16 @@
       "kind": "press",
       "lang": "en",
       "hot": true
+    },
+    {
+      "title": "Wuthering Waves: Release date, platforms, & everything we know",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaGRnbDlmWUR6Vlp3Yl92UkRHYnpBb0hKanVWMHBJdU80ZE9FRjJTcThvNklfZDhUSjBFTzBiNHRRNzdWOVVtTjlzTWNBSy1oc213UWU2UHFiTWJqM3JJNkQyZmxGWWU4SDJTT0FKSldtMGxLQUlKbkp5bkdXRjRfdVExMTBQMDFXTFh6Sk5BcXV0QQ?oc=5",
+      "date": "2026-08-11T07:00:00.000Z",
+      "source": "Dexerto",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
     },
     {
       "title": "《寰宇人类注疏：威胁集录》——天傀劫煞",
@@ -331,7 +361,7 @@
       "title": "Wuthering Waves codes for August 2026",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBOeWRua3AyNW1vUkszZDVZdk56Tkt4QTc4TFdpSTdEYWE2dGo3YjNfQmVTNkJyczFabzZrWmk4cF9oNkMzWWVrWDQwMkV3cnlTbl9SdHVJWFRlN3ZDcWhR?oc=5",
       "date": "2026-08-07T14:25:15.000Z",
-      "source": "vg247.com",
+      "source": "VG247",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -628,20 +658,10 @@
       "hot": false
     },
     {
-      "title": "3.6.5 beta updates via seele",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhwxd6/365_beta_updates_via_seele/",
-      "date": "2026-08-07T10:31:40.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Wuthering Waves 3.6 Livestream Time & Codes",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE1Rd0g4emNLcUxkNTZqeHdrZF9jbGFmU1otQWthbXVHZWJlYVNJY2Y4MU9pSVctcHFZbWhib0EtTGMxVEI1N1BTRC1CUENCZTh4eTZKRDF0a3ZrMUhRS211WC1BemlnaUt3VkJCbkU3NWd6b19wOFo0Q1V2dkhIY3RXMmc4MVlTRW9XSHpxOXY2UDdtV0xVWWZrMVA3RnJX?oc=5",
       "date": "2026-08-07T09:00:14.000Z",
-      "source": "GameRant",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -786,16 +806,6 @@
       "kind": "video",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "共鸣者瞬间 | 穗穗",
-      "url": "https://www.kurobbs.com/mc/post/1532720758294847488",
-      "date": "2026-08-04T10:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
     },
     {
       "title": "Wuthering Waves tier list and who to pick at the start",
@@ -1051,7 +1061,7 @@
       "title": "Suisui Banner Release Date In WuWa: When Does She Comes Out?",
       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOWVNFQTVBNHl5a2NZX1JaVUZiMGZsdTNKcXFRbXh5dExnTjFiMUI4elhMaFhXRzlVWlRtbUIzaW9INExxb1lVcUVaX1Vma3QyekowdDRyTUx1X2Nmc3JUdU1RVDR1QWJtbGZzSkFJRUI3aHlfQ194N2g0V1M1N2g1SFVHN3V2cm5yVTZ2VWNKT3d3ZU1GX1d4MEhWWk9XRzdGeVl1WEpwOU8?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
-      "source": "GameRant",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1071,7 +1081,7 @@
       "title": "Wuthering Waves Current Banner, Next Banner, And Past Banners",
       "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOVjBFMDI3c2doa2I5aURyeVFKUVRaNWl5NUFHMDRqV3NlMVhFYXkxN0lGSWJKbERhMElZaUlkbXZRTzFvZGxKQ21Hc29RR0xJT3FSWnZrNktlTkRoSDFVLTFIRFhVVTNnVm1ra0dfOEM1ZHNmQlo1Vm5ISVlSZlNPTE43V1EyNGRiR0VfcA?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
-      "source": "GameRant",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1144,16 +1154,6 @@
       "source": "Kuro Games (official EN)",
       "sourceId": "kuro-en",
       "kind": "official",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.5 second phase banners and events (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNSTF6bFVreUZ6bVpGSFppZHNPU0tieHVpX3M2cWxUMHJ5bXZNS3RudVB0RWdJczRYSElJWGljVTBsUU9VdVh0WEVUanU3ZUozRWRKYVlJdUFNVVgwRjBLNWx1UXBrRzBzRVQtRm9yRDFqLV9zUlZpNHNrbWEzNDJ5d1VXOWZTZktDVFVWbnUza1d2UQ?oc=5",
-      "date": "2026-07-28T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": true
     },
