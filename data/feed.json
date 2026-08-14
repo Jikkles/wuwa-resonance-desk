@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-13T18:44:31.969Z",
+  "fetched": "2026-08-14T00:54:16.916Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 663,
-      "ms": 1425
+      "ms": 819
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 30,
       "fetched": 30,
-      "ms": 880
+      "ms": 720
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 197
+      "ms": 520
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 489
+      "ms": 562
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2615,
+      "ms": 2628,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -62,7 +62,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 63,
-      "ms": 493
+      "ms": 438
     },
     {
       "id": "mmoculture",
@@ -72,7 +72,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 666
+      "ms": 736
     }
   ],
   "errors": [],
@@ -201,7 +201,7 @@
       "title": "Wuthering Waves – Version 3.6 Trailer & Overview",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQaXZYUDk4cFQwa1BkUnhxaG9vaS1OVGFxeGdBUEdpYUh3emlBekxrbmg0dEl0Mk1MWkllRWFtSmJlbFRCQnkxRUhPZmJhaEI4UDNuc0pOeDlHSDBkUmIxR0xKREtUTV84WTNLamhXdDdRWmJTaDgwc0c4TTVUZUNfMGpNZ2pIeUtJRFdfdUZR?oc=5",
       "date": "2026-08-10T13:00:04.000Z",
-      "source": "gamespace.com",
+      "source": "GameSpace.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -221,7 +221,7 @@
       "title": "Wuthering Waves 2.2 Update: Release Date and Features",
       "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE84Zm4yc2dpSjREWHhRSkxybjBCZUJsdVB5NWJEb1VwZTlpcnZFeEhSdVZKVlMtakg0NXZ5Q3UxcU9Sc1dmRXBKQmpnM0tQdjFhQnBIeDZwNzhZLW5K?oc=5",
       "date": "2026-08-08T16:00:00.000Z",
-      "source": "mmos.com",
+      "source": "MMOs.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -331,7 +331,7 @@
       "title": "Wuthering Waves codes for August 2026",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBOeWRua3AyNW1vUkszZDVZdk56Tkt4QTc4TFdpSTdEYWE2dGo3YjNfQmVTNkJyczFabzZrWmk4cF9oNkMzWWVrWDQwMkV3cnlTbl9SdHVJWFRlN3ZDcWhR?oc=5",
       "date": "2026-08-07T14:25:15.000Z",
-      "source": "VG247",
+      "source": "vg247.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1078,6 +1078,16 @@
       "hot": true
     },
     {
+      "title": "WuWa Suisui Build: Teams, Weapons, and Echoes",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFB6THp6ZEpkaW5oeWRpcEZ1U20xOF93VFd1bHlQc0ttM3hRQkhwaXZ3dzhOYVdvcnY2ZU1zSmM4VmlORGJfRXRXRVg0UWFjcmZmemRiMnZ3eDJhSDU10gFiQVVfeXFMUEwtWTBBMDVWbnlWbmRIT1NpYUg1bkl1UlB6ZVE0R2t2dmt4TDRINUkyQ0VMblBsZjlhSlB3MHhqUGNqUVJQQ0o4c3UtR1NHQkRtS1ZXQmZ2UHpZclp0RklORFE?oc=5",
+      "date": "2026-07-29T07:00:00.000Z",
+      "source": "Beebom",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "⋆The Four Seasons of Suisui⋆",
       "url": "https://www.youtube.com/shorts/kdig-KE1RfQ",
       "date": "2026-07-29T06:00:06.000Z",
@@ -1126,16 +1136,6 @@
       "kind": "official",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "WuWa Suisui Build: Teams, Weapons, and Echoes",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFB6THp6ZEpkaW5oeWRpcEZ1U20xOF93VFd1bHlQc0ttM3hRQkhwaXZ3dzhOYVdvcnY2ZU1zSmM4VmlORGJfRXRXRVg0UWFjcmZmemRiMnZ3eDJhSDU10gFiQVVfeXFMUEwtWTBBMDVWbnlWbmRIT1NpYUg1bkl1UlB6ZVE0R2t2dmt4TDRINUkyQ0VMblBsZjlhSlB3MHhqUGNqUVJQQ0o4c3UtR1NHQkRtS1ZXQmZ2UHpZclp0RklORFE?oc=5",
-      "date": "2026-07-28T19:31:02.000Z",
-      "source": "Beebom",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Upcoming Events in Wuthering Waves Version 3.5",
