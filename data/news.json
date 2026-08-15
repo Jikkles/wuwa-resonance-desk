@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-13",
+  "updated": "2026-08-15",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -641,6 +641,109 @@
           "name": "Maintainer statement",
           "lang": "en",
           "url": ""
+        }
+      ]
+    },
+    {
+      "id": "2026-08-14-36-ending",
+      "date": "2026-08-14",
+      "version": "3.6",
+      "category": "story",
+      "confidence": "datamined",
+      "title": "Muyu names a backer, and Xuanfang's collapse turns out to be a debt coming due",
+      "body": "The beta's final-battle script is out, posted with the Chinese original alongside the translation. Beaten, Muyu - speaking as Tiankui through the puppet carrying his consciousness - says he never wanted the Casket of Civilization itself, only the knowledge inside it, and that the ones who actually want it are the Rover's old adversaries. He then refers to a \"she\" who has \"probably realised it by now\" and dies without naming her. The larger reveal is structural. Xuanfang City was built on a Sentinel's intervention in the mortal world, and by Muyu's account every life it saved was a cost paid in advance. The Skyfall now hanging over the region is the accumulated remnants of Tacet Discords and the dead since the Battle of Yunyuan - the annihilation Xuanfang was fated to suffer, deferred rather than avoided. The player chooses whether to finish Muyu personally or leave it to Qingxiao. Qingxiao then stays behind to purify the malice in those Echoes, the Rover refuses to leave on the strength of a promise made to Heart Moon Fox, and the act closes on her calling the defence not one person's sword but the sword of all living beings. This is beta text, so wording and localisation can still change before 20 August.",
+      "tags": [
+        "3.6",
+        "story",
+        "Muyu",
+        "Qingxiao",
+        "spoilers"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - 3.6 ending script",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vo2siz/36_about_the_ending_major_spoilers_open_at_your/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-15-36-voice-lines",
+      "date": "2026-08-15",
+      "version": "3.6",
+      "category": "story",
+      "confidence": "datamined",
+      "title": "Qingxiao and Jingran's voice lines wire 3.6 back into the older cast",
+      "body": "Both new Resonators' About and Thought voice line sets were extracted by team gemberry and posted with the Chinese originals attached. Qingxiao's are the denser half. Her Mind-Clearing Art is what eases Changli's Vermilion Fire burn, and she is explicit that the lifespan Changli already burned through is not coming back. On Yangyang she says that perhaps it is not that Yangyang resembles Xuanling, but that Xuanling resembles her. Her own master Jingwei is alive and has severed mortal ties. Years ago she cast a fortune for Jingran's master ahead of a mirage realm trip and drew Great Misfortune; he grinned and went anyway, and did not come back. Ruoyun is named as the child who first brought her down the mountain, and Qingxiao says plainly that the Sword Immortal that child found failed to protect her. She also wants to travel to Rinascita to trade insight with a swordswoman said to have learned the sword from the tides. Jingran's set covers the mountain cat Tangtuanzi sealed in his lantern, which is eating his lifespan and which he considers a fair trade; his hatred of Muyu over his parents' deaths, sharpened by Muyu having died too easily; his master dying inside a collapsing mirage realm; and Qiuyuan, whom he reads as a sword left long unsheathed that still hums in the dark. Beta text, so the English wording is not final.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "Jingran",
+        "story",
+        "lore"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Qingxiao About lines via team gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vnymw9/36_qingxiaos_about_voice_lines_via_team_gemberry/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Qingxiao Thought lines via team gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vo0cl8/36_qingxiaos_thought_voice_lines_via_team_gemberry/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Jingran About lines via team gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vovizj/36_jingrans_about_voice_lines_via_team_gemberry/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Jingran Thought lines via team gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vowj10/36_jingrans_thought_voice_lines_via_team_gemberry/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-14-36-jingran-form-vfx",
+      "date": "2026-08-14",
+      "version": "3.6",
+      "category": "cosmetic",
+      "confidence": "datamined",
+      "title": "Jingran's second form dresses the arena around him",
+      "body": "Beta capture posted by Reversed Rooms shows Jingran's second form applying environmental effects to the space he is fighting in, rather than confining its visuals to the character model. The clip carries no accompanying description, so this is a presentation detail with no mechanical claim attached to it - nothing in it changes the Nether Passage and Ghost Ward numbers already logged from the 3.6.1 and 3.6.5 passes.",
+      "tags": [
+        "3.6",
+        "Jingran",
+        "beta"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Jingran second form effects via Reversed Rooms",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vo11ge/36_jingran_2nd_form_environmental_effects_via/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-15-37-hsin-concept-art",
+      "date": "2026-08-15",
+      "version": "3.7",
+      "category": "cosmetic",
+      "confidence": "reported",
+      "title": "First Hsin concept art surfaces about a month before her beta",
+      "body": "Seele put out a concept sheet for Hsin, the character 3.7 is expected to be built around. It is design work rather than a kit reveal - nothing on it moves her element, weapon or the two-stance description that is currently the only substantive claim about how she plays, and that claim still rests on Sleep's word with no files behind it. The 3.7 beta has not opened, and the subreddit's own working estimate puts it roughly a month out. The desk does not host leaked art; the source link goes to the post.",
+      "tags": [
+        "3.7",
+        "Hsin",
+        "characters"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Hsin concept art via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vostk9/hsin_concept_art_via_seele/"
         }
       ]
     }
