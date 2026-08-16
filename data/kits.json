@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/kits@1.0",
-  "updated": "2026-08-15",
+  "updated": "2026-08-16",
   "note": "Six skills, two Inherent Skills and the six-node Resonance Chain per Resonator, as they read in the live client. Text carries **bold** and __underline__ markers rather than markup — the desk escapes the string before turning those back into elements. Skill descriptions via prydwen.gg; skills © Kuro Games.",
   "credit": "Kit text via prydwen.gg · © Kuro Games",
   "kits": {
