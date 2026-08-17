@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-16T18:10:47.589Z",
+  "fetched": "2026-08-17T00:30:19.958Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 664,
-      "ms": 1051
+      "ms": 870
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 30,
       "fetched": 30,
-      "ms": 818
+      "ms": 1101
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 179
+      "ms": 193
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 629
+      "ms": 497
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2619,
+      "ms": 2495,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 62,
-      "ms": 407
+      "fetched": 58,
+      "ms": 485
     },
     {
       "id": "mmoculture",
@@ -72,7 +72,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 552
+      "ms": 779
     }
   ],
   "errors": [],
@@ -221,7 +221,7 @@
       "title": "Wuthering Waves Codes (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9Qal9Uc2xHRzZmcUdmalVEOS1ZVkNRVTZYYklCYVVwZDVGdDB4S20tYzBaYV9PVGJSTlNNcjVsX0V6bXpXdFMtWW50czVFd1V1NWFqTm1YVlpPbVgx0gFiQVVfeXFMTzBoc00td21SRmdDaGJ0Nk5QSEdaeXdpelgzTWljZFFrUmViemhYSjYzVXlBMkVQd1RwOUdJWHA0RmdxNG9SQVVjNkFVMHRybnh4U1EwY2dYWjQ5UE4wVTdOa0E?oc=5",
       "date": "2026-08-13T03:57:25.000Z",
-      "source": "beebom.com",
+      "source": "Beebom",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -528,16 +528,6 @@
       "hot": true
     },
     {
-      "title": "Wuthering Waves Version 3.6 Adds Qingxiao, Jingran, New Story, DLSS 4.5 Support, and More",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE10VWR3MXk0ZE9EMnRGRVVyTWpMMnJNZkktNVZCUWV3QjRFM1lZdEhZYUVlNXZ6Qi1jQ055RTVfYTZabmk4YkcxUFRlMmpPTjFBSjVtWUJkcGZxZXBtcXY5T0hFOXF5NDJBMXREVTF5d0dDSWZtdVVnNXRVZExzZw?oc=5",
-      "date": "2026-08-07T13:25:08.000Z",
-      "source": "Noisy Pixel",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "WuWa 3.6 release date and time (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNd3JvUHUzY2NEWlJxeEhWQzBla0lRTk5ITVpFOVROdnpMajhqeW9YcEJsdko4QVI3eXl1aWh3V2ZTbmg0azg2MENGSm9PRUFwSlF6dkI4aWE4N3ZORC0weU94U19kTkdRbThYejAxRzFSX3JWQk1ORVJmdmt4RFlZTlFRdmY?oc=5",
       "date": "2026-08-07T12:46:00.000Z",
@@ -748,16 +738,6 @@
       "hot": false
     },
     {
-      "title": "WuWa Jingran materials leaked (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB1OVN6bE80WXI2UVM0M2ZtSkJQXzlUblE4QUVMM3lfdnVpVDd4VHFaNmp1d3hmRW1EQlRRMFJPR0FaVzY5eVN0UWRWUE9LV01KUG91bzVSSy00czduU3pmaWpWaDc2Y254cU1URk14RXdYX1FsV0tlRjFGY0VIVVU?oc=5",
-      "date": "2026-08-06T16:51:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "《瑝珑图志》——味通四海·昭明商会",
       "url": "https://www.kurobbs.com/mc/post/1534242563611258880",
       "date": "2026-08-06T11:00:00.000Z",
@@ -776,6 +756,16 @@
       "kind": "official",
       "lang": "zh",
       "hot": false
+    },
+    {
+      "title": "WuWa Jingran materials leaked (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB1OVN6bE80WXI2UVM0M2ZtSkJQXzlUblE4QUVMM3lfdnVpVDd4VHFaNmp1d3hmRW1EQlRRMFJPR0FaVzY5eVN0UWRWUE9LV01KUG91bzVSSy00czduU3pmaWpWaDc2Y254cU1URk14RXdYX1FsV0tlRjFGY0VIVVU?oc=5",
+      "date": "2026-08-06T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "同人绘画展示 | 穗穗",
@@ -871,7 +861,7 @@
       "title": "Wuthering Waves Tier List – Best WuWa Characters Ranked (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBhZVZyUlhXWVdKSkpGM0RsbnptRl9ZcmdmXzFpYXhXWng0cFhyczBuQXJwa004N0xlbjlOZE5KYXo1dXhUaWN1ZGN2RmtER1JDM3NCUEpTTmJ6bTA1MURvR28yeUFLZ9IBa0FVX3lxTFBfd3RjVDh0SDM3eklvMDd5NE1MVjNyMHpib1JMRVJUSTB2cERDQkM5d0FEODdRNGVER0pabXc5d0FJc3YxTjdxOWRqVzR0cGZGbVk1bjVrclRodmRiRDB4QnJTaGg0V3FkVEtn?oc=5",
       "date": "2026-08-04T07:00:00.000Z",
-      "source": "beebom.com",
+      "source": "Beebom",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -990,7 +980,7 @@
     {
       "title": "Wuthering Waves Version 3.6 Leaks: New Resonators, Banners, Events, and more",
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQWHN0aFpRRHllcFVvZWNjRU5BZ1FDYkdySFRoNUtRNGhpME1iQzJIbnZ1bnlsYlpkaXpteldETDF3VmplUUNHcWgyUUo3Mi13STZUZ1d3eXhBekJwOHRNRlF2SzNMMDNfdGdFM2NiUUxyWkxEdEstTVpZclB6YldiTTNBS1I2T2h0MUhud3EwcjZ4b05JVDZXeVk1SlBFcng3SlZ4OFVJWQ?oc=5",
-      "date": "2026-08-01T17:34:28.000Z",
+      "date": "2026-08-01T07:00:00.000Z",
       "source": "GamingonPhone",
       "sourceId": "google-news",
       "kind": "press",
@@ -1122,6 +1112,16 @@
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbjFXMFRyT0xBX1lXY2JuUmdFT185cUF2X0YwNEdtZWxTdE8wSDVwYlpkZjVzX0JJLTJJZjBfdmNjVlNDVlpIa1ZlUHF0STJNMFdpS0xLR2Y1N3ppN3o2bHhtTG9XNUIzbHpJcmowYi0wZm9LVEtwTjBPRk43WU85V1Rtd01uTHBR?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
       "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves Current Banner, Next Banner, And Past Banners",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOVjBFMDI3c2doa2I5aURyeVFKUVRaNWl5NUFHMDRqV3NlMVhFYXkxN0lGSWJKbERhMElZaUlkbXZRTzFvZGxKQ21Hc29RR0xJT3FSWnZrNktlTkRoSDFVLTFIRFhVVTNnVm1ra0dfOEM1ZHNmQlo1Vm5ISVlSZlNPTE43V1EyNGRiR0VfcA?oc=5",
+      "date": "2026-07-29T07:00:00.000Z",
+      "source": "GameRant",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
