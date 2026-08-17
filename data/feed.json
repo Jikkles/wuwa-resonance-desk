@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-17T12:17:57.011Z",
+  "fetched": "2026-08-17T18:19:33.354Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 665,
-      "ms": 1583
+      "ms": 1832
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 30,
       "fetched": 30,
-      "ms": 1036
+      "ms": 1001
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 127
+      "ms": 277
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 385
+      "ms": 798
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2477,
+      "ms": 2612,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 55,
-      "ms": 389
+      "fetched": 56,
+      "ms": 807
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 585
+      "ms": 1227
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "3.X| About this year's moon chasing festival via seele",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vqsmo6/3x_about_this_years_moon_chasing_festival_via/",
+      "date": "2026-08-17T13:39:17.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "Profile Reveal | Heart Sword — Qingxiao",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vqqfu2/profile_reveal_heart_sword_qingxiao/",
@@ -348,16 +358,6 @@
       "hot": false
     },
     {
-      "title": "Wuthering Waves Codes (August 2026)",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9Qal9Uc2xHRzZmcUdmalVEOS1ZVkNRVTZYYklCYVVwZDVGdDB4S20tYzBaYV9PVGJSTlNNcjVsX0V6bXpXdFMtWW50czVFd1V1NWFqTm1YVlpPbVgx0gFiQVVfeXFMTzBoc00td21SRmdDaGJ0Nk5QSEdaeXdpelgzTWljZFFrUmViemhYSjYzVXlBMkVQd1RwOUdJWHA0RmdxNG9SQVVjNkFVMHRybnh4U1EwY2dYWjQ5UE4wVTdOa0E?oc=5",
-      "date": "2026-08-13T03:57:25.000Z",
-      "source": "Beebom",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "《鸣潮》3.6版本更新维护预告",
       "url": "https://www.kurobbs.com/mc/post/1537123078483877888",
       "date": "2026-08-13T03:00:00.000Z",
@@ -442,6 +442,16 @@
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wZkFzeGowc0poaHpKVmRVRFMxd19POUQyNzltR00zakduR1kyOEVocUQta3IyWjQyRURPYlZheFlYcElOUDV0dEFrRUlDMzgwWnhUeFhpWUNqZw?oc=5",
       "date": "2026-08-11T17:30:57.000Z",
       "source": "PCGamesN",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves events schedule",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9tSDNaNWVYVmt3aXFfYy16Uy1VX1JFdEdDVV9CM1VveTQ3djNUV3RGajVjYTZoNjdXUDFuQ1k4QlBYY1AxLWNEaHctS0NTaDNXS1AxZWlqTmhvbWp1RDNfc0hB?oc=5",
+      "date": "2026-08-11T16:29:21.000Z",
+      "source": "Pocket Tactics",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -666,16 +676,6 @@
       "kind": "press",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Character Release Timeline/History up to v3.6",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhzhrf/character_release_timelinehistory_up_to_v36/",
-      "date": "2026-08-07T12:38:23.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "救救你的舞蹈连胜！",
