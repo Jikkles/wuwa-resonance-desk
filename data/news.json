@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-15",
+  "updated": "2026-08-18",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -744,6 +744,203 @@
           "name": "r/WutheringWavesLeaks - Hsin concept art via Seele",
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vostk9/hsin_concept_art_via_seele/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-16-36-qingxiao-anthropocene",
+      "date": "2026-08-16",
+      "version": "3.6",
+      "category": "story",
+      "confidence": "official",
+      "title": "Kuro posts Qingxiao's lore teaser, \"Stars Intertwined\"",
+      "body": "Official profile teaser under Kuro's recurring \"Post-Lament Anthropocene\" lore-video format, posted to Kurobbs and the EN site together with a YouTube short. No kit or gameplay content in it - the series is character-focused lore/mood pieces, not a mechanics reveal.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "story"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games (official EN) - Post-Lament Anthropocene: Stars Intertwined | Qingxiao",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5292"
+        },
+        {
+          "name": "Kurobbs (official CN)",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1537839815610896384"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-17-36-qingxiao-epithet-official",
+      "date": "2026-08-17",
+      "version": "3.6",
+      "category": "story",
+      "confidence": "official",
+      "title": "Qingxiao's profile reveal confirms her epithet as \"Heart Sword\"",
+      "body": "Kuro's official Profile Reveal post gives her English epithet as Heart Sword, alongside the Chinese \"天地弦心剑\". That settles a discrepancy this desk's own data carried after a bot run on the 18th briefly wrote two conflicting Qingxiao records with different guessed epithets - this is the confirmation that the correct one is Heart Sword, not the other guess, which actually belonged to Jingran (\"Nether Qi Art\", also since corrected).",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "identity"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games (official EN) - Profile Reveal | Heart Sword — Qingxiao",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5294"
+        },
+        {
+          "name": "Kurobbs (official CN) - 档案公开 | 天地弦心剑——清宵",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1538855383172419584"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-17-36-qingxiao-combat-showcase",
+      "date": "2026-08-17",
+      "version": "3.6",
+      "category": "kit",
+      "confidence": "official",
+      "title": "Qingxiao's official combat showcase goes up",
+      "body": "Kuro's Resonator Combat Showcase for Qingxiao - the standard pre-release gameplay demo reel, cut to show her flying-sword barrages and Ethereal Immortal State transition already described from the beta datamine. No numbers attached, but it is the first official (rather than leaked) look at her kit in motion.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "kit"
+      ],
+      "sources": [
+        {
+          "name": "Wuthering Waves (YouTube) - Resonator Combat Showcase | Qingxiao",
+          "lang": "en",
+          "url": "https://www.youtube.com/watch?v=op22gIZneCk"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-18-36-qingxiao-cultivation-pv",
+      "date": "2026-08-18",
+      "version": "3.6",
+      "category": "cosmetic",
+      "confidence": "official",
+      "title": "Qingxiao's \"Cultivation\" resonator PV, tagline attached",
+      "body": "Character showcase PV subtitled CULTIVATION, posted with the tagline \"万念证心，一剑清平\" (roughly: ten thousand thoughts prove the heart, one sword brings peace). Marketing piece, no new kit or stat information.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "cosmetic"
+      ],
+      "sources": [
+        {
+          "name": "Wuthering Waves (YouTube) - Resonator Showcase | Qingxiao — CULTIVATION",
+          "lang": "en",
+          "url": "https://www.youtube.com/watch?v=mT86JXY6oEw"
+        },
+        {
+          "name": "Kurobbs (official CN) - 共鸣者「清宵」PV | 修行",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1538883932359565312"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-18-36-launch-notice",
+      "date": "2026-08-18",
+      "version": "3.6",
+      "category": "system",
+      "confidence": "official",
+      "title": "3.6 update content post confirms 20 August (UTC+8) release",
+      "body": "Kuro's Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\" update-content notice, the standard patch-day-minus-two rundown post. Confirms the release date and patch title this desk already had from the preview broadcast; nothing in it changes the phase or banner order already logged in the timeline.",
+      "tags": [
+        "3.6",
+        "launch"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games (official EN) - Wuthering Waves Update Content | Version 3.6",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310"
+        },
+        {
+          "name": "Kurobbs (official CN) - 版本资讯 | 3.6版本「蜃云灯影，凡尘剑心」8月20日即将更新",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1538887550436995072"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-18-36-s6-titles-and-items",
+      "date": "2026-08-18",
+      "version": "3.6",
+      "category": "cosmetic",
+      "confidence": "reported",
+      "title": "Qingxiao's and Jingran's resonance chain 6 titles surface, plus their cherished items",
+      "body": "Seele posted both characters' S6 (resonance chain 6) flavor titles, translated via encore.moe: Qingxiao's is \"Immortal's Mortal Dream\" (\"She has carried a sword across centuries and watched the world make and unmake its bonds, over and over, in joy and in grief. And just as the last of the dream was thinning, the lamplight of the mortal world made her turn and look back.\"), Jingran's is \"Dust and Nether\" (\"A lamp to go by, an eye to judge by. What he learns of life and what he takes from death, he takes alone. He kneels to no god and calls on no ghost.\"). A separate Seele post the same day covers their cherished items. This is a leaker relaying screenshots rather than posted file evidence, so it stays reported rather than datamined pending a first-party source.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "Jingran",
+        "resonance chain"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - 3.6 Qingxiao and Jingran S6 titles via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vrgic7/36_qingxiao_and_jingran_s6_titles_via_seele/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - 3.6 Qingxiao & Jingran cherished items via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vrh28g/36_qingxiao_jingran_cherished_items_via_seele/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-18-37-suoming-model-beta-open",
+      "date": "2026-08-18",
+      "version": "3.7",
+      "category": "cosmetic",
+      "confidence": "datamined",
+      "title": "Suoming's model rips out - Verina-height, and 3.7's beta has now genuinely opened",
+      "body": "A wave of model-rip content - a full render, a 360 turntable, walking/stand/umbrella-stand animations and facial expressions - hit r/WutheringWavesLeaks over the 17th-18th via Team Gemberry, SolonLeak and FS. The clips carry the subreddit automod's standard beta-capture disclaimer (incomplete animations/effects), which only fires on genuine client rips, so this is the beta actually opening rather than another render leak. Confirms she's a small \"S-model\" build, in the Verina/Roccia/Encore height bracket rather than adult-height. Her attribute mark isn't visible in any of the clips - the Electro-vs-Havoc contest flagged on 9 August is still unresolved, and nothing here settles it. Weapon and moveset are not shown in this batch either.",
+      "tags": [
+        "3.7",
+        "Suoming",
+        "beta"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Suoming Render via Team Gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vqo0y0/souming_render_via_team_gemberry/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming 360° via FS",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vre1eo/suoming_360_via_fs/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming Walking Animation via SolonLeak",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vrg8r2/suoming_walking_animation_via_solonleak/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming Umbrella Stand Animation via SolonLeak",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vrg0qf/suoming_umbrella_stand_animation_via_solonleak/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming Stand Animation via SolonLeak",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vrfii9/suoming_stand_animation_via_solonleak/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming facial expressions via SolonLeak",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vrhepi/suoming_facial_expressions_via_solonleak/"
         }
       ]
     }
