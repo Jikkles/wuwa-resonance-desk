@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-17T18:19:33.354Z",
+  "fetched": "2026-08-18T00:29:43.424Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 665,
-      "ms": 1832
+      "ms": 1242
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 30,
       "fetched": 30,
-      "ms": 1001
+      "ms": 1063
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 277
+      "ms": 42
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 798
+      "ms": 418
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2612,
+      "ms": 2446,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 56,
-      "ms": 807
+      "fetched": 53,
+      "ms": 457
     },
     {
       "id": "mmoculture",
@@ -72,7 +72,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 1227
+      "ms": 712
     }
   ],
   "errors": [],
@@ -268,6 +268,16 @@
       "hot": true
     },
     {
+      "title": "Wuthering Waves: Release date, platforms, & everything we know",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaGRnbDlmWUR6Vlp3Yl92UkRHYnpBb0hKanVWMHBJdU80ZE9FRjJTcThvNklfZDhUSjBFTzBiNHRRNzdWOVVtTjlzTWNBSy1oc213UWU2UHFiTWJqM3JJNkQyZmxGWWU4SDJTT0FKSldtMGxLQUlKbkp5bkdXRjRfdVExMTBQMDFXTFh6Sk5BcXV0QQ?oc=5",
+      "date": "2026-08-15T07:00:00.000Z",
+      "source": "Dexerto",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "3.6| Jingran's about voice lines via team gemberry via",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vovizj/36_jingrans_about_voice_lines_via_team_gemberry/",
       "date": "2026-08-15T06:39:21.000Z",
@@ -314,16 +324,6 @@
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Wuthering Waves 2026 Banner Schedule [3.5-3.8]",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE84LWozdXBPRms0SXhiTDNGOWxrMjlmNjAtMmtubXVJSzNoZG5MV2p2ZTRkSVRDaGQyRjdYaXdzUERkaEVsZzkyYXA3TXRJa01HYUlLWWpoUVcxX1E2WXB5Ukpwc29QekQ0MWdrVk1EYzY?oc=5",
-      "date": "2026-08-14T07:00:00.000Z",
-      "source": "Wotpack.ru",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": true
     },
@@ -468,16 +468,6 @@
       "hot": true
     },
     {
-      "title": "Wuthering Waves: Release date, platforms, & everything we know",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaGRnbDlmWUR6Vlp3Yl92UkRHYnpBb0hKanVWMHBJdU80ZE9FRjJTcThvNklfZDhUSjBFTzBiNHRRNzdWOVVtTjlzTWNBSy1oc213UWU2UHFiTWJqM3JJNkQyZmxGWWU4SDJTT0FKSldtMGxLQUlKbkp5bkdXRjRfdVExMTBQMDFXTFh6Sk5BcXV0QQ?oc=5",
-      "date": "2026-08-11T07:00:00.000Z",
-      "source": "Dexerto",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "《寰宇人类注疏：威胁集录》——天傀劫煞",
       "url": "https://www.kurobbs.com/mc/post/1536324402000961536",
       "date": "2026-08-11T04:00:00.000Z",
@@ -511,7 +501,7 @@
       "title": "Wuthering Waves – Version 3.6 Trailer & Overview",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQaXZYUDk4cFQwa1BkUnhxaG9vaS1OVGFxeGdBUEdpYUh3emlBekxrbmg0dEl0Mk1MWkllRWFtSmJlbFRCQnkxRUhPZmJhaEI4UDNuc0pOeDlHSDBkUmIxR0xKREtUTV84WTNLamhXdDdRWmJTaDgwc0c4TTVUZUNfMGpNZ2pIeUtJRFdfdUZR?oc=5",
       "date": "2026-08-10T13:00:04.000Z",
-      "source": "GameSpace.com",
+      "source": "gamespace.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -781,7 +771,7 @@
       "title": "Wuthering Waves codes and how to redeem them (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQLVA1Ul9DcVhDcUZ5cDVlQ05ZdmdWZjJkRnhqU2F5ZVNHbUxXWGFGQU1NTlBzSno4S1FCMHhoa1hyRmFtQS1GMlpxZ1dXRG9VV2VzUFdrTWtFV0Y5VlUyM2RpUGNKQV9uNGVFNHE1ckNRVEhQMkd4aG9GV21fZ3dOMnNMZw?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
-      "source": "Eurogamer",
+      "source": "Eurogamer.net",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1152,6 +1142,16 @@
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbjFXMFRyT0xBX1lXY2JuUmdFT185cUF2X0YwNEdtZWxTdE8wSDVwYlpkZjVzX0JJLTJJZjBfdmNjVlNDVlpIa1ZlUHF0STJNMFdpS0xLR2Y1N3ppN3o2bHhtTG9XNUIzbHpJcmowYi0wZm9LVEtwTjBPRk43WU85V1Rtd01uTHBR?oc=5",
       "date": "2026-07-29T07:00:00.000Z",
       "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves Current Banner, Next Banner, And Past Banners",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOVjBFMDI3c2doa2I5aURyeVFKUVRaNWl5NUFHMDRqV3NlMVhFYXkxN0lGSWJKbERhMElZaUlkbXZRTzFvZGxKQ21Hc29RR0xJT3FSWnZrNktlTkRoSDFVLTFIRFhVVTNnVm1ra0dfOEM1ZHNmQlo1Vm5ISVlSZlNPTE43V1EyNGRiR0VfcA?oc=5",
+      "date": "2026-07-29T07:00:00.000Z",
+      "source": "GameRant",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
