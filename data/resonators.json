@@ -3132,48 +3132,6 @@
         }
       ],
       "released": "2026-08-20",
-      "epithet": "Nether Qi Art"
-    },
-    {
-      "name": "Qingxiao",
-      "rarity": 5,
-      "attribute": "Aero",
-      "weapon": "Sword",
-      "role": "Main DPS",
-      "version": "3.6",
-      "status": "announced",
-      "convene": "Wind of Transcendence",
-      "signature": "Glint of Clouds",
-      "accessory": "Cloudbloom",
-      "region": "Mengzhou",
-      "summary": "Reclusive sword cultivator, Xuan Paragon of Xuanfang Hold. Xianxia sword-immortal archetype - her swordplay appeared in a main story cutscene before the drip reveal.",
-      "kit": [
-        "All swords sit sealed inside her guqin in the default state; the guqin acts as a support weapon while the flying swords carry her damage.",
-        "Dual-resource gauge. Filling both transitions her into an Ethereal Immortal State.",
-        "Ethereal Immortal State delivers heavy aerial sword barrages.",
-        "Tune Strain is the associated mechanic."
-      ],
-      "materials": {
-        "ascension": [],
-        "skill": []
-      },
-      "confidence": {
-        "identity": "official",
-        "kit": "datamined"
-      },
-      "sources": [
-        {
-          "name": "3.6 preview broadcast",
-          "lang": "en",
-          "url": "https://www.rpgsite.net/news/21075-wuthering-waves-version-3-6-release-date-gameplay-trailer-dlss-4-5"
-        },
-        {
-          "name": "MMO Culture (kit)",
-          "lang": "en",
-          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
-        }
-      ],
-      "released": "2026-08-20",
       "epithet": "Heart Sword"
     },
     {
@@ -3215,7 +3173,8 @@
           "lang": "en",
           "url": "https://www.topuplive.com/news/wuwa-3-6-jingran-build.html"
         }
-      ]
+      ],
+      "epithet": "Nether Qi Art"
     },
     {
       "name": "Hsin",

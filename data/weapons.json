@@ -579,6 +579,41 @@
       "icon": "assets/weapons/w-frostburn.webp"
     },
     {
+      "name": "Glint of Clouds",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020106",
+      "atk90": 500,
+      "stat": "CRIT Rate",
+      "statValue90": 36,
+      "source": "",
+      "effect": "ATK is increased by {0}. Inflicting Tune Strain - Shifting grants {1} Aero DMG Bonus for 2s, stacking up to 5 times. This effect can be triggered once every 0.5s. Upon reaching the max stack limit, gain the following effects:\\n- This Aero DMG Bonus effect's duration is extended to 30s.\\n- Aero DMG ignores {2} of the target's DEF during this effect.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "11.2%",
+          "14%",
+          "16.8%",
+          "19.6%",
+          "22.4%"
+        ],
+        [
+          "10%",
+          "12.5%",
+          "15%",
+          "17.5%",
+          "20%"
+        ]
+      ],
+      "icon": "assets/weapons/w-glint-of-clouds.webp"
+    },
+    {
       "name": "Kumokiri",
       "rarity": 5,
       "type": "Broadblade",
@@ -3261,5 +3296,5 @@
       "icon": "assets/weapons/w-tyro-sword.webp"
     }
   ],
-  "updated": "2026-08-13T14:59:34.962Z"
+  "updated": "2026-08-18T17:39:30.863Z"
 }
