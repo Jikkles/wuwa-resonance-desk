@@ -1066,6 +1066,7 @@ function patchCard(v, role){
       <div class="pcard-window">${figs.length
         ? `<div class="figs n${figs.length}">${figs.map(f =>
             `<div class="fig-cell">
+               <img class="fig-wash" src="${esc(f.src)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
                <img class="fig" src="${esc(f.src)}" alt="${esc(f.name)}" loading="lazy" decoding="async">
              </div>`).join("")}</div>`
         : ""}</div>

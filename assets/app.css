@@ -603,6 +603,9 @@ button{font:inherit;color:inherit}
 .hero.pair{grid-template-columns:1.84fr .68fr}
 .pcard{
   position:relative;display:flex;flex-direction:column;min-height:400px;overflow:hidden;
+  /* A size container, read by the art band below — how tall the picture should
+     be is a question about this card, not about the window. */
+  container-type:inline-size;
   background:var(--tint);border:1px solid var(--line);border-radius:var(--r);
   text-align:left;padding:0;cursor:pointer;color:inherit;font:inherit;
   transition:border-color .2s,transform .2s;
@@ -624,6 +627,15 @@ button{font:inherit;color:inherit}
 .pcard-stage{
   position:relative;display:flex;flex-direction:column;
   flex:6 1 auto;min-height:448px;max-height:536px;overflow:hidden;
+}
+/* A card with most of the row to itself — the timeline filtered to one patch,
+   or a live card that took the width an unannounced Next gave up. Its halves
+   are wide enough for a debut to be shown whole rather than cropped to a face
+   (see the container query on .fig-cell), and a figure standing at its own
+   shape wants the height. Deliberately the same threshold, from the other
+   side: below this the band stays as it was, because the framing does too. */
+@container (min-width:1000px){
+  .pcard-stage{min-height:560px;max-height:640px}
 }
 /* Solid ground under the picture. The banner grid and the event list used to
    be a translucent slab lying on the lower half of the art; down here they
@@ -667,59 +679,120 @@ button{font:inherit;color:inherit}
 
 /* The debut figures, one to a half. They live inside .pcard-window rather than
    behind the whole stage, and that is the entire trick: the window *is* the
-   space below the head band, so a figure framed to fill it cannot end up with
-   its head in the band's shadow. Framing them against the full stage put every
+   space below the head band, so a figure framed to it cannot end up with its
+   head in the band's shadow. Framing them against the full stage put every
    face under the dark strip and no amount of nudging fixed it, because the
    band's height moves with the codename's line count. */
 /* Bled upward past the window's top edge, so the picture still runs behind the
    head band and the band still reads as something laid over art rather than a
-   dark box stacked on top of one. The bleed is clipped by the stage. The
-   framing below is set against this taller box, not the window — which is why
-   the head still lands clear of the band. */
+   dark box stacked on top of one. The bleed is clipped by the stage. */
 .figs{position:absolute;left:0;right:0;bottom:0;top:-78px;display:flex}
+/* A size container, and the whole reason the two framings below can coexist.
+   The source is Prydwen's 374x512 card, so how a half should be filled depends
+   entirely on the shape of the half — and that shape swings enormously: about
+   0.75:1 when three patch cards share the row, past 2:1 when one card has the
+   width to itself. A width breakpoint cannot tell those apart, because the
+   wide case and the narrow case happen at the same viewport. */
 .fig-cell{
   position:relative;flex:1 1 0;min-width:0;overflow:hidden;
-  /* A neutral ground, and nothing else. Each half used to be lit in its own
-     character's element — a pool of colour at the foot, a wash up the lower
+  container-type:size;
+  /* A neutral ground, and nothing else. The source cards carry alpha, so
+     something has to stand behind them; each half used to be lit in its own
+     character element — a pool of colour at the foot, a wash up the lower
      third — which meant every debut was shown standing in coloured light that
      was not in the artist's picture. The element is a fact about a kit, so it
      belongs on the tiles below, attached to a name, where it is read rather
-     than atmosphere.
-
-     A cut-out is transparent and still needs something to stand on, but that
-     something no longer has to be opaque black: frosted, it is the patch's own
-     key visual behind them, which is the ground these characters were drawn
-     against in the first place. This is the largest single surface on the page
-     and it was the reason the backdrop read as a rumour. Still neutral — the
-     light here belongs to the patch, not to anybody's damage type. */
+     than breathed. Frosted rather than opaque, so whatever the card has behind
+     the pair is still the light they stand in. */
   background:linear-gradient(172deg,
     color-mix(in srgb,var(--bg-3) 46%,transparent),
     color-mix(in srgb,var(--bg) 56%,transparent));
   backdrop-filter:blur(14px) saturate(1.2);
   -webkit-backdrop-filter:blur(14px) saturate(1.2);
 }
-/* The crop's bottom edge dissolves into the body instead of ending on a line.
-   Shade, not colour — the same job the coloured wash used to do second. */
-.fig-cell::after{
-  content:"";position:absolute;inset:auto 0 0 0;height:38%;pointer-events:none;
-  background:linear-gradient(0deg,
-    rgba(11,10,15,.62) 0%,rgba(11,10,15,.20) 42%,transparent 100%);
-}
-/* Chest up, filling the half. `contain` was tried and shrinks a waist-up UI
-   card to a stamp in the middle of the frame; cover at this crop puts the head
-   just under the band and the shoulders across the middle of the window, which
-   is the part of a character worth showing at this size. */
+/* Taller than it is wide, or near enough: the half is close to the source's
+   own shape, `cover` barely crops it, and filling the half is both the
+   simplest thing and very nearly the whole picture. This is also the fallback
+   anywhere container queries don't run. */
 .figs img.fig{
-  position:absolute;inset:0;width:100%;height:100%;
+  position:absolute;inset:0;z-index:2;width:100%;height:100%;
   object-fit:cover;object-position:center 30%;
 }
 /* Two figures lean in toward the middle rather than both drifting to their
    outside edges — a pair standing together, not two pictures in two boxes. */
 .figs.n2 .fig-cell:first-child img.fig{object-position:62% 30%}
 .figs.n2 .fig-cell:last-child img.fig{object-position:38% 30%}
+/* Nothing to see behind a figure that fills its half. */
+.fig-cell img.fig-wash{display:none}
+/* The crop's bottom edge dissolves into the body instead of ending on a line.
+   Shade, not colour — the coloured wash each half used to carry is gone: the
+   element is a fact about a kit, so it belongs on the tiles below, attached to
+   a name, where it is read rather than breathed. */
+.fig-cell::after{
+  content:"";position:absolute;inset:auto 0 0 0;height:38%;z-index:3;pointer-events:none;
+  background:linear-gradient(0deg,
+    rgba(11,10,15,.62) 0%,rgba(11,10,15,.20) 42%,transparent 100%);
+}
 /* A seam, so two crops read as a deliberate split rather than one picture that
    failed to line up. */
 .figs.n2 .fig-cell:last-child{box-shadow:inset 1px 0 0 rgba(255,255,255,.09)}
+
+/* ── a half wider than the picture ──────────────────────────────────
+   One patch card with the row to itself gives each debut a half around 2:1,
+   and `cover` on a waist-up portrait at that shape is a 2.4x enlargement: the
+   card showed foreheads and chins and none of the costume, weapon or pose that
+   is the reason to run character art at all. So the figure stops filling the
+   half and keeps its own shape instead, and the space that opens up beside it
+   is filled by the same picture, blurred — same art, same palette, no second
+   subject competing with the first. */
+@container (min-aspect-ratio:105/100){
+  /* The ground. backdrop-filter was doing this job before and had nothing to
+     work on: the patch key visual behind the pair is suppressed the moment
+     there are two of them, so each half was frosting the flat card tint. */
+  .fig-cell img.fig-wash{
+    display:block;position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 24%;
+    transform:scale(1.7);transform-origin:50% 30%;
+    filter:blur(30px) saturate(1.25) brightness(.8);
+  }
+  /* A vignette first, so the wash falls away at the corners rather than ending
+     on the soft rectangle a blurred, scaled picture leaves behind; then a
+     neutral veil, to hold it back from competing with the figure on it. */
+  .fig-cell::before{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      radial-gradient(122% 104% at 50% 32%,
+        transparent 0%,rgba(11,10,15,.30) 58%,rgba(11,10,15,.62) 100%),
+      linear-gradient(172deg,
+        color-mix(in srgb,var(--bg-3) 20%,transparent),
+        color-mix(in srgb,var(--bg) 44%,transparent));
+  }
+  /* The whole picture at very nearly its own shape — about a third the
+     magnification the half used to force. A hair wider than the source's
+     374:512 so the very bottom of the card, usually a cut-off waist, goes
+     rather than being drawn in full.
+
+     Top edge at the bleed's foot, i.e. the window's own top: the ground may
+     run under the head band, the face may not.
+
+     The plate is a rectangle cut out of the same picture that is blurred
+     behind it, so feathering its sides lets the sharp figure sit *in* the wash
+     rather than on it — no pasted-on edge, and no frame or drop shadow needed
+     to explain the join. */
+  .figs img.fig{
+    inset:78px auto 0 50%;height:calc(100% - 78px);width:auto;max-width:100%;
+    aspect-ratio:.85;object-position:center top;transform:translateX(-50%);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%);
+  }
+  /* Outward, not inward: two plates this much narrower than their halves
+     cluster on the seam if you centre them, leaving the outer quarters as bare
+     wash. Nudged apart they sit at about a quarter and three quarters of the
+     band — the filled halves above lean the other way, and for the same
+     reason, because a crop that wide drifts to its outside edge on its own. */
+  .figs.n2 .fig-cell:first-child img.fig{left:46%;object-position:center top}
+  .figs.n2 .fig-cell:last-child img.fig{left:54%;object-position:center top}
+}
 /* A hairline of shade where the picture meets the body, and nothing else. No
    type sits on the art below the head band any more, so there is nothing left
    for a scrim to rescue — this is purely so the crop lands on the body rather
