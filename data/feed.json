@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-18T18:18:35.766Z",
+  "fetched": "2026-08-19T00:30:15.480Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 667,
-      "ms": 1313
+      "ms": 749
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 30,
       "fetched": 30,
-      "ms": 935
+      "ms": 984
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 200
+      "ms": 131
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 553
+      "ms": 394
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2631,
+      "ms": 2468,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 54,
-      "ms": 389
+      "fetched": 53,
+      "ms": 478
     },
     {
       "id": "mmoculture",
@@ -72,7 +72,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 898
+      "ms": 777
     }
   ],
   "errors": [],
@@ -131,7 +131,7 @@
       "title": "Wuthering Waves Shared Combat Showcase for Qingxiao",
       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPd0VOMC03NTJOVVVzY1JBV2V3anZ4NVA4OWZUWXRmSHRVenVacFBUakRyZmdQQXY0N0VGSUxLalVKMkd2cFI0Sm1pRG9TNmtBOFExY1JYaG1ObjFsazhnVUhhSGttaUVoc1NrTWhBdjRhWW1pZWJWNkprUUxtWFI5dWdPRjZRWm15LThPLUhKVHRJR25aQmtN?oc=5",
       "date": "2026-08-18T11:00:35.000Z",
-      "source": "GameSpace.com",
+      "source": "gamespace.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -668,16 +668,6 @@
       "hot": false
     },
     {
-      "title": "Wuthering Waves codes (August 2026) and how to redeem",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wZkFzeGowc0poaHpKVmRVRFMxd19POUQyNzltR00zakduR1kyOEVocUQta3IyWjQyRURPYlZheFlYcElOUDV0dEFrRUlDMzgwWnhUeFhpWUNqZw?oc=5",
-      "date": "2026-08-11T17:30:57.000Z",
-      "source": "PCGamesN",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves events schedule",
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9tSDNaNWVYVmt3aXFfYy16Uy1VX1JFdEdDVV9CM1VveTQ3djNUV3RGajVjYTZoNjdXUDFuQ1k4QlBYY1AxLWNEaHctS0NTaDNXS1AxZWlqTmhvbWp1RDNfc0hB?oc=5",
       "date": "2026-08-11T16:29:21.000Z",
@@ -721,7 +711,7 @@
       "title": "Wuthering Waves – Version 3.6 Trailer & Overview",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQaXZYUDk4cFQwa1BkUnhxaG9vaS1OVGFxeGdBUEdpYUh3emlBekxrbmg0dEl0Mk1MWkllRWFtSmJlbFRCQnkxRUhPZmJhaEI4UDNuc0pOeDlHSDBkUmIxR0xKREtUTV84WTNLamhXdDdRWmJTaDgwc0c4TTVUZUNfMGpNZ2pIeUtJRFdfdUZR?oc=5",
       "date": "2026-08-10T13:00:04.000Z",
-      "source": "GameSpace.com",
+      "source": "gamespace.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -771,7 +761,7 @@
       "title": "Wuthering Waves - Official Version 3.6 Official Trailer",
       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNNTdtUTd1ZEtSOU93Z0VzcWl4T0dhMW94UlVicHlIRGtqcDNNLXFVT0s2aXIyOFpqU1U2akkwUjUxMkk1VVo3LTg4M2pyLVlldWF5STZDNmd2QzY0amdZb2xaSmhMc2JLbUFPZnpBRlFiWXNibzUwUm9SYmJKWjBuRFVCd0Y4WjNfRWxtNnplLTFRdWpqREF3YmVn?oc=5",
       "date": "2026-08-07T13:52:30.000Z",
-      "source": "IGN Africa",
+      "source": "za.ign.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -868,16 +858,6 @@
       "hot": true
     },
     {
-      "title": "WuWa 3.6 livestream codes (Wuthering Waves): How to get 300 Astrites?",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOWGl3RUpSMUJzbF9DSzBQUDJnUVVZMmFZaTFHRFI4M2NfY0VZMVhIbGQ0cmRiUTBsRjlNTE5XU01LRl84NW1ySGstaXRleS14VDVuc2RlRkhUSWRmQ1FvODZqV2xHVzFROUM5LVk3bThmUjN4bFhKUGhIRjQwdkZxXzF5cmxvS1BuZk5wMDhWdlFDS1BPd0lYWXZlbVJ2WWc?oc=5",
-      "date": "2026-08-07T11:42:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Wuthering Waves codes and how to redeem them (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQLVA1Ul9DcVhDcUZ5cDVlQ05ZdmdWZjJkRnhqU2F5ZVNHbUxXWGFGQU1NTlBzSno4S1FCMHhoa1hyRmFtQS1GMlpxZ1dXRG9VV2VzUFdrTWtFV0Y5VlUyM2RpUGNKQV9uNGVFNHE1ckNRVEhQMkd4aG9GV21fZ3dOMnNMZw?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
@@ -912,6 +892,16 @@
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE1Rd0g4emNLcUxkNTZqeHdrZF9jbGFmU1otQWthbXVHZWJlYVNJY2Y4MU9pSVctcHFZbWhib0EtTGMxVEI1N1BTRC1CUENCZTh4eTZKRDF0a3ZrMUhRS211WC1BemlnaUt3VkJCbkU3NWd6b19wOFo0Q1V2dkhIY3RXMmc4MVlTRW9XSHpxOXY2UDdtV0xVWWZrMVA3RnJX?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
       "source": "GameRant",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "WuWa 3.6 livestream codes (Wuthering Waves): How to get 300 Astrites?",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOWGl3RUpSMUJzbF9DSzBQUDJnUVVZMmFZaTFHRFI4M2NfY0VZMVhIbGQ0cmRiUTBsRjlNTE5XU01LRl84NW1ySGstaXRleS14VDVuc2RlRkhUSWRmQ1FvODZqV2xHVzFROUM5LVk3bThmUjN4bFhKUGhIRjQwdkZxXzF5cmxvS1BuZk5wMDhWdlFDS1BPd0lYWXZlbVJ2WWc?oc=5",
+      "date": "2026-08-07T07:00:00.000Z",
+      "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1071,7 +1061,7 @@
       "title": "Wuthering Waves Version 3.6 Leaks: New Resonators, Banners, Events, and more",
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQWHN0aFpRRHllcFVvZWNjRU5BZ1FDYkdySFRoNUtRNGhpME1iQzJIbnZ1bnlsYlpkaXpteldETDF3VmplUUNHcWgyUUo3Mi13STZUZ1d3eXhBekJwOHRNRlF2SzNMMDNfdGdFM2NiUUxyWkxEdEstTVpZclB6YldiTTNBS1I2T2h0MUhud3EwcjZ4b05JVDZXeVk1SlBFcng3SlZ4OFVJWQ?oc=5",
       "date": "2026-08-01T07:00:00.000Z",
-      "source": "GamingonPhone",
+      "source": "gamingonphone.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1146,6 +1136,16 @@
       "kind": "press",
       "lang": "en",
       "hot": false
+    },
+    {
+      "title": "Suisui vs Aemeath in WuWa 3.5: Who should you pull for? (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPVTdISlQ5VXdDZ3J1RFhwbVV6elZPNGhQZVJKQm51VGZpS0NuVTZsOHJNcFRtamNBc1djM3IzazRVdUhyQ3FRRnFTSGczcXNoY3I2V1Nybm9MRUVxN2lBV3ZUY2dFRE1lc1JELUlOMXI1NDdUWXBkR3lfS0p0Rm00WUJpQ1lZMGxUSm9hQXVQLTFFeURKb3c?oc=5",
+      "date": "2026-07-30T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "WuWa 3.5 quest list (Wuthering Waves)",
