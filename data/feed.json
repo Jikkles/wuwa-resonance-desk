@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-19T12:18:54.745Z",
+  "fetched": "2026-08-19T18:15:34.082Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 671,
-      "ms": 903
+      "ms": 893
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 30,
       "fetched": 30,
-      "ms": 1130
+      "ms": 895
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 65
+      "ms": 217
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 386
+      "ms": 410
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2452,
+      "ms": 2502,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -62,7 +62,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 57,
-      "ms": 402
+      "ms": 479
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,31 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 169
+      "ms": 908
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Suoming JP VA Vía SolonLeak",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vsoiu5/suoming_jp_va_vía_solonleak/",
+      "date": "2026-08-19T14:46:33.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "3.6 | A very Pretty YOUNG Lady via Seele",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vsnf3f/36_a_very_pretty_young_lady_via_seele/",
+      "date": "2026-08-19T14:05:38.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "3.6| A VERY pretty lady via seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vskpsh/36_a_very_pretty_lady_via_seele/",
@@ -331,7 +351,7 @@
       "title": "When is Wuthering Waves 3.6 Release Date For Qingxiao Banner? Find Out Here.",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPbEJHbElUWjkxVk5KUU5qZ0NDcklPaHRGakRiQjYzdXZrN1F4NVRRWEFza29EMkl2OHJGenhHMHZrYXJyd0YwUHFkZWN2WXZtbnJMMTZ0bDFqd2hQVHYzM3lVX0xsRlQxU1ZrOVRKSEpQM3JPRlpjcXppa183a21SX3B3YUgyZVJRV0FyYTBlbmRRYVB4dGd3bTd5eVlYdw?oc=5",
       "date": "2026-08-18T07:33:31.000Z",
-      "source": "GameRant",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -668,16 +688,6 @@
       "hot": false
     },
     {
-      "title": "3.6| Jingran's thought voice lines via team gemberry",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vowj10/36_jingrans_thought_voice_lines_via_team_gemberry/",
-      "date": "2026-08-15T07:37:10.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Wuthering Waves: Release date, platforms, & everything we know",
       "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaGRnbDlmWUR6Vlp3Yl92UkRHYnpBb0hKanVWMHBJdU80ZE9FRjJTcThvNklfZDhUSjBFTzBiNHRRNzdWOVVtTjlzTWNBSy1oc213UWU2UHFiTWJqM3JJNkQyZmxGWWU4SDJTT0FKSldtMGxLQUlKbkp5bkdXRjRfdVExMTBQMDFXTFh6Sk5BcXV0QQ?oc=5",
       "date": "2026-08-15T07:00:00.000Z",
@@ -688,14 +698,14 @@
       "hot": false
     },
     {
-      "title": "3.6| Jingran's about voice lines via team gemberry via",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vovizj/36_jingrans_about_voice_lines_via_team_gemberry/",
-      "date": "2026-08-15T06:39:21.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
+      "title": "Best Xiangli Yao Wuthering Waves build: Weapons, Echoes & team comp",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOb19BNi1wTlFIREdlbUN2TXZ1cWlyU1o4VFJnbWJXaFJmZFA2djJhSmZjQlZBY1ZwbGNwZzhNdEt2SHFDMjZNbWRBWVQ1T1Z5Nk1Fam0zMTJBOE4tVW1kTDFqeVNWZnpzV2cxbXhHYVdCamRjcVVHWm5KRjFDcnoya01R?oc=5",
+      "date": "2026-08-14T07:00:00.000Z",
+      "source": "dexerto.com",
+      "sourceId": "google-news",
+      "kind": "press",
       "lang": "en",
-      "hot": true
+      "hot": false
     },
     {
       "title": "Wuthering Waves system requirements: Recommended PC, iOS & Android settings",
@@ -1021,7 +1031,7 @@
       "title": "WuWa 3.6 Livestream Code & Time (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE1Rd0g4emNLcUxkNTZqeHdrZF9jbGFmU1otQWthbXVHZWJlYVNJY2Y4MU9pSVctcHFZbWhib0EtTGMxVEI1N1BTRC1CUENCZTh4eTZKRDF0a3ZrMUhRS211WC1BemlnaUt3VkJCbkU3NWd6b19wOFo0Q1V2dkhIY3RXMmc4MVlTRW9XSHpxOXY2UDdtV0xVWWZrMVA3RnJX?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
-      "source": "GameRant",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1200,16 +1210,6 @@
     {
       "title": "Is Suisui worth pulling in WuWa? (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNY3JmZDV5YUZkV29FYWNSY2M3b1B6Q2ZuZzlDWnVuMFpuMDM2REhmVW0zRm5qTlV3VGFwM1lJRjc5bVI1cklzeHhWaGt3QlZhX0JLZWpYanUwSjY4Y0twWjNHZ2FpRHZrUWZmei1TLXAxcWVQV01QeHhQRDZ4ZWZiTzhVdnFlMms?oc=5",
-      "date": "2026-07-30T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Suisui S1 vs R1 in WuWa: Which one should you get? (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNelNvNnZ2Znp2LUJYSGFNbkVjUVdndVYyNWdIVlBlN08wU2IwTUdxX2xyY3hwa2dTZm5pTmN6V3ZtMUllT2VYa3hVRFZfUTFzQ1MycGFDVUp3dGpKMExERnVrZUtvYjZJN1NuVjdZdnBmM0VxV0RGY1N6U2J6WVhqZTJITGtLMzg2TEtsYURYaw?oc=5",
       "date": "2026-07-30T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
