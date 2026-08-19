@@ -45,6 +45,14 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-portraits.mjs
 
+      # The event calendar, off Kuro's own patch notes and event notices. Same
+      # host as the character art and the same reason to keep it separate: an
+      # event notice that has not gone up yet is a normal Tuesday, not a run
+      # that failed.
+      - name: Resolve events
+        if: always()
+        run: node scripts/fetch-events.mjs
+
       # Weapon stats, passives and icons. Same host, same caveat, and kept a
       # separate step for the same reason: one turned-away request must not
       # take the other's data down with it.
@@ -58,7 +66,7 @@ jobs:
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/feed.json data/art.json data/portraits.json data/weapons.json assets/portraits assets/weapons
+          git add data/feed.json data/art.json data/events.json data/portraits.json data/weapons.json assets/portraits assets/weapons
           if git diff --staged --quiet; then
             echo "no change"
             exit 0

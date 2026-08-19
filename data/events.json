@@ -1,0 +1,458 @@
+{
+  "schema": "wuwa-desk/events@1.0",
+  "note": "Limited-time events, read off Kuro's own EN posts: the per-patch Content Overview for the list, dates and flavour, and each event's own notice for its banner art and rewards. Art is hotlinked from Kuro's CDN, never rehosted. An event with no notice yet has no art by design. Times carry +08:00 because Kuro publishes them in server time.",
+  "events": [
+    {
+      "id": "3.6-gifts-of-drifting-mist",
+      "name": "Gifts of Drifting Mist",
+      "kind": "7-Day Login",
+      "version": "3.6",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-08-20T04:00:00+08:00",
+      "end": "2026-09-29T03:59:00+08:00",
+      "summary": "Log in daily for seven days: five Radiant Tides and five Lustrous Tides.",
+      "detail": "During the event, log in to claim the day's login rewards. Kuro dates this one from the Version 3.6 update itself rather than a clock time, so it opens when the patch does.",
+      "rewards": [
+        "Radiant Tide x5",
+        "Lustrous Tide x5"
+      ],
+      "eligibility": "Reach Union Level 8.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
+        "crop": {
+          "x": 78,
+          "y": 2813,
+          "w": 918,
+          "h": 480
+        },
+        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+        "published": "2026-08-18",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+      "intel": "2026-08-07-36-events",
+      "startsWithPatch": true
+    },
+    {
+      "id": "3.6-resonance-sim-realm",
+      "name": "Resonance Sim Realm",
+      "kind": "Combat",
+      "version": "3.6",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-08-22T10:00:00+08:00",
+      "end": "2026-09-29T11:59:00+08:00",
+      "summary": "Top-down simulated battles as Rover, borrowing other Resonators' abilities.",
+      "detail": "In this mode, you fight simulated battles from a top-down side view using Rover: Spectro or Rover: Havoc. Within a stage, Rover can obtain Resonance Factors of different Resonators, granting corresponding special enhancements to the basic skills or strengthening other combat abilities. Rover can also gain additional Morph Skills through Resonance Factors. Dealing damage to the enemies generates Morph Energy; once it is full, you can summon or transform into the corresponding Resonator and unleash a special skill.",
+      "rewards": [
+        "Astrite x1200",
+        "Phantom — Myriad Snare: Rustfire Chassis",
+        "\"Resonance! Best Combo\" (Title)",
+        "Premium Tuner",
+        "Premium Sealed Tube"
+      ],
+      "eligibility": "Reach Union Level 14.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
+        "crop": {
+          "x": 78,
+          "y": 1112,
+          "w": 918,
+          "h": 480
+        },
+        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+        "published": "2026-08-18",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+      "intel": "2026-08-07-36-events",
+      "headline": true
+    },
+    {
+      "id": "3.6-second-coming-of-solaris-coded-deception",
+      "name": "Second Coming of Solaris: Coded Deception",
+      "alias": [
+        "Second Coming of Solaris"
+      ],
+      "kind": "Leisure",
+      "version": "3.6",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-08-27T04:00:00+08:00",
+      "end": "2026-09-14T03:59:00+08:00",
+      "summary": "Photograph anomalies in the world with the zoom camera, then modify them.",
+      "detail": "Certain anomalies can be found in the game scenes. After locating these anomalies, use the Utility: Zoom Camera to capture them, then work with Bertolt to modify them. You may choose to mark these anomalies or intentionally distort them further. The choices you make determine how players of The Second Coming of Solaris test server rate this scene after all anomalies have been handled.",
+      "rewards": [
+        "Astrite x400",
+        "Premium Enclosure Tank — Land of Xuanfang",
+        "Forgery Premium Supply — Lahai-Roi"
+      ],
+      "eligibility": "Reach Union Level 14.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
+        "crop": {
+          "x": 78,
+          "y": 5999,
+          "w": 918,
+          "h": 489
+        },
+        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+        "published": "2026-08-18",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+      "intel": "2026-08-07-36-events"
+    },
+    {
+      "id": "3.6-the-strings-remember",
+      "name": "The Strings Remember",
+      "kind": "Leisure",
+      "version": "3.6",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-09-03T04:00:00+08:00",
+      "end": "2026-09-21T03:59:00+08:00",
+      "summary": "One guqin quest a day for seven days, taught by Qingxiao.",
+      "detail": "During the event, one event quest opens each day at 04:00 server time, for a total of 7 quests. You can receive Qingxiao's personal instruction at various locations, play pieces to refine your skill on the guqin, and earn the corresponding event rewards.",
+      "rewards": [
+        "Astrite x400",
+        "Premium Resonance Potion",
+        "Premium Sealed Tube",
+        "Premium Energy Core",
+        "Shell Credit"
+      ],
+      "eligibility": "Reach Union Level 14 and activate the Four Chime Shaftpost during Main Quest \"The Wind Before the Storm\" to access this event early. Complete the pre-requisite quest \"The Nethermancer's Requiem\" for the best experience.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
+        "crop": {
+          "x": 78,
+          "y": 7565,
+          "w": 918,
+          "h": 471
+        },
+        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+        "published": "2026-08-18",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+      "intel": "2026-08-07-36-events"
+    },
+    {
+      "id": "3.6-bountiful-crescendo",
+      "name": "Bountiful Crescendo",
+      "kind": "Material Double Drop",
+      "version": "3.6",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-09-03T04:00:00+08:00",
+      "end": "2026-09-10T03:59:00+08:00",
+      "summary": "Double Simulation and Forgery Challenge rewards, for a week.",
+      "detail": "Spend Waveplates to claim double rewards after completing a Simulation or Forgery Challenge.",
+      "rewards": [
+        "Double Simulation and Forgery Challenge rewards"
+      ],
+      "eligibility": "Reach Union Level 14.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
+        "crop": {
+          "x": 78,
+          "y": 11228,
+          "w": 918,
+          "h": 309
+        },
+        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+        "published": "2026-08-18",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far.",
+        "focus": "0% 50%"
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+      "intel": "2026-08-07-36-events"
+    },
+    {
+      "id": "3.6-if-dreams-still-reverberate",
+      "name": "If Dreams Still Reverberate",
+      "kind": "Co-op Combat",
+      "version": "3.6",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-09-10T10:00:00+08:00",
+      "end": "2026-09-29T03:59:00+08:00",
+      "summary": "Fourteen stages, seven surface and seven deep, all playable in co-op.",
+      "detail": "This event consists of 14 stages, 7 Surface Layer stages and 7 Deep Layer stages. The stages unlock gradually: clear each Surface Layer stage to unlock the corresponding Deep Layer stage, and clear all Surface Layer stages to unlock the Abyss of the Final Dreams for a boss-rush challenge. In this challenge, you can choose \"Dorothy's Companions\" as Echoes to assist you in battle, which greatly enhances the combat abilities of Resonators. As you progress through the stages, you encounter a growing variety of enemies and can deploy more and more Support Echoes. All stages can be completed in Co-Op Mode with other Rovers.",
+      "rewards": [
+        "Astrite x600",
+        "Premium Tuner",
+        "Forgery Premium Supply — Lahai-Roi",
+        "Premium Enclosure Tank — Land of Xuanfang",
+        "Premium Resonance Potion"
+      ],
+      "eligibility": "Reach Union Level 22 and activate the Four Chime Shaftpost during Main Quest Chapter IV Act I \"The Wind Before the Storm.\"",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
+        "crop": {
+          "x": 78,
+          "y": 4109,
+          "w": 918,
+          "h": 480
+        },
+        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+        "published": "2026-08-18",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+      "intel": "2026-08-07-36-events"
+    },
+    {
+      "id": "3.6-wuthering-exploration-fogveil-pagoda",
+      "name": "Wuthering Exploration: Fogveil Pagoda",
+      "alias": [
+        "Wuthering Exploration"
+      ],
+      "kind": "Exploration",
+      "version": "3.6",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-09-17T04:00:00+08:00",
+      "end": "2026-09-29T03:59:00+08:00",
+      "summary": "Daily survey tasks for survey points, claimed against reward tiers.",
+      "detail": "Complete Survey Tasks daily to get Survey Points and claim rewards after meeting Survey Point requirements. Survey Tasks refresh every day at 04:00 server time; unclaimed Survey Points are automatically claimed at this time.",
+      "rewards": [
+        "Astrite x800",
+        "Premium Sealed Tube",
+        "Premium Tuner",
+        "Modifier"
+      ],
+      "eligibility": "Reach Union Level 14.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
+        "crop": {
+          "x": 78,
+          "y": 9158,
+          "w": 918,
+          "h": 480
+        },
+        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+        "published": "2026-08-18",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+      "intel": "2026-08-07-36-events"
+    },
+    {
+      "id": "3.6-chord-cleansing",
+      "name": "Chord Cleansing",
+      "kind": "Echo Double Drop",
+      "version": "3.6",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-09-22T04:00:00+08:00",
+      "end": "2026-09-29T03:59:00+08:00",
+      "summary": "Double Echo materials from Tacet Suppression, for a week.",
+      "detail": "Spend Waveplates to claim double rewards after completing a Tacet Suppression challenge.",
+      "rewards": [
+        "Double Tacet Suppression rewards"
+      ],
+      "eligibility": "Reach Union Level 19.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
+        "crop": {
+          "x": 78,
+          "y": 10580,
+          "w": 918,
+          "h": 300
+        },
+        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+        "published": "2026-08-18",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far.",
+        "focus": "0% 50%"
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+      "intel": "2026-08-07-36-events"
+    },
+    {
+      "id": "3.5-shape-of-yesterday",
+      "name": "Shape of Yesterday",
+      "kind": "Photo Collection",
+      "version": "3.5",
+      "section": "Special Events",
+      "permanent": true,
+      "start": null,
+      "end": null,
+      "summary": "With Xuanfang's crisis at rest, an unfamiliar figure steps into Xianling Village...",
+      "detail": "With Xuanfang's crisis at rest, an unfamiliar figure steps into Xianling Village... Bound to this land by a century-old past, he finally returns to homeland he has never known...",
+      "rewards": "",
+      "eligibility": "",
+      "art": null,
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
+    },
+    {
+      "id": "3.5-a-glimpse-of-xuanfang",
+      "name": "A Glimpse of Xuanfang",
+      "kind": "Exploration",
+      "version": "3.5",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-07-10T04:00:00+08:00",
+      "end": "2026-08-19T03:59:00+08:00",
+      "summary": "Every fragment of Xuanfang Hold stands as a witness, recording the city's every smallest collapse, bearing testament to how solemnly it marches toward ruin.",
+      "detail": "Every fragment of Xuanfang Hold stands as a witness, recording the city's every smallest collapse, bearing testament to how solemnly it marches toward ruin. Gather these fragments and piece together the image of Xuanfang Hold, its past, its present, and its future.",
+      "rewards": "",
+      "eligibility": "",
+      "art": null,
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
+    },
+    {
+      "id": "3.5-gifts-of-aftertune",
+      "name": "Gifts of Aftertune",
+      "kind": "7-Day Login",
+      "version": "3.5",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-07-10T04:00:00+08:00",
+      "end": "2026-08-19T03:59:00+08:00",
+      "summary": "During the event, log in to the game daily and head to the event page to claim your daily login rewards.",
+      "detail": "During the event, log in to the game daily and head to the event page to claim your daily login rewards.",
+      "rewards": "",
+      "eligibility": "",
+      "art": null,
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
+    },
+    {
+      "id": "3.5-lament-recon-tacet-crisis",
+      "name": "Lament Recon: Tacet Crisis",
+      "kind": "Combat",
+      "version": "3.5",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-07-11T10:00:00+08:00",
+      "end": "2026-08-19T11:59:00+08:00",
+      "summary": "To help Solaris prepare for future crises, the Black Shores and Spacetrek Collective have launched a new hologram simulation project.",
+      "detail": "To help Solaris prepare for future crises, the Black Shores and Spacetrek Collective have launched a new hologram simulation project. At Yhoran's invitation, you and your companions step up to take part, ready to fight for humanity's survival in a simulated doomsday.",
+      "rewards": "Astrite x1200, Space and Blake Bloom Medal (Event Sigil), Space and Blake Bloom (Event Avatar), Modifier, Premium Tuner, Forgery Premium Supply - Lahai-Roi, Premium Enclosure Tank - Land of Xuanfang, Shell Credit, and other materials.",
+      "eligibility": "",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1783612800000/7zkzq35o525m52cjmj-1783666245394.jpg",
+        "title": "Event Preview | [Lament Recon: Tacet Crisis] Combat Event, Coming Soon!",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5129",
+        "published": "2026-07-10",
+        "credit": "© Kuro Games"
+      },
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5129",
+      "headline": true
+    },
+    {
+      "id": "3.5-recaptured-action-highlights",
+      "name": "Recaptured: Action Highlights",
+      "kind": "Combat Photography",
+      "version": "3.5",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-07-16T10:00:00+08:00",
+      "end": "2026-08-06T03:59:00+08:00",
+      "summary": "Behold!",
+      "detail": "Behold! Wutherium Film Studio Special Feature: Resonators in Combat Edition is back for a limited time! Capture Resonators' exhilarating moments during combat, then submit the photos to Fulmine and C-MOSS to earn plenty of rewards!",
+      "rewards": "",
+      "eligibility": "",
+      "art": null,
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
+    },
+    {
+      "id": "3.5-virtual-crisis-quadrant-trials",
+      "name": "Virtual Crisis: Quadrant Trials",
+      "kind": "Crisis Trial Challenge",
+      "version": "3.5",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-07-30T10:00:00+08:00",
+      "end": "2026-08-19T03:59:00+08:00",
+      "summary": "Tethys's crisis simulation program is getting an upgrade.",
+      "detail": "Tethys's crisis simulation program is getting an upgrade. With newly gathered data from Lahai-Roi, harsher scenarios await those who dare to face the challenge…",
+      "rewards": "",
+      "eligibility": "",
+      "art": null,
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
+    },
+    {
+      "id": "3.5-in-search-of-lost-jade",
+      "name": "In Search of Lost Jade",
+      "kind": "Web",
+      "version": "3.5",
+      "section": "H5 Web Event",
+      "permanent": false,
+      "start": "2026-07-30T10:00:00+08:00",
+      "end": "2026-08-13T10:00:00+08:00",
+      "summary": "Journey deep into the silent cave and help guide the Jadeplume Eagle out of danger and back to its nest.",
+      "detail": "Journey deep into the silent cave and help guide the Jadeplume Eagle out of danger and back to its nest. And win Astrites in the process! Complete event tasks to win Advanced Sealed Tubes and more.",
+      "rewards": "",
+      "eligibility": "",
+      "art": null,
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
+    },
+    {
+      "id": "3.5-lollo-campaign-new-journey",
+      "name": "Lollo Campaign: New Journey",
+      "kind": "Limited-Time Commission",
+      "version": "3.5",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-08-06T04:00:00+08:00",
+      "end": "2026-08-19T03:59:00+08:00",
+      "summary": "During the event, complete the daily tasks to claim Lollo Stamps in return for your favor.",
+      "detail": "During the event, complete the daily tasks to claim Lollo Stamps in return for your favor. Lollo Stamps can be exchanged for Lollo Helper special deliveries.",
+      "rewards": "",
+      "eligibility": "",
+      "art": null,
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
+    }
+  ],
+  "updated": "2026-08-19T22:24:23.165Z"
+}

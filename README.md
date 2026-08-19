@@ -10,6 +10,7 @@ assets/app.css                 all styling
 assets/app.js                  reads the JSON, renders every view
 data/versions.json             patch timeline + banner phases
 data/news.json                 curated leak/news entries
+data/events.json               event calendar (written by Actions)
 data/resonators.json           resonator index — identity, debut, reruns
 data/kits.json                 skills + Resonance Chains, loaded on demand
 data/weapons.json              weapon database — stats, passives (written by Actions)
@@ -21,19 +22,22 @@ assets/portraits/              cached busts and waist-up cut-outs
 assets/weapons/                cached weapon icons
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
+scripts/fetch-events.mjs       the event calendar builder
+scripts/find-event-art.mjs     finds event banners inside Kuro's patch infographics
 scripts/fetch-portraits.mjs    the character art resolver
 scripts/fetch-weapons.mjs      the weapon stat, passive and icon resolver
 scripts/fetch-kits.mjs         the roster, kit and banner-history builder
 scripts/confirm-dates.mjs      retires estimated phase dates once they're known
-.github/workflows/update-feeds.yml   cron, every 6h — feed, art, portraits, weapons
+.github/workflows/update-feeds.yml   cron, every 6h — feed, art, events, portraits, weapons
 .github/workflows/update-kits.yml    cron, daily — resonators.json + kits.json
 ```
 
-Five views:
+Six views:
 
 | View | Source | Tiered? |
 |---|---|---|
 | Timeline | `versions.json` + `resonators.json` + `art.json` | — |
+| Events | `events.json` + `versions.json` (patch windows) | yes, per event |
 | Intel | `news.json` | yes, by hand |
 | Live Signals | `feed.json` | **no** — raw lead list |
 | Resonators | `resonators.json` + `kits.json` | yes, per kit |
@@ -128,7 +132,7 @@ chip strip across the top of every panel, in a header that said the view's name 
 time and held the content a header's height down the page; both went, and the view's name
 is the one-line page title above the stack instead. Signals is the exception, and keeps
 its kind chips in its own header: it has a hatched warning bar under them, so that header
-was never the bare strip the others were. Events has nothing to filter yet. Values are read off the data, so an element or a class nothing is filed under
+was never the bare strip the others were. Events has nothing to filter yet — one axis would be the patch, and the view is already grouped by it. Values are read off the data, so an element or a class nothing is filed under
 is never a filter that can only empty the page.
 
 A **Quick filters** panel used to stand in the aside — and again inline once the aside
@@ -165,8 +169,10 @@ re-render can't leave a stale listener behind.
 
 ### The landing view fits a screen
 
-Timeline is Now / Next / Future across the top and the intel + signals duo underneath.
-That is the whole page — roughly 1560px at 1080p, where it used to be about 4500.
+Timeline is Now / Next / Future across the top, the event band under it and the intel +
+signals duo at the foot. That is the whole page — roughly 1750px at 1080p, where it used
+to be about 4500. The band earns its ~250px by being pictures: an event has a name, a
+kind and a state, and nothing else worth printing at that size.
 
 What went, and where it went instead:
 
@@ -508,6 +514,109 @@ at the ~490px the card actually renders.
 Never hotlink another fan site's CDN for these — it leeches their bandwidth and breaks
 the moment they rename a file. Download it into `assets/`.
 
+## The event calendar
+
+`data/events.json`, written by `scripts/fetch-events.mjs` off two of Kuro's own EN posts,
+because neither carries the whole thing:
+
+| Post | What it has | What it hasn't |
+|---|---|---|
+| Version *x.y* **Content Overview**, on patch day | every event in the patch, its kind, a paragraph of flavour, an exact window in server time | any per-event art — the post is one header image and several thousand words |
+| The per-event **notice** (`[Lament Recon: Tacet Crisis] Combat Event`, `Event Preview \| […]`) | the event's own 16:9 banner, its reward line | only exists for the events Kuro chooses to announce separately |
+
+So the overview says what is running and when, the notice says what it looks like and what
+it pays, and the fetcher matches them on the bracketed name. Windows keep the `+08:00`
+Kuro publishes them in, so every clock the desk draws is the reader's own — which is what
+makes "Ends in 2 days" a fact rather than a guess about whose midnight.
+
+**The picture is the event's own banner or there is no picture** — cropped out of Kuro's update-content sheet when that is the only place it exists yet (see below). This is the rule the
+first cut of this view got wrong: it borrowed a Resonator's key art for events that had
+none, and a poster of Qingxiao above the words "The Strings Remember" reads as *her*
+event, which no caption underneath can undo. An event with no notice yet draws the same
+resonance rings a patch card draws when it has no key visual — the desk's existing mark
+for a thing it knows is coming and has nothing to show of — and the rings go away by
+themselves the day the notice lands.
+
+Because Kuro's banner already has the event's name set across it, the desk's own name for
+it sits in a bar *under* the picture rather than over it.
+
+### Hand-written entries survive the fetcher
+
+Between a preview broadcast and patch day, Kuro has announced a patch's events by name and
+published nothing else about them: no dates, no art, no notice. Those go in by hand with
+`"origin": "hand"`, and `fetch-events.mjs` keeps any hand entry whose name it does not
+find in Kuro's own posts. The day Kuro publishes the real thing under the same name, the
+fetched entry wins — that is the point of the flag.
+
+A hand entry carries `version`, `name`, `kind`, `summary`, `detail`, `rewards`,
+`eligibility`, its `source` and, optionally, `intel` — the id of the `news.json` entry the
+claim came from, which renders in the drawer as a link into that entry. `alias` lists any
+other name Kuro might bracket it under, so the fetcher supersedes it cleanly when the real
+post lands. `startsWithPatch` marks the login track Kuro dates from "the Version x.y
+update" rather than a clock time: it takes the patch's own state, so the desk cannot call
+an event running while the patch card beside it still says the patch is a day out. An entry
+with no dates at all inherits the patch window and says whose dates it is showing.
+
+`headline: true` marks the patch's flagship — the double-width tile, at most one per patch.
+A hand entry that claims it keeps it; otherwise the fetcher gives it to the first Special
+Event carrying Kuro's own banner.
+
+### Where an unreleased patch's banners come from
+
+Kuro does not publish an event's banner as a file of its own until the patch is live.
+Before that, the art exists in exactly one place: the **Update Content** post, as a single
+tall infographic with a banner per event stacked down it, each beside its own window and
+reward table. (That sheet is what gets reposted to Reddit whenever someone asks what is in
+the next patch.)
+
+So a hand-written entry can carry art after all — as a rectangle of that sheet:
+
+```json
+"art": {
+  "url": "https://hw-media-cdn-mingchao.kurogame.com/object/…/k70f13…jpg",
+  "crop": { "x": 78, "y": 1112, "w": 918, "h": 494 },
+  "focus": "0% 50%",
+  "title": "Wuthering Waves Update Content | Version 3.6 …",
+  "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
+  "credit": "© Kuro Games",
+  "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far."
+}
+```
+
+`artUrl()` in `app.js` turns `crop` into `x-oss-process=image/crop,…/resize,…` on the
+image URL. Kuro's CDN is Alibaba OSS, which does the cropping and the resizing itself, so
+the desk asks that host for that region of that file — nothing is copied here and nothing
+is cut up locally. `note` replaces the caption in the drawer, so the picture says what it
+is a crop of. `focus` sets `object-position` for the two-per-patch banners that set their
+name across one end and would otherwise lose half a word to the tile's own crop.
+
+`scripts/find-event-art.mjs <articleId>` does the measuring:
+
+```
+node scripts/find-event-art.mjs 5310
+```
+
+It pulls every image in the post, asks the CDN to re-render each as a small BMP (which is
+how it reads pixels without an image library), finds the bands that are photographs rather
+than page background, and prints a ready-to-paste `crop` plus a preview URL for each. What
+it cannot do is name them — the sheet is pixels, so the event names are not machine
+readable. Open the previews, match them up, paste them in. Ten minutes a patch.
+
+None of this survives contact with a real notice, and it should not: the moment Kuro posts
+`[Chord Cleansing] Limited-Time Echo Double Drop Event` as its own article, the fetcher
+takes the standalone banner from it instead.
+
+### What it deliberately drops
+
+- **Anything outside the desk's own patch windows.** Kuro's news page still carries the
+  last two patches' notices, and an event that closed before the current patch opened is
+  an archive, not a calendar.
+- **The `[New Gameplay]` section of the overview**, which is permanent systems shipping
+  alongside the events. A permanent menu addition has no window and nothing to miss.
+
+Still not built: rewards totalled into an Astrite figure per patch, and redemption codes.
+Both need parsing Kuro's reward sentence rather than printing it, which is a different job
+from reading the calendar.
 ## The resonator database
 
 `node scripts/fetch-kits.mjs` builds the whole roster — sixty Resonators including the
@@ -752,6 +861,7 @@ left is the editorial, which is the part worth your time.
 |---|---|---|
 | `feed.json` | six news sources | yes |
 | `art.json` | Kuro's reveal posts | yes |
+| `events.json` — the calendar, its windows and its banners | Kuro's patch notes and event notices | yes |
 | `resonators.json` — identity, debut, reruns | Fandom | yes |
 | phase dates in `versions.json` | Fandom convene pages, once a phase has run | yes |
 | `kits.json` — skill text | Prydwen | **no — run locally** |

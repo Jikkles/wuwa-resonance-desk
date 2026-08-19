@@ -456,54 +456,6 @@ button{font:inherit;color:inherit}
   padding:38px 16px;text-align:center;
 }
 
-/* ══ unbuilt views ══════════════════════════════════════════════════
-   Events. Centred and narrow rather than a full-bleed panel of
-   nothing: the reader has arrived somewhere empty, and the job of the page is
-   to say so once, say what is coming, and hand them a way back. Kept quiet —
-   grey type, no accent except the button on hover — so a placeholder never
-   out-shouts the views that have real data in them. */
-/* Given a viewport's worth of height on purpose. The backdrop is the live
-   patch's key visual, sharp, with the version name set across it — the panels
-   are what frost it, so a panel that only wraps its own copy leaves half a
-   screen of legible marketing art under a page that is meant to say "nothing
-   here yet". Fill the fold, and centre the copy in what that gives you. */
-.wip{
-  max-width:520px;margin:0 auto;padding:34px 8px 30px;text-align:center;
-  min-height:clamp(340px,44vh,520px);
-  display:flex;flex-direction:column;justify-content:center;
-}
-.wip-mark{
-  display:inline-flex;align-items:center;justify-content:center;
-  /* Fixed width, so the flex column won't place it for us. */
-  align-self:center;width:64px;height:64px;border-radius:50%;margin-bottom:20px;
-  background:var(--bg-2);border:1px dashed var(--line-2);color:var(--fg-3);
-}
-.wip h3{
-  margin:0 0 10px;font-family:var(--mono);font-size:12px;font-weight:600;
-  letter-spacing:.19em;text-transform:uppercase;color:var(--fg);
-}
-.wip p{margin:0 auto;max-width:44ch;font-size:13.5px;line-height:1.62;color:var(--fg-2)}
-/* The plan reads as a spec, not as prose — left-aligned inside the centred
-   block so the four lines share an edge and scan as a list. */
-.wip-plan{
-  list-style:none;margin:22px 0 0;padding:16px 18px;text-align:left;
-  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
-  display:flex;flex-direction:column;gap:9px;
-}
-.wip-plan li{
-  position:relative;padding-left:20px;
-  font-family:var(--mono);font-size:11px;line-height:1.55;letter-spacing:.03em;color:var(--fg-3);
-}
-/* A filled diamond, not an outline — a 5px hairline square over a frosted
-   panel disappears entirely. Same lozenge as the brand mark, quarter opacity
-   of the accent so the list is marked without being decorated. */
-.wip-plan li::before{
-  content:"";position:absolute;left:3px;top:.5em;
-  width:6px;height:6px;border-radius:1px;transform:rotate(45deg);
-  background:color-mix(in srgb,var(--accent) 55%,transparent);
-}
-.wip .btn{width:auto;margin:22px auto 0;padding:9px 18px}
-
 /* Filtering replaces a list wholesale, which without this reads as the page
    flickering. 160ms of rise is enough to say "this is the same list, fewer
    rows" and short enough that it never delays a second click. */
@@ -1495,6 +1447,160 @@ button{font:inherit;color:inherit}
   color:var(--fg-3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 
+/* ══ events ═════════════════════════════════════════════════════════
+   A band of banners. Kuro draws a 16:9 poster per event with the event's name
+   set across it, and that picture is the whole control: it is what makes an
+   event recognisable at 240px, where a row of names is not.
+
+   Which is also why the desk's own name for it sits in a bar *underneath* the
+   picture rather than over it. Kuro's banner already says "Lament Recon: Tacet
+   Crisis" in the game's display face; setting it again in DM Sans across the
+   same pixels is the same words twice, and it buried the artwork it was
+   supposedly captioning.
+
+   Wrapping flex rather than a grid, and a fixed height rather than an aspect
+   ratio: the headline tile is double width, so an aspect-ratio tile would come
+   out double height beside its neighbours, and a grid leaves a hole at the end
+   of the last row every time the count and the column width fail to agree.
+   Flex items grow into what is left, so the band is always a full rectangle.
+   The max-width is for a patch with one event on it — without it a lone tile
+   grows to the full width of the panel. */
+.evgrid{display:flex;flex-wrap:wrap;gap:12px}
+.ev{
+  flex:1 1 236px;height:196px;min-width:0;max-width:420px;
+  display:flex;flex-direction:column;overflow:hidden;
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint);
+  padding:0;text-align:left;color:inherit;font:inherit;cursor:pointer;
+  transition:border-color .2s,transform .2s;
+}
+/* The patch's headline event, at double width. One per patch — Kuro builds
+   every version around a single big event and fills the rest with dailies and
+   login tracks, so a row of identical tiles claims a flatness the patch does
+   not have. */
+.ev.head{flex:2 1 484px;max-width:860px}
+.ev:hover,.ev:focus-visible{
+  border-color:color-mix(in srgb,var(--accent) 55%,transparent);transform:translateY(-2px);
+}
+.ev:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* Closed. Still listed — a calendar that drops an event the moment it ends
+   leaves you wondering whether you imagined it — but it stops competing. */
+.ev.past{opacity:.62}
+.ev.past:hover{opacity:1}
+
+.ev-pic{position:relative;flex:1;min-height:0;overflow:hidden;background:var(--bg-2)}
+.ev-pic img{
+  width:100%;height:100%;object-fit:cover;object-position:50% 45%;
+  transition:transform .45s ease;
+}
+.ev:hover .ev-pic img{transform:scale(1.04)}
+/* Kuro's banners are dark at the top corners, where the chips sit, but not
+   always — a thin wash keeps a white sky from swallowing the state chip. */
+.ev-pic::after{
+  content:"";position:absolute;inset:0 0 auto;height:56px;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(9,8,12,.55),transparent);
+}
+/* No banner published yet. The same resonance rings a patch card draws when
+   it has no key visual: the desk already has a mark for a thing it knows is
+   coming and has nothing to show of, and an event Kuro has announced but not
+   yet written up is exactly that. A hatched slab reading NO BANNER PUBLISHED
+   said the same thing as an error message. Both go away by themselves the day
+   the notice lands and the fetcher reads the art off it. */
+.ev-plate{
+  position:absolute;inset:0;overflow:hidden;
+  background:linear-gradient(158deg,var(--bg-3),var(--bg));
+}
+.ev-plate::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-radial-gradient(circle at 50% 44%,transparent 0 15px,rgba(85,201,211,.15) 15px 17px);
+  -webkit-mask-image:radial-gradient(circle at 50% 44%,#000 5%,transparent 76%);
+  mask-image:radial-gradient(circle at 50% 44%,#000 5%,transparent 76%);
+  animation:breathe 7s ease-in-out infinite;
+}
+/* Quiet, and at the foot of the picture rather than across the middle of it:
+   the rings are the statement, this is the footnote. */
+.ev-plate span{
+  position:absolute;left:0;right:0;bottom:9px;text-align:center;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-3);opacity:.6;
+}
+.ev-top{
+  position:absolute;top:9px;left:9px;right:9px;z-index:2;
+  display:flex;align-items:center;gap:6px;
+}
+.ev-top .pill{
+  margin-left:auto;background:rgba(9,8,12,.55);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+
+/* The caption bar. Sunk, like every other header and footer strip on the desk,
+   so the picture above it reads as the card's content and this as its label. */
+.ev-cap{
+  flex:none;padding:9px 12px 10px;background:var(--tint-sink);
+  border-top:1px solid var(--line);display:flex;flex-direction:column;gap:1px;
+}
+.ev-kind{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--accent);
+}
+.ev-cap h3{
+  margin:0;font-size:14px;font-weight:600;line-height:1.25;letter-spacing:-.005em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.ev.head .ev-cap h3{font-size:17px;-webkit-line-clamp:1}
+.ev.head .ev-cap p{
+  margin:3px 0 0;font-size:12px;line-height:1.45;color:var(--fg-2);
+  display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
+}
+
+/* The state chip, on the tile and again at the top of the drawer. Running is
+   worth a colour; closing inside a week is worth the warning colour, because
+   that is the only thing on the card you can act on today. */
+.ev-state{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:3px 8px;border-radius:6px;white-space:nowrap;
+  border:1px solid var(--line-2);color:var(--fg-2);background:rgba(9,8,12,.55);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.ev-state.live{
+  color:var(--t-official);border-color:color-mix(in srgb,var(--t-official) 55%,transparent);
+  background:color-mix(in srgb,var(--t-official) 14%,rgba(9,8,12,.6));
+}
+.ev-state.warn{
+  color:var(--amber);border-color:color-mix(in srgb,var(--amber) 55%,transparent);
+  background:color-mix(in srgb,var(--amber) 14%,rgba(9,8,12,.6));
+}
+.ev-state.soon{
+  color:var(--t-datamined);border-color:color-mix(in srgb,var(--t-datamined) 50%,transparent);
+}
+.ev-state.perm{color:var(--fg-3)}
+
+/* The drawer keeps the banner at its own shape — 16:9, whole, uncropped. It is
+   the one place there is room for it, and unlike a character poster it is
+   already the ratio a modal wants. */
+.dkv.ev-kv{margin-top:14px}
+.dkv.ev-kv img{width:100%;height:auto;display:block}
+/* Said in the drawer as well as on the tile, because the drawer is where
+   somebody goes to find out what they are missing. */
+.ev-noart{
+  display:flex;align-items:center;gap:11px;margin:14px 0 4px;
+  padding:12px 14px;border:1px dashed var(--line-2);border-radius:var(--r-sm);
+  background:var(--tint-sink);color:var(--fg-3);font-size:12.5px;line-height:1.55;
+}
+.ev-noart svg{flex:none;color:var(--fg-3)}
+
+@media (max-width:640px){
+  /* Two up on a phone. The caption bar is what makes this survive the width —
+     it is the same two lines at any tile size, and the picture takes the rest. */
+  .evgrid{gap:10px}
+  /* Half the row, and no more even when it is the last tile on its own —
+     without the ceiling a lone tile at the end of the band stretches to the
+     full width and reads as a different kind of card. */
+  .ev{flex:1 1 44%;height:172px;max-width:calc(50% - 5px)}
+  .ev.head{flex:1 1 100%;height:206px}
+  .ev-cap h3{font-size:13px}
+  .ev.head .ev-cap h3{font-size:15.5px}
+}
+
 /* ══ intel ══════════════════════════════════════════════════════════ */
 .intel-list{display:flex;flex-direction:column}
 .intel{
@@ -2358,8 +2464,7 @@ button{font:inherit;color:inherit}
   :root{--rail-w:270px}
   /* This much rail can't hold "Live Signals" and "Unverified" on one line at
      this type size. The hatched bar on the view itself still carries it.
-     "Events"/"Soon" fits in the same space with room to spare, and has to
-     stay: the rail is the only nav there is. */
+     Events carries no badge at all now that it has data behind it. */
   .navlink .warn{display:none}
   .navlink{font-size:17px;gap:9px;padding:11px 10px}
   .sublink{font-size:14.5px}

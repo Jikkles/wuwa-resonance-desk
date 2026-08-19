@@ -12,6 +12,7 @@ const FALLBACK = {
   resonators: {updated:"", resonators:[]},
   weapons:    {updated:"", weapons:[]},
   feed:       {fetched:"", sources:[], errors:[], items:[]},
+  events:     {updated:"", events:[]},
   art:        {art:{}},
   portraits:  {characters:{}},
   translations: {titles:{}}
@@ -57,7 +58,7 @@ const VIEWS = [
   {id:"timeline",   label:"Timeline",     icon:"i-timeline"},
   {id:"resonators", label:"Resonators",   icon:"i-res"},
   {id:"weapons",    label:"Weapons",      icon:"i-weapon"},
-  {id:"events",     label:"Events",       icon:"i-events",  soon:true},
+  {id:"events",     label:"Events",       icon:"i-events"},
   {id:"intel",      label:"Intel",        icon:"i-intel"},
   {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified", short:"Signals"}
 ];
@@ -153,6 +154,9 @@ const versions   = () => DATA.versions?.versions || [];
 const entries    = () => DATA.news?.entries || [];
 const resonators = () => DATA.resonators?.resonators || [];
 const weapons    = () => DATA.weapons?.weapons || [];
+/* The event calendar. Named for the game's events, not the DOM's — this file
+   already has an events section and it binds clicks. */
+const gameEvents = () => DATA.events?.events || [];
 const signals    = () => [...(DATA.feed?.items || [])].sort((a,b) => (b.date||"").localeCompare(a.date||""));
 
 /* Signals arrive in whatever language the source publishes in — about a fifth
@@ -1207,7 +1211,288 @@ function renderTimeline(){
     </div>
   </div>`;
 
-  $("#p-timeline").innerHTML = `<div class="stack">${pageTitle("timeline")}${hero}${duo}</div>`;
+  $("#p-timeline").innerHTML = `<div class="stack">${pageTitle("timeline")}${hero}${eventPanel()}${duo}</div>`;
+}
+
+/* ── event calendar ──────────────────────────────────────────────────
+   Events are the one part of a patch you can miss by not logging in, so they
+   get a band of their own on the landing view, between the patch cards that
+   say what is coming and the intel that says what has been claimed about it.
+
+   data/events.json is written by scripts/fetch-events.mjs off Kuro's own EN
+   posts — the per-patch Content Overview for the list and the exact windows,
+   each event's own notice for its banner art and its reward line. Two things
+   about that drive everything below.
+
+   First, the picture is the event's own 16:9 banner with its name set across
+   it, or there is no picture. The desk does not borrow a face for an event —
+   a Resonator poster standing in for an event reads as that Resonator's event,
+   which is a lie the caption underneath cannot undo. An event Kuro has not
+   published a notice for yet draws a plate, and the plate goes away by itself
+   the day the notice lands.
+
+   Second, because the banner already carries the name, the name goes *under*
+   the picture rather than over it. Set over the top it is the same words twice
+   in two typefaces, and on the plate tiles it was the only words at all.
+
+   Windows are real now: Kuro publishes them in server time (UTC+8) and the
+   file keeps the offset, so every clock here is the reader's own. What is
+   still missing is the announced-but-unwritten-up patch — 3.6's events are
+   hand-written from the preview broadcast and carry no dates, because Kuro
+   does not publish them until patch day. Those inherit the patch window and
+   say so. */
+
+/* Running first, and inside that the one closing soonest — the whole question
+   this band answers is what you are about to lose. Then what has not started,
+   then the permanent additions, then what has already closed. */
+function eventList(){
+  const rank = ev => {
+    const st = eventState(ev);
+    return st.kind === "live" ? 0 : st.kind === "soon" ? 1 : st.kind === "permanent" ? 2 : 3;
+  };
+  return [...gameEvents()].sort((a, b) => {
+    const ra = rank(a), rb = rank(b);
+    if(ra !== rb) return ra - rb;
+    if(ra === 0) return String(eventWindow(a).end || "").localeCompare(String(eventWindow(b).end || ""));
+    if(ra === 3) return String(eventWindow(b).end || "").localeCompare(String(eventWindow(a).end || ""));
+    return (b.headline ? 1 : 0) - (a.headline ? 1 : 0)
+        || String(eventWindow(a).start || "").localeCompare(String(eventWindow(b).start || ""));
+  });
+}
+
+/* When it runs, and whose dates those are. An event with its own window uses
+   it; one Kuro has not dated yet inherits its patch's and is flagged, so a
+   card can say "patch window" rather than presenting a patch's dates as an
+   event's own. */
+function eventWindow(ev){
+  if(ev.start || ev.end) return {start:ev.start || "", end:ev.end || "", inherited:false, est:false};
+  const v = versions().find(x => x.id === ev.version);
+  const win = v ? patchWindow(v) : null;
+  return win
+    ? {start:win.start, end:win.end, inherited:true, est:win.est}
+    : {start:"", end:"", inherited:true, est:false};
+}
+
+/* The state chip, and the most useful line on the tile. A running event is
+   worth a colour; one closing inside a week is worth the warning colour,
+   because that is the only fact here you can act on today. */
+function eventState(ev){
+  if(ev.permanent) return {kind:"permanent", cls:"perm", text:"Permanent"};
+  /* Kuro dates a patch's login track from "the Version 3.6 update" rather than
+     a clock time, and the update lands at 04:00 server time — which is the
+     evening before, most of the way round the world. Taken literally that has
+     the desk calling an event Running while the patch card beside it still says
+     the patch is a day out. The patch's own state wins: one page cannot hold
+     two answers to whether 3.6 has started. */
+  if(ev.startsWithPatch){
+    const v = versions().find(x => x.id === ev.version);
+    if(v && statusOf(v) !== "live"){
+      const d = v.start ? daysTo(v.start) : null;
+      return {kind:"soon", cls:"soon", text:d == null ? "Upcoming" : d <= 0 ? "Starts today" : `In ${plural(d, "day")}`};
+    }
+  }
+  const {start, end, inherited} = eventWindow(ev);
+  const now = Date.now();
+  const t = d => d ? new Date(d).getTime() : null;
+
+  if(end && t(end) < now) return {kind:"past", cls:"", text:"Ended"};
+  if(start && t(start) > now){
+    const d = daysTo(start);
+    return {kind:"soon", cls:"soon", text:d == null ? "Upcoming" : d <= 0 ? "Starts today" : `In ${plural(d, "day")}`};
+  }
+  if(!start && !end) return {kind:"soon", cls:"soon", text:"Upcoming"};
+  /* Running. Inherited dates are the patch's, so they cannot carry a countdown
+     to this event's own close — that number would be invented. */
+  const left = end && !inherited ? daysTo(end) : null;
+  if(left != null && left <= 7)
+    return {kind:"live", cls:"warn", text:left <= 0 ? "Ends today" : `Ends in ${plural(left, "day")}`};
+  return {kind:"live", cls:"live", text:"Running"};
+}
+
+/* Kuro's own banner, or nothing. There is no fallback picture by design — see
+   the note at the top of this section. */
+const eventArt = ev => (ev.art?.url ? ev.art : null);
+
+/* Where an unreleased patch's banners live. Kuro publishes them as one tall
+   infographic — a banner per event stacked down a single JPEG — and only cuts
+   them into posts of their own once the patch is live. `art.crop` is that
+   banner's rectangle inside the sheet, and this hands the crop to Kuro's own
+   CDN rather than copying the file and cutting it up here: Alibaba OSS takes
+   crop and resize on the query string, so what comes back is Kuro's image,
+   from Kuro's host, of the region we asked for. scripts/find-event-art.mjs is
+   where the numbers come from. */
+function artUrl(art, w){
+  const c = art.crop;
+  if(!c || !/(^|\.)kurogame\.com\//.test(art.url)) return cdnWidth(art.url, w);
+  return art.url
+    + `?x-oss-process=image/crop,x_${c.x},y_${c.y},w_${c.w},h_${c.h}`
+    + `/resize,w_${w}/quality,q_78`;
+}
+
+function eventCard(ev){
+  const art = eventArt(ev);
+  const st = eventState(ev);
+  const past = st.kind === "past";
+  return `<article class="ev${ev.headline ? " head" : ""}${past ? " past" : ""}" role="button" tabindex="0"
+           data-act="event" data-id="${esc(ev.id)}"
+           aria-label="${esc(ev.name)} — ${esc(ev.kind || "Event")}, version ${esc(ev.version)}, ${esc(st.text)}">
+    <div class="ev-pic">
+      ${art
+        /* A banner is 16:9 and the tile is about 2:1, so the tile crops the
+           sides. `art.focus` is for the banners that carry their name plate at
+           one end — frame the art, not half a word. */
+        ? `<img src="${esc(artUrl(art, ev.headline ? 1200 : 760))}" alt="" loading="lazy" decoding="async"
+               ${art.focus ? `style="object-position:${esc(art.focus)}"` : ""}>`
+        /* The plate. Not a picture standing in for one: the desk's own mark,
+           dimmed, saying there is nothing to show yet. */
+        : `<div class="ev-plate" aria-hidden="true"><span>Banner not published yet</span></div>`}
+      <div class="ev-top">
+        <span class="ev-state ${st.cls}">${esc(st.text)}</span>
+        <span class="pill ver">${esc(ev.version)}</span>
+      </div>
+    </div>
+    <div class="ev-cap">
+      <span class="ev-kind">${esc(ev.kind || "Event")}</span>
+      <h3>${esc(ev.name)}</h3>
+      ${ev.headline && ev.summary ? `<p>${esc(ev.summary)}</p>` : ""}
+    </div>
+  </article>`;
+}
+
+/* The band on the timeline. Capped, because it sits above Recent intel and a
+   patch runs eight or nine of these — the rest are one click away in a view of
+   their own. */
+function eventPanel(limit = 6){
+  const shown = eventList().slice(0, limit);
+  const live = gameEvents().filter(e => eventState(e).kind === "live").length;
+  return `<div class="panel">
+    <div class="panel-h"><h2>Events</h2>
+      <span class="sub">${live ? `${plural(live, "running")}` : "Live &amp; announced"}</span>
+      <div class="right"><button class="more" data-act="view" data-id="events">View all ${icon("i-arrow", 12)}</button></div></div>
+    <div class="panel-b">${shown.length
+      ? `<div class="evgrid">${shown.map(eventCard).join("")}</div>`
+      : `<div class="empty">No events on file yet.</div>`}</div>
+  </div>`;
+}
+
+/* The view. The same cards, grouped by patch instead of capped — one panel per
+   version, live patch first. */
+function renderEvents(){
+  const groups = [];
+  for(const ev of eventList()){
+    const row = groups.find(g => g.id === ev.version);
+    if(row) row.items.push(ev);
+    else groups.push({id:ev.version, items:[ev]});
+  }
+  /* eventList sorts by what is running, which mixes the patches; the view is
+     grouped, so the groups themselves go in patch order. */
+  groups.sort((a, b) => {
+    const rank = id => {
+      const s = statusOf(versions().find(v => v.id === id) || {});
+      return s === "live" ? 0 : s === "announced" ? 1 : s === "beta" ? 2 : 3;
+    };
+    return rank(a.id) - rank(b.id) || parseFloat(b.id) - parseFloat(a.id);
+  });
+
+  const sections = groups.map(({id, items}) => {
+    const v = versions().find(x => x.id === id);
+    const status = v ? statusOf(v) : "";
+    const win = v ? patchWindow(v) : null;
+    const dated = items.filter(e => e.start || e.end || e.permanent).length;
+    return `<div class="panel">
+      <div class="panel-h">
+        <h2>${esc(id)}${v?.title ? ` — ${esc(v.title)}` : ""}</h2>
+        <span class="sub">${plural(items.length, "event")}${dated ? "" : " · undated"}</span>
+        <div class="right">
+          ${status ? `<span class="pill ${status === "live" ? "live" : status === "announced" ? "next" : "future"}">${esc(status)}</span>` : ""}
+          ${win ? `<span class="sub">${fmtShort(win.start)} → ${fmtShort(win.end)}${win.est ? " est" : ""}</span>` : ""}
+          <button class="more" data-act="version" data-id="${esc(id)}">Patch ${icon("i-arrow", 12)}</button>
+        </div>
+      </div>
+      <div class="panel-b"><div class="evgrid">${items.map(eventCard).join("")}</div></div>
+    </div>`;
+  }).join("");
+
+  const src = DATA.events?.updated ? fmtDate(DATA.events.updated) : "";
+  $("#p-events").innerHTML = `<div class="stack">
+    ${pageTitle("events")}
+    ${sections || `<div class="panel"><div class="empty">No events on file yet.</div></div>`}
+    <div class="panel"><div class="panel-f">
+      <span class="tier-note">Read off Kuro's own patch notes and event notices${src ? `, last ${esc(src)}` : ""} — windows in your own timezone, art only where Kuro has published a banner. A patch Kuro has announced but not yet written up carries what the preview broadcast said and no dates, because there are none to carry.</span>
+    </div></div>
+  </div>`;
+}
+
+/* Kuro publishes windows in server time and events.json keeps the offset, so
+   these render in whatever zone the reader is in — which is the whole reason
+   the offset is kept rather than the date being flattened on the way in. */
+function eventTimes(ev){
+  const {start, end, inherited, est} = eventWindow(ev);
+  const one = d => `${fmtDate(d)}${inherited ? "" : `, ${fmtTime(d)}`}`;
+  if(ev.permanent) return "Permanent";
+  if(!start && !end) return "Not announced";
+  return [start ? one(start) : "", end ? one(end) : ""].filter(Boolean).join(" → ") + (est ? " (est)" : "");
+}
+
+function drawerEvent(id){
+  const ev = gameEvents().find(x => x.id === id);
+  if(!ev) return;
+  const tier = TIERS.includes(ev.confidence) ? ev.confidence : "rumour";
+  const art = eventArt(ev);
+  const win = eventWindow(ev);
+  const st = eventState(ev);
+  const v = versions().find(x => x.id === ev.version);
+  const intel = ev.intel ? entries().find(e => e.id === ev.intel) : null;
+  /* rewards is Kuro's own sentence when the fetcher read a notice, and a
+     hand-written list when somebody typed it in from a broadcast. */
+  const rewards = Array.isArray(ev.rewards) ? ev.rewards : (ev.rewards ? [ev.rewards] : []);
+
+  const fig = art ? `
+    <figure class="dkv ev-kv">
+      <img src="${esc(artUrl(art, 1400))}" alt="${esc(ev.name)} event banner" loading="lazy" decoding="async">
+      <figcaption>
+        ${esc(art.note || art.title || `${ev.name} event banner`)}${art.credit ? ` — ${esc(art.credit)}` : ""}
+        ${art.source ? `<a href="${esc(art.source)}" target="_blank" rel="noopener">Source</a>` : ""}
+      </figcaption>
+    </figure>`
+    : `<div class="ev-noart">${icon("i-events", 20)}
+        <span>Kuro has not published a banner for this event yet. The desk shows no picture rather than borrowing one.</span>
+      </div>`;
+
+  openDrawer("Event", `<div class="drawer-b">
+    <div class="meta">
+      ${tierBadge(tier, tier === "official")}
+      <span class="pill ver">${esc(ev.version)}</span>
+      ${ev.kind ? `<span class="pill">${esc(ev.kind)}</span>` : ""}
+      <span class="ev-state ${st.cls}">${esc(st.text)}</span>
+    </div>
+    <h2>${esc(ev.name)}${ev.nameCN ? `<span class="cjk">${esc(ev.nameCN)}</span>` : ""}</h2>
+    ${fig}
+    <div class="dgear">
+      <div><span>Runs</span><b>${esc(eventTimes(ev))}</b></div>
+      <div><span>Whose dates</span><b>${win.inherited && !ev.permanent
+        ? `Patch ${esc(ev.version)} — the event's own are not out`
+        : "The event's own, in your timezone"}</b></div>
+      ${v?.title ? `<div><span>Patch</span><b>${esc(v.id)} — ${esc(v.title)}</b></div>` : ""}
+    </div>
+    ${ev.detail ? `<p style="margin-top:16px">${esc(ev.detail)}</p>` : ""}
+    ${rewards.length ? `<div class="dsec"><span class="label">Rewards</span>
+      <ul>${rewards.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>` : ""}
+    ${ev.eligibility ? `<div class="dsec"><span class="label">Eligibility</span>
+      <p style="margin:0">${esc(ev.eligibility)}</p></div>` : ""}
+    ${intel ? `<div class="dsec"><span class="label">Intel this came from</span>
+      <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(intel.id)}">
+        <i class="dot t-${esc(intel.confidence)}" style="width:7px;height:7px;border-radius:50%;background:currentColor;flex:none"></i>
+        ${esc(intel.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span></div>` : ""}
+    ${ev.source ? `<div class="dsec"><span class="label">Source</span>
+      <a class="dsrc" href="${esc(ev.source)}" target="_blank" rel="noopener">
+        <span class="lang">EN</span>${esc(ev.origin === "kuro" ? "Kuro Games — official notice" : "Kuro Games — version preview")}
+        <span class="arrow">${icon("i-arrow", 13)}</span></a></div>` : ""}
+    <div class="dsec"><span class="label">Open the patch</span>
+      <span class="dsrc" role="button" tabindex="0" data-act="version" data-id="${esc(ev.version)}">
+        Version ${esc(ev.version)} — its banners, phases and everything else in it
+        <span class="arrow">${icon("i-arrow", 13)}</span></span></div>
+  </div>`, `event:${ev.id}`);
 }
 
 /* ── intel ───────────────────────────────────────────────────────── */
@@ -1814,50 +2099,6 @@ function renderWeapons(){
   </div>`;
 }
 
-/* ── unbuilt views ───────────────────────────────────────────────────
-   Events is in the navigation before it is in the data. That is deliberate —
-   the shape of the desk is being settled first — but a nav item that opens onto
-   nothing is a broken link with extra steps, so it states what it is going to
-   hold. The copy is the specification: when the view is built, this entry comes
-   out and the panel below it goes in, which is exactly what Weapons just did. */
-const WIP = {
-  events: {
-    title:"Event calendar",
-    line:"Limited events in the live patch: what they pay out, and how long is left to claim it.",
-    plan:[
-      "Running and announced events with their open and close times, in your timezone",
-      "Astrite, Sequence and weapon rewards totalled per event",
-      "Redemption codes, with the ones that have already expired struck out",
-      "A warning on anything closing inside a week — the same countdown the timeline runs"
-    ]
-  }
-};
-
-function renderWIP(id){
-  const v = VIEWS.find(x => x.id === id);
-  const w = WIP[id];
-  $(`#p-${id}`).innerHTML = `<div class="stack">
-    ${pageTitle(id)}
-    <div class="panel">
-      <div class="panel-h">
-        <h2>${esc(w.title)}</h2><span class="sub">Not built yet</span>
-      </div>
-      <div class="panel-b">
-        <div class="wip">
-          <span class="wip-mark">${icon(v.icon, 30)}</span>
-          <h3>Work in progress</h3>
-          <p>${esc(w.line)}</p>
-          <ul class="wip-plan">${w.plan.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
-          <button class="btn" data-act="view" data-id="timeline">Back to the timeline ${icon("i-arrow", 12)}</button>
-        </div>
-      </div>
-      <div class="panel-f">
-        <span class="tier-note">This page is a placeholder. Nothing here is sourced yet, because there is nothing here yet.</span>
-      </div>
-    </div>
-  </div>`;
-}
-
 /* ── aside ───────────────────────────────────────────────────────── */
 function renderAside(){
   const feed = DATA.feed || {};
@@ -2309,6 +2550,10 @@ function cmdIndex(){
     ? weapons().map(w => ({name:w.name, hint:[`${w.rarity}★`, w.type].filter(Boolean).join(" ")}))
     : allWeapons().map(w => ({name:w.name, hint:`${w.holder} · ${w.version}`})))
     .forEach(w => out.push({group:"Weapons", label:w.name, hint:w.hint, act:["weapon", w.name], tier:null}));
+  gameEvents().forEach(ev => out.push({
+    group:"Events", label:ev.name, hint:[ev.version, ev.kind].filter(Boolean).join(" · "),
+    act:["event", ev.id], tier:ev.confidence
+  }));
   entries().forEach(e => out.push({
     group:"Intel", label:e.title, hint:fmtShort(e.date), act:["intel", e.id], tier:e.confidence
   }));
@@ -2364,7 +2609,7 @@ const RENDER = {
   timeline: renderTimeline,
   resonators: renderResonators,
   weapons: renderWeapons,
-  events: () => renderWIP("events"),
+  events: renderEvents,
   intel: renderIntel,
   signals: renderSignals
 };
@@ -2416,6 +2661,7 @@ function dispatch(kind, id){
   else if(kind === "resonator") drawerResonator(id);
   else if(kind === "version") drawerVersion(id);
   else if(kind === "weapon") drawerWeapon(id);
+  else if(kind === "event") drawerEvent(id);
   else if(kind === "open" && id === "methodology") drawerMethodology();
 }
 
@@ -2529,7 +2775,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations"];
+  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 
