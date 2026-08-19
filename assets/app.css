@@ -1166,8 +1166,12 @@ button{font:inherit;color:inherit}
   display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
   gap:12px;
 }
+/* The art column is a share of the card until that share stops being a
+   portrait. On the wide panel a three-banner phase is three 500px cards, and
+   31% of that is a 160px square with a face floating in the middle of it — so
+   the share is capped and the extra width goes to the text beside it. */
 .bcard{
-  display:grid;grid-template-columns:minmax(84px,31%) minmax(0,1fr);gap:14px;
+  display:grid;grid-template-columns:minmax(84px,min(31%,172px)) minmax(0,1fr);gap:14px;
   padding:12px;border:1px solid var(--line);border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--bg-2) 62%,transparent);
   transition:border-color .16s,background .16s;min-width:0;
@@ -1182,7 +1186,9 @@ button{font:inherit;color:inherit}
    image is absolutely placed inside, so a card with no Role and no Convene
    doesn't leave a gap under its own character. */
 .bcard-art{
-  position:relative;overflow:hidden;border-radius:9px;min-height:158px;
+  /* The floor rises with the panel so the picture stays taller than it is
+     wide once the card has room; past that the row's own height takes over. */
+  position:relative;overflow:hidden;border-radius:9px;min-height:clamp(158px,12.5vw,214px);
   border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
   background:
@@ -1900,7 +1906,12 @@ button{font:inherit;color:inherit}
    the screen and a column wide enough for two things side by side. So the
    drawer is a centred modal — the scrim still closes it, Esc still closes it,
    and the sticky header still rides the top of its own scroll. It keeps the
-   .drawer-* names because every renderer and the close handler speak them. */
+   .drawer-* names because every renderer and the close handler speak them.
+
+   Sized to the desk it opens over rather than to a book column: a record is
+   read by scanning, and every hundred pixels of width it gains is a screenful
+   of scrolling it loses. On a 1440 laptop it takes the full frame less its
+   gutters; the caps below are what stop it becoming a page. */
 .drawer{
   position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
   padding:clamp(16px,4vh,48px) clamp(16px,4vw,48px);
@@ -1908,7 +1919,7 @@ button{font:inherit;color:inherit}
 .drawer[hidden]{display:none}
 .drawer-scrim{position:absolute;inset:0;background:rgba(7,6,10,.68);backdrop-filter:blur(3px);animation:fade .18s ease}
 .drawer-panel{
-  position:relative;width:min(1080px,100%);max-height:100%;overflow-y:auto;overscroll-behavior:contain;
+  position:relative;width:min(1620px,100%);max-height:100%;overflow-y:auto;overscroll-behavior:contain;
   background:var(--bg-1);border:1px solid var(--line-2);border-radius:var(--r-lg);
   box-shadow:0 32px 90px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.35);
   animation:rise .22s cubic-bezier(.22,.8,.3,1);
@@ -1917,7 +1928,9 @@ button{font:inherit;color:inherit}
 @keyframes rise{from{transform:translateY(14px) scale(.985);opacity:0}}
 .drawer-h{
   position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;
-  padding:14px 18px;border-bottom:1px solid var(--line);background:var(--bg-2);
+  /* Horizontal padding tracks .drawer-b so the label and the close button sit
+     on the same margins as the record under them. */
+  padding:14px clamp(18px,2.4vw,38px);border-bottom:1px solid var(--line);background:var(--bg-2);
 }
 .drawer-h .label{margin-right:auto}
 .iconbtn{
@@ -1925,7 +1938,14 @@ button{font:inherit;color:inherit}
   cursor:pointer;color:var(--fg-3);display:flex;transition:.15s;
 }
 .iconbtn:hover{color:var(--fg);border-color:var(--line-2)}
-.drawer-b{padding:20px 22px 24px}
+/* The gutters grow with the panel — 22px of margin either side of a 1570px
+   column reads as text pushed against glass. Clamped rather than fixed so the
+   full-bleed phone panel keeps the tighter padding it was drawn with. */
+.drawer-b{
+  padding:clamp(20px,2.4vh,28px) clamp(22px,2.4vw,38px) clamp(24px,3vh,34px);
+  /* The key visual box, shared with the two date rows that bracket it. */
+  --kv-w:min(1120px,108vh);
+}
 .drawer-b h2{margin:0 0 10px;font-size:21px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
 .drawer-b h2 .cjk{font-size:15px;color:var(--attr);margin-left:9px;font-weight:500}
 .drawer-b .meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
@@ -1933,6 +1953,16 @@ button{font:inherit;color:inherit}
    column yet, and a summary set across the full width runs to 140 characters a
    line. Holds prose to a readable measure until the panel's real layout lands. */
 .drawer-b p{font-size:14px;line-height:1.7;color:var(--fg-2);max-width:76ch}
+/* Same reason for the patch note: a 13px line run across the full panel is
+   190 characters. Left-aligned with air to the right, like the summary above. */
+.drawer-b .vnote{max-width:104ch}
+/* The launch and end dates and the poster between them are one block — the
+   window either side of the picture. So the two rows take the picture's box
+   rather than the panel's: `space-between` across the full width would leave a
+   date half a screen from the word naming it, and any other cap would set them
+   to a margin the poster doesn't share. One length — --kv-w above — declared
+   once and used by both. */
+.drawer-b>.dgear>div{max-width:var(--kv-w);margin-inline:auto;width:100%}
 .dsec{margin-top:22px}
 .dsec>.label{padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px;display:block}
 /* A section heading that carries a control — the rule runs under both, so the
@@ -1948,7 +1978,15 @@ button{font:inherit;color:inherit}
    right. The left column is prose and wants a measure; the right is a card and
    a list of one-line facts and wants to be narrow. Below 900px of panel there
    is room for one of them, so they stack in reading order. */
-.rlay{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);gap:10px 30px;align-items:start}
+/* The right column is a label-and-value table and a weapon tile — neither gets
+   better past about 440px, they just grow the gap between a label and its
+   value. So the side is capped and the summary takes every pixel the widened
+   panel added, instead of the two splitting it by a fixed ratio. The clamp's
+   percentage keeps the old proportions on the way down. */
+.rlay{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,clamp(260px,42%,440px));
+  gap:10px 34px;align-items:start;
+}
 .rlay-main{min-width:0}
 .rlay-side{min-width:0;display:grid;gap:12px;align-content:start}
 /* The right column's boxes have their own frame, so they do not take .dsec's
@@ -2007,7 +2045,7 @@ button{font:inherit;color:inherit}
    instead — they pack down one side and up the other, which is the order they
    are already meant to be read in, and no card is left holding open a row. */
 .skills.grid.wide{
-  display:block;column-count:2;column-gap:12px;
+  display:block;column-count:3;column-gap:14px;
 }
 .skills.grid.wide .skill{
   break-inside:avoid;margin-bottom:12px;
@@ -2141,12 +2179,16 @@ button{font:inherit;color:inherit}
    the point, so the picture is shown whole and the box is whatever height that
    comes to. The frame is the same line and radius as every other card here.
 
-   Capped well short of the panel's own width, and centred. Across the full
-   1080 a 16:9 poster is 600px tall — it stops being an illustration inside the
-   record and becomes the record, with the date it ends pushed off the bottom
-   of the screen. At 720 the whole window still reads at a glance. */
+   Capped short of the panel's own width, and centred. The limit that matters
+   is height, not width: a 16:9 poster run edge to edge across the wide panel
+   is 880px tall and the date the patch ends lands off the bottom of the
+   screen. So the cap is the shorter of a flat 1120px and 108vh — 108vh of
+   width is 61vh of picture, which leaves the header, the title and both dates
+   on screen with it on any laptop, and on a tall monitor the flat cap is what
+   binds. Either way the poster is the biggest thing in the record, which is
+   what it is for. */
 .dkv{
-  margin:14px auto;width:100%;max-width:720px;
+  margin:16px auto;width:100%;max-width:var(--kv-w,min(1120px,108vh));
   border:1px solid var(--line);border-radius:var(--r-sm);
   overflow:hidden;background:var(--bg-2);
 }
@@ -2180,6 +2222,16 @@ button{font:inherit;color:inherit}
 @media (min-width:861px){
   .dart .cart,.dart .cart.has-cutout,.dart .cart.has-art{aspect-ratio:1000/320}
   .dart .cart.has-art img{object-position:center 22%}
+}
+/* Past this the panel is wide enough that 32% of it is half a screen of head
+   before the first skill, so the band stops being a ratio and becomes a
+   height. It has to stop being a ratio, not merely be capped: `aspect-ratio`
+   with an auto width reads a clamped height as the definite side and solves
+   back for width, so a max-height here doesn't shorten the band — it narrows
+   it, and leaves 280px of dead panel down the right. `aspect-ratio:auto` plus
+   a height is the same crop with the width left alone. */
+@media (min-width:1400px){
+  .dart .cart,.dart .cart.has-cutout,.dart .cart.has-art{aspect-ratio:auto;height:min(420px,40vh)}
 }
 
 /* ══ command palette ════════════════════════════════════════════════ */
@@ -2295,6 +2347,9 @@ button{font:inherit;color:inherit}
   .hero{grid-template-columns:1fr 1fr}
   .hero .pcard.is-future{grid-column:1/-1;min-height:0}
   .hero .pcard.is-future .pcard-main{margin-top:0}
+  /* The panel is viewport-width from here down, so the third column of full
+     skill text falls under 300px and every other word hyphenates. */
+  .skills.grid.wide{column-count:2}
 }
 @media (max-width:1080px){
   /* The rail steps down with the viewport, but by less than the page does: at
@@ -2322,6 +2377,8 @@ button{font:inherit;color:inherit}
      beside it, which is the order you read them in anyway. */
   .rlay{grid-template-columns:minmax(0,1fr);gap:20px}
   .skills.grid,.skills.grid.duo{grid-template-columns:minmax(0,1fr)}
+  /* .wide is a multi-column flow, not a grid — the rule above doesn't reach it. */
+  .skills.grid.wide{column-count:1}
   .app{grid-template-columns:minmax(0,1fr)}
   .rail{
     position:static;height:auto;flex-direction:row;align-items:center;gap:14px;

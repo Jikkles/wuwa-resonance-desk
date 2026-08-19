@@ -2116,11 +2116,12 @@ function drawerVersion(id){
      came off. The version record is the one place on the desk where the whole
      subject is this patch, so it is the one place the poster belongs.
 
-     Sized at 1200: the modal is capped at 1080px and this is the widest it can
-     ever be drawn, retina aside. */
+     Sized at 1800: the figure is capped at 1120px, so this is that width with
+     enough over it to stay sharp on a 2x screen — the poster is the one image
+     in the record big enough for the upscale to show. */
   const kv = v.keyVisual?.url ? `
     <figure class="dkv">
-      <img src="${esc(cdnWidth(v.keyVisual.url, 1200))}" alt="${esc(v.keyVisual.title || `Version ${v.id} key visual`)}" loading="lazy" decoding="async">
+      <img src="${esc(cdnWidth(v.keyVisual.url, 1800))}" alt="${esc(v.keyVisual.title || `Version ${v.id} key visual`)}" loading="lazy" decoding="async">
       <figcaption>
         ${esc(v.keyVisual.title || `Version ${v.id} key visual`)}
         ${v.keyVisual.credit ? ` — ${esc(v.keyVisual.credit)}` : ""}
