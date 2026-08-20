@@ -477,6 +477,171 @@ function parseKit(html) {
   return { skills, inherent, extra, chain };
 }
 
+/* ── fandom: kits ─────────────────────────────────────────────────
+   Prydwen answers a home connection and returns 403 to a GitHub runner, so
+   for as long as kits came only from there, the scheduled job could never
+   refresh one — it logged "prydwen unreachable" and carried the old file
+   forward every night for months.
+
+   The wiki has the same text and hands it to anybody. Not on the character
+   page: the Combat tab is transcluded out of one page per skill, each an
+   infobox whose `info` holds the description. Reading those pages directly is
+   both cleaner and cheaper than rendering the tab — the rendered HTML buries
+   each term in a collapsed tooltip that repeats its own definition mid
+   sentence, whereas in source that is one {{Extra Effect}} call whose first
+   argument is the visible half.
+
+   Two `embeddedin` queries name every skill and node page on the wiki, and
+   they come back in batches of fifty like everything else here. Call it
+   eighteen requests for the whole roster's kits. */
+
+/* Positional arguments of a template call. `template()` above returns only
+   the named ones, which is all an infobox uses; the inline templates in a
+   skill description are positional. Brace and bracket depth are counted for
+   the same reason it counts them there — {{Extra Effect}} nests {{Color}}
+   calls, and a piped [[link|label]] is not an argument boundary. */
+function args(body) {
+  const out = [];
+  let buf = "", brace = 0, bracket = 0;
+  for (let i = 0; i < body.length; i++) {
+    if (body.startsWith("{{", i)) brace++;
+    else if (body.startsWith("}}", i)) brace--;
+    else if (body.startsWith("[[", i)) bracket++;
+    else if (body.startsWith("]]", i)) bracket--;
+    if (body[i] === "|" && !brace && !bracket) { out.push(buf); buf = ""; }
+    else buf += body[i];
+  }
+  out.push(buf);
+  return out;
+}
+
+/* What each inline template leaves behind. Only three of them appear in a
+   description, and the fallback keeps the first argument because that is the
+   visible half of every wiki template of this shape — a new one arriving
+   reads a little bare rather than dumping its parameters into the sentence. */
+function reduce(name, a) {
+  const key = name.trim().toLowerCase();
+  if (key === "color") {
+    const first = (a[0] || "").trim();
+    /* {{Color|menu|…}} is a section label — the desk's own heading. |help| is
+       a game term, which Prydwen renders as plain text, so it stays plain
+       here too rather than arriving underlined on one source and not the
+       other. Anything else is a damage type and matches Prydwen's <u>. */
+    if (first === "menu") return `<b>${a[1] || ""}</b>`;
+    if (first === "help") return a[1] || "";
+    return `<u>${first}</u>`;
+  }
+  /* {{Extra Effect|what the sentence reads|tooltip title|tooltip body}}. The
+     last two are hover text with nowhere to go on a kit card, and keeping
+     them is what makes the rendered page read as though every term were
+     defined twice, mid-clause. */
+  if (key === "extra effect") return a[0] || "";
+  if (key === "sic") return "";
+  return a[0] || "";
+}
+
+/* Innermost call first — the last `{{` in the string cannot contain another,
+   so the first `}}` after it is its own. Reducing outward instead would take
+   a {{Color}} out of an {{Extra Effect}} argument before it was ever read.
+   The guard is against a page whose braces do not balance: better a
+   description with a stray brace in it than a script that never returns. */
+function expand(src) {
+  let s = String(src);
+  for (let guard = 0; guard < 500; guard++) {
+    const open = s.lastIndexOf("{{");
+    if (open < 0) break;
+    const close = s.indexOf("}}", open);
+    if (close < 0) break;
+    const [name, ...rest] = args(s.slice(open + 2, close));
+    s = s.slice(0, open) + reduce(name, rest) + s.slice(close + 2);
+  }
+  return s;
+}
+
+const unlink = s => s
+  .replace(/\[\[[^\]|]+\|([^\]]*)\]\]/g, "$1")
+  .replace(/\[\[([^\]]+)\]\]/g, "$1");
+
+/* Wiki source to the <p> run blocks() eats, so both sources land in one
+   shape and a kit that changes hands does not change format. The wiki breaks
+   its paragraphs with <br>, and a line that is nothing but a bold label is
+   what blocks() already treats as a heading. */
+function fandomBlocks(src) {
+  const html = unlink(expand(src))
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/'''(.+?)'''/g, "<b>$1</b>");
+  return blocks(
+    html.split(/<br\s*\/?>/i)
+      .map(s => s.trim())
+      .filter(Boolean)
+      .map(s => `<p>${s}</p>`)
+      .join("")
+  );
+}
+
+async function embeddedIn(title) {
+  const out = [];
+  for (let cont = "";;) {
+    const j = await getJson(`${WIKI}?action=query&list=embeddedin` +
+      `&eititle=${encodeURIComponent(title)}&einamespace=0&eilimit=500` +
+      `&format=json&formatversion=2${cont}`);
+    for (const p of j.query?.embeddedin || []) out.push(p.title);
+    if (!j.continue?.eicontinue) return out;
+    cont = `&eicontinue=${encodeURIComponent(j.continue.eicontinue)}`;
+  }
+}
+
+/* Every kit the wiki holds, keyed the same way Prydwen's are. */
+async function fandomKits() {
+  const [skillPages, nodePages] = await Promise.all([
+    embeddedIn("Template:Skill Infobox"),
+    embeddedIn("Template:Node Infobox")
+  ]);
+  const source = await wikitextFor([...skillPages, ...nodePages]);
+  const kits = new Map();
+  const of = who => {
+    const k = ckey(who);
+    if (!kits.has(k)) kits.set(k, { skills: {}, inherent: [], extra: [], chain: [] });
+    return kits.get(k);
+  };
+
+  for (const [title, wikitext] of source) {
+    const skill = template(wikitext, "Skill Infobox");
+    const node = skill ? null : template(wikitext, "Node Infobox");
+    const p = skill || node;
+    if (!p?.resonator) continue;
+    const name = p.en?.trim() || title;
+    const b = fandomBlocks(skill ? p.info || "" : p.description || "");
+    if (!b.length) continue;
+    const kit = of(p.resonator);
+
+    if (node) {
+      const n = Number(p.level);
+      if (n >= 1 && n <= 6) kit.chain.push({ n, name, blocks: b });
+      continue;
+    }
+    const kind = (p.type || "").trim();
+    const slot = SKILL_SLOT[kind.toLowerCase()];
+    /* Same precedence as the Prydwen parser: one skill per slot, a second
+       claimant goes to `extra` rather than silently replacing the first. */
+    if (slot && !kit.skills[slot]) kit.skills[slot] = { name, blocks: b };
+    else if (slot) kit.extra.push({ kind, name, blocks: b });
+    else if (/^inherent/i.test(kind)) kit.inherent.push({ name, blocks: b, order: p.type3 || "" });
+  }
+
+  for (const kit of kits.values()) {
+    kit.chain.sort((a, b) => a.n - b.n);
+    /* The wiki lists a Resonator's two Inherent Skills as separate pages with
+       nothing but `type3` to order them — it reads "1st Inherent Skills" — and a
+       batched query promises no order at all. That is a sort key rather than
+       kit text, so it comes back off once it has done its job. */
+    kit.inherent.sort((a, b) => (a.order || "").localeCompare(b.order || ""));
+    for (const i of kit.inherent) delete i.order;
+  }
+  return kits;
+}
+
+
 /* Prydwen fills an unannounced character's element and weapon with the literal
    string "Unknown" so their card still lays out. On the desk an absent field
    renders as nothing at all, which says the same thing without pretending
@@ -588,7 +753,16 @@ function deriveCurrent(doc) {
   }
   const roster = listHtml ? parseRoster(listHtml) : [];
   const bySlug = new Map(roster.map(r => [ckey(r.name), r]));
-  console.log(`wiki: ${titles.length} resonator pages · prydwen: ${listHtml ? `${roster.length} listed` : "skipped"}\n`);
+  /* Fetched whether or not Prydwen answered. It is the only source a
+     scheduled run can reach, and it is often the earlier of the two anyway
+     — the wiki had Suisui's kit a fortnight before 3.5 opened, built off
+     the beta datamine. At eighteen requests it is not worth branching on. */
+  const fandom = await fandomKits().catch(err => {
+    console.log(`wiki kits unavailable (${String(err.message).slice(0, 80)})`);
+    return new Map();
+  });
+
+  console.log(`wiki: ${titles.length} resonator pages · prydwen: ${listHtml ? `${roster.length} listed` : "skipped"} · wiki kits: ${fandom.size}\n`);
 
   /* Reached it but understood nothing. A Cloudflare interstitial is a 200 with
      a valid HTML body, so curl --fail lets it through and parseRoster finds no
@@ -652,6 +826,7 @@ function deriveCurrent(doc) {
         if (!prev || day < prev) planned.set(ckey(b.name), day);
       }
 
+  const fromWiki = [];
   const index = [];
   const byName = new Map(prev.resonators?.map(r => [ckey(r.name), r]) || []);
   const used = new Set();
@@ -689,6 +864,24 @@ function deriveCurrent(doc) {
     const kit = kitPages.find(k => k && ckey(k.name) === ckey(c.name));
     const scraped = kit && Object.keys(kit.skills || {}).length >= 4;
     if (scraped) kits[name] = { slug: kit.slug, skills: kit.skills, inherent: kit.inherent, chain: kit.chain, ...(kit.extra?.length ? { extra: kit.extra } : {}) };
+    /* The wiki fills a gap and never takes over one already filled. Both
+       sources describe the same six skills but not in the same words, so a
+       kit that changed hands every run would rewrite half this file each
+       time the script moved between a runner and a desk. Prydwen keeps
+       first claim wherever it can be reached; the wiki is what makes an
+       unattended run able to add a Resonator at all. */
+    else if (!kits[name]) {
+      const wiki = fandom.get(ckey(name));
+      if (wiki && Object.keys(wiki.skills).length >= 4) {
+        kits[name] = {
+          skills: wiki.skills,
+          inherent: wiki.inherent,
+          chain: wiki.chain,
+          ...(wiki.extra.length ? { extra: wiki.extra } : {})
+        };
+        fromWiki.push(name);
+      }
+    }
     /* Carried over from a previous run counts: the record has a kit to open
        either way, and a turned-away request must not strip the badge off
        sixty cards. */
@@ -786,7 +979,7 @@ function deriveCurrent(doc) {
     note:
       "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — " +
       "it is ten times the size and only a record that has been opened needs it. " +
-      "Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg.",
+      "Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
     resonators: index
   }, null, 2) + "\n");
 
@@ -797,8 +990,8 @@ function deriveCurrent(doc) {
       "Six skills, two Inherent Skills and the six-node Resonance Chain per Resonator, as they " +
       "read in the live client. Text carries **bold** and __underline__ markers rather than " +
       "markup — the desk escapes the string before turning those back into elements. " +
-      "Skill descriptions via prydwen.gg; skills © Kuro Games.",
-    credit: "Kit text via prydwen.gg · © Kuro Games",
+      "Skill descriptions via prydwen.gg where it could be reached and wutheringwaves.fandom.com otherwise; skills © Kuro Games.",
+    credit: "Kit text via prydwen.gg and wutheringwaves.fandom.com · © Kuro Games",
     kits
   }, null, 2) + "\n");
 
@@ -806,6 +999,7 @@ function deriveCurrent(doc) {
   const withDebut = index.filter(r => r.version).length;
   console.log(`\n${index.length} records · ${withKit} with a full kit${listHtml ? "" : " (kept, prydwen skipped)"} · ${withDebut} with a debut patch`);
   const gaps = index.filter(r => !kits[r.name]).map(r => r.name);
+  if (fromWiki.length) console.log(`kit from the wiki: ${fromWiki.join(", ")}`);
   if (gaps.length) console.log(`no kit published yet: ${gaps.join(", ")}`);
   /* Says the quiet part out loud, because a green run that silently stopped
      refreshing kit text is exactly the failure this script is meant not to
