@@ -734,7 +734,7 @@ function thumb(b, {showWeapon = true, showPhase = true, showNew = false} = {}){
   return `<div class="bmini${unknown ? " unknown" : ""}"${attrStyle(attr)}${act}>
     <div class="thumb${f.icon ? " bust" : f.cutout ? " cut" : ""}">${inner}</div>
     <span class="bwho">
-      <b data-fit="1.5">${esc(b.name || "???")}</b>
+      <b data-fit="1.5 .8">${esc(b.name || "???")}</b>
       <span class="bmeta">${meta}</span>
     </span>
   </div>`;
@@ -1152,7 +1152,7 @@ function patchCard(v, role){
       <div class="bp-left"${who}>
         <div class="bp-art${f.cutout ? " cut" : ""}${f.icon && !f.image ? " bust" : ""}">${art}</div>
         <div class="bp-who">
-          <b data-fit="1.35" data-fit-in=".bpair">${esc(b.name || "???")}</b>
+          <b data-fit="1.35 .74" data-fit-in=".bpair">${esc(b.name || "???")}</b>
           <span class="bmeta">${b.new ? `<i class="new">New</i>` : ""}${
             b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${
             attr ? `<i class="attr">${esc(attr)}</i>` : ""}</span>
@@ -3386,14 +3386,14 @@ function drawerMethodology(){
       <div style="display:grid;gap:14px">${TIERS.map(t => `
         <div>
           <div style="margin-bottom:6px">${tierBadge(t, t === "official")}</div>
-          <div style="font-size:12.5px;color:var(--fg-2);line-height:1.6">${esc(tiers[t] || TIER_MEANS[t])}</div>
+          <div style="font-size:.78rem;color:var(--fg-2);line-height:1.6">${esc(tiers[t] || TIER_MEANS[t])}</div>
         </div>`).join("")}</div>
     </div>
     <div class="dsec"><span class="label">Automated sources — every 6 hours</span>
       <div style="display:grid;gap:8px">${srcs.map(s => `
         <span class="dsrc"><i class="dot" style="width:6px;height:6px;border-radius:50%;flex:none;background:${
           s.status === "ok" ? "var(--t-official)" : s.status === "skipped" ? "var(--amber)" : "var(--t-rumour)"}"></i>
-          ${esc(s.name)}<span class="arrow" style="font-family:var(--mono);font-size:10px">${esc(s.status)} · ${s.count}</span></span>`).join("")
+          ${esc(s.name)}<span class="arrow" style="font-family:var(--mono);font-size:.625rem">${esc(s.status)} · ${s.count}</span></span>`).join("")
         || `<span class="dsrc">No source report yet.</span>`}</div>
     </div>
     <div class="dsec"><span class="label">Art</span>

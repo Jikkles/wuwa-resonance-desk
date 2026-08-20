@@ -56,8 +56,8 @@
      "Resonators" and its caret on one line. The one row that doesn't fit,
      Live Signals with its warning badge, wraps instead of setting the width
      for everything else. */
-  --rail-w:272px;
-  --aside-w:340px;
+  --rail-w:296px;
+  --aside-w:21.25rem;
 
   /* Backdrop dials. The backdrop is the desk's own mark now rather than the
      patch's key visual, so there is nothing behind the page that has to be
@@ -97,12 +97,27 @@
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-html{scroll-behavior:smooth}
+/* The type dial. Every font-size in this file is a rem, so all 233 of them
+   are a percentage of this one number and nothing here has an absolute size
+   of its own any more.
+
+   126% of whatever the browser was going to use. A terminal reads small
+   because everything in it is a label, and the labels were set at the sizes
+   a label wants — 10px mono, .13em tracking — while the body they annotate
+   was left at 14. Together they made a page you lean into. At this setting
+   body lands near 17.5px and the feed rows near 16, which is roughly where
+   the wikis people read this alongside set their own body copy.
+
+   A percentage rather than a px, so a reader who has set their browser's
+   default to 20px still gets 126% of that rather than being overridden. That
+   is also why the shell dimensions below are rems: a rail fixed at 272px
+   would hold 26% larger type in the same box and clip it. */
+html{scroll-behavior:smooth;font-size:126%}
 body{
   background:var(--bg);
   color:var(--fg);
   font-family:var(--sans);
-  font-size:14px;
+  font-size:.875rem;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
@@ -164,7 +179,7 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
 
 .label{
-  font-family:var(--mono);font-size:10.5px;font-weight:500;
+  font-family:var(--mono);font-size:.6563rem;font-weight:500;
   letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);
 }
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
@@ -194,14 +209,14 @@ button{font:inherit;color:inherit}
    characters and it breaks in two before anything else in the rail runs out of
    room. A two-line wordmark reads as a layout fault, so this is the one line
    here that stops short of the step the rest took. */
-.brand-name{display:block;font-size:18px;font-weight:700;letter-spacing:.12em;line-height:1.15;white-space:nowrap}
-.brand-sub{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.18em;color:var(--fg-3);text-transform:uppercase}
+.brand-name{display:block;font-size:1.125rem;font-weight:700;letter-spacing:.12em;line-height:1.15;white-space:nowrap}
+.brand-sub{display:block;font-family:var(--mono);font-size:.8125rem;letter-spacing:.18em;color:var(--fg-3);text-transform:uppercase}
 
 .rail-group{display:flex;flex-direction:column;gap:2px;padding:0 12px}
 .rail-group>.label{padding:0 6px 8px}
 /* The section headings in the rail sit a step above the 10.5px .label used
    inside panels — they head the navigation, not a card's metadata row. */
-.rail .label{font-size:15px;color:var(--fg-2)}
+.rail .label{font-size:.9375rem;color:var(--fg-2)}
 
 /* The rail runs about half again the size of the type inside the panels. It is
    read at a glance and from further back than a card is — it says where you
@@ -210,7 +225,7 @@ button{font:inherit;color:inherit}
 .navlink{
   display:flex;align-items:center;gap:11px;width:100%;flex-wrap:wrap;
   background:none;border:0;border-radius:var(--r-sm);padding:12px 12px;cursor:pointer;
-  font-family:var(--mono);font-size:19px;font-weight:500;letter-spacing:.1em;
+  font-family:var(--mono);font-size:1.1875rem;font-weight:500;letter-spacing:.1em;
   text-transform:uppercase;color:var(--fg);text-align:left;
   transition:background .15s,color .15s;
 }
@@ -228,7 +243,7 @@ button{font:inherit;color:inherit}
    that did not grow with the rest: it is a caveat on the item above it, not a
    destination. */
 .navlink .warn{
-  margin-left:auto;flex:none;font-size:10px;letter-spacing:.09em;padding:2px 6px;border-radius:5px;
+  margin-left:auto;flex:none;font-size:.625rem;letter-spacing:.09em;padding:2px 6px;border-radius:5px;
   border:1px dashed color-mix(in srgb,var(--t-rumour) 60%,transparent);color:var(--t-rumour);
 }
 /* Same slot, different claim: .warn is "don't trust this yet", .soon is
@@ -237,7 +252,7 @@ button{font:inherit;color:inherit}
 .navlink .soon{
   margin-left:auto;flex:none;border-radius:6px;font-family:var(--mono);text-transform:uppercase;
   background:var(--bg-2);border:1px solid var(--line);color:var(--fg-3);
-  font-size:12px;letter-spacing:.09em;padding:3px 8px;
+  font-size:.75rem;letter-spacing:.09em;padding:3px 8px;
 }
 /* An unbuilt view is dimmer than a built one until you land on it. */
 .navlink:has(.soon):not([aria-current="true"]){opacity:.78}
@@ -266,7 +281,7 @@ button{font:inherit;color:inherit}
 .sublink{
   display:flex;align-items:center;gap:9px;width:100%;
   background:none;border:0;border-radius:7px;padding:8px 11px;cursor:pointer;
-  font-family:var(--mono);font-size:16px;font-weight:500;letter-spacing:.1em;
+  font-family:var(--mono);font-size:1rem;font-weight:500;letter-spacing:.1em;
   text-transform:uppercase;color:var(--fg-3);text-align:left;
   transition:background .15s,color .15s;
 }
@@ -274,7 +289,7 @@ button{font:inherit;color:inherit}
 .sublink[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
 .sublink>span:first-of-type{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sublink .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
-.sublink .n{margin-left:auto;font-size:14px;opacity:.65;letter-spacing:.04em}
+.sublink .n{margin-left:auto;font-size:.875rem;opacity:.65;letter-spacing:.04em}
 /* Tier rows keep their tier colour whether or not they are on — same bargain
    the tier chips struck: the legend and the filter are one control. Written
    under .subnav so they outrank the pressed rule above, which would otherwise
@@ -288,20 +303,20 @@ button{font:inherit;color:inherit}
 .tierlink{
   display:flex;align-items:center;gap:10px;width:100%;
   background:none;border:0;border-radius:8px;padding:10px 12px;cursor:pointer;
-  font-family:var(--mono);font-size:17px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
+  font-family:var(--mono);font-size:1.0625rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
   color:var(--fg-2);text-align:left;transition:background .15s,color .15s;
 }
 .tierlink:hover{background:var(--bg-2);color:var(--fg)}
 .tierlink .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
 .tierlink .n{
-  margin-left:auto;font-size:14px;color:var(--fg-2);
-  border:1px solid var(--line);border-radius:6px;padding:1px 7px;min-width:30px;text-align:center;
+  margin-left:auto;font-size:.875rem;color:var(--fg-2);
+  border:1px solid var(--line);border-radius:6px;padding:1px 7px;min-width:1.875rem;text-align:center;
 }
 
 .linkout{
   display:inline-flex;align-items:center;gap:6px;margin-top:10px;
   background:none;border:0;padding:0;cursor:pointer;
-  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.6875rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
   color:var(--accent);text-decoration:none;
 }
 .linkout:hover{color:var(--fg)}
@@ -314,7 +329,7 @@ button{font:inherit;color:inherit}
    mono as the view names but at two thirds the size: the nav is read at a
    glance from across the desk, and a list of places to leave for is not. */
 .rail-links{margin-top:auto;padding:0 12px 4px;display:flex;flex-direction:column;gap:1px}
-.rail-links .tierlink{font-size:13px;letter-spacing:.07em;gap:9px;padding:6px 10px}
+.rail-links .tierlink{font-size:.8125rem;letter-spacing:.07em;gap:9px;padding:6px 10px}
 .rail-links .tierlink svg{flex:none;color:var(--fg-3)}
 .rail-links .tierlink:hover svg{color:var(--accent)}
 /* The underline belongs to the label, not to the row. On a flex anchor the
@@ -329,7 +344,7 @@ button{font:inherit;color:inherit}
 /* Half the size it is in the tier lists: there it holds a count, here it is a
    mark saying "this leaves the site" and the box around it was louder than the
    link. */
-.rail-links .tierlink .n{font-size:11px;min-width:0;border:0;padding:0;color:var(--fg-3)}
+.rail-links .tierlink .n{font-size:.6875rem;min-width:0;border:0;padding:0;color:var(--fg-3)}
 
 .rail-foot{padding:0 18px;display:flex;gap:14px;align-items:center}
 .rail-foot a{color:var(--fg-3);display:flex;transition:color .15s}
@@ -346,7 +361,7 @@ button{font:inherit;color:inherit}
 .hud .searchbtn{width:100%}
 .hud-strip{
   display:flex;flex-direction:column;align-items:flex-start;gap:9px;margin-top:11px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.6563rem;letter-spacing:.13em;text-transform:uppercase;
   color:var(--fg-3);
 }
 .hud-strip b{color:var(--fg-2);font-weight:500}
@@ -418,7 +433,7 @@ button{font:inherit;color:inherit}
    floating between two panels, unattached to either. */
 .pagetitle{
   margin:0 0 -6px;padding:0 2px;
-  font-family:var(--mono);font-size:12px;font-weight:500;
+  font-family:var(--mono);font-size:.75rem;font-weight:500;
   letter-spacing:.24em;text-transform:uppercase;color:var(--fg-2);
   display:flex;align-items:center;gap:11px;
 }
@@ -432,10 +447,10 @@ button{font:inherit;color:inherit}
   padding:10px 16px;border-bottom:1px solid var(--line);background:var(--tint-sink);
 }
 .panel-h h2{
-  margin:0;font-size:12px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
+  margin:0;font-size:.75rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   font-family:var(--mono);
 }
-.panel-h .sub{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.panel-h .sub{font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
 .panel-h .right{margin-left:auto;display:flex;gap:8px;align-items:center}
 .panel-b{padding:14px 16px}
 .panel-b.flush{padding:0}
@@ -446,13 +461,13 @@ button{font:inherit;color:inherit}
 
 .more{
   background:none;border:0;cursor:pointer;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.6563rem;letter-spacing:.13em;text-transform:uppercase;
   color:var(--fg-2);display:inline-flex;align-items:center;gap:7px;
 }
 .more:hover{color:var(--accent)}
 
 .empty{
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--fg-3);
+  font-family:var(--mono);font-size:.7188rem;letter-spacing:.06em;color:var(--fg-3);
   padding:38px 16px;text-align:center;
 }
 
@@ -467,14 +482,14 @@ button{font:inherit;color:inherit}
 .chips button{
   background:var(--bg-2);border:1px solid var(--line);border-radius:20px;
   padding:5px 12px;cursor:pointer;color:var(--fg-3);
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.6563rem;letter-spacing:.11em;text-transform:uppercase;
   transition:.15s;display:inline-flex;align-items:center;gap:7px;
 }
 .chips button:hover{color:var(--fg);border-color:var(--line-2)}
 .chips button[aria-pressed="true"]{
   background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent);
 }
-.chips button .n{opacity:.6;font-size:9.5px}
+.chips button .n{opacity:.6;font-size:.5938rem}
 .chips button .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
 /* Tier chips stay in tier colour even when unpressed — the legend and the
    filter are the same control. Written out because `.chips button` outranks
@@ -504,12 +519,12 @@ button{font:inherit;color:inherit}
 .searchbtn{
   display:flex;align-items:center;gap:9px;cursor:pointer;
   background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:5px 9px 5px 11px;
-  color:var(--fg-3);font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--fg-3);font-family:var(--mono);font-size:.625rem;letter-spacing:.13em;text-transform:uppercase;
   transition:.15s;
 }
 .searchbtn:hover{color:var(--fg);border-color:var(--line-2)}
 .searchbtn kbd{
-  font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--fg-3);
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.06em;color:var(--fg-3);
   border:1px solid var(--line-2);border-radius:5px;padding:1px 5px;white-space:nowrap;
 }
 
@@ -519,7 +534,7 @@ button{font:inherit;color:inherit}
    is the cheapest way to do that. */
 .tier{
   display:inline-flex;align-items:center;gap:7px;flex:none;
-  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.625rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
   border:1px solid color-mix(in srgb,currentColor 42%,transparent);
   background:color-mix(in srgb,currentColor 11%,transparent);
   border-radius:6px;padding:3px 8px;white-space:nowrap;
@@ -528,11 +543,11 @@ button{font:inherit;color:inherit}
 .tier.solid{background:currentColor;border-color:currentColor}
 .tier.solid span{color:var(--bg)}
 .tier-note{
-  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
 }
 
 .pill{
-  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.13em;text-transform:uppercase;
   border:1px solid var(--line-2);border-radius:6px;padding:3px 8px;color:var(--fg-3);white-space:nowrap;
 }
 .pill.ver{border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
@@ -547,14 +562,14 @@ button{font:inherit;color:inherit}
 .hero{display:grid;grid-template-columns:1.16fr 1.16fr .68fr;gap:16px}
 /* Filtered down to one or two patches, they share the width evenly instead of
    leaving a hole where the other cards were. */
-.hero.narrow{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.hero.narrow{grid-template-columns:repeat(auto-fit,minmax(18.75rem,1fr))}
 /* Live + Future with no announced patch between them — the normal state for
    most of a cycle. The live card takes the width the empty Next slot gave up;
    the future card keeps its narrow column, because what is in it is still two
    names and a paragraph of hedging. */
 .hero.pair{grid-template-columns:1.84fr .68fr}
 .pcard{
-  position:relative;display:flex;flex-direction:column;min-height:400px;overflow:hidden;
+  position:relative;display:flex;flex-direction:column;min-height:25rem;overflow:hidden;
   /* A size container, read by the art band below — how tall the picture should
      be is a question about this card, not about the window. */
   container-type:inline-size;
@@ -578,7 +593,7 @@ button{font:inherit;color:inherit}
    the footer. It stops at the ceiling either way. */
 .pcard-stage{
   position:relative;display:flex;flex-direction:column;
-  flex:6 1 auto;min-height:448px;max-height:536px;overflow:hidden;
+  flex:6 1 auto;min-height:28rem;max-height:33.5rem;overflow:hidden;
 }
 /* A card with most of the row to itself — the timeline filtered to one patch,
    or a live card that took the width an unannounced Next gave up. Its halves
@@ -587,7 +602,7 @@ button{font:inherit;color:inherit}
    shape wants the height. Deliberately the same threshold, from the other
    side: below this the band stays as it was, because the framing does too. */
 @container (min-width:1000px){
-  .pcard-stage{min-height:560px;max-height:640px}
+  .pcard-stage{min-height:35rem;max-height:40rem}
 }
 /* Solid ground under the picture. The banner grid and the event list used to
    be a translucent slab lying on the lower half of the art; down here they
@@ -610,7 +625,7 @@ button{font:inherit;color:inherit}
    block under a picture; this one has no picture, so margin-top:auto just
    opened a 300px hole above the number. */
 .pcard.is-future .pcard-main{margin-top:0}
-.pcard.is-future .pcard-num{font-size:40px}
+.pcard.is-future .pcard-num{font-size:2.5rem}
 
 /* The art runs the whole card and every other element sits on top of it. The
    scrim is a vertical ramp rather than a floor: the top third stays near-clear
@@ -784,14 +799,14 @@ button{font:inherit;color:inherit}
 .pcard-idtext{min-width:0;flex:1}
 .pcard-num{
   flex:none;
-  font-family:var(--mono);font-size:57px;font-weight:500;line-height:.95;letter-spacing:-.03em;
+  font-family:var(--mono);font-size:3.5625rem;font-weight:500;line-height:.95;letter-spacing:-.03em;
   font-variant-numeric:tabular-nums;
 }
 .pcard.is-live .pcard-num{color:var(--t-official)}
 .pcard.is-next .pcard-num{color:var(--t-datamined)}
 /* [ LAMPLIGHT IN MIRAGE ] — the patch codename reads as a designation. */
 .pcard-title{
-  font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg);margin-top:10px;line-height:1.45;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
@@ -800,12 +815,12 @@ button{font:inherit;color:inherit}
 .pcard-title::before{content:"[\00a0"}
 .pcard-title::after{content:"\00a0]"}
 .pcard-dates{
-  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
   color:var(--fg-2);margin-top:8px;
 }
 .pcard-state{
   display:flex;align-items:center;gap:9px;margin-top:10px;
-  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2);
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2);
 }
 /* Transparent, so the picture runs behind the banner strip and the event list
    too. It used to be an opaque slab — the art got the header and the rows got
@@ -860,7 +875,7 @@ button{font:inherit;color:inherit}
   display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
   width:max-content;max-width:100%;margin-bottom:9px;
   padding:5px 10px;border-radius:8px;background:rgba(8,7,12,.55);
-  font-size:10.5px;letter-spacing:.16em;color:var(--fg-2);
+  font-size:.6563rem;letter-spacing:.16em;color:var(--fg-2);
 }
 /* That phase has run. Said once, on the heading, rather than repeated on a chip
    on every tile in the column. */
@@ -890,7 +905,7 @@ button{font:inherit;color:inherit}
    short ones and a hole. Capped, because a phase with one banner beside a
    phase with four would otherwise draw a single 200px-tall tile. */
 .ps-col .bstrip.rows{flex:1 1 auto}
-.ps-col .bstrip.rows>.bpair{flex:1 1 auto;max-height:104px}
+.ps-col .bstrip.rows>.bpair{flex:1 1 auto;max-height:6.5rem}
 /* 104px is two lines of a 13px name over 9px chips with room to spare. The
    same tile at 26px and 18px — see "a wide tile's type" — needs 158, and left
    at 104 it clips the chips off the bottom of any debut whose name wraps. The
@@ -916,7 +931,7 @@ button{font:inherit;color:inherit}
    line is the fix for both halves of that. */
 @container (min-width:480px){
   .ps-col .bstrip.rows>.bpair{
-    max-height:158px;flex-shrink:0;
+    max-height:9.875rem;flex-shrink:0;
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   }
 }
@@ -947,8 +962,8 @@ button{font:inherit;color:inherit}
 }
 .bstrip.rows .bmini[role="button"]:hover .thumb{transform:none;border-color:color-mix(in srgb,var(--attr) 65%,var(--line))}
 .bstrip.rows .bwho{min-width:0;flex:1}
-.bstrip.rows .bmini b{font-size:13px;margin-top:0;-webkit-line-clamp:1;line-height:1.25}
-.bstrip.rows .bmini .bmeta{margin-top:4px;font-size:8.5px;gap:5px}
+.bstrip.rows .bmini b{font-size:.8125rem;margin-top:0;-webkit-line-clamp:1;line-height:1.25}
+.bstrip.rows .bmini .bmeta{margin-top:4px;font-size:.5313rem;gap:5px}
 .bstrip.rows .bmini .attr{padding:1px 5px}
 /* Square, to sit level with the weapon icon under it. */
 .bstrip.rows .thumb{flex:none;aspect-ratio:1;border-radius:9px}
@@ -1042,7 +1057,7 @@ button{font:inherit;color:inherit}
 .bp-left:hover .bp-art img{transform:scale(1.06)}
 .bp-left:hover .bp-art img.cut{transform:scale(1.12)}
 .bp-art .g{
-  font-size:20px;font-weight:600;color:color-mix(in srgb,var(--attr) 70%,var(--fg-3));
+  font-size:1.25rem;font-weight:600;color:color-mix(in srgb,var(--attr) 70%,var(--fg-3));
 }
 /* The right half: the weapon, its name against its picture. Ruled off from the
    left so the tile reads as the two things it opens. */
@@ -1088,7 +1103,7 @@ button{font:inherit;color:inherit}
    which "Cantarella" does not fit on one — and a name cut to "Cantare…" is
    worse than a name on two lines. */
 .bp-who b{
-  font-size:13px;font-weight:600;line-height:1.22;
+  font-size:.8125rem;font-weight:600;line-height:1.22;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .bp-who:hover b{color:var(--attr)}
@@ -1099,13 +1114,13 @@ button{font:inherit;color:inherit}
    where the class label used to be. Two lines rather than an ellipsis, for the
    same reason the character names get two: "Thousandfold …" names nothing. */
 .bp-wep{
-  min-width:0;font-size:11.5px;font-weight:500;color:var(--fg-2);letter-spacing:-.01em;
+  min-width:0;font-size:.7188rem;font-weight:500;color:var(--fg-2);letter-spacing:-.01em;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   line-height:1.3;
 }
 .bp-right:not(.empty):hover .bp-wep{color:var(--attr)}
 .bp-right.empty .bp-wep{
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:.5313rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
 }
 .wicon{
   position:relative;overflow:hidden;
@@ -1129,10 +1144,10 @@ button{font:inherit;color:inherit}
 .wtext{min-width:0;flex:1}
 .wtext b{
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  font-size:11.5px;font-weight:600;line-height:1.3;color:var(--fg);letter-spacing:-.01em;
+  font-size:.7188rem;font-weight:600;line-height:1.3;color:var(--fg);letter-spacing:-.01em;
 }
 .wsub{
-  flex:none;font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;
+  flex:none;font-family:var(--mono);font-size:.4688rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--fg-3);white-space:nowrap;
 }
 
@@ -1145,11 +1160,11 @@ button{font:inherit;color:inherit}
    the whole note is a click away on the version record, which is where a
    thousand words of provenance belongs. */
 .pcard-notes{
-  margin:0;font-size:12.5px;line-height:1.6;color:var(--fg-2);
+  margin:0;font-size:.7813rem;line-height:1.6;color:var(--fg-2);
   display:-webkit-box;-webkit-line-clamp:14;-webkit-box-orient:vertical;overflow:hidden;
 }
 .bnone{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--fg-3);
+  font-family:var(--mono);font-size:.6563rem;letter-spacing:.08em;color:var(--fg-3);
   padding:12px 0;
 }
 /* margin-top:auto pins it to the bottom of the card. Three cards in a row are
@@ -1158,12 +1173,12 @@ button{font:inherit;color:inherit}
 .pcard-foot{
   position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-end;gap:8px;
   margin-top:auto;padding:10px 16px;border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
 }
 .pcard:hover .pcard-foot{color:var(--fg)}
 .pcard-row .bstrip{padding-bottom:2px}
 .pcard-note{
-  position:relative;z-index:1;padding:14px 16px;font-size:12px;color:var(--fg-3);line-height:1.6;
+  position:relative;z-index:1;padding:14px 16px;font-size:.75rem;color:var(--fg-3);line-height:1.6;
 }
 
 /* Phase track — one bar for the patch run, split where the phases change,
@@ -1182,7 +1197,7 @@ button{font:inherit;color:inherit}
 }
 .track-k{
   display:flex;justify-content:space-between;gap:14px;margin-top:9px;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);
 }
 .track-k span{white-space:nowrap;flex:none}
 /* The middle label is the one that gives, not the dates either side of it. */
@@ -1233,7 +1248,7 @@ button{font:inherit;color:inherit}
    this is one rule rather than per-character framing. */
 .bmini .thumb img.poster{object-position:center top;transform:scale(1.7);transform-origin:50% 24%}
 .bmini .thumb .g{
-  font-family:var(--cjk);font-size:24px;font-weight:700;
+  font-family:var(--cjk);font-size:1.5rem;font-weight:700;
   color:color-mix(in srgb,var(--attr) 60%,var(--fg));opacity:.65;
 }
 /* The phase, now that it is a chip in the meta row rather than a bar across
@@ -1251,19 +1266,19 @@ button{font:inherit;color:inherit}
    "Yangyan…" tells you nothing. */
 .bmini b{
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
-  font-size:14px;font-weight:600;margin-top:9px;line-height:1.28;overflow:hidden;
+  font-size:.875rem;font-weight:600;margin-top:9px;line-height:1.28;overflow:hidden;
   letter-spacing:-.01em;color:var(--fg);
 }
 /* Rarity and element as separate marks rather than one grey string — the
    element is the thing people scan a banner row for. */
 .bmini .bmeta,.bp-who .bmeta{
   display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.09em;text-transform:uppercase;
 }
 .bmini .bmeta i,.bp-who .bmeta i{font-style:normal}
 /* Tighter in the banner row, where the chips share a 165px column with the
    name above them and the weapon below. */
-.bp-who .bmeta{gap:5px;margin-top:4px;font-size:9px}
+.bp-who .bmeta{gap:5px;margin-top:4px;font-size:.5625rem}
 
 /* ── banner cards ───────────────────────────────────────────────────
    The phase strip on a version record: one card per banner, the character
@@ -1276,7 +1291,7 @@ button{font:inherit;color:inherit}
    and nothing to keep in step when a phase gains one. Below 260px of room per
    card they stack, which is what happens on a phone. */
 .bstrip.cards{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16.25rem),1fr));
   gap:12px;
 }
 /* The art column is a share of the card until that share stops being a
@@ -1284,7 +1299,7 @@ button{font:inherit;color:inherit}
    31% of that is a 160px square with a face floating in the middle of it — so
    the share is capped and the extra width goes to the text beside it. */
 .bcard{
-  display:grid;grid-template-columns:minmax(84px,min(31%,172px)) minmax(0,1fr);gap:14px;
+  display:grid;grid-template-columns:minmax(5.25rem,min(31%,10.75rem)) minmax(0,1fr);gap:14px;
   padding:12px;border:1px solid var(--line);border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--bg-2) 62%,transparent);
   transition:border-color .16s,background .16s;min-width:0;
@@ -1301,7 +1316,7 @@ button{font:inherit;color:inherit}
 .bcard-art{
   /* The floor rises with the panel so the picture stays taller than it is
      wide once the card has room; past that the row's own height takes over. */
-  position:relative;overflow:hidden;border-radius:9px;min-height:clamp(158px,12.5vw,214px);
+  position:relative;overflow:hidden;border-radius:9px;min-height:clamp(9.875rem,12.5vw,13.375rem);
   border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;
   background:
@@ -1318,14 +1333,14 @@ button{font:inherit;color:inherit}
 /* Kuro's reveal poster runs the game logo across the top. Start below it. */
 .bcard-art img.poster{object-position:center 22%}
 .bcard-art .g{
-  position:relative;font-family:var(--cjk);font-size:34px;font-weight:700;
+  position:relative;font-family:var(--cjk);font-size:2.125rem;font-weight:700;
   color:color-mix(in srgb,var(--attr) 62%,var(--fg));opacity:.6;
 }
 /* Debut or return. Bottom-left of the picture, where a cut-out has its darkest
    corner and nothing worth covering. */
 .bcard-art .bflag{
   position:absolute;left:7px;bottom:7px;z-index:2;font-style:normal;
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5313rem;letter-spacing:.11em;text-transform:uppercase;
   padding:2px 6px;border-radius:5px;background:rgba(13,12,17,.78);
   border:1px solid var(--line-2);color:var(--fg-2);
 }
@@ -1335,23 +1350,23 @@ button{font:inherit;color:inherit}
 .bcard-b{min-width:0;display:flex;flex-direction:column}
 .bcard-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin-bottom:10px}
 .bcard-h>b{
-  font-size:15px;font-weight:600;line-height:1.3;letter-spacing:-.01em;color:var(--fg);
+  font-size:.9375rem;font-weight:600;line-height:1.3;letter-spacing:-.01em;color:var(--fg);
   flex:1 1 auto;min-width:0;transition:color .16s;
 }
 .bcard-h .bcard-r{
-  flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--amber);
+  flex:none;font-family:var(--mono);font-size:.625rem;letter-spacing:.08em;color:var(--amber);
 }
 /* The epithet on its own line under the name — "Voices of Azure Plume" is a
    title, not a property, and beside the name it fights the name. */
-.bcard-h .bcard-ep{flex:1 1 100%;font-size:11.5px;line-height:1.45;color:var(--fg-3)}
+.bcard-h .bcard-ep{flex:1 1 100%;font-size:.7188rem;line-height:1.45;color:var(--fg-3)}
 /* The signature weapon card, at card scale. It is the same component the
    Resonator record heads its side column with — same markup, same behaviour,
    one size down because here it shares a card with a picture. */
 .bcard .wcard{padding:8px 10px;gap:9px;border-radius:8px}
 .bcard .wcard-art{width:34px;height:34px;border-radius:7px}
-.bcard .wcard-t b{font-size:12.5px;line-height:1.3}
-.bcard .wcard-t .label{font-size:9px;letter-spacing:.12em}
-.bcard .wcard-r{font-size:9.5px}
+.bcard .wcard-t b{font-size:.7813rem;line-height:1.3}
+.bcard .wcard-t .label{font-size:.5625rem;letter-spacing:.12em}
+.bcard .wcard-r{font-size:.5938rem}
 /* Label left, value right — the same shape the version's own dates take a few
    rows up, so the record reads as one document at two scales. Pushed to the
    foot of the card so the weapon card sits under the name whether or not the
@@ -1359,11 +1374,11 @@ button{font:inherit;color:inherit}
 .bcard-facts{display:grid;gap:6px;margin-top:11px}
 .bcard-facts>div{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
 .bcard-facts span{
-  flex:none;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  flex:none;font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;
   text-transform:uppercase;color:var(--fg-3);
 }
 .bcard-facts b{
-  min-width:0;font-size:12.5px;font-weight:500;line-height:1.45;
+  min-width:0;font-size:.7813rem;font-weight:500;line-height:1.45;
   color:var(--fg-2);text-align:right;
 }
 /* Under about 300px of card the two columns stop being columns: the picture
@@ -1423,21 +1438,21 @@ button{font:inherit;color:inherit}
    intrinsic pass is the height the tile is laid out at, which is the whole
    reason the bottom row was being cut off — see the strip's own note. */
 @container (min-width:480px){
-  .bp-who b{font-size:clamp(13px,5cqi,26px);line-height:1.16}
-  .bp-who .bmeta{font-size:clamp(9px,2.7cqi,18px);gap:.5em;margin-top:.5em;flex-wrap:nowrap}
+  .bp-who b{font-size:clamp(.8125rem,5cqi,1.625rem);line-height:1.16}
+  .bp-who .bmeta{font-size:clamp(.5625rem,2.7cqi,1.125rem);gap:.5em;margin-top:.5em;flex-wrap:nowrap}
   .bp-who .attr,.bp-who .new{padding:.18em .5em;border-radius:6px}
-  .bp-wep{font-size:clamp(11.5px,4.1cqi,23px);line-height:1.25}
-  .bp-right.empty .bp-wep{font-size:clamp(8.5px,3cqi,17px)}
+  .bp-wep{font-size:clamp(.7188rem,4.1cqi,1.4375rem);line-height:1.25}
+  .bp-right.empty .bp-wep{font-size:clamp(.5313rem,3cqi,1.0625rem)}
   /* The initial a tile falls back to with no portrait published. It stands in
      for the face, so it grows with the name beside it. */
-  .bp-art .g{font-size:clamp(20px,6.5cqi,34px)}
+  .bp-art .g{font-size:clamp(1.25rem,6.5cqi,2.125rem)}
 }
 .bmini-more{
   flex:none;align-self:center;padding:0 2px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--fg-3);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.08em;color:var(--fg-3);
 }
 .bmini span{
-  display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;
+  display:block;font-family:var(--mono);font-size:.5313rem;letter-spacing:.09em;text-transform:uppercase;
   color:var(--attr);
 }
 .bmini.unknown .thumb{border-style:dashed}
@@ -1448,11 +1463,11 @@ button{font:inherit;color:inherit}
   margin-top:14px;padding:10px 13px;border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--amber) 7%,transparent);
   border-left:2px solid color-mix(in srgb,var(--amber) 55%,transparent);
-  font-size:13px;color:var(--fg-2);line-height:1.6;
+  font-size:.8125rem;color:var(--fg-2);line-height:1.6;
 }
 
 /* ══ character cards (next-patch hero grid) ═════════════════════════ */
-.cgrid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.cgrid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(21.25rem,1fr))}
 .ccard{
   --attr:var(--accent);
   position:relative;display:flex;flex-direction:column;text-align:left;
@@ -1475,7 +1490,7 @@ button{font:inherit;color:inherit}
 }
 /* Cards can get wide when only two characters share the grid. Cap the panel
    height so a 4:5 ratio doesn't turn into an 800px tower. */
-.cart.has-art,.cart.has-cutout{aspect-ratio:4/5;max-height:520px}
+.cart.has-art,.cart.has-cutout{aspect-ratio:4/5;max-height:32.5rem}
 .cart:not(.has-art)::before{
   content:"";position:absolute;left:50%;top:52%;width:112%;aspect-ratio:1;
   transform:translate(-50%,-50%);
@@ -1504,18 +1519,18 @@ button{font:inherit;color:inherit}
 }
 .cart .glyph{
   position:relative;font-family:var(--cjk);font-weight:700;
-  font-size:clamp(46px,8vw,74px);line-height:1;letter-spacing:.06em;
+  font-size:clamp(2.875rem,8vw,4.625rem);line-height:1;letter-spacing:.06em;
   color:color-mix(in srgb,var(--attr) 66%,var(--fg));opacity:.5;user-select:none;
 }
 .cart .rank{
   position:absolute;top:11px;left:13px;z-index:2;
-  font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--amber);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;color:var(--amber);
   border:1px solid color-mix(in srgb,var(--amber) 55%,transparent);border-radius:6px;padding:2px 7px;
   background:rgba(13,12,17,.7);
 }
 .cart .phase{
   position:absolute;top:11px;right:13px;z-index:2;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
   color:var(--bg);background:var(--attr);border-radius:6px;padding:3px 8px;
 }
 /* ── debut badge ──────────────────────────────────────────────────
@@ -1527,12 +1542,12 @@ button{font:inherit;color:inherit}
 .cart .debut,.rr-hero .debut{
   position:absolute;top:11px;right:13px;z-index:3;
   display:inline-flex;align-items:center;gap:5px;
-  font-family:var(--mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  font-family:var(--mono);font-size:.875rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
   color:var(--bg);background:var(--attr,var(--accent));border-radius:6px;padding:3px 9px;
   cursor:default;
 }
 .cart .debut i,.rr-hero .debut i{
-  font-style:normal;font-size:12px;letter-spacing:.04em;
+  font-style:normal;font-size:.75rem;letter-spacing:.04em;
   padding:0 4px;border-radius:4px;
   background:color-mix(in srgb,var(--bg) 26%,transparent);
 }
@@ -1541,7 +1556,7 @@ button{font:inherit;color:inherit}
    leaves the art on the rightmost column of the grid. */
 .cart .debut-tip,.rr-hero .debut-tip{
   position:absolute;top:calc(100% + 7px);right:0;z-index:4;
-  display:grid;gap:5px;min-width:132px;
+  display:grid;gap:5px;min-width:8.25rem;
   padding:9px 11px;border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--bg) 94%,transparent);
   border:1px solid var(--line-2);
@@ -1556,7 +1571,7 @@ button{font:inherit;color:inherit}
   opacity:1;visibility:visible;transform:translateY(0);
 }
 .cart .debut-tip em,.rr-hero .debut-tip em{
-  font-style:normal;color:var(--fg-3);font-size:8.5px;letter-spacing:.14em;
+  font-style:normal;color:var(--fg-3);font-size:.5313rem;letter-spacing:.14em;
   text-transform:uppercase;display:block;margin-bottom:2px;
 }
 .cart .debut-runs,.rr-hero .debut-runs{display:block}
@@ -1580,7 +1595,7 @@ button{font:inherit;color:inherit}
    it sits on artwork, where a hairline border and a colour disappear. */
 .cart .flag{
   position:absolute;top:11px;left:13px;z-index:3;
-  font-style:normal;font-family:var(--mono);font-size:14px;letter-spacing:.08em;
+  font-style:normal;font-family:var(--mono);font-size:.875rem;letter-spacing:.08em;
   text-transform:uppercase;font-weight:600;
   color:var(--bg);border-radius:6px;padding:3px 9px;
 }
@@ -1590,45 +1605,45 @@ button{font:inherit;color:inherit}
 .cart .attrline{
   position:absolute;left:13px;right:13px;bottom:11px;z-index:2;
   display:flex;gap:8px;flex-wrap:wrap;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
 }
 .cart .attrline b{color:var(--attr);font-weight:500}
 .ccredit{
   padding:6px 16px;border-bottom:1px solid var(--line);background:var(--bg);
-  font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:var(--fg-3);
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.05em;color:var(--fg-3);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 .ccredit a{color:var(--fg-3)}
 .cbody{padding:15px 16px 17px;display:flex;flex-direction:column;gap:11px;flex:1}
-.cbody h3{margin:0;font-size:19px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
-.cbody h3 .cjk{font-size:13px;font-weight:500;color:var(--attr)}
-.cwhen{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);margin-top:-6px}
-.cepithet{font-size:12.5px;font-style:italic;color:var(--attr);margin-top:-4px}
+.cbody h3{margin:0;font-size:1.1875rem;font-weight:600;letter-spacing:-.01em;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.cbody h3 .cjk{font-size:.8125rem;font-weight:500;color:var(--attr)}
+.cwhen{font-family:var(--mono);font-size:.5938rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);margin-top:-6px}
+.cepithet{font-size:.7813rem;font-style:italic;color:var(--attr);margin-top:-4px}
 .csum{
-  margin:0;font-size:13px;color:var(--fg-2);line-height:1.6;
+  margin:0;font-size:.8125rem;color:var(--fg-2);line-height:1.6;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
 .cgear{
   display:grid;gap:6px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;
-  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
 }
 .cgear div{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
-.cgear b{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--fg);text-transform:none;letter-spacing:0;text-align:right}
+.cgear b{font-family:var(--sans);font-size:.75rem;font-weight:500;color:var(--fg);text-transform:none;letter-spacing:0;text-align:right}
 .cknow{margin-top:auto}
 .cknow-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:9px}
 .cknow ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .cknow li{
-  position:relative;padding-left:14px;font-size:13px;color:var(--fg-2);line-height:1.5;
+  position:relative;padding-left:14px;font-size:.8125rem;color:var(--fg-2);line-height:1.5;
 }
 .cknow li::before{content:"";position:absolute;left:0;top:.6em;width:4px;height:4px;border-radius:50%;background:var(--attr)}
-.cknow .none{font-size:12px;color:var(--fg-3);font-style:italic}
+.cknow .none{font-size:.75rem;color:var(--fg-3);font-style:italic}
 .cmore{
-  margin-top:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  margin-top:12px;font-family:var(--mono);font-size:.5938rem;letter-spacing:.13em;text-transform:uppercase;
   color:var(--attr);display:flex;align-items:center;gap:6px;
 }
 
 /* rerun row */
-.rerow{display:grid;gap:9px;grid-template-columns:repeat(auto-fit,minmax(212px,1fr))}
+.rerow{display:grid;gap:9px;grid-template-columns:repeat(auto-fit,minmax(13.25rem,1fr))}
 .recard{
   --attr:var(--fg-3);
   display:flex;align-items:center;gap:11px;text-align:left;
@@ -1641,15 +1656,15 @@ button{font:inherit;color:inherit}
   flex:none;width:38px;height:38px;border-radius:9px;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(150deg,color-mix(in srgb,var(--attr) 30%,var(--bg-3)),var(--bg));
-  font-family:var(--cjk);font-size:16px;font-weight:700;color:color-mix(in srgb,var(--attr) 62%,var(--fg));
+  font-family:var(--cjk);font-size:1rem;font-weight:700;color:color-mix(in srgb,var(--attr) 62%,var(--fg));
 }
 .recard .g img{width:100%;height:100%;object-fit:cover;object-position:center 12%}
 /* 38px square — without a head crop this is an unreadable thumbnail of a poster. */
 .recard .g img.poster{object-position:center top;transform:scale(2.1);transform-origin:50% 38%}
 .recard .who{min-width:0;flex:1}
-.recard strong{display:block;font-size:13px;font-weight:500}
+.recard strong{display:block;font-size:.8125rem;font-weight:500}
 .recard span{
-  display:block;font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+  display:block;font-family:var(--mono);font-size:.5625rem;letter-spacing:.09em;text-transform:uppercase;
   color:var(--fg-3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 
@@ -1691,7 +1706,7 @@ button{font:inherit;color:inherit}
    beside its neighbours — it is meant to show more of its banner, not to be a
    different kind of card. */
 .ev{
-  flex:1 1 calc(20% - 10px);min-width:250px;max-width:560px;
+  flex:1 1 calc(20% - 10px);min-width:15.625rem;max-width:35rem;
   height:clamp(232px,11.5vw,320px);
   display:flex;flex-direction:column;overflow:hidden;
   border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint);
@@ -1702,7 +1717,7 @@ button{font:inherit;color:inherit}
    every version around a single big event and fills the rest with dailies and
    login tracks, so a row of identical tiles claims a flatness the patch does
    not have. */
-.ev.head{flex:2 1 calc(40% - 14px);max-width:1120px}
+.ev.head{flex:2 1 calc(40% - 14px);max-width:70rem}
 .ev:hover,.ev:focus-visible{
   border-color:color-mix(in srgb,var(--accent) 55%,transparent);transform:translateY(-2px);
 }
@@ -1748,7 +1763,7 @@ button{font:inherit;color:inherit}
    the rings are the statement, this is the footnote. */
 .ev-plate span{
   position:absolute;left:0;right:0;bottom:9px;text-align:center;
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5313rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--fg-3);opacity:.6;
 }
 .ev-top{
@@ -1772,14 +1787,14 @@ button{font:inherit;color:inherit}
   background:rgba(9,8,12,.6);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);
-  font-family:var(--mono);font-size:10.5px;color:var(--fg);
+  font-family:var(--mono);font-size:.6563rem;color:var(--fg);
 }
 /* On a tile the stone is the size of a stone. The number grew with it, but not
    as much — the glyph is what carries across a grid at a glance, and a mono
    figure set as large as the crystal turns the badge into a price tag. */
 .ev-astrite:not(.inline){
   gap:7px;padding:5px 12px 5px 7px;border-radius:10px;
-  font-size:14.5px;letter-spacing:.01em;
+  font-size:.9063rem;letter-spacing:.01em;
 }
 /* Astrite is a pale blue-white crystal in game, and the desk's cyan is the
    nearest thing it owns — lifted towards white so the glyph reads as a stone
@@ -1811,16 +1826,16 @@ img.astrite-pic{
   border-top:1px solid var(--line);display:flex;flex-direction:column;gap:1px;
 }
 .ev-kind{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.17em;text-transform:uppercase;
   color:var(--accent);
 }
 .ev-cap h3{
-  margin:0;font-size:15.5px;font-weight:600;line-height:1.25;letter-spacing:-.005em;
+  margin:0;font-size:.9688rem;font-weight:600;line-height:1.25;letter-spacing:-.005em;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.ev.head .ev-cap h3{font-size:19px;-webkit-line-clamp:1}
+.ev.head .ev-cap h3{font-size:1.1875rem;-webkit-line-clamp:1}
 .ev.head .ev-cap p{
-  margin:4px 0 0;font-size:12.5px;line-height:1.45;color:var(--fg-2);
+  margin:4px 0 0;font-size:.7813rem;line-height:1.45;color:var(--fg-2);
   display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
 }
 
@@ -1828,7 +1843,7 @@ img.astrite-pic{
    worth a colour; closing inside a week is worth the warning colour, because
    that is the only thing on the card you can act on today. */
 .ev-state{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.14em;text-transform:uppercase;
   padding:3px 8px;border-radius:6px;white-space:nowrap;
   border:1px solid var(--line-2);color:var(--fg-2);background:rgba(9,8,12,.55);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
@@ -1898,11 +1913,11 @@ img.astrite-pic{
   position:relative;z-index:1;min-height:var(--evr-h);
   display:flex;flex-direction:column;justify-content:center;
   padding:clamp(22px,3.4vh,34px) var(--dpad-x);
-  max-width:min(600px,60%);
+  max-width:min(37.5rem,60%);
 }
-.evr-copy h2{font-size:clamp(24px,2.6vw,34px);letter-spacing:-.02em;margin-bottom:8px}
+.evr-copy h2{font-size:clamp(1.5rem,2.6vw,2.125rem);letter-spacing:-.02em;margin-bottom:8px}
 .drawer-b .evr-copy .evr-sum{
-  font-size:14.5px;line-height:1.6;color:var(--fg-2);max-width:52ch;margin:0 0 16px;
+  font-size:.9063rem;line-height:1.6;color:var(--fg-2);max-width:52ch;margin:0 0 16px;
 }
 
 /* A standalone notice banner keeps the same hero, and changes one thing: it
@@ -1944,11 +1959,11 @@ img.astrite-pic{
 }
 .evr-dates>svg{flex:none;color:var(--fg-3)}
 .evr-range{display:inline-flex;align-items:baseline;gap:7px;flex-wrap:wrap}
-.evr-range b{font-size:13px;font-weight:500;color:var(--fg)}
-.evr-range i{font-family:var(--mono);font-size:11px;font-style:normal;color:var(--fg-3)}
+.evr-range b{font-size:.8125rem;font-weight:500;color:var(--fg)}
+.evr-range i{font-family:var(--mono);font-size:.6875rem;font-style:normal;color:var(--fg-3)}
 .evr-to{display:inline-flex;color:var(--fg-3);margin:0 2px;transform:translateY(1px)}
 .evr-est,.evr-perm{
-  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
 }
 
 /* Out to Kuro's own post. The only button on the record, because it is the
@@ -1959,7 +1974,7 @@ img.astrite-pic{
   padding:10px 16px;border-radius:var(--r-sm);text-decoration:none;
   background:color-mix(in srgb,var(--accent) 22%,rgba(9,8,12,.6));
   border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);
-  color:var(--fg);font-size:13px;transition:.15s;
+  color:var(--fg);font-size:.8125rem;transition:.15s;
 }
 .evr-cta:hover{background:color-mix(in srgb,var(--accent) 32%,rgba(9,8,12,.6));border-color:var(--accent)}
 .evr-cta svg{flex:none;color:var(--accent)}
@@ -1968,7 +1983,7 @@ img.astrite-pic{
    The four things that decide whether to open the game tonight, on one line
    directly under the picture. Same numbers the tile carries, said in full. */
 .evr-strip{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(11.875rem,1fr));
   margin:0 calc(-1 * var(--dpad-x));padding:14px var(--dpad-x);
   border-bottom:1px solid var(--line);background:var(--tint-sink);
   gap:12px 22px;
@@ -1977,10 +1992,10 @@ img.astrite-pic{
 .evr-strip svg{flex:none;color:var(--fg-3);margin-top:2px}
 .evr-strip span{min-width:0}
 .evr-strip em{
-  display:block;font-family:var(--mono);font-size:9.5px;font-style:normal;
+  display:block;font-family:var(--mono);font-size:.5938rem;font-style:normal;
   letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);margin-bottom:3px;
 }
-.evr-strip b{display:block;font-size:12.5px;font-weight:500;line-height:1.45;color:var(--fg-2)}
+.evr-strip b{display:block;font-size:.7813rem;font-weight:500;line-height:1.45;color:var(--fg-2)}
 
 /* ── the reel, and what the event is ───────────────────────────────
    Kuro's pictures on the left, their words on the right. The reel is the
@@ -2013,7 +2028,7 @@ img.astrite-pic{
 .evr-thumb[aria-current="true"]{opacity:1;border-color:var(--accent)}
 .evr-cap{
   display:flex;align-items:baseline;gap:10px;margin-top:10px;
-  font-size:11px;line-height:1.5;color:var(--fg-3);
+  font-size:.6875rem;line-height:1.5;color:var(--fg-3);
 }
 .evr-cap a{margin-left:auto;color:var(--fg-3);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
 .evr-cap a:hover{color:var(--accent)}
@@ -2040,7 +2055,7 @@ img.astrite-pic{
    floor and a ceiling gives one card size whatever the count, and the row
    starts at the left rather than being justified into the width. */
 .lootgrid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,210px));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(8.75rem,13.125rem));
   justify-content:start;gap:10px;
 }
 .loot{
@@ -2068,18 +2083,18 @@ img.astrite-pic{
 .loot-plate{
   display:flex;align-items:center;justify-content:center;width:100%;height:100%;
   border:1px dashed var(--line-2);border-radius:var(--r-sm);padding:4px;
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5313rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--fg-3);line-height:1.4;
 }
 .loot-t{display:block;min-width:0}
-.loot-t b{display:block;font-size:12.5px;font-weight:500;line-height:1.35;color:var(--fg)}
+.loot-t b{display:block;font-size:.7813rem;font-weight:500;line-height:1.35;color:var(--fg)}
 .loot-t em{
-  display:block;margin-top:3px;font-style:normal;font-size:11px;line-height:1.4;color:var(--fg-3);
+  display:block;margin-top:3px;font-style:normal;font-size:.6875rem;line-height:1.4;color:var(--fg-3);
 }
 .loot-f{display:flex;align-items:center;gap:7px;margin-top:auto;padding-top:2px;flex-wrap:wrap;justify-content:center}
-.loot-q{font-family:var(--mono);font-size:12.5px;color:var(--fg);letter-spacing:.02em}
+.loot-q{font-family:var(--mono);font-size:.7813rem;color:var(--fg);letter-spacing:.02em}
 .loot-tag{
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5313rem;letter-spacing:.12em;text-transform:uppercase;
   padding:2px 6px;border-radius:5px;border:1px solid var(--line-2);color:var(--fg-3);
 }
 /* The two rewards that aren't things: a multiplier on another mode's table,
@@ -2090,13 +2105,13 @@ img.astrite-pic{
   grid-column:1/-1;
   flex-direction:row;align-items:center;text-align:left;gap:13px;padding:13px 15px;
 }
-.loot.wide .loot-t b{font-size:13px}
+.loot.wide .loot-t b{font-size:.8125rem}
 .evr-loot .tier-note{margin-top:12px;display:block}
 
 /* ── the three boxes ───────────────────────────────────────────────
    What kind of thing it is, who can play it, and where the desk got it. */
 .evr-cols{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(16.25rem,1fr));
   gap:12px;margin-top:clamp(22px,3vh,30px);
 }
 .evr-box{
@@ -2104,7 +2119,7 @@ img.astrite-pic{
   display:flex;flex-direction:column;gap:11px;
 }
 .evr-box>.label{padding-bottom:10px;border-bottom:1px solid var(--line)}
-.drawer-b .evr-box p{margin:0;font-size:13px;max-width:none}
+.drawer-b .evr-box p{margin:0;font-size:.8125rem;max-width:none}
 .evr-box .dsrc{background:rgba(0,0,0,.14)}
 /* The gate, as a dial. Kuro writes it as a sentence and the sentence is kept
    underneath — this is only the number out of it, at a size that answers the
@@ -2118,12 +2133,12 @@ img.astrite-pic{
   border:1px solid color-mix(in srgb,var(--accent) 42%,transparent);
   background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%);
 }
-.evr-dial b{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--fg)}
+.evr-dial b{font-family:var(--mono);font-size:1.375rem;font-weight:500;color:var(--fg)}
 .evr-gate-t em{
-  display:block;font-family:var(--mono);font-size:9.5px;font-style:normal;
+  display:block;font-family:var(--mono);font-size:.5938rem;font-style:normal;
   letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);margin-bottom:4px;
 }
-.evr-gate-t b{font-size:14px;font-weight:500}
+.evr-gate-t b{font-size:.875rem;font-weight:500}
 
 @media (max-width:900px){
   /* The split hero needs room for a picture and a column of type side by side,
@@ -2144,7 +2159,7 @@ img.astrite-pic{
   .evr-mid{grid-template-columns:1fr}
 }
 @media (max-width:560px){
-  .lootgrid{grid-template-columns:repeat(auto-fit,minmax(104px,150px));gap:8px}
+  .lootgrid{grid-template-columns:repeat(auto-fit,minmax(6.5rem,9.375rem));gap:8px}
   .loot{padding:12px 9px 11px}
   .loot-pic{width:62px;height:62px}
   .evr-thumb{width:72px}
@@ -2161,12 +2176,12 @@ img.astrite-pic{
   /* min-width:0 first: the band's floor is a desktop number, and left standing
      it beats the max-width below — min-width always does — and puts one tile a
      row on a 400px phone with half the width empty beside it. */
-  .ev{flex:1 1 44%;min-width:0;height:186px;max-width:calc(50% - 5px)}
+  .ev{flex:1 1 44%;min-width:0;height:186px;max-width:calc(50% - .3125rem)}
   /* The headline tile drops to the same size as the rest here. Two up on a
      phone means an odd-width tile leaves half a row empty behind it, and the
      band is a queue now — every hole in it reads as a missing event. */
-  .ev.head{flex:1 1 44%;min-width:0;height:186px;max-width:calc(50% - 5px)}
-  .ev-cap h3,.ev.head .ev-cap h3{font-size:13px}
+  .ev.head{flex:1 1 44%;min-width:0;height:186px;max-width:calc(50% - .3125rem)}
+  .ev-cap h3,.ev.head .ev-cap h3{font-size:.8125rem}
   .ev.head .ev-cap p{display:none}
 }
 
@@ -2189,7 +2204,7 @@ img.astrite-pic{
 }
 /* Thumbnail beside the text, not above it: the list has to stay scannable at
    one row per story, and a stacked image doubles the height of every row. */
-.intel.has-art{display:grid;grid-template-columns:112px minmax(0,1fr);gap:15px;align-items:start}
+.intel.has-art{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:15px;align-items:start}
 .itext{min-width:0}
 .ithumb{
   position:relative;aspect-ratio:3/2;border-radius:9px;overflow:hidden;border:1px solid var(--line);
@@ -2209,7 +2224,7 @@ img.astrite-pic{
     linear-gradient(160deg,var(--bg-2),var(--bg));
 }
 .ithumb.plate span{
-  font-family:var(--mono);font-size:16px;font-weight:500;letter-spacing:.06em;
+  font-family:var(--mono);font-size:1rem;font-weight:500;letter-spacing:.06em;
   color:currentColor;opacity:.72;font-variant-numeric:tabular-nums;
 }
 .intel:hover .ithumb img{transform:scale(1.05)}
@@ -2217,43 +2232,43 @@ img.astrite-pic{
 .intel:hover .ithumb.cut img{transform:scale(1.42)}
 
 .intel-h{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
-.intel-h .when{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--fg-3)}
-.intel h3{margin:0 0 5px;font-size:15px;font-weight:600;line-height:1.45;color:var(--fg);letter-spacing:-.01em}
+.intel-h .when{font-family:var(--mono);font-size:.625rem;letter-spacing:.08em;color:var(--fg-3)}
+.intel h3{margin:0 0 5px;font-size:.9375rem;font-weight:600;line-height:1.45;color:var(--fg);letter-spacing:-.01em}
 /* A measure, not the full column. On a wide monitor the intel column is over
    1000px and a body line runs to 180 characters, which is a paragraph you skip
    rather than read. */
 .intel h3,.intel p{max-width:88ch}
 .intel p{
-  margin:0;font-size:13px;color:var(--fg-2);line-height:1.6;
+  margin:0;font-size:.8125rem;color:var(--fg-2);line-height:1.6;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .intel-f{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
-.srcs{display:flex;gap:9px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;color:var(--fg-3)}
+.srcs{display:flex;gap:9px;flex-wrap:wrap;font-family:var(--mono);font-size:.625rem;color:var(--fg-3)}
 .srcs a,.srcs span{color:var(--fg-3);text-decoration:none;border-bottom:1px dotted var(--line-2)}
 .srcs a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .lang{
-  display:inline-block;font-size:8.5px;padding:0 4px;margin-right:5px;
+  display:inline-block;font-size:.5313rem;padding:0 4px;margin-right:5px;
   border:1px solid var(--line-2);border-radius:5px;letter-spacing:.08em;
 }
 .conf{
   margin-left:auto;display:flex;align-items:center;gap:8px;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.13em;text-transform:uppercase;
 }
 .conf .k{color:var(--fg-3)}
 .conf b{color:currentColor;font-weight:500}
 .conf .meter{display:flex;gap:3px}
 .conf .meter i{width:12px;height:3px;border-radius:1px;background:var(--line-2)}
 .conf .meter i.on{background:currentColor}
-.outcome{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase}
+.outcome{font-family:var(--mono);font-size:.5938rem;letter-spacing:.1em;text-transform:uppercase}
 .outcome.ok{color:var(--t-official)}
 .outcome.no{color:var(--amber)}
 
 /* compact variant on the dashboard, where the column is half width */
 .intel.mini{padding:12px 16px 13px 18px}
-.intel.mini h3{font-size:13px;margin-bottom:4px}
-.intel.mini p{-webkit-line-clamp:2;font-size:12px}
+.intel.mini h3{font-size:.8125rem;margin-bottom:4px}
+.intel.mini p{-webkit-line-clamp:2;font-size:.75rem}
 .intel.mini .intel-f,.intel.mini .conf{display:none}
-.intel.mini.has-art{grid-template-columns:64px minmax(0,1fr);gap:12px}
+.intel.mini.has-art{grid-template-columns:4rem minmax(0,1fr);gap:12px}
 .intel.mini .ithumb{aspect-ratio:1/1}
 
 /* ══ live signals ═══════════════════════════════════════════════════ */
@@ -2261,9 +2276,9 @@ img.astrite-pic{
   display:flex;align-items:center;gap:10px;padding:10px 18px;
   border-bottom:1px solid var(--line);
   background:repeating-linear-gradient(135deg,rgba(217,99,92,.05) 0 8px,transparent 8px 16px);
-  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--t-rumour);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.13em;text-transform:uppercase;color:var(--t-rumour);
 }
-.warnbar span{color:var(--fg-3);letter-spacing:.08em;text-transform:none;font-size:11px}
+.warnbar span{color:var(--fg-3);letter-spacing:.08em;text-transform:none;font-size:.6875rem}
 
 /* .srcstrip / .srcpill — the row of per-fetcher status pills — stood here. It
    was drawn twice, under the Live Signals header and again as a Source health
@@ -2272,17 +2287,17 @@ img.astrite-pic{
 
 .term{display:flex;flex-direction:column;font-family:var(--mono)}
 .sig{
-  display:grid;grid-template-columns:76px 200px minmax(0,1fr) auto;gap:14px;align-items:center;
+  display:grid;grid-template-columns:4.75rem 12.5rem minmax(0,1fr) auto;gap:14px;align-items:center;
   padding:9px 18px;border-bottom:1px solid var(--bg-2);text-decoration:none;color:inherit;
   transition:background .12s;
 }
 .sig:last-child{border-bottom:0}
 .sig:hover{background:var(--bg-2)}
-.sig .t{font-size:11px;color:var(--fg-3);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.sig .t{font-size:.6875rem;color:var(--fg-3);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .sig .src{display:flex;align-items:center;gap:9px;min-width:0}
 .sig .sname{display:flex;flex-direction:column;gap:1px;min-width:0}
 .sig .src b{
-  font-size:10px;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
+  font-size:.625rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 /* The source mark. Carries the kind's colour, so scanning for the one official
@@ -2302,12 +2317,12 @@ img.astrite-pic{
 .smark.community{color:var(--t-datamined)}
 .smark.press{color:var(--fg-3)}
 .sig .head{
-  font-family:var(--sans);font-size:13.5px;color:var(--fg-2);line-height:1.45;
+  font-family:var(--sans);font-size:.8438rem;color:var(--fg-2);line-height:1.45;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;
 }
 /* Original headline under the translation, so nothing is hidden by it. */
 .sig .head .orig{
-  display:block;font-family:var(--cjk);font-style:normal;font-size:10.5px;color:var(--fg-3);
+  display:block;font-family:var(--cjk);font-style:normal;font-size:.6563rem;color:var(--fg-3);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:1px;
 }
 .lang.tr{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
@@ -2316,7 +2331,7 @@ img.astrite-pic{
 .sig .flags{display:flex;gap:6px;align-items:center}
 /* Dashboard column is half width — drop the headline onto its own line
    instead of squeezing it into 150px. */
-.term.mini .sig{grid-template-columns:70px minmax(0,1fr) auto;gap:3px 12px;padding:10px 16px}
+.term.mini .sig{grid-template-columns:4.375rem minmax(0,1fr) auto;gap:3px 12px;padding:10px 16px}
 .term.mini .sig .t{grid-row:1}
 .term.mini .sig .src{grid-column:2;grid-row:1;gap:8px}
 .term.mini .sig .sname{flex-direction:row;gap:8px;align-items:baseline}
@@ -2329,7 +2344,7 @@ img.astrite-pic{
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
 }
 .kind{
-  font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;
   border:1px solid currentColor;border-radius:5px;padding:1px 6px;white-space:nowrap;
 }
 .kind.official{color:var(--t-official)}
@@ -2337,7 +2352,7 @@ img.astrite-pic{
 .kind.community{color:var(--t-datamined)}
 .kind.press{color:var(--fg-3)}
 .hotflag{
-  font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);
+  font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);
   border:1px solid color-mix(in srgb,var(--amber) 45%,transparent);border-radius:5px;padding:1px 6px;
 }
 
@@ -2345,7 +2360,7 @@ img.astrite-pic{
 /* Eight or nine to a row on a desktop, not eleven. A record whose whole job is
    to be recognised by its face has a floor below which the face stops being the
    thing you see, and 152px was under it. */
-.rgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.rgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(11.875rem,1fr))}
 .rec{
   --attr:var(--accent);
   position:relative;display:flex;flex-direction:column;text-align:left;padding:0;
@@ -2362,33 +2377,33 @@ img.astrite-pic{
    the art is mostly face, and a caption bar across a face is the one place a
    label cannot go. */
 .rec-n{
-  margin:0;padding:12px 13px 13px;font-size:15px;font-weight:600;line-height:1.3;
+  margin:0;padding:12px 13px 13px;font-size:.9375rem;font-weight:600;line-height:1.3;
   display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;
   border-top:1px solid var(--line);
 }
-.rec-n .cjk{font-size:12px;font-weight:500;color:var(--attr)}
+.rec-n .cjk{font-size:.75rem;font-weight:500;color:var(--attr)}
 .rec:hover .rec-n{color:var(--attr)}
 /* The two corners still face each other across the top of the art, so the
    tracking stays off — "Upcoming" against a patch number is the tightest row on
    the desk, and the wider card spends its extra width on the face, not on these. */
-.rec .cart .debut{top:8px;right:8px;font-size:12.5px;letter-spacing:.06em;padding:2px 7px;gap:4px}
-.rec .cart .debut i{font-size:11px}
-.rec .cart .flag{top:8px;left:8px;font-size:12.5px;letter-spacing:.05em;padding:2px 7px}
+.rec .cart .debut{top:8px;right:8px;font-size:.7813rem;letter-spacing:.06em;padding:2px 7px;gap:4px}
+.rec .cart .debut i{font-size:.6875rem}
+.rec .cart .flag{top:8px;left:8px;font-size:.7813rem;letter-spacing:.05em;padding:2px 7px}
 
 /* Five marks always, the unearned ones greyed — the shape of the rating reads
    before the count does, which is the point of stars over "5★". */
-.stars{font-size:11px;color:var(--amber);letter-spacing:.12em;line-height:1}
+.stars{font-size:.6875rem;color:var(--amber);letter-spacing:.12em;line-height:1}
 .stars i{font-style:normal;color:var(--line-2)}
 /* The record grid dropped these when its cards became a portrait and a name;
    the aside's featured Resonator still runs the full layout, and this is the
    one place on the desk that does. */
 .rec-attrs{
   display:flex;gap:8px;flex-wrap:wrap;align-items:center;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-3);
 }
 .rec-attrs b{color:var(--attr);font-weight:500}
 .rec-role{
-  font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-2);
   border-top:1px solid var(--line);padding-top:10px;
 }
 
@@ -2396,8 +2411,8 @@ img.astrite-pic{
    tier badge reads as a verdict on the whole character. */
 .ctiers{display:grid;gap:8px;flex:1;min-width:0}
 .ctiers>div{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.ctiers .label{min-width:52px}
-.rec-when{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--fg-3)}
+.ctiers .label{min-width:3.25rem}
+.rec-when{font-family:var(--mono);font-size:.5625rem;letter-spacing:.09em;text-transform:uppercase;color:var(--fg-3)}
 
 /* ══ weapons ════════════════════════════════════════════════════════
    The same contact sheet the resonator grid is — big art, name underneath, and
@@ -2431,7 +2446,7 @@ img.astrite-pic{
 /* Wider cells than the resonator grid. A weapon's name runs to "Rime-Draped
    Sprouts" and it carries a stat line under it, where a resonator card carries
    one word. */
-.wgrid{grid-template-columns:repeat(auto-fill,minmax(222px,1fr))}
+.wgrid{grid-template-columns:repeat(auto-fill,minmax(13.875rem,1fr))}
 /* A weapon render is an object on transparent ground, not a portrait: it wants
    air around it and a floor to stand on, so it is contained and centred rather
    than cropped to fill. The 4:5 frame is the resonator card's, kept so the two
@@ -2458,13 +2473,13 @@ img.astrite-pic{
 }
 
 .wrec-b{padding:10px 11px 11px;border-top:1px solid var(--line);display:grid;gap:3px}
-.wrec-b h3{margin:0;font-size:13.5px;font-weight:600;line-height:1.3}
+.wrec-b h3{margin:0;font-size:.8438rem;font-weight:600;line-height:1.3}
 .rec:hover .wrec-b h3{color:var(--attr)}
 /* The two figures the grid is scanned for, and the only text on the card
    besides its name. Level 90, always — the ascension slider in the record does
    not touch these. */
 .wrec-s{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.06em;text-transform:uppercase;
   color:var(--fg-3);font-variant-numeric:tabular-nums;
 }
 .wrec-s b{color:var(--fg-2);font-weight:500}
@@ -2502,8 +2517,8 @@ img.astrite-pic{
 .ascend-h{display:flex;align-items:baseline;gap:12px}
 .ascend-h .label{flex:1;min-width:0}
 .ascend-v{
-  flex:none;min-width:30px;text-align:right;
-  font-family:var(--mono);font-size:12px;font-weight:500;
+  flex:none;min-width:1.875rem;text-align:right;
+  font-family:var(--mono);font-size:.75rem;font-weight:500;
   color:var(--rar,var(--attr));font-variant-numeric:tabular-nums;
 }
 /* The scale. Inset by half a thumb either side so S1 and S5 stand under the
@@ -2511,7 +2526,7 @@ img.astrite-pic{
    the track is drawn between thumb centres, not edge to edge. */
 .ascend-ticks{
   display:flex;justify-content:space-between;padding:0 6px;
-  font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--fg-3);
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.1em;color:var(--fg-3);
 }
 .ascend-ticks i{font-style:normal;transition:color .15s}
 .ascend-ticks i.on{color:var(--rar,var(--attr))}
@@ -2520,7 +2535,7 @@ img.astrite-pic{
    default: the native control is a light-mode widget and lands on this page as
    a white bar. */
 .ascend input[type=range]{
-  -webkit-appearance:none;appearance:none;flex:1;min-width:120px;
+  -webkit-appearance:none;appearance:none;flex:1;min-width:7.5rem;
   height:20px;background:none;cursor:pointer;margin:0;
 }
 .ascend input[type=range]::-webkit-slider-runnable-track{
@@ -2551,8 +2566,8 @@ img.astrite-pic{
   padding:11px 13px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
   display:flex;flex-direction:column;gap:3px;
 }
-.wstats .k{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
-.wstats b{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
+.wstats .k{font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
+.wstats b{font-family:var(--mono);font-size:1.1875rem;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
 
 /* ══ the weapon record ══════════════════════════════════════════════
    Two columns and a rule: the weapon on the left, what the desk measured about
@@ -2591,7 +2606,7 @@ img.astrite-pic{
    weapon for Qingxiao" ends up further from Qingxiao's weapon than the rail
    is. */
 .wr-head{
-  display:grid;grid-template-columns:minmax(0,auto) minmax(0,330px);
+  display:grid;grid-template-columns:minmax(0,auto) minmax(0,20.625rem);
   justify-content:start;
   gap:clamp(14px,2.6vw,42px);align-items:end;
   padding-bottom:clamp(16px,2vh,22px);
@@ -2603,9 +2618,9 @@ img.astrite-pic{
    runs to three words where a Resonator's is one, and "Thousandfold
    Deliverance" at 58px is two lines before the picture starts. */
 .drawer-b .wr-id h2{
-  margin:0;font-size:clamp(26px,3.1vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.04;
+  margin:0;font-size:clamp(1.625rem,3.1vw,2.625rem);font-weight:600;letter-spacing:-.03em;line-height:1.04;
 }
-.drawer-b .wr-sum{margin:0 0 4px;font-size:14px;line-height:1.65;max-width:42ch}
+.drawer-b .wr-sum{margin:0 0 4px;font-size:.875rem;line-height:1.65;max-width:42ch}
 
 /* The picture takes a column with a ceiling on it rather than a share of the
    row. A fraction hands it every pixel the panel gains, and what a weapon
@@ -2613,7 +2628,7 @@ img.astrite-pic{
    that it is a wide short band again, which is the crop this layout replaced.
    The passive takes what is left, which is also what keeps its measure sane. */
 .wr-body{
-  display:grid;grid-template-columns:minmax(0,clamp(210px,34%,330px)) minmax(0,1fr);
+  display:grid;grid-template-columns:minmax(0,clamp(13.125rem,34%,20.625rem)) minmax(0,1fr);
   gap:clamp(16px,1.8vw,26px);align-items:stretch;
 }
 
@@ -2672,7 +2687,7 @@ img.astrite-pic{
 /* Doubled up on purpose. `.drawer-b p` is the interim measure cap further down
    this file, at equal specificity and later in source order, and it would set
    this passive at 14px on a 76ch line inside a box that is neither. */
-.wr-eff .weff{font-size:13.5px;line-height:1.72;color:var(--fg-2)}
+.wr-eff .weff{font-size:.8438rem;line-height:1.72;color:var(--fg-2)}
 .wr-eff .weff p{margin:0;font-size:inherit;line-height:inherit;max-width:none}
 .wr-eff .weff p+p{margin-top:9px}
 /* Kuro's own list, where a passive has one. Bulleted in the attribute colour
@@ -2683,7 +2698,7 @@ img.astrite-pic{
   content:"";position:absolute;left:0;top:.66em;width:4px;height:4px;border-radius:50%;
   background:var(--attr);
 }
-.drawer-b .wr-thin{color:var(--fg-3);font-size:13px;line-height:1.65;margin:0;max-width:56ch}
+.drawer-b .wr-thin{color:var(--fg-3);font-size:.8125rem;line-height:1.65;margin:0;max-width:56ch}
 
 /* The rail. A rule rather than a card: the figures are part of this record,
    not a panel sitting next to it. */
@@ -2691,7 +2706,7 @@ img.astrite-pic{
   min-width:0;display:grid;gap:12px;align-content:start;
   padding-left:var(--wr-gap);border-left:1px solid var(--line);
 }
-.wr-rail-h{margin:0 0 1px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--fg)}
+.wr-rail-h{margin:0 0 1px;font-size:.9375rem;font-weight:600;letter-spacing:-.01em;color:var(--fg)}
 .wr-lv{
   display:grid;gap:11px;
   border:1px solid var(--line);border-radius:var(--r);padding:13px 14px 14px;
@@ -2722,14 +2737,14 @@ img.astrite-pic{
      150px between stops, and two figures set in boxes 400px wide are two
      numbers adrift in the middle of nothing. The intel list keeps the width —
      it is headlines, and they use it. */
-  .wr-lv,.wr-rail .wstats{max-width:470px}
+  .wr-lv,.wr-rail .wstats{max-width:29.375rem}
 }
 @media (max-width:700px){
   .wr-body{grid-template-columns:minmax(0,1fr)}
   /* Squared and centred rather than a band the width of the phone. Same reason
      the plate is near-square above: the render is drawn corner to corner. */
   .wr-art{width:min(100%,318px);height:auto;aspect-ratio:1;margin-inline:auto}
-  .drawer-b .wr-id h2{font-size:clamp(24px,7vw,34px)}
+  .drawer-b .wr-id h2{font-size:clamp(1.5rem,7vw,2.125rem)}
 }
 
 /* ══ aside ══════════════════════════════════════════════════════════ */
@@ -2737,18 +2752,18 @@ img.astrite-pic{
   display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line);
   background:var(--tint-sink);
 }
-.mini-h h3{margin:0;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.mini-h h3{margin:0;font-family:var(--mono);font-size:.625rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
 .mini-b{padding:13px 14px}
 .glance{display:grid;gap:11px}
-.glance-row{display:flex;align-items:baseline;gap:10px;font-size:12.5px;color:var(--fg-2)}
-.glance-row b{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--fg);font-variant-numeric:tabular-nums}
+.glance-row{display:flex;align-items:baseline;gap:10px;font-size:.7813rem;color:var(--fg-2)}
+.glance-row b{margin-left:auto;font-family:var(--mono);font-size:.75rem;color:var(--fg);font-variant-numeric:tabular-nums}
 .glance-row b.accent{color:var(--accent)}
 
 .feat{position:relative}
 .feat .cart{aspect-ratio:4/5}
 .feat-b{padding:14px}
-.feat-b h3{margin:0 0 3px;font-size:19px;font-weight:600}
-.feat-b .cjk{font-family:var(--cjk);font-size:13px;color:var(--attr)}
+.feat-b h3{margin:0 0 3px;font-size:1.1875rem;font-weight:600}
+.feat-b .cjk{font-family:var(--cjk);font-size:.8125rem;color:var(--attr)}
 .feat-b .rec-attrs{margin-top:9px}
 .feat-b .ctiers{margin-top:13px}
 .feat-b .btn{margin-top:13px}
@@ -2757,7 +2772,7 @@ img.astrite-pic{
   display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
   background:var(--bg-3);border:1px solid var(--line-2);border-radius:var(--r-sm);padding:9px;
   cursor:pointer;color:var(--fg-2);
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;
   transition:.15s;
 }
 .btn:hover{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
@@ -2812,13 +2827,13 @@ img.astrite-pic{
   /* The key visual box, shared with the two date rows that bracket it. */
   --kv-w:min(1120px,108vh);
 }
-.drawer-b h2{margin:0 0 10px;font-size:21px;font-weight:600;line-height:1.3;letter-spacing:-.01em}
-.drawer-b h2 .cjk{font-size:15px;color:var(--attr);margin-left:9px;font-weight:500}
+.drawer-b h2{margin:0 0 10px;font-size:1.3125rem;font-weight:600;line-height:1.3;letter-spacing:-.01em}
+.drawer-b h2 .cjk{font-size:.9375rem;color:var(--attr);margin-left:9px;font-weight:500}
 .drawer-b .meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 /* Interim measure cap. Nothing in here has been laid out for a thousand-pixel
    column yet, and a summary set across the full width runs to 140 characters a
    line. Holds prose to a readable measure until the panel's real layout lands. */
-.drawer-b p{font-size:14px;line-height:1.7;color:var(--fg-2);max-width:76ch}
+.drawer-b p{font-size:.875rem;line-height:1.7;color:var(--fg-2);max-width:76ch}
 /* Same reason for the patch note: a 13px line run across the full panel is
    190 characters. Left-aligned with air to the right, like the summary above. */
 .drawer-b .vnote{max-width:104ch}
@@ -2870,14 +2885,14 @@ img.astrite-pic{
 }
 .wcard-art img{width:100%;height:100%;object-fit:contain;padding:3px}
 .wcard-t{display:grid;gap:3px;min-width:0;flex:1}
-.wcard-t b{font-size:13.5px;font-weight:600;color:var(--fg);line-height:1.35}
+.wcard-t b{font-size:.8438rem;font-weight:600;color:var(--fg);line-height:1.35}
 .wcard:not(.is-flat):hover .wcard-t b{color:var(--attr,var(--accent))}
 .wcard-r{
-  flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--amber);
+  flex:none;font-family:var(--mono);font-size:.625rem;letter-spacing:.08em;color:var(--amber);
 }
 .wcard .arrow{flex:none;color:var(--fg-3);display:flex}
 .dsec ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
-.dsec li{position:relative;padding-left:16px;font-size:13.5px;color:var(--fg-2);line-height:1.6}
+.dsec li{position:relative;padding-left:16px;font-size:.8438rem;color:var(--fg-2);line-height:1.6}
 .dsec li::before{content:"";position:absolute;left:0;top:.62em;width:4px;height:4px;border-radius:50%;background:var(--attr)}
 /* ── kit ──────────────────────────────────────────────────────────
    A full Resonator kit is around five thousand words, and a column of closed
@@ -2910,7 +2925,7 @@ img.astrite-pic{
   border-bottom:1px solid var(--line);background:var(--bg-2);
 }
 .skill-hh{display:grid;gap:3px;min-width:0;flex:1}
-.skill-h b{font-size:13.5px;font-weight:600;color:var(--fg);line-height:1.35}
+.skill-h b{font-size:.8438rem;font-weight:600;color:var(--fg);line-height:1.35}
 .skill-h .skill-k{width:auto;color:var(--attr,var(--fg-3))}
 /* The same mark the rotation band uses for this slot, so a card and its node
    are recognisably the same thing at two sizes. */
@@ -2933,12 +2948,12 @@ img.astrite-pic{
 .skill summary::-webkit-details-marker{display:none}
 .skill summary:hover{background:var(--bg-2)}
 .skill[open] summary{border-bottom:1px solid var(--line);background:var(--bg-2)}
-.skill summary b{font-size:13.5px;font-weight:600;color:var(--fg);flex:1;min-width:0}
+.skill summary b{font-size:.8438rem;font-weight:600;color:var(--fg);flex:1;min-width:0}
 /* The slot name is fixed-width so the skill names line up down the list and
    the eye can run the column of "Basic Attack / Resonance Skill / …" without
    reading it. Chain nodes get the same column, holding S1 to S6. */
 .skill-k{
-  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg-3);flex:none;width:104px;line-height:1.45;
 }
 /* Disclosure arrow, drawn rather than fetched — rotates a quarter turn open. */
@@ -2949,7 +2964,7 @@ img.astrite-pic{
 }
 .skill[open] summary::after{transform:rotate(45deg)}
 .skill-t{padding:12px 13px 14px}
-.skill-t p{margin:0 0 9px;font-size:13px;line-height:1.65;color:var(--fg-2)}
+.skill-t p{margin:0 0 9px;font-size:.8125rem;line-height:1.65;color:var(--fg-2)}
 .skill-t p:last-child{margin-bottom:0}
 /* The two marks the scraper preserves out of Kuro's own copy: bold on every
    number that matters, underline on the element a hit deals. Both earn their
@@ -2960,7 +2975,7 @@ img.astrite-pic{
 /* Sub-ability headings — "Heavy Attack", "Dodge Counter". A Basic Attack entry
    is six of these; without them it is one unreadable paragraph. */
 .skill-t h5{
-  margin:14px 0 6px;font-family:var(--mono);font-size:9.5px;font-weight:500;
+  margin:14px 0 6px;font-family:var(--mono);font-size:.5938rem;font-weight:500;
   letter-spacing:.12em;text-transform:uppercase;color:var(--attr,var(--accent));
 }
 .skill-t h5:first-child{margin-top:0}
@@ -2968,7 +2983,7 @@ img.astrite-pic{
    reads as the card's own note rather than another line of the skill. */
 .skill-t .gist-more{
   margin:11px 0 0;padding-top:9px;border-top:1px dashed var(--line);
-  font-size:11px;line-height:1.5;color:var(--fg-3);
+  font-size:.6875rem;line-height:1.5;color:var(--fg-3);
 }
 /* One card's way out of Simplified. The global toggle is a preference about
    the whole record; this is a reader who wants this skill and not the other
@@ -2976,12 +2991,12 @@ img.astrite-pic{
 .skill-more{
   display:flex;align-items:center;gap:8px;width:100%;
   padding:9px 13px 11px;border:0;border-top:1px dashed var(--line);
-  background:none;cursor:pointer;font:inherit;font-size:12px;color:var(--fg-3);
+  background:none;cursor:pointer;font:inherit;font-size:.75rem;color:var(--fg-3);
   transition:.15s;text-align:left;
 }
 .skill-more:hover{color:var(--fg);background:var(--tint)}
 .skill-more em{
-  font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.08em;color:var(--fg-3);
+  font-family:var(--mono);font-size:.5938rem;font-style:normal;letter-spacing:.08em;color:var(--fg-3);
 }
 .skill-more svg{margin-left:auto;flex:none}
 /* Jumped to from the rotation band. Long enough to find the card with your eye
@@ -2999,7 +3014,7 @@ img.astrite-pic{
 .kitmode{
   display:flex;align-items:center;gap:8px;flex:none;
   background:none;border:0;padding:0;cursor:pointer;color:var(--fg-3);
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.12em;text-transform:uppercase;
   transition:color .15s;
 }
 .kitmode i{
@@ -3019,13 +3034,13 @@ img.astrite-pic{
 .kitmode:hover i{border-color:var(--line-2)}
 /* `.drawer-b p` sets 14px and outranks `.tier-note`'s 10px on specificity, so
    a note dropped into the drawer came out at body size and shouting. */
-.drawer-b .tier-note{font-size:10px;line-height:1.6}
+.drawer-b .tier-note{font-size:.625rem;line-height:1.6}
 /* The credit under a kit is a sentence, not a label — uppercase mono over two
    lines made an attribution read like a warning. */
 .kit-credit{
-  margin:14px 0 0;font-size:11.5px;line-height:1.6;color:var(--fg-3);
+  margin:14px 0 0;font-size:.7188rem;line-height:1.6;color:var(--fg-3);
 }
-.drawer-b p.kit-credit{font-size:11.5px}
+.drawer-b p.kit-credit{font-size:.7188rem}
 .kit-credit a{color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
 .kit-credit a:hover{color:var(--accent)}
 
@@ -3036,7 +3051,7 @@ img.astrite-pic{
 .vstream{
   display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 9px;
   padding-left:11px;margin-left:2px;border-left:1px solid var(--line-2);
-  font-size:12.5px;color:var(--fg-2);
+  font-size:.7813rem;color:var(--fg-2);
 }
 .vstream>.label{padding:0}
 .vstream b{font-weight:500;color:var(--fg);white-space:nowrap}
@@ -3049,8 +3064,8 @@ img.astrite-pic{
 .vstream a:hover svg{opacity:1}
 
 .dgear{display:grid;gap:8px}
-.dgear div{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:13px}
-.dgear span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.dgear div{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-size:.8125rem}
+.dgear span{font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
 /* The version's key visual, sitting in the gear list between the date it
    launched and the date it ends — the window on either side of the picture,
    which is what those two rows are. It takes its own margins because 8px of
@@ -3069,7 +3084,7 @@ img.astrite-pic{
    binds. Either way the poster is the biggest thing in the record, which is
    what it is for. */
 .dkv{
-  margin:16px auto;width:100%;max-width:var(--kv-w,min(1120px,108vh));
+  margin:16px auto;width:100%;max-width:var(--kv-w,min(70rem,108vh));
   border:1px solid var(--line);border-radius:var(--r-sm);
   overflow:hidden;background:var(--bg-2);
 }
@@ -3078,7 +3093,7 @@ img.astrite-pic{
   display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;
   padding:8px 11px 9px;border-top:1px solid var(--line);
   background:var(--tint-sink);
-  font-size:11px;line-height:1.5;color:var(--fg-3);
+  font-size:.6875rem;line-height:1.5;color:var(--fg-3);
 }
 /* Pushed to the end of the caption line, so the credit reads as a sentence and
    the way out sits where a link on a card always sits. */
@@ -3086,7 +3101,7 @@ img.astrite-pic{
 .dkv figcaption a:hover{color:var(--accent)}
 .dsrc{
   display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:var(--r-sm);
-  text-decoration:none;font-size:12.5px;color:var(--fg-2);transition:.15s;
+  text-decoration:none;font-size:.7813rem;color:var(--fg-2);transition:.15s;
 }
 .dsrc:hover{border-color:var(--line-2);color:var(--fg);background:var(--bg-2)}
 .dsrc[role="button"]{cursor:pointer;text-align:left}
@@ -3154,7 +3169,7 @@ img.astrite-pic{
   display:flex;align-items:center;justify-content:center;
 }
 .rr-glyph{
-  position:relative;font-family:var(--cjk);font-size:clamp(56px,7vw,96px);
+  position:relative;font-family:var(--cjk);font-size:clamp(3.5rem,7vw,6rem);
   color:var(--attr,var(--fg-3));opacity:.22;line-height:1;
 }
 
@@ -3162,7 +3177,7 @@ img.astrite-pic{
   position:relative;z-index:1;min-height:var(--rr-h);
   display:flex;flex-direction:column;justify-content:center;
   padding:clamp(24px,3.4vh,36px) 0 clamp(24px,3.4vh,36px) var(--dpad-x);
-  max-width:min(640px,100%);
+  max-width:min(40rem,100%);
 }
 /* Element first, above the name. It is the single most load-bearing fact about
    a Resonator — it decides the team before the kit does — and it was a row
@@ -3172,17 +3187,17 @@ img.astrite-pic{
 }
 .rr-elem svg{flex:none}
 .rr-elem span{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.6563rem;letter-spacing:.16em;text-transform:uppercase;
 }
 .rr-stars{display:flex;gap:3px;margin-bottom:6px;line-height:1}
-.rr-stars i{font-style:normal;font-size:14px;color:var(--amber)}
+.rr-stars i{font-style:normal;font-size:.875rem;color:var(--amber)}
 .drawer-b .rr-copy h2{
-  font-size:clamp(32px,4.4vw,58px);font-weight:600;letter-spacing:-.03em;line-height:1.02;margin:0 0 6px;
+  font-size:clamp(2rem,4.4vw,3.625rem);font-weight:600;letter-spacing:-.03em;line-height:1.02;margin:0 0 6px;
 }
 .drawer-b .rr-copy h2 .cjk{font-size:.4em;vertical-align:.4em}
-.rr-copy .cepithet{margin:0 0 14px;font-size:14px}
+.rr-copy .cepithet{margin:0 0 14px;font-size:.875rem}
 .rrec .rr-copy .meta{margin-bottom:14px}
-.drawer-b .rr-copy .rr-sum{font-size:14px;line-height:1.65;color:var(--fg-2);max-width:50ch;margin:0}
+.drawer-b .rr-copy .rr-sum{font-size:.875rem;line-height:1.65;color:var(--fg-2);max-width:50ch;margin:0}
 
 /* The far column of the hero. Glass, because it is standing on the artwork —
    the same treatment the panels on the desk behind this get. */
@@ -3209,7 +3224,7 @@ img.astrite-pic{
 }
 .wsig-h{display:flex;align-items:center;gap:10px}
 .wsig-h .label{flex:1;min-width:0}
-.wsig-r{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--amber)}
+.wsig-r{font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;color:var(--amber)}
 /* A height rather than an aspect-ratio. A ratio box with a percentage width,
    inside a flex column, inside a grid item that is itself being centred, is
    three sizing passes that have to agree — and they do not: the card measures
@@ -3226,11 +3241,11 @@ img.astrite-pic{
 }
 .wsig-art img{width:100%;height:100%;object-fit:contain;padding:10px;display:block;transition:transform .35s ease}
 .wsig:not(.is-flat):hover .wsig-art img{transform:scale(1.05)}
-.wsig b{font-size:17px;font-weight:600;line-height:1.25;letter-spacing:-.01em;color:var(--fg)}
+.wsig b{font-size:1.0625rem;font-weight:600;line-height:1.25;letter-spacing:-.01em;color:var(--fg)}
 .wsig:not(.is-flat):hover b{color:var(--attr,var(--accent))}
 .wsig-f{
   display:flex;align-items:center;gap:10px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
 }
 .wsig-f .arrow{margin-left:auto;display:flex;color:var(--fg-3)}
 .wsig:not(.is-flat):hover .wsig-f .arrow{color:var(--attr,var(--accent))}
@@ -3248,9 +3263,9 @@ img.astrite-pic{
 }
 .rr-runs-on button{cursor:pointer}
 .rr-runs-on button:hover{background:var(--bg-2);color:var(--fg)}
-.rr-runs-on b{font-size:13.5px;font-weight:600;color:var(--fg);flex:none}
+.rr-runs-on b{font-size:.8438rem;font-weight:600;color:var(--fg);flex:none}
 .rr-runs-on em{
-  font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  font-style:normal;font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--fg-3);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 .rr-runs-on .arrow{margin-left:auto;display:flex;flex:none;color:var(--fg-3)}
@@ -3263,7 +3278,7 @@ img.astrite-pic{
    and nothing read as a set. Across the panel they are seven tiles you take in
    at once, which is the only thing "at a glance" can mean. */
 .rr-glance{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(9.375rem,1fr));
   gap:10px;margin-top:clamp(18px,2.4vh,26px);
 }
 .rr-glance>div{
@@ -3280,10 +3295,10 @@ img.astrite-pic{
   background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--attr,var(--accent)) 22%,transparent),transparent 72%);
 }
 .rr-glance em{
-  font-family:var(--mono);font-size:9px;font-style:normal;letter-spacing:.14em;
+  font-family:var(--mono);font-size:.5625rem;font-style:normal;letter-spacing:.14em;
   text-transform:uppercase;color:var(--fg-3);
 }
-.rr-glance b{font-size:13.5px;font-weight:500;line-height:1.35;color:var(--fg)}
+.rr-glance b{font-size:.8438rem;font-weight:500;line-height:1.35;color:var(--fg)}
 .rr-glance>div.attr b{color:var(--attr,var(--fg))}
 
 /* ── the rotation ──────────────────────────────────────────────────
@@ -3324,15 +3339,15 @@ img.astrite-pic{
   background:radial-gradient(circle at 50% 38%,color-mix(in srgb,var(--attr,var(--accent)) 24%,transparent),var(--bg));
 }
 .kflow em{
-  font-family:var(--mono);font-size:8.5px;font-style:normal;letter-spacing:.13em;
+  font-family:var(--mono);font-size:.5313rem;font-style:normal;letter-spacing:.13em;
   text-transform:uppercase;color:var(--fg-3);text-align:center;line-height:1.4;
 }
-.kflow b{font-size:12.5px;font-weight:500;line-height:1.35;text-align:center;color:var(--fg-2)}
+.kflow b{font-size:.7813rem;font-weight:500;line-height:1.35;text-align:center;color:var(--fg-2)}
 .kflow button:hover b{color:var(--fg)}
 
 /* ── release history and sources, side by side ─────────────────── */
 .rr-cols{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(17.5rem,1fr));
   gap:12px;margin-top:clamp(20px,2.8vh,28px);align-items:start;
 }
 .rr-steps{
@@ -3346,14 +3361,14 @@ img.astrite-pic{
   content:"";position:absolute;right:12px;top:7px;width:5px;height:5px;
   border-top:1px solid var(--line-2);border-right:1px solid var(--line-2);transform:rotate(45deg);
 }
-.rr-steps b{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--fg);letter-spacing:-.01em}
+.rr-steps b{font-family:var(--mono);font-size:.9375rem;font-weight:500;color:var(--fg);letter-spacing:-.01em}
 .rr-steps li.on b{color:var(--attr,var(--accent))}
 .rr-steps em{
-  font-family:var(--mono);font-size:8.5px;font-style:normal;letter-spacing:.13em;
+  font-family:var(--mono);font-size:.5313rem;font-style:normal;letter-spacing:.13em;
   text-transform:uppercase;color:var(--fg-3);
 }
 .rr-runs{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
-.rr-runs .pill{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px}
+.rr-runs .pill{cursor:pointer;font:inherit;font-family:var(--mono);font-size:.625rem}
 .rr-runs .pill:hover{border-color:var(--attr,var(--accent));color:var(--fg)}
 
 @media (max-width:1000px){
@@ -3386,8 +3401,8 @@ img.astrite-pic{
   .rr-copy{min-height:0;max-width:none;padding:clamp(18px,2.4vh,24px) var(--dpad-x)}
 }
 @media (max-width:700px){
-  .drawer-b .rr-copy h2{font-size:clamp(28px,9vw,40px)}
-  .rr-glance{grid-template-columns:repeat(auto-fit,minmax(126px,1fr));gap:8px}
+  .drawer-b .rr-copy h2{font-size:clamp(1.75rem,9vw,2.5rem)}
+  .rr-glance{grid-template-columns:repeat(auto-fit,minmax(7.875rem,1fr));gap:8px}
   .rr-glance>div{padding:12px 8px 11px}
   .kflow li{flex-basis:100%}
   .kflow li:not(:last-child)::after{display:none}
@@ -3414,7 +3429,7 @@ img.astrite-pic{
 @keyframes pop{from{transform:translateY(-8px);opacity:0}}
 .cmd-in{display:flex;align-items:center;gap:11px;padding:14px 16px;border-bottom:1px solid var(--line);color:var(--fg-3)}
 .cmd-in input{
-  flex:1;background:none;border:0;outline:0;color:var(--fg);font-family:var(--sans);font-size:15px;min-width:0;
+  flex:1;background:none;border:0;outline:0;color:var(--fg);font-family:var(--sans);font-size:.9375rem;min-width:0;
 }
 .cmd-in input::placeholder{color:var(--fg-3)}
 .cmd-res{overflow-y:auto;padding:6px}
@@ -3422,16 +3437,16 @@ img.astrite-pic{
 .cmd-item{
   display:flex;align-items:center;gap:11px;width:100%;
   background:none;border:0;border-radius:var(--r-sm);padding:9px 12px;cursor:pointer;text-align:left;
-  color:var(--fg-2);font-size:13.5px;
+  color:var(--fg-2);font-size:.8438rem;
 }
 .cmd-item .kbd{
-  margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-3);
+  margin-left:auto;font-family:var(--mono);font-size:.5625rem;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-3);
 }
 .cmd-item[aria-selected="true"]{background:var(--accent-soft);color:var(--fg)}
 .cmd-item .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
 .cmd-foot{
   padding:9px 14px;border-top:1px solid var(--line);background:var(--bg-2);
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-3);
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.11em;text-transform:uppercase;color:var(--fg-3);
   display:flex;gap:16px;flex-wrap:wrap;
 }
 
@@ -3454,13 +3469,13 @@ img.astrite-pic{
   -webkit-backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
   display:flex;flex-direction:column;align-items:center;gap:9px;
 }
-.deskabout p{margin:0;font-size:15px;line-height:1.65;color:var(--fg-2)}
+.deskabout p{margin:0;font-size:.9375rem;line-height:1.65;color:var(--fg-2)}
 /* The link's own top margin is for a left-aligned card; here the flex gap
    spaces it and the centring wants it tight to the sentence. */
 .deskabout .linkout{margin-top:2px}
 .foot{
   display:flex;align-items:center;gap:12px;padding:14px 24px;border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--fg-3);line-height:1.7;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.06em;color:var(--fg-3);line-height:1.7;
   max-width:var(--page);
 }
 .foot .warn{color:var(--t-official)}
@@ -3470,7 +3485,7 @@ img.astrite-pic{
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-left:auto;flex:none}
 .legend span{
   display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
-  font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-size:.5938rem;letter-spacing:.13em;text-transform:uppercase;
 }
 .legend .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
 .foot .links{margin-left:18px;display:flex;gap:14px}
@@ -3498,7 +3513,7 @@ img.astrite-pic{
   }
   .col{grid-row:2}
   .hud .mini-h{order:2;padding:0;border-bottom:0;background:none}
-  .hud .mini-h h3{font-size:10.5px;letter-spacing:.18em;color:var(--fg-2)}
+  .hud .mini-h h3{font-size:.6563rem;letter-spacing:.18em;color:var(--fg-2)}
   .hud .mini-b{
     padding:0;display:flex;align-items:center;justify-content:flex-end;
     flex-wrap:wrap;gap:16px;
@@ -3527,13 +3542,13 @@ img.astrite-pic{
      this type size. The hatched bar on the view itself still carries it.
      Events carries no badge at all now that it has data behind it. */
   .navlink .warn{display:none}
-  .navlink{font-size:17px;gap:9px;padding:11px 10px}
-  .sublink{font-size:14.5px}
-  .tierlink{font-size:15px}
+  .navlink{font-size:1.0625rem;gap:9px;padding:11px 10px}
+  .sublink{font-size:.9063rem}
+  .tierlink{font-size:.9375rem}
   /* "RESONANCE DESK" is 14 characters of tracked-out type and it breaks across
      two lines well before the nav under it runs out of room. The wordmark steps
      down rather than wrapping — a two-line brand reads as a layout fault. */
-  .brand-name{font-size:17px;letter-spacing:.08em;white-space:nowrap}
+  .brand-name{font-size:1.0625rem;letter-spacing:.08em;white-space:nowrap}
   /* The panel is viewport-width minus its padding from here down, so a third
      of it is no longer a card — two skills to a row. */
   .skills.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -3564,11 +3579,11 @@ img.astrite-pic{
   }
   .hero::-webkit-scrollbar{display:none}
   .hero .pcard{flex:0 0 88%;scroll-snap-align:center}
-  .pcard{min-height:340px}
+  .pcard{min-height:21.25rem}
   /* A phone card is one column wide and everything in it stacks, so the body
      runs long. The art band gives some of its height back rather than putting
      the banner list a screen and a half down. */
-  .pcard-stage{min-height:300px;max-height:360px}
+  .pcard-stage{min-height:18.75rem;max-height:22.5rem}
   /* No horizontal scroll inside a card on touch — wrap the portraits instead,
      since a half-visible face reads as a broken image. */
   .pcard-row .bstrip{flex-wrap:wrap;overflow:visible;--thumb:56px}
@@ -3582,7 +3597,7 @@ img.astrite-pic{
   .ps-col.div{padding:14px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.09)}
   .hero .pcard.is-future{grid-column:auto;min-height:0}
   .body{padding-bottom:88px}
-  .sig{grid-template-columns:64px minmax(0,1fr);gap:4px 12px;padding:11px 16px}
+  .sig{grid-template-columns:4rem minmax(0,1fr);gap:4px 12px;padding:11px 16px}
   .sig .src{grid-row:2;grid-column:1/-1;gap:8px;align-items:center}
   .sig .sname{flex-direction:row;gap:8px;align-items:baseline}
   .smark{width:20px;height:20px}
@@ -3599,7 +3614,7 @@ img.astrite-pic{
      characters — hence the tighter tracking and the short labels from VIEWS.
      Anything narrower than that lets the row scroll rather than clip. */
   .dock{
-    display:grid;grid-template-columns:repeat(6,minmax(52px,1fr));
+    display:grid;grid-template-columns:repeat(6,minmax(3.25rem,1fr));
     position:fixed;left:0;right:0;bottom:0;z-index:20;
     background:rgba(19,18,24,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);
     padding-bottom:env(safe-area-inset-bottom);
@@ -3609,21 +3624,21 @@ img.astrite-pic{
   .dock button{
     display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;
     padding:9px 2px 10px;cursor:pointer;color:var(--fg-3);white-space:nowrap;
-    font-family:var(--mono);font-size:8px;letter-spacing:.02em;text-transform:uppercase;
+    font-family:var(--mono);font-size:.5rem;letter-spacing:.02em;text-transform:uppercase;
   }
   .dock button[aria-current="true"]{color:var(--accent)}
   .foot{margin-bottom:64px;flex-direction:column;align-items:flex-start}
   .foot .links,.legend{margin-left:0}
   .foot-i{display:none}
   /* 112px of thumbnail out of a 360px row leaves no headline. */
-  .intel.has-art{grid-template-columns:78px minmax(0,1fr);gap:12px}
+  .intel.has-art{grid-template-columns:4.875rem minmax(0,1fr);gap:12px}
   .intel{padding-left:16px}
 
   /* The source report used to be reordered below the log here. With it gone
      Signals is header → warning → filters → feed in source order, which is the
      order you read it in, so there is nothing left to move. */
   .warnbar{flex-direction:column;align-items:flex-start;gap:4px;padding:10px 16px}
-  .warnbar span{font-size:11.5px;line-height:1.5}
+  .warnbar span{font-size:.7188rem;line-height:1.5}
 }
 @media (max-width:520px){
   /* The readings wrap onto two lines at this width, so they get the same right
@@ -3641,7 +3656,7 @@ img.astrite-pic{
 @media (max-width:520px){
   .wgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .wrec-b{padding:9px}
-  .wrec-b h3{font-size:12.5px}
+  .wrec-b h3{font-size:.7813rem}
 }
 
 @media (prefers-reduced-motion:reduce){
