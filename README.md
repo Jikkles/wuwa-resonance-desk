@@ -805,11 +805,19 @@ closing date on the infobox, because the wiki files an event there when the *mod
 added stays in the game — which is a different claim from the event still being open. A
 Glimpse of Xuanfang is in that category and closed on 2026-08-19, which the desk knows
 because Kuro said so. `time_end = none` is the field that means what this file means, and
-it is what the filter reads: 19 events, launch day to now.
+it is what the first filter reads.
+
+The second filter is about who the event is for. Six of the nineteen that pass are the
+game's own onboarding: three **Login** tracks paying out for turning up on consecutive
+days, and three **Next Stop: \<region\>** passes that skip a returning player forward to the
+current map. Those never close because they are not events, they are a ramp — the game
+keeps them open for whoever installs it next year. The in-game Permanent tab does not list
+them and neither does this. The wiki labels both groups itself, in `group2`, so the filter
+is that label rather than a list of names to keep up to date. 13 events, launch day to now.
 
 The banners come down at 720px into `assets/events/` rather than being hotlinked, the same
 call the reward icons and the portraits make — these are Kuro's own event banners, hosted
-by Fandom, and a page fetching 19 pictures off a wiki CDN on every load is a page borrowing
+by Fandom, and a page fetching a dozen pictures off a wiki CDN on every load is a page borrowing
 somebody's bandwidth. Every one of them carries the event's name set across it, so they are
 shown whole in the tile rather than filled to it, same flag and same reason as the
 double-drop title strips: a 1.6:1 tile cropping a 4:1 banner turns *Tales of the Isles*

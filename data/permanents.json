@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/permanents@1.0",
-  "note": "Events with no closing date, read off the Wuthering Waves Wiki on Fandom — the only place the whole list exists, because Kuro's news feed no longer carries the posts that announced them. Membership is `time_end = none` on the wiki's own event infobox, not the Permanent Events category, which also holds limited events whose mode was kept. Banners are Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
+  "note": "Events with no closing date, read off the Wuthering Waves Wiki on Fandom — the only place the whole list exists, because Kuro's news feed no longer carries the posts that announced them. Membership is `time_end = none` on the wiki's own event infobox, not the Permanent Events category, which also holds limited events whose mode was kept. Login tracks and Next Stop region passes are dropped on the wiki's own `group2` label: they never close because they are the game's onboarding ramp rather than events, and the in-game Permanent tab does not list them. Banners are Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
   "credit": "Event data and banners via wutheringwaves.fandom.com · © Kuro Games",
   "source": "https://wutheringwaves.fandom.com/wiki/Permanent_Events",
   "events": [
@@ -74,75 +74,6 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Rumbling_Hollows"
     },
     {
-      "id": "perm-gifts-of-thawing-frost",
-      "name": "Gifts of Thawing Frost",
-      "kind": "Login",
-      "version": "",
-      "section": "Permanent",
-      "permanent": true,
-      "start": "2024-05-23T10:00:00+08:00",
-      "end": null,
-      "summary": "",
-      "detail": "",
-      "rewards": "Sanhua x1, Radiant Tide x4, Lustrous Tide x4",
-      "eligibility": "",
-      "art": {
-        "url": "assets/events/gifts-of-thawing-frost.png",
-        "nameplate": true,
-        "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Thawing_Frost",
-        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
-      },
-      "confidence": "official",
-      "origin": "wiki",
-      "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Thawing_Frost"
-    },
-    {
-      "id": "perm-reprise-of-tides",
-      "name": "Reprise of Tides",
-      "kind": "Login",
-      "version": "",
-      "section": "Permanent",
-      "permanent": true,
-      "start": "2024-08-15T13:00:00+08:00",
-      "end": null,
-      "summary": "",
-      "detail": "",
-      "rewards": "Astrite x800, Crystal Solvent x8, Premium Tuner x100, Premium Resonance Potion x20, Premium Sealed Tube x30, Malleable Elite Class Echo I x1, Malleable Elite Class Echo II x1",
-      "eligibility": "",
-      "art": {
-        "url": "assets/events/reprise-of-tides.jpg",
-        "nameplate": true,
-        "source": "https://wutheringwaves.fandom.com/wiki/Reprise_of_Tides",
-        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
-      },
-      "confidence": "official",
-      "origin": "wiki",
-      "source": "https://wutheringwaves.fandom.com/wiki/Reprise_of_Tides"
-    },
-    {
-      "id": "perm-next-stop-rinascita",
-      "name": "Next Stop: Rinascita",
-      "kind": "Early Access",
-      "version": "",
-      "section": "Permanent",
-      "permanent": true,
-      "start": "2025-01-02T10:00:00+08:00",
-      "end": null,
-      "summary": "O Rover guided by the tides, you have banished the shadows of war in Jinzhou and crossed the boundaries of time on Mt.",
-      "detail": "O Rover guided by the tides, you have banished the shadows of war in Jinzhou and crossed the boundaries of time on Mt. Firmament. When you stood upon the secluded shores, did you hear the gospel carried on the tempest winds, echoing across the stormy sea? Did you glimpse the unparalleled splendor that lies within the fabled land of Echoes? Now, steel your heart and embark on a journey into the unknown, brave the storm, and carve a path to Rinascita.",
-      "rewards": "",
-      "eligibility": "",
-      "art": {
-        "url": "assets/events/next-stop-rinascita.jpg",
-        "nameplate": true,
-        "source": "https://wutheringwaves.fandom.com/wiki/Next_Stop%3A_Rinascita",
-        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
-      },
-      "confidence": "official",
-      "origin": "wiki",
-      "source": "https://wutheringwaves.fandom.com/wiki/Next_Stop%3A_Rinascita"
-    },
-    {
       "id": "perm-tales-of-the-isles",
       "name": "Tales of the Isles",
       "kind": "Event",
@@ -164,29 +95,6 @@
       "confidence": "official",
       "origin": "wiki",
       "source": "https://wutheringwaves.fandom.com/wiki/Tales_of_the_Isles"
-    },
-    {
-      "id": "perm-solaris-new-voyage-celebration",
-      "name": "Solaris New Voyage Celebration",
-      "kind": "Login",
-      "version": "",
-      "section": "Permanent",
-      "permanent": true,
-      "start": "2025-06-12T10:00:00+08:00",
-      "end": null,
-      "summary": "\"Hi, Rover, welcome to the Solaris Photo Show!\" How will your journey unfold in this brand new world?",
-      "detail": "\"Hi, Rover, welcome to the Solaris Photo Show!\" How will your journey unfold in this brand new world? The scenery you dream of, the companions you wish to encounter, and the stories you are about to write... memories will unravel in full color, starting right here, with you.",
-      "rewards": "Astrite x2000, Forgery Premium Supply x8, Premium Enclosure Tank x12, Advanced Resonance Potion x30, Advanced Energy Core x25, Advanced Sealed Tube x15, Forgery Medium Supply x12, Medium Enclosure Tank x30, Shell Credit x250000",
-      "eligibility": "",
-      "art": {
-        "url": "assets/events/solaris-new-voyage-celebration.jpg",
-        "nameplate": true,
-        "source": "https://wutheringwaves.fandom.com/wiki/Solaris_New_Voyage_Celebration",
-        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
-      },
-      "confidence": "official",
-      "origin": "wiki",
-      "source": "https://wutheringwaves.fandom.com/wiki/Solaris_New_Voyage_Celebration"
     },
     {
       "id": "perm-banners-never-fall",
@@ -279,29 +187,6 @@
       "confidence": "official",
       "origin": "wiki",
       "source": "https://wutheringwaves.fandom.com/wiki/Lahai-Roi_Pioneers"
-    },
-    {
-      "id": "perm-next-stop-lahai-roi",
-      "name": "Next Stop: Lahai-Roi",
-      "kind": "Early Access",
-      "version": "",
-      "section": "Permanent",
-      "permanent": true,
-      "start": "2025-12-25T10:45:00+08:00",
-      "end": null,
-      "summary": "O Rover guided by the tides, you have climbed the peaks of Jinzhou and listened to the waves crash against the Black Shores.",
-      "detail": "O Rover guided by the tides, you have climbed the peaks of Jinzhou and listened to the waves crash against the Black Shores. You've braved tempests, heard the dual nature of Ragunna's faith, and tasted the glory in the arenas of Septimont. Now, the path to the frozen frontier unfolds in Honami City. It's time to set forth to Lahai-Roi.",
-      "rewards": "",
-      "eligibility": "",
-      "art": {
-        "url": "assets/events/next-stop-lahai-roi.jpg",
-        "nameplate": true,
-        "source": "https://wutheringwaves.fandom.com/wiki/Next_Stop%3A_Lahai-Roi",
-        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
-      },
-      "confidence": "official",
-      "origin": "wiki",
-      "source": "https://wutheringwaves.fandom.com/wiki/Next_Stop%3A_Lahai-Roi"
     },
     {
       "id": "perm-startorch-for-you",
@@ -417,25 +302,7 @@
       "confidence": "official",
       "origin": "wiki",
       "source": "https://wutheringwaves.fandom.com/wiki/Shape_of_Yesterday"
-    },
-    {
-      "id": "perm-next-stop-mengzhou",
-      "name": "Next Stop: Mengzhou",
-      "kind": "Early Access",
-      "version": "",
-      "section": "Permanent",
-      "permanent": true,
-      "start": "2026-07-10T10:00:00+08:00",
-      "end": null,
-      "summary": "O Seeker of the road ahead, you have climbed the peaks of Jinzhou and listened to the waves crash against the Black Shores.",
-      "detail": "O Seeker of the road ahead, you have climbed the peaks of Jinzhou and listened to the waves crash against the Black Shores. You've braved tempests, heard the dual nature of Ragunna's faith, and tasted the glory in the arenas of Septimont. Adventuring through the City Set in Amber, you faced deep space in mysterious Lahai-Roi, meeting the Void with courage. Now the road ahead has again revealed itself. Let us return to Huanglong, and journey on to Mengzhou.",
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
-      "confidence": "official",
-      "origin": "wiki",
-      "source": "https://wutheringwaves.fandom.com/wiki/Next_Stop%3A_Mengzhou"
     }
   ],
-  "updated": "2026-08-20T14:02:10.896Z"
+  "updated": "2026-08-20T20:25:07.969Z"
 }

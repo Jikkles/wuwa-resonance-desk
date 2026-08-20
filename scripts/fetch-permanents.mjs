@@ -22,7 +22,16 @@
 // event still being open. A Glimpse of Xuanfang is in that category and closed
 // on 2026-08-19, which the desk knows because Kuro said so in the 3.5 notice.
 // `time_end = none` is the field that actually means what this file means, and
-// it is what the filter reads. 19 events, launch day to now.
+// it is what the first filter reads.
+//
+// The second filter is about who the event is for. Six of the nineteen that
+// pass are the game's own onboarding: three Login tracks paying out for
+// turning up on consecutive days, and three Next Stop: <region> passes that
+// skip a returning player forward to the current map. Those never close
+// because they are not events, they are a ramp — the game keeps them open for
+// whoever installs it next year. The in-game Permanent tab does not list them
+// and neither does this. The wiki labels both groups itself, in `group2`, so
+// the filter is that label rather than a list of names to keep up to date.
 //
 // Art is downloaded rather than hotlinked, same as the reward icons and the
 // portraits: these are Kuro's own event banners, hosted by Fandom, and a page
@@ -38,6 +47,9 @@ const UA =
 const API = "https://wutheringwaves.fandom.com/api.php";
 const WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(String(t).replace(/ /g, "_"))}`;
 const CATEGORY = "Permanent Events";
+/* See the note at the top. `group2` on the wiki's own infobox, and the two
+   values on it that mean "this is the onboarding ramp, not an event". */
+const ONBOARDING = /^(login|early[ -]?access)$/i;
 const OUT = "data/permanents.json";
 const DIR = "assets/events";
 const TIMEOUT_MS = 25000;
@@ -146,8 +158,8 @@ function isoStart(text) {
 /* What kind of thing it is, in the words the tile has room for. The wiki files
    these under `group` and `group2`, where group is usually the literal word
    "Permanent" — which the tile already says in its own chip and does not need
-   twice — and group2 is the useful half: Login, Early Access, Photo
-   Collection. Where neither says anything, it is an event. */
+   twice — and group2 is the useful half: Photo Collection, Combat,
+   Exploration. Where neither says anything, it is an event. */
 function kindOf(text) {
   const g1 = field(text, "group");
   const g2 = field(text, "group2");
@@ -191,11 +203,14 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
   const events = [];
   const keep = new Set();
   let closed = 0;
+  let onboarding = 0;
 
   for (const p of pages) {
     /* The whole filter. See the note at the top: the category is a claim about
        the mode, this field is a claim about the event. */
     if (!/^none$/i.test(field(p.text, "time_end"))) { closed++; continue; }
+    /* Login tracks and region passes. Open forever, and not the list. */
+    if (ONBOARDING.test(field(p.text, "group2"))) { onboarding++; continue; }
 
     const name = field(p.text, "name") || p.title;
     const detail = description(p.text);
@@ -267,8 +282,10 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
       "Events with no closing date, read off the Wuthering Waves Wiki on Fandom — the only place the " +
       "whole list exists, because Kuro's news feed no longer carries the posts that announced them. " +
       "Membership is `time_end = none` on the wiki's own event infobox, not the Permanent Events " +
-      "category, which also holds limited events whose mode was kept. Banners are Kuro's own art, " +
-      "downloaded from the wiki at 720px rather than hotlinked.",
+      "category, which also holds limited events whose mode was kept. Login tracks and Next Stop " +
+      "region passes are dropped on the wiki's own `group2` label: they never close because they are " +
+      "the game's onboarding ramp rather than events, and the in-game Permanent tab does not list " +
+      "them. Banners are Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
     credit: "Event data and banners via wutheringwaves.fandom.com · © Kuro Games",
     source: WIKI(CATEGORY),
     events
@@ -282,6 +299,7 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
 
   console.log(
     `\n${events.length} permanent events, ${events.filter(e => e.art).length} with art, ` +
-    `${closed} category pages skipped for having a closing date` +
+    `${closed} category pages skipped for having a closing date, ` +
+    `${onboarding} for being login or early access` +
     (unchanged ? " (unchanged)" : ""));
 })();
