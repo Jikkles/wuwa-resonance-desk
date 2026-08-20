@@ -1985,14 +1985,28 @@ img.astrite-pic{
    that loses either is a crop of the thing that makes it that event's banner.
    Contained, it sits in the right of the hero as a poster does on a wall —
    beside the record's own title rather than underneath it, so neither has to
-   give way to the other. No mask for the same reason: the mask exists to
-   dissolve a cropped edge, and there is no cropped edge here to dissolve. */
+   give way to the other. */
 .evr-hero.plated .evr-pic{
   inset:clamp(10px,1.6vh,20px) clamp(10px,1.4vw,22px) clamp(10px,1.6vh,20px) 34%;
-  -webkit-mask-image:none;mask-image:none;
+  /* A short fade on the inner edge, and only there. The full-width mask above
+     dissolves a cropped picture into the panel across 40% of itself; this one
+     has far less to dissolve, because the poster is whole and its own left
+     edge is part of what Kuro drew. But the copy beside it still reaches past
+     34% on a long name, and type crossing a hard vertical edge of artwork
+     reads as a picture landing on the words rather than as a layout. A quarter
+     of the box is enough to soften the line the words cross and not enough to
+     take the plate with it. Every permanent event is plated, so this is the
+     hero the permanent list is read through. */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 26%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 26%);
 }
 .evr-hero.plated .evr-pic img{object-fit:contain;object-position:center}
 .evr-hero.plated::after{display:none}
+/* And the copy stops inside that fade. It takes 60% on a cropped hero, which
+   here put the last quarter of a line out on solid picture — past the point
+   the mask has finished bringing it up. Bounded, the overlap only ever happens
+   where the artwork is still coming out of transparent. */
+.evr-hero.plated .evr-copy{max-width:min(33rem,48%)}
 
 /* Nothing published at all: the rings, above a title band, and no pretending
    there is a picture to lay type over. */
@@ -2212,7 +2226,9 @@ img.astrite-pic{
      shape it is — a 3:1 title strip letterboxed into a 16:9 box is two bands
      of nothing, and cropped to 16:9 it loses the name that put it in this
      branch to begin with. */
+  .evr-hero.plated .evr-pic{-webkit-mask-image:none;mask-image:none}
   .evr-hero.plated .evr-pic img{aspect-ratio:auto;height:auto}
+  .evr-hero.plated .evr-copy{max-width:none}
   .evr-hero.bare .evr-pic{position:relative;height:150px}
   .evr-copy{max-width:none;min-height:0;padding-top:18px;padding-bottom:18px}
   .evr-mid{grid-template-columns:1fr}
