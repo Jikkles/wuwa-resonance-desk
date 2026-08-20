@@ -1,0 +1,2527 @@
+{
+  "schema": "wuwa-desk/archive@1.0",
+  "note": "Every patch the game has shipped and every event that ran in it, read off the Wuthering Waves Wiki on Fandom. The desk's own calendars only reach as far back as Kuro's news feed does, which is a hundred days; this is the record behind that. Events are filed under the first version their `ltd_during` names, which is the patch they shipped in. No art — a list of names and dates does not need 240 banners, and the two patches whose pictures are worth showing are in events.json with Kuro's own.",
+  "credit": "Version and event history via wutheringwaves.fandom.com · © Kuro Games",
+  "source": "https://wutheringwaves.fandom.com/wiki/Category%3AIn-Game_Events",
+  "versions": [
+    {
+      "id": "3.6",
+      "title": "Lamplight in Mirage, Sword's Resolve in Heart",
+      "start": "2026-08-20T10:00:00+08:00",
+      "end": null,
+      "notice": "",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.6",
+      "events": []
+    },
+    {
+      "id": "3.5",
+      "title": "Blade of Past Resounds, Lingering Dream Hymns",
+      "start": "2026-07-10T09:10:00+08:00",
+      "end": "2026-08-20T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.5",
+      "events": [
+        {
+          "id": "arc-a-glimpse-of-xuanfang",
+          "name": "A Glimpse of Xuanfang",
+          "kind": "Exploration",
+          "start": "2026-07-10T09:10:00+08:00",
+          "end": "2026-08-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/A_Glimpse_of_Xuanfang"
+        },
+        {
+          "id": "arc-gifts-of-aftertune",
+          "name": "Gifts of Aftertune",
+          "kind": "Featured",
+          "start": "2026-07-10T09:10:00+08:00",
+          "end": "2026-08-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Aftertune"
+        },
+        {
+          "id": "arc-gifts-of-starpath",
+          "name": "Gifts of Starpath",
+          "kind": "Event",
+          "start": "2026-07-10T09:10:00+08:00",
+          "end": "2026-08-19T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Starpath"
+        },
+        {
+          "id": "arc-glamour-couture-2026-07-10",
+          "name": "Glamour Couture 2026-07-10",
+          "kind": "Resonator Trial",
+          "start": "2026-07-10T09:10:00+08:00",
+          "end": "2026-08-19T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Glamour_Couture%2F2026-07-10"
+        },
+        {
+          "id": "arc-mingshen-notices",
+          "name": "Mingshen Notices",
+          "kind": "Exploration",
+          "start": "2026-07-10T09:10:00+08:00",
+          "end": "2026-08-20T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Mingshen_Notices"
+        },
+        {
+          "id": "arc-shape-of-yesterday",
+          "name": "Shape of Yesterday",
+          "kind": "Leisure",
+          "start": "2026-07-10T09:10:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Shape_of_Yesterday"
+        },
+        {
+          "id": "arc-next-stop-mengzhou",
+          "name": "Next Stop: Mengzhou",
+          "kind": "Early Access",
+          "start": "2026-07-10T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Next_Stop%3A_Mengzhou"
+        },
+        {
+          "id": "arc-lament-recon-tacet-crisis",
+          "name": "Lament Recon: Tacet Crisis",
+          "kind": "Combat",
+          "start": "2026-07-11T10:00:00+08:00",
+          "end": "2026-08-19T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lament_Recon%3A_Tacet_Crisis"
+        },
+        {
+          "id": "arc-recaptured-action-highlights",
+          "name": "Recaptured: Action Highlights",
+          "kind": "Featured",
+          "start": "2026-07-16T10:00:00+08:00",
+          "end": "2026-08-06T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Recaptured%3A_Action_Highlights"
+        },
+        {
+          "id": "arc-endstate-matrix-adversity-vanguard",
+          "name": "Endstate Matrix: Adversity Vanguard",
+          "kind": "Event",
+          "start": "2026-07-17T04:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/5150",
+          "source": "https://wutheringwaves.fandom.com/wiki/Endstate_Matrix%2F2026-07-17"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2026-04-02",
+          "name": "Bountiful Crescendo 2026-04-02",
+          "kind": "Featured",
+          "start": "2026-07-23T04:00:00+08:00",
+          "end": "2026-07-30T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2026-07-23"
+        },
+        {
+          "id": "arc-virtual-crisis-quadrant-trials",
+          "name": "Virtual Crisis: Quadrant Trials",
+          "kind": "Trial",
+          "start": "2026-07-30T10:00:00+08:00",
+          "end": "2026-08-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Virtual_Crisis%3A_Quadrant_Trials"
+        },
+        {
+          "id": "arc-lollo-campaign-new-journey",
+          "name": "Lollo Campaign: New Journey",
+          "kind": "Event",
+          "start": "2026-08-06T10:00:00+08:00",
+          "end": "2026-08-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2891",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2026-08-06"
+        }
+      ]
+    },
+    {
+      "id": "3.4",
+      "title": "The Dream Not Dreamed",
+      "start": "2026-06-08T08:43:00+08:00",
+      "end": "2026-07-10T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/4819",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.4",
+      "events": [
+        {
+          "id": "arc-depths-of-illusive-realm-dreamchasers",
+          "name": "Depths of Illusive Realm: Dreamchasers",
+          "kind": "Trial",
+          "start": "2026-06-08T08:43:00+08:00",
+          "end": "2026-07-09T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4695",
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2026-06-08"
+        },
+        {
+          "id": "arc-gifts-of-dreamchasers",
+          "name": "Gifts of Dreamchasers",
+          "kind": "Login",
+          "start": "2026-06-08T08:43:00+08:00",
+          "end": "2026-07-09T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Dreamchasers"
+        },
+        {
+          "id": "arc-sweetdream-tuning",
+          "name": "Sweetdream Tuning",
+          "kind": "Login",
+          "start": "2026-06-08T08:43:00+08:00",
+          "end": "2026-07-09T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Sweetdream_Tuning"
+        },
+        {
+          "id": "arc-startorch-racing-rerun",
+          "name": "Startorch Racing, Rerun!",
+          "kind": "Leisure",
+          "start": "2026-06-11T04:00:00+08:00",
+          "end": "2026-06-25T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Startorch_Racing%2C_Rerun!"
+        },
+        {
+          "id": "arc-dream-of-azure-sky",
+          "name": "Dream of Azure Sky",
+          "kind": "Login",
+          "start": "2026-06-18T10:00:00+08:00",
+          "end": "2026-07-09T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Dream_of_Azure_Sky"
+        },
+        {
+          "id": "arc-matrix-reform",
+          "name": "Matrix Reform",
+          "kind": "Leisure",
+          "start": "2026-06-25T04:00:00+08:00",
+          "end": "2026-07-09T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Matrix_Reform"
+        }
+      ]
+    },
+    {
+      "id": "3.3",
+      "title": "Reverbs From the End of Galaxies",
+      "start": "2026-04-30T08:21:00+08:00",
+      "end": "2026-06-08T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/4613",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.3",
+      "events": [
+        {
+          "id": "arc-dimmr-traces",
+          "name": "Dimmr Traces",
+          "kind": "Event",
+          "start": "2026-04-30T08:21:00+08:00",
+          "end": "2026-06-07T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Dimmr_Traces"
+        },
+        {
+          "id": "arc-dimmr-travelogue",
+          "name": "Dimmr Travelogue",
+          "kind": "Leisure",
+          "start": "2026-04-30T08:21:00+08:00",
+          "end": "2026-06-07T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Dimmr_Travelogue"
+        },
+        {
+          "id": "arc-gifts-of-grand-celebration",
+          "name": "Gifts of Grand Celebration",
+          "kind": "Login",
+          "start": "2026-04-30T08:21:00+08:00",
+          "end": "2026-06-07T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Grand_Celebration_(2nd_Anniversary)"
+        },
+        {
+          "id": "arc-gifts-of-starlight",
+          "name": "Gifts of Starlight",
+          "kind": "Login",
+          "start": "2026-04-30T08:21:00+08:00",
+          "end": "2026-06-07T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Starlight"
+        },
+        {
+          "id": "arc-second-coming-of-solaris-collab-season",
+          "name": "Second Coming of Solaris: Collab Season",
+          "kind": "Event",
+          "start": "2026-04-30T08:21:00+08:00",
+          "end": "2026-06-07T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Second_Coming_of_Solaris%3A_Collab_Season"
+        },
+        {
+          "id": "arc-ascendant-aces-hiyuki-mornye-iuno-baizhi-aalto-yuanwu",
+          "name": "Ascendant Aces - Hiyuki, Mornye, Iuno, Baizhi, Aalto, Yuanwu",
+          "kind": "Ascendant Aces",
+          "start": "2026-04-30T10:00:00+08:00",
+          "end": "2026-05-21T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2026-04-30"
+        },
+        {
+          "id": "arc-into-the-land-of-paradox",
+          "name": "Into the Land of Paradox",
+          "kind": "Event",
+          "start": "2026-04-30T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Into_the_Land_of_Paradox"
+        },
+        {
+          "id": "arc-star-bouncing",
+          "name": "Star Bouncing",
+          "kind": "Leisure",
+          "start": "2026-05-02T10:00:00+08:00",
+          "end": "2026-06-07T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Star_Bouncing"
+        },
+        {
+          "id": "arc-lollo-express-promise-delivered",
+          "name": "Lollo Express: Promise Delivered",
+          "kind": "Event",
+          "start": "2026-05-07T04:00:00+08:00",
+          "end": "2026-06-07T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Express%3A_Promise_Delivered"
+        },
+        {
+          "id": "arc-cubie-derby-championship",
+          "name": "Cubie Derby: Championship",
+          "kind": "Event",
+          "start": "2026-05-09T04:00:00+08:00",
+          "end": "2026-05-25T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4654",
+          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby%3A_Championship"
+        },
+        {
+          "id": "arc-ascendant-aces-denia-chisa-phrolova-chixia-buling-yangyang",
+          "name": "Ascendant Aces - Denia, Chisa, Phrolova, Chixia, Buling, Yangyang",
+          "kind": "Ascendant Aces",
+          "start": "2026-05-21T10:00:00+08:00",
+          "end": "2026-06-07T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2026-05-21"
+        },
+        {
+          "id": "arc-depths-of-illusive-realm-chromatic-fantasy",
+          "name": "Depths of Illusive Realm: Chromatic Fantasy",
+          "kind": "Trial",
+          "start": "2026-05-21T10:00:00+08:00",
+          "end": "2026-06-07T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4695",
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2026-05-21"
+        },
+        {
+          "id": "arc-beyond-the-waves-roya-frostlands",
+          "name": "Beyond the Waves: Roya Frostlands",
+          "kind": "Event",
+          "start": "2026-05-25T04:00:00+08:00",
+          "end": "2026-06-07T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2026-04-30"
+        }
+      ]
+    },
+    {
+      "id": "3.2",
+      "title": "Resolution to Illuminate the Shadows",
+      "start": "2026-03-19T11:00:00+08:00",
+      "end": "2026-04-29T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/4447",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.2",
+      "events": [
+        {
+          "id": "arc-endstate-matrix-doomsday-cycle",
+          "name": "Endstate Matrix: Doomsday Cycle",
+          "kind": "Event",
+          "start": "2026-03-19T11:00:00+08:00",
+          "end": "2026-07-10T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Endstate_Matrix%2F2026-03-19"
+        },
+        {
+          "id": "arc-gifts-of-solsworn",
+          "name": "Gifts of Solsworn",
+          "kind": "Login",
+          "start": "2026-03-19T11:00:00+08:00",
+          "end": "2026-04-29T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Solsworn"
+        },
+        {
+          "id": "arc-knights-of-the-wild",
+          "name": "Knights of the Wild",
+          "kind": "Challenge",
+          "start": "2026-03-19T11:00:00+08:00",
+          "end": "2026-04-29T04:00:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Knights_of_the_Wild"
+        },
+        {
+          "id": "arc-soar-to-the-beat",
+          "name": "Soar to the Beat",
+          "kind": "Leisure",
+          "start": "2026-03-19T11:00:00+08:00",
+          "end": "2026-04-29T12:00:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Soar_to_the_Beat"
+        },
+        {
+          "id": "arc-whispers-between-stars",
+          "name": "Whispers Between Stars",
+          "kind": "Event",
+          "start": "2026-03-19T11:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Whispers_Between_Stars"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2026-04-02",
+          "name": "Bountiful Crescendo 2026-04-02",
+          "kind": "Event",
+          "start": "2026-04-02T04:00:00+08:00",
+          "end": "2026-04-09T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4466",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2026-04-02"
+        },
+        {
+          "id": "arc-speed-up-f-u-e-l-instrumentality-project",
+          "name": "Speed Up! F.U.E.L. Instrumentality Project!",
+          "kind": "Event",
+          "start": "2026-04-02T04:00:00+08:00",
+          "end": "2026-04-20T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4458",
+          "source": "https://wutheringwaves.fandom.com/wiki/Speed_Up!_F.U.E.L._Instrumentality_Project!"
+        },
+        {
+          "id": "arc-the-flaming-red-in-memory",
+          "name": "The Flaming Red in Memory",
+          "kind": "Showcase",
+          "start": "2026-04-16T04:00:00+08:00",
+          "end": "2026-04-29T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4506",
+          "source": "https://wutheringwaves.fandom.com/wiki/The_Flaming_Red_in_Memory"
+        }
+      ]
+    },
+    {
+      "id": "3.1",
+      "title": "For You Who Walk in Snow",
+      "start": "2026-02-05T08:55:00+08:00",
+      "end": "2026-03-19T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/4188",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.1",
+      "events": [
+        {
+          "id": "arc-footprints-on-frostlands",
+          "name": "Footprints on Frostlands",
+          "kind": "Leisure",
+          "start": "2025-02-05T08:55:00+08:00",
+          "end": "2026-03-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Footprints_on_Frostlands"
+        },
+        {
+          "id": "arc-gifts-of-soft-snow",
+          "name": "Gifts of Soft Snow",
+          "kind": "Login",
+          "start": "2026-02-05T08:55:00+08:00",
+          "end": "2026-03-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Soft_Snow"
+        },
+        {
+          "id": "arc-pioneer-podcast-2026-02-05",
+          "name": "Pioneer Podcast 2026-02-05",
+          "kind": "Pioneer Podcast",
+          "start": "2026-02-05T08:55:00+08:00",
+          "end": "2026-03-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2026-02-05"
+        },
+        {
+          "id": "arc-starpaths-intertwined",
+          "name": "Starpaths Intertwined",
+          "kind": "Giveback",
+          "start": "2026-02-05T08:55:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Starpaths_Intertwined"
+        },
+        {
+          "id": "arc-startorch-for-you",
+          "name": "Startorch for You",
+          "kind": "Event",
+          "start": "2026-02-05T08:55:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Startorch_for_You"
+        },
+        {
+          "id": "arc-term-x-outreach",
+          "name": "TERM-X: Outreach",
+          "kind": "Exploration",
+          "start": "2026-02-05T08:55:00+08:00",
+          "end": "2026-03-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/TERM-X%3A_Outreach"
+        },
+        {
+          "id": "arc-unfrozen-traces",
+          "name": "Unfrozen Traces",
+          "kind": "Event",
+          "start": "2026-02-05T08:55:00+08:00",
+          "end": "2026-03-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Unfrozen_Traces"
+        },
+        {
+          "id": "arc-where-stars-cascade-down",
+          "name": "Where Stars Cascade Down",
+          "kind": "Leisure",
+          "start": "2026-02-15T04:00:00+08:00",
+          "end": "2026-03-18T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Where_Stars_Cascade_Down"
+        },
+        {
+          "id": "arc-rein-back-migration-mayhem",
+          "name": "Rein Back! Migration Mayhem!",
+          "kind": "Leisure",
+          "start": "2026-02-19T04:00:00+08:00",
+          "end": "2026-03-09T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Rein_Back!_Migration_Mayhem!"
+        },
+        {
+          "id": "arc-blade-hunter-wilderness",
+          "name": "Blade Hunter: Wilderness",
+          "kind": "Event",
+          "start": "2026-02-26T10:00:00+08:00",
+          "end": "2026-03-16T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Blade_Hunter%3A_Wilderness"
+        },
+        {
+          "id": "arc-full-throttle-bolt-blitz",
+          "name": "Full Throttle! Bolt & Blitz!",
+          "kind": "Event",
+          "start": "2026-02-26T10:00:00+08:00",
+          "end": "2026-03-16T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Full_Throttle!_Bolt_%26_Blitz!"
+        },
+        {
+          "id": "arc-lollo-campaign-implementation",
+          "name": "Lollo Campaign: Implementation",
+          "kind": "Event",
+          "start": "2026-03-05T04:00:00+08:00",
+          "end": "2026-03-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2026-03-05"
+        }
+      ]
+    },
+    {
+      "id": "3.0",
+      "title": "We Who See the Stars",
+      "start": "2025-12-25T10:45:00+08:00",
+      "end": "2026-02-05T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3920",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.0",
+      "events": [
+        {
+          "id": "arc-capturing-starlight",
+          "name": "Capturing Starlight",
+          "kind": "Leisure",
+          "start": "2025-11-20T10:45:00+08:00",
+          "end": "2026-02-04T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Capturing_Starlight"
+        },
+        {
+          "id": "arc-gifts-of-freshers-week",
+          "name": "Gifts of Freshers Week",
+          "kind": "Login",
+          "start": "2025-12-25T10:45:00+08:00",
+          "end": "2026-02-04T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Freshers_Week"
+        },
+        {
+          "id": "arc-lahai-roi-pioneers",
+          "name": "Lahai-Roi Pioneers",
+          "kind": "Event",
+          "start": "2025-12-25T10:45:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lahai-Roi_Pioneers"
+        },
+        {
+          "id": "arc-let-s-go-to-startorch-academy",
+          "name": "Let's Go, to Startorch Academy!",
+          "kind": "Login",
+          "start": "2025-12-25T10:45:00+08:00",
+          "end": "2026-02-04T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Let's_Go%2C_to_Startorch_Academy!"
+        },
+        {
+          "id": "arc-next-stop-lahai-roi",
+          "name": "Next Stop: Lahai-Roi",
+          "kind": "Early Access",
+          "start": "2025-12-25T10:45:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Next_Stop%3A_Lahai-Roi"
+        },
+        {
+          "id": "arc-operation-frontier-renewal",
+          "name": "Operation: Frontier Renewal",
+          "kind": "Event",
+          "start": "2025-12-25T10:45:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Operation%3A_Frontier_Renewal"
+        },
+        {
+          "id": "arc-peaks-of-prestige-rekindled-duel",
+          "name": "Peaks of Prestige: Rekindled Duel",
+          "kind": "Echo Combat",
+          "start": "2025-12-25T10:45:00+08:00",
+          "end": "2026-02-04T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Peaks_of_Prestige%3A_Rekindled_Duel"
+        },
+        {
+          "id": "arc-persona-sonic",
+          "name": "Persona Sonic",
+          "kind": "Collaboration",
+          "start": "2025-12-25T10:45:00+08:00",
+          "end": "2026-02-04T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Persona_Sonic"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-12-25",
+          "name": "Pioneer Podcast 2025-12-25",
+          "kind": "Pioneer Podcast",
+          "start": "2025-12-25T10:45:00+08:00",
+          "end": "2026-02-04T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-12-25"
+        },
+        {
+          "id": "arc-beyond-the-waves-lahai-roi",
+          "name": "Beyond the Waves: Lahai-Roi",
+          "kind": "Exploration",
+          "start": "2026-01-01T04:00:00+08:00",
+          "end": "2026-01-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3946",
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2026-01-01"
+        }
+      ]
+    },
+    {
+      "id": "2.8",
+      "title": "To the City Set in Amber",
+      "start": "2025-11-20T10:30:00+08:00",
+      "end": "2025-12-25T10:45:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3657",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.8",
+      "events": [
+        {
+          "id": "arc-gifts-of-amber",
+          "name": "Gifts of Amber",
+          "kind": "Login",
+          "start": "2025-11-20T10:30:00+08:00",
+          "end": "2025-12-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Amber"
+        },
+        {
+          "id": "arc-glamour-couture-2025-11-20",
+          "name": "Glamour Couture 2025-11-20",
+          "kind": "Resonator Trial",
+          "start": "2025-11-20T10:30:00+08:00",
+          "end": "2025-12-24T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Glamour_Couture%2F2025-11-20"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-11-20",
+          "name": "Pioneer Podcast 2025-11-20",
+          "kind": "Pioneer Podcast",
+          "start": "2025-11-20T10:30:00+08:00",
+          "end": "2025-12-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-11-20"
+        },
+        {
+          "id": "arc-stranger-things-in-honami",
+          "name": "Stranger Things in Honami",
+          "kind": "Event",
+          "start": "2025-11-20T10:30:00+08:00",
+          "end": "2025-12-24T11:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3603",
+          "source": "https://wutheringwaves.fandom.com/wiki/Stranger_Things_in_Honami"
+        },
+        {
+          "id": "arc-whispers-of-the-waves",
+          "name": "Whispers of the Waves",
+          "kind": "Leisure",
+          "start": "2025-11-20T10:30:00+08:00",
+          "end": "2025-12-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Whispers_of_the_Waves"
+        },
+        {
+          "id": "arc-tactical-simulacra-off-tune",
+          "name": "Tactical Simulacra: Off Tune",
+          "kind": "Trial",
+          "start": "2025-11-27T04:00:00+08:00",
+          "end": "2025-12-15T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Tactical_Simulacra%2F2025-11-27"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-12-01",
+          "name": "Bountiful Crescendo 2025-12-01",
+          "kind": "Event",
+          "start": "2025-12-01T04:00:00+08:00",
+          "end": "2025-12-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-12-01"
+        },
+        {
+          "id": "arc-lollo-campaign-rising-anew",
+          "name": "Lollo Campaign: Rising Anew",
+          "kind": "Event",
+          "start": "2025-12-08T04:00:00+08:00",
+          "end": "2025-12-22T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%3A_Rising_Anew"
+        },
+        {
+          "id": "arc-search-for-it-bits-of-lahai-roi",
+          "name": "Search for It! Bits of Lahai-Roi",
+          "kind": "Event",
+          "start": "2025-12-11T10:00:00+08:00",
+          "end": "2025-12-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Search_for_It!_Bits_of_Lahai-Roi"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-12-17",
+          "name": "Chord Cleansing 2025-12-17",
+          "kind": "Event",
+          "start": "2025-12-17T04:00:00+08:00",
+          "end": "2025-12-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-12-17"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "2.7",
+      "title": "Dawn Breaks on Dark Tides",
+      "start": "2025-10-09T11:00:00+08:00",
+      "end": "2025-11-20T10:30:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3412",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.7",
+      "events": [
+        {
+          "id": "arc-ascendant-aces-galbrena-lupa-sanhua-mortefi-lumi",
+          "name": "Ascendant Aces - Galbrena, Lupa, Sanhua, Mortefi, Lumi",
+          "kind": "Ascendant Aces",
+          "start": "2025-10-09T10:00:00+08:00",
+          "end": "2025-10-30T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2025-10-09"
+        },
+        {
+          "id": "arc-gifts-of-approaching-dawn",
+          "name": "Gifts of Approaching Dawn",
+          "kind": "Login",
+          "start": "2025-10-09T10:00:00+08:00",
+          "end": "2025-11-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Approaching_Dawn"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-10-09",
+          "name": "Pioneer Podcast 2025-10-09",
+          "kind": "Pioneer Podcast",
+          "start": "2025-10-09T10:00:00+08:00",
+          "end": "2025-11-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-10-09"
+        },
+        {
+          "id": "arc-lament-recon-solaris-soldier",
+          "name": "Lament Recon: Solaris Soldier",
+          "kind": "Event",
+          "start": "2025-10-11T04:00:00+08:00",
+          "end": "2025-11-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lament_Recon%3A_Solaris_Soldier"
+        },
+        {
+          "id": "arc-septimont-weather-forecast",
+          "name": "Septimont Weather Forecast",
+          "kind": "Event",
+          "start": "2025-10-16T04:00:00+08:00",
+          "end": "2025-10-30T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3447",
+          "source": "https://wutheringwaves.fandom.com/wiki/Septimont_Weather_Forecast"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-10-23",
+          "name": "Bountiful Crescendo 2025-10-23",
+          "kind": "Event",
+          "start": "2025-10-23T04:00:00+08:00",
+          "end": "2025-10-30T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-10-23"
+        },
+        {
+          "id": "arc-freeze-frame-action-highlights",
+          "name": "Freeze Frame: Action Highlights",
+          "kind": "Event",
+          "start": "2025-10-30T04:00:00+08:00",
+          "end": "2025-11-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3523",
+          "source": "https://wutheringwaves.fandom.com/wiki/Freeze_Frame%3A_Action_Highlights"
+        },
+        {
+          "id": "arc-gifts-of-ink-song",
+          "name": "Gifts of Ink Song",
+          "kind": "Login",
+          "start": "2025-10-30T10:00:00+08:00",
+          "end": "2025-11-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Ink_Song"
+        },
+        {
+          "id": "arc-lollo-campaign-ice-savior",
+          "name": "Lollo Campaign: Ice Savior",
+          "kind": "Event",
+          "start": "2025-11-06T04:00:00+08:00",
+          "end": "2025-11-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3541",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-11-06"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-11-12",
+          "name": "Chord Cleansing 2025-11-12",
+          "kind": "Event",
+          "start": "2025-11-12T04:00:00+08:00",
+          "end": "2025-11-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-11-12"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "2.6",
+      "title": "By Sun's Scourge, By Moon's Revelation",
+      "start": "2025-08-28T11:00:00+08:00",
+      "end": "2025-10-09T11:00:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3194",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.6",
+      "events": [
+        {
+          "id": "arc-gifts-of-the-hunt",
+          "name": "Gifts of the Hunt",
+          "kind": "Login",
+          "start": "2025-08-28T10:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_the_Hunt"
+        },
+        {
+          "id": "arc-hunt-of-ash-and-steel",
+          "name": "Hunt of Ash and Steel",
+          "kind": "Event",
+          "start": "2025-08-28T10:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Hunt_of_Ash_and_Steel"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-08-28",
+          "name": "Pioneer Podcast 2025-08-28",
+          "kind": "Pioneer Podcast",
+          "start": "2025-08-28T10:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-08-28"
+        },
+        {
+          "id": "arc-prints-of-plateaus",
+          "name": "Prints of Plateaus",
+          "kind": "Leisure",
+          "start": "2025-08-28T10:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Prints_of_Plateaus"
+        },
+        {
+          "id": "arc-sanguis-plateaus-travel-atlas",
+          "name": "Sanguis Plateaus Travel Atlas",
+          "kind": "Event",
+          "start": "2025-08-28T10:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Sanguis_Plateaus_Travel_Atlas"
+        },
+        {
+          "id": "arc-windrider-project",
+          "name": "Windrider Project",
+          "kind": "Event",
+          "start": "2025-08-28T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Windrider_Project"
+        },
+        {
+          "id": "arc-tidal-defense-simulator",
+          "name": "Tidal Defense Simulator",
+          "kind": "Event",
+          "start": "2025-08-30T10:00:00+08:00",
+          "end": "2025-10-08T11:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3216",
+          "source": "https://wutheringwaves.fandom.com/wiki/Tidal_Defense_Simulator"
+        },
+        {
+          "id": "arc-marks-of-the-wild",
+          "name": "Marks of the Wild",
+          "kind": "Event",
+          "start": "2025-09-04T04:00:00+08:00",
+          "end": "2025-09-22T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Marks_of_the_Wild"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-09-11",
+          "name": "Bountiful Crescendo 2025-09-11",
+          "kind": "Event",
+          "start": "2025-09-11T04:00:00+08:00",
+          "end": "2025-09-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-09-11"
+        },
+        {
+          "id": "arc-second-coming-of-solaris-ultra",
+          "name": "Second Coming of Solaris (Ultra)",
+          "kind": "Event",
+          "start": "2025-09-17T04:00:00+08:00",
+          "end": "2025-10-06T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Second_Coming_of_Solaris_(Ultra)"
+        },
+        {
+          "id": "arc-ascendant-aces-iuno-ciaccona-aalto-baizhi-taoqi",
+          "name": "Ascendant Aces - Iuno, Ciaccona, Aalto, Baizhi, Taoqi",
+          "kind": "Ascendant Aces",
+          "start": "2025-09-17T10:00:00+08:00",
+          "end": "2025-10-08T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2025-09-17"
+        },
+        {
+          "id": "arc-gifts-of-the-moon-roamer",
+          "name": "Gifts of the Moon Roamer",
+          "kind": "Login",
+          "start": "2025-09-17T10:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_the_Moon_Roamer"
+        },
+        {
+          "id": "arc-moonlit-revelation",
+          "name": "Moonlit Revelation",
+          "kind": "Event",
+          "start": "2025-09-25T04:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Moonlit_Revelation"
+        },
+        {
+          "id": "arc-beyond-the-waves-rinascita-2025-09-25",
+          "name": "Beyond the Waves: Rinascita 2025-09-25",
+          "kind": "Event",
+          "start": "2025-09-25T10:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3323",
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-09-25"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-10-01",
+          "name": "Chord Cleansing 2025-10-01",
+          "kind": "Event",
+          "start": "2025-10-01T04:00:00+08:00",
+          "end": "2025-10-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-10-01"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "2.5",
+      "title": "Unfading Melody of Life",
+      "start": "2025-07-24T11:00:00+08:00",
+      "end": "2025-08-28T11:00:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2966",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.5",
+      "events": [
+        {
+          "id": "arc-deep-sea-survey",
+          "name": "Deep Sea Survey",
+          "kind": "Leisure",
+          "start": "2025-07-24T10:00:00+08:00",
+          "end": "2025-08-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Deep_Sea_Survey"
+        },
+        {
+          "id": "arc-gifts-of-grand-symphony",
+          "name": "Gifts of Grand Symphony",
+          "kind": "Login",
+          "start": "2025-07-24T10:00:00+08:00",
+          "end": "2025-08-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Grand_Symphony"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-07-24",
+          "name": "Pioneer Podcast 2025-07-24",
+          "kind": "Pioneer Podcast",
+          "start": "2025-07-24T10:00:00+08:00",
+          "end": "2025-08-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-07-24"
+        },
+        {
+          "id": "arc-phantasma-dreamland",
+          "name": "Phantasma Dreamland",
+          "kind": "Event",
+          "start": "2025-07-26T10:00:00+08:00",
+          "end": "2025-08-27T11:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2991",
+          "source": "https://wutheringwaves.fandom.com/wiki/Phantasma_Dreamland"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-08-04",
+          "name": "Chord Cleansing 2025-08-04",
+          "kind": "Event",
+          "start": "2025-08-04T04:00:00+08:00",
+          "end": "2025-08-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-08-04"
+        },
+        {
+          "id": "arc-overflowing-picture-book",
+          "name": "Overflowing Picture Book",
+          "kind": "Event",
+          "start": "2025-08-07T04:00:00+08:00",
+          "end": "2025-08-25T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Overflowing_Picture_Book"
+        },
+        {
+          "id": "arc-wuthering-exploration-2025-08-11",
+          "name": "Wuthering Exploration 2025-08-11",
+          "kind": "Event",
+          "start": "2025-08-11T10:00:00+08:00",
+          "end": "2025-08-25T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2025-08-11"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-08-18",
+          "name": "Bountiful Crescendo 2025-08-18",
+          "kind": "Event",
+          "start": "2025-08-18T04:00:00+08:00",
+          "end": "2025-08-25T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-08-18"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "2.4",
+      "title": "Lightly We Toss the Crown",
+      "start": "2025-06-12T11:00:00+08:00",
+      "end": "2025-07-24T11:00:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2801",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.4",
+      "events": [
+        {
+          "id": "arc-gifts-of-applause",
+          "name": "Gifts of Applause",
+          "kind": "Login",
+          "start": "2025-06-12T10:00:00+08:00",
+          "end": "2025-07-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Applause"
+        },
+        {
+          "id": "arc-glamour-couture-2025-06-12",
+          "name": "Glamour Couture 2025-06-12",
+          "kind": "Resonator Trial",
+          "start": "2025-06-12T10:00:00+08:00",
+          "end": "2025-07-23T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Glamour_Couture%2F2025-06-12"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-06-12",
+          "name": "Pioneer Podcast 2025-06-12",
+          "kind": "Pioneer Podcast",
+          "start": "2025-06-12T10:00:00+08:00",
+          "end": "2025-07-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-06-12"
+        },
+        {
+          "id": "arc-septimont-travel-atlas",
+          "name": "Septimont Travel Atlas",
+          "kind": "Event",
+          "start": "2025-06-12T10:00:00+08:00",
+          "end": "2025-07-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Septimont_Travel_Atlas"
+        },
+        {
+          "id": "arc-solaris-new-voyage-celebration",
+          "name": "Solaris New Voyage Celebration",
+          "kind": "Login",
+          "start": "2025-06-12T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Solaris_New_Voyage_Celebration"
+        },
+        {
+          "id": "arc-the-everglorious-summit",
+          "name": "The Everglorious Summit",
+          "kind": "Event",
+          "start": "2025-06-12T10:00:00+08:00",
+          "end": "2025-07-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/The_Everglorious_Summit"
+        },
+        {
+          "id": "arc-the-great-agon-gifts-of-grand-opening",
+          "name": "The Great Agon: Gifts of Grand Opening",
+          "kind": "Login",
+          "start": "2025-06-12T10:00:00+08:00",
+          "end": "2025-07-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/The_Great_Agon%3A_Gifts_of_Grand_Opening"
+        },
+        {
+          "id": "arc-uncovering-past-heroes",
+          "name": "Uncovering Past Heroes",
+          "kind": "Leisure",
+          "start": "2025-06-12T10:00:00+08:00",
+          "end": "2025-07-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Uncovering_Past_Heroes"
+        },
+        {
+          "id": "arc-all-out-towards-the-peaks-of-prestige",
+          "name": "All Out! Towards the Peaks of Prestige",
+          "kind": "Echo Combat",
+          "start": "2025-06-14T04:00:00+08:00",
+          "end": "2025-07-23T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/All_Out!_Towards_the_Peaks_of_Prestige"
+        },
+        {
+          "id": "arc-virtual-crisis-frontier-trials",
+          "name": "Virtual Crisis: Frontier Trials",
+          "kind": "Trial",
+          "start": "2025-06-19T10:00:00+08:00",
+          "end": "2025-07-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2826",
+          "source": "https://wutheringwaves.fandom.com/wiki/Virtual_Crisis%3A_Frontier_Trials"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-06-26",
+          "name": "Chord Cleansing 2025-06-26",
+          "kind": "Event",
+          "start": "2025-06-26T04:00:00+08:00",
+          "end": "2025-07-03T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-06-26"
+        },
+        {
+          "id": "arc-banners-never-fall",
+          "name": "Banners Never Fall",
+          "kind": "Event",
+          "start": "2025-07-03T04:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Banners_Never_Fall"
+        },
+        {
+          "id": "arc-lollo-campaign-verification",
+          "name": "Lollo Campaign: Verification",
+          "kind": "Event",
+          "start": "2025-07-10T04:00:00+08:00",
+          "end": "2025-07-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2891",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-07-10"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-07-14",
+          "name": "Bountiful Crescendo 2025-07-14",
+          "kind": "Event",
+          "start": "2025-07-14T04:00:00+08:00",
+          "end": "2025-07-21T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-07-14"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "2.3",
+      "title": "Fiery Arpeggio of Summer Reunion",
+      "start": "2025-04-29T11:00:00+08:00",
+      "end": "2025-06-12T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2561",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.3",
+      "events": [
+        {
+          "id": "arc-cube-cubic-n-cubie",
+          "name": "Cube, Cubic n Cubie",
+          "kind": "Event",
+          "start": "2025-04-29T10:00:00+08:00",
+          "end": "2025-06-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2504",
+          "source": "https://wutheringwaves.fandom.com/wiki/Cube%2C_Cubic_n_Cubie"
+        },
+        {
+          "id": "arc-cubie-derby-warmup",
+          "name": "Cubie Derby: Warmup",
+          "kind": "Event",
+          "start": "2025-04-29T10:00:00+08:00",
+          "end": "2025-06-11T11:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2513",
+          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby%3A_Warmup"
+        },
+        {
+          "id": "arc-gifts-of-grand-reunion",
+          "name": "Gifts of Grand Reunion",
+          "kind": "Login",
+          "start": "2025-04-29T10:00:00+08:00",
+          "end": "2025-06-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Grand_Reunion"
+        },
+        {
+          "id": "arc-gilded-nightmarket",
+          "name": "Gilded Nightmarket",
+          "kind": "Event",
+          "start": "2025-04-29T10:00:00+08:00",
+          "end": "2025-06-11T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gilded_Nightmarket"
+        },
+        {
+          "id": "arc-memory-travelogue",
+          "name": "Memory Travelogue",
+          "kind": "Leisure",
+          "start": "2025-04-29T10:00:00+08:00",
+          "end": "2025-06-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Memory_Travelogue"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-04-29",
+          "name": "Pioneer Podcast 2025-04-29",
+          "kind": "Pioneer Podcast",
+          "start": "2025-04-29T10:00:00+08:00",
+          "end": "2025-06-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-04-29"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-05-01",
+          "name": "Chord Cleansing 2025-05-01",
+          "kind": "Event",
+          "start": "2025-05-01T04:00:00+08:00",
+          "end": "2025-05-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-05-01"
+        },
+        {
+          "id": "arc-cubie-derby",
+          "name": "Cubie Derby",
+          "kind": "Event",
+          "start": "2025-05-14T08:00:00+08:00",
+          "end": "2025-05-26T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2602",
+          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby"
+        },
+        {
+          "id": "arc-dreaming-deep",
+          "name": "Dreaming Deep",
+          "kind": "Event",
+          "start": "2025-05-22T04:00:00+08:00",
+          "end": "2025-08-27T03:59:00+08:00",
+          "ran": "2.3, 2.4, 2.5",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2626",
+          "source": "https://wutheringwaves.fandom.com/wiki/Dreaming_Deep"
+        },
+        {
+          "id": "arc-your-summer-will-never-wither",
+          "name": "Your Summer Will Never Wither",
+          "kind": "Event",
+          "start": "2025-05-22T04:00:00+08:00",
+          "end": "2025-06-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Your_Summer_Will_Never_Wither"
+        },
+        {
+          "id": "arc-gifts-of-grand-celebration",
+          "name": "Gifts of Grand Celebration",
+          "kind": "Login",
+          "start": "2025-05-23T00:00:00+08:00",
+          "end": "2025-06-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Grand_Celebration"
+        },
+        {
+          "id": "arc-beyond-the-waves-rinascita-2025-05-29",
+          "name": "Beyond the Waves: Rinascita 2025-05-29",
+          "kind": "Event",
+          "start": "2025-05-29T10:00:00+08:00",
+          "end": "2025-06-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2691",
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-05-29"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-06-02",
+          "name": "Bountiful Crescendo 2025-06-02",
+          "kind": "Event",
+          "start": "2025-06-02T04:00:00+08:00",
+          "end": "2025-06-09T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-06-02"
+        },
+        {
+          "id": "arc-gifts-of-melodic-verses",
+          "name": "Gifts of Melodic Verses",
+          "kind": "Login",
+          "start": "2025-06-05T04:00:00+08:00",
+          "end": "2025-06-19T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Melodic_Verses"
+        }
+      ]
+    },
+    {
+      "id": "2.2",
+      "title": "Tangled Truth in Inverted Tower",
+      "start": "2025-03-27T11:00:00+08:00",
+      "end": "2025-04-29T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2381",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.2",
+      "events": [
+        {
+          "id": "arc-acropolis-documentarian",
+          "name": "Acropolis Documentarian",
+          "kind": "Leisure",
+          "start": "2025-03-27T10:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Acropolis_Documentarian"
+        },
+        {
+          "id": "arc-ascendant-aces-cantarella-camellya-danjin-chixia-yuanwu",
+          "name": "Ascendant Aces - Cantarella, Camellya, Danjin, Chixia, Yuanwu",
+          "kind": "Ascendant Aces",
+          "start": "2025-03-27T10:00:00+08:00",
+          "end": "2025-04-17T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2025-03-27"
+        },
+        {
+          "id": "arc-avinoleum-travel-atlas",
+          "name": "Avinoleum Travel Atlas",
+          "kind": "Event",
+          "start": "2025-03-27T10:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Avinoleum_Travel_Atlas"
+        },
+        {
+          "id": "arc-gifts-of-the-still-tides",
+          "name": "Gifts of the Still Tides",
+          "kind": "Login",
+          "start": "2025-03-27T10:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_the_Still_Tides"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-03-27",
+          "name": "Pioneer Podcast 2025-03-27",
+          "kind": "Pioneer Podcast",
+          "start": "2025-03-27T10:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-03-27"
+        },
+        {
+          "id": "arc-winds-of-the-past",
+          "name": "Winds of the Past",
+          "kind": "Event",
+          "start": "2025-03-27T10:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Winds_of_the_Past"
+        },
+        {
+          "id": "arc-virtual-crisis-prototype-trials",
+          "name": "Virtual Crisis: Prototype Trials",
+          "kind": "Trial",
+          "start": "2025-04-03T10:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Virtual_Crisis%3A_Prototype_Trials"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-04-07",
+          "name": "Chord Cleansing 2025-04-07",
+          "kind": "Event",
+          "start": "2025-04-07T04:00:00+08:00",
+          "end": "2025-04-14T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2404",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-04-07"
+        },
+        {
+          "id": "arc-lollo-campaign-set-sail",
+          "name": "Lollo Campaign: Set Sail",
+          "kind": "Event",
+          "start": "2025-04-10T10:00:00+08:00",
+          "end": "2025-04-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2415",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-04-10"
+        },
+        {
+          "id": "arc-ragunna-weather-forecast",
+          "name": "Ragunna Weather Forecast",
+          "kind": "Event",
+          "start": "2025-04-10T10:00:00+08:00",
+          "end": "2025-04-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2422",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ragunna_Weather_Forecast"
+        },
+        {
+          "id": "arc-wuthering-exploration-2025-04-14",
+          "name": "Wuthering Exploration 2025-04-14",
+          "kind": "Event",
+          "start": "2025-04-14T10:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2432",
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2025-04-14"
+        },
+        {
+          "id": "arc-ascendant-aces-shorekeeper-baizhi-sanhua-aalto",
+          "name": "Ascendant Aces - Shorekeeper, Baizhi, Sanhua, Aalto",
+          "kind": "Ascendant Aces",
+          "start": "2025-04-17T10:00:00+08:00",
+          "end": "2025-04-28T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2025-04-17"
+        },
+        {
+          "id": "arc-if-you-gaze-into-the-abyss-of-dreams",
+          "name": "If You Gaze Into the Abyss of Dreams",
+          "kind": "Co-Op",
+          "start": "2025-04-17T10:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/If_You_Gaze_Into_the_Abyss_of_Dreams"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-04-21",
+          "name": "Bountiful Crescendo 2025-04-21",
+          "kind": "Event",
+          "start": "2025-04-21T04:00:00+08:00",
+          "end": "2025-04-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-04-21"
+        },
+        {
+          "id": "arc-special-limited-time-login-event",
+          "name": "Special Limited-Time Login Event",
+          "kind": "Login",
+          "start": "2025-04-25T04:00:00+08:00",
+          "end": "2025-06-11T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Special_Limited-Time_Login_Event"
+        }
+      ]
+    },
+    {
+      "id": "2.1",
+      "title": "Waves Sing, and the Cerulean Bird Calls",
+      "start": "2025-02-13T11:00:00+08:00",
+      "end": "2025-03-27T11:00:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/2154",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.1",
+      "events": [
+        {
+          "id": "arc-gifts-of-blue-water",
+          "name": "Gifts of Blue Water",
+          "kind": "Login",
+          "start": "2025-02-13T10:00:00+08:00",
+          "end": "2025-03-26T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Blue_Water"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-02-13",
+          "name": "Pioneer Podcast 2025-02-13",
+          "kind": "Pioneer Podcast",
+          "start": "2025-02-13T10:00:00+08:00",
+          "end": "2025-03-26T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-02-13"
+        },
+        {
+          "id": "arc-old-man-and-the-whale",
+          "name": "Old Man and the Whale",
+          "kind": "Event",
+          "start": "2025-02-13T11:00:00+08:00",
+          "end": "2025-03-26T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2100",
+          "source": "https://wutheringwaves.fandom.com/wiki/Old_Man_and_the_Whale"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-02-20",
+          "name": "Chord Cleansing 2025-02-20",
+          "kind": "Event",
+          "start": "2025-02-20T04:00:00+08:00",
+          "end": "2025-02-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2180",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-02-20"
+        },
+        {
+          "id": "arc-apex-ragunna",
+          "name": "Apex Ragunna",
+          "kind": "Event",
+          "start": "2025-02-20T10:00:00+08:00",
+          "end": "2025-03-10T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2173",
+          "source": "https://wutheringwaves.fandom.com/wiki/Apex_Ragunna"
+        },
+        {
+          "id": "arc-tactical-simulacra-iii",
+          "name": "Tactical Simulacra III",
+          "kind": "Trial",
+          "start": "2025-02-27T10:00:00+08:00",
+          "end": "2025-03-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Tactical_Simulacra%2F2025-02-27"
+        },
+        {
+          "id": "arc-infinite-battle-simulation-ii",
+          "name": "Infinite Battle Simulation II",
+          "kind": "Event",
+          "start": "2025-03-06T10:00:00+08:00",
+          "end": "2025-03-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Infinite_Battle_Simulation%2F2025-03-06"
+        },
+        {
+          "id": "arc-beyond-the-waves-2025-03-13",
+          "name": "Beyond the Waves 2025-03-13",
+          "kind": "Event",
+          "start": "2025-03-13T10:00:00+08:00",
+          "end": "2025-03-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/2261",
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-03-13"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-03-20",
+          "name": "Bountiful Crescendo 2025-03-20",
+          "kind": "Event",
+          "start": "2025-03-20T04:00:00+08:00",
+          "end": "2025-03-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-03-20"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "2.0",
+      "title": "All Silent Souls Can Sing",
+      "start": "2025-01-02T10:00:00+08:00",
+      "end": "2025-02-13T11:00:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1912",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F2.0",
+      "events": [
+        {
+          "id": "arc-ascendant-aces-carlotta-zhezhi-sanhua-chixia-mortefi",
+          "name": "Ascendant Aces - Carlotta ,Zhezhi, Sanhua, Chixia, Mortefi",
+          "kind": "Ascendant Aces",
+          "start": "2025-01-02T10:00:00+08:00",
+          "end": "2025-01-23T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2025-01-02"
+        },
+        {
+          "id": "arc-gifts-of-joyous-tunes",
+          "name": "Gifts of Joyous Tunes",
+          "kind": "Login",
+          "start": "2025-01-02T10:00:00+08:00",
+          "end": "2025-02-12T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Joyous_Tunes"
+        },
+        {
+          "id": "arc-glamour-couture-2025-01-02",
+          "name": "Glamour Couture 2025-01-02",
+          "kind": "Resonator Trial",
+          "start": "2025-01-02T10:00:00+08:00",
+          "end": "2025-02-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Glamour_Couture%2F2025-01-02"
+        },
+        {
+          "id": "arc-next-stop-rinascita",
+          "name": "Next Stop: Rinascita",
+          "kind": "Early Access",
+          "start": "2025-01-02T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Next_Stop%3A_Rinascita"
+        },
+        {
+          "id": "arc-pincer-maneuver-warriors-iii",
+          "name": "Pincer Maneuver Warriors III",
+          "kind": "Trial",
+          "start": "2025-01-02T10:00:00+08:00",
+          "end": "2025-01-23T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pincer_Maneuver_Warriors%2F2025-01-02"
+        },
+        {
+          "id": "arc-pioneer-podcast-2025-01-02",
+          "name": "Pioneer Podcast 2025-01-02",
+          "kind": "Pioneer Podcast",
+          "start": "2025-01-02T10:00:00+08:00",
+          "end": "2025-02-12T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2025-01-02"
+        },
+        {
+          "id": "arc-tales-of-the-isles",
+          "name": "Tales of the Isles",
+          "kind": "Event",
+          "start": "2025-01-02T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Tales_of_the_Isles"
+        },
+        {
+          "id": "arc-traces-of-tides",
+          "name": "Traces of Tides",
+          "kind": "Leisure",
+          "start": "2025-01-02T10:00:00+08:00",
+          "end": "2025-02-12T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Traces_of_Tides"
+        },
+        {
+          "id": "arc-although-colors-have-no-form",
+          "name": "Although Colors Have No Form",
+          "kind": "Co-Op",
+          "start": "2025-01-09T10:00:00+08:00",
+          "end": "2025-01-30T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1954",
+          "source": "https://wutheringwaves.fandom.com/wiki/Although_Colors_Have_No_Form"
+        },
+        {
+          "id": "arc-chord-cleansing-2025-01-16",
+          "name": "Chord Cleansing 2025-01-16",
+          "kind": "Event",
+          "start": "2025-01-16T04:00:00+08:00",
+          "end": "2025-01-23T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1985",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-01-16"
+        },
+        {
+          "id": "arc-wuthering-exploration-2025-01-16",
+          "name": "Wuthering Exploration 2025-01-16",
+          "kind": "Event",
+          "start": "2025-01-16T10:00:00+08:00",
+          "end": "2025-01-30T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1984",
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2025-01-16"
+        },
+        {
+          "id": "arc-ascendant-aces-roccia-jinhsi-danjin-youhu-yuanwu",
+          "name": "Ascendant Aces - Roccia, Jinhsi, Danjin, Youhu, Yuanwu",
+          "kind": "Ascendant Aces",
+          "start": "2025-01-23T10:00:00+08:00",
+          "end": "2025-02-12T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2025-01-23"
+        },
+        {
+          "id": "arc-dances-for-spring-s-return",
+          "name": "Dances For Spring's Return",
+          "kind": "Event",
+          "start": "2025-01-23T10:00:00+08:00",
+          "end": "2025-02-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2021",
+          "source": "https://wutheringwaves.fandom.com/wiki/Dances_For_Spring's_Return"
+        },
+        {
+          "id": "arc-john-wicktorio-no-debts-for-old-men",
+          "name": "John Wicktorio: No Debts for Old Men",
+          "kind": "Trial",
+          "start": "2025-01-23T10:00:00+08:00",
+          "end": "2025-02-09T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/John_Wicktorio%3A_No_Debts_for_Old_Men"
+        },
+        {
+          "id": "arc-pincer-maneuver-warriors-iv",
+          "name": "Pincer Maneuver Warriors IV",
+          "kind": "Trial",
+          "start": "2025-01-23T10:00:00+08:00",
+          "end": "2025-02-12T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pincer_Maneuver_Warriors%2F2025-01-23"
+        },
+        {
+          "id": "arc-celebration-aftertunes",
+          "name": "Celebration Aftertunes",
+          "kind": "Login",
+          "start": "2025-01-29T00:00:00+08:00",
+          "end": "2025-02-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Celebration_Aftertunes"
+        },
+        {
+          "id": "arc-lollo-campaign-comeback",
+          "name": "Lollo Campaign: Comeback",
+          "kind": "Event",
+          "start": "2025-01-30T10:00:00+08:00",
+          "end": "2025-02-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2066",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-01-30"
+        },
+        {
+          "id": "arc-moonlit-path",
+          "name": "Moonlit Path",
+          "kind": "Store",
+          "start": "2025-02-05T08:55:00+08:00",
+          "end": "2026-03-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Moonlit_Path"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2025-02-06",
+          "name": "Bountiful Crescendo 2025-02-06",
+          "kind": "Event",
+          "start": "2025-02-06T04:00:00+08:00",
+          "end": "2025-02-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-02-06"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "1.4",
+      "title": "When the Night Knocks",
+      "start": "2024-11-14T11:00:00+08:00",
+      "end": "2025-01-02T10:00:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1647",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F1.4",
+      "events": [
+        {
+          "id": "arc-depths-of-illusive-realm-phantasm-amass",
+          "name": "Depths of Illusive Realm: Phantasm Amass",
+          "kind": "Trial",
+          "start": "2024-11-14T10:00:00+08:00",
+          "end": "2025-01-01T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1646",
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2024-11-14"
+        },
+        {
+          "id": "arc-gifts-of-fleeting-dreams",
+          "name": "Gifts of Fleeting Dreams",
+          "kind": "Login",
+          "start": "2024-11-14T11:00:00+08:00",
+          "end": "2025-01-01T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Fleeting_Dreams"
+        },
+        {
+          "id": "arc-pioneer-podcast-2024-11-14",
+          "name": "Pioneer Podcast 2024-11-14",
+          "kind": "Pioneer Podcast",
+          "start": "2024-11-14T11:00:00+08:00",
+          "end": "2025-01-01T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2024-11-14"
+        },
+        {
+          "id": "arc-pincer-maneuver-warriors-i",
+          "name": "Pincer Maneuver Warriors I",
+          "kind": "Trial",
+          "start": "2024-11-14T13:00:00+08:00",
+          "end": "2024-12-12T09:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1647",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pincer_Maneuver_Warriors%2F2024-11-14"
+        },
+        {
+          "id": "arc-somnium-labyrinth",
+          "name": "Somnium Labyrinth",
+          "kind": "Event",
+          "start": "2024-11-14T13:00:00+08:00",
+          "end": "2025-01-01T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1631",
+          "source": "https://wutheringwaves.fandom.com/wiki/Somnium_Labyrinth"
+        },
+        {
+          "id": "arc-beyond-the-waves-2024-11-21",
+          "name": "Beyond the Waves 2024-11-21",
+          "kind": "Event",
+          "start": "2024-11-21T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1693",
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2024-11-21"
+        },
+        {
+          "id": "arc-chord-cleansing-2024-12-05",
+          "name": "Chord Cleansing 2024-12-05",
+          "kind": "Event",
+          "start": "2024-12-05T04:00:00+08:00",
+          "end": "2024-12-12T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1715",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-12-05"
+        },
+        {
+          "id": "arc-pincer-maneuver-warriors-ii",
+          "name": "Pincer Maneuver Warriors II",
+          "kind": "Trial",
+          "start": "2024-12-12T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1738",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pincer_Maneuver_Warriors%2F2024-12-12"
+        },
+        {
+          "id": "arc-tactical-simulacra-ii",
+          "name": "Tactical Simulacra II",
+          "kind": "Trial",
+          "start": "2024-12-19T10:00:00+08:00",
+          "end": "2025-01-01T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1788",
+          "source": "https://wutheringwaves.fandom.com/wiki/Tactical_Simulacra%2F2024-12-19"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2024-12-25",
+          "name": "Bountiful Crescendo 2024-12-25",
+          "kind": "Event",
+          "start": "2024-12-25T04:00:00+08:00",
+          "end": "2025-01-01T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-12-25"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "1.3",
+      "title": "To the Shore's End",
+      "start": "2024-09-29T11:00:00+08:00",
+      "end": "2024-11-14T03:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1454",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F1.3",
+      "events": [
+        {
+          "id": "arc-ascendant-aces-shorekeeper-taoqi-yangyang-chixia",
+          "name": "Ascendant Aces - Shorekeeper, Taoqi, Yangyang, Chixia",
+          "kind": "Ascendant Aces",
+          "start": "2024-09-29T11:00:00+08:00",
+          "end": "2024-10-24T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2024-09-28"
+        },
+        {
+          "id": "arc-pioneer-podcast-2024-09-29",
+          "name": "Pioneer Podcast 2024-09-29",
+          "kind": "Pioneer Podcast",
+          "start": "2024-09-29T11:00:00+08:00",
+          "end": "2024-11-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2024-09-29"
+        },
+        {
+          "id": "arc-where-stars-slumber",
+          "name": "Where Stars Slumber",
+          "kind": "Event",
+          "start": "2024-09-29T11:00:00+08:00",
+          "end": "2024-11-13T15:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Where_Stars_Slumber"
+        },
+        {
+          "id": "arc-solaris-weather-forecast",
+          "name": "Solaris Weather Forecast",
+          "kind": "Event",
+          "start": "2024-10-10T10:00:00+08:00",
+          "end": "2024-10-31T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1491",
+          "source": "https://wutheringwaves.fandom.com/wiki/Solaris_Weather_Forecast"
+        },
+        {
+          "id": "arc-wuthering-exploration-2024-10-10",
+          "name": "Wuthering Exploration 2024-10-10",
+          "kind": "Event",
+          "start": "2024-10-10T10:00:00+08:00",
+          "end": "2024-10-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1492",
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-10-10"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2024-10-17",
+          "name": "Bountiful Crescendo 2024-10-17",
+          "kind": "Event",
+          "start": "2024-10-17T04:00:00+08:00",
+          "end": "2024-10-24T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1502",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-10-17"
+        },
+        {
+          "id": "arc-infinite-battle-simulation",
+          "name": "Infinite Battle Simulation",
+          "kind": "Event",
+          "start": "2024-10-24T10:00:00+08:00",
+          "end": "2024-11-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1509",
+          "source": "https://wutheringwaves.fandom.com/wiki/Infinite_Battle_Simulation%2F2024-10-24"
+        },
+        {
+          "id": "arc-lollo-campaign-rerun",
+          "name": "Lollo Campaign: Rerun",
+          "kind": "Event",
+          "start": "2024-10-24T10:00:00+08:00",
+          "end": "2024-11-07T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1509",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2024-10-24"
+        },
+        {
+          "id": "arc-wuthering-exploration-2024-10-31",
+          "name": "Wuthering Exploration 2024-10-31",
+          "kind": "Event",
+          "start": "2024-10-31T10:00:00+08:00",
+          "end": "2024-11-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1562",
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-10-31"
+        },
+        {
+          "id": "arc-chord-cleansing-2024-11-06",
+          "name": "Chord Cleansing 2024-11-06",
+          "kind": "Event",
+          "start": "2024-11-06T04:00:00+08:00",
+          "end": "2024-11-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1588",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-11-06"
+        }
+      ]
+    },
+    {
+      "id": "1.2",
+      "title": "In the Turquoise Moonglow",
+      "start": "2024-08-15T13:00:00+08:00",
+      "end": "2024-09-29T11:00:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1190",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F1.2",
+      "events": [
+        {
+          "id": "arc-ascendant-aces-zhezhi-sanhua-baizhi-chixia",
+          "name": "Ascendant Aces - Zhezhi, Sanhua, Baizhi, Chixia",
+          "kind": "Ascendant Aces",
+          "start": "2024-08-15T10:00:00+08:00",
+          "end": "2024-09-07T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2024-08-15"
+        },
+        {
+          "id": "arc-pioneer-podcast-2024-08-15",
+          "name": "Pioneer Podcast 2024-08-15",
+          "kind": "Pioneer Podcast",
+          "start": "2024-08-15T10:00:00+08:00",
+          "end": "2024-09-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2024-08-15"
+        },
+        {
+          "id": "arc-reprise-of-tides",
+          "name": "Reprise of Tides",
+          "kind": "Login",
+          "start": "2024-08-15T13:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1178",
+          "source": "https://wutheringwaves.fandom.com/wiki/Reprise_of_Tides"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2024-08-29",
+          "name": "Bountiful Crescendo 2024-08-29",
+          "kind": "Event",
+          "start": "2024-08-29T04:00:00+08:00",
+          "end": "2024-09-05T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1233",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-08-29"
+        },
+        {
+          "id": "arc-ascendant-aces-xiangli-yao-danjin-aalto-yuanwu",
+          "name": "Ascendant Aces - Xiangli Yao, Danjin, Aalto, Yuanwu",
+          "kind": "Ascendant Aces",
+          "start": "2024-09-07T10:00:00+08:00",
+          "end": "2024-09-28T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2024-09-07"
+        },
+        {
+          "id": "arc-wuthering-exploration-2024-09-12",
+          "name": "Wuthering Exploration 2024-09-12",
+          "kind": "Event",
+          "start": "2024-09-12T10:00:00+08:00",
+          "end": "2024-09-26T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1296",
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-09-12"
+        },
+        {
+          "id": "arc-alloy-smelt-ii",
+          "name": "Alloy Smelt II",
+          "kind": "Trial",
+          "start": "2024-09-16T10:00:00+08:00",
+          "end": "2024-09-28T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1306",
+          "source": "https://wutheringwaves.fandom.com/wiki/Alloy_Smelt%2F2024-09-16"
+        },
+        {
+          "id": "arc-chord-cleansing-2024-09-20",
+          "name": "Chord Cleansing 2024-09-20",
+          "kind": "Event",
+          "start": "2024-09-20T04:00:00+08:00",
+          "end": "2024-09-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1316",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-09-20"
+        }
+      ],
+      "endDerived": true
+    },
+    {
+      "id": "1.1",
+      "title": "Thaw of Eons",
+      "start": "2024-06-28T13:00:00+08:00",
+      "end": "2024-08-15T05:59:00+08:00",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/996",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F1.1",
+      "events": [
+        {
+          "id": "arc-ascendant-aces-jinhsi-sanhua-yangyang-danjin",
+          "name": "Ascendant Aces - Jinhsi, Sanhua, Yangyang, Danjin",
+          "kind": "Ascendant Aces",
+          "start": "2024-06-28T10:00:00+08:00",
+          "end": "2024-07-22T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2024-06-28"
+        },
+        {
+          "id": "arc-pioneer-podcast-2024-06-28",
+          "name": "Pioneer Podcast 2024-06-28",
+          "kind": "Pioneer Podcast",
+          "start": "2024-06-28T10:00:00+08:00",
+          "end": "2024-08-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2024-06-28"
+        },
+        {
+          "id": "arc-gifts-of-celestial-light",
+          "name": "Gifts of Celestial Light",
+          "kind": "Login",
+          "start": "2024-06-28T13:00:00+08:00",
+          "end": "2024-08-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Celestial_Light"
+        },
+        {
+          "id": "arc-tales-from-mt-firmament",
+          "name": "Tales from Mt. Firmament",
+          "kind": "Event",
+          "start": "2024-06-28T13:00:00+08:00",
+          "end": "2024-08-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Tales_from_Mt._Firmament"
+        },
+        {
+          "id": "arc-traces-of-mt-firmament",
+          "name": "Traces of Mt. Firmament",
+          "kind": "Leisure",
+          "start": "2024-06-28T13:00:00+08:00",
+          "end": "2024-08-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Traces_of_Mt._Firmament"
+        },
+        {
+          "id": "arc-gifts-of-gratitude",
+          "name": "Gifts of Gratitude",
+          "kind": "Login",
+          "start": "2024-07-04T04:00:00+08:00",
+          "end": "2024-08-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1018",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Gratitude"
+        },
+        {
+          "id": "arc-depths-of-illusive-realm-dreams-ablaze-in-darkness",
+          "name": "Depths of Illusive Realm: Dreams Ablaze in Darkness",
+          "kind": "Trial",
+          "start": "2024-07-04T10:00:00+08:00",
+          "end": "2024-08-05T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1025",
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2024-07-04"
+        },
+        {
+          "id": "arc-bountiful-crescendo-2024-07-11",
+          "name": "Bountiful Crescendo 2024-07-11",
+          "kind": "Event",
+          "start": "2024-07-11T04:00:00+08:00",
+          "end": "2024-07-18T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1038",
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-07-11"
+        },
+        {
+          "id": "arc-tactical-simulacra",
+          "name": "Tactical Simulacra",
+          "kind": "Trial",
+          "start": "2024-07-20T10:00:00+08:00",
+          "end": "2024-08-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1055",
+          "source": "https://wutheringwaves.fandom.com/wiki/Tactical_Simulacra%2F2024-07-20"
+        },
+        {
+          "id": "arc-ascendant-aces-changli-baizhi-taoqi-mortefi",
+          "name": "Ascendant Aces - Changli, Baizhi, Taoqi, Mortefi",
+          "kind": "Ascendant Aces",
+          "start": "2024-07-22T10:00:00+08:00",
+          "end": "2024-08-14T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2024-07-22"
+        },
+        {
+          "id": "arc-lollo-campaign",
+          "name": "Lollo Campaign",
+          "kind": "Event",
+          "start": "2024-07-25T10:00:00+08:00",
+          "end": "2024-08-08T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1080",
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2024-07-25"
+        },
+        {
+          "id": "arc-chord-cleansing-2024-08-06",
+          "name": "Chord Cleansing 2024-08-06",
+          "kind": "Event",
+          "start": "2024-08-06T04:00:00+08:00",
+          "end": "2024-08-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-08-06"
+        }
+      ]
+    },
+    {
+      "id": "1.0",
+      "title": "Waking of a World",
+      "start": "2024-05-23T10:00:00+08:00",
+      "end": "2024-06-28T05:59:00+08:00",
+      "notice": "https://x.com/Wuthering_Waves/status/1773671444767002757",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F1.0",
+      "events": [
+        {
+          "id": "arc-depths-of-illusive-realm-2024-05-23",
+          "name": "Depths of Illusive Realm 2024-05-23",
+          "kind": "Trial",
+          "start": "2024-05-23T04:00:00+08:00",
+          "end": "2024-06-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2024-05-23"
+        },
+        {
+          "id": "arc-awakening-journey",
+          "name": "Awakening Journey",
+          "kind": "Event",
+          "start": "2024-05-23T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Awakening_Journey"
+        },
+        {
+          "id": "arc-echo-hunters",
+          "name": "Echo Hunters",
+          "kind": "Event",
+          "start": "2024-05-23T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Echo_Hunters"
+        },
+        {
+          "id": "arc-gifts-of-thawing-frost",
+          "name": "Gifts of Thawing Frost",
+          "kind": "Login",
+          "start": "2024-05-23T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Thawing_Frost"
+        },
+        {
+          "id": "arc-pioneer-podcast-2024-05-23",
+          "name": "Pioneer Podcast 2024-05-23",
+          "kind": "Pioneer Podcast",
+          "start": "2024-05-23T10:00:00+08:00",
+          "end": "2024-06-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Pioneer_Podcast%2F2024-05-23"
+        },
+        {
+          "id": "arc-rumbling-hollows",
+          "name": "Rumbling Hollows",
+          "kind": "Event",
+          "start": "2024-05-23T10:00:00+08:00",
+          "end": null,
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Rumbling_Hollows"
+        },
+        {
+          "id": "arc-ascendant-aces-jiyan-danjin-chixia-mortefi",
+          "name": "Ascendant Aces - Jiyan, Danjin, Chixia, Mortefi",
+          "kind": "Ascendant Aces",
+          "start": "2024-05-23T18:00:00+08:00",
+          "end": "2024-06-06T09:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2024-05-23"
+        },
+        {
+          "id": "arc-overdash-club",
+          "name": "Overdash Club",
+          "kind": "Event",
+          "start": "2024-05-30T04:00:00+08:00",
+          "end": "2024-06-17T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/813",
+          "source": "https://wutheringwaves.fandom.com/wiki/Overdash_Club"
+        },
+        {
+          "id": "arc-intensive-training",
+          "name": "Intensive Training",
+          "kind": "Event",
+          "start": "2024-06-06T04:00:00+08:00",
+          "end": "2024-06-13T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Intensive_Training"
+        },
+        {
+          "id": "arc-alloy-smelt",
+          "name": "Alloy Smelt",
+          "kind": "Trial",
+          "start": "2024-06-06T10:00:00+08:00",
+          "end": "2024-06-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/836",
+          "source": "https://wutheringwaves.fandom.com/wiki/Alloy_Smelt%2F2024-06-06"
+        },
+        {
+          "id": "arc-ascendant-aces-yinlin-taoqi-aalto-yuanwu",
+          "name": "Ascendant Aces - Yinlin, Taoqi, Aalto, Yuanwu",
+          "kind": "Ascendant Aces",
+          "start": "2024-06-06T10:00:00+08:00",
+          "end": "2024-06-26T11:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Ascendant_Aces%2F2024-06-06"
+        },
+        {
+          "id": "arc-second-coming-of-solaris",
+          "name": "Second Coming of Solaris",
+          "kind": "Event",
+          "start": "2024-06-13T04:00:00+08:00",
+          "end": "2024-06-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Second_Coming_of_Solaris"
+        },
+        {
+          "id": "arc-wuthering-exploration-2024-06-13",
+          "name": "Wuthering Exploration 2024-06-13",
+          "kind": "Event",
+          "start": "2024-06-13T10:00:00+08:00",
+          "end": "2024-06-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/874",
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-06-13"
+        },
+        {
+          "id": "arc-chord-cleansing-2024-06-20",
+          "name": "Chord Cleansing 2024-06-20",
+          "kind": "Event",
+          "start": "2024-06-20T04:00:00+08:00",
+          "end": "2024-06-27T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/900",
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-06-20"
+        }
+      ]
+    }
+  ],
+  "updated": "2026-08-20T23:18:38.090Z"
+}

@@ -204,9 +204,23 @@ What went, and where it went instead:
   Recent intel panel one scroll down and the whole Intel view one click away. The card
   answers *who is in this patch*; Intel answers *what has been said about it*.
 
-The `when` chips filter the card row directly. They used to sit on this panel and
-quietly re-filter a list two thousand pixels further down, which reads as a button that
-does nothing.
+The `when` chips filter the card row **and the band under it**. They used to sit on this
+panel and quietly re-filter a list two thousand pixels further down, which reads as a
+button that does nothing; then they moved to the rail and filtered the cards alone, which
+reads as a filter with an unfiltered page beneath it. Now:
+
+| Window | Cards | Band underneath |
+|---|---|---|
+| **All** | now, next, and whatever is beyond it | everything running and everything announced |
+| **Current** | the live patch | what is on tonight, permanents included |
+| **Upcoming** | announced and beta | what has not opened yet |
+| **Past** | the patches that have closed | the archive — every version the game has shipped |
+
+Past is the one that changes shape rather than shrinking, and it is the only window where
+the event band is not events at all. A closed event is not a thing you can do, and the desk
+has argued that for a while by dropping them from the Events view. What belongs in Past is
+the other question — not *what did I miss last fortnight* but *what was 2.3* — and that is
+answered by the patch, not by nine greyed-out tiles from it. See **The patch archive**.
 
 **Banner thumbnails are clickable** and their `[data-act]` is the innermost one, so a
 face opens that resonator while the rest of the card opens the version. That is the
@@ -796,7 +810,7 @@ Still not built: redemption codes.
 that does not come from Kuro. A permanent event is a mode the game kept: it ran for a
 fortnight like everything else, its notice dropped out of the news feed, and the content is
 still in the menu a year later. `fetch-events.mjs` reads a hundred days back; the oldest
-entry here opened on 2025-04-29, in Version 2.3.
+entry here opened on 2024-11-14, in Version 1.4.
 
 So this half reads the wiki — the `{{Event}}` infobox for the dates and the type,
 `{{Description}}` for Kuro's own blurb, `{{Event Rewards}}` for the payout. **What it does
@@ -805,31 +819,78 @@ tried twice. `Category:Permanent Events` carries 37 pages, three times the list.
 `time_end = none` — no closing date on the infobox — gives 19, and it is wrong in both
 directions at once: it lets in the game's onboarding ramp, three **Login** tracks and three
 **Next Stop: \<region\>** passes that are open forever because they are there for whoever
-installs the game next year, and it keeps out ten of the twelve events actually on the tab,
-every one of which has a real closing date on the wiki. *Dreaming Deep* closed on
+installs the game next year, and it keeps out sixteen of the twenty-two events actually on
+the tab, every one of which has a real closing date on the wiki. *Dreaming Deep* closed on
 2025-08-27 and is in the menu today.
 
 That is not the wiki being wrong. The two are answers to different questions: the wiki's
 date is the event's, the fortnight its rewards were running, and the tab is Kuro's claim
 about the *mode*. Nothing on the page separates a mode Kuro kept from one it retired,
 because that is decided in the client and never written down anywhere the wiki reads. So
-the `TAB` list in the fetcher is the membership — twelve names, copied off the Permanent
-tab in game — and the wiki supplies every fact about each one. The category is still
-fetched, now only to audit that list: a name that has left it has probably been renamed, a
-page that has joined it is a candidate for the next time the tab is opened, and both get
-printed on every run. 12 events, Version 2.3 to now.
+the `TAB` list in the fetcher is the membership — twenty-two names, copied off the
+Permanent tab in game — and the wiki supplies every fact about each one. The category is
+still fetched, now only to audit that list: a name that has left it has probably been
+renamed, a page that has joined it is a candidate for the next time the tab is opened, and
+the fifteen that are in the category and not on the tab get printed by name on every run,
+because the reason each one is out is a different reason and it is worth being able to read
+down them. 22 events, Version 1.4 to now.
 
-All twelve carry `end: null`, including the ten the wiki dates. That date closed the
-event's reward run; *permanent* on this desk means the thing is there when you log in
+All twenty-two carry `end: null`, including the sixteen the wiki dates. That date closed
+the event's reward run; *permanent* on this desk means the thing is there when you log in
 tonight, which is what the tab asserts.
 
 The banners come down at 720px into `assets/events/` rather than being hotlinked, the same
 call the reward icons and the portraits make — these are Kuro's own event banners, hosted
-by Fandom, and a page fetching a dozen pictures off a wiki CDN on every load is a page borrowing
+by Fandom, and a page fetching twenty pictures off a wiki CDN on every load is a page borrowing
 somebody's bandwidth. Every one of them carries the event's name set across it, so they are
 shown whole in the tile rather than filled to it, same flag and same reason as the
 double-drop title strips: a 1.6:1 tile cropping a 4:1 banner turns *Tales of the Isles*
 into *les of the Isles*, which reads as a broken image rather than as a crop.
+
+### The patch archive
+
+`data/archive.json`, written by `scripts/fetch-archive.mjs`, and the only file here that
+looks backwards. The desk has always been a forward-looking thing: `versions.json` carries
+the arc it is watching — live, announced, rumoured — and `events.json` is written off
+Kuro's news feed, which reaches a hundred days back and no further. Both are the right
+shape for *what should I do this fortnight*. Neither can answer *what was 2.3*.
+
+The wiki can. `Category:In-Game Events` is every event the game has run, about 240 pages,
+each with the `{{Event}}` infobox the permanent list already reads; `Version/<id>` is the
+patch's own name, window and Kuro post. An event is filed under the first version its
+`ltd_during` names, which is the patch it shipped in — and two thirds of those pages have
+no `ltd_during` at all, so those are filed on their start date instead, against the patch
+windows.
+
+**The window an event is measured against is the patch's start and the next patch's
+start**, not the `date_end` on its own infobox. Nine of the twenty-one patch pages have no
+closing date, and read literally that is a patch which never ended: 2.1 swallowed every
+event of the next four patches when this was written the obvious way. Consecutive starts
+cannot have that problem. The same fill gives every patch a closing date for display — a
+patch ends when its successor begins, which is not an inference about this game but what a
+patch is. Where the wiki states an end, the wiki wins.
+
+They are compared on the day rather than the timestamp, because the two clocks do not agree
+to the hour: the wiki dates a patch from its maintenance window (2.3 opens at 11:00) and
+the events inside it from 10:00, so an event that shipped *with* a patch reads as an hour
+older than the patch it shipped in.
+
+**No art.** This is the one fetcher that downloads nothing. 240 banners is 15MB for a view
+that is a list of names and dates, and the two patches whose pictures are worth showing are
+in `events.json` with Kuro's own. Every row links back to its wiki page and, where the
+infobox kept one, to Kuro's own notice — which on a two-year-old patch is the only way back
+to what Kuro actually said about it.
+
+The character half of a past patch needs no new file. `resonators.json` carries every
+convene run since launch, keyed by resonator, so `patchBanners()` reads it from the other
+end — the same trick `weaponRuns()` plays to give a 1.0 weapon a convene history — and
+`patchPhases()` groups those runs back into the patch's phases by their windows. One row
+per character, not one per run: a 4-star is featured in both halves of a patch, so its run
+history carries two rows for the same version.
+
+Together that is enough for `archivePatch()` to hand the version drawer a record for a
+patch `versions.json` has never heard of. Eighteen of the twenty-one are in that state,
+and they open exactly like the three that aren't.
 
 The two lists are merged in `gameEvents()` so that a card, a record and a search all see
 one calendar. Where both files hold the same event — a patch's permanent addition, which
@@ -1154,6 +1215,7 @@ left is the editorial, which is the part worth your time.
 | `art.json` | Kuro's reveal posts | yes |
 | `events.json` — the calendar, its windows and its banners | Kuro's patch notes and event notices | yes |
 | `permanents.json` + `assets/events/` — everything the game keeps, and its banners | the in-game Permanent tab for the list, Fandom for the facts | yes |
+| `archive.json` — every patch that has shipped and what ran in it | Fandom's `Category:In-Game Events` and its `Version/` pages | yes |
 | `items.json` + `assets/items/` — reward icons | Fandom, off the reward lines in both calendars | yes |
 | `resonators.json` — identity, debut, reruns | Fandom | yes |
 | phase dates in `versions.json` | Fandom convene pages, once a phase has run | yes |

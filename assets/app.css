@@ -3746,6 +3746,101 @@ img.astrite-pic{
   *{animation:none!important;transition:none!important}
 }
 
+/* ══ the archive ════════════════════════════════════════════════════
+   The Timeline's Past window. One row per patch, newest first, each carrying
+   the convenes that ran in it — and no picture, which is the whole design.
+
+   A patch card is a poster: key visual, figures cut out and standing in front
+   of it, a progress bar. That is the right object for three patches you are
+   deciding between and the wrong one for twenty-one you are looking back
+   through — twenty-one posters is a page you scroll rather than a record you
+   read, and nineteen of them have no key visual for the desk to show anyway.
+   So the archive is set as a list: the number, the codename, the window, the
+   faces, and a count. The record itself is one click behind it. */
+.arcp{
+  display:block;width:100%;text-align:left;cursor:pointer;
+  padding:13px 16px 14px;border-bottom:1px solid var(--line);
+  transition:background .15s;
+}
+.arcp:last-child{border-bottom:0}
+.arcp:hover{background:var(--bg-2)}
+.arcp:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.arcp-h{display:flex;align-items:baseline;gap:12px}
+/* The number, in the mono face and at the size the patch cards set it — it is
+   what the eye comes down this list looking for. */
+.arcp-v{
+  flex:none;min-width:2.75rem;
+  font-family:var(--mono);font-size:1.0625rem;letter-spacing:.01em;color:var(--fg);
+}
+.arcp-t{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.arcp-t b{font-size:.9063rem;font-weight:500;color:var(--fg);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Kuro has named every patch since launch, so a blank here means the wiki's
+   page is thin rather than that the patch had no name. Said quietly. */
+.arcp-t b.thin{color:var(--fg-3);font-weight:400;font-style:italic}
+.arcp-t span{
+  font-family:var(--mono);font-size:.6563rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.arcp-n{
+  flex:none;font-family:var(--mono);font-size:.6563rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.arcp .arrow{flex:none;color:var(--fg-3)}
+.arcp:hover .arrow{color:var(--accent)}
+/* Small: a row of faces under the patch line, not a gallery. */
+.arcp .bstrip{margin-top:10px;gap:8px}
+/* One line each, so the chips under them sit on one rule across the row. At two
+   lines a Ciaccona next to a Lumi puts its element a whole line lower, and a
+   strip of eight reads as a chart with no baseline. The name is clipped either
+   way at this size; clipped and level beats clipped and stepped. */
+.arcp .bstrip .bmini b{-webkit-line-clamp:1}
+.arcp-none{
+  margin-top:8px;font-family:var(--mono);font-size:.6563rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--fg-3);opacity:.75;
+}
+
+/* ══ a patch's events, as a list ════════════════════════════════════
+   In the version record, under the banner strip. Same argument as the archive
+   above and the same answer: the event tiles are for the fortnight you are in,
+   where a picture and an Astrite figure are things you act on. Inside a patch
+   record — and especially inside an archived one, where there is no art to show
+   and never will be — what you want is what ran, what kind of thing it was, and
+   when. Three columns and a rule between them. */
+.pevlist{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden}
+.pev{
+  display:flex;align-items:center;gap:11px;padding:8px 11px;
+  border-bottom:1px solid var(--line);text-decoration:none;
+  font-size:.7813rem;color:var(--fg-2);transition:.15s;
+}
+.pev:last-child{border-bottom:0}
+.pev:hover{background:var(--bg-2);color:var(--fg)}
+.pev[role="button"]{cursor:pointer;text-align:left}
+.pev:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+/* The kind, in a fixed column so the names line up down the list rather than
+   each starting wherever the label before it happened to end. */
+.pev-k{
+  flex:none;width:7.5rem;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--fg-3);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.pev-n{flex:1;min-width:0;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pev-d{
+  flex:none;font-family:var(--mono);font-size:.6563rem;letter-spacing:.04em;
+  color:var(--fg-3);white-space:nowrap;
+}
+.pev .arrow{flex:none;color:var(--fg-3);opacity:.6}
+.pev:hover .arrow{color:var(--accent);opacity:1}
+
+/* Narrow: the kind column and the dates are the first things to go. The name
+   is the row. */
+@media (max-width:720px){
+  .pev-k{width:4.5rem}
+  .pev-d{display:none}
+  .arcp-n{display:none}
+}
+
 /* ══ confidence colours ═════════════════════════════════════════════
    Last in the file on purpose. Every tier-coloured element (intel rail,
    chips, dots, meters) carries one of these next to a component class of

@@ -75,6 +75,16 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-permanents.mjs
 
+      # The patch archive — every version the game has shipped and the events
+      # that ran in it. Same host, same cadence and the same reasoning as the
+      # step above: it answers a question that only changes when a patch ships.
+      # It downloads no art, so it is the cheapest job here despite reading two
+      # hundred and forty pages.
+      - name: Resolve the patch archive
+        if: always()
+        continue-on-error: true
+        run: node scripts/fetch-archive.mjs
+
       # always(), so that a Prydwen 403 taking the kit step down does not also
       # throw away the event banners the wiki step just fetched. The run still
       # goes red when a step failed, which is the part worth seeing; fetch-kits
@@ -84,7 +94,7 @@ jobs:
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/resonators.json data/kits.json data/versions.json data/permanents.json assets/events
+          git add data/resonators.json data/kits.json data/versions.json data/permanents.json data/archive.json assets/events
           if git diff --staged --quiet; then
             echo "no change"
             exit 0

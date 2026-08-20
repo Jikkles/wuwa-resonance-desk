@@ -14,6 +14,7 @@ const FALLBACK = {
   feed:       {fetched:"", sources:[], errors:[], items:[]},
   events:     {updated:"", events:[]},
   permanents: {updated:"", events:[]},
+  archive:    {updated:"", versions:[]},
   items:      {items:{}},
   art:        {art:{}},
   portraits:  {characters:{}},
@@ -295,6 +296,85 @@ const gameEvents = () => {
   });
   return [...kuro, ...perm.values()];
 };
+
+/* ── the archive ─────────────────────────────────────────────────────
+   data/archive.json, written by scripts/fetch-archive.mjs off the wiki: every
+   patch the game has shipped, its name, its window, and what ran in it. The
+   desk's own two calendars reach as far back as Kuro's news feed does, which is
+   a hundred days, and no further — this is the record behind them, and it is
+   what the Timeline's Past window is made of.
+
+   It is deliberately thin. No art, no blurb, no reward lines: a patch that
+   closed a year ago is not something you can act on, and the question it
+   answers — what was 2.3 — is a list of names and dates. The live patch and the
+   one before it are in events.json with Kuro's own pictures, and where both
+   hold the same event the desk's own record wins. See patchEvents(). */
+const archive   = () => DATA.archive?.versions || [];
+const archiveOf = id => archive().find(v => v.id === id) || null;
+
+/* Every convene that ran in a patch, read out of the resonators rather than off
+   the timeline. versions.json carries phases for the two or three patches it is
+   watching; resonators.json carries every run every character has ever had,
+   which is the same history from the other end and reaches launch day. The same
+   trick weaponRuns() plays to give a 1.0 weapon a convene history. */
+function patchBanners(id){
+  const out = [];
+  /* One row per character, not one per run. A 4-star is featured in both halves
+     of a patch, so its run history carries two rows for the same version, and
+     an undeduped strip drew Chixia three times in a line. The archive row
+     answers "who ran in 2.6", which is a set. */
+  const seen = new Set();
+  for(const r of resonators())
+    for(const run of r.runs || [])
+      if(run.version === id && !seen.has(r.name)){
+        seen.add(r.name);
+        out.push({
+          name:r.name, attribute:r.attribute, weapon:r.weapon, rarity:r.rarity,
+          convene:run.convene, start:run.start, end:run.end,
+          /* A debut is a run in the patch the character was released in. */
+          new: run.version === r.version, rerun: run.version !== r.version
+        });
+      }
+  return out;
+}
+
+/* Those runs grouped back into the patch's phases. A phase is a window, so two
+   characters sharing a window are in the same half of the patch — which is the
+   only definition available this far back and also the correct one: it is what
+   a phase is. */
+function patchPhases(id){
+  const rows = new Map();
+  for(const b of patchBanners(id)){
+    const key = `${b.start || ""}|${b.end || ""}`;
+    if(!rows.has(key)) rows.set(key, {start:b.start, end:b.end, banners:[]});
+    rows.get(key).banners.push(b);
+  }
+  return [...rows.values()]
+    .sort((a, b) => String(a.start || "").localeCompare(String(b.start || "")))
+    .map((p, i) => ({...p, n:i + 1}));
+}
+
+/* A patch versions.json has never heard of, in the shape the version drawer
+   reads. That file holds three; the archive holds twenty-one, and the eighteen
+   that exist only there still have to open when their row is clicked. */
+function archivePatch(id){
+  const a = archiveOf(id);
+  if(!a) return null;
+  return {
+    id:a.id, title:a.title, start:a.start, end:a.end,
+    phases:patchPhases(id), source:a.source, notice:a.notice, archived:true
+  };
+}
+
+/* Everything that ran in a patch, the desk's own records first. gameEvents()
+   has Kuro's words and Kuro's pictures and reaches back a hundred days; the
+   archive has names and dates and reaches to launch. Where both hold the same
+   event the desk's own wins and the archive fills in behind it. */
+function patchEvents(id){
+  const own = gameEvents().filter(e => e.version === id);
+  const seen = new Set(own.map(e => eventKey(e.name)));
+  return [...own, ...(archiveOf(id)?.events || []).filter(e => !seen.has(eventKey(e.name)))];
+}
 const signals    = () => [...(DATA.feed?.items || [])].sort((a,b) => (b.date||"").localeCompare(a.date||""));
 
 /* Signals arrive in whatever language the source publishes in — about a fifth
@@ -1073,6 +1153,7 @@ function patchCard(v, role){
   const state = role === "live"
     ? `<span class="pill live">Current</span>`
     : role === "next" ? `<span class="pill next">Upcoming</span>`
+    : role === "past" ? `<span class="pill">Ended</span>`
     : `<span class="pill future">Future</span>`;
 
   let status = "";
@@ -1080,6 +1161,10 @@ function patchCard(v, role){
     const left = patchWindow(v) ? daysTo(patchWindow(v).end) : null;
     status = `<div class="pcard-state"><span class="pulse t-official">Live</span>
       ${left != null && left > 0 ? `<span style="color:var(--fg-3)">${plural(left, "day")} remaining</span>` : ""}</div>`;
+  }else if(role === "past"){
+    const end = patchWindow(v)?.end;
+    status = `<div class="pcard-state"><span style="color:var(--fg-3)">${
+      end ? `Closed ${fmtShort(end)}` : "Closed"}</span></div>`;
   }else if(days != null){
     status = `<div class="pcard-state">${days > 0 ? `<span class="t-datamined">In ${plural(days, "day")}</span>`
       : `<span class="t-datamined">Launching now</span>`}</div>`;
@@ -1338,7 +1423,14 @@ function streamVideo(v){
    have to agree or the filter looks broken. */
 const bucketOf = v => statusOf(v) === "live" ? "current"
   : (statusOf(v) === "announced" || statusOf(v) === "beta") ? "upcoming" : "past";
-const roleOf = v => statusOf(v) === "live" ? "live" : statusOf(v) === "announced" ? "next" : "future";
+const roleOf = v => statusOf(v) === "live" ? "live"
+  : statusOf(v) === "announced" ? "next"
+  /* A shipped patch is not a future one. Nothing rendered a card for a closed
+     patch until the Past window started doing it, so "anything that is not live
+     or announced" quietly meant "beta" — and 3.5, six weeks over, came up
+     labelled Future with "Launching now" under it, because its start date is in
+     the past and the branch that says so is the one for a patch about to open. */
+  : statusOf(v) === "past" ? "past" : "future";
 
 function renderTimeline(){
   const live = liveVersion(), next = nextVersion(), future = futureVersion();
@@ -1368,7 +1460,20 @@ function renderTimeline(){
   const body = cards.length
     ? `<div class="hero${S.when === "all" ? (cards.length === 2 ? " pair" : "") : " narrow"}">${
         cards.map(([v, r]) => patchCard(v, r)).join("")}</div>`
+    /* Nothing to say here on Past: the archive below is the answer to that
+       window, and an empty box directly above twenty patches reads as a page
+       that has failed rather than as one with a card missing. versions.json
+       only carries the arc the desk is watching, so a Past window with no card
+       in it is the ordinary state and not a hole. */
+    : S.when === "past" ? ""
     : `<div class="empty">No patch in this window.</div>`;
+
+  /* The band under the cards. Everywhere but Past that is the event grid; on
+     Past it is the archive, and it skips whichever patches are already drawn as
+     cards above it so the same patch is not on the page twice. */
+  const band = S.when === "past"
+    ? archivePanel(new Set(cards.map(([v]) => v?.id).filter(Boolean)))
+    : eventPanel();
 
   /* No panel header. It was the view's name plus the window filter and the
      layout toggle, all of which now sit in the rail — what heads the page is
@@ -1376,7 +1481,7 @@ function renderTimeline(){
      rail has collapsed and taken the filters with it. */
   const hero = `<div class="panel">
     ${fbar("timeline")}
-    <div class="panel-b">${body}</div>
+    ${body ? `<div class="panel-b">${body}</div>` : ""}
   </div>`;
 
   /* Dashboard duo */
@@ -1395,7 +1500,7 @@ function renderTimeline(){
     </div>
   </div>`;
 
-  $("#p-timeline").innerHTML = `<div class="stack">${pageTitle("timeline")}${hero}${eventPanel()}${duo}</div>`;
+  $("#p-timeline").innerHTML = `<div class="stack">${pageTitle("timeline")}${hero}${band}${duo}</div>`;
 }
 
 /* ── event calendar ──────────────────────────────────────────────────
@@ -1542,6 +1647,13 @@ const astriteMark = (size = 12) => {
    the note at the top of this section. */
 const eventArt = ev => (ev.art?.url ? ev.art : null);
 
+/* What the plate says where there is no banner. For a patch's own events the
+   answer is that Kuro has not written the notice yet, and the plate goes away
+   by itself the day it lands. For a permanent event it never will: that list is
+   read off the wiki, the wiki has no picture for this one, and "not published
+   yet" about a mode that shipped in 3.2 is a promise the desk cannot keep. */
+const plateNote = ev => ev.permanent ? "No banner on the wiki" : "Banner not published yet";
+
 /* Where an unreleased patch's banners live. Kuro publishes them as one tall
    infographic — a banner per event stacked down a single JPEG — and only cuts
    them into posts of their own once the patch is live. `art.crop` is that
@@ -1581,7 +1693,7 @@ function eventCard(ev){
                ${art.focus && !art.nameplate ? `style="object-position:${esc(art.focus)}"` : ""}>`
         /* The plate. Not a picture standing in for one: the desk's own mark,
            dimmed, saying there is nothing to show yet. */
-        : `<div class="ev-plate" aria-hidden="true"><span>Banner not published yet</span></div>`}
+        : `<div class="ev-plate" aria-hidden="true"><span>${esc(plateNote(ev))}</span></div>`}
       <div class="ev-top">
         <span class="ev-state ${st.cls}">${esc(st.text)}</span>
         ${/* Most of the permanent list predates any patch this desk holds a
@@ -1621,14 +1733,23 @@ function eventPanel(){
      what to do this fortnight it is a tile that never changes and never goes
      away. The Events view keeps it, filed under the patch it shipped in. */
   const floor = parseFloat(liveVersion()?.id);
+  /* And the window chips above it. They used to move the three patch cards and
+     leave this band alone, which reads as a filter that does nothing: the band
+     is the longest thing on the page, it sits directly under the chips, and it
+     was answering a different question from the one just asked. Now Current is
+     what is on tonight and Upcoming is what is not on yet. Past renders no band
+     at all — see renderTimeline, where the archive takes its place. */
+  const wanted = S.when === "current" ? ["live", "warn", "permanent"]
+    : S.when === "upcoming" ? ["soon"]
+    : ["live", "warn", "soon", "permanent"];
   const shown = eventList().filter(e =>
-    eventState(e).kind !== "past" &&
+    wanted.includes(eventState(e).kind) &&
     (isNaN(floor) || parseFloat(e.version) >= floor));
   const count = kind => shown.filter(e => eventState(e).kind === kind).length;
   /* Says what the parts of the list are, so its order is stated rather than
      inferred from the chips — and the tally has to add up to the tiles under
      it, which is why the permanent ones are in it. */
-  const sub = [[count("live"), "running"], [count("soon"), "upcoming"], [count("permanent"), "permanent"]]
+  const sub = [[count("live") + count("warn"), "running"], [count("soon"), "upcoming"], [count("permanent"), "permanent"]]
     .filter(([k]) => k).map(([k, w]) => `${k} ${w}`).join(" · ") || "Nothing scheduled";
   /* Summed off the tiles below it, so it is the same claim they are making and
      not a second one. An event whose reward line Kuro has not published adds
@@ -1640,8 +1761,90 @@ function eventPanel(){
         ${astriteMark(16)}${astriteLabel(astrite)}</span>` : ""}</div>
     <div class="panel-b">${shown.length
       ? `<div class="evgrid">${shown.map(eventCard).join("")}</div>`
-      : `<div class="empty">Nothing running, and nothing announced yet.</div>`}</div>
+      : `<div class="empty">${S.when === "current" ? "Nothing running right now."
+          : S.when === "upcoming" ? "Nothing announced past the events already running."
+          : "Nothing running, and nothing announced yet."}</div>`}</div>
   </div>`;
+}
+
+/* ── the archive band ────────────────────────────────────────────────
+   What the Past window shows instead of the event band. Two reasons it is not
+   the same tiles greyed out. The first is that a closed event is not a thing
+   you can do — the Events view has made that argument for a while and drops
+   them for it. The second is that this is a different question: Past is not
+   "what did I miss last fortnight", it is "what was 2.3", and that is answered
+   by the patch, not by nine tiles from it.
+
+   So it is a patch per row, newest first, each one carrying the convenes that
+   ran in it and a count of its events, and each one opening the version record
+   where the events are listed in full. The rows go back to launch because
+   resonators.json and archive.json both do. */
+function archivePanel(already){
+  const live = currentVersion();
+  const rows = archive().filter(v =>
+    !already.has(v.id) && (!live || cmpVer(v.id, live) < 0));
+  if(!rows.length) return `<div class="panel">
+    <div class="panel-h"><h2>Archive</h2></div>
+    <div class="panel-b"><div class="empty">No closed patch on record yet.</div></div>
+  </div>`;
+  const events = rows.reduce((n, v) => n + (v.events?.length || 0), 0);
+  return `<div class="panel">
+    <div class="panel-h"><h2>Archive</h2>
+      <span class="sub">${rows.length} patches · ${plural(events, "event")}</span>
+      <div class="right"><span class="sub">Every patch the game has shipped</span></div></div>
+    <div class="panel-b flush">${rows.map(archiveRow).join("")}</div>
+  </div>`;
+}
+
+function archiveRow(v){
+  const bs = patchBanners(v.id);
+  const n = v.events?.length || 0;
+  const win = [v.start ? fmtShort(v.start) : "", v.end ? fmtShort(v.end) : ""]
+    .filter(Boolean).join(" → ") || "Undated";
+  return `<article class="arcp" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
+           aria-label="Version ${esc(v.id)}${v.title ? ` — ${esc(v.title)}` : ""}, ${win}">
+    <div class="arcp-h">
+      <span class="arcp-v">${esc(v.id)}</span>
+      <div class="arcp-t">
+        ${v.title ? `<b>${esc(v.title)}</b>` : `<b class="thin">No codename on record</b>`}
+        <span>${esc(win)}</span>
+      </div>
+      <span class="arcp-n">${n ? plural(n, "event") : "no events on record"}</span>
+      <span class="arrow">${icon("i-arrow", 12)}</span>
+    </div>
+    ${bs.length
+      /* The wrapping strip of faces, not the one-per-row list the patch cards
+         use. Nineteen patches of four-line lists is a page twenty thousand
+         pixels tall — the archive is a list of patches, and inside a row the
+         convenes are a line of faces you scan, not four rows you read. */
+      ? `<div class="bstrip">${bs.map(b => thumb(b, {showPhase:false, showNew:true, showWeapon:false})).join("")}</div>`
+      /* A patch with no convene in it is a real thing — 1.2 ran a rerun the
+         desk has no run record for — and saying so is better than an empty
+         strip that reads as a loading failure. */
+      : `<div class="arcp-none">No convene on record for this patch</div>`}
+  </article>`;
+}
+
+/* One event as a row rather than a tile. The tiles are for the fortnight you
+   are in: a picture, a state chip and a number you can act on. A patch that
+   closed a year ago wants the list instead — what ran, what kind of thing it
+   was, and when. A row the desk holds a record for opens that record; a row
+   that exists only in the archive links out to where it came from, because
+   there is nothing here for it to open. */
+function eventRow(ev){
+  const known = !String(ev.id || "").startsWith("arc-");
+  const win = ev.permanent ? "Permanent"
+    : ev.start || ev.end
+      ? `${ev.start ? fmtShort(ev.start) : "—"} → ${ev.end ? fmtShort(ev.end) : "—"}`
+      : "";
+  const inner = `<span class="pev-k">${esc(ev.kind || "Event")}</span>
+    <b class="pev-n">${esc(ev.name)}</b>
+    <span class="pev-d">${esc(win)}</span>
+    <span class="arrow">${icon("i-arrow", 12)}</span>`;
+  return known
+    ? `<span class="pev" role="button" tabindex="0" data-act="event" data-id="${esc(ev.id)}">${inner}</span>`
+    : `<a class="pev" href="${esc(ev.notice || ev.source || "#")}" target="_blank" rel="noopener"
+         title="${esc(ev.notice ? "Kuro's own notice for this event" : "This event on the wiki")}">${inner}</a>`;
 }
 
 /* The view. The same cards, grouped by patch instead of capped — one panel per
@@ -1940,7 +2143,7 @@ function drawerEvent(id){
        banner — the desk's own mark for a thing it knows is coming and has
        nothing to show of, rather than a second way of saying it. */
     : `<div class="evr-pic none">
-        <div class="ev-plate" aria-hidden="true"><span>Banner not published yet</span></div>
+        <div class="ev-plate" aria-hidden="true"><span>${esc(plateNote(ev))}</span></div>
       </div>`;
 
   const dates = ev.permanent
@@ -3182,7 +3385,12 @@ function fillKit(name){
   });
 }
 function drawerVersion(id){
-  const v = versions().find(x => x.id === id);
+  /* versions.json for the arc the desk is watching; the archive for the
+     eighteen patches behind it, which have no record in that file and are
+     assembled out of the wiki's patch page and the resonators' own run
+     history. Either way what comes back has an id, a window and phases, which
+     is everything below this line reads. */
+  const v = versions().find(x => x.id === id) || archivePatch(id);
   if(!v) return;
   const status = statusOf(v);
   const role = status === "live" ? "live" : status === "announced" ? "next" : "future";
@@ -3232,6 +3440,29 @@ function drawerVersion(id){
     </span>`;
   })() : "";
 
+  /* What ran in the patch, under who ran in it. The banner strip above answers
+     "who is in this patch" and this is the other half of the same question —
+     which until now could only be had from the Events view, and that view drops
+     a patch on the day it closes. On an archived patch it is the whole record:
+     no art, no reward lines, just what ran and when, each row linking to Kuro's
+     own notice where the wiki kept the link. */
+  const evs = patchEvents(id);
+  const events = evs.length ? `<div class="dsec">
+    <span class="label">Events in this patch — ${evs.length}</span>
+    <div class="pevlist">${evs.map(eventRow).join("")}</div>
+  </div>` : "";
+
+  /* An archived patch has no key visual, no preview stream and no notes — the
+     desk was not watching when it shipped. What it does have is where the
+     record came from, which on a two-year-old patch is the only way back to
+     what Kuro actually said about it. */
+  const arcSource = v.archived && (v.notice || v.source) ? `<div class="dsec">
+    <span class="label">Where this record comes from</span>
+    <a class="dsrc" href="${esc(v.notice || v.source)}" target="_blank" rel="noopener">
+      ${esc(v.notice ? "Kuro's own version notice" : "This patch on the Wuthering Waves Wiki")}
+      <span class="arrow">${icon("i-arrow", 13)}</span></a>
+  </div>` : "";
+
   openDrawer("Version", `<div class="drawer-b">
     <div class="meta">
       <span class="pill ${role === "live" ? "live" : role === "next" ? "next" : "future"}">${esc(status)}</span>
@@ -3246,6 +3477,8 @@ function drawerVersion(id){
     </div>
     ${v.notes ? `<div class="vnote" style="margin-top:16px">${esc(v.notes)}</div>` : ""}
     ${phases}
+    ${events}
+    ${arcSource}
     ${news.length ? `<div class="dsec"><span class="label">Intel on this version — ${news.length}</span>
       <div style="display:grid;gap:8px">${news.map(e => `
         <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(e.id)}">
@@ -3722,7 +3955,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events","permanents","items"];
+  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events","permanents","items","archive"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 
