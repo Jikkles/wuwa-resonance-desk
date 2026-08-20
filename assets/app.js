@@ -1315,6 +1315,25 @@ function eventState(ev){
   return {kind:"live", cls:"live", text:"Running"};
 }
 
+/* What the event pays in Astrite, off the reward line Kuro publishes with it.
+   Two shapes to read: a hand-written entry lists rewards one to an array slot
+   ("Astrite x1200"), and a fetched one keeps Kuro's own sentence with the
+   whole reward table in it. Both put the number next to the word.
+
+   Null, not zero, when there is no reward line at all — half the events on a
+   shipped patch never got one, and a tile reading "0 Astrite" states something
+   Kuro has not said. No badge is the honest version of not knowing. */
+function astriteFrom(ev){
+  const text = Array.isArray(ev.rewards) ? ev.rewards.join(", ") : String(ev.rewards || "");
+  if(!text) return null;
+  const m = /astrite\s*[x×]?\s*([\d][\d,]*)/i.exec(text)
+         || /([\d][\d,]*)\s*[x×]?\s*astrite/i.exec(text);
+  if(!m) return null;
+  const n = Number(m[1].replace(/,/g, ""));
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+const astriteLabel = n => `${n.toLocaleString("en-GB")} Astrite`;
+
 /* Kuro's own banner, or nothing. There is no fallback picture by design — see
    the note at the top of this section. */
 const eventArt = ev => (ev.art?.url ? ev.art : null);
@@ -1339,9 +1358,10 @@ function eventCard(ev){
   const art = eventArt(ev);
   const st = eventState(ev);
   const past = st.kind === "past";
+  const astrite = astriteFrom(ev);
   return `<article class="ev${ev.headline ? " head" : ""}${past ? " past" : ""}" role="button" tabindex="0"
            data-act="event" data-id="${esc(ev.id)}"
-           aria-label="${esc(ev.name)} — ${esc(ev.kind || "Event")}, version ${esc(ev.version)}, ${esc(st.text)}">
+           aria-label="${esc(ev.name)} — ${esc(ev.kind || "Event")}, version ${esc(ev.version)}, ${esc(st.text)}${astrite ? `, ${astriteLabel(astrite)}` : ""}">
     <div class="ev-pic">
       ${art
         /* A banner is 16:9 and the tile is about 2:1, so the tile crops the
@@ -1356,6 +1376,8 @@ function eventCard(ev){
         <span class="ev-state ${st.cls}">${esc(st.text)}</span>
         <span class="pill ver">${esc(ev.version)}</span>
       </div>
+      ${astrite ? `<span class="ev-astrite" title="Astrite from this event">
+        ${icon("i-astrite", 12)}<b>${astrite.toLocaleString("en-GB")}</b></span>` : ""}
     </div>
     <div class="ev-cap">
       <span class="ev-kind">${esc(ev.kind || "Event")}</span>
@@ -1391,8 +1413,14 @@ function eventPanel(){
      it, which is why the permanent ones are in it. */
   const sub = [[count("live"), "running"], [count("soon"), "upcoming"], [count("permanent"), "permanent"]]
     .filter(([k]) => k).map(([k, w]) => `${k} ${w}`).join(" · ") || "Nothing scheduled";
+  /* Summed off the tiles below it, so it is the same claim they are making and
+     not a second one. An event whose reward line Kuro has not published adds
+     nothing rather than a guess, which is why this is "listed". */
+  const astrite = shown.reduce((n, e) => n + (astriteFrom(e) || 0), 0);
   return `<div class="panel">
-    <div class="panel-h"><h2>Events</h2><span class="sub">${esc(sub)}</span></div>
+    <div class="panel-h"><h2>Events</h2><span class="sub">${esc(sub)}</span>
+      ${astrite ? `<span class="sub astrite" title="Astrite listed across these events. An event Kuro has not published a reward line for counts as nothing.">
+        ${icon("i-astrite", 12)}${astriteLabel(astrite)}</span>` : ""}</div>
     <div class="panel-b">${shown.length
       ? `<div class="evgrid">${shown.map(eventCard).join("")}</div>`
       : `<div class="empty">Nothing running, and nothing announced yet.</div>`}</div>
@@ -1500,7 +1528,10 @@ function drawerEvent(id){
       ${v?.title ? `<div><span>Patch</span><b>${esc(v.id)} — ${esc(v.title)}</b></div>` : ""}
     </div>
     ${ev.detail ? `<p style="margin-top:16px">${esc(ev.detail)}</p>` : ""}
-    ${rewards.length ? `<div class="dsec"><span class="label">Rewards</span>
+    ${rewards.length ? `<div class="dsec">
+      <div class="dsec-h"><span class="label">Rewards</span>
+        ${astriteFrom(ev) ? `<span class="ev-astrite inline">${icon("i-astrite", 12)}
+          <b>${astriteLabel(astriteFrom(ev))}</b></span>` : ""}</div>
       <ul>${rewards.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>` : ""}
     ${ev.eligibility ? `<div class="dsec"><span class="label">Eligibility</span>
       <p style="margin:0">${esc(ev.eligibility)}</p></div>` : ""}

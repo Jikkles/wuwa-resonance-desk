@@ -1532,6 +1532,33 @@ button{font:inherit;color:inherit}
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
 }
 
+/* What the event pays, in the corner of the picture opposite the version. It
+   is the one number you plan around — forty pulls is five events — so it sits
+   on the artwork rather than in the caption, where it would be a third line of
+   type competing with the name. Only ever shown when Kuro has published a
+   reward line; see astriteFrom(). */
+.ev-astrite{
+  position:absolute;right:9px;bottom:9px;z-index:2;
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px 3px 6px;border-radius:6px;white-space:nowrap;
+  background:rgba(9,8,12,.6);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);
+  font-family:var(--mono);font-size:10.5px;color:var(--fg);
+}
+/* Astrite is a pale blue-white crystal in game, and the desk's cyan is the
+   nearest thing it owns — lifted towards white so the glyph reads as a stone
+   rather than as another accent-coloured control. */
+.ev-astrite svg{flex:none;color:color-mix(in srgb,var(--accent) 62%,#FFFFFF)}
+.ev-astrite b{font-weight:500;letter-spacing:.02em}
+/* In the drawer it sits in a row rather than on a picture. */
+.ev-astrite.inline{position:static;background:var(--tint);backdrop-filter:none;-webkit-backdrop-filter:none}
+/* The patch total, in the band's header. */
+.panel-h .sub.astrite{
+  display:inline-flex;align-items:center;gap:5px;color:var(--fg-2);letter-spacing:.08em;
+}
+.panel-h .sub.astrite svg{color:color-mix(in srgb,var(--accent) 62%,#FFFFFF)}
+
 /* The caption bar. Sunk, like every other header and footer strip on the desk,
    so the picture above it reads as the card's content and this as its label. */
 .ev-cap{
