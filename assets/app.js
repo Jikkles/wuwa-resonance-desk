@@ -2794,9 +2794,27 @@ function renderAside(){
   const days = next?.start ? daysTo(next.start) : null;
   const counts = tierCounts();
 
-  /* Featured = the next new resonator on the schedule, else the newest record. */
-  const featName = (next?.phases || []).flatMap(p => (p.banners || []).filter(b => b.new))[0]?.name;
-  const feat = featName ? resonatorFor(featName) : resonators()[0];
+  /* Featured = the debut you can actually pull right now: a new resonator on a
+     phase of the live patch that has not closed yet.
+
+     Read off the live patch rather than the next one. For most of a cycle the
+     next patch has no banners published — nothing is announced until Kuro says
+     so — so the old line found nothing, fell through to resonators()[0], and
+     the panel spent weeks at a time featuring Aalto, who is first in the file
+     alphabetically and has not run since 1.0. It only ever showed the right
+     face in the few days between an announcement and a release.
+
+     Falls forward to the next patch's debut once every phase of the live one
+     has closed, which is the window where "right now" really is next week,
+     and only then to the newest record. */
+  const debuts = v => (v?.phases || []).flatMap(p =>
+    (p.banners || []).filter(b => b.new && b.name && b.name !== "???")
+      .map(b => ({name:b.name, closed: !!p.end && daysTo(p.end) < 0})));
+  const live = liveVersion();
+  const featName = (debuts(live).find(b => !b.closed)
+    || debuts(next)[0] || debuts(live)[0])?.name;
+  const feat = (featName && resonatorFor(featName).name)
+    ? resonatorFor(featName) : resonators()[0];
 
   /* Live version, next patch and entry count are already answered by the patch
      timeline this panel sits beside — in full, with dates and banners, rather

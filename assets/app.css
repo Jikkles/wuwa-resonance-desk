@@ -57,7 +57,7 @@
      Live Signals with its warning badge, wraps instead of setting the width
      for everything else. */
   --rail-w:296px;
-  --aside-w:21.25rem;
+  --aside-w:18.6rem;
 
   /* Backdrop dials. The backdrop is the desk's own mark now rather than the
      patch's key visual, so there is nothing behind the page that has to be
@@ -404,6 +404,30 @@ button{font:inherit;color:inherit}
   position:sticky;top:18px;align-self:start;
   display:flex;flex-direction:column;gap:16px;
 }
+/* Two sizes back off the dial, and only in this column. Both panels of it:
+   the hud is a separate element placed into column two by the grid rather
+   than a child of the aside, so a rule on .aside alone leaves its header at
+   full size in a narrowed track, where it wraps.
+
+   The column is a margin note — four counts, a status readout, a portrait and
+   a link, standing beside the thing they annotate rather than being the thing
+   you came to read. At the page's own size it argued with the timeline for
+   attention and won.
+
+   zoom rather than a font-size, because every size in this file is a rem and
+   a rem does not care what it is nested in: a font-size on .aside would move
+   nothing inside it. The markup here is shared, too — .term.mini and
+   .rec-attrs are drawn on the timeline and in the record drawer as well — so
+   there is no set of selectors that means "these, but only in the aside".
+   zoom is the one thing that scopes a scale to a subtree, and it takes the
+   padding and the frames down with the type, which is what keeps the panel
+   looking like itself rather than like small text in a full-size box.
+
+   --aside-w comes down with it. The track holds the same layout it did at
+   full size — 375px of track at .875 is the 428 the panels were built in —
+   so the 53px this frees goes to the stage, where the phase tiles were the
+   thing paying for the width. */
+.aside,.hud{zoom:.875}
 
 /* Frosted, not merely translucent. The backdrop behind these is a sharp
    picture with faces and lettering in it, and 12px body copy laid over that at
@@ -931,7 +955,25 @@ button{font:inherit;color:inherit}
    line is the fix for both halves of that. */
 @container (min-width:480px){
   .ps-col .bstrip.rows>.bpair{
-    max-height:9.875rem;flex-shrink:0;
+    /* No tile taller than a third of the strip it is in. The columns are grid
+       siblings and so all the same height, and the tiles share that height
+       between them — which meant a phase with two banners drew them half again
+       as tall as the phase beside it running three, same portrait, same two
+       lines of name, floating in a tile with a third of it empty. Two phases
+       of the same patch should be the same object twice.
+
+       A third rather than a count of what is actually in the column, because
+       a rule wants one number and three is the busy case: a phase running
+       four or more is already below this cap and keeps sharing the height as
+       before, and one running one or two is held down to the size the busiest
+       phase settled on. What that leaves is a short column with space under
+       it, which is the honest way to draw a phase with less in it.
+
+       Against the strip's own height rather than the tile's content, so it
+       tracks the row. 16px is the two gaps between three tiles. The absolute
+       cap stays on as the outer bound for a strip tall enough that a third of
+       it is still too much for one banner. */
+    max-height:min(9.875rem, calc((100% - 16px) / 3));flex-shrink:0;
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   }
 }
@@ -3510,6 +3552,10 @@ img.astrite-pic{
     display:flex;flex-direction:column;align-items:flex-end;gap:5px;
     background:none;border:0;border-radius:0;overflow:visible;
     backdrop-filter:none;-webkit-backdrop-filter:none;
+    /* Back to full size. The two sizes came off because this was a margin note
+       in a narrow column, and at this width there is no column and no margin —
+       the hud is a strip across the top of the page it annotates. */
+    zoom:1;
   }
   .col{grid-row:2}
   .hud .mini-h{order:2;padding:0;border-bottom:0;background:none}
