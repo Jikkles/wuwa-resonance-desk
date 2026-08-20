@@ -4,6 +4,44 @@
   "credit": "Item art © Kuro Games · via the Wuthering Waves Wiki on Fandom (CC BY-SA)",
   "source": "https://wutheringwaves.fandom.com/wiki/Items",
   "items": {
+    "5-star Weapon Supply Chest": {
+      "icon": "assets/items/5-star-weapon-supply-chest.png",
+      "page": "5-star Weapon Supply Chest",
+      "rarity": 5,
+      "type": "Supply Pack",
+      "description": "Provides a 5-star [[Winter Brume Series]] weapon.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/5-star_Weapon_Supply_Chest"
+    },
+    "Advanced Enclosure Tank — Lahai-Roi": {
+      "icon": "assets/items/advanced-enclosure-tank-lahai-roi.png",
+      "page": "Advanced Enclosure Tank",
+      "rarity": 4,
+      "type": "Supply Pack",
+      "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice:<br>[[Improved Ring]]*1<br>[[HF Whisperin Core]]*1<br>[[HF Howler Core]]*1",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Advanced_Enclosure_Tank"
+    },
+    "Advanced Energy Core": {
+      "icon": "assets/items/advanced-energy-core.png",
+      "page": "Advanced Energy Core",
+      "rarity": 4,
+      "type": "Weapon EXP Material",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Advanced_Energy_Core"
+    },
+    "Advanced Resonance Potion": {
+      "icon": "assets/items/advanced-resonance-potion.png",
+      "page": "Advanced Resonance Potion",
+      "rarity": 4,
+      "type": "Resonator EXP Material",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Advanced_Resonance_Potion"
+    },
+    "Advanced Sealed Tube": {
+      "icon": "assets/items/advanced-sealed-tube.png",
+      "page": "Advanced Sealed Tube",
+      "rarity": 4,
+      "type": "Echo Development Material",
+      "description": "Advanced Echo EXP Item. Provides 2,000 EXP.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Advanced_Sealed_Tube"
+    },
     "Astrite": {
       "icon": "assets/items/astrite.png",
       "page": "Astrite",
@@ -11,6 +49,53 @@
       "type": "Premium Currency",
       "description": "The precious remnants of the civilization reverberate within... Perhaps they hold infinite possibilities.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Astrite"
+    },
+    "Concealed Starlight": {
+      "icon": "assets/items/concealed-starlight.png",
+      "page": "Concealed Starlight",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "Even as the stars fade, you still shine.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Concealed_Starlight"
+    },
+    "Cosmic Spindle": {
+      "icon": "assets/items/cosmic-spindle.png",
+      "page": "Cosmic Spindle",
+      "rarity": 5,
+      "description": "Adrift in the cosmos, in motion with the tides, modulating the stars.<br>Your past threads the fabric of the universe.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Cosmic_Spindle"
+    },
+    "Crystal Solvent": {
+      "icon": "assets/items/crystal-solvent.png",
+      "page": "Crystal Solvent",
+      "rarity": 4,
+      "type": "Consumable",
+      "description": "Obtain 60 [[Waveplate",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Crystal_Solvent"
+    },
+    "Forgery Advanced Supply — Lahai-Roi": {
+      "icon": "assets/items/forgery-advanced-supply-lahai-roi.png",
+      "page": "Forgery Advanced Supply",
+      "rarity": 4,
+      "type": "Supply Pack",
+      "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Advanced_Supply"
+    },
+    "Forgery Medium Supply": {
+      "icon": "assets/items/forgery-medium-supply.png",
+      "page": "Forgery Medium Supply",
+      "rarity": 3,
+      "type": "Supply Pack",
+      "description": "Open to claim one basic material for weapon ascension or skill upgrade of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Medium_Supply"
+    },
+    "Forgery Premium Supply": {
+      "icon": "assets/items/forgery-premium-supply.png",
+      "page": "Forgery Premium Supply",
+      "rarity": 5,
+      "type": "Supply Pack",
+      "description": "Open to claim one premium material for weapon ascension or skill upgrade of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Premium_Supply"
     },
     "Forgery Premium Supply — Lahai-Roi": {
       "icon": "assets/items/forgery-premium-supply-lahai-roi.png",
@@ -27,6 +112,30 @@
       "type": "Convene Token",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Lustrous_Tide"
     },
+    "Malleable Elite Class Echo I": {
+      "icon": "assets/items/malleable-elite-class-echo-i.png",
+      "page": "Malleable Elite Class Echo I",
+      "rarity": 5,
+      "type": "Random Echo Item",
+      "description": "Open to claim one 5-Star Elite Class Echo of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Malleable_Elite_Class_Echo_I"
+    },
+    "Malleable Elite Class Echo II": {
+      "icon": "assets/items/malleable-elite-class-echo-ii.png",
+      "page": "Malleable Elite Class Echo II",
+      "rarity": 5,
+      "type": "Random Echo Item",
+      "description": "Open to claim one 5-Star Elite Class Echo of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Malleable_Elite_Class_Echo_II"
+    },
+    "Medium Enclosure Tank": {
+      "icon": "assets/items/medium-enclosure-tank.png",
+      "page": "Medium Enclosure Tank",
+      "rarity": 3,
+      "type": "Supply Pack",
+      "description": "Open to claim one medium material for weapon ascension or skill upgrade of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Medium_Enclosure_Tank"
+    },
     "Modifier": {
       "icon": "assets/items/modifier.png",
       "page": "Modifier",
@@ -35,11 +144,41 @@
       "description": "Used to modify the Mainstat of an unenhanced 5-Star Echo.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Modifier"
     },
+    "Perpetual Spark": {
+      "icon": "assets/items/perpetual-spark.png",
+      "page": "Perpetual Spark",
+      "rarity": 4,
+      "type": "Signature",
+      "description": "Rover's uniform from a past life at Startorch Academy. The black-and-white motif, accented with gold stripes, weaves past and future together, ensuring that what has happened is remembered and what is yet to come feels within reach.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Perpetual_Spark"
+    },
     "Phantom — Myriad Snare: Rustfire Chassis": {
       "icon": "assets/items/phantom-myriad-snare-rustfire-chassis.png",
       "page": "Myriad Snare: Rustfire Chassis",
       "type": "Overlord",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Myriad_Snare%3A_Rustfire_Chassis"
+    },
+    "Phantom: Fae Ignis": {
+      "icon": "assets/items/phantom-fae-ignis.png",
+      "page": "Fae Ignis/Echo",
+      "type": "Common",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Fae_Ignis%2FEcho"
+    },
+    "Premium Enclosure Tank": {
+      "icon": "assets/items/premium-enclosure-tank.png",
+      "page": "Premium Enclosure Tank",
+      "rarity": 5,
+      "type": "Supply Pack",
+      "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice:<br>[[Tailored Ring]]*1<br>[[FF Whisperin Core]]*1<br>[[FF Howler Core]]*1",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Enclosure_Tank"
+    },
+    "Premium Enclosure Tank — Lahai-Roi": {
+      "icon": "assets/items/premium-enclosure-tank-lahai-roi.png",
+      "page": "Premium Enclosure Tank",
+      "rarity": 5,
+      "type": "Supply Pack",
+      "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice:<br>[[Tailored Ring]]*1<br>[[FF Whisperin Core]]*1<br>[[FF Howler Core]]*1",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Enclosure_Tank"
     },
     "Premium Enclosure Tank — Land of Xuanfang": {
       "icon": "assets/items/premium-enclosure-tank-land-of-xuanfang.png",
@@ -86,6 +225,13 @@
       "type": "Convene Token",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Radiant_Tide"
     },
+    "Sanhua": {
+      "icon": "assets/items/sanhua.png",
+      "page": "Sanhua",
+      "rarity": 4,
+      "type": "Playable",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Sanhua"
+    },
     "Shell Credit": {
       "icon": "assets/items/shell-credit.png",
       "page": "Shell Credit",
@@ -100,7 +246,30 @@
       "type": "Sigil",
       "description": "Dedicated to the faculty and students who shone in the drill.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Space_and_Blake_Bloom_Medal"
+    },
+    "Union EXP": {
+      "icon": "assets/items/union-exp.png",
+      "page": "Union EXP",
+      "rarity": 5,
+      "type": "EXP",
+      "description": "Union Level EXP. Obtained from exploration.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Union_EXP"
+    },
+    "Voyager of the World": {
+      "icon": "assets/items/voyager-of-the-world.png",
+      "page": "Voyager of the World",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "I want to witness the sky beyond the sky and reach the world beyond the world.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Voyager_of_the_World"
+    },
+    "Yuanwu": {
+      "icon": "assets/items/yuanwu.png",
+      "page": "Yuanwu",
+      "rarity": 4,
+      "type": "Playable",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Yuanwu"
     }
   },
-  "updated": "2026-08-20T08:58:57.105Z"
+  "updated": "2026-08-20T14:00:05.409Z"
 }

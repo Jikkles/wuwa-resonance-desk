@@ -719,8 +719,50 @@ there to be ready for.
   an archive, not a calendar.
 - **The `[New Gameplay]` section of the overview**, which is permanent systems shipping
   alongside the events. A permanent menu addition has no window and nothing to miss.
+- **Closed events, from the Events view.** This one used to keep them, grouped under the
+  patch they ran in, and that is the wrong shape for the page: a patch's events all end on
+  the same Tuesday, so the morning a patch turned over, the top of the page was nine tiles
+  greyed out and the new patch sat underneath them. Nothing about a closed event is
+  actionable and the desk keeps no history of one anywhere else, so there is nothing here
+  for the entry to be the index of. An event drops off the day it closes, and its patch
+  goes with the last of them.
 
 Still not built: redemption codes.
+
+### Permanent events
+
+`data/permanents.json`, written by `scripts/fetch-permanents.mjs`, and the one calendar
+that does not come from Kuro. A permanent event has no window and gets no notice: it was
+announced once, in a patch that shipped up to two years ago, and Kuro's news feed stopped
+carrying that post long before this desk existed. `fetch-events.mjs` reads a hundred days
+back; Echo Hunters has been in the game since launch day, 2024-05-23.
+
+So this half reads the wiki — `Category:Permanent Events`, the `{{Event}}` infobox for the
+dates and the type, `{{Description}}` for Kuro's own blurb, `{{Event Rewards}}` for the
+payout. **The category is not the filter.** It holds 37 pages and 18 of them have a real
+closing date on the infobox, because the wiki files an event there when the *mode* it
+added stays in the game — which is a different claim from the event still being open. A
+Glimpse of Xuanfang is in that category and closed on 2026-08-19, which the desk knows
+because Kuro said so. `time_end = none` is the field that means what this file means, and
+it is what the filter reads: 19 events, launch day to now.
+
+The banners come down at 720px into `assets/events/` rather than being hotlinked, the same
+call the reward icons and the portraits make — these are Kuro's own event banners, hosted
+by Fandom, and a page fetching 19 pictures off a wiki CDN on every load is a page borrowing
+somebody's bandwidth. Every one of them carries the event's name set across it, so they are
+shown whole in the tile rather than filled to it, same flag and same reason as the
+double-drop title strips: a 1.6:1 tile cropping a 4:1 banner turns *Tales of the Isles*
+into *les of the Isles*, which reads as a broken image rather than as a crop.
+
+The two lists are merged in `gameEvents()` so that a card, a record and a search all see
+one calendar. Where both files hold the same event — a patch's permanent addition, which
+Kuro announced in an overview the desk still reads — Kuro's own entry wins and takes the
+wiki's banner if it hasn't got one: Kuro's words about a Kuro event, and the only picture
+anyone has. Permanent events are pulled out of the patch panels into a section of their
+own, because they have no deadline, which is the one thing the patch panels sort by, and
+half of them predate any patch the desk holds a record of. The record says
+`The Wuthering Waves Wiki on Fandom` under "Written by" rather than implying a post the
+desk could go and show you.
 ## The resonator database
 
 `node scripts/fetch-kits.mjs` builds the whole roster — sixty Resonators including the
@@ -1034,7 +1076,8 @@ left is the editorial, which is the part worth your time.
 | `feed.json` | six news sources | yes |
 | `art.json` | Kuro's reveal posts | yes |
 | `events.json` — the calendar, its windows and its banners | Kuro's patch notes and event notices | yes |
-| `items.json` + `assets/items/` — reward icons | Fandom, off the reward lines in `events.json` | yes |
+| `permanents.json` + `assets/events/` — everything the game keeps, and its banners | Fandom's `Category:Permanent Events` | yes |
+| `items.json` + `assets/items/` — reward icons | Fandom, off the reward lines in both calendars | yes |
 | `resonators.json` — identity, debut, reruns | Fandom | yes |
 | phase dates in `versions.json` | Fandom convene pages, once a phase has run | yes |
 | `kits.json` — skill text | Prydwen | **no — run locally** |

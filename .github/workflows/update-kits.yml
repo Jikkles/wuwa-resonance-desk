@@ -7,7 +7,10 @@ name: Update kits
 # the same answer.
 #
 # The wiki half of this job runs unattended and is what lands on patch-day
-# morning: banner dates, debut patches, the versions.json confirmation pass.
+# morning: banner dates, debut patches, the versions.json confirmation pass,
+# and the permanent event list — everything the game keeps, which is the one
+# calendar Kuro's own news feed cannot answer, because the posts that
+# announced most of it scrolled off years ago.
 #
 # The kit half does not. Prydwen answers a home connection and returns a flat
 # 403 to a GitHub runner, so kit text has never once arrived from a scheduled
@@ -61,11 +64,27 @@ jobs:
       - name: Confirm estimated phase dates
         run: node scripts/confirm-dates.mjs
 
+      # The permanent event list, off the wiki's own Permanent Events category.
+      # Here rather than in update-feeds.yml for the reason at the top of this
+      # file: it is a Fandom job that answers a question which only changes
+      # when a patch ships, and running it every six hours would be four times
+      # the traffic for the same list. Kept independent of the kit half — a
+      # Prydwen 403 must not cost the desk its event banners.
+      - name: Resolve permanent events
+        if: always()
+        continue-on-error: true
+        run: node scripts/fetch-permanents.mjs
+
+      # always(), so that a Prydwen 403 taking the kit step down does not also
+      # throw away the event banners the wiki step just fetched. The run still
+      # goes red when a step failed, which is the part worth seeing; fetch-kits
+      # refuses to write a thin file, so there is nothing half-made to commit.
       - name: Commit if changed
+        if: always()
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/resonators.json data/kits.json data/versions.json
+          git add data/resonators.json data/kits.json data/versions.json data/permanents.json assets/events
           if git diff --staged --quiet; then
             echo "no change"
             exit 0

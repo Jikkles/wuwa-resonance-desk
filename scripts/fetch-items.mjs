@@ -28,7 +28,10 @@ const UA =
 
 const API = "https://wutheringwaves.fandom.com/api.php";
 const WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(String(t).replace(/ /g, "_"))}`;
-const EVENTS = "data/events.json";
+/* Both calendars. The permanent list pays out too, and its reward tiles draw
+   the same grid — an item that only ever appears on a permanent event still
+   needs its picture. */
+const EVENTS = ["data/events.json", "data/permanents.json"];
 const OUT = "data/items.json";
 const DIR = "assets/items";
 const TIMEOUT_MS = 25000;
@@ -146,7 +149,12 @@ async function lookup(titles) {
 (async () => {
   await mkdir(DIR, { recursive: true });
 
-  const events = JSON.parse(await readFile(EVENTS, "utf8")).events || [];
+  const events = (await Promise.all(EVENTS.map(async f => {
+    /* A file that isn't there yet is a fetcher that hasn't run yet, not a
+       reason to resolve nothing. */
+    try { return JSON.parse(await readFile(f, "utf8")).events || []; }
+    catch { console.log(`${f} not readable — skipped`); return []; }
+  }))).flat();
   const names = new Set();
   for (const ev of events)
     for (const t of rewardTokens(ev.rewards))

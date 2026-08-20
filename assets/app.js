@@ -13,6 +13,7 @@ const FALLBACK = {
   weapons:    {updated:"", weapons:[]},
   feed:       {fetched:"", sources:[], errors:[], items:[]},
   events:     {updated:"", events:[]},
+  permanents: {updated:"", events:[]},
   items:      {items:{}},
   art:        {art:{}},
   portraits:  {characters:{}},
@@ -160,8 +161,36 @@ const entries    = () => DATA.news?.entries || [];
 const resonators = () => DATA.resonators?.resonators || [];
 const weapons    = () => DATA.weapons?.weapons || [];
 /* The event calendar. Named for the game's events, not the DOM's — this file
-   already has an events section and it binds clicks. */
-const gameEvents = () => DATA.events?.events || [];
+   already has an events section and it binds clicks.
+
+   Two files behind it, because a permanent event is a different kind of fact
+   from a limited one and comes from somewhere else. events.json is Kuro's own
+   posts and covers what is running now; permanents.json is the wiki's list of
+   everything with no closing date, going back to launch day, because Kuro's
+   news feed stopped carrying those posts years ago. Merged here rather than at
+   the two call sites so that a card, a record and a search all see one list.
+
+   Where both files hold the same event — a patch's permanent addition, which
+   Kuro announced in an overview this desk still reads — Kuro's own entry is
+   the one that survives, and takes the wiki's banner if it hasn't got one of
+   its own. Kuro's words about a Kuro event, the only picture anyone has.
+
+   The wiki fills blanks and never overwrites, same rule confirm-dates.mjs
+   works to. Kuro's overview dates a permanent addition as "after the version
+   update" and the desk resolves that to nothing; the wiki has the day it
+   opened, to the minute, so a record that would have said "no closing date"
+   and stopped can say when it arrived instead. */
+const eventKey = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+const gameEvents = () => {
+  const perm = new Map((DATA.permanents?.events || []).map(e => [eventKey(e.name), e]));
+  const kuro = (DATA.events?.events || []).map(e => {
+    const p = perm.get(eventKey(e.name));
+    if(!p) return e;
+    perm.delete(eventKey(e.name));
+    return {...e, permanent:true, art:e.art || p.art, start:e.start || p.start};
+  });
+  return [...kuro, ...perm.values()];
+};
 const signals    = () => [...(DATA.feed?.items || [])].sort((a,b) => (b.date||"").localeCompare(a.date||""));
 
 /* Signals arrive in whatever language the source publishes in — about a fifth
@@ -1366,7 +1395,7 @@ function eventCard(ev){
   const astrite = astriteFrom(ev);
   return `<article class="ev${ev.headline ? " head" : ""}${past ? " past" : ""}" role="button" tabindex="0"
            data-act="event" data-id="${esc(ev.id)}"
-           aria-label="${esc(ev.name)} — ${esc(ev.kind || "Event")}, version ${esc(ev.version)}, ${esc(st.text)}${astrite ? `, ${astriteLabel(astrite)}` : ""}">
+           aria-label="${esc(ev.name)} — ${esc(ev.kind || "Event")}${ev.version ? `, version ${esc(ev.version)}` : ""}, ${esc(st.text)}${astrite ? `, ${astriteLabel(astrite)}` : ""}">
     <div class="ev-pic">
       ${art
         /* A banner is 16:9 and the tile is about 2:1, so the tile crops the
@@ -1385,7 +1414,9 @@ function eventCard(ev){
         : `<div class="ev-plate" aria-hidden="true"><span>Banner not published yet</span></div>`}
       <div class="ev-top">
         <span class="ev-state ${st.cls}">${esc(st.text)}</span>
-        <span class="pill ver">${esc(ev.version)}</span>
+        ${/* Most of the permanent list predates any patch this desk holds a
+              record of — an empty pill is worse than no pill. */
+          ev.version ? `<span class="pill ver">${esc(ev.version)}</span>` : ""}
       </div>
       ${astrite ? `<span class="ev-astrite" title="Astrite from this event">
         ${icon("i-astrite", 12)}<b>${astrite.toLocaleString("en-GB")}</b></span>` : ""}
@@ -1439,10 +1470,26 @@ function eventPanel(){
 }
 
 /* The view. The same cards, grouped by patch instead of capped — one panel per
-   version, live patch first. */
+   version, live patch first, then everything the game keeps.
+
+   What it does not carry is a closed event. This was an archive for a while,
+   and an archive is the wrong thing for it to be: a patch's events all end on
+   the same Tuesday, so the day a patch turns over, the top of this page became
+   nine tiles greyed out and the new patch sat under them. Nothing on a closed
+   event is actionable — you cannot go and do it — and the desk keeps no
+   history of one anywhere else, so there is nothing here for it to be the
+   index of. It falls off the page when it closes, and the patch it belonged to
+   falls off with the last of them.
+
+   Permanent events are pulled out into their own section rather than filed
+   under the patch that shipped them. They have no deadline, which is the one
+   thing the patch panels are sorted by, and half of them predate any patch the
+   desk holds a record of. See gameEvents() for where that list comes from. */
 function renderEvents(){
-  const groups = [];
+  const permanent = [], groups = [];
   for(const ev of eventList()){
+    if(ev.permanent){ permanent.push(ev); continue; }
+    if(eventState(ev).kind === "past") continue;
     const row = groups.find(g => g.id === ev.version);
     if(row) row.items.push(ev);
     else groups.push({id:ev.version, items:[ev]});
@@ -1476,12 +1523,38 @@ function renderEvents(){
     </div>`;
   }).join("");
 
+  /* Newest first: the far end of this list is launch day 2024, and the thing
+     a reader has most plausibly not done yet is the one that arrived last.
+
+     No headline tile. That flag is Kuro's patch having one big event at its
+     centre, which is a true thing about a fortnight and a meaningless one
+     about a two-year list — a permanent event that happened to be its patch's
+     headline is not the headline of *this* section, and taking double the
+     width says it is. */
+  const standing = [...permanent]
+    .sort((a, b) => String(b.start || "").localeCompare(String(a.start || "")))
+    .map(e => e.headline ? {...e, headline:false} : e);
+  /* Same claim the patch panels make, summed off the same tiles. */
+  const permAstrite = standing.reduce((n, e) => n + (astriteFrom(e) || 0), 0);
+  const permSection = standing.length ? `<div class="panel">
+    <div class="panel-h">
+      <h2>Permanent</h2>
+      <span class="sub">${plural(standing.length, "event")} · no closing date</span>
+      <div class="right">
+        ${permAstrite ? `<span class="sub astrite" title="Astrite listed across the permanent events. One with no published reward line counts as nothing.">
+          ${icon("i-astrite", 12)}${astriteLabel(permAstrite)}</span>` : ""}
+      </div>
+    </div>
+    <div class="panel-b"><div class="evgrid">${standing.map(eventCard).join("")}</div></div>
+  </div>` : "";
+
   const src = DATA.events?.updated ? fmtDate(DATA.events.updated) : "";
   $("#p-events").innerHTML = `<div class="stack">
     ${pageTitle("events")}
-    ${sections || `<div class="panel"><div class="empty">No events on file yet.</div></div>`}
+    ${sections || `<div class="panel"><div class="empty">Nothing running, and nothing announced yet.</div></div>`}
+    ${permSection}
     <div class="panel"><div class="panel-f">
-      <span class="tier-note">Read off Kuro's own patch notes and event notices${src ? `, last ${esc(src)}` : ""} — windows in your own timezone, art only where Kuro has published a banner. A patch Kuro has announced but not yet written up carries what the preview broadcast said and no dates, because there are none to carry.</span>
+      <span class="tier-note">Read off Kuro's own patch notes and event notices${src ? `, last ${esc(src)}` : ""} — windows in your own timezone, art only where Kuro has published a banner. A patch Kuro has announced but not yet written up carries what the preview broadcast said and no dates, because there are none to carry. An event that has closed drops off this page; nothing here is an archive. The permanent list comes from the Wuthering Waves Wiki on Fandom instead — Kuro's news feed no longer carries the posts that announced the older ones.</span>
     </div></div>
   </div>`;
 }
@@ -1696,7 +1769,10 @@ function drawerEvent(id){
       </div>`;
 
   const dates = ev.permanent
-    ? `<span class="evr-perm">Permanent — no closing date</span>`
+    /* A permanent event has no window, but it does have a day it arrived, and
+       that is the useful half: it says whether this is something you have had
+       two years to get round to or something that landed with the patch. */
+    ? `<span class="evr-perm">Permanent${ev.start ? ` — in the game since ${esc(fmtDate(ev.start))}` : " — no closing date"}</span>`
     : win.start || win.end
       ? `<span class="evr-range">
           <b>${esc(win.start ? fmtDate(win.start) : "—")}</b>
@@ -1713,10 +1789,16 @@ function drawerEvent(id){
   const strip = [
     ["i-timeline", "Runs", eventTimes(ev)],
     ["i-events", "Mode", ev.kind || "Event"],
-    ["i-info", "Whose dates", win.inherited && !ev.permanent
-      ? `Patch ${ev.version}'s — the event's own are not out`
-      : "The event's own, in your clock"],
-    ["i-kuro", "Patch", v?.title ? `${v.id} — ${v.title}` : ev.version]
+    ["i-info", "Whose dates", ev.permanent
+      ? "Opened once and never closes"
+      : win.inherited
+        ? `Patch ${ev.version}'s — the event's own are not out`
+        : "The event's own, in your clock"],
+    /* Half the permanent list is older than any patch the desk keeps a record
+       of — Echo Hunters has been in the game since launch day — so the slot
+       says when it arrived instead of naming a patch nothing can link to. */
+    ["i-kuro", "Patch", v?.title ? `${v.id} — ${v.title}` : ev.version
+      || (ev.start ? `Not recorded — arrived ${fmtDate(ev.start)}` : "Not recorded")]
   ];
 
   /* Only when there is more than one picture. The hero is already showing the
@@ -1753,7 +1835,14 @@ function drawerEvent(id){
     ["Kind", ev.kind || "Event"],
     ["Filed under", ev.section || "Special Events"],
     ["Confidence", TIER_LABEL[tier]],
-    ["Written by", ev.origin === "kuro" ? "Kuro's own post, read by the fetcher" : "Hand, off a broadcast"]
+    ["Written by",
+      ev.origin === "kuro" ? "Kuro's own post, read by the fetcher"
+      /* The permanent list. Kuro announced these too, years ago in most cases,
+         and the news feed no longer carries the post — so the wiki is the
+         record, and the record says so rather than implying a post the desk
+         could go and show you. */
+      : ev.origin === "wiki" ? "The Wuthering Waves Wiki on Fandom"
+      : "Hand, off a broadcast"]
   ];
 
   openDrawer("Event", `<div class="drawer-b evrec">
@@ -1762,7 +1851,7 @@ function drawerEvent(id){
       <div class="evr-copy">
         <div class="meta">
           ${tierBadge(tier, tier === "official")}
-          <span class="pill ver">${esc(ev.version)}</span>
+          ${ev.version ? `<span class="pill ver">${esc(ev.version)}</span>` : ""}
           ${ev.kind ? `<span class="pill">${esc(ev.kind)}</span>` : ""}
           <span class="ev-state ${st.cls}">${esc(st.text)}</span>
         </div>
@@ -1772,7 +1861,9 @@ function drawerEvent(id){
           <span class="evr-dates">${icon("i-timeline", 13)}${dates}</span>
         </div>
         ${ev.source ? `<a class="evr-cta" href="${esc(ev.source)}" target="_blank" rel="noopener">
-          ${esc(ev.origin === "kuro" ? "Kuro's event notice" : "Kuro's version preview")}
+          ${esc(ev.origin === "kuro" ? "Kuro's event notice"
+              : ev.origin === "wiki" ? "This event on the wiki"
+              : "Kuro's version preview")}
           ${icon("i-arrow", 13)}</a>` : ""}
       </div>
     </header>
@@ -1789,7 +1880,9 @@ function drawerEvent(id){
         ${astrite ? `<span class="ev-astrite inline">${icon("i-astrite", 12)}
           <b>${astriteLabel(astrite)}</b></span>` : ""}</div>
       <div class="lootgrid">${loot.map(rewardTile).join("")}</div>
-      <p class="tier-note">Kuro's own reward line, item by item. Item art © Kuro Games, via the
+      <p class="tier-note">${ev.origin === "wiki"
+        ? "The wiki's reward table for this event, item by item."
+        : "Kuro's own reward line, item by item."} Item art © Kuro Games, via the
         Wuthering Waves Wiki on Fandom.</p>
     </section>` : ""}
 
@@ -3327,7 +3420,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events","items"];
+  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events","permanents","items"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 
