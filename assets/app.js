@@ -118,6 +118,102 @@ const $  = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const DAY = 86400000;
 
+/* ── fit ─────────────────────────────────────────────────────────────
+   Type that takes the room it is given and no more.
+
+   Every size in the stylesheet is the size that suits the longest string that
+   can land in that box, which makes it the wrong size for every other string:
+   "Jinhsi" is set at the size "Yangyang: Xuanling" needed and sits in its card
+   half empty. The cqi clamps answer one half of this — they know how wide the
+   box turned out to be — but no clamp can know how long the name in it turned
+   out to be, and length is the thing that actually decides whether a name fits.
+
+   So the stylesheet goes on setting the base size, and this grows it from
+   there. Mark an element data-fit and it may take up to 1.6x what the CSS gave
+   it, settling on the largest size that still fits its box. A short name takes
+   the whole allowance, a long one takes what the box leaves it, and nothing
+   ever escapes, because the fit is measured rather than predicted from a
+   character count and an assumed glyph width.
+
+     data-fit="2"       a different ceiling.
+     data-fit="1.6 .8"  a floor under the CSS size as well, for a box that must
+                        not be overrun even when the base size overruns it.
+     data-fit-lines="2" the box has no height of its own to overflow, so "fits"
+                        means "wraps to no more than two lines" instead.
+     data-fit-in=".x"   the type is not what gets clipped — a two-line name at
+                        a bigger size is a taller name, and what falls off the
+                        bottom is the chips under it. Fit is then a question
+                        about the tile, so name the tile.
+
+   Reads and writes run in lockstep across every marked element rather than one
+   element at a time: all the sizes written, one reflow, all the fits read. Done
+   per element it is a forced reflow each, and a banner row alone is thirty. */
+const FIT_STEPS = 5;
+const FIT_MAX = 1.6;
+
+function fitBox(el, lines, box){
+  if(el.scrollWidth > el.clientWidth + 1) return false;
+  if(el.scrollHeight > el.clientHeight + 1) return false;
+  if(lines){
+    const lh = parseFloat(getComputedStyle(el).lineHeight) || 0;
+    if(lh && el.scrollHeight > lh * lines + 1) return false;
+  }
+  if(box && (box.scrollHeight > box.clientHeight + 1 || box.scrollWidth > box.clientWidth + 1)) return false;
+  return true;
+}
+
+function fitAll(root = document){
+  const els = [...root.querySelectorAll("[data-fit]")];
+  if(!els.length) return;
+
+  /* Back to the CSS size before anything is measured. On a resize the base is
+     a cqi clamp that has just resolved to a different number, and growing from
+     the last pass's answer instead ratchets the type up again every time the
+     window moves. */
+  for(const el of els) el.style.fontSize = "";
+
+  const jobs = els.map(el => {
+    const [up, down] = String(el.dataset.fit || "").split(/[\s,]+/).map(Number);
+    const base = parseFloat(getComputedStyle(el).fontSize) || 16;
+    const lo = base * (down > 0 ? down : 1);
+    return {
+      el, lo, mid: lo, best: lo, done: false,
+      hi: base * (up > 0 ? up : FIT_MAX),
+      lines: Number(el.dataset.fitLines) || 0,
+      box: el.dataset.fitIn ? el.closest(el.dataset.fitIn) : null
+    };
+  });
+
+  /* The ceiling first. Most names clear it outright, and those want the
+     ceiling itself rather than the number a halving converges towards. */
+  for(const j of jobs) j.el.style.fontSize = `${j.hi}px`;
+  for(const j of jobs) if(fitBox(j.el, j.lines, j.box)){ j.best = j.hi; j.done = true; }
+
+  for(let i = 0; i < FIT_STEPS; i++){
+    for(const j of jobs){
+      if(j.done) continue;
+      j.mid = (j.lo + j.hi) / 2;
+      j.el.style.fontSize = `${j.mid}px`;
+    }
+    for(const j of jobs){
+      if(j.done) continue;
+      if(fitBox(j.el, j.lines, j.box)){ j.best = j.mid; j.lo = j.mid; }
+      else j.hi = j.mid;
+    }
+  }
+  /* Nothing fitted even at the floor keeps the floor — the box clips it, which
+     is the same thing the stylesheet alone would have done. */
+  for(const j of jobs) j.el.style.fontSize = `${j.best.toFixed(2)}px`;
+}
+
+/* Every caller wants the same thing — one pass, after the frame the new markup
+   landed in — and several of them fire together on a single view change. */
+let fitQueued = 0;
+function fitSoon(){
+  if(fitQueued) return;
+  fitQueued = requestAnimationFrame(() => { fitQueued = 0; fitAll(); });
+}
+
 function attrStyle(a){
   const c = ATTR_COLOUR[String(a||"").toLowerCase()];
   return c ? ` style="--attr:${c}"` : "";
@@ -638,7 +734,7 @@ function thumb(b, {showWeapon = true, showPhase = true, showNew = false} = {}){
   return `<div class="bmini${unknown ? " unknown" : ""}"${attrStyle(attr)}${act}>
     <div class="thumb${f.icon ? " bust" : f.cutout ? " cut" : ""}">${inner}</div>
     <span class="bwho">
-      <b>${esc(b.name || "???")}</b>
+      <b data-fit="1.5">${esc(b.name || "???")}</b>
       <span class="bmeta">${meta}</span>
     </span>
   </div>`;
@@ -687,7 +783,7 @@ function bannerCard(b){
     <div class="bcard-art${f.cutout ? " cut" : ""}">${inner}${flag}</div>
     <div class="bcard-b">
       <div class="bcard-h">
-        <b>${esc(b.name || "???")}</b>
+        <b data-fit="1.7" data-fit-lines="1">${esc(b.name || "???")}</b>
         ${rarity ? `<span class="bcard-r">${esc(rarity)}★</span>` : ""}
         ${r.epithet ? `<span class="bcard-ep">${esc(r.epithet)}</span>` : ""}
       </div>
@@ -1056,7 +1152,7 @@ function patchCard(v, role){
       <div class="bp-left"${who}>
         <div class="bp-art${f.cutout ? " cut" : ""}${f.icon && !f.image ? " bust" : ""}">${art}</div>
         <div class="bp-who">
-          <b>${esc(b.name || "???")}</b>
+          <b data-fit="1.35" data-fit-in=".bpair">${esc(b.name || "???")}</b>
           <span class="bmeta">${b.new ? `<i class="new">New</i>` : ""}${
             b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${
             attr ? `<i class="attr">${esc(attr)}</i>` : ""}</span>
@@ -2765,6 +2861,7 @@ function openDrawer(kind, html, id = null){
   }
   d.querySelector(".drawer-panel").scrollTop = 0;
   d.querySelector(".drawer-panel").focus();
+  fitSoon();
 }
 function closeDrawer(){
   const d = $("#drawer");
@@ -2830,7 +2927,7 @@ function sigWeaponCard(wname){
   const inner = `<span class="wcard-art">${art}</span>
     <span class="wcard-t">
       <span class="label">Signature weapon</span>
-      <b>${esc(wname)}</b>
+      <b data-fit="1.45" data-fit-lines="1">${esc(wname)}</b>
     </span>
     ${w?.rarity ? `<span class="wcard-r">${esc(w.rarity)}★</span>` : ""}
     ${live ? `<span class="arrow">${icon("i-arrow", 13)}</span>` : ""}`;
@@ -3439,6 +3536,7 @@ function setView(id, focus){
 function draw(id){
   try{ RENDER[id](); }catch(err){ console.error(`render ${id} failed`, err); }
   try{ renderAside(); }catch(err){ console.error("aside failed", err); }
+  fitSoon();
 }
 
 function dispatch(kind, id){
@@ -3586,6 +3684,12 @@ function bind(){
 
   $("#cmd-input").addEventListener("input", e => runCmd(e.target.value));
   addEventListener("hashchange", () => setView(location.hash.slice(1) || "timeline"));
+  /* Every box a fitted name sits in is sized off the window one way or
+     another, so a size the last width allowed is not a size this one does. */
+  addEventListener("resize", fitSoon);
+  /* DM Sans arriving replaces the metrics every fit was measured against —
+     the fallback is narrower, and names measured in it overrun once it goes. */
+  document.fonts?.ready.then(fitSoon);
 }
 
 /* ── boot ────────────────────────────────────────────────────────── */
