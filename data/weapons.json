@@ -1,7 +1,7 @@
 {
   "schema": "wuwa-desk/weapons@1.0",
-  "note": "Every weapon in the game: class, rarity, level 90 stats, and the passive as a template with its five ascension values. atk90 and statValue90 are max-level figures — there is no level curve here and none is inferred. ranks[n] holds what {n} in `effect` becomes at ascension 1 through 5. Sub-stat values are percentages. Icons are cached in assets/weapons/. Stats and passives via prydwen.gg; weapon art © Kuro Games.",
-  "credit": "Stats and art via prydwen.gg · weapon art © Kuro Games",
+  "note": "Every weapon in the game: class, rarity, level 90 stats, and the passive as a template with its five ascension values. atk90 and statValue90 are max-level figures — there is no level curve here and none is inferred. ranks[n] holds what {n} in `effect` becomes at ascension 1 through 5. Sub-stat values are percentages. Icons are cached in assets/weapons/. Stats and passives via prydwen.gg; weapon art © Kuro Games. Icons for Glint of Clouds are from the Wuthering Waves wiki — prydwen.gg ships those below 200px.",
+  "credit": "Stats and art via prydwen.gg, some icons via the Wuthering Waves wiki · weapon art © Kuro Games",
   "source": "https://www.prydwen.gg/wuthering-waves/weapons",
   "weapons": [
     {
@@ -3296,5 +3296,5 @@
       "icon": "assets/weapons/w-tyro-sword.webp"
     }
   ],
-  "updated": "2026-08-18T17:39:30.863Z"
+  "updated": "2026-08-20T18:37:55.765Z"
 }

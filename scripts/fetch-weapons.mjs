@@ -44,6 +44,16 @@
 // This script owns that directory outright — it also owns the weapon icons the
 // timeline's signature tiles use, which is why fetch-portraits.mjs no longer
 // downloads any.
+//
+// Prydwen ships these at 256×256 and the record draws one about that size, so
+// the icons are shown at roughly 1:1. Every so often one arrives at 100×100 —
+// Glint of Clouds did, and there is no larger variant behind it, so the fault
+// is upstream of their CDN rather than in the request. Enlarged to record size
+// that is a 2.3× upscale, which on a dark plate reads as a blocky halo around
+// the blade. So an icon that comes back under MIN_ICON_PX is looked up on the
+// Fandom wiki instead, which the desk already reads for items and kits, and
+// whichever copy is bigger is the one kept. General rather than a list of
+// weapon names: the next one to arrive small should fix itself.
 
 import { writeFile, readFile, mkdir, readdir, unlink } from "node:fs/promises";
 import { execFile } from "node:child_process";
@@ -57,6 +67,10 @@ const UA =
 
 const WEAPONS_URL = "https://www.prydwen.gg/wuthering-waves/weapons";
 const WEAPON_IMG = id => `https://cdn.prydwen.gg/images/wuthering-waves/weapons/${id}.webp`;
+/* Second source for an icon the first one ships too small. Same wiki
+   fetch-items.mjs and fetch-kits.mjs read. */
+const FANDOM_API = "https://wutheringwaves.fandom.com/api.php";
+const MIN_ICON_PX = 200;
 const OUT = "data/weapons.json";
 const DIR = "assets/weapons";
 const TIMEOUT_MS = 25000;
@@ -86,6 +100,43 @@ async function fetchImage(url) {
   const { stdout } = await curl(url, ["-H", "Accept: image/webp,image/*"]);
   if (!stdout.length) throw new Error("empty body");
   return stdout;
+}
+
+/* The canvas width out of a WebP container, or 0 for anything that isn't one.
+   Three chunk layouts: VP8X carries the size in its own header, VP8 is lossy
+   and VP8L is lossless, and each writes it somewhere different. Only the width
+   is wanted — these are square — and only to tell a full-size icon from a
+   thumbnail, so a shape this doesn't recognise reads as 0 and falls through to
+   the wiki rather than throwing. */
+function webpWidth(buf) {
+  if (buf.length < 32) return 0;
+  const head = buf.slice(0, 32).toString("latin1");
+  if (head.slice(0, 4) !== "RIFF" || head.slice(8, 12) !== "WEBP") return 0;
+  switch (head.slice(12, 16)) {
+    case "VP8X": return 1 + buf.readUIntLE(24, 3);
+    case "VP8 ": return buf.readUInt16LE(26) & 0x3fff;
+    case "VP8L": return (buf.readUInt32LE(21) & 0x3fff) + 1;
+    default: return 0;
+  }
+}
+
+/* The wiki's copy of a weapon icon. It files them under one predictable title,
+   so this is a prefix search rather than a guess at the exact spelling, and the
+   file it serves for a .png title is a 256px WebP with a transparent ground —
+   the same thing Prydwen's CDN returns, which is why it can be written straight
+   to disk with no conversion step. Returns null for anything it can't find:
+   a missing wiki page is a reason to keep the small icon, not to fail. */
+async function fandomIcon(name) {
+  const q = new URLSearchParams({
+    action: "query", format: "json", list: "allimages",
+    aiprefix: `Weapon ${name}`, ailimit: "5"
+  });
+  try {
+    const { stdout } = await curl(`${FANDOM_API}?${q}`, ["-H", "Accept: application/json"]);
+    const hit = (JSON.parse(stdout.toString("utf8")).query?.allimages || [])
+      .find(i => String(i.name).toLowerCase() === `weapon_${slug(name).replace(/-/g, "_")}.png`);
+    return hit ? await fetchImage(hit.url) : null;
+  } catch { return null; }
 }
 
 /* The page ships its data as a JSON string inside a script tag, so every quote
@@ -162,6 +213,10 @@ function rankTable(w) {
   const keep = new Set();
   const oddTypes = new Set();
   const holes = [];
+  /* Which icons came off the wiki rather than Prydwen. The credit line names
+     both sources when it isn't empty — the desk says where a picture came
+     from, and "art via prydwen.gg" stops being true the moment one didn't. */
+  const wiki = [];
 
   /* 5★ first, then by name — the file reads the way the view does, and a diff
      on it stays legible when Kuro adds two weapons in the middle of the list. */
@@ -175,11 +230,20 @@ function rankTable(w) {
     const file = `${DIR}/w-${slug(w.Name)}.webp`;
     let icon = "";
     try {
-      const buf = await fetchImage(WEAPON_IMG(w.ID));
+      let buf = await fetchImage(WEAPON_IMG(w.ID));
+      let from = "prydwen";
+      /* Too small to draw at record size. Ask the wiki, and keep whichever copy
+         is bigger — the fallback is only worth taking if it actually is one. */
+      if (webpWidth(buf) < MIN_ICON_PX) {
+        const alt = await fandomIcon(w.Name);
+        if (alt && webpWidth(alt) > webpWidth(buf)) { buf = alt; from = "fandom"; wiki.push(w.Name); }
+      }
       await writeFile(file, buf);
       icon = file;
       keep.add(file);
-      console.log(`${w.Rarity}★ ${String(w.Name).padEnd(26)} ${String(buf.length).padStart(7)}b`);
+      const px = webpWidth(buf);
+      console.log(`${w.Rarity}★ ${String(w.Name).padEnd(26)} ${String(buf.length).padStart(7)}b` +
+        (px ? ` ${px}px` : "") + (from === "fandom" ? "  ← wiki (prydwen's was small)" : ""));
     } catch (err) {
       /* A weapon announced ahead of its patch has no published icon yet. The
          view falls back to the generic mark for those, which is the honest
@@ -224,17 +288,27 @@ function rankTable(w) {
       "with its five ascension values. atk90 and statValue90 are max-level figures — there is no " +
       "level curve here and none is inferred. ranks[n] holds what {n} in `effect` becomes at " +
       "ascension 1 through 5. Sub-stat values are percentages. Icons are cached in assets/weapons/. " +
-      "Stats and passives via prydwen.gg; weapon art © Kuro Games.",
-    credit: "Stats and art via prydwen.gg · weapon art © Kuro Games",
+      "Stats and passives via prydwen.gg; weapon art © Kuro Games." +
+      (wiki.length
+        ? ` Icons for ${wiki.join(", ")} are from the Wuthering Waves wiki — prydwen.gg ships those below ${MIN_ICON_PX}px.`
+        : ""),
+    credit: wiki.length
+      ? "Stats and art via prydwen.gg, some icons via the Wuthering Waves wiki · weapon art © Kuro Games"
+      : "Stats and art via prydwen.gg · weapon art © Kuro Games",
     source: WEAPONS_URL,
     weapons
   };
 
-  /* Same rule as the feed: don't churn the file when nothing moved. */
+  /* Same rule as the feed: don't churn the file when nothing moved. The note
+     and the credit are compared too, not just the roster — an icon that starts
+     coming off the wiki instead changes where the file says its pictures came
+     from while every weapon in it stays byte for byte the same, and on the
+     roster alone that rewrite would never be written. */
   let unchanged = false;
   try {
     const prev = JSON.parse(await readFile(OUT, "utf8"));
-    unchanged = JSON.stringify(prev.weapons) === JSON.stringify(weapons);
+    unchanged = JSON.stringify(prev.weapons) === JSON.stringify(weapons)
+      && prev.note === payload.note && prev.credit === payload.credit;
   } catch {}
   if (!unchanged) {
     await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
