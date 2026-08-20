@@ -5,6 +5,75 @@
   "source": "https://wutheringwaves.fandom.com/wiki/Permanent_Events",
   "events": [
     {
+      "id": "perm-somnium-labyrinth",
+      "name": "Somnium Labyrinth",
+      "kind": "Event",
+      "version": "1.4",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2024-11-14T13:00:00+08:00",
+      "end": null,
+      "summary": "A train crashes from the dreamscape into reality, ripping open a gateway to the realm of illusions.",
+      "detail": "A train crashes from the dreamscape into reality, ripping open a gateway to the realm of illusions. A looming shadow greets you with a grim prophecy: the world will succumb to this nightmare, and night will reign eternal. You struggle to awaken, desperately clinging to the shreds of reality left in the shattered dreams. Thankfully, a white cat appears to guide you back on track, helping you find your lost allies. Together, you battle against the darkest terrors lurking in this chaotic labyrinth.",
+      "rewards": "Astrite x800, Somnoire Anchor x1, Projection: Somnoire Anchor x1, Hearty Supper x4",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/somnium-labyrinth.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Somnium_Labyrinth",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Somnium_Labyrinth"
+    },
+    {
+      "id": "perm-tales-of-the-isles",
+      "name": "Tales of the Isles",
+      "kind": "Event",
+      "version": "",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2025-01-02T10:00:00+08:00",
+      "end": null,
+      "summary": "After braving the perilous sea mists and tumultuous waves, you've finally arrived in Rinascita, the Land of Echoes.",
+      "detail": "After braving the perilous sea mists and tumultuous waves, you've finally arrived in Rinascita, the Land of Echoes. Radiant lights stretch across the horizon, while cheerful melodies echo through the bays and blooms. The Carnevale is around the corner. May your journey be one to remember. Complete event quests to earn rewards.",
+      "rewards": "Rinascita Commemorative Stamp x4200",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/tales-of-the-isles.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Tales_of_the_Isles",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Tales_of_the_Isles"
+    },
+    {
+      "id": "perm-old-man-and-the-whale",
+      "name": "Old Man and the Whale",
+      "kind": "Event",
+      "version": "2.1",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2025-02-13T11:00:00+08:00",
+      "end": null,
+      "summary": "To the north of Ragunna City lies Rinascita's largest fishing ground: to Riccioli inlands, an enticing destination for an intriguing adventure.",
+      "detail": "To the north of Ragunna City lies Rinascita's largest fishing ground: to Riccioli inlands, an enticing destination for an intriguing adventure. an enticing destination for an intriguing adventure. Ready your sails and prepare for the vast blue waters, Captin!",
+      "rewards": "Astrite x900, Ocean's Gift x1, Projection: Ocean's Gift x1, Blue-Spotted Giant Fish x4, Phantom: Lorelei x1",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/old-man-and-the-whale.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Old_Man_and_the_Whale",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Old_Man_and_the_Whale"
+    },
+    {
       "id": "perm-cube-cubic-n-cubie",
       "name": "Cube, Cubic n Cubie",
       "kind": "Event",
@@ -49,6 +118,98 @@
       "confidence": "official",
       "origin": "wiki",
       "source": "https://wutheringwaves.fandom.com/wiki/Dreaming_Deep"
+    },
+    {
+      "id": "perm-your-summer-will-never-wither",
+      "name": "Your Summer Will Never Wither",
+      "kind": "Event",
+      "version": "2.3",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2025-05-22T04:00:00+08:00",
+      "end": null,
+      "summary": "A rumor about Daemons is spreading through the streets of Ragunna, with an article pointing to the former Poets Society—The Golden Anthem.",
+      "detail": "A rumor about Daemons is spreading through the streets of Ragunna, with an article pointing to the former Poets Society—The Golden Anthem. As you dig deeper, you uncover a tragic story deliberately concealed by The Order.)",
+      "rewards": "Astrite x100, Forgery Premium Supply x12, Premium Enclosure Tank x8, Premium Resonance Potion x3, Premium Energy Core x3, Premium Sealed Tube x6",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/your-summer-will-never-wither.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Your_Summer_Will_Never_Wither",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Your_Summer_Will_Never_Wither"
+    },
+    {
+      "id": "perm-all-out-towards-the-peaks-of-prestige",
+      "name": "All Out! Towards the Peaks of Prestige",
+      "kind": "Echo Combat",
+      "version": "2.4",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2025-06-14T04:00:00+08:00",
+      "end": null,
+      "summary": "A strange message draws your attention to a mysterious Echo dueling game called \"Peaks of Prestige.\" It's said that countless challengers have set out on a…",
+      "detail": "A strange message draws your attention to a mysterious Echo dueling game called \"Peaks of Prestige.\" It's said that countless challengers have set out on a journey to claim the legendary title of \"Apex Duelist.\" \"Countless Echoes. Limitless tactics. You could be the next Apex Duelist!\")",
+      "rewards": "Astrite x1200, Card Duelist x1, Moment of Triumph x1, Phantom: Cuddle Wuddle x1, Modifier x10, Premium Tuner x100, Shell Credit x940000",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/all-out-towards-the-peaks-of-prestige.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/All_Out!_Towards_the_Peaks_of_Prestige",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/All_Out!_Towards_the_Peaks_of_Prestige"
+    },
+    {
+      "id": "perm-banners-never-fall",
+      "name": "Banners Never Fall",
+      "kind": "Event",
+      "version": "",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2025-07-03T04:00:00+08:00",
+      "end": null,
+      "summary": "With the intricate terrain of Septimont's Old District revealed after recent drainage efforts, the city has announced a thrilling new event—a simulated Tacet…",
+      "detail": "With the intricate terrain of Septimont's Old District revealed after recent drainage efforts, the city has announced a thrilling new event—a simulated Tacet Discord Hunt. Brave Gladiators, step forward! Join the hunt and carve out your own path to glory and victory!)",
+      "rewards": "Astrite x800, Phantom: Fae Ignis x1, Outstanding Commander x1, Lustrous Tide x4, Modifier x5",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/banners-never-fall.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Banners_Never_Fall",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Banners_Never_Fall"
+    },
+    {
+      "id": "perm-phantasma-dreamland",
+      "name": "Phantasma Dreamland",
+      "kind": "Event",
+      "version": "2.5",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2025-07-26T10:00:00+08:00",
+      "end": null,
+      "summary": "A strange gate to the Somnoire appears.",
+      "detail": "A strange gate to the Somnoire appears. Through it, a curious Conductor glimpses a forsaken Dreamland. There, a host of peculiar Echoes have gathered, striving to restore its former glory. The Conductor chooses to linger, silently awaiting the unfolding of this dream...)",
+      "rewards": "Astrite x1200, Dreamland Reverie x1, Phantom: Nightmare Inferno Rider x1, Modifier x10, Premium Tuner x150, Forgery Premium Supply x10, Shell Credit x870000",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/phantasma-dreamland.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Phantasma_Dreamland",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Phantasma_Dreamland"
     },
     {
       "id": "perm-tidal-defense-simulator",
@@ -97,6 +258,52 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Stranger_Things_in_Honami"
     },
     {
+      "id": "perm-operation-frontier-renewal",
+      "name": "Operation: Frontier Renewal",
+      "kind": "Event",
+      "version": "",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2025-12-25T10:45:00+08:00",
+      "end": null,
+      "summary": "Lahai-Roi's route network, along with the Spacetrek Observatory that used to monitor its terrain, ecosystem, and climate, has been devastated by a Void Storm.",
+      "detail": "Lahai-Roi's route network, along with the Spacetrek Observatory that used to monitor its terrain, ecosystem, and climate, has been devastated by a Void Storm. It's time to rebuild them all! Use rebuild materials gathered in Lahai-Roi to assist Dhalifa in restoring the Route Network and the Spacetrek Observatory.",
+      "rewards": "Astrite x400, Lustrous Tide x10, Phantom: Twin Nova - Nebulous Cannon x1, Phantom: Twin Nova - Collapsar Blade x1, Modifier x2, Premium Tuner x50",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/operation-frontier-renewal.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Operation%3A_Frontier_Renewal",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Operation%3A_Frontier_Renewal"
+    },
+    {
+      "id": "perm-lahai-roi-pioneers",
+      "name": "Lahai-Roi Pioneers",
+      "kind": "Event",
+      "version": "",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2025-12-25T10:45:00+08:00",
+      "end": null,
+      "summary": "Join the Lahai-Roi Pioneer Project launched by the Spacetrek Collective!",
+      "detail": "Join the Lahai-Roi Pioneer Project launched by the Spacetrek Collective! Explore every corner of Lahai-Roi, uncover its wonders, and earn rewards along the way.",
+      "rewards": "Astrite x500, Voyager of the World x1, Forgery Premium Supply - Lahai-Roi x3, Premium Enclosure Tank - Lahai-Roi x6, Premium Tuner x100, Premium Sealed Tube x11, Crystal Solvent x3, Shell Credit x550000",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/lahai-roi-pioneers.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Lahai-Roi_Pioneers",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Lahai-Roi_Pioneers"
+    },
+    {
       "id": "perm-peaks-of-prestige-rekindled-duel",
       "name": "Peaks of Prestige: Rekindled Duel",
       "kind": "Echo Combat",
@@ -138,6 +345,29 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Soar_to_the_Beat"
     },
     {
+      "id": "perm-whispers-between-stars",
+      "name": "Whispers Between Stars",
+      "kind": "Event",
+      "version": "3.2",
+      "section": "Permanent",
+      "permanent": true,
+      "start": "2026-03-19T11:00:00+08:00",
+      "end": null,
+      "summary": "Progress the Main Quest to unlock the events of the corresponding Resonators.",
+      "detail": "Progress the Main Quest to unlock the events of the corresponding Resonators. Certain conditions are required to unlock some of the events.",
+      "rewards": "Astrite x300, Advanced Resonance Potion x18, Advanced Energy Core x10, Advanced Sealed Tube x14, Forgery Advanced Supply - Lahai-Roi x15, Advanced Enclosure Tank - Lahai-Roi x16, Memories of the Stars x1, Shell Credit x550000",
+      "eligibility": "",
+      "art": {
+        "url": "assets/events/whispers-between-stars.jpg",
+        "nameplate": true,
+        "source": "https://wutheringwaves.fandom.com/wiki/Whispers_Between_Stars",
+        "credit": "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
+      },
+      "confidence": "official",
+      "origin": "wiki",
+      "source": "https://wutheringwaves.fandom.com/wiki/Whispers_Between_Stars"
+    },
+    {
       "id": "perm-into-the-land-of-paradox",
       "name": "Into the Land of Paradox",
       "kind": "Event",
@@ -146,7 +376,7 @@
       "permanent": true,
       "start": "2026-04-30T10:00:00+08:00",
       "end": null,
-      "summary": "Startorch Academy and the Roya Tribe have joined forces to establish a foothold on the Dimmr Plains, launching a joint scientific expedition into this long-isol",
+      "summary": "Startorch Academy and the Roya Tribe have joined forces to establish a foothold on the Dimmr Plains, launching a joint scientific expedition into this…",
       "detail": "Startorch Academy and the Roya Tribe have joined forces to establish a foothold on the Dimmr Plains, launching a joint scientific expedition into this long-isolated realm. Objectives include collecting environmental data, recovering ancient plant samples and Exostrider components, and remediating environmental damage caused by Void Storms. The fruits of this operation will effectively advance ecological research and habitat restoration in Lahai-Roi. You recieve a message from I.R.I.S., inviting you to join the inaugural expedition...",
       "rewards": "Astrite x400, Lustrous Tide x10, Premium Resonance Potion x4, Premium Energy Core x4, Premium Sealed Tube x4, Forgery Premium Supply - Lahai-Roi x4, Lumen Coin x400, Chuluu! x1, Radiate into the Depths x1",
       "eligibility": "",
@@ -276,5 +506,5 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Lament_Recon%3A_Tacet_Crisis"
     }
   ],
-  "updated": "2026-08-20T22:47:29.722Z"
+  "updated": "2026-08-20T23:03:10.102Z"
 }

@@ -238,6 +238,16 @@ async function parseNotice(article, name) {
    smart quotes and the odd trailing exclamation mark all move. */
 const key = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
 
+/* One sentence, and where that sentence is long, as much of it as fits — cut
+   at a space rather than through a word. Same clip fetch-permanents.mjs uses:
+   a bare slice(0, 160) stops mid-word, which reads as damaged data. */
+function clip(text, max) {
+  const t = String(text || "").trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\u2014-]+$/, "") + "…";
+}
+
 const slug = s =>
   String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48);
 
@@ -364,7 +374,7 @@ function versionFor(versions, when, fallback) {
       permanent: !!when.permanent,
       start,
       end: when.end || null,
-      summary: desc.split(/(?<=[.!?])\s/)[0]?.slice(0, 160) || "",
+      summary: clip(desc.split(/(?<=[.!?])\s/)[0], 160),
       detail: desc,
       rewards: notice?.rewards || hand?.rewards || "",
       eligibility: notice?.eligibility || hand?.eligibility || "",

@@ -22,9 +22,9 @@
 // 19, and it is wrong in both directions at once: it lets in the game's
 // onboarding ramp, three Login tracks and three Next Stop: <region> passes
 // that are open forever because they are there for whoever installs the game
-// next year, and it keeps out ten of the twelve events actually on the tab,
-// every one of which has a real closing date on the wiki. Dreaming Deep closed
-// on 2025-08-27 and is on the tab today.
+// next year, and it keeps out sixteen of the twenty-two events actually on the
+// tab, every one of which has a real closing date on the wiki. Dreaming Deep
+// closed on 2025-08-27 and is on the tab today.
 //
 // That is not the wiki being wrong. The two lists are answers to different
 // questions. The wiki's date is the event's — the fortnight its rewards were
@@ -57,7 +57,7 @@ const API = "https://wutheringwaves.fandom.com/api.php";
 const WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(String(t).replace(/ /g, "_"))}`;
 const CATEGORY = "Permanent Events";
 /* The Permanent tab, in the order the game lists it — newest run at the top.
-   Read off the client on 2026-08-20. Wiki page titles, which are the event's
+   Read off the client on 2026-08-21. Wiki page titles, which are the event's
    full name; the tab truncates most of them to fit its own rail. */
 const TAB = [
   "Lament Recon: Tacet Crisis",
@@ -71,7 +71,17 @@ const TAB = [
   "Cube, Cubic n Cubie",
   "Shape of Yesterday",
   "A Glimpse of Xuanfang",
-  "Into the Land of Paradox"
+  "Into the Land of Paradox",
+  "Whispers Between Stars",
+  "Lahai-Roi Pioneers",
+  "Operation: Frontier Renewal",
+  "Phantasma Dreamland",
+  "All Out! Towards the Peaks of Prestige",
+  "Banners Never Fall",
+  "Your Summer Will Never Wither",
+  "Old Man and the Whale",
+  "Tales of the Isles",
+  "Somnium Labyrinth"
 ];
 const OUT = "data/permanents.json";
 const DIR = "assets/events";
@@ -81,6 +91,16 @@ const BATCH = 50;
 /* What the widest tile asks for. The originals run to 1920 and 330KB, which is
    a megabyte and a half of banner nobody displays at that size. */
 const IMG_WIDTH = 720;
+
+/* One sentence, and where that sentence is long, as much of it as fits — cut
+   at a space rather than through a word. A bare slice(0, 160) gave "expedition
+   into this long-isol", which looks like the data is damaged. */
+function clip(text, max) {
+  const t = String(text || "").trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\u2014-]+$/, "") + "…";
+}
 
 const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
@@ -276,7 +296,7 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
          there when you log in tonight. Carrying the wiki's date would have the
          record say a permanent event ended eleven months ago. */
       end: null,
-      summary: detail.split(/(?<=[.!?])\s/)[0]?.slice(0, 160) || "",
+      summary: clip(detail.split(/(?<=[.!?])\s/)[0], 160),
       detail,
       rewards: rewards(p.text),
       eligibility: plain(field(p.text, "requirements")),
@@ -335,7 +355,11 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
   for (const t of missing) console.log(`  ! on the list, no page on the wiki: ${t}`);
   for (const t of TAB.filter(t => !category.has(t) && !missing.includes(t)))
     console.log(`  ! on the list, no longer in Category:${CATEGORY}: ${t}`);
-  const unlisted = [...category].filter(t => !TAB.includes(t));
-  if (unlisted.length)
-    console.log(`  ${unlisted.length} category pages not on the tab — check the game if a patch just shipped`);
+  const unlisted = [...category].filter(t => !TAB.includes(t)).sort();
+  if (unlisted.length) {
+    console.log(`\n${unlisted.length} category pages not on the tab. The six-strong onboarding ramp is` +
+      ` here on purpose; the rest are modes Kuro retired, or pages the wiki keeps and the game does` +
+      ` not. Worth reading when a patch has just shipped:`);
+    for (const t of unlisted) console.log(`  - ${t}`);
+  }
 })();
