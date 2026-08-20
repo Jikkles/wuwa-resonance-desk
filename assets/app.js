@@ -999,27 +999,63 @@ function patchCard(v, role){
      a click target of its own rather than being a footnote under the portrait —
      but it is that character's weapon, and on a card carrying five banners two
      free-floating tiles each cost a stacked pair of rows to say so. */
+  /* One banner, read left to right: the character, who they are, what runs
+     beside them, and the weapon itself. The two halves used to be stacked —
+     portrait row over weapon row, split by a rule — which spent the card's
+     whole width on a 44px face and then spent another row saying the weapon
+     was that character's. Side by side, the same facts fit one row, and both
+     pictures get to be three times the size they were.
+
+     Four cells on a two-row grid: the art down the left spanning both, the
+     name and its chips top-middle, the weapon name under them, and the weapon
+     icon down the right spanning both. Both pictures run flush to the tile's
+     edges — a portrait inset by nine pixels of padding is a portrait wasting
+     the only space it has. */
   const pair = b => {
     const sig = signatureFor(b);
     const r = resonatorFor(b.name);
     const cls = b.weapon || r.weapon;
-    /* The element rides the tile itself, not just its two halves — the tile is
-       lit in it at rest, so a column of banners reads as a row of elements
-       before you read a single name. */
-    return `<div class="bpair"${attrStyle(b.attribute || r.attribute)}>${thumb(b, {showWeapon:false, showPhase:false, showNew:true})}${sig
-      ? `<button class="wtile" data-act="weapon" data-id="${esc(sig)}"${attrStyle(b.attribute || resonatorFor(b.name).attribute)}
-                title="Signature weapon — runs alongside ${esc(b.name)}">
-           ${weaponIcon(sig)}
-           <span class="wtext"><b>${esc(sig)}</b></span>
-           <!-- The class, not the word "Signature". A signature weapon is by
-                definition the resonator's own class, so one label carries both
-                facts — and it is the fact you sort a roster by. -->
-           ${cls ? `<span class="wsub">${esc(cls)}</span>` : ""}
-         </button>`
-      : `<div class="wtile empty">
-           <span class="wsub">No weapon listed</span>
-           ${cls ? `<span class="wsub" style="margin-left:auto">${esc(cls)}</span>` : ""}
-         </div>`}</div>`;
+    const f = figure(b);
+    const unknown = !b.name || b.name === "???";
+    /* The waist-up card first, the 54px bust second — the opposite of the
+       thumbnail's order, and for the reason bannerCard gives: the bust is cut
+       for a small square and this box is now tall enough to want the picture
+       that was drawn standing. */
+    const art = f.image
+      ? `<img class="${f.cutout ? "cut" : f.poster ? "poster" : ""}" src="${esc(f.image)}" alt="" loading="lazy" decoding="async"${f.style}>`
+      : f.icon
+      ? `<img class="bust" src="${esc(f.icon)}" alt="" loading="lazy" decoding="async">`
+      : `<span class="g">${esc(unknown ? "?" : f.glyph)}</span>`;
+    const attr = b.attribute || r.attribute;
+    /* Same rule the rest of the desk works to: the picture is a click target
+       for the mouse, the text beside it is the one that takes focus. Two tab
+       stops on a tile carrying two records, not four on a tile carrying two. */
+    const who = unknown ? "" : ` data-act="resonator" data-id="${esc(b.name)}"`;
+    const wep = sig ? ` data-act="weapon" data-id="${esc(sig)}"` : "";
+    /* The element rides the tile itself, not just its halves — the tile is lit
+       in it at rest, so a column of banners reads as a row of elements before
+       you read a single name. */
+    return `<div class="bpair${unknown ? " unknown" : ""}"${attrStyle(attr)}>
+      <div class="bp-art${f.cutout ? " cut" : ""}${f.icon && !f.image ? " bust" : ""}"${who}>${art}</div>
+      <div class="bp-who"${who}${unknown ? "" : ` role="button" tabindex="0" aria-label="${esc(b.name)} — Resonator record"`}>
+        <b>${esc(b.name || "???")}</b>
+        <span class="bmeta">${b.new ? `<i class="new">New</i>` : ""}${
+          b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${
+          attr ? `<i class="attr">${esc(attr)}</i>` : ""}</span>
+      </div>
+      ${sig
+        ? `<button class="bp-wep"${wep} title="Signature weapon — runs alongside ${esc(b.name)}">
+             <b>${esc(sig)}</b>
+             <!-- The class, not the word "Signature". A signature weapon is by
+                  definition the resonator's own class, so one label carries
+                  both facts — and it is the fact you sort a roster by. -->
+             ${cls ? `<span class="wsub">${esc(cls)}</span>` : ""}
+           </button>`
+        : `<div class="bp-wep empty">
+             <span class="wsub">No weapon listed${cls ? ` · ${esc(cls)}` : ""}</span>
+           </div>`}
+      <div class="bp-wic${sig ? "" : " empty"}"${wep}>${weaponIcon(sig, 26)}</div>
+    </div>`;
   };
   const strip = list => list.length
     ? `<div class="bstrip rows">${list.slice(0, 4).map(pair).join("")}${
@@ -1418,8 +1454,13 @@ function eventCard(ev){
               record of — an empty pill is worse than no pill. */
           ev.version ? `<span class="pill ver">${esc(ev.version)}</span>` : ""}
       </div>
-      ${astrite ? `<span class="ev-astrite" title="Astrite from this event">
-        ${icon("i-astrite", 12)}<b>${astrite.toLocaleString("en-GB")}</b></span>` : ""}
+      ${/* Big. This is the number the page is scanned for — "what is this
+            fortnight worth" is answered by adding up eight of these — and at
+            12px it was a footnote in the corner of a picture, legible only if
+            you had already decided to read it. The glyph does the work: a
+            stone you can pick out across the grid without reading a digit. */
+        astrite ? `<span class="ev-astrite" title="Astrite from this event">
+        ${icon("i-astrite", 38)}<b>${astrite.toLocaleString("en-GB")}</b></span>` : ""}
     </div>
     <div class="ev-cap">
       <span class="ev-kind">${esc(ev.kind || "Event")}</span>

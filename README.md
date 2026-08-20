@@ -357,13 +357,30 @@ the point of putting art there. Below the band nothing needs rescuing at all, wh
 why `.pcard-art::after` is now a hairline of shade at the very bottom: it only has to
 land the crop on the body rather than stop dead against it.
 
-**Each banner is one tile, not two.** Character over weapon, split by a rule inside a
-shared border. The weapon convene is a separate pull and keeps its own click target, but
-it is *that character's* weapon — and two free-floating tiles cost a stacked pair of
-rows each, which across five banners is half a screen of card for a distinction the rule
-makes just as well. The class label (`RECTIFIER`, `SWORD`) lives on the weapon row, not
-in the character's meta: a signature weapon is by definition its holder's class, so one
-label carries both facts and the meta line stops wrapping.
+**Each banner is one tile, not two, and it reads across rather than down.** The
+character down the left, the weapon down the right, and the words between them: name and
+chips on the top line, the weapon it runs beside on the second. The weapon convene is a
+separate pull and keeps its own click target, but it is *that character's* weapon — and
+two free-floating tiles cost a stacked pair of rows each, which across five banners is
+half a screen of card for a distinction the tile makes on its own.
+
+It was a stack — portrait row over weapon row, split by a rule — and the stack was the
+thing wasting the tile. A row 300px wide spent all of it on a 44px face and then spent
+a second row underneath saying whose weapon it was. Side by side, the same facts fit one
+row and **both pictures are three times the size**: two 62px squares, flush to the
+tile's edges on three sides, because a portrait inset by the tile's padding is a
+portrait giving a third of itself back.
+
+Four cells on a two-row grid — `"art name wic" / "art wep wic"` — with the two pictures
+spanning both rows. The class label (`RECTIFIER`, `SWORD`) lives on the weapon line, not
+in the character's chips: a signature weapon is by definition its holder's class, so one
+label carries both facts. That line wraps rather than squeezes, because two phase columns
+on an 1100px screen leave it about 110px, and the failure mode of not wrapping is
+"Thousandfold Deliverance" clipped to `Tho…Deli` with a BROADBLADE chip pressed against
+it. Below a `6em` basis the chip drops to its own line and the name gets the width back.
+
+The pictures are click targets for the mouse; the text beside each one is what takes
+focus. Two tab stops on a tile carrying two records, not four.
 
 **The tile is lit in its element at rest, not on hover.** Ten tiles are most of what you
 look at on this page, and putting the one piece of colour they carry behind a mouse
@@ -666,10 +683,19 @@ is the item's name, and `data/items.json` maps that name to an icon:
 node scripts/fetch-items.mjs
 ```
 
-It reads every reward line in `events.json`, resolves each name against the Wuthering Waves
-Wiki on Fandom — the same source the resonator database reads — and caches the icon under
-`assets/items/`. Cached rather than hotlinked, unlike everything from Kuro's own CDN,
-because Fandom rewrites its revision URLs.
+It reads every reward line in `events.json` and `permanents.json`, resolves each name
+against the Wuthering Waves Wiki on Fandom — the same source the resonator database reads
+— and caches the icon under `assets/items/`. Cached rather than hotlinked, unlike
+everything from Kuro's own CDN, because Fandom rewrites its revision URLs.
+
+The Astrite total gets its own mark on the tile, and it is deliberately large: a 38px
+crystal in the corner of the picture, with the figure beside it. This is the one number
+the page is scanned for — what a fortnight is worth is eight of these added up — and at
+the 12px it started as, it was a footnote legible only once you had already decided to
+read it. The glyph carries across the grid; the figure is set smaller than the stone so
+the badge doesn't read as a price tag. Only shown where Kuro published a reward line —
+see `astriteFrom()`, which returns null rather than zero, because a tile reading
+`0 Astrite` states something nobody said.
 
 Two details worth knowing:
 

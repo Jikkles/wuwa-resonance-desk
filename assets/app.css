@@ -903,25 +903,35 @@ button{font:inherit;color:inherit}
 /* Square, to sit level with the weapon icon under it. */
 .bstrip.rows .thumb{flex:none;aspect-ratio:1;border-radius:9px}
 
-/* Character and weapon in one tile, split by a rule. The weapon convene is its
-   own pull and keeps its own click target, but it is *this character's* weapon
-   and a card carrying five banners cannot afford to say so twice. Two separate
-   floating tiles cost a stacked pair each — half a screen of card across the
-   row — for a distinction the rule inside makes just as well. */
+/* Character and weapon in one tile, side by side. The weapon convene is its own
+   pull and keeps its own click target, but it is *this character's* weapon and
+   a card carrying five banners cannot afford to say so twice.
+
+   This was two stacked rows — portrait over weapon, split by a rule — and the
+   stack was the thing wasting the tile. A row 300px wide spent all of it on a
+   44px face, then spent a second row underneath saying whose weapon it was. Put
+   the two pictures at the two ends and the words between them, and the same
+   facts fit one row with both pictures three times the size. */
 .bpair{
   /* Fallback for a banner whose element nobody has announced yet — Suoming,
      an unnamed slot. Inline styles win over this, so a known element still
      paints its own colour. Without it every color-mix below computes against
      an undefined var and the whole tile loses its border and background. */
   --attr:var(--fg-3);
-  display:flex;flex-direction:column;min-width:0;
+  /* Character down the left, weapon down the right, the words between them.
+     Both pictures are square and the same size, which is the point: they are
+     the two things this tile is about, and the old stacked layout gave the
+     face 44px and the weapon 26px in a tile 300px wide. */
+  --face:62px;
+  display:grid;min-width:0;
+  grid-template-columns:var(--face) minmax(0,1fr) var(--face);
+  grid-template-areas:"art name wic" "art wep wic";
+  align-items:center;
   border:1px solid color-mix(in srgb,var(--attr) 30%,transparent);
   border-radius:10px;overflow:hidden;
   /* Lit at rest, not on hover. Five grey tiles to a card is most of what you
      look at on this page, and hiding the one piece of colour they carry behind
-     a mouse means the page is grey every time you aren't touching it. Warmest
-     at the top where the portrait is, dipping through the middle, up again
-     under the weapon row so the tile reads as one lamp rather than two. */
+     a mouse means the page is grey every time you aren't touching it. */
   /* The base under the element wash is dark and largely opaque, and it has to
      be: this tile carries the smallest type on the desk — a rarity, an element,
      a weapon class at 8.5px — and behind the card is now a picture rather than
@@ -940,16 +950,85 @@ button{font:inherit;color:inherit}
   border-color:color-mix(in srgb,var(--attr) 60%,transparent);
   box-shadow:0 6px 22px -10px color-mix(in srgb,var(--attr) 60%,transparent);
 }
-.wtile{
-  display:flex;align-items:center;gap:9px;text-align:left;width:100%;
-  background:none;border:0;
-  border-top:1px solid color-mix(in srgb,var(--attr) 22%,transparent);
-  padding:5px 9px;cursor:pointer;color:inherit;font:inherit;
-  transition:background .16s;
+/* The two pictures. Flush to the tile's edges on three sides — the whole point
+   of the side-by-side layout is that these get the room, and a portrait inset
+   by the tile's padding is a portrait giving a third of itself back. */
+.bp-art,.bp-wic{
+  position:relative;overflow:hidden;align-self:stretch;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
 }
-.wtile:hover{background:color-mix(in srgb,var(--attr) 14%,transparent)}
-.wtile.empty{cursor:default}
-.wtile.empty:hover{background:none}
+.bp-art{
+  grid-area:art;
+  background:linear-gradient(155deg,color-mix(in srgb,var(--attr) 22%,var(--bg-3)),var(--bg));
+  border-right:1px solid color-mix(in srgb,var(--attr) 22%,transparent);
+}
+.bp-art img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 12%;
+  transition:transform .25s ease;
+}
+/* A cut-out stands on the floor of its box rather than being cropped to fill
+   it — there is no background in the file to crop into. */
+.bp-art img.cut{object-fit:contain;object-position:center bottom;transform:scale(1.06)}
+.bp-art.bust img{object-fit:contain;object-position:center;transform:scale(1.05)}
+.bp-art img.poster{object-position:center top;transform:scale(1.55);transform-origin:50% 22%}
+.bpair:hover .bp-art img{transform:scale(1.06)}
+.bpair:hover .bp-art img.cut{transform:scale(1.12)}
+.bp-art .g{
+  font-size:20px;font-weight:600;color:color-mix(in srgb,var(--attr) 70%,var(--fg-3));
+}
+.bp-wic{
+  grid-area:wic;
+  border-left:1px solid color-mix(in srgb,var(--attr) 22%,transparent);
+  background:linear-gradient(205deg,color-mix(in srgb,var(--attr) 18%,var(--bg-3)),var(--bg));
+}
+.bp-wic.empty{cursor:default}
+/* The icon inside loses the chrome it wore at 26px — at this size the cell is
+   the frame, and a second rounded box inside it is a box in a box. */
+.bp-wic .wicon{
+  width:100%;height:100%;border:0;border-radius:0;background:none;
+}
+.bp-wic .wicon.has-art{background:none}
+.bp-wic .wicon img{transform:scale(1.02);padding:6px}
+.bpair:hover .bp-wic .wicon img{transform:scale(1.09)}
+
+/* The words. Name and chips on the top line, the weapon it runs beside on the
+   second — the reading order of the sketch this was drawn from. */
+.bp-who{
+  grid-area:name;min-width:0;padding:7px 10px 2px;cursor:pointer;
+  transition:color .16s;
+}
+.bp-who b{
+  display:block;font-size:13px;font-weight:600;line-height:1.25;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.bp-who:hover b{color:var(--attr)}
+/* The chips themselves are the tile's, shared with .bmini further down this
+   file — which is also why the sizing tweaks for this narrower slot live down
+   there beside them rather than here, where source order would lose. */
+/* Wraps rather than squeezes. Two phase columns on a 1100px screen leave this
+   slot about 110px, which is not enough for "Thousandfold Deliverance" and a
+   BROADBLADE chip on one line — and the failure mode of not wrapping is the
+   name clipped to "Tho…Deli" with the chip pressed against it. The `6em` basis
+   is the point at which the name stops being readable: below that the chip
+   drops to its own line and the name gets the width back. */
+.bp-wep{
+  grid-area:wep;display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 7px;min-width:0;
+  text-align:left;width:100%;background:none;border:0;color:inherit;font:inherit;
+  padding:2px 10px 7px;cursor:pointer;transition:color .16s;
+}
+/* Two lines rather than an ellipsis, for the same reason the character names
+   get two: "Thousandfold …" names nothing, and this column is 165px wide. The
+   row only grows when a name actually needs the second line. */
+.bp-wep b{
+  flex:1 1 6em;min-width:0;font-size:11px;font-weight:500;color:var(--fg-2);letter-spacing:-.01em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  line-height:1.3;
+}
+.bp-wep:hover b{color:var(--attr)}
+.bp-wep.empty{cursor:default}
+.bp-wep .wsub{margin-left:auto}
 .wicon{
   position:relative;overflow:hidden;
   flex:none;display:flex;align-items:center;justify-content:center;width:26px;height:26px;
@@ -1098,11 +1177,14 @@ button{font:inherit;color:inherit}
 }
 /* Rarity and element as separate marks rather than one grey string — the
    element is the thing people scan a banner row for. */
-.bmini .bmeta{
+.bmini .bmeta,.bp-who .bmeta{
   display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px;
   font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
 }
-.bmini .bmeta i{font-style:normal}
+.bmini .bmeta i,.bp-who .bmeta i{font-style:normal}
+/* Tighter in the banner row, where the chips share a 165px column with the
+   name above them and the weapon below. */
+.bp-who .bmeta{gap:5px;margin-top:4px;font-size:9px}
 
 /* ── banner cards ───────────────────────────────────────────────────
    The phase strip on a version record: one card per banner, the character
@@ -1213,20 +1295,21 @@ button{font:inherit;color:inherit}
   .bcard-art img{object-position:center 8%}
   .bcard-art.cut img{object-position:center 12%;object-fit:cover}
 }
-.bmini .rar{color:var(--amber);font-weight:500}
+.bmini .rar,.bp-who .rar{color:var(--amber);font-weight:500}
 .bmini .wep{color:var(--fg-3)}
 /* A debut, inside a phase column where grouping no longer says so. Solid, in
    the card's own accent rather than the character's element — it is a fact
    about the banner, not about the kit, and the element chip is right beside it
    doing the other job. */
-.bmini .new{
+.bmini .new,.bp-who .new{
   color:var(--bg);background:var(--accent);font-weight:600;
   border-radius:5px;padding:2px 6px;letter-spacing:.1em;
 }
-.bmini .attr{
+.bmini .attr,.bp-who .attr{
   color:var(--attr);border-radius:5px;padding:2px 7px;font-weight:500;
   background:color-mix(in srgb,var(--attr) 16%,transparent);
 }
+.bp-who .attr,.bp-who .new{padding:1px 5px}
 .bmini-more{
   flex:none;align-self:center;padding:0 2px;
   font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--fg-3);
@@ -1568,6 +1651,13 @@ button{font:inherit;color:inherit}
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);
   font-family:var(--mono);font-size:10.5px;color:var(--fg);
+}
+/* On a tile the stone is the size of a stone. The number grew with it, but not
+   as much — the glyph is what carries across a grid at a glance, and a mono
+   figure set as large as the crystal turns the badge into a price tag. */
+.ev-astrite:not(.inline){
+  gap:7px;padding:5px 12px 5px 7px;border-radius:10px;
+  font-size:14.5px;letter-spacing:.01em;
 }
 /* Astrite is a pale blue-white crystal in game, and the desk's cyan is the
    nearest thing it owns — lifted towards white so the glyph reads as a stone
