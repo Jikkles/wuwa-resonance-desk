@@ -1070,17 +1070,9 @@ button{font:inherit;color:inherit}
    as a small grey smudge at this size. */
 .wicon.has-art{background:linear-gradient(150deg,color-mix(in srgb,var(--attr) 18%,var(--bg-3)),var(--bg))}
 .wicon img{width:100%;height:100%;object-fit:contain;transform:scale(1.2)}
-/* The same render at the size it was drawn for, heading the weapon drawer.
-   There is no weapon database behind that panel — the picture is most of what
-   the desk can actually show you about one. */
-.wbig{
-  display:flex;align-items:center;justify-content:center;height:168px;margin:4px 0 2px;
-  border-radius:var(--r);border:1px solid var(--line);
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 50%,color-mix(in srgb,var(--attr) 22%,transparent),transparent 72%),
-    linear-gradient(155deg,var(--bg-3),var(--bg));
-}
-.wbig img{max-width:88%;max-height:88%;object-fit:contain}
+/* The render that headed the weapon drawer was .wbig here — a 168px band
+   across the panel. The record is two columns now and the picture holds one of
+   them, as .wr-art, down with the rest of that layout. */
 /* The name gets the whole row. Two lines rather than an ellipsis, for the same
    reason the character names get two: "Thousandfold …" names nothing. The row
    only grows when a name actually needs the second line. */
@@ -2406,22 +2398,30 @@ img.astrite-pic{
    record it followed them, which is also where Prydwen puts it. S.rank is
    global and paintRank queries the document, so the rank you set on one weapon
    is the rank the next one opens at. */
+/* Stacked, because it stands in a 300px rail now rather than across a heading.
+   Three rows: what it is and where it is set, the track, and the scale. The
+   label used to sit beside the track and eat a third of it — five stops inside
+   what was left is a control you nudge and hope. */
 .ascend{
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-  padding:10px 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+  display:grid;gap:7px;cursor:pointer;
+  padding:11px 13px 10px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
 }
-/* Given room to be a slider. Five stops inside 120px is a control you nudge
-   and hope; at 340 the steps are far enough apart to aim at. */
-.ascend-c{display:flex;align-items:center;gap:12px;flex:1 1 340px;max-width:540px}
-.ascend-c .label{flex:none}
-/* On the stats heading it shares a line with that heading, so it gives up the
-   340px floor and takes the half of the row the summary was leaving empty. */
-.dsec-h .ascend{flex:1 1 280px;max-width:440px;padding:7px 13px}
-.dsec-h .ascend-c{flex:1 1 auto;max-width:none}
+.ascend-h{display:flex;align-items:baseline;gap:12px}
+.ascend-h .label{flex:1;min-width:0}
 .ascend-v{
-  flex:none;min-width:30px;font-family:var(--mono);font-size:12px;font-weight:500;
+  flex:none;min-width:30px;text-align:right;
+  font-family:var(--mono);font-size:12px;font-weight:500;
   color:var(--rar,var(--attr));font-variant-numeric:tabular-nums;
 }
+/* The scale. Inset by half a thumb either side so S1 and S5 stand under the
+   positions the thumb actually reaches rather than under the ends of the box —
+   the track is drawn between thumb centres, not edge to edge. */
+.ascend-ticks{
+  display:flex;justify-content:space-between;padding:0 6px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--fg-3);
+}
+.ascend-ticks i{font-style:normal;transition:color .15s}
+.ascend-ticks i.on{color:var(--rar,var(--attr))}
 
 /* Five stops, so the track is drawn as five stops. Nothing here is the browser
    default: the native control is a light-mode widget and lands on this page as
@@ -2460,6 +2460,184 @@ img.astrite-pic{
 }
 .wstats .k{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
 .wstats b{font-family:var(--mono);font-size:19px;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
+
+/* ══ the weapon record ══════════════════════════════════════════════
+   Two columns and a rule: the weapon on the left, what the desk measured about
+   it on the right. Same bones as the resonator record — the reasoning is in
+   drawerWeapon — and the same failure mode it was built to avoid, which is a
+   1620px panel spending every one of those pixels on a single column of things
+   that are each 400px wide.
+
+   All 121 records fill this, because weapons.json has no partial rows: an
+   icon, a passive, an ATK and a sub-stat for every one. --attr is set on the
+   root from the holder's element, or from the rarity where there is no holder,
+   so the whole record is coloured by the fact it is filed under. */
+.wrec-r{
+  --wr-rail:min(324px,31%);
+  --wr-gap:clamp(20px,2.4vw,36px);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,var(--wr-rail));
+  align-items:stretch;
+}
+/* The panel is sized for a Resonator record, which is a cover photograph and
+   five thousand words of kit. A weapon is a picture, a paragraph and four
+   numbers: at 1620px the passive gets a 95-character line and the picture gets
+   a plate half a metre wide. So the record narrows the panel rather than
+   centring a column inside it — that would strand the drawer's own heading and
+   close button against an edge the record no longer starts at. */
+.drawer-panel:has(.wrec-r){width:min(1240px,100%)}
+/* Nothing to put in the rail — no database row and no intel. The rule and the
+   empty column both go rather than standing there labelled. */
+.wrec-r.norail{display:block}
+.wr-main{min-width:0;padding-right:var(--wr-gap)}
+.wrec-r.norail .wr-main{padding-right:0}
+
+/* Name on the left, the one sentence about it on the right, sitting on the
+   name's own baseline rather than above it in the chip row's lane. The name
+   column is auto rather than 1fr so the sentence stands next to the name it is
+   about — given a fraction it takes the far edge of the panel, and "Signature
+   weapon for Qingxiao" ends up further from Qingxiao's weapon than the rail
+   is. */
+.wr-head{
+  display:grid;grid-template-columns:minmax(0,auto) minmax(0,330px);
+  justify-content:start;
+  gap:clamp(14px,2.6vw,42px);align-items:end;
+  padding-bottom:clamp(16px,2vh,22px);
+}
+.wr-head.bare{grid-template-columns:minmax(0,1fr)}
+.wr-id{min-width:0}
+.wrec-r .wr-id .meta{margin-bottom:11px}
+/* The size the resonator record sets a name at, one step down: a weapon name
+   runs to three words where a Resonator's is one, and "Thousandfold
+   Deliverance" at 58px is two lines before the picture starts. */
+.drawer-b .wr-id h2{
+  margin:0;font-size:clamp(26px,3.1vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.04;
+}
+.drawer-b .wr-sum{margin:0 0 4px;font-size:14px;line-height:1.65;max-width:42ch}
+
+/* The picture takes a column with a ceiling on it rather than a share of the
+   row. A fraction hands it every pixel the panel gains, and what a weapon
+   render needs is a box near enough square at the size it was drawn — past
+   that it is a wide short band again, which is the crop this layout replaced.
+   The passive takes what is left, which is also what keeps its measure sane. */
+.wr-body{
+  display:grid;grid-template-columns:minmax(0,clamp(210px,34%,330px)) minmax(0,1fr);
+  gap:clamp(16px,1.8vw,26px);align-items:stretch;
+}
+
+/* The plate the desk draws behind every other piece of art it shows, squared
+   off. Tinted from the record's own accent, so a Havoc signature and a stock
+   3★ are lit differently before you have read either name.
+
+   A height rather than a min-height, and the same reason .wsig-art carries one:
+   percentages inside a box whose height is a floor have nothing to resolve
+   against, so the render falls back to its intrinsic size and takes the plate
+   with it. A length also stops a 500-word passive from stretching the picture
+   down the page beside it — the plate keeps its size and the text runs on. */
+.wr-art{
+  position:relative;margin:0;align-self:start;
+  display:flex;align-items:center;justify-content:center;
+  height:clamp(214px,29vh,322px);padding:8%;
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:
+    radial-gradient(ellipse 62% 58% at 50% 48%,color-mix(in srgb,var(--attr) 24%,transparent),transparent 72%),
+    linear-gradient(155deg,var(--bg-3),var(--bg));
+}
+/* The frame the game itself shows a weapon in — a square stood on its corner,
+   which is also the shape the render fills, so it reads as the box the picture
+   was drawn for rather than as a border put round it afterwards. Sized off the
+   plate's height rather than its width: the height is the clamped side, and a
+   percentage of the width put the corners through the edges on a wide panel. */
+.wr-art::before{
+  content:"";position:absolute;top:50%;left:50%;height:62%;aspect-ratio:1;
+  transform:translate(-50%,-50%) rotate(45deg);
+  border:1px solid color-mix(in srgb,var(--attr) 24%,transparent);border-radius:10px;
+}
+/* The shadow the weapon cards give a render, at the size this one is shown.
+   Kuro draws these against nothing, and without it a sword on a dark plate is
+   a decal rather than an object lying on one. */
+.wr-art img{
+  position:relative;width:100%;height:100%;object-fit:contain;display:block;
+  filter:drop-shadow(0 12px 26px rgba(0,0,0,.55));
+}
+.wr-art-g{position:relative;display:flex;color:var(--attr);opacity:.45}
+
+.wr-eff{
+  display:flex;flex-direction:column;min-width:0;
+  border:1px solid var(--line);border-radius:var(--r);padding:14px 16px 16px;
+  background:color-mix(in srgb,var(--bg-2) 62%,transparent);
+}
+.wr-eff>.label{
+  display:flex;align-items:baseline;gap:10px;
+  padding-bottom:9px;border-bottom:1px solid var(--line);margin-bottom:12px;
+}
+/* The rank the passive below is currently printed at. The slider is in the
+   rail, a column away, and without this the numbers change with no visible
+   cause. */
+.wr-eff>.label em{
+  margin-left:auto;font-style:normal;font-family:var(--mono);color:var(--rar,var(--attr));
+}
+/* Doubled up on purpose. `.drawer-b p` is the interim measure cap further down
+   this file, at equal specificity and later in source order, and it would set
+   this passive at 14px on a 76ch line inside a box that is neither. */
+.wr-eff .weff{font-size:13.5px;line-height:1.72;color:var(--fg-2)}
+.wr-eff .weff p{margin:0;font-size:inherit;line-height:inherit;max-width:none}
+.wr-eff .weff p+p{margin-top:9px}
+/* Kuro's own list, where a passive has one. Bulleted in the attribute colour
+   like every other list in a record. */
+.wr-eff .weff-l{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:7px}
+.wr-eff .weff-l li{position:relative;padding-left:15px}
+.wr-eff .weff-l li::before{
+  content:"";position:absolute;left:0;top:.66em;width:4px;height:4px;border-radius:50%;
+  background:var(--attr);
+}
+.drawer-b .wr-thin{color:var(--fg-3);font-size:13px;line-height:1.65;margin:0;max-width:56ch}
+
+/* The rail. A rule rather than a card: the figures are part of this record,
+   not a panel sitting next to it. */
+.wr-rail{
+  min-width:0;display:grid;gap:12px;align-content:start;
+  padding-left:var(--wr-gap);border-left:1px solid var(--line);
+}
+.wr-rail-h{margin:0 0 1px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--fg)}
+.wr-lv{
+  display:grid;gap:11px;
+  border:1px solid var(--line);border-radius:var(--r);padding:13px 14px 14px;
+  background:color-mix(in srgb,var(--bg-2) 62%,transparent);
+}
+.wr-lv>.label{padding-bottom:9px;border-bottom:1px solid var(--line)}
+.wr-intel{margin-top:4px}
+.wr-intel>.label{display:block;padding-bottom:9px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.wr-intel-l{display:grid;gap:8px}
+.wr-intel .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+
+@media (max-width:1000px){
+  /* The rail's 324px and a picture and a passive do not fit across a panel
+     that is now the width of a tablet. The rule turns on its side and the rail
+     goes underneath, which keeps the reading order — object, passive, numbers
+     — that the columns were arranged to give. */
+  .wrec-r{display:block}
+  .wr-main{padding-right:0}
+  .wr-rail{
+    padding:clamp(18px,2.4vh,24px) 0 0;margin-top:clamp(18px,2.4vh,24px);
+    border-left:0;border-top:1px solid var(--line);
+  }
+  /* The summary stops being a column beside the name and becomes the line
+     under it, which is the order it is read in anyway. */
+  .wr-head{grid-template-columns:minmax(0,1fr);align-items:start;gap:12px}
+  .drawer-b .wr-sum{max-width:64ch;margin-bottom:0}
+  /* Held to a width down here. A five-stop slider run across the full panel is
+     150px between stops, and two figures set in boxes 400px wide are two
+     numbers adrift in the middle of nothing. The intel list keeps the width —
+     it is headlines, and they use it. */
+  .wr-lv,.wr-rail .wstats{max-width:470px}
+}
+@media (max-width:700px){
+  .wr-body{grid-template-columns:minmax(0,1fr)}
+  /* Squared and centred rather than a band the width of the phone. Same reason
+     the plate is near-square above: the render is drawn corner to corner. */
+  .wr-art{width:min(100%,318px);height:auto;aspect-ratio:1;margin-inline:auto}
+  .drawer-b .wr-id h2{font-size:clamp(24px,7vw,34px)}
+}
 
 /* ══ aside ══════════════════════════════════════════════════════════ */
 .mini-h{

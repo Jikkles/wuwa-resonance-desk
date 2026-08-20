@@ -49,6 +49,14 @@ const ATTR_COLOUR = {
   electro:"#B98BE0", spectro:"#E8C24A", havoc:"#D4557A"
 };
 
+/* The three rarity colours, the same three the Weapons page heads its tables
+   in. They live in the stylesheet as --rar on .wpanel, and here as well because
+   a weapon record with no element has to fall back to one inline — two thirds
+   of the database is nobody's signature, and a record accented in the site
+   accent says nothing about what you opened. Kept beside ATTR_COLOUR so the
+   two lists that colour the desk are in one place. */
+const RAR_COLOUR = {5:"#E3AC55", 4:"#B98BE0", 3:"#78BFE8"};
+
 /* Nav order, top to bottom and left to right, in one place: the rail, the tab
    strip, the mobile dock, the command palette and the ←/→ tab cycling all read
    this array. `soon` marks a view that is navigable but has no data behind it
@@ -2539,12 +2547,30 @@ const WTYPES = ["Broadblade", "Sword", "Pistols", "Gauntlets", "Rectifier"];
    re-reading the paragraph to find it. */
 function effectHtml(w, rank){
   const i = Math.min(5, Math.max(1, rank || 1)) - 1;
-  return esc(w.effect || "").replace(/\{(\d)\}/g, (_, n) => {
+  const fill = s => esc(s).replace(/\{(\d)\}/g, (_, n) => {
     const vals = w.ranks?.[Number(n)];
     /* A hole the source shipped no values for. Say so rather than print a
        number from the wrong slot — the whole desk runs on that rule. */
     return vals ? `<b class="wval">${esc(vals[i])}</b>` : `<b class="wval na">?</b>`;
-  }) || `<span class="wnone">No passive.</span>`;
+  });
+
+  /* Kuro writes the longest passives as a paragraph and then a list, and the
+     break reaches the desk as the two characters backslash-n rather than as a
+     newline — so printed as one string it reads "gain the following effects:\n-
+     This Aero DMG Bonus…" with the escape in the middle of the sentence. Split
+     on either form. A run of parts that all open with a dash is the list Kuro
+     wrote, so it is set as one; anything else stays paragraphs, because a
+     bullet drawn on a sentence that isn't one is an invented claim about
+     structure. */
+  const parts = String(w.effect || "").split(/\\n|\n/).map(s => s.trim()).filter(Boolean);
+  if(!parts.length) return `<span class="wnone">No passive.</span>`;
+  const [lead, ...rest] = parts;
+  const listed = rest.length && rest.every(s => /^[-–•]/.test(s));
+  return `<p>${fill(lead)}</p>` + (!rest.length ? ""
+    : listed
+      ? `<ul class="weff-l">${rest.map(s =>
+          `<li>${fill(s.replace(/^[-–•]\s*/, ""))}</li>`).join("")}</ul>`
+      : rest.map(s => `<p>${fill(s)}</p>`).join(""));
 }
 
 /* 1–5, and it redraws nothing. A full re-render would rebuild the input the
@@ -2558,21 +2584,36 @@ function paintRank(){
     if(w) el.innerHTML = effectHtml(w, S.rank);
   });
   document.querySelectorAll("[data-ranklabel]").forEach(el => el.textContent = `S${S.rank}`);
+  document.querySelectorAll("[data-ranktick]").forEach(el =>
+    el.classList.toggle("on", Number(el.dataset.ranktick) === S.rank));
   document.querySelectorAll("[data-rank]").forEach(el => {
     el.value = S.rank;
     el.setAttribute("aria-valuetext", `Ascension ${S.rank} of 5`);
   });
 }
 
+/* The five stops, drawn as five stops and now named as well. The control used
+   to be a track with the live rank beside it, which told you where the thumb
+   was standing and nothing about the four places it could go — on a slider
+   with five positions and no scale, S3 is a reading rather than a position.
+   The row under the track is the scale, so the whole range is legible without
+   dragging it.
+
+   The <label> wraps the input rather than pointing at an id: the record can
+   hold only one of these, but the palette and the drawer both rebuild markup
+   from scratch, and an id that has to stay unique across that is a bug waiting
+   for the second one. */
 function ascendBar(){
-  return `<div class="ascend">
-    <label class="ascend-c">
+  return `<label class="ascend">
+    <span class="ascend-h">
       <span class="label">Ascension</span>
-      <input type="range" min="1" max="5" step="1" value="${S.rank}" data-rank
-             aria-label="Weapon ascension" aria-valuetext="Ascension ${S.rank} of 5">
       <output class="ascend-v" data-ranklabel>S${S.rank}</output>
-    </label>
-  </div>`;
+    </span>
+    <input type="range" min="1" max="5" step="1" value="${S.rank}" data-rank
+           aria-label="Weapon ascension" aria-valuetext="Ascension ${S.rank} of 5">
+    <span class="ascend-ticks" aria-hidden="true">${[1, 2, 3, 4, 5].map(n =>
+      `<i data-ranktick="${n}"${n === S.rank ? ` class="on"` : ""}>S${n}</i>`).join("")}</span>
+  </label>`;
 }
 
 /* A weapon card is the weapon's own render, its name, and the two figures that
@@ -3109,7 +3150,30 @@ function drawerVersion(id){
    numbers for the one weapon in four that has any, and the resonator it belongs
    to carries the same run history in full — so the holder's name in the
    sentence above is the link to it, and that is the whole navigation this
-   record needs. */
+   record needs.
+
+   ── the layout ──
+   It was one column for a while: chips, a 168px render, the name, the two
+   figures, the passive, the intel, each one set across the full width of a
+   1620px panel. Every part of that is the wrong shape for the width. A sword
+   drawn on the diagonal inside a wide short band is cropped to a hilt; a
+   passive is 400 characters and got a 190-character line; and the two numbers
+   the record is actually opened for — is this weapon's ATK worth the pulls —
+   were three sections down, below the fold on a laptop.
+
+   So it takes the shape the resonator record already uses, for the reason that
+   one gives: the name and the one sentence about it across the top, the object
+   and what it does beneath, and every figure or link in a rail down the right
+   behind a rule. The eye goes picture → passive → numbers, and the numbers are
+   in the corner they are in on every other page of every other database.
+
+   This is the layout for all 121 weapons, not for the good ones. Every record
+   in weapons.json carries an icon, a passive, an ATK and a sub-stat — there is
+   no partial case in the file — so the only parts that can be absent are the
+   holder's sentence, which two thirds of the database has no holder for, and
+   the intel list, which nearly none of them has. Each drops out on its own and
+   moves nothing else: no summary and the name takes the whole top; no rail at
+   all and the main column takes the whole panel. */
 function drawerWeapon(name){
   const w = weaponFor(name);
   const runs = weaponRuns(name);
@@ -3125,52 +3189,91 @@ function drawerWeapon(name){
   const holderName = runs[0]?.name || sigHolderFor(name);
   const holder = holderName ? resonatorFor(holderName) : {};
 
-  openDrawer("Weapon record", `<div class="drawer-b"${attrStyle(runs[0]?.attribute || holder.attribute)}>
-    <div class="meta">
-      <span class="pill">${esc(w?.type || holder.weapon || runs[0]?.weapon || "Weapon")}</span>
-      ${w?.rarity ? `<span class="pill ver">${esc(w.rarity)}★</span>` : ""}
-      ${w?.source ? `<span class="pill">${esc(w.source)}</span>` : ""}
-      ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
+  /* Nobody's signature, so there is no element to take. Rarity instead, which
+     is the fact the Weapons page already sorts and colours the whole database
+     by — a 5★ opens gold, a 3★ opens blue, and neither opens in the site
+     accent looking like every other panel on the desk. */
+  const rarity = Number(w?.rarity) || 0;
+  const accent = attrStyle(runs[0]?.attribute || holder.attribute)
+    || (RAR_COLOUR[rarity] ? ` style="--attr:${RAR_COLOUR[rarity]}"` : "");
+
+  /* The holder's name is the link out of here, now that the convene list has
+     gone. Their record carries the same run history in full, and this is one
+     word rather than a section. With no holder there is no sentence: the desk
+     knows the class, the rarity and the source, all three are chips two lines
+     up, and writing them out again as prose would be the record padding
+     itself. The name takes the width instead. */
+  const summary = holderName ? `<p class="wr-sum">Signature weapon for
+    <b class="wholder" role="button" tabindex="0" data-act="resonator" data-id="${esc(holderName)}">${esc(holderName)}</b>,
+    and its convene runs alongside their banner.</p>` : "";
+
+  const intel = mentions.length ? `<section class="wr-intel">
+    <span class="label">Related intel — ${mentions.length}</span>
+    <div class="wr-intel-l">${mentions.map(e => `
+      <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(e.id)}">
+        <i class="dot t-${esc(e.confidence)}"></i>
+        ${esc(e.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div>
+  </section>` : "";
+
+  /* The rail is the record's figures and its ways out, and it only exists if
+     there is one of either. A weapon the timeline has a convene for and the
+     database has no row for — the two 3.7 signatures — with no intel written
+     about it yet has neither, and gets no empty column standing beside the
+     picture.
+
+     The slider sits up here rather than on the passive it changes. It is
+     against the rule's edge, a hand's width from the text, and it belongs with
+     "stats and progression" — which is what an ascension is — rather than
+     hanging off a heading. The passive carries the live rank in its own
+     heading so the two are visibly wired together. */
+  const rail = (w || intel) ? `<aside class="wr-rail">
+    <h3 class="wr-rail-h">Stats and progression</h3>
+    ${w ? `<div class="wr-lv">
+      <span class="label">Stats at level 90</span>
+      ${ascendBar()}
     </div>
-    <!-- .wbig, not .wsig. The latter is the signature *card* on a resonator
-         record, a framed row whose own .wsig-art box does the sizing, and a
-         bare img dropped into it has nothing constraining it at all — so the
-         drawer opened on a 1000px render of a sword. This is the picture at
-         the size it was drawn for, which is what heads this drawer.
-         (No backticks in here: this comment is inside a template literal.) -->
-    ${w?.icon ? `<div class="wbig"><img src="${esc(w.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
-    <h2>${esc(name)}</h2>
-    <!-- The holder's name is the link out of here, now that the convene list
-         has gone. Their record carries the same run history in full, and this
-         is one word rather than a section. -->
-    ${holderName ? `<p>Signature weapon for
-      <b class="wholder" role="button" tabindex="0" data-act="resonator" data-id="${esc(holderName)}">${esc(holderName)}</b>,
-      and its convene runs alongside their banner.</p>` : ""}
-
-    <!-- The slider rides the stats heading rather than the passive's. It is
-         the record's one control and it was buried two thirds down, under a
-         heading, in the band of empty column beside the summary — while the
-         line it actually changes sits directly under it either way. Reading
-         order is unchanged: set the ascension, then read the passive.
-
-         It does not move the two figures below it, which is why the heading it
-         sits on says level 90 out loud. -->
-    ${w ? `<div class="dsec">
-      <div class="dsec-h"><span class="label">Stats at level 90</span>${ascendBar()}</div>
-      <div class="wstats">
-        <div><span class="k">Base ATK</span><b>${w.atk90 || "—"}</b></div>
-        <div><span class="k">${esc(w.stat || "Sub-stat")}</span><b>${w.statValue90 ? esc(w.statValue90) + "%" : "—"}</b></div>
-      </div></div>` : ""}
-
-    ${w ? `<div class="dsec"><span class="label">Passive</span>
-      <p class="weff" data-eff="${esc(w.name)}" style="margin:0">${effectHtml(w, S.rank)}</p>
+    <div class="wstats">
+      <div><span class="k">Base ATK</span><b>${w.atk90 || "—"}</b></div>
+      <div><span class="k">${esc(w.stat || "Sub-stat")}</span><b>${w.statValue90 ? esc(w.statValue90) + "%" : "—"}</b></div>
     </div>` : ""}
+    ${intel}
+  </aside>` : "";
 
-    ${mentions.length ? `<div class="dsec"><span class="label">Intel mentioning it — ${mentions.length}</span>
-      <div style="display:grid;gap:8px">${mentions.map(e => `
-        <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(e.id)}">
-          <i class="dot t-${esc(e.confidence)}" style="width:7px;height:7px;border-radius:50%;background:currentColor;flex:none"></i>
-          ${esc(e.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div></div>` : ""}
+  openDrawer("Weapon record", `<div class="drawer-b wrec-r${rail ? "" : " norail"}"${accent}>
+    <div class="wr-main">
+      <header class="wr-head${summary ? "" : " bare"}">
+        <div class="wr-id">
+          <div class="meta">
+            <span class="pill">${esc(w?.type || holder.weapon || runs[0]?.weapon || "Weapon")}</span>
+            ${rarity ? `<span class="pill ver">${rarity}★</span>` : ""}
+            ${w?.source ? `<span class="pill">${esc(w.source)}</span>` : ""}
+            ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
+          </div>
+          <h2>${esc(name)}</h2>
+        </div>
+        ${summary}
+      </header>
+
+      <div class="wr-body">
+        <!-- The render at the size it was drawn for, which is most of what the
+             desk can show you about a weapon. Squared rather than the old wide
+             band: Kuro draws these on the diagonal, corner to corner, and a
+             short landscape box crops a greatsword to its grip.
+             (No backticks in here: this comment is inside a template literal.) -->
+        <figure class="wr-art">${w?.icon
+          ? `<img src="${esc(w.icon)}" alt="${esc(name)}" decoding="async">`
+          : `<span class="wr-art-g">${icon("i-weapon", 56)}</span>`}</figure>
+
+        <section class="wr-eff">
+          <span class="label">Passive${w ? ` <em data-ranklabel>S${S.rank}</em>` : ""}</span>
+          ${w ? `<div class="weff" data-eff="${esc(w.name)}">${effectHtml(w, S.rank)}</div>`
+            : `<p class="wr-thin">No passive published for this one yet. It has a convene on the
+               timeline and no row in the weapon database — stats and passive land when the
+               patch does.</p>`}
+        </section>
+      </div>
+    </div>
+    ${rail}
   </div>`);
 }
 
