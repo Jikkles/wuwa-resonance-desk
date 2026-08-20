@@ -6,22 +6,32 @@ name: Update kits
 # on the feed's cadence would be four times the traffic at two fan sites for
 # the same answer.
 #
-# The useful run is the one on patch day: fetch-kits.mjs derives the live
-# version from the dates in versions.json, so the morning 3.6 starts it
-# promotes Qingxiao's and Jingran's kits from `datamined` to `official` on its
-# own. Nothing to trigger, nothing to edit first.
+# The wiki half of this job runs unattended and is what lands on patch-day
+# morning: banner dates, debut patches, the versions.json confirmation pass.
+#
+# The kit half does not. Prydwen answers a home connection and returns a flat
+# 403 to a GitHub runner, so kit text has never once arrived from a scheduled
+# run — fetch-kits.mjs logs "prydwen unreachable" and carries the previous
+# kits forward untouched. A new Resonator's skills land when the script is run
+# from a machine Prydwen will talk to. Don't wait on the cron for those.
 
 on:
   schedule:
-    - cron: "40 3 * * *"   # daily, 03:40 UTC — after the 00:00 feed run
+    # Two hours after the 04:00 UTC patch go-live. The old 03:40 predated the
+    # move off midnight and would now fire while the servers were still down —
+    # deriveCurrent() reads a date, not a clock, so it would have called the
+    # patch live twenty minutes early and then found nothing published yet.
+    - cron: "0 6 * * *"    # daily, 06:00 UTC
   workflow_dispatch:
 
 permissions:
   contents: write
 
 # Shared with update-feeds.yml: both jobs commit to the same branch, and the
-# rebase-then-push dance is far less likely to matter if they simply never run
-# at once.
+# rebase-then-push dance is far less likely to matter if only one of them is
+# writing at a time. The two schedules are also picked not to overlap — the
+# feed runs 02/08/14/20, this one at 06:00 — so the group is the backstop for
+# a slow run drifting into the next slot, not the thing doing the separating.
 concurrency:
   group: desk-data
   cancel-in-progress: false

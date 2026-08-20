@@ -2,7 +2,12 @@ name: Update feeds
 
 on:
   schedule:
-    - cron: "0 */6 * * *"   # every 6 hours
+    # Every 6 hours, offset off the top of the clock rather than on it.
+    # Kuro's patches now go live at 04:00 UTC, not midnight, so the run that
+    # matters is the one after that — 08:00 gives the site four hours to put
+    # its notices up. The offset also keeps all four slots clear of the kits
+    # job at 06:00, which shares this workflow's concurrency group.
+    - cron: "0 2,8,14,20 * * *"   # 02:00, 08:00, 14:00, 20:00 UTC
   workflow_dispatch:
 
 # Needs Settings -> Actions -> Workflow permissions set to "Read and write",
