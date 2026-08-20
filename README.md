@@ -746,6 +746,68 @@ has a kit that's in the live client, and the live client is Kuro's own word, so 
 `official`. Anyone still unreleased keeps whatever tier a human gave them — their
 Prydwen page is a stub with no skill blocks at all, so there's nothing to scrape anyway.
 
+### The record
+
+Built the same way the event record is, and for the same reason: the picture is what a
+reader arrives at, so it holds the page rather than sitting in a box on it.
+
+What this replaced was a 4:5 art panel across the full width of the modal with everything
+the record had to say underneath it. At 1500px that is a 400px cut-out standing in a field,
+and the name, the element and the kit all started below the fold.
+
+Top to bottom now:
+
+| Band | What's in it |
+|---|---|
+| **Hero** | Kuro's art down the right, dissolving into the panel; element, rarity, name, epithet, confidence and status set into the left; the signature weapon and the banner they run on in a glass rail on the far side |
+| **At a glance** | Element, weapon, role, region, debut, released, reruns — seven tiles |
+| **Combat kit** | The six slots in the order you press them, each jumping to its own card |
+| **Skills** | The six cards, then the Inherent Skills, then the Resonance Chain |
+| **Release history / Sources** | Debut → first release → whether they have ever come back, beside where the desk got any of it |
+
+**The art has two shapes and the hero knows which.** A cut-out — a bust on a transparent
+ground, which is what `portraits.json` resolves for nearly everyone — is `object-fit:
+contain` and stands at its own proportions with a fade at the foot. Anything else is a
+crop, `cover`, anchored high, because Kuro draws these as portraits and the half worth
+showing is the top. Where the hero carries a rail the picture stops before it, and fades
+on that side too: a cover crop cut off square against a glass card reads as the card
+standing on a photograph that ran out.
+
+Where the picture starts and stops is two custom properties on the hero — `--pic-l` and
+`--pic-r` — rather than four selectors fighting over `inset`. The breakpoints move the
+rail, so all they have to move is the numbers.
+
+**The rail is skipped entirely when there is nothing to put in it.** A standard-pool
+Resonator has no convene to name and often no signature weapon; ten of the sixty are in
+that state, and an empty box standing beside the name is worse than the extra width.
+
+### Elements and kit slots are drawn here
+
+`index.html` carries a glyph for each of the six elements and each of the six kit slots.
+Both sets are the desk's own marks, not the client's: these render at 13px beside a name
+and at 56px in the rotation band, and the game's own attribute icons are painted 128px
+badges with a bevel on them. Each glyph inherits `currentColor`, which the record sets to
+`--attr`, so a Glacio record's marks are Glacio-coloured without a second table of hex to
+keep in step.
+
+The same mark appears at three sizes — the element beside the name, in the At a glance
+tile, and in the sprite the grid card already uses — so they read as one thing.
+
+### One card out of Simplified
+
+The **Simplified** toggle is still what keeps six skill cards to a grid: every paragraph
+cut to its first sentence, every card stopped at five lines, and the count of what was
+dropped shown rather than swallowed.
+
+That count is now the card's own way out. A condensed card carries `View details · +25
+lines`, and clicking it swaps that one card to the full text — the kit is already in
+memory, so it costs a lookup and an `innerHTML`, not a redraw. The toggle is a preference
+about the whole record; this is a reader who wants this skill and not the other five, and
+redrawing on it would shut every other card they had already opened.
+
+`kitGist()` returns `{html, cut}` for this reason: the card turns the count into a button,
+and a Resonance Chain node — still a `<details>`, still shut — prints it as a note.
+
 ### The grid is a contact sheet
 
 A record card is a portrait, a name and the debut badge. Nothing else — no

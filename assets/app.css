@@ -1319,14 +1319,14 @@ button{font:inherit;color:inherit}
    reruns, so the corner answers "have they been back?" before you hover, and
    hovering says which patches. Kept to the attribute colour like everything
    else on a record — it is an identity fact, not a confidence one. */
-.cart .debut{
+.cart .debut,.rr-hero .debut{
   position:absolute;top:11px;right:13px;z-index:3;
   display:inline-flex;align-items:center;gap:5px;
   font-family:var(--mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
   color:var(--bg);background:var(--attr,var(--accent));border-radius:6px;padding:3px 9px;
   cursor:default;
 }
-.cart .debut i{
+.cart .debut i,.rr-hero .debut i{
   font-style:normal;font-size:12px;letter-spacing:.04em;
   padding:0 4px;border-radius:4px;
   background:color-mix(in srgb,var(--bg) 26%,transparent);
@@ -1334,7 +1334,7 @@ button{font:inherit;color:inherit}
 /* The tooltip. Placed below the badge rather than above because the badge is
    already against the top edge of the card, and right-aligned so it never
    leaves the art on the rightmost column of the grid. */
-.cart .debut-tip{
+.cart .debut-tip,.rr-hero .debut-tip{
   position:absolute;top:calc(100% + 7px);right:0;z-index:4;
   display:grid;gap:5px;min-width:132px;
   padding:9px 11px;border-radius:var(--r-sm);
@@ -1346,15 +1346,16 @@ button{font:inherit;color:inherit}
   transition:opacity .13s ease,transform .13s ease,visibility .13s;
   pointer-events:none;
 }
-.cart .debut:hover .debut-tip,.cart .debut:focus-visible .debut-tip{
+.cart .debut:hover .debut-tip,.cart .debut:focus-visible .debut-tip,
+.rr-hero .debut:hover .debut-tip,.rr-hero .debut:focus-visible .debut-tip{
   opacity:1;visibility:visible;transform:translateY(0);
 }
-.cart .debut-tip em{
+.cart .debut-tip em,.rr-hero .debut-tip em{
   font-style:normal;color:var(--fg-3);font-size:8.5px;letter-spacing:.14em;
   text-transform:uppercase;display:block;margin-bottom:2px;
 }
-.cart .debut-runs{display:block}
-.cart .debut-runs i{
+.cart .debut-runs,.rr-hero .debut-runs{display:block}
+.cart .debut-runs i,.rr-hero .debut-runs i{
   font-style:normal;display:inline-block;margin:2px 4px 0 0;padding:1px 5px;
   border-radius:4px;background:var(--bg-3);color:var(--fg);
 }
@@ -1363,7 +1364,7 @@ button{font:inherit;color:inherit}
    the record spells the same patches out in full — so here the corner simply
    goes back to being the debut patch and nothing is lost. */
 @media (hover:none){
-  .cart .debut-tip{display:none}
+  .cart .debut-tip,.rr-hero .debut-tip{display:none}
 }
 
 /* ── release flag ─────────────────────────────────────────────────
@@ -2410,24 +2411,9 @@ button{font:inherit;color:inherit}
 }
 .dsec-h>.label{padding:0;border:0;margin:0;flex:1;min-width:0}
 
-/* ── record layout ────────────────────────────────────────────────
-   Two columns under the art: who they are on the left, what they are on the
-   right. The left column is prose and wants a measure; the right is a card and
-   a list of one-line facts and wants to be narrow. Below 900px of panel there
-   is room for one of them, so they stack in reading order. */
-/* The right column is a label-and-value table and a weapon tile — neither gets
-   better past about 440px, they just grow the gap between a label and its
-   value. So the side is capped and the summary takes every pixel the widened
-   panel added, instead of the two splitting it by a fixed ratio. The clamp's
-   percentage keeps the old proportions on the way down. */
-.rlay{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,clamp(260px,42%,440px));
-  gap:10px 34px;align-items:start;
-}
-.rlay-main{min-width:0}
-.rlay-side{min-width:0;display:grid;gap:12px;align-content:start}
-/* The right column's boxes have their own frame, so they do not take .dsec's
-   top margin — they start level with the character's name. */
+/* A framed box rather than a ruled section, for the panels that sit beside
+   something else instead of under everything: the hero rail's cards, the
+   release history, the source list where a record sets it in a column. */
 .dpanel{
   border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 15px 14px;
   background:color-mix(in srgb,var(--bg-2) 62%,transparent);
@@ -2492,11 +2478,20 @@ button{font:inherit;color:inherit}
 /* A card header, not a summary row: at a third of the panel the slot name and
    the skill name cannot share a line, so the slot sits above it as a kicker. */
 .skill-h{
-  display:grid;gap:3px;padding:10px 13px 9px;
+  display:flex;align-items:center;gap:11px;padding:10px 13px 9px;
   border-bottom:1px solid var(--line);background:var(--bg-2);
 }
+.skill-hh{display:grid;gap:3px;min-width:0;flex:1}
 .skill-h b{font-size:13.5px;font-weight:600;color:var(--fg);line-height:1.35}
 .skill-h .skill-k{width:auto;color:var(--attr,var(--fg-3))}
+/* The same mark the rotation band uses for this slot, so a card and its node
+   are recognisably the same thing at two sizes. */
+.skill-i{
+  flex:none;width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--attr,var(--accent));border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 38%,color-mix(in srgb,var(--attr,var(--accent)) 14%,transparent),transparent 74%);
+}
 .skill{
   border:1px solid var(--line);border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--bg-2) 62%,transparent);
@@ -2546,6 +2541,27 @@ button{font:inherit;color:inherit}
 .skill-t .gist-more{
   margin:11px 0 0;padding-top:9px;border-top:1px dashed var(--line);
   font-size:11px;line-height:1.5;color:var(--fg-3);
+}
+/* One card's way out of Simplified. The global toggle is a preference about
+   the whole record; this is a reader who wants this skill and not the other
+   five, and it says how much it is holding back so the click is informed. */
+.skill-more{
+  display:flex;align-items:center;gap:8px;width:100%;
+  padding:9px 13px 11px;border:0;border-top:1px dashed var(--line);
+  background:none;cursor:pointer;font:inherit;font-size:12px;color:var(--fg-3);
+  transition:.15s;text-align:left;
+}
+.skill-more:hover{color:var(--fg);background:var(--tint)}
+.skill-more em{
+  font-family:var(--mono);font-size:9.5px;font-style:normal;letter-spacing:.08em;color:var(--fg-3);
+}
+.skill-more svg{margin-left:auto;flex:none}
+/* Jumped to from the rotation band. Long enough to find the card with your eye
+   after the scroll settles, and gone before it becomes decoration. */
+.skill.lit{animation:sklit 1.5s ease-out}
+@keyframes sklit{
+  0%,55%{border-color:var(--attr,var(--accent));box-shadow:0 0 0 3px color-mix(in srgb,var(--attr,var(--accent)) 16%,transparent)}
+  100%{border-color:var(--line);box-shadow:0 0 0 3px transparent}
 }
 .skills.chain .skill-k{width:34px}
 
@@ -2647,28 +2663,249 @@ button{font:inherit;color:inherit}
 .dsrc:hover{border-color:var(--line-2);color:var(--fg);background:var(--bg-2)}
 .dsrc[role="button"]{cursor:pointer;text-align:left}
 .dsrc .arrow{margin-left:auto;color:var(--fg-3)}
-.dart{position:relative;border-bottom:1px solid var(--line)}
-.dart .cart{aspect-ratio:16/11;border-bottom:0}
-.dart .cart.has-cutout,.dart .cart.has-art{aspect-ratio:4/3}
-/* Centred, the panel is a thousand pixels across, and the portrait ratios above
-   turn into either a tower or — because a constrained height feeds back through
-   aspect-ratio — a 480px picture with 600px of black beside it. Wide enough to
-   sit in a modal, the art is a banner instead: one ratio for all three kinds,
-   cropped to the head rather than zoomed for a narrow card. Below 860px the
-   panel is full-bleed again and the rules above still hold. */
-@media (min-width:861px){
-  .dart .cart,.dart .cart.has-cutout,.dart .cart.has-art{aspect-ratio:1000/320}
-  .dart .cart.has-art img{object-position:center 22%}
+/* ══ the resonator record ═══════════════════════════════════════════
+   Same shape as the event record, for the same reason. What this replaced was
+   a 4:5 art panel across the full width of the modal with everything the record
+   had to say underneath it: at 1500px that is a 400px cut-out standing in a
+   field, and the name, the element and the kit all started below the fold.
+
+   Here the art holds the right of a hero, the name and the state are set into
+   it, and the two cards that lead out of the record — the signature weapon, the
+   banner they run on — sit on the far side of the picture. */
+.rrec{--rr-h:clamp(320px,46vh,470px);--rr-rail:300px}
+
+.rr-hero{
+  position:relative;overflow:hidden;
+  margin:calc(-1 * var(--dpad-y)) calc(-1 * var(--dpad-x)) 0;
+  border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(120% 90% at 78% 18%,color-mix(in srgb,var(--attr,var(--accent)) 12%,transparent),transparent 70%),
+    var(--bg-2);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,var(--rr-rail));
+  gap:0 clamp(16px,2vw,30px);align-items:center;
 }
-/* Past this the panel is wide enough that 32% of it is half a screen of head
-   before the first skill, so the band stops being a ratio and becomes a
-   height. It has to stop being a ratio, not merely be capped: `aspect-ratio`
-   with an auto width reads a clamped height as the definite side and solves
-   back for width, so a max-height here doesn't shorten the band — it narrows
-   it, and leaves 280px of dead panel down the right. `aspect-ratio:auto` plus
-   a height is the same crop with the width left alone. */
-@media (min-width:1400px){
-  .dart .cart,.dart .cart.has-cutout,.dart .cart.has-art{aspect-ratio:auto;height:min(420px,40vh)}
+/* Where the picture starts and stops, as two numbers on the hero rather than
+   as four selectors fighting over inset. The rail stands on the same band the
+   picture does, so where there is one the picture ends before it — and the two
+   breakpoints below move the rail, so all they have to move is the numbers.
+
+   The picture sits behind both columns and dissolves into the panel on the
+   left, so the copy is on ground rather than on a scrim laid over a face; and
+   it fades on the right as well, because a cover crop cut off square against a
+   glass card reads as the card standing on a photograph that ran out. Kuro
+   draws these as portraits — the half worth showing is the top — so the crop
+   is anchored high rather than centred. */
+.rr-hero{--pic-l:26%;--pic-r:0px}
+.rr-hero.railed{--pic-r:calc(var(--rr-rail) + var(--dpad-x))}
+.rr-pic{
+  position:absolute;inset:0 var(--pic-r) 0 var(--pic-l);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 42%,#000 88%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 42%,#000 88%,transparent 100%);
+}
+.rr-pic img{width:100%;height:100%;object-fit:cover;object-position:center 16%;display:block}
+
+/* A cut-out is a bust on a transparent ground, drawn for a 4:5 card. Contained
+   and pushed right, it stands in the hero at its own proportions instead of
+   being enlarged until only a collar is in frame. The sides need no mask — the
+   picture is already transparent there — but the foot does: the card is cropped
+   at the waist, and without one it lands on the credit rule like a photograph
+   somebody guillotined. */
+.rr-pic.cut{
+  --pic-l:38%;
+  -webkit-mask-image:linear-gradient(0deg,transparent 0,#000 13%);
+  mask-image:linear-gradient(0deg,transparent 0,#000 13%);
+}
+.rr-pic.cut img{object-fit:contain;object-position:right bottom}
+.rr-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(0deg,rgba(13,12,17,.55),rgba(13,12,17,0) 34%);
+}
+
+.rr-pic.none{
+  --pic-l:34%;-webkit-mask-image:none;mask-image:none;
+  display:flex;align-items:center;justify-content:center;
+}
+.rr-glyph{
+  position:relative;font-family:var(--cjk);font-size:clamp(56px,7vw,96px);
+  color:var(--attr,var(--fg-3));opacity:.22;line-height:1;
+}
+
+.rr-copy{
+  position:relative;z-index:1;min-height:var(--rr-h);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(24px,3.4vh,36px) 0 clamp(24px,3.4vh,36px) var(--dpad-x);
+  max-width:min(640px,100%);
+}
+/* Element first, above the name. It is the single most load-bearing fact about
+   a Resonator — it decides the team before the kit does — and it was a row
+   seven deep in a table in the far column. */
+.rr-elem{
+  display:inline-flex;align-items:center;gap:9px;color:var(--attr,var(--accent));margin-bottom:10px;
+}
+.rr-elem svg{flex:none}
+.rr-elem span{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+}
+.rr-stars{display:flex;gap:3px;margin-bottom:6px;line-height:1}
+.rr-stars i{font-style:normal;font-size:14px;color:var(--amber)}
+.drawer-b .rr-copy h2{
+  font-size:clamp(32px,4.4vw,58px);font-weight:600;letter-spacing:-.03em;line-height:1.02;margin:0 0 6px;
+}
+.drawer-b .rr-copy h2 .cjk{font-size:.4em;vertical-align:.4em}
+.rr-copy .cepithet{margin:0 0 14px;font-size:14px}
+.rrec .rr-copy .meta{margin-bottom:14px}
+.drawer-b .rr-copy .rr-sum{font-size:14px;line-height:1.65;color:var(--fg-2);max-width:50ch;margin:0}
+
+/* The far column of the hero. Glass, because it is standing on the artwork —
+   the same treatment the panels on the desk behind this get. */
+.rr-rail{
+  position:relative;z-index:1;display:grid;gap:10px;align-content:center;
+  padding:clamp(18px,2.4vh,26px) var(--dpad-x) clamp(18px,2.4vh,26px) 0;
+}
+.rr-rail .wcard,.rr-rail .dpanel{
+  background:rgba(15,14,19,.72);
+  backdrop-filter:blur(var(--panel-frost));-webkit-backdrop-filter:blur(var(--panel-frost));
+  border-color:var(--line-2);
+}
+.rr-conv b{display:block;font-size:13.5px;font-weight:600;line-height:1.35;margin-bottom:10px}
+.rr-conv .dsrc{width:100%;background:rgba(0,0,0,.2);border:0;font:inherit;color:var(--fg-2);cursor:pointer}
+.rr-conv .dsrc:hover{background:rgba(0,0,0,.32);color:var(--fg)}
+.rrec .rr-hero .debut{top:12px;right:12px}
+.rrec>.ccredit{margin:0 calc(-1 * var(--dpad-x));padding:7px var(--dpad-x);border-bottom:1px solid var(--line)}
+
+/* ── at a glance ───────────────────────────────────────────────────
+   The seven things a record is opened for. They were a label-and-value table
+   in a 440px box, where the label sat at one edge and the value at the other
+   and nothing read as a set. Across the panel they are seven tiles you take in
+   at once, which is the only thing "at a glance" can mean. */
+.rr-glance{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;margin-top:clamp(18px,2.4vh,26px);
+}
+.rr-glance>div{
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:7px;
+  padding:15px 11px 14px;border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(168deg,var(--tint),rgba(0,0,0,.14));
+}
+.rr-g-i{
+  display:flex;align-items:center;justify-content:center;width:38px;height:38px;
+  border-radius:50%;color:var(--fg-3);background:var(--tint-sink);
+}
+.rr-glance>div.attr .rr-g-i{
+  color:var(--attr,var(--accent));
+  background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--attr,var(--accent)) 22%,transparent),transparent 72%);
+}
+.rr-glance em{
+  font-family:var(--mono);font-size:9px;font-style:normal;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.rr-glance b{font-size:13.5px;font-weight:500;line-height:1.35;color:var(--fg)}
+.rr-glance>div.attr b{color:var(--attr,var(--fg))}
+
+/* ── the rotation ──────────────────────────────────────────────────
+   Six names in the order you press them. A kit page is asked for the shape of
+   the loop before it is asked for four thousand words about it, and a grid of
+   six equal cards does not say an order. Each node jumps to its own card, so
+   the band is a table of contents rather than a picture of one. */
+.kflow{
+  list-style:none;margin:0;padding:0;
+  display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px 0;
+}
+/* .dsec li draws a bullet, and these are list items inside a .dsec. */
+.dsec .kflow li{padding-left:0}
+.dsec .kflow li::before{content:none}
+.kflow li{display:flex;align-items:flex-start;flex:1 1 130px;min-width:0}
+/* The connector between nodes, drawn by the node it leaves — so the last one
+   has none and nothing is left hanging at the end of a wrapped row. Held level
+   with the middle of the discs rather than the middle of the node, because the
+   node is a disc with two lines of type under it. */
+.kflow li:not(:last-child)::after{
+  content:"";flex:none;width:18px;height:1px;margin:34px 1px 0;
+  background:linear-gradient(90deg,var(--line-2),transparent);
+}
+.kflow button{
+  flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:7px;
+  background:none;border:0;padding:6px 4px 4px;cursor:pointer;font:inherit;color:inherit;
+  border-radius:var(--r-sm);transition:.15s;
+}
+.kflow button:hover{background:var(--tint)}
+.kflow-i{
+  width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line-2);color:var(--attr,var(--accent));
+  background:radial-gradient(circle at 50% 38%,color-mix(in srgb,var(--attr,var(--accent)) 14%,transparent),var(--bg));
+  transition:.15s;
+}
+.kflow button:hover .kflow-i{
+  border-color:color-mix(in srgb,var(--attr,var(--accent)) 60%,transparent);
+  background:radial-gradient(circle at 50% 38%,color-mix(in srgb,var(--attr,var(--accent)) 24%,transparent),var(--bg));
+}
+.kflow em{
+  font-family:var(--mono);font-size:8.5px;font-style:normal;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--fg-3);text-align:center;line-height:1.4;
+}
+.kflow b{font-size:12.5px;font-weight:500;line-height:1.35;text-align:center;color:var(--fg-2)}
+.kflow button:hover b{color:var(--fg)}
+
+/* ── release history and sources, side by side ─────────────────── */
+.rr-cols{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:12px;margin-top:clamp(20px,2.8vh,28px);align-items:start;
+}
+.rr-steps{
+  list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 0;align-items:flex-start;
+}
+.rr-steps li{flex:1 1 90px;min-width:0;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:30px}
+/* The arrow that makes three facts a sequence. Set well clear of both values —
+   an unreleased Resonator's middle step is a single em dash, and at four pixels
+   the mark read as punctuation on the value after it. */
+.rr-steps li:not(:last-child)::after{
+  content:"";position:absolute;right:12px;top:7px;width:5px;height:5px;
+  border-top:1px solid var(--line-2);border-right:1px solid var(--line-2);transform:rotate(45deg);
+}
+.rr-steps b{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--fg);letter-spacing:-.01em}
+.rr-steps li.on b{color:var(--attr,var(--accent))}
+.rr-steps em{
+  font-family:var(--mono);font-size:8.5px;font-style:normal;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.rr-runs{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+.rr-runs .pill{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px}
+.rr-runs .pill:hover{border-color:var(--attr,var(--accent));color:var(--fg)}
+
+@media (max-width:1000px){
+  /* Below this the hero is a picture, a column of type and a 300px rail across
+     a panel that no longer has room for three of anything. The rail goes under
+     the copy — the two cards in it are links out of the record, and links out
+     belong after the record rather than beside its name. */
+  .rr-hero,.rr-hero.railed{grid-template-columns:1fr;--pic-l:32%;--pic-r:0px}
+  .rr-rail{padding:0 var(--dpad-x) clamp(18px,2.4vh,26px);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .rr-copy{min-height:0;padding-right:var(--dpad-x);max-width:none}
+  .rr-pic.cut{--pic-l:44%}
+}
+@media (max-width:700px){
+  /* One column, and the picture over it rather than behind it: at this width
+     a masked band down one side is a sliver of a shoulder. */
+  .rr-hero{display:block}
+  .rr-hero::after{display:none}
+  .rr-pic{
+    position:relative;inset:auto;height:clamp(200px,32vh,280px);
+    border-bottom:1px solid var(--line);-webkit-mask-image:none;mask-image:none;
+  }
+  .rr-pic img{object-position:center 14%}
+  .rr-pic.cut img{object-fit:contain;object-position:center bottom}
+  .rr-copy{padding:18px var(--dpad-x)}
+  .rr-glance{grid-template-columns:repeat(auto-fit,minmax(126px,1fr));gap:8px}
+  .rr-glance>div{padding:12px 8px 11px}
+  .kflow li{flex-basis:100%}
+  .kflow li:not(:last-child)::after{display:none}
+  .kflow button{
+    display:grid;grid-template-columns:auto minmax(0,1fr);
+    grid-template-areas:"i e" "i b";column-gap:12px;row-gap:2px;
+    justify-items:start;align-items:start;padding:8px;
+  }
+  .kflow-i{grid-area:i;width:44px;height:44px;align-self:center}
+  .kflow em{grid-area:e;align-self:end;text-align:left}
+  .kflow b{grid-area:b;align-self:start;text-align:left}
 }
 
 /* ══ command palette ════════════════════════════════════════════════ */

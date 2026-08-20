@@ -2045,11 +2045,13 @@ const GIST_LINES = 5;
 
 /* Condensed skill text: headings kept, every paragraph cut to its opening
    sentence, and the card stopped at GIST_LINES. What was dropped is counted
-   and said out loud — a summary that quietly loses thirty lines of a kit is
-   worse than no summary, and the count is also the argument for the toggle. */
+   and handed back with the html rather than printed inside it — the card turns
+   that count into its own way in to the full text, and the chain nodes print it
+   as a note. A summary that quietly loses thirty lines of a kit is worse than
+   no summary either way. */
 function kitGist(blocks){
   let used = 0, cut = 0;
-  const body = (blocks || []).map(b => {
+  const html = (blocks || []).map(b => {
     const ps = b.p || [];
     const take = Math.max(0, Math.min(ps.length, GIST_LINES - used));
     cut += ps.length - take;
@@ -2060,20 +2062,40 @@ function kitGist(blocks){
     return `${b.h ? `<h5>${kitText(b.h)}</h5>` : ""}
       ${ps.slice(0, take).map(p => `<p>${kitText(firstSentence(p))}</p>`).join("")}`;
   }).join("");
-  return body + (cut
-    ? `<p class="gist-more">+${cut} more line${cut === 1 ? "" : "s"} — switch off Simplified for the full text.</p>`
-    : "");
+  return {html, cut};
 }
+
+/* Game order, not file order: this is the sequence the in-game Resonator
+   screen lists them in, and the order they come up in a rotation. Each slot
+   carries the desk's own mark for it — see the sprite in index.html for why
+   these are drawn rather than lifted out of the client. */
+const KIT_ORDER = [
+  ["basic", "Basic Attack", "i-k-basic"], ["skill", "Resonance Skill", "i-k-skill"],
+  ["forte", "Forte Circuit", "i-k-forte"], ["liberation", "Resonance Liberation", "i-k-lib"],
+  ["intro", "Intro Skill", "i-k-intro"], ["outro", "Outro Skill", "i-k-outro"]
+];
+const KIT_ICON = Object.fromEntries(KIT_ORDER.map(([k, , ic]) => [k, ic]));
 
 /* One skill, one card. These used to be <details> in a single column, closed,
    because a full kit laid flat buried everything under it. In the grid they
    are open cards instead and the Simplified toggle is what keeps them short —
-   six boxes you can read across beats six rows you have to click. */
-function kitEntry(label, s, simple = S.kitSimple){
+   six boxes you can read across beats six rows you have to click.
+
+   `slot` is how the card finds its own full text again when the reader asks
+   for it: the kit is already in memory, so opening one card is a lookup and an
+   innerHTML rather than a redraw of the whole record. */
+function kitEntry(label, s, simple = S.kitSimple, slot = "", ic = "") {
   if(!s) return "";
-  return `<article class="skill">
-    <header class="skill-h"><span class="skill-k">${esc(label)}</span><b>${esc(s.name)}</b></header>
-    <div class="skill-t">${simple ? kitGist(s.blocks) : kitBody(s.blocks)}</div>
+  const g = simple ? kitGist(s.blocks) : {html: kitBody(s.blocks), cut: 0};
+  return `<article class="skill" id="sk-${esc(slot)}" data-slot="${esc(slot)}">
+    <header class="skill-h">
+      ${ic ? `<span class="skill-i">${icon(ic, 19)}</span>` : ""}
+      <span class="skill-hh"><span class="skill-k">${esc(label)}</span><b>${esc(s.name)}</b></span>
+    </header>
+    <div class="skill-t">${g.html}</div>
+    ${g.cut && slot ? `<button class="skill-more" data-act="skillfull">
+      <span>View details</span><em>+${g.cut} line${g.cut === 1 ? "" : "s"}</em>
+      ${icon("i-arrow", 12)}</button>` : ""}
   </article>`;
 }
 
@@ -2083,37 +2105,68 @@ function kitEntry(label, s, simple = S.kitSimple){
    browser's own in-page search for nothing. */
 function chainEntry(label, s, simple = S.kitSimple){
   if(!s) return "";
+  const g = simple ? kitGist(s.blocks) : {html: kitBody(s.blocks), cut: 0};
   return `<details class="skill">
     <summary><span class="skill-k">${esc(label)}</span><b>${esc(s.name)}</b></summary>
-    <div class="skill-t">${simple ? kitGist(s.blocks) : kitBody(s.blocks)}</div>
+    <div class="skill-t">${g.html}${g.cut
+      ? `<p class="gist-more">+${g.cut} more line${g.cut === 1 ? "" : "s"} — switch off Simplified for the full text.</p>`
+      : ""}</div>
   </details>`;
 }
 
-/* Game order, not file order: this is the sequence the in-game Resonator
-   screen lists them in, and the order they come up in a rotation. */
-const KIT_ORDER = [
-  ["basic", "Basic Attack"], ["skill", "Resonance Skill"],
-  ["forte", "Forte Circuit"], ["liberation", "Resonance Liberation"],
-  ["intro", "Intro Skill"], ["outro", "Outro Skill"]
-];
+/* Which blocks a card is holding back, found from the slot it wrote into its
+   own markup. The kit is already loaded — this record cannot have drawn
+   without it — so opening one card costs a lookup rather than a fetch. */
+function skillBlocks(name, slot){
+  const kit = kitFor(name);
+  if(!kit || !slot) return null;
+  const [kind, i] = String(slot).split(":");
+  if(kind === "inherent") return kit.inherent?.[Number(i)]?.blocks;
+  if(kind === "extra") return kit.extra?.[Number(i)]?.blocks;
+  return kit.skills?.[kind]?.blocks;
+}
+
+/* The rotation, as a rotation. Six names in the order you press them, which is
+   the one thing a kit page is asked for that a grid of six equal cards does not
+   say — a reader arriving at a Resonator wants the shape of the loop before
+   they want four thousand words about it. Each node jumps to its own card, so
+   the band is a table of contents rather than a picture of one. */
+function kitFlow(kit){
+  const nodes = KIT_ORDER
+    .map(([k, label, ic]) => kit.skills?.[k] ? {k, label, ic, name: kit.skills[k].name} : null)
+    .filter(Boolean);
+  /* One or two slots is not a rotation, it is a fragment of a scrape. */
+  if(nodes.length < 3) return "";
+  return `<div class="dsec"><span class="label">Combat kit</span>
+    <ol class="kflow">${nodes.map(n => `<li>
+      <button data-act="kitjump" data-id="${esc(n.k)}">
+        <span class="kflow-i">${icon(n.ic, 24)}</span>
+        <em>${esc(n.label)}</em>
+        <b>${esc(n.name)}</b>
+      </button>
+    </li>`).join("")}</ol></div>`;
+}
 
 function kitPanel(kit){
   if(!kit) return "";
   const simple = S.kitSimple;
-  const skills = KIT_ORDER.map(([k, label]) => kitEntry(label, kit.skills?.[k], simple)).join("");
+  const skills = KIT_ORDER
+    .map(([k, label, ic]) => kitEntry(label, kit.skills?.[k], simple, k, ic)).join("");
   /* Prydwen occasionally labels two blocks with the same slot name — a second
      Forte Circuit where the Intro Skill should be. The scraper keeps both
      rather than letting one overwrite the other, and the spare lands here. */
-  const extra = (kit.extra || []).map(e => kitEntry(e.kind, e, simple)).join("");
+  const extra = (kit.extra || [])
+    .map((e, i) => kitEntry(e.kind, e, simple, `extra:${i}`, KIT_ICON[String(e.kind || "").toLowerCase().includes("forte") ? "forte" : "skill"])).join("");
   /* Their own section rather than cards seven and eight of the grid: passives
      are a different kind of thing to the six slots you press, and folded in
      among them they read as skills you have somehow never found the button for. */
   const inherent = (kit.inherent || [])
-    .map(s => kitEntry("Inherent Skill", s, simple)).join("");
+    .map((s, i) => kitEntry("Inherent Skill", s, simple, `inherent:${i}`, "i-role")).join("");
   const chain = (kit.chain || [])
     .map(n => chainEntry(`S${n.n}`, {name:n.name, blocks:n.blocks}, simple)).join("");
 
   return `
+    ${kitFlow(kit)}
     <div class="dsec"><div class="dsec-h"><span class="label">Skills</span>${kitModeToggle(simple)}</div>
       <!-- Two columns for the full text rather than three. Condensed, the cards
            are five lines each and three across reads as a grid; at full length
@@ -2512,9 +2565,11 @@ function closeDrawer(){
   lastFocus?.focus?.();
 }
 
-function sourceList(sources){
+/* `box` puts the same list in a framed panel instead of a ruled section, for
+   the records that set it beside something else rather than under everything. */
+function sourceList(sources, box){
   if(!sources?.length) return "";
-  return `<div class="dsec"><span class="label">Sources</span>
+  return `<div class="${box ? "dpanel" : "dsec"}"><span class="label">Sources</span>
     <div style="display:grid;gap:8px">${sources.map(s => s.url
       ? `<a class="dsrc" href="${esc(s.url)}" target="_blank" rel="noopener">
            <span class="lang">${esc((s.lang || "??").toUpperCase())}</span>${esc(s.name)}
@@ -2574,6 +2629,73 @@ function sigWeaponCard(wname){
     : `<div class="wcard is-flat">${inner}</div>`;
 }
 
+/* ── the resonator record ──────────────────────────────────────────
+   Built the same way the event record is, and for the same reason: the picture
+   is the thing you arrive at, so it holds the page rather than sitting in a box
+   on it. Kuro's key art runs down the right of the hero with the name, the
+   element and the state set into it; the signature weapon and the banner they
+   run on sit in the far column, on the art; the seven facts everybody actually
+   opens a record for are a strip under it; then the kit — the rotation as a
+   rotation, and then the six cards.
+
+   What went is the tall 4:5 art panel across the full width of the panel. A
+   1500px modal with a 400px cut-out centred in it is a portrait in a field, and
+   everything the record has to say started below the fold. */
+
+const ATTR_ICON = {
+  glacio:"i-e-glacio", fusion:"i-e-fusion", electro:"i-e-electro",
+  aero:"i-e-aero", spectro:"i-e-spectro", havoc:"i-e-havoc"
+};
+function attrIcon(a, size = 14){
+  const id = ATTR_ICON[String(a || "").toLowerCase()];
+  return id ? icon(id, size) : "";
+}
+
+/* Rarity as the game draws it. The corner chip said "5★" in mono, which is the
+   same fact at a size nobody reads first — and the one thing a reader wants off
+   a Resonator before the name is whether they are a five. */
+function rarityStars(n){
+  const r = Number(n) || 0;
+  if(!r) return "";
+  return `<span class="rr-stars" role="img" aria-label="${r} star">${
+    Array.from({length:r}, () => `<i>★</i>`).join("")}</span>`;
+}
+
+/* Debut, first release, and whether they have ever come back — the three dates
+   a record is opened for, in that order.
+
+   Reruns are a 5★ question. A 4★ is rate-up filler on nearly every banner that
+   runs, so the same list that reads as a history for a limited Resonator reads
+   as a wall of patch numbers for them; their badge already drops the count for
+   this reason and so does this. */
+function releaseHistory(r){
+  if(!r.version && !r.released) return "";
+  const filler = String(r.rarity) === "4";
+  const reruns = filler ? [] : r.reruns || [];
+  const debuted = hasDebuted(r);
+
+  const back = r.standard ? "Standard pool"
+    : filler ? "Rate-up filler"
+    : reruns.length ? `${plural(reruns.length, "rerun")}`
+    : debuted ? "None yet"
+    : "Unreleased";
+  const backSub = r.standard ? "Always available"
+    : filler ? "On most banners that run"
+    : reruns.length ? `Latest ${reruns[reruns.length - 1]}`
+    : debuted ? "Has not come back" : "No banner yet";
+
+  return `<div class="dpanel rr-hist">
+    <span class="label">Release history</span>
+    <ol class="rr-steps">
+      <li><b>${esc(r.version || "—")}</b><em>Debut patch</em></li>
+      <li><b>${r.released ? esc(fmtDate(r.released)) : "—"}</b><em>First release</em></li>
+      <li class="${reruns.length || r.standard ? "on" : ""}"><b>${esc(back)}</b><em>${esc(backSub)}</em></li>
+    </ol>
+    ${reruns.length ? `<div class="rr-runs">${reruns.map(v =>
+      `<button class="pill ver" data-act="version" data-id="${esc(v)}">${esc(v)}</button>`).join("")}</div>` : ""}
+  </div>`;
+}
+
 function drawerResonator(name){
   const r = resonatorFor(name);
   const b = bannerFor(name) || {};
@@ -2581,62 +2703,97 @@ function drawerResonator(name){
   const f = figure({name, ...b});
   const kitTier = r.confidence?.kit;
   const sig = r.signature || b.signature;
-  /* Debut and reruns are written out in full here, not just hung off the
-     corner badge's tooltip — this is the record, and a patch history you can
-     only reach by holding a mouse still is not in the record. The signature
-     weapon is the one row that left: it is the card above this list now. */
-  const gear = [["Convene", r.convene || b.convene],
-                ["Accessory", r.accessory], ["Weapon", r.weapon || b.weapon], ["Role", r.role || b.role],
-                ["Region", r.region], ["Debut", r.version || b.version],
-                /* "None yet" only once they have actually had a banner to not
-                   come back from — on an unreleased Resonator it reads as a
-                   fact about their history rather than the absence of one. */
-                ["Reruns", r.standard ? "Standard pool — always available"
-                  : r.reruns?.length ? r.reruns.join(", ")
-                  : hasDebuted(r) ? "None yet" : ""],
-                ["Released", r.released ? fmtDate(r.released) : ""]].filter(([, v]) => v);
+  const attr = r.attribute || b.attribute;
+  const rarity = r.rarity || b.rarity;
+  const version = r.version || b.version;
+  const convene = r.convene || b.convene;
 
-  openDrawer("Resonator record", `
-    <div class="dart"${attrStyle(r.attribute || b.attribute)}>
-      ${artPanel({name, ...b}, `${r.rarity || b.rarity ? `<span class="rank">${esc(r.rarity || b.rarity)}★</span>` : ""}
-        ${debutBadge(r)}
-        <span class="attrline">${r.attribute || b.attribute ? `<b>${esc(r.attribute || b.attribute)}</b>` : ""}</span>`)}
-      ${creditLine({name, ...b})}
-    </div>
-    <div class="drawer-b"${attrStyle(r.attribute || b.attribute)}>
-      <!-- Who they are on the left, what they are on the right. The record used
-           to run the full width under the summary, which put eight two-word
-           rows across a thousand pixels with the label at one edge and the
-           value at the other. Side by side, both columns are a readable width
-           and the panel opens on everything the card could not hold. -->
-      <div class="rlay">
-        <div class="rlay-main">
-          <h2>${esc(name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h2>
-          ${f.epithet ? `<div class="cepithet" style="margin:-4px 0 12px">${esc(f.epithet)}</div>` : ""}
-          <div class="meta">
-            ${r.confidence?.identity ? tierBadge(r.confidence.identity, r.confidence.identity === "official") : ""}
-            ${r.status ? `<span class="pill">${esc(r.status)}</span>` : ""}
-            ${b.phase ? `<span class="pill">Phase ${esc(b.phase)}</span>` : ""}
-          </div>
-          ${r.summary ? `<p>${esc(r.summary)}</p>` : `<p>No written record yet — identity only.</p>`}
-          ${r.kit?.length ? `<div class="dsec">
-            <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
-            <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
-            <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
-            <p style="font-size:12px;color:var(--fg-3);margin-top:14px">Pre-balance. Multipliers and mechanics
-            routinely shift between beta phases.</p>
-          </div>` : ""}
+  /* The seven facts, as a strip. These were a label-and-value table in the far
+     column, where seven two-word rows put the label at one edge of a 440px box
+     and the value at the other and nothing was readable as a set. Across the
+     record they are seven tiles you take in at once, which is what "at a
+     glance" has to mean to be worth the words. */
+  const glance = [
+    ["Element", attr, attr ? attrIcon(attr, 22) : icon("i-res", 22), "attr"],
+    ["Weapon", r.weapon || b.weapon, icon("i-weapon", 22)],
+    ["Role", r.role || b.role, icon("i-role", 22)],
+    ["Region", r.region, icon("i-region", 22)],
+    ["Debut", version ? `Version ${version}` : "", icon("i-timeline", 22)],
+    ["Released", r.released ? fmtDate(r.released) : (hasDebuted(r) ? "" : "Not yet"), icon("i-timeline", 22)],
+    ["Reruns", r.standard ? "Standard pool"
+      : String(r.rarity) === "4" ? "Rate-up filler"
+      : r.reruns?.length ? plural(r.reruns.length, "rerun")
+      : hasDebuted(r) ? "None yet" : "", icon("i-rerun", 22)]
+  ].filter(([, v]) => v);
+
+  /* The far column of the hero, over the art. Two cards, both of them a way
+     out of this record rather than more of it: what they hold, and which
+     banner they came off. Skipped entirely when neither is known, so an
+     unannounced Resonator's hero is the picture and the name and no furniture
+     standing around an empty box. */
+  const rail = [
+    sigWeaponCard(sig),
+    convene ? `<div class="dpanel rr-conv">
+      <span class="label">Runs on</span>
+      <b>${esc(convene)}</b>
+      ${version ? `<button class="dsrc" data-act="version" data-id="${esc(version)}">
+        Version ${esc(version)} — the whole patch
+        <span class="arrow">${icon("i-arrow", 13)}</span></button>` : ""}
+    </div>` : ""
+  ].filter(Boolean).join("");
+
+  openDrawer("Resonator record", `<div class="drawer-b rrec"${attrStyle(attr)}>
+    <header class="rr-hero${f.image ? "" : " bare"}${rail ? " railed" : ""}">
+      ${f.image
+        ? `<div class="rr-pic${f.cutout ? " cut" : ""}">
+             <img src="${esc(f.image)}" alt="${esc(name)}" decoding="async"${f.style}>
+           </div>`
+        /* No picture resolved. The desk's own rings, same as everywhere else,
+           and the initial the grid already falls back to. */
+        : `<div class="rr-pic none"><div class="ev-plate" aria-hidden="true">
+             <span>No art published yet</span></div>
+             <span class="rr-glyph">${esc(f.glyph)}</span></div>`}
+      <div class="rr-copy">
+        ${attr ? `<div class="rr-elem">${attrIcon(attr, 26)}<span>${esc(attr)}</span></div>` : ""}
+        ${rarityStars(rarity)}
+        <h2>${esc(name)}${r.nameCN ? `<span class="cjk">${esc(r.nameCN)}</span>` : ""}</h2>
+        ${f.epithet || r.epithet ? `<div class="cepithet">${esc(f.epithet || r.epithet)}</div>` : ""}
+        <div class="meta">
+          ${r.confidence?.identity ? tierBadge(r.confidence.identity, r.confidence.identity === "official") : ""}
+          ${r.status ? `<span class="pill">${esc(r.status)}</span>` : ""}
+          ${b.phase ? `<span class="pill">Phase ${esc(b.phase)}</span>` : ""}
         </div>
-        <div class="rlay-side">
-          ${sigWeaponCard(sig)}
-          ${gear.length ? `<div class="dpanel"><span class="label">Record</span>
-            <div class="dgear">${gear.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div></div>` : ""}
-        </div>
+        ${r.summary ? `<p class="rr-sum">${esc(r.summary)}</p>`
+          : `<p class="rr-sum evr-thin">No written record yet — identity only.</p>`}
       </div>
-      <div id="kitwrap"><div class="dsec"><span class="label">Skills</span>
-        <p style="margin:0;color:var(--fg-3)">Loading kit…</p></div></div>
-      ${sourceList(r.sources)}
-    </div>`, `resonator:${name}`);
+      ${rail ? `<aside class="rr-rail">${rail}</aside>` : ""}
+      ${debutBadge(r)}
+    </header>
+    ${creditLine({name, ...b})}
+
+    ${glance.length ? `<div class="rr-glance">
+      ${glance.map(([k, v, ic, cls]) => `<div class="${cls || ""}">
+        <span class="rr-g-i">${ic}</span>
+        <em>${esc(k)}</em><b>${esc(v)}</b>
+      </div>`).join("")}
+    </div>` : ""}
+
+    ${r.kit?.length ? `<div class="dsec">
+      <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
+      <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
+      <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
+      <p class="tier-note" style="margin-top:14px">Pre-balance. Multipliers and mechanics
+      routinely shift between beta phases.</p>
+    </div>` : ""}
+
+    <div id="kitwrap"><div class="dsec"><span class="label">Skills</span>
+      <p style="margin:0;color:var(--fg-3)">Loading kit…</p></div></div>
+
+    <div class="rr-cols">
+      ${releaseHistory(r)}
+      ${sourceList(r.sources, true)}
+    </div>
+  </div>`, `resonator:${name}`);
 
   /* The record is on screen already; this drops the kit in underneath when the
      file lands. Guarded on the drawer still showing this Resonator, because a
@@ -3042,6 +3199,32 @@ function bind(){
     }
     else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
     else if(act === "reel"){ paintReel(Number(id)); }
+    /* A condensed skill card asking for the rest of itself. Repaints the one
+       card rather than redrawing the kit: the Simplified toggle is a preference
+       about the whole record and this is not — it is one card, opened, and
+       redrawing would shut it again along with everything else already open. */
+    else if(act === "skillfull"){
+      const card = el.closest(".skill");
+      const who = String(S.drawer || "");
+      const blocks = who.startsWith("resonator:")
+        ? skillBlocks(who.slice(10), card?.dataset.slot) : null;
+      if(card && blocks){
+        card.querySelector(".skill-t").innerHTML = kitBody(blocks);
+        card.classList.add("full");
+        el.remove();
+      }
+    }
+    /* The combat-kit band is a table of contents for the cards under it. */
+    else if(act === "kitjump"){
+      const card = document.getElementById(`sk-${id}`);
+      if(card){
+        card.scrollIntoView({block:"center", behavior:"smooth"});
+        card.classList.remove("lit");
+        /* Restart the highlight even when the same node is clicked twice. */
+        void card.offsetWidth;
+        card.classList.add("lit");
+      }
+    }
     else if(act === "noop"){ /* decorative */ }
     else dispatch(act, id);
   });
