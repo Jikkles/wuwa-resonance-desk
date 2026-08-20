@@ -875,13 +875,51 @@ button{font:inherit;color:inherit}
    Centred stacks left two thirds of each column empty when a phase had a
    single debut — a row uses the width it's given, and has space for the
    weapon as well as the rarity and element. */
-.bstrip.rows{flex-direction:column;flex-wrap:nowrap;gap:8px;overflow:visible;--thumb:44px}
+/* The size container every banner tile in here is measured against — its own
+   width, its cap, and the size of its type all come off this box. It is the
+   strip rather than each tile because a tile sized in cqi cannot also be the
+   container those units are a percentage of; .bpair's own note has the whole
+   story. The strip has no padding and a tile stretches to fill it, so the two
+   are the same width and every threshold reads the same either way. */
+.bstrip.rows{
+  flex-direction:column;flex-wrap:nowrap;gap:8px;overflow:visible;--thumb:44px;
+  container-type:inline-size;
+}
 /* Inside a phase column the strip takes the column's height and the tiles
    share it — a phase with two banners gets two taller tiles rather than two
    short ones and a hole. Capped, because a phase with one banner beside a
    phase with four would otherwise draw a single 200px-tall tile. */
 .ps-col .bstrip.rows{flex:1 1 auto}
 .ps-col .bstrip.rows>.bpair{flex:1 1 auto;max-height:104px}
+/* 104px is two lines of a 13px name over 9px chips with room to spare. The
+   same tile at 26px and 18px — see "a wide tile's type" — needs 158, and left
+   at 104 it clips the chips off the bottom of any debut whose name wraps. The
+   narrow tile keeps the cap that stops one lone banner stretching to the
+   height of a neighbouring phase's four.
+
+   The halves are rebalanced with it. 1.35fr to the left is right when that
+   half is a 62px portrait beside 13px type and the right one is a single short
+   line — at twice the size it is the split that leaves a hand's width of
+   nothing down the middle of the tile while "Thousandfold Deliverance" is
+   clipped mid-word in the half that needed those pixels. Even halves here, and
+   the middle closes up.
+
+   480px, not the 330px the weapon half turns on its side at. Those are two
+   different questions: 330 is where the weapon's name and its picture fit
+   beside each other, and this is where doubled type fits at all. Under 480 an
+   even split leaves the left half about 158px for a New chip, a rarity and an
+   element — which is one line at 13px and two at anything larger, and a tile
+   whose chips wrap is a tile that gets them clipped. Not because there is no
+   room for a second row: because the grid resolves its height from an
+   intrinsic pass in which the chips are measured unwrapped, so the row is
+   built for one line and then laid out with two. Sizing them to stay on one
+   line is the fix for both halves of that. */
+@container (min-width:480px){
+  .ps-col .bstrip.rows>.bpair{
+    max-height:158px;flex-shrink:0;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  }
+}
 /* flex and width spelled out here rather than left to the pair: the base .bmini
    rule sets `flex:none; width:var(--thumb)` and sits later in the file, so it
    wins on source order and collapses this tile to thumbnail width. */
@@ -943,10 +981,16 @@ button{font:inherit;color:inherit}
      larger share because it carries a 62px portrait inside it. */
   grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
   align-items:stretch;
-  /* The tile asks about its own width below, not the window's. Two phase
-     columns put it at 254px on a 1500px screen and 630px on a tablet, which
-     is the same tile in two situations a media query cannot tell apart. */
-  container-type:inline-size;
+  /* The tile asks about its own width below, not the window's — two phase
+     columns put it at 254px on a 1500px screen and 630px on a tablet, which is
+     the same tile in two situations a media query cannot tell apart. The
+     container it asks is the strip it sits in rather than itself, because the
+     type inside it is sized in cqi and a box cannot be measured in units of
+     its own width: the flex pass that works out how tall this tile has to be
+     runs with the tile's inline size contained, the cqi type resolves against
+     nothing, and the tile comes out seven pixels short of what is in it. The
+     strip is the same width to the pixel — a tile stretches to fill it — so
+     the queries read identically and the height resolves in one pass. */
   border:1px solid color-mix(in srgb,var(--attr) 30%,transparent);
   border-radius:10px;overflow:hidden;
   /* Lit at rest, not on hover. Five grey tiles to a card is most of what you
@@ -1019,6 +1063,12 @@ button{font:inherit;color:inherit}
 @container (min-width:330px){
   .bp-right{flex-direction:row;justify-content:flex-end;text-align:right;gap:9px}
 }
+/* The type this tile sets at that width is scaled in the same query, further
+   down the file — see "a wide tile's type". It has to be down there: a
+   container query adds no specificity, and .bp-who b and .bp-wep are both
+   declared below this point, so an override written here loses on source
+   order without a word of warning. Same reason the chip sizing already lives
+   beside the chips rather than up here. */
 .bp-right.empty{cursor:default}
 /* Both halves light under the mouse, which is the whole point of there being
    two of them — where a click goes is answerable without trying it. */
@@ -1339,6 +1389,49 @@ button{font:inherit;color:inherit}
   background:color-mix(in srgb,var(--attr) 16%,transparent);
 }
 .bp-who .attr,.bp-who .new{padding:1px 5px}
+
+/* ── a wide tile's type ────────────────────────────────────────────
+   Twice the size, once the tile is wide enough not to need squinting at. The
+   sizes above — a 13px name, 9px chips, an 11.5px weapon — were set for the
+   254px tile that two phase columns leave on a desktop, where they are the
+   largest that fit. One phase column is 630px: the same markup with two and a
+   half times the room, and it was spending all of it on empty middle, the name
+   ending a third of the way across and the weapon starting two thirds along
+   with a hand's width of nothing between. Small type here is a consequence of
+   a narrow column, not a house style, so it goes when the column does.
+
+   Placed at the foot of the tile's rules rather than with the container query
+   that turns the weapon half on its side, because a container query carries no
+   specificity of its own: written up there, every line of this would be
+   outranked by the base rule it is trying to override. The container is still
+   .bpair — where the rule sits in the file has nothing to do with which box is
+   measured. The tile's own height, shrink and column split are the things that
+   cannot be set from in here, since a container cannot query itself; those are
+   on the strip, up beside .ps-col.
+
+   Sized in cqi — a percent of the tile's own width — rather than stepped from
+   one number to another at the threshold. A step is right at 665px, which is
+   the widest a phase column gets, and wrong at 490px, which is the same column
+   on a smaller tablet: there 23px is wider than the weapon half has room for
+   and "Forged Dwarf Star" loses its last word mid-letter. Each of these is the
+   size that fits the tile it is actually in, floored at what the narrow tile
+   already used and capped at twice it, so nothing between the two ever has to
+   be measured again. The coefficients are set so the cap lands where the half
+   holding it has the width for it, not before.
+
+   The chips stop wrapping. At one line the height the grid resolves from its
+   intrinsic pass is the height the tile is laid out at, which is the whole
+   reason the bottom row was being cut off — see the strip's own note. */
+@container (min-width:480px){
+  .bp-who b{font-size:clamp(13px,5cqi,26px);line-height:1.16}
+  .bp-who .bmeta{font-size:clamp(9px,2.7cqi,18px);gap:.5em;margin-top:.5em;flex-wrap:nowrap}
+  .bp-who .attr,.bp-who .new{padding:.18em .5em;border-radius:6px}
+  .bp-wep{font-size:clamp(11.5px,4.1cqi,23px);line-height:1.25}
+  .bp-right.empty .bp-wep{font-size:clamp(8.5px,3cqi,17px)}
+  /* The initial a tile falls back to with no portrait published. It stands in
+     for the face, so it grows with the name beside it. */
+  .bp-art .g{font-size:clamp(20px,6.5cqi,34px)}
+}
 .bmini-more{
   flex:none;align-self:center;padding:0 2px;
   font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--fg-3);
