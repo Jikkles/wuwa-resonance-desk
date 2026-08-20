@@ -1728,11 +1728,6 @@ button{font:inherit;color:inherit}
 .evr-est,.evr-perm{
   font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
 }
-.evr-tz{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
-}
-.evr-tz svg{flex:none}
 
 /* Out to Kuro's own post. The only button on the record, because it is the
    only thing here the desk cannot answer itself. */

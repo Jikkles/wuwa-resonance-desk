@@ -1770,7 +1770,6 @@ function drawerEvent(id){
         ${ev.summary ? `<p class="evr-sum">${esc(ev.summary)}</p>` : ""}
         <div class="evr-when">
           <span class="evr-dates">${icon("i-timeline", 13)}${dates}</span>
-          <span class="evr-tz">${icon("i-info", 12)}Your own clock — ${esc(tzLabel())}</span>
         </div>
         ${ev.source ? `<a class="evr-cta" href="${esc(ev.source)}" target="_blank" rel="noopener">
           ${esc(ev.origin === "kuro" ? "Kuro's event notice" : "Kuro's version preview")}
