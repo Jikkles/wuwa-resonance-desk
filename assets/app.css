@@ -56,7 +56,7 @@
      "Resonators" and its caret on one line. The one row that doesn't fit,
      Live Signals with its warning badge, wraps instead of setting the width
      for everything else. */
-  --rail-w:296px;
+  --rail-w:259px;
   --aside-w:18.6rem;
 
   /* Backdrop dials. The backdrop is the desk's own mark now rather than the
@@ -190,7 +190,24 @@ button{font:inherit;color:inherit}
 .app{display:grid;grid-template-columns:var(--rail-w) minmax(0,1fr);min-height:100vh}
 
 .rail{
-  position:sticky;top:0;height:100vh;overflow-y:auto;overscroll-behavior:contain;
+  /* Two sizes off the dial, the same move the aside got and for the same
+     reason: this is a column of labels you navigate by, not text you read, and
+     at the page's own size the word RESONATORS was the largest thing on a
+     screen whose subject is a patch. zoom rather than a font-size because
+     every size here is a rem — see the note over .aside,.hud for the whole of
+     why. --rail-w comes down with it, 296 to 259, which is the same layout in
+     a narrower track and 37px handed back to the stage.
+
+     The height has to be divided back out. zoom scales what the box renders
+     at, so a rail asking for 100vh would be laid out a viewport tall and then
+     drawn at seven eighths of one, coming up short of the fold with the foot
+     links floating above the bottom of the screen. Dividing first is what
+     makes 100vh mean 100vh again. It is written against the same variable as
+     the zoom so the two cannot drift apart. */
+  --rail-zoom:.875;
+  zoom:var(--rail-zoom);
+  position:sticky;top:0;height:calc(100vh / var(--rail-zoom));
+  overflow-y:auto;overscroll-behavior:contain;
   /* The same glass as the panels, so the backdrop reaches the full width of
      the page rather than starting 238px in, and the rail doesn't read as the
      one opaque slab on a page of frosted ones. It is a column of 10px mono
@@ -3583,7 +3600,7 @@ img.astrite-pic{
   /* The rail steps down with the viewport, but by less than the page does: at
      this width it is a bigger share of the screen than at 1440, and that is
      the trade — the nav is what the desk is steered with. */
-  :root{--rail-w:270px}
+  :root{--rail-w:236px}
   /* This much rail can't hold "Live Signals" and "Unverified" on one line at
      this type size. The hatched bar on the view itself still carries it.
      Events carries no badge at all now that it has data behind it. */
@@ -3610,6 +3627,9 @@ img.astrite-pic{
   .rail{
     position:static;height:auto;flex-direction:row;align-items:center;gap:14px;
     padding:12px 16px;border-right:0;border-bottom:1px solid var(--line);
+    /* Full size again. The two sizes came off a column you navigate by; here
+       the column is gone and what is left is a brand and a row of links. */
+    zoom:1;
   }
   .rail-group,.rail-links,.rail-foot{display:none}
   /* The header lives inside .body now and takes its gutters from it. */
