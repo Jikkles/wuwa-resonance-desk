@@ -1242,21 +1242,27 @@ function renderTimeline(){
    does not publish them until patch day. Those inherit the patch window and
    say so. */
 
-/* Running first, and inside that the one closing soonest — the whole question
-   this band answers is what you are about to lose. Then what has not started,
-   then the permanent additions, then what has already closed. */
+/* Chronological, in the order you would actually meet these: what is running,
+   soonest to close first — that is the one you are about to lose — then what
+   has not opened yet, soonest to open first, then the permanent additions,
+   which are not going anywhere, and finally what has already closed.
+
+   Nothing sorts by importance. The headline event keeps its double-width tile
+   but takes its place in the queue like everything else: a band whose order is
+   partly the calendar and partly an editorial judgement is a band you cannot
+   read the calendar off. */
+const EVENT_ORDER = {live:0, soon:1, permanent:2, past:3};
 function eventList(){
-  const rank = ev => {
-    const st = eventState(ev);
-    return st.kind === "live" ? 0 : st.kind === "soon" ? 1 : st.kind === "permanent" ? 2 : 3;
-  };
+  const at = (ev, which) => String(eventWindow(ev)[which] || "");
   return [...gameEvents()].sort((a, b) => {
-    const ra = rank(a), rb = rank(b);
+    const ra = EVENT_ORDER[eventState(a).kind], rb = EVENT_ORDER[eventState(b).kind];
     if(ra !== rb) return ra - rb;
-    if(ra === 0) return String(eventWindow(a).end || "").localeCompare(String(eventWindow(b).end || ""));
-    if(ra === 3) return String(eventWindow(b).end || "").localeCompare(String(eventWindow(a).end || ""));
-    return (b.headline ? 1 : 0) - (a.headline ? 1 : 0)
-        || String(eventWindow(a).start || "").localeCompare(String(eventWindow(b).start || ""));
+    if(ra === 0) return at(a, "end").localeCompare(at(b, "end"));
+    if(ra === 1) return at(a, "start").localeCompare(at(b, "start"));
+    /* Closed events read newest first — the far end of the list is the far
+       end of the patch. */
+    if(ra === 3) return at(b, "end").localeCompare(at(a, "end"));
+    return a.name.localeCompare(b.name);
   });
 }
 
@@ -1359,19 +1365,37 @@ function eventCard(ev){
   </article>`;
 }
 
-/* The band on the timeline. Capped, because it sits above Recent intel and a
-   patch runs eight or nine of these — the rest are one click away in a view of
-   their own. */
-function eventPanel(limit = 6){
-  const shown = eventList().slice(0, limit);
-  const live = gameEvents().filter(e => eventState(e).kind === "live").length;
+/* The band on the timeline: everything that is on and everything that is
+   coming, in that order, however many rows that takes. It was capped at six
+   with a View all button, which is the wrong trade for this particular list —
+   a patch runs eight or nine events, they are the things you can miss by not
+   logging in, and a tile is 200px. Six of nine with a button is a reader
+   counting what is behind the cut.
+
+   What it does drop is the closed ones. This is the band for planning the week
+   and an event that ended is not part of that; the Events view keeps them,
+   grouped by patch, which is where a finished patch belongs. */
+function eventPanel(){
+  /* This patch and the ones after it, and nothing older. A permanent event
+     from a shipped patch is still playable — Shape of Yesterday will be there
+     next year — but it is not part of the current cycle, and on a band about
+     what to do this fortnight it is a tile that never changes and never goes
+     away. The Events view keeps it, filed under the patch it shipped in. */
+  const floor = parseFloat(liveVersion()?.id);
+  const shown = eventList().filter(e =>
+    eventState(e).kind !== "past" &&
+    (isNaN(floor) || parseFloat(e.version) >= floor));
+  const count = kind => shown.filter(e => eventState(e).kind === kind).length;
+  /* Says what the parts of the list are, so its order is stated rather than
+     inferred from the chips — and the tally has to add up to the tiles under
+     it, which is why the permanent ones are in it. */
+  const sub = [[count("live"), "running"], [count("soon"), "upcoming"], [count("permanent"), "permanent"]]
+    .filter(([k]) => k).map(([k, w]) => `${k} ${w}`).join(" · ") || "Nothing scheduled";
   return `<div class="panel">
-    <div class="panel-h"><h2>Events</h2>
-      <span class="sub">${live ? `${plural(live, "running")}` : "Live &amp; announced"}</span>
-      <div class="right"><button class="more" data-act="view" data-id="events">View all ${icon("i-arrow", 12)}</button></div></div>
+    <div class="panel-h"><h2>Events</h2><span class="sub">${esc(sub)}</span></div>
     <div class="panel-b">${shown.length
       ? `<div class="evgrid">${shown.map(eventCard).join("")}</div>`
-      : `<div class="empty">No events on file yet.</div>`}</div>
+      : `<div class="empty">Nothing running, and nothing announced yet.</div>`}</div>
   </div>`;
 }
 
