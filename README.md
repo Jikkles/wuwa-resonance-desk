@@ -793,27 +793,35 @@ Still not built: redemption codes.
 ### Permanent events
 
 `data/permanents.json`, written by `scripts/fetch-permanents.mjs`, and the one calendar
-that does not come from Kuro. A permanent event has no window and gets no notice: it was
-announced once, in a patch that shipped up to two years ago, and Kuro's news feed stopped
-carrying that post long before this desk existed. `fetch-events.mjs` reads a hundred days
-back; Echo Hunters has been in the game since launch day, 2024-05-23.
+that does not come from Kuro. A permanent event is a mode the game kept: it ran for a
+fortnight like everything else, its notice dropped out of the news feed, and the content is
+still in the menu a year later. `fetch-events.mjs` reads a hundred days back; the oldest
+entry here opened on 2025-04-29, in Version 2.3.
 
-So this half reads the wiki — `Category:Permanent Events`, the `{{Event}}` infobox for the
-dates and the type, `{{Description}}` for Kuro's own blurb, `{{Event Rewards}}` for the
-payout. **The category is not the filter.** It holds 37 pages and 18 of them have a real
-closing date on the infobox, because the wiki files an event there when the *mode* it
-added stays in the game — which is a different claim from the event still being open. A
-Glimpse of Xuanfang is in that category and closed on 2026-08-19, which the desk knows
-because Kuro said so. `time_end = none` is the field that means what this file means, and
-it is what the first filter reads.
+So this half reads the wiki — the `{{Event}}` infobox for the dates and the type,
+`{{Description}}` for Kuro's own blurb, `{{Event Rewards}}` for the payout. **What it does
+not read is the membership.** Nothing on the wiki reproduces the in-game list, and it was
+tried twice. `Category:Permanent Events` carries 37 pages, three times the list.
+`time_end = none` — no closing date on the infobox — gives 19, and it is wrong in both
+directions at once: it lets in the game's onboarding ramp, three **Login** tracks and three
+**Next Stop: \<region\>** passes that are open forever because they are there for whoever
+installs the game next year, and it keeps out ten of the twelve events actually on the tab,
+every one of which has a real closing date on the wiki. *Dreaming Deep* closed on
+2025-08-27 and is in the menu today.
 
-The second filter is about who the event is for. Six of the nineteen that pass are the
-game's own onboarding: three **Login** tracks paying out for turning up on consecutive
-days, and three **Next Stop: \<region\>** passes that skip a returning player forward to the
-current map. Those never close because they are not events, they are a ramp — the game
-keeps them open for whoever installs it next year. The in-game Permanent tab does not list
-them and neither does this. The wiki labels both groups itself, in `group2`, so the filter
-is that label rather than a list of names to keep up to date. 13 events, launch day to now.
+That is not the wiki being wrong. The two are answers to different questions: the wiki's
+date is the event's, the fortnight its rewards were running, and the tab is Kuro's claim
+about the *mode*. Nothing on the page separates a mode Kuro kept from one it retired,
+because that is decided in the client and never written down anywhere the wiki reads. So
+the `TAB` list in the fetcher is the membership — twelve names, copied off the Permanent
+tab in game — and the wiki supplies every fact about each one. The category is still
+fetched, now only to audit that list: a name that has left it has probably been renamed, a
+page that has joined it is a candidate for the next time the tab is opened, and both get
+printed on every run. 12 events, Version 2.3 to now.
+
+All twelve carry `end: null`, including the ten the wiki dates. That date closed the
+event's reward run; *permanent* on this desk means the thing is there when you log in
+tonight, which is what the tab asserts.
 
 The banners come down at 720px into `assets/events/` rather than being hotlinked, the same
 call the reward icons and the portraits make — these are Kuro's own event banners, hosted
@@ -1145,7 +1153,7 @@ left is the editorial, which is the part worth your time.
 | `feed.json` | six news sources | yes |
 | `art.json` | Kuro's reveal posts | yes |
 | `events.json` — the calendar, its windows and its banners | Kuro's patch notes and event notices | yes |
-| `permanents.json` + `assets/events/` — everything the game keeps, and its banners | Fandom's `Category:Permanent Events` | yes |
+| `permanents.json` + `assets/events/` — everything the game keeps, and its banners | the in-game Permanent tab for the list, Fandom for the facts | yes |
 | `items.json` + `assets/items/` — reward icons | Fandom, off the reward lines in both calendars | yes |
 | `resonators.json` — identity, debut, reruns | Fandom | yes |
 | phase dates in `versions.json` | Fandom convene pages, once a phase has run | yes |

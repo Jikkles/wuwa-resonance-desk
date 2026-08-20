@@ -16,22 +16,31 @@
 //   {{Description}}            →  Kuro's own blurb, quoted on the page
 //   {{Event Rewards}}          →  the payout, item by item
 //
-// The category is not the filter, though. It carries 37 pages and 18 of them
-// have a real closing date on the infobox — the wiki files an event there when
-// the *mode* it added stays in the game, which is a different claim from the
-// event still being open. A Glimpse of Xuanfang is in that category and closed
-// on 2026-08-19, which the desk knows because Kuro said so in the 3.5 notice.
-// `time_end = none` is the field that actually means what this file means, and
-// it is what the first filter reads.
+// The category is not the filter, and neither is any other field on the page.
+// This was tried twice. The category itself carries 37 pages, which is three
+// times the list. `time_end = none` — no closing date on the infobox — gives
+// 19, and it is wrong in both directions at once: it lets in the game's
+// onboarding ramp, three Login tracks and three Next Stop: <region> passes
+// that are open forever because they are there for whoever installs the game
+// next year, and it keeps out ten of the twelve events actually on the tab,
+// every one of which has a real closing date on the wiki. Dreaming Deep closed
+// on 2025-08-27 and is on the tab today.
 //
-// The second filter is about who the event is for. Six of the nineteen that
-// pass are the game's own onboarding: three Login tracks paying out for
-// turning up on consecutive days, and three Next Stop: <region> passes that
-// skip a returning player forward to the current map. Those never close
-// because they are not events, they are a ramp — the game keeps them open for
-// whoever installs it next year. The in-game Permanent tab does not list them
-// and neither does this. The wiki labels both groups itself, in `group2`, so
-// the filter is that label rather than a list of names to keep up to date.
+// That is not the wiki being wrong. The two lists are answers to different
+// questions. The wiki's date is the event's — the fortnight its rewards were
+// running — and the tab is Kuro's claim about the *mode*: the content stayed
+// in the game after the run ended, so the entry stays in the menu. Nothing on
+// the page separates a mode Kuro kept from one it retired, because that is a
+// decision taken in the client and never written down anywhere the wiki reads.
+//
+// So the list below is the filter, and it is a list of names because the thing
+// it is copying is a list of names — read off the Permanent tab in game, where
+// it is the only place it exists. TAB is the membership; the wiki is still
+// where every fact about each one comes from. The category is still fetched,
+// now only to audit: a name that has left it has probably been renamed, and a
+// page that has joined it is a candidate for the next time the tab is opened.
+// Both get printed. This file is short and the game changes it about once a
+// patch, which is the same cadence versions.json is edited by hand on.
 //
 // Art is downloaded rather than hotlinked, same as the reward icons and the
 // portraits: these are Kuro's own event banners, hosted by Fandom, and a page
@@ -47,9 +56,23 @@ const UA =
 const API = "https://wutheringwaves.fandom.com/api.php";
 const WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(String(t).replace(/ /g, "_"))}`;
 const CATEGORY = "Permanent Events";
-/* See the note at the top. `group2` on the wiki's own infobox, and the two
-   values on it that mean "this is the onboarding ramp, not an event". */
-const ONBOARDING = /^(login|early[ -]?access)$/i;
+/* The Permanent tab, in the order the game lists it — newest run at the top.
+   Read off the client on 2026-08-20. Wiki page titles, which are the event's
+   full name; the tab truncates most of them to fit its own rail. */
+const TAB = [
+  "Lament Recon: Tacet Crisis",
+  "Mingshen Notices",
+  "Star Bouncing",
+  "Soar to the Beat",
+  "Peaks of Prestige: Rekindled Duel",
+  "Stranger Things in Honami",
+  "Tidal Defense Simulator",
+  "Dreaming Deep",
+  "Cube, Cubic n Cubie",
+  "Shape of Yesterday",
+  "A Glimpse of Xuanfang",
+  "Into the Land of Paradox"
+];
 const OUT = "data/permanents.json";
 const DIR = "assets/events";
 const TIMEOUT_MS = 25000;
@@ -185,9 +208,11 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
   const listing = await getJson(
     `${API}?action=query&format=json&formatversion=2&list=categorymembers` +
     `&cmtitle=Category:${encodeURIComponent(CATEGORY)}&cmlimit=200`);
-  const titles = (listing.query?.categorymembers || []).map(m => m.title);
-  console.log(`Category:${CATEGORY} — ${titles.length} pages\n`);
+  const category = new Set((listing.query?.categorymembers || []).map(m => m.title));
+  console.log(`Category:${CATEGORY} — ${category.size} pages, ${TAB.length} of them on the tab\n`);
 
+  const titles = TAB;
+  const missing = [];
   const pages = [];
   for (let i = 0; i < titles.length; i += BATCH) {
     const j = await getJson(
@@ -195,23 +220,20 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
       `&prop=pageimages|revisions&piprop=original&rvprop=content&rvslots=main` +
       `&titles=${encodeURIComponent(titles.slice(i, i + BATCH).join("|"))}`);
     for (const p of j.query?.pages || []) {
-      if (p.missing) continue;
+      /* A name on the list that the wiki has no page for. Almost always a
+         rename rather than a deletion, so it is worth saying out loud — the
+         alternative is an event quietly falling off the desk. */
+      if (p.missing) { missing.push(p.title); continue; }
       pages.push({ title: p.title, text: p.revisions?.[0]?.slots?.main?.content || "", image: p.original?.source || "" });
     }
   }
 
   const events = [];
   const keep = new Set();
-  let closed = 0;
-  let onboarding = 0;
 
+  /* No filter here. Every page fetched is on the tab, because the tab is what
+     was fetched. */
   for (const p of pages) {
-    /* The whole filter. See the note at the top: the category is a claim about
-       the mode, this field is a claim about the event. */
-    if (!/^none$/i.test(field(p.text, "time_end"))) { closed++; continue; }
-    /* Login tracks and region passes. Open forever, and not the list. */
-    if (ONBOARDING.test(field(p.text, "group2"))) { onboarding++; continue; }
-
     const name = field(p.text, "name") || p.title;
     const detail = description(p.text);
     const version = /^\d+\.\d+$/.test(field(p.text, "ltd_during")) ? field(p.text, "ltd_during") : "";
@@ -248,6 +270,11 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
       section: "Permanent",
       permanent: true,
       start: isoStart(p.text),
+      /* Not the wiki's `time_end`, on the ten of these that have one. That
+         date closed the event's reward run; the tab is the game still listing
+         the mode afterwards, and "permanent" on this desk means the thing is
+         there when you log in tonight. Carrying the wiki's date would have the
+         record say a permanent event ended eleven months ago. */
       end: null,
       summary: detail.split(/(?<=[.!?])\s/)[0]?.slice(0, 160) || "",
       detail,
@@ -279,13 +306,13 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
   const payload = {
     schema: "wuwa-desk/permanents@1.0",
     note:
-      "Events with no closing date, read off the Wuthering Waves Wiki on Fandom — the only place the " +
-      "whole list exists, because Kuro's news feed no longer carries the posts that announced them. " +
-      "Membership is `time_end = none` on the wiki's own event infobox, not the Permanent Events " +
-      "category, which also holds limited events whose mode was kept. Login tracks and Next Stop " +
-      "region passes are dropped on the wiki's own `group2` label: they never close because they are " +
-      "the game's onboarding ramp rather than events, and the in-game Permanent tab does not list " +
-      "them. Banners are Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
+      "The game's own Permanent tab, copied by hand from the client on 2026-08-20 and then read off " +
+      "the Wuthering Waves Wiki on Fandom for the dates, the blurb, the payout and the banner. The " +
+      "list is names rather than a filter because nothing on the wiki reproduces it: the tab is " +
+      "Kuro's claim that a mode stayed in the game, and the wiki's dates are the event's reward run, " +
+      "so ten of these twelve have a closing date on the wiki and are in the menu today. The desk " +
+      "carries them as permanent — no closing date — which is what the tab asserts. Banners are " +
+      "Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
     credit: "Event data and banners via wutheringwaves.fandom.com · © Kuro Games",
     source: WIKI(CATEGORY),
     events
@@ -298,8 +325,17 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
   }
 
   console.log(
-    `\n${events.length} permanent events, ${events.filter(e => e.art).length} with art, ` +
-    `${closed} category pages skipped for having a closing date, ` +
-    `${onboarding} for being login or early access` +
+    `\n${events.length} of ${TAB.length} permanent events, ` +
+    `${events.filter(e => e.art).length} with art` +
     (unchanged ? " (unchanged)" : ""));
+
+  /* The audit. Neither of these is an error — the first is usually a rename
+     and the second is usually an event whose mode Kuro retired — but both are
+     the wiki telling you the tab is worth opening again. */
+  for (const t of missing) console.log(`  ! on the list, no page on the wiki: ${t}`);
+  for (const t of TAB.filter(t => !category.has(t) && !missing.includes(t)))
+    console.log(`  ! on the list, no longer in Category:${CATEGORY}: ${t}`);
+  const unlisted = [...category].filter(t => !TAB.includes(t));
+  if (unlisted.length)
+    console.log(`  ${unlisted.length} category pages not on the tab — check the game if a patch just shipped`);
 })();
