@@ -367,27 +367,37 @@ half a screen of card for a distinction the tile makes on its own.
 It was a stack — portrait row over weapon row, split by a rule — and the stack was the
 thing wasting the tile. A row 300px wide spent all of it on a 44px face, then spent a
 second row underneath saying whose weapon it was, with the weapon's name at the opposite
-end of the tile from the weapon. Four cells on a two-row grid —
-`"art name wic" / "art wep wic"` — puts each set of words next to the picture it belongs
-to and gives **the portrait 62px instead of 44**, flush to the tile's edges on three
-sides, because a portrait inset by the tile's padding is a portrait giving a third of
-itself back.
+end of the tile from the weapon.
 
-**Only the portrait gets the full height.** The weapon is a 34px mark against its own
-name, not a second panel: two 62px squares left about 130px for two names in a phase
-column, which is where `Qingxiao` started coming out as `Qingxi…`.
+**Two halves, and nothing smaller than a half.** The left half is the Resonator —
+portrait, name, chips — and opens their record. The right half is the weapon — its name
+against its picture — and opens the weapon's. Each half is one element, one tab stop, and
+lights under the mouse, so which record a click will open is answerable before you click.
+An earlier cut handed out a target per element, which is four things to aim at on a 250px
+tile and no way to tell from looking where any of them went.
 
-The class label (`RECTIFIER`, `SWORD`) lives on the weapon line, not in the character's
-chips: a signature weapon is by definition its holder's class, so one label carries both
-facts. That line wraps rather than squeezes, because two phase columns on an 1100px
-screen leave it about 110px, and the failure mode of not wrapping is "Thousandfold
-Deliverance" clipped to `Tho…Deli` with a BROADBLADE chip pressed against it. Below a
-`6em` basis the chip drops to its own line and the name gets the width back.
+**The portrait gets 62px instead of 44**, flush to the tile's edges on three sides,
+because a portrait inset by the tile's padding is a portrait giving a third of itself
+back. The weapon's picture is 42px, which is what its half can afford now that the class
+label is gone. That label (`RECTIFIER`, `SWORD`) carried two facts at once — a signature
+weapon is by definition its holder's class — but neither is a fact anyone came to a patch
+card for, and the space is the weapon's name.
 
-**Two halves, two records.** The left half opens the Resonator, the right half opens the
-weapon, and hovering either one lights that half so which of them a click will open is
-answerable without trying it. The pictures are click targets for the mouse; the text
-beside each is what takes focus — two tab stops on a tile carrying two records, not four.
+**The tile asks about its own width, not the window's.** Two phase columns put it at
+254px on a 1500px screen and 630px on a tablet, which is the same tile in two situations
+no media query can tell apart — so `.bpair` is a `container-type: inline-size` and the
+weapon's name sits beside its picture above 330px and above it below that. Under 330px
+there is room for one of the two names on a line, and the failure mode of insisting on
+both is `Thousanc` / `Deliveran` beside `Qing…`.
+
+**The weapon drawer's own picture is `.wbig`, not `.wsig`.** The latter is the signature
+*card* on a resonator record — a framed row whose `.wsig-art` box does the sizing — and a
+bare `<img>` dropped into it has nothing constraining it at all, so the drawer opened on a
+1000px render of a sword. Worth knowing because the two class names are one letter apart
+and the CSS gives no error either way; the symptom is a weapon record you have to scroll.
+Beware backticks inside those template literals, too: one in a comment ends the string
+early, and `` `.wsig-art` `` in a note about this very bug is what made `drawerWeapon`
+throw `art is not defined`.
 
 **The strip fills the card.** Cards sit in one grid row and are all as tall as the
 busiest, so the quiet one used to end its banner list two thirds of the way down and

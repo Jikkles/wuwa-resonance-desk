@@ -1027,34 +1027,44 @@ function patchCard(v, role){
       ? `<img class="bust" src="${esc(f.icon)}" alt="" loading="lazy" decoding="async">`
       : `<span class="g">${esc(unknown ? "?" : f.glyph)}</span>`;
     const attr = b.attribute || r.attribute;
-    /* Same rule the rest of the desk works to: the picture is a click target
-       for the mouse, the text beside it is the one that takes focus. Two tab
-       stops on a tile carrying two records, not four on a tile carrying two. */
-    const who = unknown ? "" : ` data-act="resonator" data-id="${esc(b.name)}"`;
-    const wep = sig ? ` data-act="weapon" data-id="${esc(sig)}"` : "";
+    /* Two halves, two targets, and nothing smaller than a half. The tile used
+       to hand out a click zone per element — portrait, name, weapon name,
+       weapon icon — which is four things to aim at on a 250px tile and no way
+       to tell from looking which of them went where. Now the left side is the
+       Resonator and the right side is the weapon, each one element, each one
+       tab stop, and each lighting up under the mouse so the answer to "where
+       does this go" is visible before you click.
+
+       The weapon's class label is gone with it. It was there because a
+       signature weapon is by definition its holder's class, so the label
+       carried two facts at once — but neither of them is a fact anybody came
+       to a patch card for, and the space is the weapon's name. */
+    const who = unknown ? "" : ` role="button" tabindex="0" data-act="resonator" data-id="${esc(b.name)}"` +
+      ` aria-label="${esc(b.name)} — Resonator record"`;
     /* The element rides the tile itself, not just its halves — the tile is lit
        in it at rest, so a column of banners reads as a row of elements before
        you read a single name. */
     return `<div class="bpair${unknown ? " unknown" : ""}"${attrStyle(attr)}>
-      <div class="bp-art${f.cutout ? " cut" : ""}${f.icon && !f.image ? " bust" : ""}"${who}>${art}</div>
-      <div class="bp-who"${who}${unknown ? "" : ` role="button" tabindex="0" aria-label="${esc(b.name)} — Resonator record"`}>
-        <b>${esc(b.name || "???")}</b>
-        <span class="bmeta">${b.new ? `<i class="new">New</i>` : ""}${
-          b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${
-          attr ? `<i class="attr">${esc(attr)}</i>` : ""}</span>
+      <div class="bp-left"${who}>
+        <div class="bp-art${f.cutout ? " cut" : ""}${f.icon && !f.image ? " bust" : ""}">${art}</div>
+        <div class="bp-who">
+          <b>${esc(b.name || "???")}</b>
+          <span class="bmeta">${b.new ? `<i class="new">New</i>` : ""}${
+            b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${
+            attr ? `<i class="attr">${esc(attr)}</i>` : ""}</span>
+        </div>
       </div>
       ${sig
-        ? `<button class="bp-wep"${wep} title="${esc(sig)} — signature weapon, runs alongside ${esc(b.name)}">
-             <b>${esc(sig)}</b>
-             <!-- The class, not the word "Signature". A signature weapon is by
-                  definition the resonator's own class, so one label carries
-                  both facts — and it is the fact you sort a roster by. -->
-             ${cls ? `<span class="wsub">${esc(cls)}</span>` : ""}
+        ? `<button class="bp-right" data-act="weapon" data-id="${esc(sig)}"
+                   aria-label="${esc(sig)} — weapon record"
+                   title="${esc(sig)} — signature weapon, runs alongside ${esc(b.name)}">
+             <span class="bp-wep">${esc(sig)}</span>
+             <span class="bp-wic">${weaponIcon(sig, 26)}</span>
            </button>`
-        : `<div class="bp-wep empty">
-             <span class="wsub">No weapon listed${cls ? ` · ${esc(cls)}` : ""}</span>
+        : `<div class="bp-right empty">
+             <span class="bp-wep">No weapon listed</span>
+             <span class="bp-wic">${weaponIcon(null, 26)}</span>
            </div>`}
-      <div class="bp-wic${sig ? "" : " empty"}"${wep}${sig ? ` title="${esc(sig)}"` : ""}>${weaponIcon(sig, 26)}</div>
     </div>`;
   };
   const strip = list => list.length
@@ -3122,7 +3132,13 @@ function drawerWeapon(name){
       ${w?.source ? `<span class="pill">${esc(w.source)}</span>` : ""}
       ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
     </div>
-    ${w?.icon ? `<div class="wsig"><img src="${esc(w.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
+    <!-- .wbig, not .wsig. The latter is the signature *card* on a resonator
+         record, a framed row whose own .wsig-art box does the sizing, and a
+         bare img dropped into it has nothing constraining it at all — so the
+         drawer opened on a 1000px render of a sword. This is the picture at
+         the size it was drawn for, which is what heads this drawer.
+         (No backticks in here: this comment is inside a template literal.) -->
+    ${w?.icon ? `<div class="wbig"><img src="${esc(w.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
     <h2>${esc(name)}</h2>
     <!-- The holder's name is the link out of here, now that the convene list
          has gone. Their record carries the same run history in full, and this
