@@ -1044,7 +1044,7 @@ function patchCard(v, role){
           attr ? `<i class="attr">${esc(attr)}</i>` : ""}</span>
       </div>
       ${sig
-        ? `<button class="bp-wep"${wep} title="Signature weapon — runs alongside ${esc(b.name)}">
+        ? `<button class="bp-wep"${wep} title="${esc(sig)} — signature weapon, runs alongside ${esc(b.name)}">
              <b>${esc(sig)}</b>
              <!-- The class, not the word "Signature". A signature weapon is by
                   definition the resonator's own class, so one label carries
@@ -1054,7 +1054,7 @@ function patchCard(v, role){
         : `<div class="bp-wep empty">
              <span class="wsub">No weapon listed${cls ? ` · ${esc(cls)}` : ""}</span>
            </div>`}
-      <div class="bp-wic${sig ? "" : " empty"}"${wep}>${weaponIcon(sig, 26)}</div>
+      <div class="bp-wic${sig ? "" : " empty"}"${wep}${sig ? ` title="${esc(sig)}"` : ""}>${weaponIcon(sig, 26)}</div>
     </div>`;
   };
   const strip = list => list.length
@@ -1404,6 +1404,26 @@ function astriteFrom(ev){
 }
 const astriteLabel = n => `${n.toLocaleString("en-GB")} Astrite`;
 
+/* The stone itself, rather than the desk's drawing of it. Kuro's own item art
+   is already on disk — fetch-items.mjs pulls it off the wiki along with every
+   other thing an event pays, and the reward grid has been showing it all
+   along. There was never a reason for the badge on the tile to be the only
+   place Astrite appeared as a glyph.
+
+   The inline `i-astrite` in index.html stays as the fallback: it is what draws
+   in the moment before items.json lands, and for anyone whose fetch of it
+   failed. Nothing here depends on the picture being there. */
+const astriteMark = (size = 12) => {
+  const art = itemFor("Astrite")?.icon;
+  /* Sized inline. The badge on a tile sits inside .ev-pic, whose `img` rule
+     fills the box — it is written for the event banner behind it, and it wins
+     on specificity over anything a class on this one can say. */
+  return art
+    ? `<img class="astrite-pic" src="${esc(art)}" alt=""
+           style="width:${size}px;height:${size}px" loading="lazy" decoding="async">`
+    : icon("i-astrite", size);
+};
+
 /* Kuro's own banner, or nothing. There is no fallback picture by design — see
    the note at the top of this section. */
 const eventArt = ev => (ev.art?.url ? ev.art : null);
@@ -1460,7 +1480,7 @@ function eventCard(ev){
             you had already decided to read it. The glyph does the work: a
             stone you can pick out across the grid without reading a digit. */
         astrite ? `<span class="ev-astrite" title="Astrite from this event">
-        ${icon("i-astrite", 38)}<b>${astrite.toLocaleString("en-GB")}</b></span>` : ""}
+        ${astriteMark(40)}<b>${astrite.toLocaleString("en-GB")}</b></span>` : ""}
     </div>
     <div class="ev-cap">
       <span class="ev-kind">${esc(ev.kind || "Event")}</span>
@@ -1503,7 +1523,7 @@ function eventPanel(){
   return `<div class="panel">
     <div class="panel-h"><h2>Events</h2><span class="sub">${esc(sub)}</span>
       ${astrite ? `<span class="sub astrite" title="Astrite listed across these events. An event Kuro has not published a reward line for counts as nothing.">
-        ${icon("i-astrite", 12)}${astriteLabel(astrite)}</span>` : ""}</div>
+        ${astriteMark(16)}${astriteLabel(astrite)}</span>` : ""}</div>
     <div class="panel-b">${shown.length
       ? `<div class="evgrid">${shown.map(eventCard).join("")}</div>`
       : `<div class="empty">Nothing running, and nothing announced yet.</div>`}</div>
@@ -1583,7 +1603,7 @@ function renderEvents(){
       <span class="sub">${plural(standing.length, "event")} · no closing date</span>
       <div class="right">
         ${permAstrite ? `<span class="sub astrite" title="Astrite listed across the permanent events. One with no published reward line counts as nothing.">
-          ${icon("i-astrite", 12)}${astriteLabel(permAstrite)}</span>` : ""}
+          ${astriteMark(16)}${astriteLabel(permAstrite)}</span>` : ""}
       </div>
     </div>
     <div class="panel-b"><div class="evgrid">${standing.map(eventCard).join("")}</div></div>
@@ -1918,7 +1938,7 @@ function drawerEvent(id){
 
     ${loot.length ? `<section class="dsec evr-loot">
       <div class="dsec-h"><span class="label">What it pays</span>
-        ${astrite ? `<span class="ev-astrite inline">${icon("i-astrite", 12)}
+        ${astrite ? `<span class="ev-astrite inline">${astriteMark(18)}
           <b>${astriteLabel(astrite)}</b></span>` : ""}</div>
       <div class="lootgrid">${loot.map(rewardTile).join("")}</div>
       <p class="tier-note">${ev.origin === "wiki"

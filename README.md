@@ -365,22 +365,38 @@ two free-floating tiles cost a stacked pair of rows each, which across five bann
 half a screen of card for a distinction the tile makes on its own.
 
 It was a stack — portrait row over weapon row, split by a rule — and the stack was the
-thing wasting the tile. A row 300px wide spent all of it on a 44px face and then spent
-a second row underneath saying whose weapon it was. Side by side, the same facts fit one
-row and **both pictures are three times the size**: two 62px squares, flush to the
-tile's edges on three sides, because a portrait inset by the tile's padding is a
-portrait giving a third of itself back.
+thing wasting the tile. A row 300px wide spent all of it on a 44px face, then spent a
+second row underneath saying whose weapon it was, with the weapon's name at the opposite
+end of the tile from the weapon. Four cells on a two-row grid —
+`"art name wic" / "art wep wic"` — puts each set of words next to the picture it belongs
+to and gives **the portrait 62px instead of 44**, flush to the tile's edges on three
+sides, because a portrait inset by the tile's padding is a portrait giving a third of
+itself back.
 
-Four cells on a two-row grid — `"art name wic" / "art wep wic"` — with the two pictures
-spanning both rows. The class label (`RECTIFIER`, `SWORD`) lives on the weapon line, not
-in the character's chips: a signature weapon is by definition its holder's class, so one
-label carries both facts. That line wraps rather than squeezes, because two phase columns
-on an 1100px screen leave it about 110px, and the failure mode of not wrapping is
-"Thousandfold Deliverance" clipped to `Tho…Deli` with a BROADBLADE chip pressed against
-it. Below a `6em` basis the chip drops to its own line and the name gets the width back.
+**Only the portrait gets the full height.** The weapon is a 34px mark against its own
+name, not a second panel: two 62px squares left about 130px for two names in a phase
+column, which is where `Qingxiao` started coming out as `Qingxi…`.
 
-The pictures are click targets for the mouse; the text beside each one is what takes
-focus. Two tab stops on a tile carrying two records, not four.
+The class label (`RECTIFIER`, `SWORD`) lives on the weapon line, not in the character's
+chips: a signature weapon is by definition its holder's class, so one label carries both
+facts. That line wraps rather than squeezes, because two phase columns on an 1100px
+screen leave it about 110px, and the failure mode of not wrapping is "Thousandfold
+Deliverance" clipped to `Tho…Deli` with a BROADBLADE chip pressed against it. Below a
+`6em` basis the chip drops to its own line and the name gets the width back.
+
+**Two halves, two records.** The left half opens the Resonator, the right half opens the
+weapon, and hovering either one lights that half so which of them a click will open is
+answerable without trying it. The pictures are click targets for the mouse; the text
+beside each is what takes focus — two tab stops on a tile carrying two records, not four.
+
+**The strip fills the card.** Cards sit in one grid row and are all as tall as the
+busiest, so the quiet one used to end its banner list two thirds of the way down and
+leave a band of nothing above the footer. The tiles grow into it instead, capped at
+104px so that a phase with one banner beside a phase with four doesn't draw a single
+200px tile. Most of that slack came from one place: a future patch's `notes` is a
+paragraph of accumulated leak history, and unclamped it ran to 950px in a 210px column,
+stretching the row to 1437px. It is held to fourteen lines now — the whole note is a
+click away on the version record, which is where a thousand words of provenance belongs.
 
 **The tile is lit in its element at rest, not on hover.** Ten tiles are most of what you
 look at on this page, and putting the one piece of colour they carry behind a mouse
@@ -688,14 +704,23 @@ against the Wuthering Waves Wiki on Fandom — the same source the resonator dat
 — and caches the icon under `assets/items/`. Cached rather than hotlinked, unlike
 everything from Kuro's own CDN, because Fandom rewrites its revision URLs.
 
-The Astrite total gets its own mark on the tile, and it is deliberately large: a 38px
+The Astrite total gets its own mark on the tile, and it is deliberately large: a 40px
 crystal in the corner of the picture, with the figure beside it. This is the one number
 the page is scanned for — what a fortnight is worth is eight of these added up — and at
 the 12px it started as, it was a footnote legible only once you had already decided to
-read it. The glyph carries across the grid; the figure is set smaller than the stone so
-the badge doesn't read as a price tag. Only shown where Kuro published a reward line —
-see `astriteFrom()`, which returns null rather than zero, because a tile reading
-`0 Astrite` states something nobody said.
+read it. The stone carries across the grid; the figure is set smaller than it so the
+badge doesn't read as a price tag. Only shown where Kuro published a reward line — see
+`astriteFrom()`, which returns null rather than zero, because a tile reading `0 Astrite`
+states something nobody said.
+
+**It is Kuro's own item art, not a drawing of it.** `assets/items/astrite.png` has been
+on disk all along — `fetch-items.mjs` pulls it with everything else an event pays, and
+the reward grid has been showing it since the day that script was written. There was
+never a reason for the badge to be the only place Astrite appeared as a glyph.
+`astriteMark()` returns the picture where `items.json` has resolved and falls back to the
+inline `i-astrite` otherwise, which is what draws in the moment before the JSON lands.
+It is sized inline, because the badge sits inside `.ev-pic`, whose `img` rule fills the
+box for the event banner behind it and wins over anything a class on the mark can say.
 
 Two details worth knowing:
 
