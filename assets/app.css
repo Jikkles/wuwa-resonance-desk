@@ -1467,8 +1467,27 @@ button{font:inherit;color:inherit}
    The max-width is for a patch with one event on it — without it a lone tile
    grows to the full width of the panel. */
 .evgrid{display:flex;flex-wrap:wrap;gap:12px}
+/* Sized off the row rather than off a pixel count, so a patch's worth of
+   events lands as two readable rows instead of one strip of stamps. A fifth of
+   the band each, and the headline takes two of those fifths, which puts a patch
+   of eight events out as the headline plus three, then four. Five slots to a
+   row rather than four is what makes that two rows rather than three: the
+   headline counts twice, so eight events is nine slots and four across leaves
+   one stranded on a third row.
+
+   The tiles in the short row grow into what is left, which is the whole reason
+   this is flex and not a grid — a grid would leave the hole instead. The floor
+   is what stops five columns appearing on a laptop where the stage is 800px and
+   they would be 150px wide; below it the band drops to three across, then two,
+   on its own.
+
+   The height is a length, not a ratio, and every tile in the band shares it.
+   The headline is double width and an aspect-ratio would make it double height
+   beside its neighbours — it is meant to show more of its banner, not to be a
+   different kind of card. */
 .ev{
-  flex:1 1 236px;height:196px;min-width:0;max-width:420px;
+  flex:1 1 calc(20% - 10px);min-width:250px;max-width:560px;
+  height:clamp(232px,11.5vw,320px);
   display:flex;flex-direction:column;overflow:hidden;
   border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint);
   padding:0;text-align:left;color:inherit;font:inherit;cursor:pointer;
@@ -1478,7 +1497,7 @@ button{font:inherit;color:inherit}
    every version around a single big event and fills the rest with dailies and
    login tracks, so a row of identical tiles claims a flatness the patch does
    not have. */
-.ev.head{flex:2 1 484px;max-width:860px}
+.ev.head{flex:2 1 calc(40% - 14px);max-width:1120px}
 .ev:hover,.ev:focus-visible{
   border-color:color-mix(in srgb,var(--accent) 55%,transparent);transform:translateY(-2px);
 }
@@ -1493,6 +1512,9 @@ button{font:inherit;color:inherit}
   width:100%;height:100%;object-fit:cover;object-position:50% 45%;
   transition:transform .45s ease;
 }
+/* See eventCard: a banner with Kuro's own name plate across it is shown whole,
+   on the ground the picture would otherwise be covering. */
+.ev-pic img.plate{object-fit:contain;background:linear-gradient(160deg,var(--bg-2),var(--bg))}
 .ev:hover .ev-pic img{transform:scale(1.04)}
 /* Kuro's banners are dark at the top corners, where the chips sit, but not
    always — a thin wash keeps a white sky from swallowing the state chip. */
@@ -1563,7 +1585,7 @@ button{font:inherit;color:inherit}
 /* The caption bar. Sunk, like every other header and footer strip on the desk,
    so the picture above it reads as the card's content and this as its label. */
 .ev-cap{
-  flex:none;padding:9px 12px 10px;background:var(--tint-sink);
+  flex:none;padding:10px 14px 12px;background:var(--tint-sink);
   border-top:1px solid var(--line);display:flex;flex-direction:column;gap:1px;
 }
 .ev-kind{
@@ -1571,12 +1593,12 @@ button{font:inherit;color:inherit}
   color:var(--accent);
 }
 .ev-cap h3{
-  margin:0;font-size:14px;font-weight:600;line-height:1.25;letter-spacing:-.005em;
+  margin:0;font-size:15.5px;font-weight:600;line-height:1.25;letter-spacing:-.005em;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.ev.head .ev-cap h3{font-size:17px;-webkit-line-clamp:1}
+.ev.head .ev-cap h3{font-size:19px;-webkit-line-clamp:1}
 .ev.head .ev-cap p{
-  margin:3px 0 0;font-size:12px;line-height:1.45;color:var(--fg-2);
+  margin:4px 0 0;font-size:12.5px;line-height:1.45;color:var(--fg-2);
   display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
 }
 
@@ -1919,11 +1941,14 @@ button{font:inherit;color:inherit}
   /* Half the row, and no more even when it is the last tile on its own —
      without the ceiling a lone tile at the end of the band stretches to the
      full width and reads as a different kind of card. */
-  .ev{flex:1 1 44%;height:172px;max-width:calc(50% - 5px)}
+  /* min-width:0 first: the band's floor is a desktop number, and left standing
+     it beats the max-width below — min-width always does — and puts one tile a
+     row on a 400px phone with half the width empty beside it. */
+  .ev{flex:1 1 44%;min-width:0;height:186px;max-width:calc(50% - 5px)}
   /* The headline tile drops to the same size as the rest here. Two up on a
      phone means an odd-width tile leaves half a row empty behind it, and the
      band is a queue now — every hole in it reads as a missing event. */
-  .ev.head{flex:1 1 44%;height:172px;max-width:calc(50% - 5px)}
+  .ev.head{flex:1 1 44%;min-width:0;height:186px;max-width:calc(50% - 5px)}
   .ev-cap h3,.ev.head .ev-cap h3{font-size:13px}
   .ev.head .ev-cap p{display:none}
 }
@@ -2672,7 +2697,7 @@ button{font:inherit;color:inherit}
    Here the art holds the right of a hero, the name and the state are set into
    it, and the two cards that lead out of the record — the signature weapon, the
    banner they run on — sit on the far side of the picture. */
-.rrec{--rr-h:clamp(320px,46vh,470px);--rr-rail:300px}
+.rrec{--rr-h:clamp(320px,46vh,470px);--rr-rail:326px}
 
 .rr-hero{
   position:relative;overflow:hidden;
@@ -2759,17 +2784,73 @@ button{font:inherit;color:inherit}
 /* The far column of the hero. Glass, because it is standing on the artwork —
    the same treatment the panels on the desk behind this get. */
 .rr-rail{
-  position:relative;z-index:1;display:grid;gap:10px;align-content:center;
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;justify-content:center;gap:10px;
   padding:clamp(18px,2.4vh,26px) var(--dpad-x) clamp(18px,2.4vh,26px) 0;
 }
-.rr-rail .wcard,.rr-rail .dpanel{
+/* The signature weapon at the size the record has room for: the picture first
+   and the name under it, the way the game shows one in an inventory. On a
+   banner row this is a 40px bullet in a line of five facts — here it is the
+   only other thing on the page anybody wants to look at. */
+.wsig{
+  flex:none;display:flex;flex-direction:column;width:100%;text-align:left;gap:10px;
+  padding:15px 16px 16px;border:1px solid var(--line-2);border-radius:var(--r);
   background:rgba(15,14,19,.72);
   backdrop-filter:blur(var(--panel-frost));-webkit-backdrop-filter:blur(var(--panel-frost));
-  border-color:var(--line-2);
+  cursor:pointer;font:inherit;color:inherit;transition:.15s;
 }
-.rr-conv b{display:block;font-size:13.5px;font-weight:600;line-height:1.35;margin-bottom:10px}
-.rr-conv .dsrc{width:100%;background:rgba(0,0,0,.2);border:0;font:inherit;color:var(--fg-2);cursor:pointer}
-.rr-conv .dsrc:hover{background:rgba(0,0,0,.32);color:var(--fg)}
+.wsig.is-flat{cursor:default}
+.wsig:not(.is-flat):hover{
+  border-color:color-mix(in srgb,var(--attr,var(--accent)) 55%,transparent);
+  background:rgba(20,18,26,.86);
+}
+.wsig-h{display:flex;align-items:center;gap:10px}
+.wsig-h .label{flex:1;min-width:0}
+.wsig-r{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--amber)}
+/* A height rather than an aspect-ratio. A ratio box with a percentage width,
+   inside a flex column, inside a grid item that is itself being centred, is
+   three sizing passes that have to agree — and they do not: the card measures
+   its own height before the box resolves its width, comes out half the size it
+   needs, and the picture hangs out of the top of it. A length is one pass. */
+.wsig-art{
+  flex:none;display:flex;align-items:center;justify-content:center;
+  width:100%;height:clamp(148px,18vh,206px);
+  border-radius:var(--r-sm);color:var(--attr,var(--accent));
+  background:
+    radial-gradient(circle at 50% 44%,color-mix(in srgb,var(--attr,var(--accent)) 16%,transparent),transparent 70%),
+    linear-gradient(160deg,rgba(255,255,255,.05),rgba(0,0,0,.18));
+  overflow:hidden;
+}
+.wsig-art img{width:100%;height:100%;object-fit:contain;padding:10px;display:block;transition:transform .35s ease}
+.wsig:not(.is-flat):hover .wsig-art img{transform:scale(1.05)}
+.wsig b{font-size:17px;font-weight:600;line-height:1.25;letter-spacing:-.01em;color:var(--fg)}
+.wsig:not(.is-flat):hover b{color:var(--attr,var(--accent))}
+.wsig-f{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
+}
+.wsig-f .arrow{margin-left:auto;display:flex;color:var(--fg-3)}
+.wsig:not(.is-flat):hover .wsig-f .arrow{color:var(--attr,var(--accent))}
+
+/* Which banner they run on. A line of text and a link, so it reads as one —
+   set against the attribute colour down its left edge rather than boxed, which
+   is what had it competing with the weapon card it used to sit under. */
+.rr-runs-on{margin-top:18px}
+.rr-runs-on>.label{display:block;margin-bottom:7px}
+.rr-runs-on button,.rr-runs-on>b{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  padding:9px 13px;border:0;border-left:2px solid var(--attr,var(--accent));
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  background:var(--tint);font:inherit;color:var(--fg-2);transition:.15s;
+}
+.rr-runs-on button{cursor:pointer}
+.rr-runs-on button:hover{background:var(--bg-2);color:var(--fg)}
+.rr-runs-on b{font-size:13.5px;font-weight:600;color:var(--fg);flex:none}
+.rr-runs-on em{
+  font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-3);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.rr-runs-on .arrow{margin-left:auto;display:flex;flex:none;color:var(--fg-3)}
 .rrec .rr-hero .debut{top:12px;right:12px}
 .rrec>.ccredit{margin:0 calc(-1 * var(--dpad-x));padding:7px var(--dpad-x);border-bottom:1px solid var(--line)}
 
@@ -2873,27 +2954,36 @@ button{font:inherit;color:inherit}
 .rr-runs .pill:hover{border-color:var(--attr,var(--accent));color:var(--fg)}
 
 @media (max-width:1000px){
-  /* Below this the hero is a picture, a column of type and a 300px rail across
-     a panel that no longer has room for three of anything. The rail goes under
-     the copy — the two cards in it are links out of the record, and links out
-     belong after the record rather than beside its name. */
-  .rr-hero,.rr-hero.railed{grid-template-columns:1fr;--pic-l:32%;--pic-r:0px}
-  .rr-rail{padding:0 var(--dpad-x) clamp(18px,2.4vh,26px);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .rr-copy{min-height:0;padding-right:var(--dpad-x);max-width:none}
-  .rr-pic.cut{--pic-l:44%}
-}
-@media (max-width:700px){
-  /* One column, and the picture over it rather than behind it: at this width
-     a masked band down one side is a sliver of a shoulder. */
-  .rr-hero{display:block}
+  /* Below this the hero is a picture, a column of type and a 326px rail across
+     a panel that no longer has room for three of anything. So it stops being
+     three columns and becomes three bands: the picture whole across the top,
+     the copy under it, then the weapon. A masked slice down one side at this
+     width is a sliver of a shoulder, and a glass card floating over the middle
+     of a face is not a layout. */
+  .rr-hero,.rr-hero.railed{display:block}
   .rr-hero::after{display:none}
   .rr-pic{
-    position:relative;inset:auto;height:clamp(200px,32vh,280px);
+    position:relative;inset:auto;height:clamp(210px,34vh,320px);
     border-bottom:1px solid var(--line);-webkit-mask-image:none;mask-image:none;
   }
   .rr-pic img{object-position:center 14%}
   .rr-pic.cut img{object-fit:contain;object-position:center bottom}
-  .rr-copy{padding:18px var(--dpad-x)}
+  /* The card lies down with it: the picture beside the name rather than above
+     it, at a height that does not push the strip below off screen. */
+  .rr-rail{padding:0 var(--dpad-x) clamp(18px,2.4vh,26px)}
+  .wsig{
+    display:grid;grid-template-columns:auto minmax(0,1fr);
+    grid-template-areas:"art head" "art name" "art foot";
+    column-gap:15px;row-gap:5px;align-content:center;
+  }
+  .wsig-h{grid-area:head}
+  .wsig-art{grid-area:art;width:104px;height:104px;aspect-ratio:auto;align-self:center}
+  .wsig b{grid-area:name}
+  .wsig-f{grid-area:foot}
+  .rr-copy{min-height:0;max-width:none;padding:clamp(18px,2.4vh,24px) var(--dpad-x)}
+}
+@media (max-width:700px){
+  .drawer-b .rr-copy h2{font-size:clamp(28px,9vw,40px)}
   .rr-glance{grid-template-columns:repeat(auto-fit,minmax(126px,1fr));gap:8px}
   .rr-glance>div{padding:12px 8px 11px}
   .kflow li{flex-basis:100%}

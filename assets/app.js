@@ -1372,8 +1372,14 @@ function eventCard(ev){
         /* A banner is 16:9 and the tile is about 2:1, so the tile crops the
            sides. `art.focus` is for the banners that carry their name plate at
            one end — frame the art, not half a word. */
-        ? `<img src="${esc(artUrl(art, ev.headline ? 1200 : 760))}" alt="" loading="lazy" decoding="async"
-               ${art.focus ? `style="object-position:${esc(art.focus)}"` : ""}>`
+        /* A banner that carries its own name plate is shown whole rather than
+           filled to the tile. Those are the double-drop title strips — 3:1, the
+           event name set across them — and a 1.6:1 tile cropping the sides of
+           one slices the name in half, which reads as a bug rather than as a
+           crop. Everything else is art and fills the tile. */
+        ? `<img class="${art.nameplate ? "plate" : ""}"
+               src="${esc(artUrl(art, ev.headline ? 1200 : 760))}" alt="" loading="lazy" decoding="async"
+               ${art.focus && !art.nameplate ? `style="object-position:${esc(art.focus)}"` : ""}>`
         /* The plate. Not a picture standing in for one: the desk's own mark,
            dimmed, saying there is nothing to show yet. */
         : `<div class="ev-plate" aria-hidden="true"><span>Banner not published yet</span></div>`}
@@ -2629,6 +2635,35 @@ function sigWeaponCard(wname){
     : `<div class="wcard is-flat">${inner}</div>`;
 }
 
+/* The same weapon, at the size the record has room for. On a banner row a
+   signature is one line among five and the 40px icon is a bullet; on the
+   record it is the only other object on the page, and Kuro draws these — the
+   art is the reason anyone recognises a weapon at all. So the picture leads and
+   the name sits under it, the way the game's own inventory shows one. */
+function sigWeaponBig(wname){
+  if(!wname) return "";
+  const w = weaponFor(wname);
+  const live = !!w || weaponRuns(wname).length > 0;
+  const inner = `
+    <span class="wsig-h">
+      <span class="label">Signature weapon</span>
+      ${w?.rarity ? `<span class="wsig-r">${esc(w.rarity)}★</span>` : ""}
+    </span>
+    <span class="wsig-art">${w?.icon
+      ? `<img src="${esc(w.icon)}" alt="${esc(wname)}" loading="lazy" decoding="async">`
+      /* Announced ahead of its patch and not drawn yet. The generic mark at the
+         same size, rather than a borrowed picture of somebody else's weapon. */
+      : icon("i-weapon", 48)}</span>
+    <b>${esc(wname)}</b>
+    <span class="wsig-f">
+      ${w?.type ? `<span>${esc(w.type)}</span>` : ""}
+      ${live ? `<span class="arrow">${icon("i-arrow", 13)}</span>` : ""}
+    </span>`;
+  return live
+    ? `<button class="wsig" data-act="weapon" data-id="${esc(wname)}">${inner}</button>`
+    : `<div class="wsig is-flat">${inner}</div>`;
+}
+
 /* ── the resonator record ──────────────────────────────────────────
    Built the same way the event record is, and for the same reason: the picture
    is the thing you arrive at, so it holds the page rather than sitting in a box
@@ -2726,21 +2761,26 @@ function drawerResonator(name){
       : hasDebuted(r) ? "None yet" : "", icon("i-rerun", 22)]
   ].filter(([, v]) => v);
 
-  /* The far column of the hero, over the art. Two cards, both of them a way
-     out of this record rather than more of it: what they hold, and which
-     banner they came off. Skipped entirely when neither is known, so an
-     unannounced Resonator's hero is the picture and the name and no furniture
-     standing around an empty box. */
-  const rail = [
-    sigWeaponCard(sig),
-    convene ? `<div class="dpanel rr-conv">
-      <span class="label">Runs on</span>
-      <b>${esc(convene)}</b>
-      ${version ? `<button class="dsrc" data-act="version" data-id="${esc(version)}">
-        Version ${esc(version)} — the whole patch
-        <span class="arrow">${icon("i-arrow", 13)}</span></button>` : ""}
-    </div>` : ""
-  ].filter(Boolean).join("");
+  /* The far column of the hero is the signature weapon and nothing else. It is
+     the only other object on this page — a thing Kuro drew, that the reader
+     wants to look at — so it gets the column at a size worth looking at, and
+     everything that is a fact about the Resonator rather than an object goes
+     where the facts are. Skipped when they have no signature, and the art takes
+     that width instead: an empty box standing beside the name is worse than the
+     room it was holding.
+
+     Which banner they run on used to be the second card up here. It is a line
+     of text and a link, it was reading as an object beside a picture of one,
+     and it belongs with the writing. */
+  const rail = sigWeaponBig(sig);
+  const runsOn = convene ? `<div class="rr-runs-on">
+    <span class="label">Runs on</span>
+    ${version
+      ? `<button data-act="version" data-id="${esc(version)}">
+          <b>${esc(convene)}</b><em>Version ${esc(version)} — the whole patch</em>
+          <span class="arrow">${icon("i-arrow", 13)}</span></button>`
+      : `<b>${esc(convene)}</b>`}
+  </div>` : "";
 
   openDrawer("Resonator record", `<div class="drawer-b rrec"${attrStyle(attr)}>
     <header class="rr-hero${f.image ? "" : " bare"}${rail ? " railed" : ""}">
@@ -2765,6 +2805,7 @@ function drawerResonator(name){
         </div>
         ${r.summary ? `<p class="rr-sum">${esc(r.summary)}</p>`
           : `<p class="rr-sum evr-thin">No written record yet — identity only.</p>`}
+        ${runsOn}
       </div>
       ${rail ? `<aside class="rr-rail">${rail}</aside>` : ""}
       ${debutBadge(r)}
@@ -2928,7 +2969,7 @@ function drawerWeapon(name){
       ${w?.source ? `<span class="pill">${esc(w.source)}</span>` : ""}
       ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
     </div>
-    ${w?.icon ? `<div class="wbig"><img src="${esc(w.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
+    ${w?.icon ? `<div class="wsig"><img src="${esc(w.icon)}" alt="${esc(name)}" decoding="async"></div>` : ""}
     <h2>${esc(name)}</h2>
     <!-- The holder's name is the link out of here, now that the convene list
          has gone. Their record carries the same run history in full, and this

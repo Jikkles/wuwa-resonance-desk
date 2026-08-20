@@ -171,8 +171,19 @@ re-render can't leave a stale listener behind.
 
 Timeline is Now / Next / Future across the top, the event band under it and the intel +
 signals duo at the foot. That is the whole page — roughly 1750px at 1080p, where it used
-to be about 4500. The band earns its ~250px by being pictures: an event has a name, a
-kind and a state, and nothing else worth printing at that size.
+to be about 4500. The band earns its height by being pictures: an event has a name, a kind
+and a state, and nothing else worth printing at that size.
+
+**The band is two rows of large tiles rather than one strip of small ones.** Each tile is a
+fifth of the band and the headline takes two of those fifths, so a patch of eight events
+comes out as the headline plus three, then four. Five slots to a row rather than four is
+what makes that two rows and not three — the headline counts twice, so eight events is nine
+slots, and four across leaves one stranded on a third row. The short row grows into what is
+left, which is why this is a wrapping flex and not a grid: a grid would leave the hole.
+
+The one banner shape that does not fill its tile is the double-drop title strip. Those are
+3:1, with the event name set across them, and a 1.6:1 tile cropping the sides of one slices
+the name in half — so an `art.nameplate` banner is shown whole on its own ground instead.
 
 What went, and where it went instead:
 
@@ -759,7 +770,7 @@ Top to bottom now:
 
 | Band | What's in it |
 |---|---|
-| **Hero** | Kuro's art down the right, dissolving into the panel; element, rarity, name, epithet, confidence and status set into the left; the signature weapon and the banner they run on in a glass rail on the far side |
+| **Hero** | Kuro's art down the middle, dissolving into the panel; element, rarity, name, epithet, confidence, status and which banner they run on set into the left; the signature weapon on the far side, picture first and name under it |
 | **At a glance** | Element, weapon, role, region, debut, released, reruns — seven tiles |
 | **Combat kit** | The six slots in the order you press them, each jumping to its own card |
 | **Skills** | The six cards, then the Inherent Skills, then the Resonance Chain |
@@ -777,9 +788,15 @@ Where the picture starts and stops is two custom properties on the hero — `--p
 `--pic-r` — rather than four selectors fighting over `inset`. The breakpoints move the
 rail, so all they have to move is the numbers.
 
-**The rail is skipped entirely when there is nothing to put in it.** A standard-pool
-Resonator has no convene to name and often no signature weapon; ten of the sixty are in
-that state, and an empty box standing beside the name is worse than the extra width.
+**The rail is the signature weapon and nothing else.** It is the only other object on the
+page — a thing Kuro drew, that a reader wants to look at — so it gets the column at a size
+worth looking at: the picture leads and the name sits under it, the way the game shows one
+in an inventory. Everything that is a fact about the Resonator rather than an object goes
+where the facts are, which is why the banner they run on moved into the copy.
+
+The rail is skipped entirely for anyone with no signature, and the art takes that width
+instead — ten of the sixty are in that state, and an empty box standing beside the name is
+worse than the room it was holding.
 
 ### Elements and kit slots are drawn here
 
