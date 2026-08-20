@@ -13,6 +13,7 @@ const FALLBACK = {
   weapons:    {updated:"", weapons:[]},
   feed:       {fetched:"", sources:[], errors:[], items:[]},
   events:     {updated:"", events:[]},
+  items:      {items:{}},
   art:        {art:{}},
   portraits:  {characters:{}},
   translations: {titles:{}}
@@ -69,6 +70,10 @@ let DATA = {};
    flat bag so a filter control never has to know which view it is in. */
 const S = {
   view:"timeline", sigLimit:60, drawer:null,
+  /* The open event record's pictures, and which one the frame is showing.
+     Lives here rather than in the markup because the thumbnails repaint the
+     frame in place — see paintReel. */
+  reel:[], reelAt:0,
   /* Which rail item has its filter list unfolded. An accordion of one: opening
      a view opens its list and closes whatever was open, and clicking the view
      you are already on folds it away. Null is "all folded". */
@@ -1486,6 +1491,159 @@ function eventTimes(ev){
   return [start ? one(start) : "", end ? one(end) : ""].filter(Boolean).join(" → ") + (est ? " (est)" : "");
 }
 
+/* ── the event record ──────────────────────────────────────────────
+   What a tile opens onto. Every other record on the desk is a page of facts
+   with a picture on it; this one is the other way round, because an event is
+   something you look at before it is something you read — the question a
+   reader arrives with is *what is this and what does it pay*, and both of
+   those answer better as pictures than as prose.
+
+   So: Kuro's banner across the top with the name, the window and the state set
+   into it; their own screenshots of the mode under it; and the rewards as the
+   items themselves rather than as the sentence Kuro listed them in.
+
+   Nothing in here is invented. No frame that Kuro did not publish, no icon
+   that isn't the game's own, and an event they have written a name and nothing
+   else for collapses to the name — the plates below are what that looks like. */
+
+/* Twin of `rewardTokens` in scripts/fetch-items.mjs, and they have to stay
+   one: that script decides which names get an icon fetched, this one decides
+   which name is looked up when the record draws. Change one, change the other.
+
+   Two shapes arrive. A hand-written entry lists rewards one to an array slot
+   ("Astrite x1200"); a fetched one keeps Kuro's own sentence with the whole
+   table in it. Both put the count after the word and the qualifier in
+   brackets, which is the only reason one reader can take both. */
+const REWARD_DASH  = /\s+[—–-]\s+/;
+const REWARD_MORE  = /^(and\s+)?other\s+(materials|rewards)$/i;
+const REWARD_BONUS = /^double\b.*\brewards$/i;
+
+function rewardTokens(rewards){
+  const raw = Array.isArray(rewards)
+    ? rewards.filter(Boolean).map(String)
+    /* Commas, except the ones inside a bracketed qualifier. */
+    : String(rewards || "").trim().replace(/\.\s*$/, "").split(/,(?![^(]*\))/);
+
+  return raw.map(s => {
+    let name = String(s).trim().replace(/^and\s+/i, "").replace(/\.\s*$/, "");
+    if(!name) return null;
+    /* "and other materials" is Kuro declining to finish the list, and "Double
+       Tacet Suppression rewards" is a multiplier on somebody else's table.
+       Neither is a thing with an icon, and both are worth showing as what they
+       are rather than being dropped for not fitting the grid. */
+    if(REWARD_MORE.test(name))  return {kind:"more", name};
+    if(REWARD_BONUS.test(name)) return {kind:"bonus", name};
+
+    let qty = null, tag = null;
+    const q = /\s*[x×]\s*([\d][\d,]*)\s*$/i.exec(name);
+    if(q){ qty = Number(q[1].replace(/,/g, "")); name = name.slice(0, q.index).trim(); }
+    /* "(Title)", "(Event Sigil)", "(Event Avatar)" — what kind of thing it is,
+       which the tile shows as a badge rather than as part of the name. */
+    const t = /\(([^()]+)\)\s*$/.exec(name);
+    if(t){ tag = t[1].trim(); name = name.slice(0, t.index).trim(); }
+    /* Kuro writes the same compound both ways depending who typed the post.
+       One spelling, so both find the same icon. */
+    name = name.replace(REWARD_DASH, " — ");
+    return name ? {kind:"item", name, qty, tag} : null;
+  }).filter(Boolean);
+}
+
+const itemFor = name => DATA.items?.items?.[name] || null;
+
+/* One reward, as the thing itself. `page` in items.json names which half of a
+   compound is the item and which is the qualifier — Kuro puts the qualifier on
+   the left in "Phantom — Myriad Snare: Rustfire Chassis" and on the right in
+   "Forgery Premium Supply — Lahai-Roi" — so the tile can set the item large
+   and the qualifier under it instead of running 40 characters across a 150px
+   card. */
+function rewardTile(t){
+  if(t.kind === "bonus")
+    return `<div class="loot wide">
+      <span class="loot-pic glyph">${icon("i-events", 22)}</span>
+      <span class="loot-t"><b>${esc(t.name)}</b>
+        <em>A multiplier on another mode's table, not a payout of its own</em></span>
+    </div>`;
+  if(t.kind === "more")
+    return `<div class="loot wide">
+      <span class="loot-pic glyph">${icon("i-info", 22)}</span>
+      <span class="loot-t"><b>And other materials</b>
+        <em>Where Kuro's own reward line stops. The rest is only in the game.</em></span>
+    </div>`;
+
+  const it = itemFor(t.name);
+  const halves = t.name.split(" — ");
+  let main = t.name, sub = "";
+  if(halves.length === 2){
+    /* The half the wiki answered under is the item; the other one qualifies it.
+       With no icon resolved there is nothing to go on, so keep Kuro's order. */
+    const itemFirst = !it?.page || it.page.startsWith(halves[0]);
+    main = itemFirst ? halves[0] : halves[1];
+    sub  = itemFirst ? halves[1] : halves[0];
+  }
+  main = main.replace(/^["“](.+)["”]$/, "$1");
+
+  const hint = [it?.type, it?.description].filter(Boolean).join(" — ");
+  return `<div class="loot${it?.rarity ? ` r${it.rarity}` : ""}"${hint ? ` title="${esc(hint)}"` : ""}>
+    <span class="loot-pic">${it?.icon
+      ? `<img src="${esc(it.icon)}" alt="" loading="lazy" decoding="async">`
+      /* Nobody has an icon for a title or an event avatar — they are a line of
+         text and a picture the game never hands out as an item. The plate says
+         which kind of thing it is rather than borrowing a picture of another. */
+      : `<span class="loot-plate">${esc(t.tag || "No icon")}</span>`}</span>
+    <span class="loot-t">
+      <b>${esc(main)}</b>
+      ${sub ? `<em>${esc(sub)}</em>` : ""}
+    </span>
+    <span class="loot-f">
+      ${t.qty ? `<span class="loot-q">×${t.qty.toLocaleString("en-GB")}</span>` : ""}
+      ${t.tag && it?.icon ? `<span class="loot-tag">${esc(t.tag)}</span>` : ""}
+    </span>
+  </div>`;
+}
+
+/* Every picture Kuro has published of this event, banner first. The banner is
+   the poster; what follows it is the mode actually being played, which is the
+   only place that exists — the overview post has no pictures and the
+   infographic is a poster too. `media` is empty for most events and the reel
+   just doesn't draw; it fills in by itself the day the notice lands. */
+function eventFrames(ev){
+  const art = eventArt(ev);
+  const out = [];
+  if(art) out.push({
+    full: artUrl(art, 1600), thumb: artUrl(art, 320),
+    cap: art.note || art.title || `${ev.name} — event banner`,
+    credit: art.credit || "", source: art.source || ""
+  });
+  for(const m of ev.media || []) out.push({
+    full: cdnWidth(m.url, 1600), thumb: cdnWidth(m.url, 320),
+    cap: m.title || `${ev.name} — Kuro Games`,
+    credit: m.credit || "", source: m.source || ""
+  });
+  return out;
+}
+
+/* Swap the frame under the reel. Repaints rather than redrawing: the whole
+   record is one innerHTML write, and rebuilding it to change an `src` would
+   throw away the reader's scroll position halfway down a page of rewards. */
+function paintReel(i){
+  const wrap = $(".evr-reel");
+  const f = (S.reel || [])[i];
+  if(!wrap || !f) return;
+  S.reelAt = i;
+  const img = wrap.querySelector(".evr-frame img");
+  img.src = f.full;
+  img.alt = f.cap;
+  wrap.querySelector(".evr-cap-t").textContent = f.cap + (f.credit ? ` — ${f.credit}` : "");
+  const a = wrap.querySelector(".evr-cap a");
+  if(a){ a.href = f.source || "#"; a.hidden = !f.source; }
+  wrap.querySelectorAll(".evr-thumb").forEach((b, n) =>
+    b.setAttribute("aria-current", String(n === i)));
+}
+
+/* The gate on an event, as a number. Kuro writes it as a sentence and the
+   sentence is kept — this is only what the dial reads. */
+const unionLevel = ev => Number(/union\s+level\s+(\d+)/i.exec(ev.eligibility || "")?.[1]) || null;
+
 function drawerEvent(id){
   const ev = gameEvents().find(x => x.id === id);
   if(!ev) return;
@@ -1495,58 +1653,173 @@ function drawerEvent(id){
   const st = eventState(ev);
   const v = versions().find(x => x.id === ev.version);
   const intel = ev.intel ? entries().find(e => e.id === ev.intel) : null;
-  /* rewards is Kuro's own sentence when the fetcher read a notice, and a
-     hand-written list when somebody typed it in from a broadcast. */
-  const rewards = Array.isArray(ev.rewards) ? ev.rewards : (ev.rewards ? [ev.rewards] : []);
+  const astrite = astriteFrom(ev);
+  const loot = rewardTokens(ev.rewards);
+  const ul = unionLevel(ev);
 
-  const fig = art ? `
-    <figure class="dkv ev-kv">
-      <img src="${esc(artUrl(art, 1400))}" alt="${esc(ev.name)} event banner" loading="lazy" decoding="async">
-      <figcaption>
-        ${esc(art.note || art.title || `${ev.name} event banner`)}${art.credit ? ` — ${esc(art.credit)}` : ""}
-        ${art.source ? `<a href="${esc(art.source)}" target="_blank" rel="noopener">Source</a>` : ""}
-      </figcaption>
-    </figure>`
-    : `<div class="ev-noart">${icon("i-events", 20)}
-        <span>Kuro has not published a banner for this event yet. The desk shows no picture rather than borrowing one.</span>
+  const frames = eventFrames(ev);
+  S.reel = frames;
+  S.reelAt = 0;
+
+  /* Does this banner already say the event's name?
+     It decides the whole hero. A picture with no name on it can carry the
+     record's own title in a gradient across it, which is the look. One that
+     already has Kuro's name plate on it cannot — a second title over the top
+     is two titles fighting, and whichever loses is the one that gets cut in
+     half. Those are shown whole instead, beside the title rather than under
+     it. Same judgement the tiles have always made.
+
+     A standalone notice banner always has its name on it; that is what makes
+     it a notice banner. A crop out of the update-content sheet usually doesn't
+     — Kuro draws those as art, which is the only reason a band of the sheet
+     can be cut out and used at all — but the utility events get a title strip
+     rather than a picture, so `art.nameplate` overrides the default either
+     way, and is set by hand alongside `art.crop`. */
+  const plated = !!art && (art.nameplate ?? !art.crop);
+
+  const pic = art
+    ? `<div class="evr-pic">
+        <img src="${esc(artUrl(art, 1600))}" alt="${esc(ev.name)} event banner" decoding="async"
+             ${art.focus ? `style="object-position:${esc(art.focus)}"` : ""}>
+      </div>`
+    /* The same resonance rings the tile draws when Kuro has published no
+       banner — the desk's own mark for a thing it knows is coming and has
+       nothing to show of, rather than a second way of saying it. */
+    : `<div class="evr-pic none">
+        <div class="ev-plate" aria-hidden="true"><span>Banner not published yet</span></div>
       </div>`;
 
-  openDrawer("Event", `<div class="drawer-b">
-    <div class="meta">
-      ${tierBadge(tier, tier === "official")}
-      <span class="pill ver">${esc(ev.version)}</span>
-      ${ev.kind ? `<span class="pill">${esc(ev.kind)}</span>` : ""}
-      <span class="ev-state ${st.cls}">${esc(st.text)}</span>
+  const dates = ev.permanent
+    ? `<span class="evr-perm">Permanent — no closing date</span>`
+    : win.start || win.end
+      ? `<span class="evr-range">
+          <b>${esc(win.start ? fmtDate(win.start) : "—")}</b>
+          ${win.start && !win.inherited ? `<i>${esc(fmtTime(win.start))}</i>` : ""}
+          <span class="evr-to">${icon("i-arrow", 12)}</span>
+          <b>${esc(win.end ? fmtDate(win.end) : "—")}</b>
+          ${win.end && !win.inherited ? `<i>${esc(fmtTime(win.end))}</i>` : ""}
+          ${win.est ? `<span class="evr-est">est</span>` : ""}
+        </span>`
+      : `<span class="evr-perm">Kuro has not dated this one yet</span>`;
+
+  /* The four facts that decide whether to open the game tonight, on one line
+     under the picture. Same numbers as the strip on the tile, said in full. */
+  const strip = [
+    ["i-timeline", "Runs", eventTimes(ev)],
+    ["i-events", "Mode", ev.kind || "Event"],
+    ["i-info", "Whose dates", win.inherited && !ev.permanent
+      ? `Patch ${ev.version}'s — the event's own are not out`
+      : "The event's own, in your clock"],
+    ["i-kuro", "Patch", v?.title ? `${v.id} — ${v.title}` : ev.version]
+  ];
+
+  /* Only when there is more than one picture. The hero is already showing the
+     banner; a reel of exactly that frame, six inches lower, is the same
+     photograph printed twice and reads as a mistake rather than as a gallery.
+     Most events are in that state today and the record simply gives the width
+     to the writing — the reel appears by itself the day Kuro's own notice for
+     the event lands with its screenshots in it. */
+  const reel = frames.length > 1 ? `<figure class="evr-reel">
+    <div class="evr-frame">
+      <img src="${esc(frames[0].full)}" alt="${esc(frames[0].cap)}" loading="lazy" decoding="async">
     </div>
-    <h2>${esc(ev.name)}${ev.nameCN ? `<span class="cjk">${esc(ev.nameCN)}</span>` : ""}</h2>
-    ${fig}
-    <div class="dgear">
-      <div><span>Runs</span><b>${esc(eventTimes(ev))}</b></div>
-      <div><span>Whose dates</span><b>${win.inherited && !ev.permanent
-        ? `Patch ${esc(ev.version)} — the event's own are not out`
-        : "The event's own, in your timezone"}</b></div>
-      ${v?.title ? `<div><span>Patch</span><b>${esc(v.id)} — ${esc(v.title)}</b></div>` : ""}
+    ${frames.length > 1 ? `<div class="evr-thumbs" role="group" aria-label="Pictures of this event">
+      ${frames.map((f, i) => `<button class="evr-thumb" data-act="reel" data-id="${i}"
+        aria-current="${i === 0}" aria-label="Picture ${i + 1} of ${frames.length}">
+        <img src="${esc(f.thumb)}" alt="" loading="lazy" decoding="async"></button>`).join("")}
+    </div>` : ""}
+    <figcaption class="evr-cap"><span class="evr-cap-t">${esc(frames[0].cap)}${
+      frames[0].credit ? ` — ${esc(frames[0].credit)}` : ""}</span>
+      <a href="${esc(frames[0].source || "#")}" target="_blank" rel="noopener"${
+        frames[0].source ? "" : " hidden"}>Source</a></figcaption>
+  </figure>` : "";
+
+  /* The reel is the left column and the writing is the right one, so an event
+     with no picture at all doesn't leave a hole where one would have been —
+     the prose takes the width instead. */
+  const about = `<div class="evr-about">
+    <span class="label">What it is</span>
+    ${ev.detail ? `<p>${esc(ev.detail)}</p>` : ev.summary ? `<p>${esc(ev.summary)}</p>`
+      : `<p class="evr-thin">Kuro has announced this one by name and written nothing else about it yet.</p>`}
+  </div>`;
+
+  const facts = [
+    ["Kind", ev.kind || "Event"],
+    ["Filed under", ev.section || "Special Events"],
+    ["Confidence", TIER_LABEL[tier]],
+    ["Written by", ev.origin === "kuro" ? "Kuro's own post, read by the fetcher" : "Hand, off a broadcast"]
+  ];
+
+  openDrawer("Event", `<div class="drawer-b evrec">
+    <header class="evr-hero${plated ? " plated" : ""}${art ? "" : " bare"}">
+      ${pic}
+      <div class="evr-copy">
+        <div class="meta">
+          ${tierBadge(tier, tier === "official")}
+          <span class="pill ver">${esc(ev.version)}</span>
+          ${ev.kind ? `<span class="pill">${esc(ev.kind)}</span>` : ""}
+          <span class="ev-state ${st.cls}">${esc(st.text)}</span>
+        </div>
+        <h2>${esc(ev.name)}${ev.nameCN ? `<span class="cjk">${esc(ev.nameCN)}</span>` : ""}</h2>
+        ${ev.summary ? `<p class="evr-sum">${esc(ev.summary)}</p>` : ""}
+        <div class="evr-when">
+          <span class="evr-dates">${icon("i-timeline", 13)}${dates}</span>
+          <span class="evr-tz">${icon("i-info", 12)}Your own clock — ${esc(tzLabel())}</span>
+        </div>
+        ${ev.source ? `<a class="evr-cta" href="${esc(ev.source)}" target="_blank" rel="noopener">
+          ${esc(ev.origin === "kuro" ? "Kuro's event notice" : "Kuro's version preview")}
+          ${icon("i-arrow", 13)}</a>` : ""}
+      </div>
+    </header>
+
+    <div class="evr-strip">
+      ${strip.map(([ic, k, val]) => `<div>${icon(ic, 15)}
+        <span><em>${esc(k)}</em><b>${esc(val)}</b></span></div>`).join("")}
     </div>
-    ${ev.detail ? `<p style="margin-top:16px">${esc(ev.detail)}</p>` : ""}
-    ${rewards.length ? `<div class="dsec">
-      <div class="dsec-h"><span class="label">Rewards</span>
-        ${astriteFrom(ev) ? `<span class="ev-astrite inline">${icon("i-astrite", 12)}
-          <b>${astriteLabel(astriteFrom(ev))}</b></span>` : ""}</div>
-      <ul>${rewards.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>` : ""}
-    ${ev.eligibility ? `<div class="dsec"><span class="label">Eligibility</span>
-      <p style="margin:0">${esc(ev.eligibility)}</p></div>` : ""}
-    ${intel ? `<div class="dsec"><span class="label">Intel this came from</span>
-      <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(intel.id)}">
-        <i class="dot t-${esc(intel.confidence)}" style="width:7px;height:7px;border-radius:50%;background:currentColor;flex:none"></i>
-        ${esc(intel.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span></div>` : ""}
-    ${ev.source ? `<div class="dsec"><span class="label">Source</span>
-      <a class="dsrc" href="${esc(ev.source)}" target="_blank" rel="noopener">
-        <span class="lang">EN</span>${esc(ev.origin === "kuro" ? "Kuro Games — official notice" : "Kuro Games — version preview")}
-        <span class="arrow">${icon("i-arrow", 13)}</span></a></div>` : ""}
-    <div class="dsec"><span class="label">Open the patch</span>
-      <span class="dsrc" role="button" tabindex="0" data-act="version" data-id="${esc(ev.version)}">
-        Version ${esc(ev.version)} — its banners, phases and everything else in it
-        <span class="arrow">${icon("i-arrow", 13)}</span></span></div>
+
+    <div class="evr-mid${reel ? "" : " solo"}">${reel}${about}</div>
+
+    ${loot.length ? `<section class="dsec evr-loot">
+      <div class="dsec-h"><span class="label">What it pays</span>
+        ${astrite ? `<span class="ev-astrite inline">${icon("i-astrite", 12)}
+          <b>${astriteLabel(astrite)}</b></span>` : ""}</div>
+      <div class="lootgrid">${loot.map(rewardTile).join("")}</div>
+      <p class="tier-note">Kuro's own reward line, item by item. Item art © Kuro Games, via the
+        Wuthering Waves Wiki on Fandom.</p>
+    </section>` : ""}
+
+    <div class="evr-cols">
+      <div class="evr-box">
+        <span class="label">Event details</span>
+        <div class="dgear">${facts.map(([k, val]) =>
+          `<div><span>${esc(k)}</span><b>${esc(val)}</b></div>`).join("")}</div>
+      </div>
+
+      <div class="evr-box">
+        <span class="label">Who can play it</span>
+        ${ul ? `<div class="evr-gate">
+          <span class="evr-dial" aria-hidden="true"><b>${ul}</b></span>
+          <span class="evr-gate-t"><em>Union Level</em><b>${ul} and up</b></span>
+        </div>` : ""}
+        ${ev.eligibility
+          ? `<p>${esc(ev.eligibility)}</p>`
+          : `<p class="evr-thin">Kuro has not published a requirement for this one.</p>`}
+      </div>
+
+      <div class="evr-box">
+        <span class="label">Where this comes from</span>
+        ${ev.source ? `<a class="dsrc" href="${esc(ev.source)}" target="_blank" rel="noopener">
+          <span class="lang">EN</span>${esc(ev.origin === "kuro"
+            ? "Kuro Games — official notice" : "Kuro Games — version preview")}
+          <span class="arrow">${icon("i-arrow", 13)}</span></a>` : ""}
+        ${intel ? `<span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(intel.id)}">
+          <i class="dot t-${esc(intel.confidence)}" style="width:7px;height:7px;border-radius:50%;background:currentColor;flex:none"></i>
+          ${esc(intel.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span>` : ""}
+        <span class="dsrc" role="button" tabindex="0" data-act="version" data-id="${esc(ev.version)}">
+          Version ${esc(ev.version)} — its banners, phases and everything else in it
+          <span class="arrow">${icon("i-arrow", 13)}</span></span>
+      </div>
+    </div>
   </div>`, `event:${ev.id}`);
 }
 
@@ -2768,6 +3041,7 @@ function bind(){
       draw(S.view);
     }
     else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
+    else if(act === "reel"){ paintReel(Number(id)); }
     else if(act === "noop"){ /* decorative */ }
     else dispatch(act, id);
   });
@@ -2830,7 +3104,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events"];
+  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events","items"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 

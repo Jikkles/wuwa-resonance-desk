@@ -1601,19 +1601,315 @@ button{font:inherit;color:inherit}
 }
 .ev-state.perm{color:var(--fg-3)}
 
-/* The drawer keeps the banner at its own shape — 16:9, whole, uncropped. It is
-   the one place there is room for it, and unlike a character poster it is
-   already the ratio a modal wants. */
-.dkv.ev-kv{margin-top:14px}
-.dkv.ev-kv img{width:100%;height:auto;display:block}
-/* Said in the drawer as well as on the tile, because the drawer is where
-   somebody goes to find out what they are missing. */
-.ev-noart{
-  display:flex;align-items:center;gap:11px;margin:14px 0 4px;
-  padding:12px 14px;border:1px dashed var(--line-2);border-radius:var(--r-sm);
-  background:var(--tint-sink);color:var(--fg-3);font-size:12.5px;line-height:1.55;
+/* ══ the event record ═══════════════════════════════════════════════
+   The one record on the desk built around a picture. Everything else here is
+   a page of facts with art on it; an event is the other way round, because
+   what a reader wants off it — what is this, is it on, what does it pay — is
+   answered faster by a banner, a screenshot and a row of item icons than by
+   any arrangement of the same words.
+
+   Three bands, in the order the questions arrive: the banner with the name and
+   the window set into it, Kuro's own pictures of the mode beside what it is,
+   and then the payout as the items themselves. */
+.evrec{--evr-h:clamp(290px,42vh,440px)}
+
+/* ── the hero ──────────────────────────────────────────────────────
+   Full bleed to the panel's edges, which is what --dpad-* on .drawer-b is
+   for. Two shapes of banner arrive and the hero has to hold both:
+
+   A crop out of Kuro's update-content infographic is clean art — they set no
+   name on those, which is the only reason a band of that sheet can be cut out
+   and used at all — so the record's own title lies in a gradient across it.
+
+   A standalone event notice's banner already carries the event's name across
+   the middle in the game's display face, and the Wuthering Waves wordmark in
+   the corner. Setting a second title over that is the same words twice, badly
+   aligned. That one runs full width and uncovered with the title in a band
+   underneath — which is the rule the tiles have followed all along. */
+.evr-hero{
+  position:relative;overflow:hidden;
+  margin:calc(-1 * var(--dpad-y)) calc(-1 * var(--dpad-x)) 0;
+  border-bottom:1px solid var(--line);background:var(--bg-2);
 }
-.ev-noart svg{flex:none;color:var(--fg-3)}
+/* The picture takes the right two-thirds rather than the whole band, and
+   dissolves into the panel across its own left edge instead of having a scrim
+   laid over it. A banner is about 2:1 and the hero band is nearer 4:1, so a
+   picture stretched across the whole width is object-fit blowing it up until
+   only a torso is left — the figure Kuro drew is the thing being shown, and
+   cropping it to a shirt to make room for a gradient gets that backwards. */
+.evr-pic{
+  position:absolute;inset:0 0 0 32%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 40%);
+}
+.evr-pic img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block}
+/* Up from the bottom edge, so the picture lands on the fact strip rather than
+   being sliced off by it. */
+.evr-hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(0deg,rgba(13,12,17,.72),rgba(13,12,17,0) 40%);
+}
+.evr-copy{
+  position:relative;z-index:1;min-height:var(--evr-h);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(22px,3.4vh,34px) var(--dpad-x);
+  max-width:min(600px,60%);
+}
+.evr-copy h2{font-size:clamp(24px,2.6vw,34px);letter-spacing:-.02em;margin-bottom:8px}
+.drawer-b .evr-copy .evr-sum{
+  font-size:14.5px;line-height:1.6;color:var(--fg-2);max-width:52ch;margin:0 0 16px;
+}
+
+/* A standalone notice banner keeps the same hero, and changes one thing: it
+   is shown whole rather than filled to the box. Kuro sets the event's name
+   across the lower third of those and the wordmark in the corner, and a crop
+   that loses either is a crop of the thing that makes it that event's banner.
+   Contained, it sits in the right of the hero as a poster does on a wall —
+   beside the record's own title rather than underneath it, so neither has to
+   give way to the other. No mask for the same reason: the mask exists to
+   dissolve a cropped edge, and there is no cropped edge here to dissolve. */
+.evr-hero.plated .evr-pic{
+  inset:clamp(10px,1.6vh,20px) clamp(10px,1.4vw,22px) clamp(10px,1.6vh,20px) 34%;
+  -webkit-mask-image:none;mask-image:none;
+}
+.evr-hero.plated .evr-pic img{object-fit:contain;object-position:center}
+.evr-hero.plated::after{display:none}
+
+/* Nothing published at all: the rings, above a title band, and no pretending
+   there is a picture to lay type over. */
+.evr-hero.bare{display:block}
+.evr-hero.bare::after{display:none}
+.evr-hero.bare .evr-pic{
+  position:relative;inset:auto;height:clamp(150px,20vh,210px);
+  border-bottom:1px solid var(--line);-webkit-mask-image:none;mask-image:none;
+}
+.evr-hero.bare .evr-copy{
+  max-width:none;min-height:0;padding-top:clamp(16px,2.2vh,22px);padding-bottom:clamp(16px,2.2vh,22px);
+}
+
+/* The window, set as a fact rather than as a sentence: two dates with their
+   clock times under them and an arrow between. An inherited window has no
+   times to show — they would be the patch's, to the minute, which is a
+   precision the desk does not have about this event. */
+.evr-when{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.evr-dates{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:8px 13px;border:1px solid var(--line-2);border-radius:var(--r-sm);
+  background:rgba(9,8,12,.5);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+}
+.evr-dates>svg{flex:none;color:var(--fg-3)}
+.evr-range{display:inline-flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.evr-range b{font-size:13px;font-weight:500;color:var(--fg)}
+.evr-range i{font-family:var(--mono);font-size:11px;font-style:normal;color:var(--fg-3)}
+.evr-to{display:inline-flex;color:var(--fg-3);margin:0 2px;transform:translateY(1px)}
+.evr-est,.evr-perm{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+}
+.evr-tz{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
+}
+.evr-tz svg{flex:none}
+
+/* Out to Kuro's own post. The only button on the record, because it is the
+   only thing here the desk cannot answer itself. */
+.evr-cta{
+  align-self:flex-start;margin-top:18px;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:10px 16px;border-radius:var(--r-sm);text-decoration:none;
+  background:color-mix(in srgb,var(--accent) 22%,rgba(9,8,12,.6));
+  border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);
+  color:var(--fg);font-size:13px;transition:.15s;
+}
+.evr-cta:hover{background:color-mix(in srgb,var(--accent) 32%,rgba(9,8,12,.6));border-color:var(--accent)}
+.evr-cta svg{flex:none;color:var(--accent)}
+
+/* ── the fact strip ────────────────────────────────────────────────
+   The four things that decide whether to open the game tonight, on one line
+   directly under the picture. Same numbers the tile carries, said in full. */
+.evr-strip{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  margin:0 calc(-1 * var(--dpad-x));padding:14px var(--dpad-x);
+  border-bottom:1px solid var(--line);background:var(--tint-sink);
+  gap:12px 22px;
+}
+.evr-strip>div{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.evr-strip svg{flex:none;color:var(--fg-3);margin-top:2px}
+.evr-strip span{min-width:0}
+.evr-strip em{
+  display:block;font-family:var(--mono);font-size:9.5px;font-style:normal;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);margin-bottom:3px;
+}
+.evr-strip b{display:block;font-size:12.5px;font-weight:500;line-height:1.45;color:var(--fg-2)}
+
+/* ── the reel, and what the event is ───────────────────────────────
+   Kuro's pictures on the left, their words on the right. The reel is the
+   banner followed by whatever screenshots the event's own notice carried —
+   the only published pictures of one of these actually being played. Most
+   events have none yet and the frame stands alone; the thumbnails appear the
+   day there is more than one thing to look at. */
+.evr-mid{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:clamp(18px,2.4vw,34px);padding-top:clamp(20px,2.6vh,28px);
+}
+/* No reel, because Kuro has published one picture of this event and it is
+   already the hero. The writing takes the band on its own, at a measure rather
+   than at the panel width — a 14px line run across 1400px is 190 characters,
+   and the air to its right is the same air the patch note leaves. */
+.evr-mid.solo{grid-template-columns:minmax(0,min(100%,78ch))}
+.evr-reel{margin:0;min-width:0}
+.evr-frame{
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--bg);
+}
+.evr-frame img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.evr-thumbs{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.evr-thumb{
+  flex:0 0 auto;width:88px;padding:0;cursor:pointer;background:none;
+  border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;
+  opacity:.62;transition:.15s;
+}
+.evr-thumb img{display:block;width:100%;height:52px;object-fit:cover}
+.evr-thumb:hover{opacity:.9;border-color:var(--line-2)}
+.evr-thumb[aria-current="true"]{opacity:1;border-color:var(--accent)}
+.evr-cap{
+  display:flex;align-items:baseline;gap:10px;margin-top:10px;
+  font-size:11px;line-height:1.5;color:var(--fg-3);
+}
+.evr-cap a{margin-left:auto;color:var(--fg-3);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+.evr-cap a:hover{color:var(--accent)}
+.evr-about>.label{display:block;padding-bottom:9px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.drawer-b .evr-about p{margin:0 0 12px;max-width:62ch}
+.evr-thin{color:var(--fg-3)}
+
+/* ── what it pays ──────────────────────────────────────────────────
+   Kuro writes the rewards as a line of prose and the desk used to print it
+   back as a bulleted list, which is the shape the sentence arrived in rather
+   than the shape the question comes in. The question is what this event pays,
+   and that is answered by the things themselves — at a size you can recognise
+   an Astrite crystal from across a desk, because recognising it is the whole
+   job an icon has.
+
+   auto-fill rather than a fixed count: a login track pays two things and a
+   combat event pays nine, and neither should be laid out for the other. */
+.evr-loot{margin-top:clamp(22px,3vh,30px)}
+/* auto-fit with a ceiling, which is the only one of the four ways to write
+   this that behaves. auto-fill lays ten columns across a panel this wide and
+   puts five stamps in the first five of them; auto-fit with a 1fr maximum
+   hands three rewards a third of the page each; and wrapping flex leaves the
+   last row's orphan twice the size of everything above it. A track between a
+   floor and a ceiling gives one card size whatever the count, and the row
+   starts at the left rather than being justified into the width. */
+.lootgrid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,210px));
+  justify-content:start;gap:10px;
+}
+.loot{
+  min-width:0;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px;
+  padding:16px 12px 14px;border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(168deg,var(--tint),rgba(0,0,0,.14));
+}
+/* Rarity, off the item's own wiki page. It is the game's own grading and the
+   only thing on the tile that ranks one reward against another, so it lights
+   the picture rather than being printed as a number nobody reads. */
+.loot-pic{
+  position:relative;width:84px;height:84px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:var(--r-sm);background:radial-gradient(circle at 50% 42%,var(--tint),transparent 72%);
+}
+.loot.r5 .loot-pic{background:radial-gradient(circle at 50% 42%,rgba(227,172,85,.26),transparent 72%)}
+.loot.r4 .loot-pic{background:radial-gradient(circle at 50% 42%,rgba(163,124,232,.24),transparent 72%)}
+.loot.r3 .loot-pic{background:radial-gradient(circle at 50% 42%,rgba(123,165,242,.22),transparent 72%)}
+.loot-pic img{width:100%;height:100%;object-fit:contain;display:block}
+.loot-pic.glyph{width:44px;height:44px;color:var(--fg-3)}
+/* A title and an event avatar have no icon because the game never hands them
+   over as items. The plate says which kind of thing it is; it does not borrow
+   a picture of another one. */
+.loot-plate{
+  display:flex;align-items:center;justify-content:center;width:100%;height:100%;
+  border:1px dashed var(--line-2);border-radius:var(--r-sm);padding:4px;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--fg-3);line-height:1.4;
+}
+.loot-t{display:block;min-width:0}
+.loot-t b{display:block;font-size:12.5px;font-weight:500;line-height:1.35;color:var(--fg)}
+.loot-t em{
+  display:block;margin-top:3px;font-style:normal;font-size:11px;line-height:1.4;color:var(--fg-3);
+}
+.loot-f{display:flex;align-items:center;gap:7px;margin-top:auto;padding-top:2px;flex-wrap:wrap;justify-content:center}
+.loot-q{font-family:var(--mono);font-size:12.5px;color:var(--fg);letter-spacing:.02em}
+.loot-tag{
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:2px 6px;border-radius:5px;border:1px solid var(--line-2);color:var(--fg-3);
+}
+/* The two rewards that aren't things: a multiplier on another mode's table,
+   and Kuro declining to finish the list. Both are worth showing as what they
+   are — dropping them for not fitting the grid would have the desk quietly
+   under-reporting the payout. */
+.loot.wide{
+  grid-column:1/-1;
+  flex-direction:row;align-items:center;text-align:left;gap:13px;padding:13px 15px;
+}
+.loot.wide .loot-t b{font-size:13px}
+.evr-loot .tier-note{margin-top:12px;display:block}
+
+/* ── the three boxes ───────────────────────────────────────────────
+   What kind of thing it is, who can play it, and where the desk got it. */
+.evr-cols{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;margin-top:clamp(22px,3vh,30px);
+}
+.evr-box{
+  padding:15px 17px 17px;border:1px solid var(--line);border-radius:var(--r);background:var(--tint);
+  display:flex;flex-direction:column;gap:11px;
+}
+.evr-box>.label{padding-bottom:10px;border-bottom:1px solid var(--line)}
+.drawer-b .evr-box p{margin:0;font-size:13px;max-width:none}
+.evr-box .dsrc{background:rgba(0,0,0,.14)}
+/* The gate, as a dial. Kuro writes it as a sentence and the sentence is kept
+   underneath — this is only the number out of it, at a size that answers the
+   question from the other side of the room. There is no track behind it: the
+   Union Level cap moves with the game and a scale drawn to a guess would be
+   the one invented thing on the page. */
+.evr-gate{display:flex;align-items:center;gap:14px}
+.evr-dial{
+  flex:none;width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid color-mix(in srgb,var(--accent) 42%,transparent);
+  background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%);
+}
+.evr-dial b{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--fg)}
+.evr-gate-t em{
+  display:block;font-family:var(--mono);font-size:9.5px;font-style:normal;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);margin-bottom:4px;
+}
+.evr-gate-t b{font-size:14px;font-weight:500}
+
+@media (max-width:900px){
+  /* The split hero needs room for a picture and a column of type side by side,
+     and below this there isn't any: the copy would be four words to a line
+     over the part of the banner nobody chose to show. Every hero stacks. */
+  .evr-hero{display:block}
+  .evr-hero::after{display:none}
+  .evr-hero .evr-pic{position:static;border-bottom:1px solid var(--line);
+    -webkit-mask-image:none;mask-image:none}
+  .evr-hero .evr-pic img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+  /* A banner carrying its own name is still shown whole here, at whatever
+     shape it is — a 3:1 title strip letterboxed into a 16:9 box is two bands
+     of nothing, and cropped to 16:9 it loses the name that put it in this
+     branch to begin with. */
+  .evr-hero.plated .evr-pic img{aspect-ratio:auto;height:auto}
+  .evr-hero.bare .evr-pic{position:relative;height:150px}
+  .evr-copy{max-width:none;min-height:0;padding-top:18px;padding-bottom:18px}
+  .evr-mid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .lootgrid{grid-template-columns:repeat(auto-fit,minmax(104px,150px));gap:8px}
+  .loot{padding:12px 9px 11px}
+  .loot-pic{width:62px;height:62px}
+  .evr-thumb{width:72px}
+  .evr-thumb img{height:44px}
+}
 
 @media (max-width:640px){
   /* Two up on a phone. The caption bar is what makes this survive the width —
@@ -2078,7 +2374,12 @@ button{font:inherit;color:inherit}
    column reads as text pushed against glass. Clamped rather than fixed so the
    full-bleed phone panel keeps the tighter padding it was drawn with. */
 .drawer-b{
-  padding:clamp(20px,2.4vh,28px) clamp(22px,2.4vw,38px) clamp(24px,3vh,34px);
+  /* Named, because the event record's hero bleeds to the panel's own edges and
+     has to negate this — a clamp() written out twice is two numbers that will
+     stop agreeing the first time one of them is tuned. */
+  --dpad-x:clamp(22px,2.4vw,38px);
+  --dpad-y:clamp(20px,2.4vh,28px);
+  padding:var(--dpad-y) var(--dpad-x) clamp(24px,3vh,34px);
   /* The key visual box, shared with the two date rows that bracket it. */
   --kv-w:min(1120px,108vh);
 }

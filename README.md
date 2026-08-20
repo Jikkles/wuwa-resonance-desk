@@ -576,6 +576,7 @@ So a hand-written entry can carry art after all — as a rectangle of that sheet
   "url": "https://hw-media-cdn-mingchao.kurogame.com/object/…/k70f13…jpg",
   "crop": { "x": 78, "y": 1112, "w": 918, "h": 494 },
   "focus": "0% 50%",
+  "nameplate": true,
   "title": "Wuthering Waves Update Content | Version 3.6 …",
   "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
   "credit": "© Kuro Games",
@@ -589,6 +590,13 @@ the desk asks that host for that region of that file — nothing is copied here 
 is cut up locally. `note` replaces the caption in the drawer, so the picture says what it
 is a crop of. `focus` sets `object-position` for the two-per-patch banners that set their
 name across one end and would otherwise lose half a word to the tile's own crop.
+
+`nameplate` is those same banners said out loud, for the event record. The utility events —
+the double drops — get a title strip out of Kuro's design team rather than a picture, and
+the record shows those whole instead of laying its own title across them. It defaults to
+false for a crop and true for a standalone notice banner, so it is only ever written on the
+exceptions; two a patch, and you see which they are while you are matching previews to
+events anyway.
 
 `scripts/find-event-art.mjs <articleId>` does the measuring:
 
@@ -606,6 +614,93 @@ None of this survives contact with a real notice, and it should not: the moment 
 `[Chord Cleansing] Limited-Time Echo Double Drop Event` as its own article, the fetcher
 takes the standalone banner from it instead.
 
+### The event record
+
+A tile opens onto the one record on the desk built around a picture. Every other record
+here is a page of facts with art on it; an event is the other way round, because what a
+reader arrives with — *what is this, is it on, what does it pay* — is answered faster by a
+banner, a row of item icons and four numbers than by any arrangement of the same words.
+
+Top to bottom: Kuro's banner with the name, the window and the state set into it; the four
+facts that decide whether to open the game tonight; what it is; what it pays; and then the
+three boxes — what kind of thing it is, who can play it, where the desk got it.
+
+**The hero holds two shapes of banner and behaves differently for each**, because the two
+are different pictures:
+
+| Art | What Kuro put on it | What the hero does |
+|---|---|---|
+| a `crop` out of the update-content infographic | usually nothing — Kuro draws those as art, which is the only reason a band of that sheet can be cut out and used at all | fills the right two-thirds and dissolves into the panel across its own left edge, with the record's title lying in the gradient |
+| a standalone notice banner, or any crop flagged `"nameplate": true` | the event's name across it, in the game's display face, usually with the Wuthering Waves wordmark in a corner | shown whole, `object-fit: contain`, sitting beside the record's title rather than under it |
+
+Which is the same judgement the tiles have always made — Kuro's banner says the name, so the
+desk doesn't say it again over the top. The default falls out of `art.crop`, which the
+calendar already records; `art.nameplate` overrides it, and in practice is written on the
+two double-drop events a patch whose banner is a title strip rather than a picture.
+
+An event with no banner at all draws the resonance rings, same as the tile.
+
+### Rewards are the things, not the sentence
+
+Kuro publishes a reward line as prose — `Astrite x1200, Space and Blake Bloom Medal (Event
+Sigil), Modifier, Premium Tuner, Forgery Premium Supply - Lahai-Roi, and other materials.`
+— and the record used to print it back as a bulleted list, which is the shape the sentence
+arrived in rather than the shape the question comes in.
+
+`rewardTokens()` splits it: the count off the end (`x1200`), the qualifier out of the
+brackets (`(Event Sigil)`), one spelling for the dash Kuro writes three ways. What is left
+is the item's name, and `data/items.json` maps that name to an icon:
+
+```bash
+node scripts/fetch-items.mjs
+```
+
+It reads every reward line in `events.json`, resolves each name against the Wuthering Waves
+Wiki on Fandom — the same source the resonator database reads — and caches the icon under
+`assets/items/`. Cached rather than hotlinked, unlike everything from Kuro's own CDN,
+because Fandom rewrites its revision URLs.
+
+Two details worth knowing:
+
+- **`page` says which half of a compound name is the item.** Kuro qualifies a generic item
+  with where it drops (`Forgery Premium Supply — Lahai-Roi`) and a specific one with what
+  it is (`Phantom — Myriad Snare: Rustfire Chassis`), so the qualifier is on the left in
+  one and on the right in the other. The half the wiki answered under is the thing; the
+  card sets the other one under it in smaller type.
+- **A reward with no icon gets a plate naming its kind, not a borrowed picture.** Titles
+  and event avatars have no item art because the game never hands them over as items — the
+  card says `TITLE` and stops there.
+
+`rewardTokens()` exists twice, once in `app.js` and once in `fetch-items.mjs`, and the two
+have to agree: the script decides which names get an icon fetched, the renderer decides
+which name is looked up when the record draws. Change one, change the other. Both files
+say so where they are defined.
+
+Rarity comes off the same wiki page and lights the icon's ground rather than being printed
+as a number — it is the game's own grading and the only thing on a card that ranks one
+reward against another.
+
+### The reel, and why it is usually empty
+
+`media` on an event is the rest of the pictures out of its notice, and the record shows
+them as a reel under the banner — the frame, a strip of thumbnails, and the caption and
+source swapping with it.
+
+**It only draws when there is more than one picture.** The hero is already showing the
+banner; a reel of exactly that frame six inches lower is the same photograph printed twice.
+
+**And most notices have nothing to put in it.** A notice runs its 16:9 banner and then, as
+often as not, the whole post over again as a single tall infographic — 1080×3738, the
+duration and the eligibility and the reward table set as type down a poster. The desk holds
+every one of those facts as data already, and one in a 16:9 frame is a thumbnail of a page.
+So `isLandscape()` asks Kuro's CDN for the shape of each image before keeping it — their
+host is Alibaba OSS and `x-oss-process=image/info` answers with the dimensions for free —
+and anything outside roughly 1.25:1 to 2.5:1 is dropped.
+
+Today that leaves every event with one picture and no reel. It fills in by itself the first
+time Kuro puts a screenshot of a mode in its own notice, which is what the shape test is
+there to be ready for.
+
 ### What it deliberately drops
 
 - **Anything outside the desk's own patch windows.** Kuro's news page still carries the
@@ -614,9 +709,7 @@ takes the standalone banner from it instead.
 - **The `[New Gameplay]` section of the overview**, which is permanent systems shipping
   alongside the events. A permanent menu addition has no window and nothing to miss.
 
-Still not built: rewards totalled into an Astrite figure per patch, and redemption codes.
-Both need parsing Kuro's reward sentence rather than printing it, which is a different job
-from reading the calendar.
+Still not built: redemption codes.
 ## The resonator database
 
 `node scripts/fetch-kits.mjs` builds the whole roster — sixty Resonators including the
@@ -862,6 +955,7 @@ left is the editorial, which is the part worth your time.
 | `feed.json` | six news sources | yes |
 | `art.json` | Kuro's reveal posts | yes |
 | `events.json` — the calendar, its windows and its banners | Kuro's patch notes and event notices | yes |
+| `items.json` + `assets/items/` — reward icons | Fandom, off the reward lines in `events.json` | yes |
 | `resonators.json` — identity, debut, reruns | Fandom | yes |
 | phase dates in `versions.json` | Fandom convene pages, once a phase has run | yes |
 | `kits.json` — skill text | Prydwen | **no — run locally** |
@@ -1043,7 +1137,8 @@ repo activity — if the feed genuinely goes quiet that long, push anything to r
 
 ## Rules
 
-- Character art is cached into `assets/portraits/` and weapon icons into `assets/weapons/`
+- Character art is cached into `assets/portraits/`, weapon icons into `assets/weapons/` and
+  reward item icons into `assets/items/`
   by the fetchers, and a hand-set override
   may be added under `assets/characters/`. This is a deliberate call: it's Kuro's IP, it's
   the thing that gets fan sites taken down, and the project accepts that risk. Every such

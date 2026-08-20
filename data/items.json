@@ -1,0 +1,106 @@
+{
+  "schema": "wuwa-desk/items@1.0",
+  "note": "Icons for the things events pay out, keyed by the item's name exactly as it appears in an events.json reward line — the renderer strips the count and the bracketed qualifier and looks up what's left. Resolved against the Wuthering Waves Wiki on Fandom, which carries Kuro's own extracted item art; cached under assets/items/ rather than hotlinked because Fandom rewrites its revision URLs. An item with no entry here draws a typed plate instead — the desk shows what it has and borrows nothing.",
+  "credit": "Item art © Kuro Games · via the Wuthering Waves Wiki on Fandom (CC BY-SA)",
+  "source": "https://wutheringwaves.fandom.com/wiki/Items",
+  "items": {
+    "Astrite": {
+      "icon": "assets/items/astrite.png",
+      "page": "Astrite",
+      "rarity": 5,
+      "type": "Premium Currency",
+      "description": "The precious remnants of the civilization reverberate within... Perhaps they hold infinite possibilities.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Astrite"
+    },
+    "Forgery Premium Supply — Lahai-Roi": {
+      "icon": "assets/items/forgery-premium-supply-lahai-roi.png",
+      "page": "Forgery Premium Supply",
+      "rarity": 5,
+      "type": "Supply Pack",
+      "description": "Open to claim one premium material for weapon ascension or skill upgrade of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Premium_Supply"
+    },
+    "Lustrous Tide": {
+      "icon": "assets/items/lustrous-tide.png",
+      "page": "Lustrous Tide",
+      "rarity": 5,
+      "type": "Convene Token",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Lustrous_Tide"
+    },
+    "Modifier": {
+      "icon": "assets/items/modifier.png",
+      "page": "Modifier",
+      "rarity": 5,
+      "type": "Echo Development Material",
+      "description": "Used to modify the Mainstat of an unenhanced 5-Star Echo.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Modifier"
+    },
+    "Phantom — Myriad Snare: Rustfire Chassis": {
+      "icon": "assets/items/phantom-myriad-snare-rustfire-chassis.png",
+      "page": "Myriad Snare: Rustfire Chassis",
+      "type": "Overlord",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Myriad_Snare%3A_Rustfire_Chassis"
+    },
+    "Premium Enclosure Tank — Land of Xuanfang": {
+      "icon": "assets/items/premium-enclosure-tank-land-of-xuanfang.png",
+      "page": "Premium Enclosure Tank",
+      "rarity": 5,
+      "type": "Supply Pack",
+      "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice:<br>[[Tailored Ring]]*1<br>[[FF Whisperin Core]]*1<br>[[FF Howler Core]]*1",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Enclosure_Tank"
+    },
+    "Premium Energy Core": {
+      "icon": "assets/items/premium-energy-core.png",
+      "page": "Premium Energy Core",
+      "rarity": 5,
+      "type": "Weapon EXP Material",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Energy_Core"
+    },
+    "Premium Resonance Potion": {
+      "icon": "assets/items/premium-resonance-potion.png",
+      "page": "Premium Resonance Potion",
+      "rarity": 5,
+      "type": "Resonator EXP Material",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Resonance_Potion"
+    },
+    "Premium Sealed Tube": {
+      "icon": "assets/items/premium-sealed-tube.png",
+      "page": "Premium Sealed Tube",
+      "rarity": 5,
+      "type": "Echo Development Material",
+      "description": "Premium Echo EXP Item. Provides 5,000 EXP.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Sealed_Tube"
+    },
+    "Premium Tuner": {
+      "icon": "assets/items/premium-tuner.png",
+      "page": "Premium Tuner",
+      "rarity": 5,
+      "type": "Echo Development Material",
+      "description": "Adjust Echoes' frequencies, removes any noise, and unleash their true potential.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Tuner"
+    },
+    "Radiant Tide": {
+      "icon": "assets/items/radiant-tide.png",
+      "page": "Radiant Tide",
+      "rarity": 5,
+      "type": "Convene Token",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Radiant_Tide"
+    },
+    "Shell Credit": {
+      "icon": "assets/items/shell-credit.png",
+      "page": "Shell Credit",
+      "rarity": 3,
+      "type": "Universal Currency",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Shell_Credit"
+    },
+    "Space and Blake Bloom Medal": {
+      "icon": "assets/items/space-and-blake-bloom-medal.png",
+      "page": "Space and Blake Bloom Medal",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "Dedicated to the faculty and students who shone in the drill.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Space_and_Blake_Bloom_Medal"
+    }
+  },
+  "updated": "2026-08-20T08:58:57.105Z"
+}

@@ -14,7 +14,11 @@
 //      Event", "Event Preview | […]"). One event each, and the first image in
 //      the body is that event's own 16:9 banner — the picture with the event's
 //      name set across it. This is the only place event art exists: Kuro draws
-//      no key visual for an event until they announce it on its own.
+//      no key visual for an event until they announce it on its own. Anything
+//      landscape after it is a screenshot of the mode being played, and becomes
+//      the reel on the event record — but most notices carry only the whole
+//      post over again as one tall infographic, and those are dropped by shape
+//      rather than shown as a thumbnail of a page. See isLandscape.
 //
 // So the overview says what is running and when, the notice says what it looks
 // like and what it pays, and this script matches them on the bracketed name.
@@ -75,6 +79,31 @@ const imagesIn = html =>
   [...String(html || "").matchAll(/<img[^>]+src="([^"]+)"/gi)]
     .map(m => m[1])
     .filter(u => /^https:\/\/[^"]+\.(jpe?g|png|webp)(\?|$)/i.test(u));
+
+/* Which of a notice's pictures are pictures.
+   A notice runs its 16:9 banner first and then, as often as not, the whole
+   post again as a single tall infographic — 1080x3738, the duration and the
+   eligibility and the reward table set as type down a poster. The desk already
+   holds every one of those facts as data, and one in a 16:9 frame is a
+   thumbnail of a page. So the reel takes landscape frames only, and asks the
+   CDN for the shape rather than guessing from the filename: Kuro's host is
+   Alibaba OSS and `image/info` answers with the dimensions for free, without
+   pulling down four megabytes to measure it here. */
+const LANDSCAPE = [1.25, 2.5];
+
+async function isLandscape(url) {
+  try {
+    const info = await getJson(`${url}${url.includes("?") ? "&" : "?"}x-oss-process=image/info`);
+    const w = Number(info?.ImageWidth?.value), h = Number(info?.ImageHeight?.value);
+    if (!w || !h) return false;
+    const r = w / h;
+    return r >= LANDSCAPE[0] && r <= LANDSCAPE[1];
+  } catch {
+    /* Any other host, or a CDN that declined to answer. Unmeasured is not
+       shown — the reel is small enough that one page of type in it undoes it. */
+    return false;
+  }
+}
 
 /* "2026-07-11 10:00" in Kuro's server time. The offset is the point: without it
    every clock on the desk would be an hour or nine out for whoever is reading. */
@@ -182,12 +211,20 @@ function noticeName(title) {
   return null;
 }
 
-function parseNotice(article, name) {
+async function parseNotice(article, name) {
   const text = toText(article.articleContent);
   const durationLine = field(text, "Duration");
+  const imgs = imagesIn(article.articleContent);
   return {
     name,
-    art: imagesIn(article.articleContent)[0] || null,
+    art: imgs[0] || null,
+    /* Whatever else in the post is a picture rather than a page — see
+       isLandscape. When a notice carries a real screenshot of the mode being
+       played this is where it comes from, and the event record shows them as a
+       reel; when it carries nothing but the banner and the poster, which is
+       most of them, the list comes back empty and no reel draws. */
+    shots: (await Promise.all(imgs.slice(1).map(async u => (await isLandscape(u)) ? u : null)))
+      .filter(Boolean),
     when: durationLine ? parseWhen(durationLine) : null,
     rewards: field(text, "Rewards") || "",
     eligibility: field(text, "Eligibility") || "",
@@ -255,12 +292,13 @@ function versionFor(versions, when, fallback) {
     if (!name) continue;
     try {
       const full = await getJson(`${BASE}/article/${a.articleId}.json`);
-      const n = parseNotice(full, name);
+      const n = await parseNotice(full, name);
       n.articleId = a.articleId;
       n.articleTitle = full.articleTitle;
       n.published = String(a.startTime || "").slice(0, 10);
       notices.set(key(name), n);
-      console.log(`notice   ${name.padEnd(34)} ${n.art ? "art" : "no art"}`);
+      console.log(`notice   ${name.padEnd(34)} ${n.art ? "art" : "no art"}` +
+        (n.shots.length ? `, ${n.shots.length} screenshot${n.shots.length === 1 ? "" : "s"}` : ""));
     } catch (err) {
       console.log(`notice   ${a.articleId} failed: ${err.message}`);
     }
@@ -342,6 +380,25 @@ function versionFor(versions, when, fallback) {
             credit: "© Kuro Games"
           }
         : hand?.art || null,
+      /* The reel. Kuro's own screenshots out of the notice, in the order the
+         post ran them, hotlinked from the same CDN the banner is. A hand entry
+         may carry its own — a preview broadcast sometimes shows a mode weeks
+         before the notice exists — and keeps them until a notice supersedes
+         it, same rule as the art above. */
+      ...(() => {
+        const media = notice
+          ? (notice.shots || []).map(url => ({
+              url,
+              title: notice.articleTitle,
+              source: ARTICLE_URL(notice.articleId),
+              credit: "© Kuro Games"
+            }))
+          : hand?.media || [];
+        /* Absent rather than empty. Most notices are a banner and nothing else,
+           and a `"media": []` on every one of them is a field that only ever
+           says no. */
+        return media.length ? { media } : {};
+      })(),
       confidence: "official",
       origin: "kuro",
       source: notice?.articleId
@@ -386,8 +443,10 @@ function versionFor(versions, when, fallback) {
     schema: "wuwa-desk/events@1.0",
     note:
       "Limited-time events, read off Kuro's own EN posts: the per-patch Content Overview for the " +
-      "list, dates and flavour, and each event's own notice for its banner art and rewards. Art is " +
-      "hotlinked from Kuro's CDN, never rehosted. An event with no notice yet has no art by design. " +
+      "list, dates and flavour, and each event's own notice for its banner art, screenshots and " +
+      "rewards. Art is hotlinked from Kuro's CDN, never rehosted. `media` is the notice's other " +
+      "pictures where they are landscape — a screenshot of the mode, not the post set as a poster. " +
+      "An event with no notice yet has no art by design. " +
       "Times carry +08:00 because Kuro publishes them in server time.",
     events: all
   };
@@ -402,8 +461,10 @@ function versionFor(versions, when, fallback) {
   }
 
   const withArt = all.filter(e => e.art).length;
+  const shots = all.reduce((n, e) => n + (e.media?.length || 0), 0);
   console.log(
-    `\n${all.length} events, ${withArt} with Kuro's own art, ${kept.length} hand-written kept` +
+    `\n${all.length} events, ${withArt} with Kuro's own art, ${shots} screenshots, ` +
+      `${kept.length} hand-written kept` +
       (unchanged ? " (unchanged)" : "")
   );
 })();

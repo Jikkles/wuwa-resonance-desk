@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/events@1.0",
-  "note": "Limited-time events, read off Kuro's own EN posts: the per-patch Content Overview for the list, dates and flavour, and each event's own notice for its banner art and rewards. Art is hotlinked from Kuro's CDN, never rehosted. An event with no notice yet has no art by design. Times carry +08:00 because Kuro publishes them in server time.",
+  "note": "Limited-time events, read off Kuro's own EN posts: the per-patch Content Overview for the list, dates and flavour, and each event's own notice for its banner art, screenshots and rewards. Art is hotlinked from Kuro's CDN, never rehosted. `media` is the rest of the notice's pictures, in the order the post ran them. An event with no notice yet has no art by design. Times carry +08:00 because Kuro publishes them in server time.",
   "events": [
     {
       "id": "3.6-gifts-of-drifting-mist",
@@ -177,6 +177,7 @@
           "w": 918,
           "h": 309
         },
+        "nameplate": true,
         "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
         "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
         "published": "2026-08-18",
@@ -290,6 +291,7 @@
           "w": 918,
           "h": 300
         },
+        "nameplate": true,
         "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
         "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
         "published": "2026-08-18",
@@ -454,5 +456,5 @@
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
     }
   ],
-  "updated": "2026-08-19T22:24:23.165Z"
+  "updated": "2026-08-20T09:12:33.755Z"
 }
