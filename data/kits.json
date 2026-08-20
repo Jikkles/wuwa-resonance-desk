@@ -13343,6 +13343,261 @@
           ]
         }
       ]
+    },
+    "Qingxiao": {
+      "slug": "qingxiao",
+      "skills": {
+        "basic": {
+          "name": "Strings to Steel",
+          "blocks": [
+            {
+              "p": [
+                "Press repeatedly or hold Normal Attack to perform up to **4** consecutive attacks, dealing __Aero DMG__.",
+                "Basic Attack - Stringblade Stage 1 and Basic Attack - Stringblade Stage 4 are in Sheathed Stance.",
+                "Basic Attack - Stringblade Stage 2 and Basic Attack - Stringblade Stage 3 are in Drawn Stance.",
+                "When Qin Heart and Sword Cadence are full, Heavy Attack - Stringblade becomes available.",
+                "Hold Normal Attack to consume STA and cast this skill, dealing __Aero DMG__.",
+                "Casting this skill consumes all Qin Heart and Sword Cadence and sends Qingxiao into the Ephemeral Transcendence state.",
+                "Press Normal Attack consecutively or hold it down to perform up to **3** consecutive attacks, dealing __Aero DMG__.",
+                "This skill is in Drawn Stance.",
+                "After landing from Mid-air Attack - Stringblade Stage 3, press or hold Normal Attack within a certain time to cast Basic Attack - Stringblade Stage 3.",
+                "While in mid-air, Resonance Skill is replaced by Mid-air Attack - Stringblade Stage 3.",
+                "While in the Sword Flight state, Jump is replaced by Plunging Attack.",
+                "Consume STA to perform a Plunging Attack, dealing __Aero DMG__.",
+                "While out of the Ephemeral Transcendence state, press Normal Attack within a certain time after casting this skill to cast Basic Attack - Stringblade Stage 3.",
+                "Press Normal Attack within a certain time after a successful Dodge to attack the target, dealing __Aero DMG__.",
+                "This skill is in Drawn Stance.",
+                "Press or hold Normal Attack within a certain time after casting this skill to cast Basic Attack - Stringblade Stage 4.",
+                "While in mid-air, Dodge is replaced by Sword Glide."
+              ]
+            }
+          ]
+        },
+        "skill": {
+          "name": "Severing Note",
+          "blocks": [
+            {
+              "p": [
+                "Deal __Aero DMG__. During this skill, gain **45** points of Qin Heart.",
+                "While not in the Ephemeral Transcendence state, press or hold Normal Attack within a certain time after casting this skill to cast Basic Attack - Stringblade Stage 4.",
+                "While casting Basic Attack - Stringblade Stage 2, Basic Attack - Stringblade Stage 3, or Dodge Counter - Stringblade, Resonance Skill is replaced by Severing Note: Ascendant.",
+                "Deal __Aero DMG__.",
+                "This skill is in Drawn Stance."
+              ]
+            }
+          ]
+        },
+        "liberation": {
+          "name": "Billows Beneath Heaven",
+          "blocks": [
+            {
+              "p": [
+                "Deal __Aero DMG__.",
+                "Can be cast in mid-air close to the ground."
+              ]
+            }
+          ]
+        },
+        "forte": {
+          "name": "Formless Heart Sword",
+          "blocks": [
+            {
+              "p": [
+                "While Qingxiao is in the Ephemeral Transcendence state, Basic Attack - Ephemeral Transcendence and Dodge Counter - Ephemeral Transcendence become available.",
+                "Press repeatedly or hold Normal Attack to perform up to **4** consecutive attacks, dealing __Aero DMG__.",
+                "Before Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence becomes available, this skill's DMG Multiplier is increased by **100%**.",
+                "Can be cast in mid-air.",
+                "Press or hold Normal Attack within a certain time after a successful Dodge to attack the target, dealing __Aero DMG__.",
+                "Before Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence becomes available, this skill's DMG Multiplier is increased by **100%**.",
+                "Can be cast in mid-air.",
+                "When Heart Sword Intent is full, Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence becomes available. Hold Normal Attack to cast the skill, dealing __Aero DMG__.",
+                "Casting this skill consumes all Heart Sword Intent and ends the Ephemeral Transcendence state.",
+                "Mindlock stacks up to **15** times.",
+                "Each time when a Resonator in the team inflicts Tune Strain - Interfered on a target, inflict **1** stack of Mindlock on the target.",
+                "For each stack of Mindlock on the target, DMG taken from Qingxiao's following skills is Amplified by **2%**, with an additional 5% per stack for the first **7** stacks.",
+                "Heavy Attack - Stringblade, Basic Attack - Ephemeral Transcendence, Dodge Counter - Ephemeral Transcendence, Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence, Resonance Liberation - Billows Beneath Heaven.",
+                "Upon entering combat or casting Resonance Liberation Billows Beneath Heaven, gain Heaven's Clarity.",
+                "When Sheathed Stance/Drawn Stance moves deal damage, the rates at which Qin Heart/Sword Cadence are obtained increase by **100%**.",
+                "When casting Heavy Attack - Stringblade, inflict **3** stacks of Mindlock on nearby targets, and enhance the next Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence: its DMG Multiplier is increased by **100%** and it builds additional Off-Tune Level on the target. Switching to another Resonator ends the Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence enhancement.",
+                "Casting Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence removes Heaven's Clarity.",
+                "Casting Intro Skill - Tonality Shift or Heavy Attack - Stringblade grants **1** stack of Swordlight Ward.",
+                "Swordlight Ward stacks up to **1** time. When taking DMG from an enemy's attack, **1** stacks of Swordlight Ward can be consumed to grant immunity to interruption and reduce DMG taken by **60%** for **1s**. This effect can be triggered once per second.",
+                "While in the Sword Flight state, Qingxiao moves with a special animation.",
+                "Moving in Sword Flight continuously consumes Flight Qi.",
+                "Casting the following skills sends Qingxiao into the Sword Flight state:",
+                "Sword Dodge, Heavy Attack - Stringblade, Mid-air Attack - Stringblade Stage 1, Mid-air Attack - Stringblade Stage 2, Severing Note: Ascendant, Basic Attack - Ephemeral Transcendence, Dodge Counter - Ephemeral Transcendence, Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence, and Intro Skill - Tonality Shift.",
+                "Exit the Sword Flight state by",
+                "Casting Mid-air Attack - Stringblade Stage 3 or Plunging Attack.",
+                "Triggering certain environmental interactions or Utilities.",
+                "Returning to the ground.",
+                "Switching to another Resonator.",
+                "Depleting all Flight Qi.",
+                "While in the Sword Flight state, hold Jump to leap up and dash forward a short distance.",
+                "Sword Step can only be cast once during Sword Flight.",
+                "Can hold up to **100** points.",
+                "Dealing damage with Sheathed Stance skills grants Qin Heart.",
+                "Qin Heart cannot be gained while in the Ephemeral Transcendence state.",
+                "Can hold up to **100** points.",
+                "Dealing damage with Drawn Stance skills grants Sword Cadence.",
+                "Sword Cadence cannot be gained while in the Ephemeral Transcendence state.",
+                "Can hold up to **100** points.",
+                "Dealing damage with Basic Attack - Ephemeral Transcendence or Dodge Counter - Ephemeral Transcendence grants Heart Sword Intent."
+              ]
+            }
+          ]
+        },
+        "intro": {
+          "name": "Tonality Shift",
+          "blocks": [
+            {
+              "p": [
+                "Deal __Aero DMG__. Upon casting, gain **30** points of Sword Cadence and gain Resonant Chime.",
+                "Casting Resonance Skill - Severing Note: Judgement grants **30** points of Qin Heart and removes Resonant Chime."
+              ]
+            }
+          ]
+        },
+        "outro": {
+          "name": "Lingering Song",
+          "blocks": [
+            {
+              "p": [
+                "Deal __Aero DMG__ equal to **800%** of Qingxiao's ATK."
+              ]
+            }
+          ]
+        }
+      },
+      "inherent": [
+        {
+          "name": "Sea of Thought, World of Dust",
+          "blocks": [
+            {
+              "p": [
+                "Upon entering combat, gain **1** stack of Gathered Mind.",
+                "After damage dealt directly by Resonators in the team defeats a target inflicted with the Mindlock effect:",
+                "If Qingxiao does not have the Gathered Mind effect, gain Gathered Mind with stacks equal to the target's Mindlock stacks.",
+                "If Qingxiao already has Gathered Mind and the target's Mindlock stacks are no fewer than Qingxiao's Gathered Mind stacks, Qingxiao's Gathered Mind stacks will be matched to the target's Mindlock stacks.",
+                "After Resonators in the team deal damage to a target, inflict Mindlock equal to Qingxiao's Gathered Mind stacks. This effect can only trigger **1** time on the same target.",
+                "When Resonators in the team cast Tune Break, if the target has Tune Strain - Shifting, additionally inflict **1** stack of Tune Strain - Interfered on the target. This effect can only trigger **1** time on the same target.",
+                "When Qingxiao is knocked out, she can no longer gain Gathered Mind, and any existing Gathered Mind effect becomes inactive.",
+                "Gathered Mind stacks up to **15** times and lasts for **30s**."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "To Know, To Banish",
+          "blocks": [
+            {
+              "p": [
+                "Qingxiao's following skills deal **2%** more DMG per stack of Mindlock on the target, with an additional **5%** per stack for the first **7** stacks.",
+                "Heavy Attack - Stringblade, Basic Attack - Ephemeral Transcendence, Dodge Counter - Ephemeral Transcendence, Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence, Resonance Liberation - Billows Beneath Heaven.",
+                "Each time after a Resonator in the team inflicts Tune Strain - Interfered on an Overlord Class or Calamity Class target, additionally inflict **1** stack of Mindlock on the target."
+              ]
+            }
+          ]
+        }
+      ],
+      "chain": [
+        {
+          "n": 1,
+          "name": "Like Clouds That Meet and Drift Apart",
+          "blocks": [
+            {
+              "p": [
+                "Crit. Rate is increased by **16%**.",
+                "The max stack limit of Swordlight Ward is increased to **2**. Casting Heavy Attack - Stringblade additionally grants **1** stack of Swordlight Ward.",
+                "Upon entering combat, gain **25** stacks of Exorcising Seal.",
+                "After Basic Attack - Stringblade, Mid-air Attack - Stringblade, or Basic Attack - Ephemeral Transcendence deals damage, if Qingxiao has Exorcising Seal, remove Exorcising Seal and trigger Juque Perdition, dealing Aero DMG equal to **400%** of Qingxiao's ATK, considered Basic Attack DMG. This effect can be triggered up to once per second. For each stack of Exorcising Seal removed, the target takes 4% more DMG from Juque Perdition for **2s**.",
+                "Exorcising Seal stacks up to **25** times."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "name": "Like Petals That Fall Without a Sound",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multiplier of Heavy Attack - Stringblade is increased by **40%**.",
+                "After entering combat, the max stack limit of Mindlock on nearby enemies is increased to **25**.",
+                "The max stack limit of Gathered Mind from Inherent Skill - Sea of Thought, World of Dust is increased to **25**.",
+                "Heaven's Clarity is enhanced: Casting Heavy Attack - Stringblade now inflicts **6** stacks of Mindlock on nearby targets."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "name": "Dreams Fade, Sword Abides",
+          "blocks": [
+            {
+              "p": [
+                "The Crit. DMG of Resonance Liberation - Billows Beneath Heaven is increased by **100%**.",
+                "During Heavy Attack - Stringblade, gain World in Chorus stacks equal to the highest Mindlock stack count present among nearby enemies.",
+                "World in Chorus: Each stack increases the DMG Multiplier of Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence by **3%**. World in Chorus is removed after casting Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence.",
+                "The Gathered Mind effect of Inherent Skill - Sea of Thought, World of Dust now inflicts **2** stacks of Tune Strain - Interfered."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "name": "Wherever the Road Leads, Side by Side",
+          "blocks": [
+            {
+              "p": [
+                "After a Resonator in the team inflicts Tune Strain - Shifting, their ATK is increased by **20%** for **8s**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "name": "Cold Steel That Longs to Warm the Snow",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multiplier of Resonance Skill - Severing Note: Judgement is increased by **100%**.",
+                "While moving in Sword Flight, Flight Qi cost is reduced by **30%**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "name": "Cleanse This Tarnished Age, Till All Runs Clear",
+          "blocks": [
+            {
+              "p": [
+                "Targets take **40%** more DMG from Qingxiao's Heavy Attack - Stringblade, Heavy Attack - Heaven's Reckoning: Ephemeral Transcendence, Resonance Liberation - Billows Beneath Heaven, and Juque Perdition.",
+                "During Heavy Attack - Stringblade, gain Exorcising Seal stacks equal to the highest Mindlock stack count present among nearby enemies.",
+                "For each stack of Mindlock on the target, the DMG of Juque Perdition taken by the target is Amplified by **2%**. The first **7** stacks additionally grant **5%** DMG Amplification.",
+                "When Inherent Skill - To Know, To Banish is unlocked, the DMG of Juque Perdition on targets with Mindlock is increased by **2%** for each stack of Mindlock. The first **7** stacks additionally grant **5%** DMG increase.",
+                "The effect of Qingxiao's response to Tune Strain - Interfered is increased by **20**%."
+              ]
+            }
+          ]
+        }
+      ],
+      "extra": [
+        {
+          "kind": "Forte Circuit",
+          "name": "Draw and Sunder",
+          "blocks": [
+            {
+              "p": [
+                "Qingxiao inflicts Tune Strain - Shifting on the target after dealing damage with skills. Each skill can only trigger this once for the same target.",
+                "Qingxiao can respond to Tune Strain - Interfered.",
+                "Responding to Tune Strain - Interfered: For each stack of Tune Strain - Interfered on the target, every point of Qingxiao's Tune Break Boost increases the total DMG Qingxiao deals to that target by **0.12%**. While Qingxiao is in the team, the max stack limit of Tune Strain - Interfered on a target is increased by **1**.",
+                "Additionally, when the target's Off-Tune Level is full, Qingxiao can cast Tune Break on it. While on the ground and not in the Ephemeral Transcendence state, press Normal Attack within a certain time after casting Tune Break to cast Basic Attack - Stringblade Stage 3."
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 }

@@ -3147,7 +3147,7 @@
       "weapon": "Sword",
       "role": "Main DPS",
       "version": "3.6",
-      "status": "announced",
+      "status": "released",
       "convene": "Wind of Transcendence",
       "signature": "Glint of Clouds",
       "accessory": "Cloudbloom",
@@ -3165,7 +3165,7 @@
       },
       "confidence": {
         "identity": "official",
-        "kit": "datamined"
+        "kit": "official"
       },
       "sources": [
         {
@@ -3188,7 +3188,8 @@
           "start": "2026-08-20",
           "end": "2026-09-10"
         }
-      ]
+      ],
+      "hasKit": true
     },
     {
       "name": "Jingran",

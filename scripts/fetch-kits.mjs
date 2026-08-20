@@ -97,6 +97,11 @@ async function getText(url, extra = []) {
     }
   }
 }
+/* One day-stamp for the whole run. Two calls a minute apart either side of
+   midnight UTC deciding different things would be a genuinely horrible bug
+   to be handed. */
+const TODAY = new Date().toISOString().slice(0, 10);
+
 const getJson = async url => JSON.parse(await getText(url));
 const readJson = async path => JSON.parse(await readFile(path, "utf8"));
 
@@ -531,11 +536,10 @@ function shipped(current) {
    fifteen lines would cost the project the thing it is built around. **If you
    change the rule, change it in both places.** */
 function deriveCurrent(doc) {
-  const today = new Date().toISOString().slice(0, 10);
   const list = doc.versions || [];
   const started = list.filter(v => {
     const start = v.start || (v.phases || []).slice(-1)[0]?.start;
-    return start && start <= today;
+    return start && start <= TODAY;
   });
   if (!started.length) return doc.current || "0.0";
   /* The newest patch that has started. Anything earlier is superseded by it,
@@ -633,6 +637,21 @@ function deriveCurrent(doc) {
      kit, and only a page that actually parsed replaces one. */
   const kits = { ...prevKits };
   const isShipped = shipped(current);
+  /* When each Resonator's banner is scheduled to open, off the desk's own
+     timeline. The wiki only lists a convene once it has actually run, so a
+     character announced for the back half of a live patch has no date on any
+     page anywhere — versions.json is the only thing that knows, and it is
+     sitting right here already loaded. */
+  const planned = new Map();
+  for (const v of versions.versions || [])
+    for (const ph of v.phases || [])
+      for (const b of ph.banners || []) {
+        const day = ph.start || v.start;
+        if (!day) continue;
+        const prev = planned.get(ckey(b.name));
+        if (!prev || day < prev) planned.set(ckey(b.name), day);
+      }
+
   const index = [];
   const byName = new Map(prev.resonators?.map(r => [ckey(r.name), r]) || []);
   const used = new Set();
@@ -675,6 +694,16 @@ function deriveCurrent(doc) {
        sixty cards. */
     const hasKit = scraped || !!kits[name];
 
+    /* Out means this Resonator is obtainable, which is not the same as their
+       debut patch being live: a phase-2 five-star arrives three weeks into a
+       version that shipped without them. Jingran debuts in 3.6, 3.6 is live,
+       and his banner is still three weeks off — asking isShipped("3.6") calls
+       him released today. So prefer a day the wiki actually knows, and fall
+       back to the patch only for the older records it gives no date for. */
+    const debutDay = old.released || c.releaseDate || fiveRuns[0]?.start
+      || planned.get(ckey(c.name));
+    const out = debutDay ? debutDay <= TODAY : isShipped(debut);
+
     /* Old record first so nothing hand-written is lost, then the wiki fills
        the blanks. `version`, `reruns` and `runs` are the exception — they are
        dates and patch numbers, not judgements, so the scrape is the truth. */
@@ -689,7 +718,12 @@ function deriveCurrent(doc) {
       epithet: old.epithet || c.epithet || rover.epithet,
       summary: old.summary || c.summary || rover.summary,
       version: debut || undefined,
-      status: old.status || (isShipped(debut) ? "released" : "announced"),
+      /* Shipping wins over whatever the record was hand-written as. The rest
+         of this object lets the old value stand, because a human's reading of
+         a leak beats a blank wiki field — but "announced" is not a reading,
+         it is a date that has since passed, and leaving it would put an
+         announced pill on a Resonator the desk elsewhere draws as live. */
+      status: out ? "released" : (old.status || "announced"),
       convene: old.convene || fiveRuns[0]?.convene,
       released: old.released || c.releaseDate,
       /* Always obtainable, so the corner badge says so instead of showing a
@@ -708,8 +742,8 @@ function deriveCurrent(doc) {
        anyone released. Kit likewise — but only once the patch is out; before
        that a human's tier stands, because there is nothing on the page yet. */
     rec.confidence = {
-      identity: old.confidence?.identity || (isShipped(debut) ? "official" : "reported"),
-      kit: hasKit && isShipped(debut) ? "official" : old.confidence?.kit
+      identity: out ? "official" : (old.confidence?.identity || "reported"),
+      kit: hasKit && out ? "official" : old.confidence?.kit
     };
     if (!rec.confidence.kit) delete rec.confidence.kit;
 
@@ -746,10 +780,9 @@ function deriveCurrent(doc) {
     process.exit(1);
   }
 
-  const today = new Date().toISOString().slice(0, 10);
   await writeFile(OUT_INDEX, JSON.stringify({
     schema: "wuwa-desk/resonators@1.1",
-    updated: today,
+    updated: TODAY,
     note:
       "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — " +
       "it is ten times the size and only a record that has been opened needs it. " +
@@ -759,7 +792,7 @@ function deriveCurrent(doc) {
 
   await writeFile(OUT_KITS, JSON.stringify({
     schema: "wuwa-desk/kits@1.0",
-    updated: today,
+    updated: TODAY,
     note:
       "Six skills, two Inherent Skills and the six-node Resonance Chain per Resonator, as they " +
       "read in the live client. Text carries **bold** and __underline__ markers rather than " +
