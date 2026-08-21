@@ -362,6 +362,11 @@ function archivePatch(id){
   if(!a) return null;
   return {
     id:a.id, title:a.title, start:a.start, end:a.end,
+    /* The patch's own key art, read out of Kuro's patch notes by
+       scripts/fetch-archive.mjs. It arrives in the same shape versions.json
+       uses for the live patch, so the record draws it with the same branch and
+       an archived patch stops being the one that has no picture. */
+    keyVisual:a.keyVisual || null,
     phases:patchPhases(id), source:a.source, notice:a.notice, archived:true
   };
 }
@@ -1843,21 +1848,39 @@ function archivePanel(already){
   </div>`;
 }
 
-/* The order a closed patch's convenes read in: the debuts first, then by
-   rarity. Everywhere else on the desk a banner list is in date order, because
-   there the question is "what can I pull this fortnight" and the answer is a
-   calendar. A patch that closed two years ago is not a calendar — nothing in it
-   is pullable — so what is left is "what was in it", and the answer to that is
-   led by who was new. Rarity second, because a 5-star debut and a 4-star
-   permanent are not the same size of fact.
+/* The order a patch's cast reads in: the debuts first, then by rarity.
 
-   sort() is stable, so anything these two rules tie on keeps the order
-   patchBanners() built it in, which is the resonators' own run order. */
-const archiveOrder = bs => [...bs].sort((a, b) =>
+   Date order is what a banner list wants when the question is "what can I pull
+   this fortnight", and that is a calendar. It answers nothing here. In the
+   archive strip the patch closed months ago and nothing in it is pullable; in
+   a phase strip every card in the strip shares one window by definition, so
+   sorting them by a date they all hold in common is sorting them by nothing.
+   What is left in both places is "who was in it", and that is led by who was
+   new. Rarity second, because a 5-star debut and a 4-star rerun are not the
+   same size of fact.
+
+   sort() is stable, so anything these two rules tie on keeps the order it
+   arrived in — the resonators' own run order in the archive, versions.json's
+   hand-written order in a phase. */
+const castOrder = bs => [...bs].sort((a, b) =>
   (b.new ? 1 : 0) - (a.new ? 1 : 0) || (b.rarity || 0) - (a.rarity || 0));
 
+/* Who a patch is remembered as. The 4-stars are dropped from both places that
+   look back at one — the archive strip and the phase strips in a version
+   record — and it is not a space saving, it is the same edit as dropping the
+   element chip. A 4-star rerun is not a fact about a patch: every patch has
+   five or six of them, they are the same faces over and over down the list,
+   and Yuanwu appearing in nine consecutive rows says nothing about any of the
+   nine. Two to six 5-stars is what actually distinguished one patch from the
+   next, and at that count they can be shown large enough to recognise.
+
+   The rarity is read off the resonator where the banner row has not got one:
+   versions.json writes it by hand and the archive's rows are built from run
+   history, so only one of the two sources carries it. */
+const isFive = b => (b.rarity || resonatorFor(b.name).rarity) === 5;
+
 function archiveRow(v){
-  const bs = archiveOrder(patchBanners(v.id));
+  const bs = castOrder(patchBanners(v.id).filter(isFive));
   const n = v.events?.length || 0;
   const win = [v.start ? fmtShort(v.start) : "", v.end ? fmtShort(v.end) : ""]
     .filter(Boolean).join(" → ") || "Undated";
@@ -1877,13 +1900,14 @@ function archiveRow(v){
          use. Nineteen patches of four-line lists is a page twenty thousand
          pixels tall — the archive is a list of patches, and inside a row the
          convenes are a line of faces you scan, not four rows you read. */
-      /* One track per convene, so the row spans the panel exactly rather than
-         bunching a fixed 62px tile against the left edge and leaving a third of
-         the width empty. Every closed patch ran between eight and twelve, so
-         the tracks land within about fifty percent of each other and the strip
-         still reads as one repeated shape down the list. The count has to come
-         from here because only this line knows it. */
-      ? `<div class="bstrip wide" style="--n:${bs.length}">${bs.map(b => thumb(b, {
+      /* One track per convene was the first answer here, back when the strip
+         carried the 4-stars too and every patch had eight to twelve of them.
+         With only the debut class left a patch has two to six, and a track per
+         convene would set a two-character patch at three times the size of a
+         six-character one. The tracks are a fixed width now — see
+         .arcp .bstrip.wide — which is what makes every face in the archive the
+         same size as every other, whatever the patch it belongs to. */
+      ? `<div class="bstrip wide">${bs.map(b => thumb(b, {
           showPhase:false, showNew:true, showWeapon:false,
           /* The tint stays, the word goes; and the name is one fixed size
              rather than fitted per box — see .arcp .bstrip.wide. */
@@ -3488,11 +3512,19 @@ function drawerVersion(id){
   const status = statusOf(v);
   const role = status === "live" ? "live" : status === "announced" ? "next" : "future";
   const news = newsFor(v.id);
-  const phases = (v.phases || []).map(p => `
+  /* The 5-stars, debuts first — see castOrder() and isFive(). Every card in a
+     phase shares the phase's window, so the order they arrived in encodes
+     nothing and the reader is left to find the debut among six reruns. A phase
+     with nothing left is dropped rather than drawn as a heading over a gap;
+     no patch since launch has run one, but a heading with no strip under it is
+     a worse thing to ship than a branch that never fires. */
+  const phases = (v.phases || []).map(p => ({...p, cast:castOrder((p.banners || []).filter(isFive))}))
+    .filter(p => p.cast.length)
+    .map(p => `
     <div class="dsec">
       <span class="label">Phase ${p.n} — ${[p.start ? fmtDate(p.start) : "", p.end ? fmtDate(p.end) : ""].filter(Boolean).join(" → ")}
         ${p.estimated_start || p.estimated_end ? " (est)" : ""}</span>
-      <div class="bstrip cards">${(p.banners || []).map(b =>
+      <div class="bstrip cards">${p.cast.map(b =>
         bannerCard({...b, phase:p.n, keyVisual:v.keyVisual})).join("")}</div>
     </div>`).join("");
 

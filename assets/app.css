@@ -3842,14 +3842,18 @@ img.astrite-pic{
 }
 .arcp .arrow{flex:none;color:var(--fg-3)}
 .arcp:hover .arrow{color:var(--accent)}
-/* A row of faces under the patch line, spanning the panel. One grid track per
-   convene — the count comes in as --n from archiveRow, because the stylesheet
-   cannot know it — so the strip ends where the row ends instead of leaving a
-   third of the width empty beside a huddle of 62px tiles. The pictures are the
-   most legible thing in this list and they were the smallest. */
+/* A row of faces under the patch line. Tracks of a fixed minimum rather than
+   one per convene: the strip carries only the 5-stars now, a patch ran between
+   two and six of them, and a track per convene would draw 1.3's two at three
+   times the size of 3.3's six — the archive is read down a column, so a face
+   changing size from row to row is the one thing it must not do. auto-fill
+   resolves the same column count for every row in the panel, which makes every
+   face in the archive the same size as every other, and the pictures are now
+   the size the pictures deserved: they are the most legible thing in this list
+   and they used to be the smallest. */
 .arcp .bstrip.wide{
-  display:grid;grid-template-columns:repeat(var(--n,8),minmax(0,1fr));
-  gap:9px;margin-top:11px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(8.5rem,100%),1fr));
+  gap:11px;margin-top:12px;
 }
 /* The tile stops being a fixed width and becomes its track. `--thumb` sizes
    both the box and its picture everywhere else on the desk, so both have to be
@@ -3869,7 +3873,7 @@ img.astrite-pic{
 .arcp .bstrip.wide .bmini b{
   display:block;-webkit-line-clamp:none;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;
-  font-size:.6875rem;font-weight:500;margin-top:7px;
+  font-size:.75rem;font-weight:500;margin-top:8px;
   letter-spacing:0;color:var(--fg-2);
 }
 .arcp .bstrip.wide .bmini[role="button"]:hover b{color:var(--attr)}
@@ -3954,7 +3958,8 @@ img.astrite-pic{
   /* Twelve tracks across a phone is a row of faces 28px wide. Below this the
      strip stops spanning the row and starts wrapping instead — as many as fit
      at a size a face survives, which is the one thing the tile is for. */
-  .arcp .bstrip.wide{grid-template-columns:repeat(auto-fill,minmax(64px,1fr))}
+  /* Two up on a phone, which is what a 5-star strip of two to six wants. */
+  .arcp .bstrip.wide{grid-template-columns:repeat(auto-fill,minmax(min(7rem,100%),1fr))}
   .pev-art{width:4rem}
 }
 

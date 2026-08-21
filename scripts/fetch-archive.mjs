@@ -27,11 +27,20 @@
 // matched against the version windows instead, which is the same answer by a
 // longer route.
 //
-// No art. This is the one fetcher that downloads nothing: 240 banners is 15MB
-// for a view that is a list of names and dates, and the ones worth showing —
-// this patch's, last patch's — are already in events.json with Kuro's own
-// pictures. The archive links every event back to its wiki page and, where the
-// infobox has one, to Kuro's own notice.
+// Downloads no art, and still ends up with a picture per patch.
+//
+// 240 event banners is 15MB for a view that is a list of names and dates, and
+// the handful worth showing — this patch's, last patch's — are already in
+// events.json with Kuro's own. That has not changed. What has is the patch's
+// own key visual, and it turns out the archive was already one link away from
+// all nineteen of them: the wiki's Version page carries `link`, Kuro's patch
+// notes post, and every one of those posts opens on the version's key art. So
+// the notice is read as well as recorded, and the one image in it becomes the
+// patch's `keyVisual` — hotlinked from Kuro's CDN, credited to the post it
+// came from, nothing copied here. See keyVisualFor().
+//
+// The archive links every event back to its wiki page and, where the infobox
+// has one, to Kuro's own notice.
 
 import { writeFile, readFile } from "node:fs/promises";
 
@@ -59,6 +68,38 @@ async function getJson(url) {
   });
   if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
   return res.json();
+}
+
+/* Kuro's own site, read as JSON. The website is a client-side app, so the HTML
+   at the news URL carries no article in it — the body arrives from here, keyed
+   by the same id the public URL ends in. */
+const ARTICLE = id =>
+  `https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/json/G152/en/article/${id}.json`;
+
+/* One patch's key visual. `articleContent` is HTML, and on a patch notes post
+   it holds exactly one <img>: the version's key art, above the letter. Later
+   sections are text — Kuro cuts the event banners into posts of their own and
+   does not repeat them here — so first image is not a guess, it is the only
+   one. A post that has none returns null rather than the desk inventing a
+   crop, and the caller says so on the run.
+
+   Hotlinked, not copied: the URL is Kuro's CDN and the credit names the post
+   it came from, the same arrangement versions.json has always used for the
+   live patch's poster. */
+async function keyVisualFor(v) {
+  const id = (v.notice || "").match(/detail\/(\d+)/)?.[1];
+  if (!id) return null;
+  let body;
+  try { body = (await getJson(ARTICLE(id))).articleContent || ""; }
+  catch (e) { console.warn(`  ${v.id} — patch notes unreadable (${e.message})`); return null; }
+  const url = body.match(/<img[^>]+src="([^"]+)"/i)?.[1];
+  if (!url) return null;
+  return {
+    url,
+    source: v.notice,
+    title: `Version ${v.id} key visual`,
+    credit: "© Kuro Games"
+  };
 }
 
 /* `|field = value` down one template call, the same shape every other wiki
@@ -246,6 +287,28 @@ async function pages(titles, props) {
     v.events.sort((a, b) => String(a.start || "").localeCompare(String(b.start || "")) ||
       a.name.localeCompare(b.name));
 
+  /* The patch's key visual, out of Kuro's own patch notes. Nineteen of the
+     twenty-one patches carry a `link` on their wiki page and every one of
+     those posts opens on the version's key art — one image in the body, the
+     same image the desk shows for the live patch, so an archived record can be
+     laid out exactly like a current one instead of being the version that has
+     no picture.
+
+     Reused from the previous file whenever it is already there for the same
+     notice, so a routine run costs nothing and only a patch the archive has
+     not seen before makes a request. */
+  const seen = new Map((previous.versions || []).map(v => [v.id, v]));
+  let fetched = 0, missing = 0;
+  for (const v of versions.values()) {
+    const was = seen.get(v.id);
+    if (was?.keyVisual?.url && was.keyVisual.source === v.notice) { v.keyVisual = was.keyVisual; continue; }
+    const art = await keyVisualFor(v);
+    if (art) { v.keyVisual = art; fetched++; } else if (v.notice) missing++;
+  }
+  if (fetched || missing)
+    console.log(`\nKey visuals — ${fetched} read from Kuro's patch notes` +
+      (missing ? `, ${missing} with a notice that carried no image` : ""));
+
   const list = [...versions.values()].sort((a, b) => num(b.id) - num(a.id));
 
   const payload = {
@@ -254,9 +317,10 @@ async function pages(titles, props) {
       "Every patch the game has shipped and every event that ran in it, read off the Wuthering Waves " +
       "Wiki on Fandom. The desk's own calendars only reach as far back as Kuro's news feed does, which " +
       "is a hundred days; this is the record behind that. Events are filed under the first version " +
-      "their `ltd_during` names, which is the patch they shipped in. No art — a list of names and " +
-      "dates does not need 240 banners, and the two patches whose pictures are worth showing are in " +
-      "events.json with Kuro's own.",
+      "their `ltd_during` names, which is the patch they shipped in. No event art — a list of names " +
+      "and dates does not need 240 banners, and the two patches whose event pictures are worth " +
+      "showing are in events.json with Kuro's own. Each patch does carry its key visual, read out of " +
+      "Kuro's own patch notes post and hotlinked from their CDN.",
     credit: "Version and event history via wutheringwaves.fandom.com · © Kuro Games",
     source: WIKI(`Category:${CATEGORY}`),
     versions: list

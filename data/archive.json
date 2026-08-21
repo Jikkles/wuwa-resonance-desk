@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/archive@1.0",
-  "note": "Every patch the game has shipped and every event that ran in it, read off the Wuthering Waves Wiki on Fandom. The desk's own calendars only reach as far back as Kuro's news feed does, which is a hundred days; this is the record behind that. Events are filed under the first version their `ltd_during` names, which is the patch they shipped in. No art — a list of names and dates does not need 240 banners, and the two patches whose pictures are worth showing are in events.json with Kuro's own.",
+  "note": "Every patch the game has shipped and every event that ran in it, read off the Wuthering Waves Wiki on Fandom. The desk's own calendars only reach as far back as Kuro's news feed does, which is a hundred days; this is the record behind that. Events are filed under the first version their `ltd_during` names, which is the patch they shipped in. No event art — a list of names and dates does not need 240 banners, and the two patches whose event pictures are worth showing are in events.json with Kuro's own. Each patch does carry its key visual, read out of Kuro's own patch notes post and hotlinked from their CDN.",
   "credit": "Version and event history via wutheringwaves.fandom.com · © Kuro Games",
   "source": "https://wutheringwaves.fandom.com/wiki/Category%3AIn-Game_Events",
   "versions": [
@@ -151,7 +151,13 @@
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2891",
           "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2026-08-06"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1783526400000/10922ojx4uxpj3ulhe-1783582934286.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091",
+        "title": "Version 3.5 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "3.4",
@@ -221,7 +227,13 @@
           "notice": "",
           "source": "https://wutheringwaves.fandom.com/wiki/Matrix_Reform"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1780761600000/vg5xi0n35ggnc6017i-1780831503492.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4819",
+        "title": "Version 3.4 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "3.3",
@@ -361,7 +373,13 @@
           "notice": "",
           "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2026-04-30"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1777392000000/qm78smnivjinhikif9-1777461409448.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4613",
+        "title": "Version 3.3 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "3.2",
@@ -451,7 +469,13 @@
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4506",
           "source": "https://wutheringwaves.fandom.com/wiki/The_Flaming_Red_in_Memory"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1773763200000/z4gyxqcbshvz6ph2nf-1773839426595.png",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4447",
+        "title": "Version 3.2 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "3.1",
@@ -581,7 +605,13 @@
           "notice": "",
           "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2026-03-05"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1770134400000/t4zkeaqrule40u1r0w-1770203474607.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4188",
+        "title": "Version 3.1 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "3.0",
@@ -691,7 +721,13 @@
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3946",
           "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2026-01-01"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1766505600000/9sd49r45ei6hcd9vnm-1766581126248.png",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3920",
+        "title": "Version 3.0 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.8",
@@ -802,7 +838,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-12-17"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1763481600000/aoxllg7m7iuwrlej3o-1763553994738.png",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3657",
+        "title": "Version 2.8 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.7",
@@ -913,7 +955,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-11-12"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1759939200000/m2qgjxaa5k25bct31m-1759973975413.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3412",
+        "title": "Version 2.7 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.6",
@@ -1074,7 +1122,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-10-01"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1756224000000/fp7wln77nnln60tkix-1756279485353.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3194",
+        "title": "Version 2.6 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.5",
@@ -1165,7 +1219,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-08-18"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1753200000000/aroozd4a6ojkptpi2t-1753260826807.png",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2966",
+        "title": "Version 2.5 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.4",
@@ -1316,7 +1376,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-07-14"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1749571200000/brlrrwuqlboavoic3r-1749648767394.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2801",
+        "title": "Version 2.4 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.3",
@@ -1466,7 +1532,13 @@
           "notice": "",
           "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Melodic_Verses"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1745769600000/pgtz2r6s6xtwfhogej-1745850723521.png",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2561",
+        "title": "Version 2.3 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.2",
@@ -1626,7 +1698,13 @@
           "notice": "",
           "source": "https://wutheringwaves.fandom.com/wiki/Special_Limited-Time_Login_Event"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1742918400000/wtgbqai6v0890mkj4v-1742998535116.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2381",
+        "title": "Version 2.2 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.1",
@@ -1727,7 +1805,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-03-20"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1739376000000/98tlotj2e2cvrnmyj8-1739410870133.jpg",
+        "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/2154",
+        "title": "Version 2.1 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "2.0",
@@ -1928,7 +2012,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2025-02-06"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1735574400000/tuhlank3b1pt0258z2-1735652832463.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1912",
+        "title": "Version 2.0 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "1.4",
@@ -2039,7 +2129,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-12-25"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1731340800000/mlv4yv5dthpq0q8hvh-1731404711547.png",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1647",
+        "title": "Version 1.4 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "1.3",
@@ -2149,7 +2245,13 @@
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1588",
           "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-11-06"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1727539200000/tvmzq5afr0vqyom3lh-1727577702090.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1454",
+        "title": "Version 1.3 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "1.2",
@@ -2240,7 +2342,13 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-09-20"
         }
       ],
-      "endDerived": true
+      "endDerived": true,
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1723564800000/a7lm6t5wyzw8g8fwbk-1723639075036.jpg",
+        "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1190",
+        "title": "Version 1.2 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "1.1",
@@ -2370,7 +2478,13 @@
           "notice": "",
           "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-08-06"
         }
-      ]
+      ],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1719504000000/riv0ofvthvam93e8qk-1719549764892.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/996",
+        "title": "Version 1.1 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "1.0",
@@ -2523,5 +2637,5 @@
       ]
     }
   ],
-  "updated": "2026-08-20T23:18:38.090Z"
+  "updated": "2026-08-21T00:28:18.538Z"
 }
