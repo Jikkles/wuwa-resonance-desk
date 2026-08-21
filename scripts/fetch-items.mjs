@@ -106,6 +106,17 @@ function rewardTokens(rewards) {
    where the page is the echo). Try the whole name, then either half. */
 function candidates(name) {
   const out = [name];
+  /* An Echo handed over as a Phantom. Kuro writes "Phantom: Chop Chop"; the
+     wiki files every Echo under "<name>/Echo" and has redirected some of the
+     Phantom spellings there but not all — Lorelei got one, Chop Chop and
+     Reactor Husk never did, and relying on the redirect is why five of these
+     drew a typed plate. So build the page name rather than hope for one, and
+     put the wiki's colon back where Kuro's dash split a compound Echo:
+     "Phantom: Twin Nova — Collapsar Blade" is filed under "Twin Nova:
+     Collapsar Blade/Echo". Ahead of the half-name guesses below, which would
+     otherwise answer this with whatever "Collapsar Blade" alone turns up. */
+  const echo = /^Phantom\s*:\s*(.+)$/i.exec(name)?.[1]?.trim();
+  if (echo) out.push(`${echo}/Echo`, `${echo.replace(/ — /g, ": ")}/Echo`);
   const parts = name.split(" — ");
   if (parts.length === 2) out.push(parts[0].trim(), parts[1].trim());
   /* Titles arrive in Kuro's own quotation marks. */

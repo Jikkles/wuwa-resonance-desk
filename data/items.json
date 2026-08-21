@@ -74,6 +74,14 @@
       "description": "An advanced material used for Weapon Ascension and Skill Upgrade for Rectifier Resonators.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Andante_Helix"
     },
+    "Astral Flight": {
+      "icon": "assets/items/astral-flight.png",
+      "page": "Astral Flight",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "If we could break free from the gravity of reality, would our worries and sorrows lighten as well?",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Astral_Flight"
+    },
     "Astrite": {
       "icon": "assets/items/astrite.png",
       "page": "Astrite",
@@ -397,6 +405,12 @@
       "type": "Overlord",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Myriad_Snare%3A_Rustfire_Chassis"
     },
+    "Phantom: Chop Chop": {
+      "icon": "assets/items/phantom-chop-chop.png",
+      "page": "Chop Chop/Echo",
+      "type": "Elite",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Chop_Chop%2FEcho"
+    },
     "Phantom: Crownless": {
       "icon": "assets/items/phantom-crownless.png",
       "page": "Crownless/Echo",
@@ -439,11 +453,35 @@
       "type": "Nightmare",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Nightmare%3A_Inferno_Rider%2FEcho"
     },
+    "Phantom: Reactor Husk": {
+      "icon": "assets/items/phantom-reactor-husk.png",
+      "page": "Reactor Husk/Echo",
+      "type": "Overlord",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Reactor_Husk%2FEcho"
+    },
     "Phantom: Smiter": {
       "icon": "assets/items/phantom-smiter.png",
       "page": "Smiter/Echo",
       "type": "Common",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Smiter%2FEcho"
+    },
+    "Phantom: The False Sovereign": {
+      "icon": "assets/items/phantom-the-false-sovereign.png",
+      "page": "The False Sovereign/Echo",
+      "type": "Overlord",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/The_False_Sovereign%2FEcho"
+    },
+    "Phantom: Twin Nova — Collapsar Blade": {
+      "icon": "assets/items/phantom-twin-nova-collapsar-blade.png",
+      "page": "Twin Nova: Collapsar Blade/Echo",
+      "type": "Elite",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Twin_Nova%3A_Collapsar_Blade%2FEcho"
+    },
+    "Phantom: Twin Nova — Nebulous Cannon": {
+      "icon": "assets/items/phantom-twin-nova-nebulous-cannon.png",
+      "page": "Twin Nova: Nebulous Cannon/Echo",
+      "type": "Elite",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Twin_Nova%3A_Nebulous_Cannon%2FEcho"
     },
     "Polarized Metallic Drip": {
       "icon": "assets/items/polarized-metallic-drip.png",
@@ -629,5 +667,5 @@
       "wiki": "https://wutheringwaves.fandom.com/wiki/Xuanfang_Wonder"
     }
   },
-  "updated": "2026-08-21T03:04:06.004Z"
+  "updated": "2026-08-21T19:46:19.770Z"
 }
