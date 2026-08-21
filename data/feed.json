@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-21T03:03:56.871Z",
+  "fetched": "2026-08-21T08:41:05.134Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 674,
-      "ms": 1325
+      "ms": 427
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 925
+      "ms": 964
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 208
+      "ms": 227
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 486
+      "ms": 511
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2641,
+      "ms": 2613,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 68,
-      "ms": 494
+      "fetched": 66,
+      "ms": 438
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 150
+      "ms": 263
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "《鸣潮》梦州·玄方篇OST Vol.2《云影仙迹》现已正式上架",
+      "url": "https://www.kurobbs.com/mc/post/1540025910044270592",
+      "date": "2026-08-21T04:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
     {
       "title": "“毫无意义的我，却已能够听见自己心脏的搏动，听见与你们曾在一起时留下的笑声……”",
       "url": "https://www.kurobbs.com/mc/post/1539599404906192896",
@@ -608,16 +618,6 @@
       "hot": true
     },
     {
-      "title": "Wuthering Waves Shared Combat Showcase for Qingxiao",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPd0VOMC03NTJOVVVzY1JBV2V3anZ4NVA4OWZUWXRmSHRVenVacFBUakRyZmdQQXY0N0VGSUxLalVKMkd2cFI0Sm1pRG9TNmtBOFExY1JYaG1ObjFsazhnVUhhSGttaUVoc1NrTWhBdjRhWW1pZWJWNkprUUxtWFI5dWdPRjZRWm15LThPLUhKVHRJR25aQmtN?oc=5",
-      "date": "2026-08-18T11:00:35.000Z",
-      "source": "GameSpace.com",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Resonator Review | Bubbles of Nihility — Denia",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5315",
       "date": "2026-08-18T10:00:00.000Z",
@@ -958,6 +958,16 @@
       "hot": false
     },
     {
+      "title": "Is Wuthering Waves cross-platform? Crossplay for PC, Android and iOS",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOZHJRWXBZakJIM1ZkTWE5ZjhfckROYk51LV9jRkZqNGdjXzhJcTZiNjdrWWJ3aHRuOVBIRl9sVzMtNnFXcWN1N1Nnb2VvT1F5Z1E3R0haWnNUaEQ5REJMS2JzTzhBb3V6czBsSmd1S1Vva0wzOFFsSWZ1dXFxZjYzOFl3LTgwUTJJZGtlbEhPdHFwWHVLVE9iVGtrWkRQRFk?oc=5",
+      "date": "2026-08-15T07:00:00.000Z",
+      "source": "Dexerto",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "Wuthering Waves: Release date, platforms, & everything we know",
       "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaGRnbDlmWUR6Vlp3Yl92UkRHYnpBb0hKanVWMHBJdU80ZE9FRjJTcThvNklfZDhUSjBFTzBiNHRRNzdWOVVtTjlzTWNBSy1oc213UWU2UHFiTWJqM3JJNkQyZmxGWWU4SDJTT0FKSldtMGxLQUlKbkp5bkdXRjRfdVExMTBQMDFXTFh6Sk5BcXV0QQ?oc=5",
       "date": "2026-08-15T07:00:00.000Z",
@@ -978,16 +988,6 @@
       "hot": true
     },
     {
-      "title": "关于《鸣潮》卓易通平台调整的相关说明",
-      "url": "https://www.kurobbs.com/mc/post/1537435358014623744",
-      "date": "2026-08-13T04:30:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves Version 3.6 Update Maintenance Notice",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5281",
       "date": "2026-08-13T03:00:00.000Z",
@@ -998,9 +998,19 @@
       "hot": true
     },
     {
+      "title": "Is Wuthering Waves free to play?",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPR3NJM05fTzRINnRhTmxZVnlDZThuLUNLNDBpbWcydmhoSXRMRmtZYnlfUEtGSG1qOV9LM3NGUkZNbF9FNzIxa0VEQ1lmUEtEclZGd0RtNW5vQ2pELTNLWHpRMHdWWUJiVHdKbFRwQ1RjblVNY3RabGZ6ZHFJck5ncHpldw?oc=5",
+      "date": "2026-08-12T07:00:00.000Z",
+      "source": "Dexerto",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "Wuthering Waves version 3.6 release date, new Resonators, and DLSS 4.5 support",
       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNNnI5ZElMRURDcVcwUDE2RmJZVG1ab3M5S1JHTTVaS0hSNVhoNDk4OXJ0dV9mR2FJczdHLTFYclk3Zy1nRGFXNEdvRmg4NGR4aVBqRE1ZS3B6dGI0RDdzdGtCc3Q2XzRnQ3g3TjJZQzQ5Q0ppZGphN2lRV2h3UW5xcHdNUl9LRXN0OGhRMWVuaU4wRWJ2eWR3cnZfWVJpN0RjYlByS1VIQkpNNVQtYkZia1dhd2hvcC0teWlWd3ln?oc=5",
-      "date": "2026-08-12T13:02:00.000Z",
+      "date": "2026-08-12T07:00:00.000Z",
       "source": "Notebookcheck",
       "sourceId": "google-news",
       "kind": "press",
@@ -1010,18 +1020,8 @@
     {
       "title": "Wuthering Waves, Shop Titans, Uncharted Waters Origin - We've Gacha Covered",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5MaGZRX2lfZDFuWkdGazA0V3ZXZHRpakxoelZIbjlGUG1Vekl2T0tiYjVYN3hOR1JROE5GcWRtcmZhNXVHWGNENi1oSmI5WUhKanQtTE5Cam10T20tdzJEMHJiUnBWM2dVYnhMYUJUX0FOdw?oc=5",
-      "date": "2026-08-12T07:04:00.000Z",
-      "source": "Pocket Gamer",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Is Wuthering Waves free to play?",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPR3NJM05fTzRINnRhTmxZVnlDZThuLUNLNDBpbWcydmhoSXRMRmtZYnlfUEtGSG1qOV9LM3NGUkZNbF9FNzIxa0VEQ1lmUEtEclZGd0RtNW5vQ2pELTNLWHpRMHdWWUJiVHdKbFRwQ1RjblVNY3RabGZ6ZHFJck5ncHpldw?oc=5",
       "date": "2026-08-12T07:00:00.000Z",
-      "source": "Dexerto",
+      "source": "Pocket Gamer",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1040,7 +1040,7 @@
     {
       "title": "Gacha Banner: New content drops for Wuthering Waves, Tower of Fantasy, and Neverness to Everness",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQN3ZSRzhQWEJGeGg2X0xKcVNfNnBMa3FsZVhSRjlXdzE0MnM0dnJZR1ctem12SHRLeUdPeHpRRVN5a0NEeHhZOENtcVkwaklRbHhOZEVKTm92THNHRW91RXNZSnhIT29lN1RBUmZ6enkwNHpQSTVpSTB0aERHam0wdVdGT0phMU44QVJtT09la1M1LTB3cTNWczNGZDhGeVVVekdDbUVlVXJoRWM1U2ROQkplUkJnZjVzQ2I5MHlqNmt6b09tY1I4RQ?oc=5",
-      "date": "2026-08-11T13:30:00.000Z",
+      "date": "2026-08-11T07:00:00.000Z",
       "source": "Massively Overpowered",
       "sourceId": "google-news",
       "kind": "press",
@@ -1070,7 +1070,7 @@
     {
       "title": "Wuthering Waves 2.2 Update: Release Date and Features",
       "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE84Zm4yc2dpSjREWHhRSkxybjBCZUJsdVB5NWJEb1VwZTlpcnZFeEhSdVZKVlMtakg0NXZ5Q3UxcU9Sc1dmRXBKQmpnM0tQdjFhQnBIeDZwNzhZLW5K?oc=5",
-      "date": "2026-08-08T16:00:00.000Z",
+      "date": "2026-08-08T07:00:00.000Z",
       "source": "MMOs.com",
       "sourceId": "google-news",
       "kind": "press",
