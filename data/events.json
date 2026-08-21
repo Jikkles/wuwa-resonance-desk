@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/events@1.0",
-  "note": "Limited-time events, read off Kuro's own EN posts: the per-patch Content Overview for the list, dates and flavour, and each event's own notice for its banner art, screenshots and rewards. Art is hotlinked from Kuro's CDN, never rehosted. `media` is the rest of the notice's pictures, in the order the post ran them. An event with no notice yet has no art by design. Times carry +08:00 because Kuro publishes them in server time.",
+  "note": "Limited-time events, read off Kuro's own EN posts: the per-patch Content Overview for the list, dates and flavour, and each event's own notice for its banner art, screenshots and rewards. Art is hotlinked from Kuro's CDN, never rehosted. `media` is the notice's other pictures where they are landscape — a screenshot of the mode, not the post set as a poster. An event with no notice yet has no art by design. Times carry +08:00 because Kuro publishes them in server time.",
   "events": [
     {
       "id": "3.6-gifts-of-drifting-mist",
@@ -36,7 +36,8 @@
       "origin": "hand",
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
       "intel": "2026-08-07-36-events",
-      "startsWithPatch": true
+      "startsWithPatch": true,
+      "headline": true
     },
     {
       "id": "3.6-resonance-sim-realm",
@@ -47,35 +48,20 @@
       "permanent": false,
       "start": "2026-08-22T10:00:00+08:00",
       "end": "2026-09-29T11:59:00+08:00",
-      "summary": "Top-down simulated battles as Rover, borrowing other Resonators' abilities.",
-      "detail": "In this mode, you fight simulated battles from a top-down side view using Rover: Spectro or Rover: Havoc. Within a stage, Rover can obtain Resonance Factors of different Resonators, granting corresponding special enhancements to the basic skills or strengthening other combat abilities. Rover can also gain additional Morph Skills through Resonance Factors. Dealing damage to the enemies generates Morph Energy; once it is full, you can summon or transform into the corresponding Resonator and unleash a special skill.",
-      "rewards": [
-        "Astrite x1200",
-        "Phantom — Myriad Snare: Rustfire Chassis",
-        "\"Resonance! Best Combo\" (Title)",
-        "Premium Tuner",
-        "Premium Sealed Tube"
-      ],
+      "summary": "2026-08-22 10:00 - 2026-09-29 11:59 (server time)",
+      "detail": "2026-08-22 10:00 - 2026-09-29 11:59 (server time)",
+      "rewards": "Astrite x1200, Phantom - Myriad Snare: Rustfire Chassis x1, Resonance! Best Combo x1 (Title), Premium Tuner x150, Premium Sealed Tube x20, Premium Resonance Potion x20, Premium Energy Core x20, Premium Enclosure Tank - Land of Xuanfang x6, Shell Credit x850000 and other Materials.",
       "eligibility": "Reach Union Level 14.",
       "art": {
-        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1786896000000/k70f13tkfs03t8xg9d-1786954706450.jpg",
-        "crop": {
-          "x": 78,
-          "y": 1112,
-          "w": 918,
-          "h": 480
-        },
-        "title": "Wuthering Waves Update Content | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
-        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
-        "published": "2026-08-18",
-        "credit": "© Kuro Games",
-        "note": "Kuro's own event banner, cropped out of the Version 3.6 update-content infographic — the only place they have published it so far."
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1787155200000/iepbmhjkqrie075dos-1787237448257.png",
+        "title": "Event Preview | [Resonance Sim Realm] Combat Event, Coming Soon!",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5365",
+        "published": "2026-08-21",
+        "credit": "© Kuro Games"
       },
       "confidence": "official",
-      "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
-      "intel": "2026-08-07-36-events",
-      "headline": true
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5365"
     },
     {
       "id": "3.6-second-coming-of-solaris-coded-deception",
@@ -456,5 +442,5 @@
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
     }
   ],
-  "updated": "2026-08-20T09:12:33.755Z"
+  "updated": "2026-08-21T14:35:57.352Z"
 }

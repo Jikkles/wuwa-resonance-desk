@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-21T08:41:05.134Z",
+  "fetched": "2026-08-21T14:35:53.844Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -10,8 +10,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 674,
-      "ms": 427
+      "fetched": 675,
+      "ms": 1309
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 964
+      "ms": 1026
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 227
+      "ms": 179
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 511
+      "ms": 448
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2613,
+      "ms": 2492,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 66,
-      "ms": 438
+      "fetched": 68,
+      "ms": 537
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,81 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 263
+      "ms": 1199
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Performance comparison between 3.5 vs 3.6 C# (programming language change)",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vuh36s/performance_comparison_between_35_vs_36_c/",
+      "date": "2026-08-21T13:56:21.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "《鸣潮》巡回演唱会「致予新世界」东京站即将开幕！",
+      "url": "https://www.kurobbs.com/mc/post/1540068125657042944",
+      "date": "2026-08-21T12:30:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "《鸣潮》巡回演唱会「致予新世界」幕后影像",
+      "url": "https://www.kurobbs.com/mc/post/1540436326624940032",
+      "date": "2026-08-21T12:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Event Preview | [Resonance Sim Realm] Combat Event, Coming Soon!",
+      "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5365",
+      "date": "2026-08-21T10:00:00.000Z",
+      "source": "Kuro Games (official EN)",
+      "sourceId": "kuro-en",
+      "kind": "official",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "活动预告 | 战斗活动即将开启！",
+      "url": "https://www.kurobbs.com/mc/post/1539704532296605696",
+      "date": "2026-08-21T10:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Insider Channel: Special Program | Crystal Clear",
+      "url": "https://www.youtube.com/watch?v=om6QZVMX9-M",
+      "date": "2026-08-21T09:00:06.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "寰宇频道特别栏目 | 净尘",
+      "url": "https://www.kurobbs.com/mc/post/1539918652693757952",
+      "date": "2026-08-21T09:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
     {
       "title": "《鸣潮》梦州·玄方篇OST Vol.2《云影仙迹》现已正式上架",
       "url": "https://www.kurobbs.com/mc/post/1540025910044270592",
@@ -256,16 +326,6 @@
       "kind": "press",
       "lang": "en",
       "hot": false
-    },
-    {
-      "title": "《鸣潮》3.6版本建议反馈收集贴",
-      "url": "https://www.kurobbs.com/mc/post/1537790853879263232",
-      "date": "2026-08-20T04:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": true
     },
     {
       "title": "WuWa 3.6 patch notes (Wuthering Waves): New characters, events, and more",
@@ -456,16 +516,6 @@
       "kind": "official",
       "lang": "zh",
       "hot": true
-    },
-    {
-      "title": "银汉迢迢，灯影绰绰。水清风舒，邀君同游。",
-      "url": "https://www.kurobbs.com/mc/post/1537869514821476352",
-      "date": "2026-08-19T09:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
     },
     {
       "title": "Time until WuWa 3.6 releases (Wuthering Waves)",
@@ -858,16 +908,6 @@
       "hot": false
     },
     {
-      "title": "Suoming Size Compared to Carlotta via team Gemberry",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vqob11/suoming_size_compared_to_carlotta_via_team/",
-      "date": "2026-08-17T10:17:12.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves Codes (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9Qal9Uc2xHRzZmcUdmalVEOS1ZVkNRVTZYYklCYVVwZDVGdDB4S20tYzBaYV9PVGJSTlNNcjVsX0V6bXpXdFMtWW50czVFd1V1NWFqTm1YVlpPbVgx0gFiQVVfeXFMTzBoc00td21SRmdDaGJ0Nk5QSEdaeXdpelgzTWljZFFrUmViemhYSjYzVXlBMkVQd1RwOUdJWHA0RmdxNG9SQVVjNkFVMHRybnh4U1EwY2dYWjQ5UE4wVTdOa0E?oc=5",
       "date": "2026-08-17T06:20:25.000Z",
@@ -918,16 +958,6 @@
       "hot": false
     },
     {
-      "title": "“此灯不照生人路。”",
-      "url": "https://www.kurobbs.com/mc/post/1537892117807984640",
-      "date": "2026-08-17T02:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Post-Lament Anthropocene: Stars Intertwined | Qingxiao",
       "url": "https://www.youtube.com/shorts/nbAIWYJmOPY",
       "date": "2026-08-16T03:00:31.000Z",
@@ -935,16 +965,6 @@
       "sourceId": "youtube",
       "kind": "video",
       "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "《寰宇人类注疏：群星交错》共鸣者展示 | 清宵",
-      "url": "https://www.kurobbs.com/mc/post/1537839815610896384",
-      "date": "2026-08-16T03:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
       "hot": false
     },
     {
@@ -1348,16 +1368,6 @@
       "hot": false
     },
     {
-      "title": "Wuthering Waves Resonator Combat Showcase | Suisui",
-      "url": "https://www.youtube.com/watch?v=prTbk_McKqk",
-      "date": "2026-07-26T03:00:08.000Z",
-      "source": "Wuthering Waves (YouTube)",
-      "sourceId": "youtube",
-      "kind": "video",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Post-Lament Anthropocene: Stars Intertwined | Suisui",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5199",
       "date": "2026-07-25T09:00:00.000Z",
@@ -1556,16 +1566,6 @@
       "kind": "official",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Profile Reveal | Vessel of Sounds — Rover: Electro",
-      "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5011",
-      "date": "2026-07-08T08:00:00.000Z",
-      "source": "Kuro Games (official EN)",
-      "sourceId": "kuro-en",
-      "kind": "official",
-      "lang": "en",
-      "hot": false
     }
   ]
 }
