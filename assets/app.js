@@ -1884,8 +1884,26 @@ function archiveRow(v){
   const n = v.events?.length || 0;
   const win = [v.start ? fmtShort(v.start) : "", v.end ? fmtShort(v.end) : ""]
     .filter(Boolean).join(" → ") || "Undated";
-  return `<article class="arcp" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
+  /* The patch's own key art, behind the row. Not as a band above it: nineteen
+     posters at their own 16:9 is a page you scroll rather than a record you
+     read, which is the argument that kept this list to type in the first
+     place. As a ground it costs no height at all — the row is already as tall
+     as the faces standing in it — and it is the same move the timeline's patch
+     cards make, where the version block and the banner tiles sit on the art
+     rather than beside it.
+
+     A wide row crops a 16:9 poster to a horizontal band through its middle,
+     which for every one of these is where Kuro put the characters. Scrimmed
+     hard, because eight lines of 10px mono have to stay readable over it and
+     the faces in front are the subject — see .arcp-kv. */
+  const kv = v.keyVisual?.url
+    ? `<div class="arcp-kv" aria-hidden="true">
+         <img src="${esc(cdnWidth(v.keyVisual.url, 1400))}" alt="" loading="lazy" decoding="async">
+       </div>`
+    : "";
+  return `<article class="arcp${kv ? " arted" : ""}" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
            aria-label="Version ${esc(v.id)}${v.title ? ` — ${esc(v.title)}` : ""}, ${win}">
+    ${kv}
     <div class="arcp-h">
       <span class="arcp-v">${esc(v.id)}</span>
       <div class="arcp-t">

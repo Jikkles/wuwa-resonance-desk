@@ -3812,13 +3812,63 @@ img.astrite-pic{
    So the archive is set as a list: the number, the codename, the window, the
    faces, and a count. The record itself is one click behind it. */
 .arcp{
-  display:block;width:100%;text-align:left;cursor:pointer;
+  position:relative;display:block;width:100%;text-align:left;cursor:pointer;
   padding:13px 16px 14px;border-bottom:1px solid var(--line);
   transition:background .15s;
 }
 .arcp:last-child{border-bottom:0}
 .arcp:hover{background:var(--bg-2)}
+/* Nothing to lighten on a row that has a picture — the hover is the picture
+   coming up instead, which is the row saying it is a door. */
+.arcp.arted:hover{background:none}
 .arcp:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+/* The patch's key visual as the row's ground. See archiveRow().
+
+   Two scrims, and they are doing different jobs. The first is a flat wash that
+   holds the whole picture down to something eight lines of small mono can be
+   read over. The second is a ramp off the left edge, because that is where the
+   version number, the codename and the window all sit, and a poster's own
+   contrast is not something a stylesheet gets to assume — 2.3 is a beach at
+   noon and 1.4 is a night street, and the type has to survive both. */
+/* A band of fixed height rather than the whole row, and that is the crop doing
+   the work rather than a decision about how much art to show. These posters
+   are marketing images: Kuro sets the game logo across the top and the version
+   name in display type across the bottom, and the desk has been here before —
+   the timeline's patch cards dropped the key visual as a backdrop precisely
+   because you ended up reading LAMPLIGHT IN MIRAGE through the gap between two
+   characters instead of seeing a setting.
+
+   Filling the row reproduces that exactly, because the row is as tall as the
+   faces in it now and `cover` on a near-square box shows a 16:9 image whole,
+   type and all. A band of about 4:1 shows two fifths of the poster's height
+   instead, and the fifths it shows are the ones with the characters in them:
+   the logo is above the crop and the title is below it. The height is fixed
+   rather than a percentage so a six-face patch and a two-face patch crop the
+   same slice — the row's height is about the cast, and the picture is not. */
+.arcp-kv{
+  position:absolute;left:0;right:0;top:0;height:12rem;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%);
+}
+.arcp-kv img{
+  width:100%;height:100%;object-fit:cover;object-position:center 38%;
+  opacity:.6;transform:scale(1.02);transition:opacity .25s,transform .35s;
+}
+.arcp.arted:hover .arcp-kv img{opacity:.8;transform:scale(1.05)}
+/* Two scrims, doing different jobs. The flat wash holds the picture down to
+   something small mono can be read over; the ramp off the left edge is for the
+   version number, the codename and the window, which all sit there and cannot
+   assume anything about the poster behind them — 2.3 is a beach at noon and
+   1.4 is a night street, and the type has to survive both. */
+.arcp-kv::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(11,10,15,.92) 0%,rgba(11,10,15,.66) 30%,rgba(11,10,15,.42) 66%,rgba(11,10,15,.56) 100%),
+    linear-gradient(180deg,rgba(11,10,15,.28),rgba(11,10,15,.5));
+}
+/* Everything the row already had, lifted off the ground it now stands on. */
+.arcp-h,.arcp .bstrip,.arcp-none{position:relative;z-index:1}
 .arcp-h{display:flex;align-items:baseline;gap:12px}
 /* The number, in the mono face and at the size the patch cards set it — it is
    what the eye comes down this list looking for. */
