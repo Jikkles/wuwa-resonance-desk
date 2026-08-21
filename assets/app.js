@@ -744,8 +744,19 @@ function figure(b){
 function artPanel(b, extra = ""){
   const f = figure(b);
   const cls = f.cutout ? " has-cutout" : f.image ? " has-art" : "";
+  /* A cut-out is alpha to its edges, so something has to stand behind it, and
+     for a long time that was the card's flat tint — a character posed against
+     nothing. The ground is now the same picture, blurred and enlarged: the
+     patch cards already do this in `.fig-wash`, it is the same file so it
+     costs no second request, and it is the only fill that can never disagree
+     with the figure standing on it. Element-coloured light was the other
+     candidate and is the wrong one, for the reason written on .fig-cell — it
+     is colour the artist did not put there. */
+  const wash = f.cutout
+    ? `<img class="cwash" src="${esc(f.image)}" alt="" aria-hidden="true" loading="lazy" decoding="async">`
+    : "";
   const inner = f.image
-    ? `<img src="${esc(f.image)}" alt="${esc(b.name)}" loading="lazy" decoding="async"${f.style}>`
+    ? `${wash}<img src="${esc(f.image)}" alt="${esc(b.name)}" loading="lazy" decoding="async"${f.style}>`
     : `<span class="glyph">${esc(f.glyph)}</span>`;
   return `<div class="cart${cls}">${inner}${extra}</div>`;
 }
@@ -761,7 +772,8 @@ function creditLine(b){
    own row — a resonator's class and the class of the weapon running beside
    them are the same fact, and printing it twice was what pushed "RECTIFIER"
    onto a second line and made every tile in a column a different height. */
-function thumb(b, {showWeapon = true, showPhase = true, showNew = false} = {}){
+function thumb(b, {showWeapon = true, showPhase = true, showNew = false,
+                   showAttr = true, fitName = true} = {}){
   const f = figure(b);
   const r = resonatorFor(b.name);
   const attr = b.attribute || r.attribute;
@@ -798,8 +810,14 @@ function thumb(b, {showWeapon = true, showPhase = true, showNew = false} = {}){
      the exception worth flagging, and stamping RERUN on the other three tiles
      is three labels to say "ordinary". */
   const debut = showNew && b.new ? `<i class="new">New</i>` : "";
+  /* The element as a word, which is not the same question as the element as a
+     colour. The archive strip turns this off and keeps the tint: down a list of
+     twenty patches the chip is the same six words repeated two hundred times,
+     while the glow behind each face still says the same thing at a glance and
+     costs no line. Everywhere else the word is what the row is scanned for. */
+  const elem = showAttr && attr ? `<i class="attr">${esc(attr)}</i>` : "";
   const meta = b.rarity || attr
-    ? `${phase}${debut}${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${attr ? `<i class="attr">${esc(attr)}</i>` : ""}${
+    ? `${phase}${debut}${b.rarity ? `<i class="rar">${esc(b.rarity)}★</i>` : ""}${elem}${
         weapon && showWeapon ? `<i class="wep">${esc(weapon)}</i>` : ""}`
     : `${phase}${debut}${fallback ? `<i class="rar">${fallback}</i>` : ""}`;
   /* Clickable in its own right, and the innermost [data-act] wins over the
@@ -814,7 +832,12 @@ function thumb(b, {showWeapon = true, showPhase = true, showNew = false} = {}){
   return `<div class="bmini${unknown ? " unknown" : ""}"${attrStyle(attr)}${act}>
     <div class="thumb${f.icon ? " bust" : f.cutout ? " cut" : ""}">${inner}</div>
     <span class="bwho">
-      <b data-fit="1.5 .8">${esc(b.name || "???")}</b>
+      ${/* Fitted, the name grows until it fills the tile and nothing is ever
+            cut. Unfitted it is one fixed size on a track it may overrun, so it
+            ellipsises — and an ellipsised name needs somewhere to say the rest,
+            which is what the title is for. "Yangyang: Xuanling" is a real name
+            and "Yangyan…" tells you nothing on its own. */""}
+      <b${fitName ? ` data-fit="1.5 .8"` : ` title="${esc(b.name || "")}"`}>${esc(b.name || "???")}</b>
       <span class="bmeta">${meta}</span>
     </span>
   </div>`;
@@ -1645,7 +1668,31 @@ const astriteMark = (size = 12) => {
 
 /* Kuro's own banner, or nothing. There is no fallback picture by design — see
    the note at the top of this section. */
-const eventArt = ev => (ev.art?.url ? ev.art : null);
+/* An event's picture, wherever the desk happens to hold one.
+
+   Its own is the answer whenever it has one: that is Kuro's post and Kuro's
+   banner, and it is what everything out of events.json carries. archive.json
+   carries none at all, and deliberately — it is the wiki's list of names and
+   dates for every patch since launch, and two hundred and thirty banners is
+   not what that file is for.
+
+   So an archived event borrows one. A permanent mode has a banner in
+   permanents.json and also ran for the first time in some patch, which is the
+   row the archive filed it under; matched on the name, that row can show the
+   picture the desk already holds. It resolves for about one archived event in
+   ten — the rest get the plate, the same as an intel row with no face. The
+   index is rebuilt when the events file behind it changes and not otherwise,
+   because a version record asks this once per row. */
+let EVENT_ART = null, EVENT_ART_OF = null;
+function eventArtIndex(){
+  if(EVENT_ART && EVENT_ART_OF === DATA.events) return EVENT_ART;
+  EVENT_ART_OF = DATA.events;
+  EVENT_ART = new Map();
+  for(const e of gameEvents()) if(e.art?.url) EVENT_ART.set(eventKey(e.name), e.art);
+  return EVENT_ART;
+}
+const eventArt = ev =>
+  ev.art?.url ? ev.art : eventArtIndex().get(eventKey(ev.name)) || null;
 
 /* What the plate says where there is no banner. For a patch's own events the
    answer is that Kuro has not written the notice yet, and the plate goes away
@@ -1796,8 +1843,21 @@ function archivePanel(already){
   </div>`;
 }
 
+/* The order a closed patch's convenes read in: the debuts first, then by
+   rarity. Everywhere else on the desk a banner list is in date order, because
+   there the question is "what can I pull this fortnight" and the answer is a
+   calendar. A patch that closed two years ago is not a calendar — nothing in it
+   is pullable — so what is left is "what was in it", and the answer to that is
+   led by who was new. Rarity second, because a 5-star debut and a 4-star
+   permanent are not the same size of fact.
+
+   sort() is stable, so anything these two rules tie on keeps the order
+   patchBanners() built it in, which is the resonators' own run order. */
+const archiveOrder = bs => [...bs].sort((a, b) =>
+  (b.new ? 1 : 0) - (a.new ? 1 : 0) || (b.rarity || 0) - (a.rarity || 0));
+
 function archiveRow(v){
-  const bs = patchBanners(v.id);
+  const bs = archiveOrder(patchBanners(v.id));
   const n = v.events?.length || 0;
   const win = [v.start ? fmtShort(v.start) : "", v.end ? fmtShort(v.end) : ""]
     .filter(Boolean).join(" → ") || "Undated";
@@ -1817,7 +1877,17 @@ function archiveRow(v){
          use. Nineteen patches of four-line lists is a page twenty thousand
          pixels tall — the archive is a list of patches, and inside a row the
          convenes are a line of faces you scan, not four rows you read. */
-      ? `<div class="bstrip">${bs.map(b => thumb(b, {showPhase:false, showNew:true, showWeapon:false})).join("")}</div>`
+      /* One track per convene, so the row spans the panel exactly rather than
+         bunching a fixed 62px tile against the left edge and leaving a third of
+         the width empty. Every closed patch ran between eight and twelve, so
+         the tracks land within about fifty percent of each other and the strip
+         still reads as one repeated shape down the list. The count has to come
+         from here because only this line knows it. */
+      ? `<div class="bstrip wide" style="--n:${bs.length}">${bs.map(b => thumb(b, {
+          showPhase:false, showNew:true, showWeapon:false,
+          /* The tint stays, the word goes; and the name is one fixed size
+             rather than fitted per box — see .arcp .bstrip.wide. */
+          showAttr:false, fitName:false})).join("")}</div>`
       /* A patch with no convene in it is a real thing — 1.2 ran a rerun the
          desk has no run record for — and saying so is better than an empty
          strip that reads as a loading failure. */
@@ -1831,13 +1901,33 @@ function archiveRow(v){
    was, and when. A row the desk holds a record for opens that record; a row
    that exists only in the archive links out to where it came from, because
    there is nothing here for it to open. */
-function eventRow(ev){
+function eventRow(ev, showArt){
   const known = !String(ev.id || "").startsWith("arc-");
   const win = ev.permanent ? "Permanent"
     : ev.start || ev.end
       ? `${ev.start ? fmtShort(ev.start) : "—"} → ${ev.end ? fmtShort(ev.end) : "—"}`
       : "";
-  const inner = `<span class="pev-k">${esc(ev.kind || "Event")}</span>
+  /* The banner, where the desk holds one for this event.
+
+     Two rules, and the second is the one that matters. Within a list that is
+     showing pictures, every row gets the slot whether or not it resolves —
+     otherwise two rows of thirteen are pictures and the other eleven start
+     their text at a different x, which reads as a rendering fault; the ones
+     that miss get the desk's own rings, the same mark it shows anywhere else
+     it has no picture.
+
+     Whether the list shows pictures at all is decided once, by the patch, and
+     that is `showArt`. A patch the desk holds nothing for is most of them —
+     archive.json has no banners and the permanent modes only cover about one
+     archived event in ten — and turning the column on regardless would trade a
+     tight list of names and dates for a column of identical rings pretending
+     to be a gallery. Nothing to show, nothing shown. */
+  const art = showArt ? eventArt(ev) : null;
+  const pic = !showArt ? "" : `<span class="pev-art">${art
+    ? `<img src="${esc(artUrl(art, 320))}" alt="" loading="lazy" decoding="async"${
+        art.focus && !art.nameplate ? ` style="object-position:${esc(art.focus)}"` : ""}>`
+    : `<span class="ev-plate" aria-hidden="true"></span>`}</span>`;
+  const inner = `${pic}<span class="pev-k">${esc(ev.kind || "Event")}</span>
     <b class="pev-n">${esc(ev.name)}</b>
     <span class="pev-d">${esc(win)}</span>
     <span class="arrow">${icon("i-arrow", 12)}</span>`;
@@ -3308,6 +3398,9 @@ function drawerResonator(name){
     <header class="rr-hero${f.image ? "" : " bare"}${rail ? " railed" : ""}">
       ${f.image
         ? `<div class="rr-pic${f.cutout ? " cut" : ""}">
+             ${f.cutout
+               ? `<img class="rr-wash" src="${esc(f.image)}" alt="" aria-hidden="true" decoding="async">`
+               : ""}
              <img src="${esc(f.image)}" alt="${esc(name)}" decoding="async"${f.style}>
            </div>`
         /* No picture resolved. The desk's own rings, same as everywhere else,
@@ -3447,9 +3540,12 @@ function drawerVersion(id){
      no art, no reward lines, just what ran and when, each row linking to Kuro's
      own notice where the wiki kept the link. */
   const evs = patchEvents(id);
+  /* Asked once for the whole list rather than once per row: the column is a
+     property of the patch, not of the event standing in it. See eventRow(). */
+  const evArt = evs.some(e => eventArt(e));
   const events = evs.length ? `<div class="dsec">
     <span class="label">Events in this patch — ${evs.length}</span>
-    <div class="pevlist">${evs.map(eventRow).join("")}</div>
+    <div class="pevlist${evArt ? " arted" : ""}">${evs.map(e => eventRow(e, evArt)).join("")}</div>
   </div>` : "";
 
   /* An archived patch has no key visual, no preview stream and no notes — the

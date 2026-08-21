@@ -1550,7 +1550,10 @@ button{font:inherit;color:inherit}
 /* Cards can get wide when only two characters share the grid. Cap the panel
    height so a 4:5 ratio doesn't turn into an 800px tower. */
 .cart.has-art,.cart.has-cutout{aspect-ratio:4/5;max-height:32.5rem}
-.cart:not(.has-art)::before{
+/* The desk's rings are what a card shows when it has no picture. They used to
+   run behind a cut-out as well, where they now have a ground of their own —
+   see .cwash below — and two backdrops in one box is one too many. */
+.cart:not(.has-art):not(.has-cutout)::before{
   content:"";position:absolute;left:50%;top:52%;width:112%;aspect-ratio:1;
   transform:translate(-50%,-50%);
   background:repeating-radial-gradient(circle at 50% 50%,transparent 0 17px,
@@ -1563,9 +1566,33 @@ button{font:inherit;color:inherit}
 /* Kuro prints the game logo across the top of every reveal poster — start the
    crop below it. */
 .cart img.poster{object-position:center 26%}
-.cart.has-cutout img{
+.cart.has-cutout img:not(.cwash){
   object-fit:contain;object-position:center bottom;
   filter:drop-shadow(0 14px 30px rgba(0,0,0,.55));
+}
+/* The ground under a cut-out: the same picture, enlarged past the frame and
+   blurred to a wash. It gives every card the palette of the art on it — cool
+   for a Glacio portrait, warm for a Fusion one — without a second asset, a
+   second request, or a colour decision the artist didn't make.
+
+   No z-index anywhere. The wash is written first into .cart, so tree order
+   alone puts it under the figure, the badges and the card's own vignette; the
+   moment it needs a number, one of those four needs one too.
+
+   Masked rather than veiled. A scaled, blurred picture leaves a soft rectangle
+   with visible corners, and the fix is to stop drawing it there rather than to
+   lay something over it — the corners go to the card's own gradient, which is
+   the ground this used to have all to itself. */
+/* No transform, deliberately. A mask is resolved against the element's own
+   box and the transform is applied to the result, so scaling the wash up also
+   scales its feathered edge — off the card entirely, leaving the flat-topped
+   rectangle the mask was there to prevent. Cropping harder with
+   object-position costs nothing here: it is a 30px blur, nobody is reading it. */
+.cart.has-cutout .cwash{
+  object-fit:cover;object-position:center 26%;
+  filter:blur(30px) saturate(1.5) brightness(.78);
+  -webkit-mask-image:radial-gradient(58% 64% at 50% 34%,#000 0%,rgba(0,0,0,.58) 48%,transparent 100%);
+  mask-image:radial-gradient(58% 64% at 50% 34%,#000 0%,rgba(0,0,0,.58) 48%,transparent 100%);
 }
 .cart::after{
   content:"";position:absolute;inset:0;
@@ -3220,7 +3247,10 @@ img.astrite-pic{
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 42%,#000 88%,transparent 100%);
   mask-image:linear-gradient(90deg,transparent 0,#000 42%,#000 88%,transparent 100%);
 }
-.rr-pic img{width:100%;height:100%;object-fit:cover;object-position:center 16%;display:block}
+/* Absolute rather than in flow, so the blurred ground below can be a second
+   img in the same box: an in-flow picture paints under every positioned thing
+   near it, which is exactly backwards here. */
+.rr-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 16%;display:block}
 
 /* A cut-out is a bust on a transparent ground, drawn for a 4:5 card. Contained
    and pushed right, it stands in the hero at its own proportions instead of
@@ -3233,7 +3263,24 @@ img.astrite-pic{
   -webkit-mask-image:linear-gradient(0deg,transparent 0,#000 13%);
   mask-image:linear-gradient(0deg,transparent 0,#000 13%);
 }
-.rr-pic.cut img{object-fit:contain;object-position:right bottom}
+.rr-pic.cut img:not(.rr-wash){object-fit:contain;object-position:right bottom}
+/* The same wash the cards carry, but cut much tighter, and for two reasons the
+   card doesn't have. It has to be a pool of light standing behind the figure
+   rather than a fog filling the hero: the hero is wide, the figure holds only
+   its right, and a wash spread over the whole band reads as a smeared
+   photograph rather than as the light in one. And it needs a left feather of
+   its own — .rr-pic's mask is cut for a contained cut-out, transparent at the
+   sides and so needing no help there, while a `cover` wash fills the box and
+   would otherwise end on a straight edge at --pic-l, under the copy.
+
+   Darker than the card's, too. A pale character blurred is milk, and there is
+   body text a few hundred pixels to its left. */
+.rr-pic.cut .rr-wash{
+  object-fit:cover;object-position:center 18%;
+  filter:blur(40px) saturate(1.5) brightness(.62);
+  -webkit-mask-image:radial-gradient(34% 62% at 72% 36%,#000 0%,rgba(0,0,0,.52) 46%,transparent 100%);
+  mask-image:radial-gradient(34% 62% at 72% 36%,#000 0%,rgba(0,0,0,.52) 46%,transparent 100%);
+}
 .rr-hero::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(0deg,rgba(13,12,17,.55),rgba(13,12,17,0) 34%);
@@ -3460,7 +3507,14 @@ img.astrite-pic{
     border-bottom:1px solid var(--line);-webkit-mask-image:none;mask-image:none;
   }
   .rr-pic img{object-position:center 14%}
-  .rr-pic.cut img{object-fit:contain;object-position:center bottom}
+  .rr-pic.cut img:not(.rr-wash){object-fit:contain;object-position:center bottom}
+  /* The band is a picture-shaped box now rather than a slice down one side, so
+     the wash centres under the figure instead of pooling to its right. */
+  .rr-pic.cut .rr-wash{
+    object-position:center 18%;
+    -webkit-mask-image:radial-gradient(52% 64% at 50% 38%,#000 0%,rgba(0,0,0,.52) 46%,transparent 100%);
+    mask-image:radial-gradient(52% 64% at 50% 38%,#000 0%,rgba(0,0,0,.52) 46%,transparent 100%);
+  }
   /* The card lies down with it: the picture beside the name rather than above
      it, at a height that does not push the strip below off screen. */
   .rr-rail{padding:0 var(--dpad-x) clamp(18px,2.4vh,26px)}
@@ -3788,13 +3842,47 @@ img.astrite-pic{
 }
 .arcp .arrow{flex:none;color:var(--fg-3)}
 .arcp:hover .arrow{color:var(--accent)}
-/* Small: a row of faces under the patch line, not a gallery. */
-.arcp .bstrip{margin-top:10px;gap:8px}
-/* One line each, so the chips under them sit on one rule across the row. At two
-   lines a Ciaccona next to a Lumi puts its element a whole line lower, and a
-   strip of eight reads as a chart with no baseline. The name is clipped either
-   way at this size; clipped and level beats clipped and stepped. */
-.arcp .bstrip .bmini b{-webkit-line-clamp:1}
+/* A row of faces under the patch line, spanning the panel. One grid track per
+   convene — the count comes in as --n from archiveRow, because the stylesheet
+   cannot know it — so the strip ends where the row ends instead of leaving a
+   third of the width empty beside a huddle of 62px tiles. The pictures are the
+   most legible thing in this list and they were the smallest. */
+.arcp .bstrip.wide{
+  display:grid;grid-template-columns:repeat(var(--n,8),minmax(0,1fr));
+  gap:9px;margin-top:11px;
+}
+/* The tile stops being a fixed width and becomes its track. `--thumb` sizes
+   both the box and its picture everywhere else on the desk, so both have to be
+   released here, and the aspect ratio carries the height. */
+.arcp .bstrip.wide>.bmini{width:auto;min-width:0}
+.arcp .bstrip.wide .thumb{width:auto}
+/* One size for every name in the archive, and a small one.
+   The rest of the desk runs these through data-fit, which grows each name until
+   it fills its own box — right where a name is a heading, wrong here: it sets
+   LUMI large and CARTETHYIA small on the same rule, and a list whose type size
+   encodes nothing but string length reads as a ransom note. archiveRow drops
+   the attribute; this sets the size it drops to.
+
+   One line each, so the chips under them sit on one baseline across the row. At
+   two lines a Ciaccona beside a Lumi puts its rarity a whole line lower and a
+   strip of eight reads as a chart with no baseline. */
+.arcp .bstrip.wide .bmini b{
+  display:block;-webkit-line-clamp:none;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+  font-size:.6875rem;font-weight:500;margin-top:7px;
+  letter-spacing:0;color:var(--fg-2);
+}
+.arcp .bstrip.wide .bmini[role="button"]:hover b{color:var(--attr)}
+/* Two marks left — New, and the rarity — and they stay on one line. Allowed to
+   wrap, the pair fits beside itself on a patch that ran eight convenes and
+   breaks on one that ran twelve, which puts the rarity of the two debuts a
+   line below everyone else's and undoes the single baseline this strip is for.
+   The tile is 77px at the narrowest track and the pair measures about 55. */
+.arcp .bstrip.wide .bmeta{
+  gap:4px;margin-top:4px;font-size:.5313rem;
+  justify-content:center;flex-wrap:nowrap;
+}
+.arcp .bstrip.wide .bmeta i{white-space:nowrap}
 .arcp-none{
   margin-top:8px;font-family:var(--mono);font-size:.6563rem;letter-spacing:.06em;
   text-transform:uppercase;color:var(--fg-3);opacity:.75;
@@ -3803,10 +3891,15 @@ img.astrite-pic{
 /* ══ a patch's events, as a list ════════════════════════════════════
    In the version record, under the banner strip. Same argument as the archive
    above and the same answer: the event tiles are for the fortnight you are in,
-   where a picture and an Astrite figure are things you act on. Inside a patch
-   record — and especially inside an archived one, where there is no art to show
-   and never will be — what you want is what ran, what kind of thing it was, and
-   when. Three columns and a rule between them. */
+   where an Astrite figure and a countdown are things you act on, and a patch
+   record wants what ran, what kind of thing it was, and when.
+
+   The picture is the part of the tile that survived the trip. This list ran as
+   three columns of text for a while on the grounds that an archived patch has
+   no art to show — true of the file, false of the desk, which holds a banner
+   for any permanent mode and files it under the patch that introduced it. So
+   the rows carry a thumbnail now, and the ones with nothing behind them carry
+   the rings instead of a blank. Four columns and a rule between them. */
 .pevlist{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden}
 .pev{
   display:flex;align-items:center;gap:11px;padding:8px 11px;
@@ -3817,6 +3910,25 @@ img.astrite-pic{
 .pev:hover{background:var(--bg-2);color:var(--fg)}
 .pev[role="button"]{cursor:pointer;text-align:left}
 .pev:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+/* The banner. 16:9 like the tile's, at the smallest size the art still reads
+   at — this is a list row, so the picture identifies the event rather than
+   being the thing you look at. Fixed width for the same reason the kind column
+   below is fixed: the names have to line up. */
+.pevlist.arted .pev{padding:6px 11px}
+.pev-art{
+  flex:none;position:relative;width:4.25rem;aspect-ratio:16/9;
+  border-radius:6px;overflow:hidden;border:1px solid var(--line);
+  background:var(--bg-3);
+}
+.pev-art img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+/* The rings, scaled to a thumbnail. .ev-plate is cut for a tile six times this
+   size, where the ring spacing reads as a pattern; left alone at 84px it is two
+   fat arcs and a dark corner. */
+.pev-art .ev-plate::before{
+  background:repeating-radial-gradient(circle at 50% 46%,transparent 0 5px,rgba(85,201,211,.16) 5px 6px);
+}
+.pev:hover .pev-art{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+
 /* The kind, in a fixed column so the names line up down the list rather than
    each starting wherever the label before it happened to end. */
 .pev-k{
@@ -3839,6 +3951,11 @@ img.astrite-pic{
   .pev-k{width:4.5rem}
   .pev-d{display:none}
   .arcp-n{display:none}
+  /* Twelve tracks across a phone is a row of faces 28px wide. Below this the
+     strip stops spanning the row and starts wrapping instead — as many as fit
+     at a size a face survives, which is the one thing the tile is for. */
+  .arcp .bstrip.wide{grid-template-columns:repeat(auto-fill,minmax(64px,1fr))}
+  .pev-art{width:4rem}
 }
 
 /* ══ confidence colours ═════════════════════════════════════════════
