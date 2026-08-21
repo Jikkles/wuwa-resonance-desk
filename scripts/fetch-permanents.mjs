@@ -167,23 +167,122 @@ function description(src) {
 
 /* The payout, as the one comma-separated line the desk's reward parser reads.
    The wiki writes it `|Astrite=1600 |Lustrous Tide=40`, with `sort` and `type`
-   in among the items as instructions to its own table template. */
-function rewards(src) {
-  const block = /\{\{Event Rewards([\s\S]*?)\}\}/i.exec(src || "")?.[1];
-  if (!block) return "";
-  const out = [];
-  for (const m of block.matchAll(/\|\s*([^|=\n]+?)\s*=\s*([^|\n}]*)/g)) {
-    const name = m[1].trim();
-    const qty = m[2].trim();
-    if (/^(sort|type|delim|mode|notes?)$/i.test(name)) continue;
-    if (!name || !qty) continue;
-    /* Thousands separators come off here rather than being left for the
-       reader's parser. That parser splits the line on commas — it has to, it
-       is reading Kuro's prose — so "Shell Credit=180,000" left alone becomes
-       a reward called "Shell Credit x180" and another called "000". */
-    out.push(`${name} x${qty.replace(/(?<=\d),(?=\d{3}\b)/g, "")}`);
+   in among the items as instructions to its own table template.
+
+   Which call, though — {{Event Rewards}} is not one call per page. The wiki
+   puts one in every row of a task table, so a page can carry thirty of them,
+   one per song cleared or floor beaten; it splits a payout in half under one
+   ==Total Rewards== heading, a Limited-time block for the fortnight the event
+   ran and a Permanent block for what the mode still pays; and where a page has
+   no total at all, both halves sit loose in the body. Reading the first match
+   answers all three wrong. It read one line of one table on the pages whose
+   tasks come first — 50 Astrite off "complete 4 tracks" for Soar to the Beat,
+   against 740 — and on the pages that split it read the limited-time half and
+   dropped the permanent one, which is the half a permanent event is on this
+   list for.
+
+   So: add the calls up rather than pick one, and add up both statements the
+   page makes — its stated total and its own task rows. */
+const TOTAL_HEADING = /^=+\s*Total Rewards\s*=+\s*$/m;
+const INSTRUCTION = /^(sort|type|delim|mode|notes?)$/i;
+
+/* A quantity, or nothing. `Shell Credit=` and `Special Cube Cookie=?` are the
+   wiki saying it does not know yet; a reward reading "x?" on the tile would be
+   the desk saying it on the wiki's behalf. */
+function qtyOf(raw) {
+  const n = Number(String(raw).replace(/,/g, "").trim());
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+/* The event's own currency, by the wiki's own classification: a block tagged
+   `type = Event Items` is the Stamps a level track is bought with, the Coins
+   an anniversary hands round to be spent in its shop. That is what the player
+   moves through the event, not what the event pays, and Star Bouncing's task
+   rows hand out 500 of them fifty at a time. Named once in the tagged block
+   and then struck off the whole page. */
+function currencyOf(src) {
+  const names = new Set();
+  for (const b of String(src).matchAll(/\{\{Event Rewards([\s\S]*?)\}\}/gi)) {
+    if (!/\|\s*type\s*=\s*Event Items/i.test(b[1])) continue;
+    for (const m of b[1].matchAll(/\|\s*([^|=\n]+?)\s*=/g)) {
+      const name = m[1].trim();
+      if (name && !INSTRUCTION.test(name)) names.add(name);
+    }
   }
-  return out.join(", ");
+  return names;
+}
+
+/* Every {{Event Rewards}} call in `scope`, added up item by item, in the order
+   the page first mentions each. */
+function mergeBlocks(scope, currency) {
+  const out = new Map();
+  for (const b of String(scope).matchAll(/\{\{Event Rewards([\s\S]*?)\}\}/gi)) {
+    if (/\|\s*type\s*=\s*Event Items/i.test(b[1])) continue;
+    for (const m of b[1].matchAll(/\|\s*([^|=\n]+?)\s*=\s*([^|\n}]*)/g)) {
+      const name = m[1].trim();
+      const qty = qtyOf(m[2]);
+      if (!name || INSTRUCTION.test(name) || currency.has(name) || qty == null) continue;
+      out.set(name, (out.get(name) || 0) + qty);
+    }
+  }
+  return out;
+}
+
+/* {{Card List|delim=;|Astrite*40;Premium Tuner*50}} — how the older pages
+   write a table cell, and the only place Tales of the Isles states a payout at
+   all: its Total Rewards block totals the 4,200 Stamps the track is bought
+   with and says nothing about the 490 Astrite the track pays.
+
+   Read last, and only where a page has no {{Event Rewards}} to read. Half the
+   list writes both, and on those the card rows are the same rewards restated. */
+function mergeCardLists(src, currency) {
+  const out = new Map();
+  for (const m of String(src).matchAll(/\{\{Card List\s*\|([^{}]*)\}\}/gi)) {
+    const parts = m[1].split("|").filter(Boolean);
+    const delim = (parts.find(p => /^\s*delim\s*=/i.test(p)) || "=;").split("=").pop().trim() || ";";
+    for (const part of parts) {
+      if (/^\s*[A-Za-z]\w*\s*=/.test(part)) continue;
+      for (const one of part.split(delim)) {
+        const [name, qty] = one.split("*").map(s => (s || "").trim());
+        const n = qtyOf(qty);
+        if (name && n != null && !currency.has(name)) out.set(name, (out.get(name) || 0) + n);
+      }
+    }
+  }
+  return out;
+}
+
+/* Two statements of the same payout, neither of them complete, and the larger
+   figure per item.
+
+   The rows are arithmetic and the total is somebody typing the arithmetic out,
+   so where they part company one of them has dropped something. Both
+   directions happen on the same list. Soar to the Beat's rows come to 800
+   Astrite against a stated 740 — and every other line of that total, the Shell
+   Credit, the Tuners, all three potions, reconciles to the row exactly, so it
+   is the total that is one task row short. Star Bouncing goes the other way:
+   its total names a Phantom and 60,000 Shell Credit that no row on the page
+   mentions. Taking the larger says what both agree the event pays at least,
+   which is the most either statement supports. */
+function likelier(stated, rows) {
+  const out = new Map(stated);
+  for (const [name, qty] of rows) out.set(name, Math.max(out.get(name) || 0, qty));
+  return out;
+}
+
+function rewards(src) {
+  const text = String(src || "");
+  const at = text.search(TOTAL_HEADING);
+  const currency = currencyOf(text);
+  const stated = mergeBlocks(at < 0 ? text : text.slice(at), currency);
+  const rows = at < 0 ? new Map() : mergeBlocks(text.slice(0, at), currency);
+  const out = stated.size || rows.size ? likelier(stated, rows) : mergeCardLists(text, currency);
+
+  /* Thousands separators came off in qtyOf rather than being left for the
+     reader's parser. That parser splits this line on commas — it has to, it is
+     reading Kuro's prose the rest of the time — so "Shell Credit=180,000" left
+     alone becomes a reward called "Shell Credit x180" and another "000". */
+  return [...out].map(([name, qty]) => `${name} x${qty}`).join(", ");
 }
 
 /* Kuro publishes in server time and the desk renders every clock in the
