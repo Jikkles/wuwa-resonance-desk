@@ -4,16 +4,32 @@
   "credit": "Item art © Kuro Games · via the Wuthering Waves Wiki on Fandom (CC BY-SA)",
   "source": "https://wutheringwaves.fandom.com/wiki/Items",
   "items": {
-    "5-star Weapon Supply Chest": {
-      "icon": "assets/items/5-star-weapon-supply-chest.png",
-      "page": "5-star Weapon Supply Chest",
-      "rarity": 5,
+    "Adagio Helix": {
+      "icon": "assets/items/adagio-helix.png",
+      "page": "Adagio Helix",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Rectifier Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Adagio_Helix"
+    },
+    "Advanced Enclosure Tank": {
+      "icon": "assets/items/advanced-enclosure-tank.png",
+      "page": "Advanced Enclosure Tank",
+      "rarity": 4,
       "type": "Supply Pack",
-      "description": "Provides a 5-star [[Winter Brume Series]] weapon.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/5-star_Weapon_Supply_Chest"
+      "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice:<br>[[Improved Ring]]*1<br>[[HF Whisperin Core]]*1<br>[[HF Howler Core]]*1",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Advanced_Enclosure_Tank"
     },
     "Advanced Enclosure Tank — Lahai-Roi": {
       "icon": "assets/items/advanced-enclosure-tank-lahai-roi.png",
+      "page": "Advanced Enclosure Tank",
+      "rarity": 4,
+      "type": "Supply Pack",
+      "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice:<br>[[Improved Ring]]*1<br>[[HF Whisperin Core]]*1<br>[[HF Howler Core]]*1",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Advanced_Enclosure_Tank"
+    },
+    "Advanced Enclosure Tank — Land of Xuanfang": {
+      "icon": "assets/items/advanced-enclosure-tank-land-of-xuanfang.png",
       "page": "Advanced Enclosure Tank",
       "rarity": 4,
       "type": "Supply Pack",
@@ -42,6 +58,22 @@
       "description": "Advanced Echo EXP Item. Provides 2,000 EXP.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Advanced_Sealed_Tube"
     },
+    "Aftertune Combustor": {
+      "icon": "assets/items/aftertune-combustor.png",
+      "page": "Aftertune Combustor",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Pistols Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Aftertune_Combustor"
+    },
+    "Andante Helix": {
+      "icon": "assets/items/andante-helix.png",
+      "page": "Andante Helix",
+      "rarity": 4,
+      "type": "Weapon and Skill Material",
+      "description": "An advanced material used for Weapon Ascension and Skill Upgrade for Rectifier Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Andante_Helix"
+    },
     "Astrite": {
       "icon": "assets/items/astrite.png",
       "page": "Astrite",
@@ -50,20 +82,61 @@
       "description": "The precious remnants of the civilization reverberate within... Perhaps they hold infinite possibilities.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Astrite"
     },
-    "Concealed Starlight": {
-      "icon": "assets/items/concealed-starlight.png",
-      "page": "Concealed Starlight",
+    "Basic Ring": {
+      "icon": "assets/items/basic-ring.png",
+      "page": "Basic Ring",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A material used to break through weapons, ascend [[Resonators]] and upgrade skills.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Basic_Ring"
+    },
+    "Blue-Spotted Giant Fish": {
+      "icon": "assets/items/blue-spotted-giant-fish.png",
+      "page": "Blue-Spotted Giant Fish",
+      "rarity": 4,
+      "type": "Material",
+      "description": "Used to increase the Syntonization Rank of [[Ocean's Gift]].",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Blue-Spotted_Giant_Fish"
+    },
+    "Broken String": {
+      "icon": "assets/items/broken-string.png",
+      "page": "Broken String",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Rectifier Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Broken_String"
+    },
+    "Broken Wing Polarizer": {
+      "icon": "assets/items/broken-wing-polarizer.png",
+      "page": "Broken Wing Polarizer",
+      "rarity": 2,
+      "type": "Weapon and Skill Material",
+      "description": "A basic material used for Weapon Ascension and Skill Upgrade for Sword Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Broken_Wing_Polarizer"
+    },
+    "Cadence Bud": {
+      "icon": "assets/items/cadence-bud.png",
+      "page": "Cadence Bud",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Gauntlets Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Cadence_Bud"
+    },
+    "Cadence Leaf": {
+      "icon": "assets/items/cadence-leaf.png",
+      "page": "Cadence Leaf",
+      "rarity": 4,
+      "type": "Weapon and Skill Material",
+      "description": "An advanced material used for Weapon Ascension and Skill Upgrade for Gauntlets Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Cadence_Leaf"
+    },
+    "Card Duelist": {
+      "icon": "assets/items/card-duelist.png",
+      "page": "Card Duelist",
       "rarity": 5,
       "type": "Sigil",
-      "description": "Even as the stars fade, you still shine.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Concealed_Starlight"
-    },
-    "Cosmic Spindle": {
-      "icon": "assets/items/cosmic-spindle.png",
-      "page": "Cosmic Spindle",
-      "rarity": 5,
-      "description": "Adrift in the cosmos, in motion with the tides, modulating the stars.<br>Your past threads the fabric of the universe.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Cosmic_Spindle"
+      "description": "\"Smash! Slash! Hurrah!\"",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Card_Duelist"
     },
     "Crystal Solvent": {
       "icon": "assets/items/crystal-solvent.png",
@@ -73,6 +146,38 @@
       "description": "Obtain 60 [[Waveplate",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Crystal_Solvent"
     },
+    "Deep Dreams Film Festival": {
+      "icon": "assets/items/deep-dreams-film-festival.png",
+      "page": "Deep Dreams Film Festival",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "The best movie is the next movie.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Deep_Dreams_Film_Festival"
+    },
+    "Dreamland Reverie": {
+      "icon": "assets/items/dreamland-reverie.png",
+      "page": "The Dreamland",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "Ride the Ferris wheel of the Dreamland and gaze down upon the world below.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/The_Dreamland"
+    },
+    "Extracted Phlogiston": {
+      "icon": "assets/items/extracted-phlogiston.png",
+      "page": "Extracted Phlogiston",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Pistols Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Extracted_Phlogiston"
+    },
+    "Forgery Advanced Supply": {
+      "icon": "assets/items/forgery-advanced-supply.png",
+      "page": "Forgery Advanced Supply",
+      "rarity": 4,
+      "type": "Supply Pack",
+      "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Advanced_Supply"
+    },
     "Forgery Advanced Supply — Lahai-Roi": {
       "icon": "assets/items/forgery-advanced-supply-lahai-roi.png",
       "page": "Forgery Advanced Supply",
@@ -80,14 +185,6 @@
       "type": "Supply Pack",
       "description": "Open to claim one advanced material for weapon ascension or skill upgrade of your choice.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Advanced_Supply"
-    },
-    "Forgery Medium Supply": {
-      "icon": "assets/items/forgery-medium-supply.png",
-      "page": "Forgery Medium Supply",
-      "rarity": 3,
-      "type": "Supply Pack",
-      "description": "Open to claim one basic material for weapon ascension or skill upgrade of your choice.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Medium_Supply"
     },
     "Forgery Premium Supply": {
       "icon": "assets/items/forgery-premium-supply.png",
@@ -105,6 +202,94 @@
       "description": "Open to claim one premium material for weapon ascension or skill upgrade of your choice.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Premium_Supply"
     },
+    "HF Howler Core": {
+      "icon": "assets/items/hf-howler-core.png",
+      "page": "HF Howler Core",
+      "rarity": 4,
+      "type": "Weapon and Skill Material",
+      "description": "A material used to break through weapons, ascend Resonators, and upgrade skills.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/HF_Howler_Core"
+    },
+    "HF Polygon Core": {
+      "icon": "assets/items/hf-polygon-core.png",
+      "page": "HF Polygon Core",
+      "rarity": 4,
+      "type": "Weapon and Skill Material",
+      "description": "A material used for Weapon & Resonator Ascension and Skill Upgrade.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/HF_Polygon_Core"
+    },
+    "HF Tidal Residuum": {
+      "icon": "assets/items/hf-tidal-residuum.png",
+      "page": "HF Tidal Residuum",
+      "rarity": 4,
+      "type": "Weapon and Skill Material",
+      "description": "A material used for Weapon & Resonator Ascension and Skill Upgrade.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/HF_Tidal_Residuum"
+    },
+    "HF Whisperin Core": {
+      "icon": "assets/items/hf-whisperin-core.png",
+      "page": "HF Whisperin Core",
+      "rarity": 4,
+      "type": "Weapon and Skill Material",
+      "description": "A material used to break through weapons, ascend Resonators, and upgrade skills.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/HF_Whisperin_Core"
+    },
+    "Hearty Supper": {
+      "icon": "assets/items/hearty-supper.png",
+      "page": "Hearty Supper",
+      "rarity": 4,
+      "type": "Material",
+      "description": "Used to increase the Syntonization Rank of [[Somnoire Anchor]].",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Hearty_Supper"
+    },
+    "Honami Doom Walker": {
+      "icon": "assets/items/honami-doom-walker.png",
+      "page": "Honami Doom Walker",
+      "rarity": 5,
+      "type": "Title",
+      "description": "A special reward obtained from the \"Stranger Things in Honami\" event.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Honami_Doom_Walker"
+    },
+    "Improved Ring": {
+      "icon": "assets/items/improved-ring.png",
+      "page": "Improved Ring",
+      "rarity": 4,
+      "type": "Weapon and Skill Material",
+      "description": "A material used to break through weapons, ascend Resonators, and upgrade skills.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Improved_Ring"
+    },
+    "Incomplete Combustor": {
+      "icon": "assets/items/incomplete-combustor.png",
+      "page": "Incomplete Combustor",
+      "rarity": 2,
+      "type": "Weapon and Skill Material",
+      "description": "A basic material used for Weapon Ascension and Skill Upgrade for Pistols Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Incomplete_Combustor"
+    },
+    "LF Autopuppet Kernel": {
+      "icon": "assets/items/lf-autopuppet-kernel.png",
+      "page": "LF Autopuppet Kernel",
+      "rarity": 2,
+      "type": "Weapon and Skill Material",
+      "description": "A material used for Weapon & Resonator Ascension and Skill Upgrade.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/LF_Autopuppet_Kernel"
+    },
+    "LF Carved Crystal": {
+      "icon": "assets/items/lf-carved-crystal.png",
+      "page": "LF Carved Crystal",
+      "rarity": 2,
+      "type": "Weapon and Skill Material",
+      "description": "A basic material used for Weapon Ascension and Skill Upgrade for Broadblade Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/LF_Carved_Crystal"
+    },
+    "LF Waveworn Shard": {
+      "icon": "assets/items/lf-waveworn-shard.png",
+      "page": "LF Waveworn Shard",
+      "rarity": 2,
+      "type": "Weapon and Skill Material",
+      "description": "A basic material used for Weapon Ascension and Skill Upgrade for Gauntlet Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/LF_Waveworn_Shard"
+    },
     "Lustrous Tide": {
       "icon": "assets/items/lustrous-tide.png",
       "page": "Lustrous Tide",
@@ -112,29 +297,61 @@
       "type": "Convene Token",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Lustrous_Tide"
     },
-    "Malleable Elite Class Echo I": {
-      "icon": "assets/items/malleable-elite-class-echo-i.png",
-      "page": "Malleable Elite Class Echo I",
-      "rarity": 5,
-      "type": "Random Echo Item",
-      "description": "Open to claim one 5-Star Elite Class Echo of your choice.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Malleable_Elite_Class_Echo_I"
-    },
-    "Malleable Elite Class Echo II": {
-      "icon": "assets/items/malleable-elite-class-echo-ii.png",
-      "page": "Malleable Elite Class Echo II",
-      "rarity": 5,
-      "type": "Random Echo Item",
-      "description": "Open to claim one 5-Star Elite Class Echo of your choice.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Malleable_Elite_Class_Echo_II"
-    },
-    "Medium Enclosure Tank": {
-      "icon": "assets/items/medium-enclosure-tank.png",
-      "page": "Medium Enclosure Tank",
+    "MF Autopuppet Kernel": {
+      "icon": "assets/items/mf-autopuppet-kernel.png",
+      "page": "MF Autopuppet Kernel",
       "rarity": 3,
-      "type": "Supply Pack",
-      "description": "Open to claim one medium material for weapon ascension or skill upgrade of your choice.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Medium_Enclosure_Tank"
+      "type": "Weapon and Skill Material",
+      "description": "A material used for Weapon & Resonator Ascension and Skill Upgrade.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/MF_Autopuppet_Kernel"
+    },
+    "MF Carved Crystal": {
+      "icon": "assets/items/mf-carved-crystal.png",
+      "page": "MF Carved Crystal",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Broadblade Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/MF_Carved_Crystal"
+    },
+    "MF Howler Core": {
+      "icon": "assets/items/mf-howler-core.png",
+      "page": "MF Howler Core",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A material used to break through weapons, ascend Resonators, and upgrade skills.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/MF_Howler_Core"
+    },
+    "MF Polygon Core": {
+      "icon": "assets/items/mf-polygon-core.png",
+      "page": "MF Polygon Core",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A material used for Weapon & Resonator Ascension and Skill Upgrade.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/MF_Polygon_Core"
+    },
+    "MF Tidal Residuum": {
+      "icon": "assets/items/mf-tidal-residuum.png",
+      "page": "MF Tidal Residuum",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A material used for Weapon & Resonator Ascension and Skill Upgrade.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/MF_Tidal_Residuum"
+    },
+    "MF Waveworn Shard": {
+      "icon": "assets/items/mf-waveworn-shard.png",
+      "page": "MF Waveworn Shard",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Gauntlet Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/MF_Waveworn_Shard"
+    },
+    "MF Whisperin Core": {
+      "icon": "assets/items/mf-whisperin-core.png",
+      "page": "MF Whisperin Core",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A material used to break through weapons, ascend Resonators, and upgrade skills.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/MF_Whisperin_Core"
     },
     "Modifier": {
       "icon": "assets/items/modifier.png",
@@ -144,13 +361,35 @@
       "description": "Used to modify the Mainstat of an unenhanced 5-Star Echo.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Modifier"
     },
-    "Perpetual Spark": {
-      "icon": "assets/items/perpetual-spark.png",
-      "page": "Perpetual Spark",
+    "Moment of Triumph": {
+      "icon": "assets/items/moment-of-triumph.png",
+      "page": "Moment of Triumph",
       "rarity": 4,
-      "type": "Signature",
-      "description": "Rover's uniform from a past life at Startorch Academy. The black-and-white motif, accented with gold stripes, weaves past and future together, ensuring that what has happened is remembered and what is yet to come feels within reach.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Perpetual_Spark"
+      "description": "“Your life is a candle in the wind.\"<br>\"Is that so? I wouldn’t be so sure.\"",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Moment_of_Triumph"
+    },
+    "Monowing Polarizer": {
+      "icon": "assets/items/monowing-polarizer.png",
+      "page": "Monowing Polarizer",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Sword Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Monowing_Polarizer"
+    },
+    "Ocean's Gift": {
+      "icon": "assets/items/ocean-s-gift.png",
+      "page": "Ocean's Gift",
+      "rarity": 4,
+      "type": "Rectifier",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Ocean's_Gift"
+    },
+    "Once Together": {
+      "icon": "assets/items/once-together.png",
+      "page": "Once Together",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "Let's keep on going, like a never-ending song.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Once_Together"
     },
     "Phantom — Myriad Snare: Rustfire Chassis": {
       "icon": "assets/items/phantom-myriad-snare-rustfire-chassis.png",
@@ -158,11 +397,68 @@
       "type": "Overlord",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Myriad_Snare%3A_Rustfire_Chassis"
     },
+    "Phantom: Crownless": {
+      "icon": "assets/items/phantom-crownless.png",
+      "page": "Crownless/Echo",
+      "type": "Overlord",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Crownless%2FEcho"
+    },
+    "Phantom: Cuddle Wuddle": {
+      "icon": "assets/items/phantom-cuddle-wuddle.png",
+      "page": "Cuddle Wuddle/Echo",
+      "type": "Elite",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Cuddle_Wuddle%2FEcho"
+    },
     "Phantom: Fae Ignis": {
       "icon": "assets/items/phantom-fae-ignis.png",
       "page": "Fae Ignis/Echo",
       "type": "Common",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Fae_Ignis%2FEcho"
+    },
+    "Phantom: Fallacy of No Return": {
+      "icon": "assets/items/phantom-fallacy-of-no-return.png",
+      "page": "Fallacy of No Return/Echo",
+      "type": "Overlord",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Fallacy_of_No_Return%2FEcho"
+    },
+    "Phantom: Lorelei": {
+      "icon": "assets/items/phantom-lorelei.png",
+      "page": "Lorelei/Echo",
+      "type": "Overlord",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Lorelei%2FEcho"
+    },
+    "Phantom: Nightmare Crownless": {
+      "icon": "assets/items/phantom-nightmare-crownless.png",
+      "page": "Nightmare: Crownless/Echo",
+      "type": "Nightmare",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Nightmare%3A_Crownless%2FEcho"
+    },
+    "Phantom: Nightmare Inferno Rider": {
+      "icon": "assets/items/phantom-nightmare-inferno-rider.png",
+      "page": "Nightmare: Inferno Rider/Echo",
+      "type": "Nightmare",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Nightmare%3A_Inferno_Rider%2FEcho"
+    },
+    "Phantom: Smiter": {
+      "icon": "assets/items/phantom-smiter.png",
+      "page": "Smiter/Echo",
+      "type": "Common",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Smiter%2FEcho"
+    },
+    "Polarized Metallic Drip": {
+      "icon": "assets/items/polarized-metallic-drip.png",
+      "page": "Polarized Metallic Drip",
+      "rarity": 4,
+      "type": "Weapon and Skill Material",
+      "description": "An advanced material used for Weapon Ascension and Skill Upgrade for Sword Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Polarized_Metallic_Drip"
+    },
+    "Post-Doomsday Coffee": {
+      "icon": "assets/items/post-doomsday-coffee.png",
+      "page": "Post-Doomsday Coffee",
+      "rarity": 4,
+      "type": "Avatar",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Post-Doomsday_Coffee"
     },
     "Premium Enclosure Tank": {
       "icon": "assets/items/premium-enclosure-tank.png",
@@ -218,6 +514,20 @@
       "description": "Adjust Echoes' frequencies, removes any noise, and unleash their true potential.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Tuner"
     },
+    "Projection: Ocean's Gift": {
+      "icon": "assets/items/projection-ocean-s-gift.png",
+      "page": "Projection: Ocean's Gift",
+      "rarity": 4,
+      "type": "Rectifier",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Projection%3A_Ocean's_Gift"
+    },
+    "Projection: Somnoire Anchor": {
+      "icon": "assets/items/projection-somnoire-anchor.png",
+      "page": "Projection: Somnoire Anchor",
+      "rarity": 4,
+      "type": "Sword",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Projection%3A_Somnoire_Anchor"
+    },
     "Radiant Tide": {
       "icon": "assets/items/radiant-tide.png",
       "page": "Radiant Tide",
@@ -225,12 +535,21 @@
       "type": "Convene Token",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Radiant_Tide"
     },
-    "Sanhua": {
-      "icon": "assets/items/sanhua.png",
-      "page": "Sanhua",
+    "Reactive Metallic Drip": {
+      "icon": "assets/items/reactive-metallic-drip.png",
+      "page": "Reactive Metallic Drip",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Sword Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Reactive_Metallic_Drip"
+    },
+    "Refined Phlogiston": {
+      "icon": "assets/items/refined-phlogiston.png",
+      "page": "Refined Phlogiston",
       "rarity": 4,
-      "type": "Playable",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Sanhua"
+      "type": "Weapon and Skill Material",
+      "description": "An advanced material used for Weapon Ascension and Skill Upgrade for Pistols Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Refined_Phlogiston"
     },
     "Shell Credit": {
       "icon": "assets/items/shell-credit.png",
@@ -238,6 +557,13 @@
       "rarity": 3,
       "type": "Universal Currency",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Shell_Credit"
+    },
+    "Somnoire Anchor": {
+      "icon": "assets/items/somnoire-anchor.png",
+      "page": "Somnoire Anchor",
+      "rarity": 4,
+      "type": "Sword",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Somnoire_Anchor"
     },
     "Space and Blake Bloom Medal": {
       "icon": "assets/items/space-and-blake-bloom-medal.png",
@@ -247,13 +573,28 @@
       "description": "Dedicated to the faculty and students who shone in the drill.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Space_and_Blake_Bloom_Medal"
     },
-    "Union EXP": {
-      "icon": "assets/items/union-exp.png",
-      "page": "Union EXP",
-      "rarity": 5,
-      "type": "EXP",
-      "description": "Union Level EXP. Obtained from exploration.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Union_EXP"
+    "Spliced String": {
+      "icon": "assets/items/spliced-string.png",
+      "page": "Spliced String",
+      "rarity": 2,
+      "type": "Weapon and Skill Material",
+      "description": "A basic material used for Weapon Ascension and Skill Upgrade for Rectifier Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Spliced_String"
+    },
+    "Summer Flower": {
+      "icon": "assets/items/summer-flower.png",
+      "page": "Summer Flower",
+      "rarity": 1,
+      "type": "Ascension Material (The Black Shores)",
+      "description": "A material used for Resonator Ascension.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Summer_Flower"
+    },
+    "TD Terminator": {
+      "icon": "assets/items/td-terminator.png",
+      "page": "TD Terminator",
+      "rarity": 4,
+      "type": "Avatar",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/TD_Terminator"
     },
     "Voyager of the World": {
       "icon": "assets/items/voyager-of-the-world.png",
@@ -263,13 +604,30 @@
       "description": "I want to witness the sky beyond the sky and reach the world beyond the world.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Voyager_of_the_World"
     },
-    "Yuanwu": {
-      "icon": "assets/items/yuanwu.png",
-      "page": "Yuanwu",
+    "Waveworn Residue 226": {
+      "icon": "assets/items/waveworn-residue-226.png",
+      "page": "Waveworn Residue 226",
+      "rarity": 3,
+      "type": "Weapon and Skill Material",
+      "description": "A medium material used for Weapon Ascension and Skill Upgrade for Broadblade Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Waveworn_Residue_226"
+    },
+    "Waveworn Residue 235": {
+      "icon": "assets/items/waveworn-residue-235.png",
+      "page": "Waveworn Residue 235",
       "rarity": 4,
-      "type": "Playable",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Yuanwu"
+      "type": "Weapon and Skill Material",
+      "description": "An advanced material used for Weapon Ascension and Skill Upgrade for Broadblade Resonators.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Waveworn_Residue_235"
+    },
+    "Xuanfang Wonder": {
+      "icon": "assets/items/xuanfang-wonder.png",
+      "page": "Xuanfang Wonder",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "Peaks crowd the road where a thousand ranges rise; from high pavilions, the gaze drinks distant skies.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Xuanfang_Wonder"
     }
   },
-  "updated": "2026-08-20T14:00:05.409Z"
+  "updated": "2026-08-21T03:04:06.004Z"
 }

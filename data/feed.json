@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-20T20:29:38.790Z",
+  "fetched": "2026-08-21T03:03:56.871Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 674,
-      "ms": 831
+      "ms": 1325
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 1005
+      "ms": 925
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 162
+      "ms": 208
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 404
+      "ms": 486
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2494,
+      "ms": 2641,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 67,
-      "ms": 497
+      "fetched": 68,
+      "ms": 494
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,41 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 392
+      "ms": 150
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "“毫无意义的我，却已能够听见自己心脏的搏动，听见与你们曾在一起时留下的笑声……”",
+      "url": "https://www.kurobbs.com/mc/post/1539599404906192896",
+      "date": "2026-08-21T03:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "【有奖活动】清宵的路线规划！",
+      "url": "https://www.kurobbs.com/mc/post/1539327866721746944",
+      "date": "2026-08-21T03:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves Launches Collaboration with Domino's Pizza",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMWxpWWFWQU9CSXdKZTdBQ1d4OUU5VVlCYklEVGJ0M3lkeW5EYWVwbXNRVURiNGhaRllMT2xvRW5fcGM3ZUdnMHNkNFVwWDhmWUZiRFYwYkk4WWdJR1VBRzRFc0FjYWlpZDZNVzlPYXpqR01vWml4a0ZsRERHZXVVYXRlRWhia0QwTGx2bWE0ZWtUY1RfejEtMHlrNG9md1kyNkE?oc=5",
+      "date": "2026-08-21T02:30:34.000Z",
+      "source": "Inven Global",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "Qingxiao vs Denia in WuWa 3.6: Who should you pull for? (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPVTdmUWlXVWs4TzE0QzFZRnY4YzRhSWFsX0R4alVFZGN5U0tUZENXVi01elRBaDVGV3pEbGtPSkZNRW11Y1VkUDRaLTJxYkFmM3B4Slk0UUpnSHFnd0lRUzc1SDg3Y1Y1dHRacE9NQTJWVkUzU1p6dzlac1BqLVdYZVlQcTQ1QU45dFcxVlRHT3hYRGxxU0E?oc=5",
@@ -96,6 +126,16 @@
       "kind": "press",
       "lang": "en",
       "hot": false
+    },
+    {
+      "title": "Wuthering Waves x Cyberpunk: The Banner Economics Explained",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQOC1FZGxWZUY3d0M0cHdaSnNjM0FFRDNZb1l4UFdkY1pGcnhLb0hmLXNSUUp4ZklIcEFrRG5XRUFEdkx6V2h6N1g1WmJkMmRiQjdtMkZuTGZ1Tm1wYWVJdVBydmU2amdUb1pMWGJVeDJkT3JDXy05aXg1ZDN1Snc1bC1aTnYzTmRVTFZzRTZBNEdvV2w2aDV1ZU93ZE9xSjM4?oc=5",
+      "date": "2026-08-20T14:00:25.000Z",
+      "source": "GameSpace.com",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "EP3.6 — Qingxiao - Outside the Mountain",
@@ -928,16 +968,6 @@
       "hot": false
     },
     {
-      "title": "旅途中所见所得的兵刃锋芒各异，各有千秋。",
-      "url": "https://www.kurobbs.com/mc/post/1537106183160483840",
-      "date": "2026-08-14T03:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Current and upcoming Wuthering Waves banners",
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE0taTZ6SWt3OVpzekh5TW95eVl0MjJXeUdjRzE2Y3p5czduTDlIaW1NQXVMQ3c0Z3BhWDdBRmNxc0pGQlhvb1Yzbi1hRDhCVWdEYVd2MWFBUU00SDAyVW5qTjBn?oc=5",
       "date": "2026-08-13T11:35:16.000Z",
@@ -956,16 +986,6 @@
       "kind": "official",
       "lang": "zh",
       "hot": false
-    },
-    {
-      "title": "《鸣潮》3.6版本更新维护预告",
-      "url": "https://www.kurobbs.com/mc/post/1537123078483877888",
-      "date": "2026-08-13T03:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": true
     },
     {
       "title": "Wuthering Waves Version 3.6 Update Maintenance Notice",
@@ -1198,16 +1218,6 @@
       "hot": true
     },
     {
-      "title": "WuWa Jingran materials leaked (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB1OVN6bE80WXI2UVM0M2ZtSkJQXzlUblE4QUVMM3lfdnVpVDd4VHFaNmp1d3hmRW1EQlRRMFJPR0FaVzY5eVN0UWRWUE9LV01KUG91bzVSSy00czduU3pmaWpWaDc2Y254cU1URk14RXdYX1FsV0tlRjFGY0VIVVU?oc=5",
-      "date": "2026-08-06T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Insider Channel: Special Program | Unconventional Art",
       "url": "https://www.youtube.com/shorts/sbhzI7OBO80",
       "date": "2026-08-05T03:00:16.000Z",
@@ -1226,16 +1236,6 @@
       "kind": "video",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Wuthering Waves tier list and who to pick at the start",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9FNTBaRkQ1NnNfU2NJVUVTa1Frck5QZXRNbDFCVkEydl9ndXZTZzJ3TTVYeVAtaXFhdWNZZEExWTAtOHF1aWU5bU9BS0ZFdEhxNF95Vk9WSFg4Zjh3b0NScXZKWHI?oc=5",
-      "date": "2026-08-04T07:00:00.000Z",
-      "source": "Pocket Gamer",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Midnight Podcast | Suisui",
