@@ -1566,9 +1566,31 @@ button{font:inherit;color:inherit}
 /* Kuro prints the game logo across the top of every reveal poster — start the
    crop below it. */
 .cart img.poster{object-position:center 26%}
+/* These are not the clean cut-outs the rest of this file assumes.
+ *
+ * Read the alpha channel of any of them and about two thirds of the pixels
+ * are partially transparent, four percent fully opaque: the source is the
+ * character under a vertical alpha ramp, solid at the head and down to a
+ * quarter by the waist, so it dissolves into whatever card it was drawn for.
+ * Then it is cropped to a hard 374x512 box, and on the characters whose art
+ * fills the frame — Hsin, Suisui — the translucent edge stops dead against the
+ * card's ground and reads as a pane of glass someone left on it.
+ *
+ * The fade is worth keeping: a figure that dissolves at the foot is exactly
+ * what this panel wanted and is why nothing needed a floor drawn under it. The
+ * rectangle is not. So the sides and the very bottom are feathered — the crop
+ * stops being a rectangle without touching the ramp that does the good work,
+ * and 11% is inside the margin Prydwen leaves on the characters who don't
+ * reach the edge, so nobody loses a shoulder to it. */
 .cart.has-cutout img:not(.cwash){
   object-fit:contain;object-position:center bottom;
   filter:drop-shadow(0 14px 30px rgba(0,0,0,.55));
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%),
+                     linear-gradient(0deg,transparent 0,#000 7%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 11%,#000 89%,transparent 100%),
+             linear-gradient(0deg,transparent 0,#000 7%);
+  -webkit-mask-composite:source-in;
+  mask-composite:intersect;
 }
 /* The ground under a cut-out: the same picture, enlarged past the frame and
    blurred to a wash. It gives every card the palette of the art on it — cool
@@ -3263,7 +3285,15 @@ img.astrite-pic{
   -webkit-mask-image:linear-gradient(0deg,transparent 0,#000 13%);
   mask-image:linear-gradient(0deg,transparent 0,#000 13%);
 }
-.rr-pic.cut img:not(.rr-wash){object-fit:contain;object-position:right bottom}
+/* Feathered at the sides for the reason written on .cart.has-cutout: the
+   source is a translucent figure cropped to a hard rectangle, and .rr-pic's
+   own mask only softens the foot. The hero is the largest this asset is ever
+   drawn, so it is where the crop edge shows most. */
+.rr-pic.cut img:not(.rr-wash){
+  object-fit:contain;object-position:right bottom;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);
+}
 /* The same wash the cards carry, but cut much tighter, and for two reasons the
    card doesn't have. It has to be a pool of light standing behind the figure
    rather than a fog filling the hero: the hero is wide, the figure holds only

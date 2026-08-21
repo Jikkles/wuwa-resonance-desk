@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/archive@1.0",
-  "note": "Every patch the game has shipped and every event that ran in it, read off the Wuthering Waves Wiki on Fandom. The desk's own calendars only reach as far back as Kuro's news feed does, which is a hundred days; this is the record behind that. Events are filed under the first version their `ltd_during` names, which is the patch they shipped in. No event art — a list of names and dates does not need 240 banners, and the two patches whose event pictures are worth showing are in events.json with Kuro's own. Each patch does carry its key visual, read out of Kuro's own patch notes post and hotlinked from their CDN.",
+  "note": "Every patch the game has shipped and every event that ran in it, read off the Wuthering Waves Wiki on Fandom. The desk's own calendars only reach as far back as Kuro's news feed does, which is a hundred days; this is the record behind that. Events are filed under the first version their `ltd_during` names, which is the patch they shipped in. Nothing here is rehosted: each patch carries its key visual, read out of Kuro's own patch notes post, and an event carries its banner where Kuro published a notice for it — both hotlinked from Kuro's CDN and credited to the post they came from. An event with no notice, or whose notice is rules sheets and no banner, carries no art, which is most of them.",
   "credit": "Version and event history via wutheringwaves.fandom.com · © Kuro Games",
   "source": "https://wutheringwaves.fandom.com/wiki/Category%3AIn-Game_Events",
   "versions": [
@@ -9,9 +9,15 @@
       "title": "Lamplight in Mirage, Sword's Resolve in Heart",
       "start": "2026-08-20T10:00:00+08:00",
       "end": null,
-      "notice": "",
+      "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357",
       "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.6",
-      "events": []
+      "events": [],
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1787155200000/q638zx40pwmperl5co-1787190881668.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357",
+        "title": "Version 3.6 key visual",
+        "credit": "© Kuro Games"
+      }
     },
     {
       "id": "3.5",
@@ -149,7 +155,12 @@
           "end": "2026-08-19T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2891",
-          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2026-08-06"
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2026-08-06",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1751990400000/asko7ty9sssibkpc3v-1752055401614.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2891",
+            "credit": "© Kuro Games"
+          }
         }
       ],
       "keyVisual": {
@@ -175,7 +186,12 @@
           "end": "2026-07-09T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4695",
-          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2026-06-08"
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2026-06-08",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1779120000000/zq1t2u05uhfammzvv7-1779171938851.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4695",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-gifts-of-dreamchasers",
@@ -341,7 +357,12 @@
           "end": "2026-05-25T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4654",
-          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby%3A_Championship"
+          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby%3A_Championship",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1778169600000/6arztgps8yjylonixa-1778213774121.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4654",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-ascendant-aces-denia-chisa-phrolova-chixia-buling-yangyang",
@@ -361,7 +382,12 @@
           "end": "2026-06-07T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4695",
-          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2026-05-21"
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2026-05-21",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1779120000000/zq1t2u05uhfammzvv7-1779171938851.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4695",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-beyond-the-waves-roya-frostlands",
@@ -447,7 +473,12 @@
           "end": "2026-04-09T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4466",
-          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2026-04-02"
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2026-04-02",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1774972800000/n8o111j9b0bmqkn5ay-1775034174004.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4466",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-speed-up-f-u-e-l-instrumentality-project",
@@ -457,7 +488,12 @@
           "end": "2026-04-20T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4458",
-          "source": "https://wutheringwaves.fandom.com/wiki/Speed_Up!_F.U.E.L._Instrumentality_Project!"
+          "source": "https://wutheringwaves.fandom.com/wiki/Speed_Up!_F.U.E.L._Instrumentality_Project!",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1774972800000/91wet1p3kfz4xry1o0-1775033587407.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4458",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-the-flaming-red-in-memory",
@@ -467,7 +503,12 @@
           "end": "2026-04-29T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4506",
-          "source": "https://wutheringwaves.fandom.com/wiki/The_Flaming_Red_in_Memory"
+          "source": "https://wutheringwaves.fandom.com/wiki/The_Flaming_Red_in_Memory",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1776182400000/svdhjnhi224ehrafyu-1776216922503.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/4506",
+            "credit": "© Kuro Games"
+          }
         }
       ],
       "keyVisual": {
@@ -719,7 +760,12 @@
           "end": "2026-01-19T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3946",
-          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2026-01-01"
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2026-01-01",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1767024000000/tye6hmfqtxk4ttgexk-1767068208964.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3946",
+            "credit": "© Kuro Games"
+          }
         }
       ],
       "keyVisual": {
@@ -775,7 +821,12 @@
           "end": "2025-12-24T11:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3603",
-          "source": "https://wutheringwaves.fandom.com/wiki/Stranger_Things_in_Honami"
+          "source": "https://wutheringwaves.fandom.com/wiki/Stranger_Things_in_Honami",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1763308800000/kocst41ot3jkzu7tsq-1763348669828.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3603",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-whispers-of-the-waves",
@@ -902,7 +953,12 @@
           "end": "2025-10-30T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3447",
-          "source": "https://wutheringwaves.fandom.com/wiki/Septimont_Weather_Forecast"
+          "source": "https://wutheringwaves.fandom.com/wiki/Septimont_Weather_Forecast",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1760457600000/x7v29irjjxivu29n5u-1760514412759.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3447",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-bountiful-crescendo-2025-10-23",
@@ -922,7 +978,12 @@
           "end": "2025-11-19T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3523",
-          "source": "https://wutheringwaves.fandom.com/wiki/Freeze_Frame%3A_Action_Highlights"
+          "source": "https://wutheringwaves.fandom.com/wiki/Freeze_Frame%3A_Action_Highlights",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1761667200000/mng4tbka6xst41ypkj-1761725914978.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3523",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-gifts-of-ink-song",
@@ -942,7 +1003,12 @@
           "end": "2025-11-19T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3541",
-          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-11-06"
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-11-06",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1762272000000/vcqovqgon5keki591t-1762312534821.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3541",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2025-11-12",
@@ -1109,7 +1175,12 @@
           "end": "2025-10-08T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/3323",
-          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-09-25"
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-09-25",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1758816000000/77mlpe0nwg2ixzcqlp-1758884262670.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/3323",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2025-10-01",
@@ -1333,7 +1404,12 @@
           "end": "2025-07-23T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2826",
-          "source": "https://wutheringwaves.fandom.com/wiki/Virtual_Crisis%3A_Frontier_Trials"
+          "source": "https://wutheringwaves.fandom.com/wiki/Virtual_Crisis%3A_Frontier_Trials",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1750176000000/qpg3znnft2ghkowxwh-1750214997294.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2826",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2025-06-26",
@@ -1363,7 +1439,12 @@
           "end": "2025-07-23T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2891",
-          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-07-10"
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-07-10",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1751990400000/asko7ty9sssibkpc3v-1752055401614.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2891",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-bountiful-crescendo-2025-07-14",
@@ -1400,7 +1481,12 @@
           "end": "2025-06-11T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2504",
-          "source": "https://wutheringwaves.fandom.com/wiki/Cube%2C_Cubic_n_Cubie"
+          "source": "https://wutheringwaves.fandom.com/wiki/Cube%2C_Cubic_n_Cubie",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1745510400000/0816yzfo1mzn8p8c0a-1745550889356.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2504",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-cubie-derby-warmup",
@@ -1410,7 +1496,12 @@
           "end": "2025-06-11T11:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2513",
-          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby%3A_Warmup"
+          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby%3A_Warmup",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1745596800000/1ueqsf15lc2zs6pw92-1745659544474.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2513",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-gifts-of-grand-reunion",
@@ -1470,7 +1561,12 @@
           "end": "2025-05-26T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2602",
-          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby"
+          "source": "https://wutheringwaves.fandom.com/wiki/Cubie_Derby",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1747065600000/nqdnkrgjqfu17gtjx5-1747106616625.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2602",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-dreaming-deep",
@@ -1510,7 +1606,12 @@
           "end": "2025-06-11T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2691",
-          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-05-29"
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-05-29",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1748275200000/xtzrvi87f2iuow2et3-1748339894641.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2691",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-bountiful-crescendo-2025-06-02",
@@ -1626,7 +1727,12 @@
           "end": "2025-04-14T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2404",
-          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-04-07"
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-04-07",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1743955200000/x2epob0gn477vyil7f-1744008402634.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2404",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-lollo-campaign-set-sail",
@@ -1636,7 +1742,12 @@
           "end": "2025-04-24T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2415",
-          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-04-10"
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-04-10",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1744128000000/zltrrpmpnvfb128d6v-1744188986298.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2415",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-ragunna-weather-forecast",
@@ -1646,7 +1757,12 @@
           "end": "2025-04-24T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2422",
-          "source": "https://wutheringwaves.fandom.com/wiki/Ragunna_Weather_Forecast"
+          "source": "https://wutheringwaves.fandom.com/wiki/Ragunna_Weather_Forecast",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1744128000000/ftemgrvlp9eaps91op-1744189536542.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2422",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-wuthering-exploration-2025-04-14",
@@ -1656,7 +1772,12 @@
           "end": "2025-04-28T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2432",
-          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2025-04-14"
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2025-04-14",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1744560000000/k4mugdzws2kcn2mltw-1744598005818.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2432",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-ascendant-aces-shorekeeper-baizhi-sanhua-aalto",
@@ -1742,7 +1863,12 @@
           "end": "2025-03-26T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2100",
-          "source": "https://wutheringwaves.fandom.com/wiki/Old_Man_and_the_Whale"
+          "source": "https://wutheringwaves.fandom.com/wiki/Old_Man_and_the_Whale",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1738944000000/08yllja20d53yt5dzv-1739019094230.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2100",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2025-02-20",
@@ -1752,7 +1878,12 @@
           "end": "2025-02-27T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2180",
-          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-02-20"
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-02-20",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1739808000000/salx4zslrt949jn4t2-1739870908669.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2180",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-apex-ragunna",
@@ -1762,7 +1893,12 @@
           "end": "2025-03-10T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2173",
-          "source": "https://wutheringwaves.fandom.com/wiki/Apex_Ragunna"
+          "source": "https://wutheringwaves.fandom.com/wiki/Apex_Ragunna",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1739808000000/optjtr1skuw532oop4-1739870290062.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2173",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-tactical-simulacra-iii",
@@ -1792,7 +1928,12 @@
           "end": "2025-03-27T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/2261",
-          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-03-13"
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2025-03-13",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1741708800000/l4qcob6oukmxkarxrt-1741747160420.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/2261",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-bountiful-crescendo-2025-03-20",
@@ -1909,7 +2050,12 @@
           "end": "2025-01-30T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1954",
-          "source": "https://wutheringwaves.fandom.com/wiki/Although_Colors_Have_No_Form"
+          "source": "https://wutheringwaves.fandom.com/wiki/Although_Colors_Have_No_Form",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1736265600000/kpdxr42cu5ekd6myw3-1736308978857.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1954",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2025-01-16",
@@ -1919,7 +2065,12 @@
           "end": "2025-01-23T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1985",
-          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-01-16"
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2025-01-16",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1736784000000/56zv2b5hjtkgxm1zvt-1736850524497.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1985",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-wuthering-exploration-2025-01-16",
@@ -1929,7 +2080,12 @@
           "end": "2025-01-30T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1984",
-          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2025-01-16"
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2025-01-16",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1736784000000/6uf85ku538y8pw5atx-1736850448162.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1984",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-ascendant-aces-roccia-jinhsi-danjin-youhu-yuanwu",
@@ -1949,7 +2105,12 @@
           "end": "2025-02-13T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2021",
-          "source": "https://wutheringwaves.fandom.com/wiki/Dances_For_Spring's_Return"
+          "source": "https://wutheringwaves.fandom.com/wiki/Dances_For_Spring's_Return",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1737302400000/3v78o85cof7x4ia2e8-1737375023436.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2021",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-john-wicktorio-no-debts-for-old-men",
@@ -1989,7 +2150,12 @@
           "end": "2025-02-13T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/2066",
-          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-01-30"
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2025-01-30",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1737907200000/aad68phb6p8pvgn9yv-1737958084560.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/2066",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-moonlit-path",
@@ -2036,7 +2202,12 @@
           "end": "2025-01-01T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1646",
-          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2024-11-14"
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2024-11-14",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1731340800000/am9eu2ho769wsnkafu-1731404610785.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1646",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-gifts-of-fleeting-dreams",
@@ -2066,7 +2237,12 @@
           "end": "2024-12-12T09:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1647",
-          "source": "https://wutheringwaves.fandom.com/wiki/Pincer_Maneuver_Warriors%2F2024-11-14"
+          "source": "https://wutheringwaves.fandom.com/wiki/Pincer_Maneuver_Warriors%2F2024-11-14",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1731340800000/mlv4yv5dthpq0q8hvh-1731404711547.png",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1647",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-somnium-labyrinth",
@@ -2076,7 +2252,12 @@
           "end": "2025-01-01T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1631",
-          "source": "https://wutheringwaves.fandom.com/wiki/Somnium_Labyrinth"
+          "source": "https://wutheringwaves.fandom.com/wiki/Somnium_Labyrinth",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1731254400000/kdnfeofur5ac6ggwd2-1731292662672.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1631",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-beyond-the-waves-2024-11-21",
@@ -2086,7 +2267,12 @@
           "end": null,
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1693",
-          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2024-11-21"
+          "source": "https://wutheringwaves.fandom.com/wiki/Beyond_the_Waves%2F2024-11-21",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1731945600000/8y2wjkr3lp1ospir0s-1732010501803.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1693",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2024-12-05",
@@ -2096,7 +2282,12 @@
           "end": "2024-12-12T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1715",
-          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-12-05"
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-12-05",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/images/1733241600000/ratocqhvajl8zbxvgd-1733277627290.jpg",
+            "source": "https://wutheringwaves.kurogames.com/m/en/main/news/detail/1715",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-pincer-maneuver-warriors-ii",
@@ -2116,7 +2307,12 @@
           "end": "2025-01-01T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1788",
-          "source": "https://wutheringwaves.fandom.com/wiki/Tactical_Simulacra%2F2024-12-19"
+          "source": "https://wutheringwaves.fandom.com/wiki/Tactical_Simulacra%2F2024-12-19",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1734451200000/4wfxjho10qrjn1jfdz-1734505393662.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1788",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-bountiful-crescendo-2024-12-25",
@@ -2183,7 +2379,12 @@
           "end": "2024-10-31T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1491",
-          "source": "https://wutheringwaves.fandom.com/wiki/Solaris_Weather_Forecast"
+          "source": "https://wutheringwaves.fandom.com/wiki/Solaris_Weather_Forecast",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1728316800000/urtzr1t56pl8c2fzy1-1728380769523.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1491",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-wuthering-exploration-2024-10-10",
@@ -2193,7 +2394,12 @@
           "end": "2024-10-24T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1492",
-          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-10-10"
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-10-10",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1728316800000/jumxy1n3k95j54xixs-1728381277000.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1492",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-bountiful-crescendo-2024-10-17",
@@ -2203,7 +2409,12 @@
           "end": "2024-10-24T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1502",
-          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-10-17"
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-10-17",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1729008000000/84m3ertn72ers4vhk6-1729044770288.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1502",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-infinite-battle-simulation",
@@ -2233,7 +2444,12 @@
           "end": "2024-11-13T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1562",
-          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-10-31"
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-10-31",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1730131200000/ot85blwd9v4v7gqalv-1730188970441.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1562",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2024-11-06",
@@ -2243,7 +2459,12 @@
           "end": "2024-11-13T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1588",
-          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-11-06"
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-11-06",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1730736000000/e376tdpglyfrtojev8-1730770019527.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1588",
+            "credit": "© Kuro Games"
+          }
         }
       ],
       "keyVisual": {
@@ -2299,7 +2520,12 @@
           "end": "2024-09-05T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1233",
-          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-08-29"
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-08-29",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1724688000000/c4q6bbq49t797unshr-1724769644787.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1233",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-ascendant-aces-xiangli-yao-danjin-aalto-yuanwu",
@@ -2319,7 +2545,12 @@
           "end": "2024-09-26T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1296",
-          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-09-12"
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-09-12",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1725897600000/89nk172r2i1q7kksm2-1725969711957.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1296",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-alloy-smelt-ii",
@@ -2329,7 +2560,12 @@
           "end": "2024-09-28T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1306",
-          "source": "https://wutheringwaves.fandom.com/wiki/Alloy_Smelt%2F2024-09-16"
+          "source": "https://wutheringwaves.fandom.com/wiki/Alloy_Smelt%2F2024-09-16",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1726243200000/zgqtlyypg5ndtbd2uk-1726301459906.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1306",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2024-09-20",
@@ -2339,7 +2575,12 @@
           "end": "2024-09-27T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1316",
-          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-09-20"
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-09-20",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1726588800000/d177o8km6xeqvsw225-1726657923890.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1316",
+            "credit": "© Kuro Games"
+          }
         }
       ],
       "endDerived": true,
@@ -2416,7 +2657,12 @@
           "end": "2024-08-13T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1018",
-          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Gratitude"
+          "source": "https://wutheringwaves.fandom.com/wiki/Gifts_of_Gratitude",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1719849600000/mvgezje1eyybdrt8vz-1719897744415.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1018",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-depths-of-illusive-realm-dreams-ablaze-in-darkness",
@@ -2426,7 +2672,12 @@
           "end": "2024-08-05T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1025",
-          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2024-07-04"
+          "source": "https://wutheringwaves.fandom.com/wiki/Depths_of_Illusive_Realm%2F2024-07-04",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1719849600000/olczthfz88wnx0euqm-1719898681928.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1025",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-bountiful-crescendo-2024-07-11",
@@ -2436,7 +2687,12 @@
           "end": "2024-07-18T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1038",
-          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-07-11"
+          "source": "https://wutheringwaves.fandom.com/wiki/Bountiful_Crescendo%2F2024-07-11",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1720540800000/r8shluxqqows1vyioo-1720586073319.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1038",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-tactical-simulacra",
@@ -2446,7 +2702,12 @@
           "end": "2024-08-08T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1055",
-          "source": "https://wutheringwaves.fandom.com/wiki/Tactical_Simulacra%2F2024-07-20"
+          "source": "https://wutheringwaves.fandom.com/wiki/Tactical_Simulacra%2F2024-07-20",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1721145600000/yxletq019znvim0syc-1721182657759.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1055",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-ascendant-aces-changli-baizhi-taoqi-mortefi",
@@ -2466,7 +2727,12 @@
           "end": "2024-08-08T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/1080",
-          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2024-07-25"
+          "source": "https://wutheringwaves.fandom.com/wiki/Lollo_Campaign%2F2024-07-25",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1721664000000/t16z2b5konzsd6rkb3-1721724071601.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/1080",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2024-08-06",
@@ -2572,7 +2838,12 @@
           "end": "2024-06-17T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/813",
-          "source": "https://wutheringwaves.fandom.com/wiki/Overdash_Club"
+          "source": "https://wutheringwaves.fandom.com/wiki/Overdash_Club",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1716825600000/a3kz8j2pfjc2nyzz9k-1716864253876.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/813",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-intensive-training",
@@ -2592,7 +2863,12 @@
           "end": "2024-06-27T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/836",
-          "source": "https://wutheringwaves.fandom.com/wiki/Alloy_Smelt%2F2024-06-06"
+          "source": "https://wutheringwaves.fandom.com/wiki/Alloy_Smelt%2F2024-06-06",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1717516800000/e8vn12y522qc7wqesa-1717560004608.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/836",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-ascendant-aces-yinlin-taoqi-aalto-yuanwu",
@@ -2622,7 +2898,12 @@
           "end": "2024-06-27T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/874",
-          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-06-13"
+          "source": "https://wutheringwaves.fandom.com/wiki/Wuthering_Exploration%2F2024-06-13",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1718035200000/ce18k7ivxi53iiy1lm-1718093088521.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/874",
+            "credit": "© Kuro Games"
+          }
         },
         {
           "id": "arc-chord-cleansing-2024-06-20",
@@ -2632,10 +2913,15 @@
           "end": "2024-06-27T03:59:00+08:00",
           "ran": "",
           "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/900",
-          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-06-20"
+          "source": "https://wutheringwaves.fandom.com/wiki/Chord_Cleansing%2F2024-06-20",
+          "art": {
+            "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1718726400000/93rl36e9wu8jaswkoy-1718770722609.jpg",
+            "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/900",
+            "credit": "© Kuro Games"
+          }
         }
       ]
     }
   ],
-  "updated": "2026-08-21T00:28:18.538Z"
+  "updated": "2026-08-21T07:56:37.253Z"
 }

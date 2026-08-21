@@ -102,6 +102,52 @@ async function keyVisualFor(v) {
   };
 }
 
+/* Landscape enough to be a banner. Kuro's event notices carry two kinds of
+   image and they are never close: the banner is 16:9 to the pixel, 1920x1080
+   or 3840x2160, and everything else in the post is a rules infographic — one
+   tall column of text and reward icons, 1080 wide by anything from three to
+   eleven thousand tall. Anything past this line is the first kind. */
+const BANNER_MIN_RATIO = 1.4;
+
+/* The CDN is Alibaba OSS, which will describe an image without sending it. */
+async function imageRatio(url) {
+  if (!/(^|\.)kurogame\.com\//.test(url)) return 0;
+  try {
+    const j = await getJson(`${url}?x-oss-process=image/info`);
+    const w = Number(j.ImageWidth?.value), h = Number(j.ImageHeight?.value);
+    return w > 0 && h > 0 ? w / h : 0;
+  } catch { return 0; }
+}
+
+/* One event's banner, out of Kuro's own notice for it.
+ *
+ * Sixty-four of the archive's events have a notice on their wiki page, and the
+ * post behind it opens on the event's banner the same way a patch notes post
+ * opens on the version's key art. Two thirds of them hold that one image and
+ * nothing else. The rest run the rules sheets underneath it, so the image is
+ * chosen by shape rather than by position: first one that is landscape.
+ *
+ * Position alone would have been wrong in both directions. Some posts lead
+ * with the rules sheet and carry the banner second; a few — Tidal Defense
+ * Simulator, Phantasma Dreamland — are sheets all the way down and have no
+ * banner at all, and those return null rather than putting a 1080x7500 column
+ * of reward tables in a 16:9 thumbnail.
+ *
+ * Only the first few images are measured. A banner that has not appeared by
+ * the fourth is not the subject of the post.
+ */
+async function eventArtFor(e) {
+  const id = (e.notice || "").match(/detail\/(\d+)/)?.[1];
+  if (!id) return null;
+  let body;
+  try { body = (await getJson(ARTICLE(id))).articleContent || ""; } catch { return null; }
+  const imgs = [...body.matchAll(/<img[^>]+src="([^"]+)"/gi)].map(m => m[1]);
+  for (const url of imgs.slice(0, 4))
+    if (await imageRatio(url) >= BANNER_MIN_RATIO)
+      return { url, source: e.notice, credit: "© Kuro Games" };
+  return null;
+}
+
 /* `|field = value` down one template call, the same shape every other wiki
    reader on the desk uses. */
 const field = (text, key) =>
@@ -309,6 +355,25 @@ async function pages(titles, props) {
     console.log(`\nKey visuals — ${fetched} read from Kuro's patch notes` +
       (missing ? `, ${missing} with a notice that carried no image` : ""));
 
+  /* And the same again per event, off each event's own notice. Cached against
+     the previous file by the notice URL, so this costs sixty-odd requests once
+     and one per newly-filed event after that — the wiki adds a `link` to a page
+     long after the event has closed, so the misses are worth retrying, but only
+     the misses. */
+  let evArt = 0, evNone = 0, evKept = 0;
+  for (const v of versions.values())
+    for (const e of v.events) {
+      const was = (seen.get(v.id)?.events || []).find(x => x.id === e.id);
+      if (was?.art?.url && was.art.source === e.notice) { e.art = was.art; evKept++; continue; }
+      if (!e.notice) continue;
+      const art = await eventArtFor(e);
+      if (art) { e.art = art; evArt++; } else evNone++;
+    }
+  if (evArt || evNone || evKept)
+    console.log(`Event banners — ${evArt + evKept} of ${
+      [...versions.values()].reduce((n, v) => n + v.events.length, 0)} events` +
+      (evNone ? `, ${evNone} whose notice is rules sheets with no banner in it` : ""));
+
   const list = [...versions.values()].sort((a, b) => num(b.id) - num(a.id));
 
   const payload = {
@@ -317,10 +382,11 @@ async function pages(titles, props) {
       "Every patch the game has shipped and every event that ran in it, read off the Wuthering Waves " +
       "Wiki on Fandom. The desk's own calendars only reach as far back as Kuro's news feed does, which " +
       "is a hundred days; this is the record behind that. Events are filed under the first version " +
-      "their `ltd_during` names, which is the patch they shipped in. No event art — a list of names " +
-      "and dates does not need 240 banners, and the two patches whose event pictures are worth " +
-      "showing are in events.json with Kuro's own. Each patch does carry its key visual, read out of " +
-      "Kuro's own patch notes post and hotlinked from their CDN.",
+      "their `ltd_during` names, which is the patch they shipped in. Nothing here is rehosted: each " +
+      "patch carries its key visual, read out of Kuro's own patch notes post, and an event carries " +
+      "its banner where Kuro published a notice for it — both hotlinked from Kuro's CDN and credited " +
+      "to the post they came from. An event with no notice, or whose notice is rules sheets and no " +
+      "banner, carries no art, which is most of them.",
     credit: "Version and event history via wutheringwaves.fandom.com · © Kuro Games",
     source: WIKI(`Category:${CATEGORY}`),
     versions: list
