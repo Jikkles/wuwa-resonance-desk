@@ -14,7 +14,7 @@
 //   Category:Permanent Events  →  every page the wiki files as permanent
 //   {{Event}} infobox          →  the dates, the type, the requirement
 //   {{Description}}            →  Kuro's own blurb, quoted on the page
-//   {{Event Rewards}}          →  the payout, item by item
+//   {{Event Rewards}}          →  the payout, item by item, standing layer only
 //
 // The category is not the filter, and neither is any other field on the page.
 // This was tried twice. The category itself carries 37 pages, which is three
@@ -171,20 +171,28 @@ function description(src) {
 
    Which call, though — {{Event Rewards}} is not one call per page. The wiki
    puts one in every row of a task table, so a page can carry thirty of them,
-   one per song cleared or floor beaten; it splits a payout in half under one
-   ==Total Rewards== heading, a Limited-time block for the fortnight the event
-   ran and a Permanent block for what the mode still pays; and where a page has
-   no total at all, both halves sit loose in the body. Reading the first match
-   answers all three wrong. It read one line of one table on the pages whose
-   tasks come first — 50 Astrite off "complete 4 tracks" for Soar to the Beat,
-   against 740 — and on the pages that split it read the limited-time half and
-   dropped the permanent one, which is the half a permanent event is on this
-   list for.
+   one per song cleared or floor beaten; it splits a payout under one
+   ==Total Rewards== heading; and where a page has no total at all, the halves
+   sit loose in the body. Reading the first match answers all of that wrong: it
+   read one line of one table on the pages whose tasks come first — 50 Astrite
+   off "complete 4 tracks" for Soar to the Beat.
 
-   So: add the calls up rather than pick one, and add up both statements the
-   page makes — its stated total and its own task rows. */
+   And *which half*, which matters more here than anywhere else on the desk.
+   An event pays two layers. The limited-time layer ran for the fortnight the
+   event was live and is gone; the standing layer — the wiki calls it Permanent
+   Rewards, or Standard Rewards, or on Tidal Defense Simulator a Field Supply —
+   is what the mode still hands out. Every event on this list has finished its
+   run, by definition: the tab is the game's list of modes it kept. So the
+   number a tile owes the reader is the standing layer alone. Somnium Labyrinth
+   paid 1,200 Astrite in its day and pays 400 now.
+
+   So: where the page separates the two, take the standing side. Where it does
+   not, it has given no grounds to split and the total stands. */
 const TOTAL_HEADING = /^=+\s*Total Rewards\s*=+\s*$/m;
 const INSTRUCTION = /^(sort|type|delim|mode|notes?)$/i;
+/* "Limited-Time Rewards", "Limited-time Task Rewards", "Limited Supply" — the
+   wiki has three spellings for the layer that expired and one word in common. */
+const LIMITED = /\blimited\b/i;
 
 /* A quantity, or nothing. `Shell Credit=` and `Special Cube Cookie=?` are the
    wiki saying it does not know yet; a reward reading "x?" on the tile would be
@@ -192,6 +200,25 @@ const INSTRUCTION = /^(sort|type|delim|mode|notes?)$/i;
 function qtyOf(raw) {
   const n = Number(String(raw).replace(/,/g, "").trim());
   return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+/* The page's headings with their offsets, so a reward call can be placed in the
+   structure the page argues in rather than just in its byte order. */
+function headings(src) {
+  return [...String(src).matchAll(/^(=+)\s*([^=\n]+?)\s*=+\s*$/gm)]
+    .map(m => ({ at: m.index, depth: m[1].length, name: m[2] }))
+    .filter(h => h.depth >= 2);
+}
+
+/* The headings standing over a point in the page, outermost first. */
+function pathAt(heads, at) {
+  const stack = [];
+  for (const h of heads) {
+    if (h.at > at) break;
+    stack.length = h.depth - 2;
+    stack[h.depth - 2] = h.name;
+  }
+  return stack.filter(Boolean).join(" > ");
 }
 
 /* The event's own currency, by the wiki's own classification: a block tagged
@@ -212,32 +239,46 @@ function currencyOf(src) {
   return names;
 }
 
-/* Every {{Event Rewards}} call in `scope`, added up item by item, in the order
-   the page first mentions each. */
-function mergeBlocks(scope, currency) {
+/* One more of something, where a count for it is known. A reward the wiki lists
+   without a number is still a reward: the standing half of Somnium Labyrinth is
+   written `|Astrite=400 |Malleable Elite Class Echo I |Malleable Elite Class
+   Echo II |Premium Resonance Potion |Premium Energy Core`, four of those five
+   with no quantity against them, and dropping them for it left that tile
+   reading "400 Astrite" and nothing else. The renderer already draws a reward
+   with no count — it hangs the count badge on `qty` being set — so the honest
+   shape is the item with the number missing, not the item missing. */
+function bump(map, name, qty) {
+  const was = map.get(name);
+  if (typeof was === "number") { if (qty != null) map.set(name, was + qty); }
+  else map.set(name, qty);
+}
+
+/* Every {{Event Rewards}} call `keep` accepts, added up item by item, in the
+   order the page first mentions each. */
+function mergeBlocks(src, currency, keep = () => true) {
   const out = new Map();
-  for (const b of String(scope).matchAll(/\{\{Event Rewards([\s\S]*?)\}\}/gi)) {
-    if (/\|\s*type\s*=\s*Event Items/i.test(b[1])) continue;
-    for (const m of b[1].matchAll(/\|\s*([^|=\n]+?)\s*=\s*([^|\n}]*)/g)) {
-      const name = m[1].trim();
-      const qty = qtyOf(m[2]);
-      if (!name || INSTRUCTION.test(name) || currency.has(name) || qty == null) continue;
-      out.set(name, (out.get(name) || 0) + qty);
+  for (const b of String(src).matchAll(/\{\{Event Rewards([\s\S]*?)\}\}/gi)) {
+    if (!keep(b.index) || /\|\s*type\s*=\s*Event Items/i.test(b[1])) continue;
+    /* Split rather than match a `key=value` pair, so that a bare `|Item` is
+       read as an item with no count instead of not being read at all. */
+    for (const param of b[1].split("|")) {
+      const eq = param.indexOf("=");
+      const name = (eq < 0 ? param : param.slice(0, eq)).trim();
+      if (!name || INSTRUCTION.test(name) || currency.has(name)) continue;
+      bump(out, name, eq < 0 ? null : qtyOf(param.slice(eq + 1)));
     }
   }
   return out;
 }
 
-/* {{Card List|delim=;|Astrite*40;Premium Tuner*50}} — how the older pages
-   write a table cell, and the only place Tales of the Isles states a payout at
-   all: its Total Rewards block totals the 4,200 Stamps the track is bought
-   with and says nothing about the 490 Astrite the track pays.
-
-   Read last, and only where a page has no {{Event Rewards}} to read. Half the
-   list writes both, and on those the card rows are the same rewards restated. */
-function mergeCardLists(src, currency) {
+/* {{Card List|delim=;|Astrite*40;Premium Tuner*50}} — how the older pages write
+   a table cell, and the only place Tales of the Isles states a payout at all:
+   its Total Rewards block totals the 4,200 Stamps the track is bought with and
+   says nothing about the 490 Astrite the track pays. */
+function mergeCardLists(src, currency, keep = () => true) {
   const out = new Map();
   for (const m of String(src).matchAll(/\{\{Card List\s*\|([^{}]*)\}\}/gi)) {
+    if (!keep(m.index)) continue;
     const parts = m[1].split("|").filter(Boolean);
     const delim = (parts.find(p => /^\s*delim\s*=/i.test(p)) || "=;").split("=").pop().trim() || ";";
     for (const part of parts) {
@@ -262,27 +303,59 @@ function mergeCardLists(src, currency) {
    Credit, the Tuners, all three potions, reconciles to the row exactly, so it
    is the total that is one task row short. Star Bouncing goes the other way:
    its total names a Phantom and 60,000 Shell Credit that no row on the page
-   mentions. Taking the larger says what both agree the event pays at least,
-   which is the most either statement supports. */
+   mentions. Taking the larger says what both agree the event pays at least. */
 function likelier(stated, rows) {
   const out = new Map(stated);
-  for (const [name, qty] of rows) out.set(name, Math.max(out.get(name) || 0, qty));
+  for (const [name, qty] of rows) {
+    const was = out.get(name);
+    if (typeof was === "number") { if (qty != null) out.set(name, Math.max(was, qty)); }
+    else out.set(name, qty);
+  }
   return out;
 }
 
+const line = map =>
+  [...map].map(([name, qty]) => (qty == null ? name : `${name} x${qty}`)).join(", ");
+
 function rewards(src) {
   const text = String(src || "");
-  const at = text.search(TOTAL_HEADING);
+  const heads = headings(text);
   const currency = currencyOf(text);
-  const stated = mergeBlocks(at < 0 ? text : text.slice(at), currency);
-  const rows = at < 0 ? new Map() : mergeBlocks(text.slice(0, at), currency);
+  const at = text.search(TOTAL_HEADING);
+  const expired = i => LIMITED.test(pathAt(heads, i));
+
+  /* Both places a page can draw the line, in the order they are worth trusting.
+     Some pages divide the total itself into a Limited-time block and a
+     Permanent one — Somnium Labyrinth, Cube, Your Summer — and the wiki has
+     done the adding up for each half. The rest leave the total undivided and
+     divide the task tables above it instead, which is Soar to the Beat, Star
+     Bouncing, Tidal Defense and the Card List pages. */
+  for (const within of [
+    i => at >= 0 && i >= at,
+    i => at < 0 || i < at
+  ]) {
+    const some = (fn, limited) => fn(text, currency, i => within(i) && expired(i) === limited);
+    /* Only a scope that states both halves has split anything. A scope with no
+       limited-time side has not said this event has one, and its content is
+       just the payout — read it by the ordinary route below rather than
+       announcing it as the standing half. */
+    if (!some(mergeBlocks, true).size && !some(mergeCardLists, true).size) continue;
+    const standing = some(mergeBlocks, false);
+    if (standing.size) return line(standing);
+    const cards = some(mergeCardLists, false);
+    if (cards.size) return line(cards);
+  }
+
+  /* No split stated. Everything the page says, added up. */
+  const stated = mergeBlocks(text, currency, i => at < 0 || i >= at);
+  const rows = at < 0 ? new Map() : mergeBlocks(text, currency, i => i < at);
   const out = stated.size || rows.size ? likelier(stated, rows) : mergeCardLists(text, currency);
 
   /* Thousands separators came off in qtyOf rather than being left for the
      reader's parser. That parser splits this line on commas — it has to, it is
      reading Kuro's prose the rest of the time — so "Shell Credit=180,000" left
      alone becomes a reward called "Shell Credit x180" and another "000". */
-  return [...out].map(([name, qty]) => `${name} x${qty}`).join(", ");
+  return line(out);
 }
 
 /* Kuro publishes in server time and the desk renders every clock in the
@@ -430,8 +503,17 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
       "list is names rather than a filter because nothing on the wiki reproduces it: the tab is " +
       "Kuro's claim that a mode stayed in the game, and the wiki's dates are the event's reward run, " +
       "so ten of these twelve have a closing date on the wiki and are in the menu today. The desk " +
-      "carries them as permanent — no closing date — which is what the tab asserts. Banners are " +
-      "Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
+      "carries them as permanent — no closing date — which is what the tab asserts. " +
+      "The reward line is what the mode still pays, not what it paid when it ran: every event here " +
+      "has finished its run, and an event pays two layers — a limited-time one that expired with it " +
+      "and a standing one the wiki files as Permanent Rewards, Standard Rewards or a Field Supply. " +
+      "Where a page separates the two the standing side is taken, so Somnium Labyrinth reads 400 " +
+      "Astrite rather than the 1,200 it paid in its fortnight. Where a page states no such split " +
+      "the total stands, because the wiki has given no grounds to divide it — All Out! Towards the " +
+      "Peaks of Prestige is the awkward one, filing its whole payout under Limited-Time Rewards " +
+      "with no standing section to fall back to, so its 1,200 is the run's figure and overstates " +
+      "what is left. Banners are Kuro's own art, downloaded from the wiki at 720px rather than " +
+      "hotlinked.",
     credit: "Event data and banners via wutheringwaves.fandom.com · © Kuro Games",
     source: WIKI(CATEGORY),
     events

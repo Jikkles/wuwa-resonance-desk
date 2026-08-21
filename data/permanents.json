@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/permanents@1.0",
-  "note": "The game's own Permanent tab, copied by hand from the client on 2026-08-20 and then read off the Wuthering Waves Wiki on Fandom for the dates, the blurb, the payout and the banner. The list is names rather than a filter because nothing on the wiki reproduces it: the tab is Kuro's claim that a mode stayed in the game, and the wiki's dates are the event's reward run, so ten of these twelve have a closing date on the wiki and are in the menu today. The desk carries them as permanent — no closing date — which is what the tab asserts. Banners are Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
+  "note": "The game's own Permanent tab, copied by hand from the client on 2026-08-20 and then read off the Wuthering Waves Wiki on Fandom for the dates, the blurb, the payout and the banner. The list is names rather than a filter because nothing on the wiki reproduces it: the tab is Kuro's claim that a mode stayed in the game, and the wiki's dates are the event's reward run, so ten of these twelve have a closing date on the wiki and are in the menu today. The desk carries them as permanent — no closing date — which is what the tab asserts. The reward line is what the mode still pays, not what it paid when it ran: every event here has finished its run, and an event pays two layers — a limited-time one that expired with it and a standing one the wiki files as Permanent Rewards, Standard Rewards or a Field Supply. Where a page separates the two the standing side is taken, so Somnium Labyrinth reads 400 Astrite rather than the 1,200 it paid in its fortnight. Where a page states no such split the total stands, because the wiki has given no grounds to divide it — All Out! Towards the Peaks of Prestige is the awkward one, filing its whole payout under Limited-Time Rewards with no standing section to fall back to, so its 1,200 is the run's figure and overstates what is left. Banners are Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
   "credit": "Event data and banners via wutheringwaves.fandom.com · © Kuro Games",
   "source": "https://wutheringwaves.fandom.com/wiki/Permanent_Events",
   "events": [
@@ -15,7 +15,7 @@
       "end": null,
       "summary": "A train crashes from the dreamscape into reality, ripping open a gateway to the realm of illusions.",
       "detail": "A train crashes from the dreamscape into reality, ripping open a gateway to the realm of illusions. A looming shadow greets you with a grim prophecy: the world will succumb to this nightmare, and night will reign eternal. You struggle to awaken, desperately clinging to the shreds of reality left in the shattered dreams. Thankfully, a white cat appears to guide you back on track, helping you find your lost allies. Together, you battle against the darkest terrors lurking in this chaotic labyrinth.",
-      "rewards": "Astrite x1200, Somnoire Anchor x1, Projection: Somnoire Anchor x1, Hearty Supper x4",
+      "rewards": "Astrite x400, Malleable Elite Class Echo I, Malleable Elite Class Echo II, Premium Resonance Potion, Premium Energy Core",
       "eligibility": "",
       "art": {
         "url": "assets/events/somnium-labyrinth.jpg",
@@ -61,7 +61,7 @@
       "end": null,
       "summary": "To the north of Ragunna City lies Rinascita's largest fishing ground: to Riccioli inlands, an enticing destination for an intriguing adventure.",
       "detail": "To the north of Ragunna City lies Rinascita's largest fishing ground: to Riccioli inlands, an enticing destination for an intriguing adventure. an enticing destination for an intriguing adventure. Ready your sails and prepare for the vast blue waters, Captin!",
-      "rewards": "Astrite x1200, Ocean's Gift x1, Projection: Ocean's Gift x1, Blue-Spotted Giant Fish x4, Phantom: Lorelei x1",
+      "rewards": "Astrite x300, Malleable Elite Class Echo III, Malleable Elite Class Echo IV, Shell Credit",
       "eligibility": "",
       "art": {
         "url": "assets/events/old-man-and-the-whale.jpg",
@@ -84,7 +84,7 @@
       "end": null,
       "summary": "The Second Coming of Solaris's Anniversary is approaching, but trouble has struck the Cube World!",
       "detail": "The Second Coming of Solaris's Anniversary is approaching, but trouble has struck the Cube World! The mysterious demon king Abbowser has captured all Cubes and challenged the legendary Black Cat Warrior. \"Step into the unknown, face my minions, rescue your lost friends, and face me in a big showdown! Come on, it's going to be a blast!\"",
-      "rewards": "Astrite x1000, Once Together x1, Modifier x10, Premium Tuner x100, Forgery Premium Supply x12, Premium Enclosure Tank x34, Premium Resonance Potion x15, Premium Energy Core x11, Premium Sealed Tube x13, Shell Credit x540000, Advanced Enclosure Tank x24, Forgery Advanced Supply x12, Advanced Resonance Potion x8, Advanced Energy Core x4, Advanced Sealed Tube x3",
+      "rewards": "Astrite x200, Premium Enclosure Tank x10, Premium Resonance Potion x7, Premium Energy Core x3, Premium Sealed Tube x3, Advanced Enclosure Tank x24, Forgery Advanced Supply x12, Advanced Resonance Potion x8, Advanced Energy Core x4, Advanced Sealed Tube x3, Shell Credit x340000",
       "eligibility": "",
       "art": {
         "url": "assets/events/cube-cubic-n-cubie.jpg",
@@ -130,7 +130,7 @@
       "end": null,
       "summary": "A rumor about Daemons is spreading through the streets of Ragunna, with an article pointing to the former Poets Society—The Golden Anthem.",
       "detail": "A rumor about Daemons is spreading through the streets of Ragunna, with an article pointing to the former Poets Society—The Golden Anthem. As you dig deeper, you uncover a tragic story deliberately concealed by The Order.)",
-      "rewards": "Astrite x300, Forgery Premium Supply x12, Premium Enclosure Tank x8, Premium Resonance Potion x5, Premium Energy Core x5, Premium Sealed Tube x10, HF Tidal Residuum x24, Refined Phlogiston x20, Shell Credit x280000",
+      "rewards": "Astrite x200, Premium Resonance Potion x2, Premium Energy Core x2, Premium Sealed Tube x4, HF Tidal Residuum x24, Refined Phlogiston x20, Shell Credit x280000",
       "eligibility": "",
       "art": {
         "url": "assets/events/your-summer-will-never-wither.jpg",
@@ -199,7 +199,7 @@
       "end": null,
       "summary": "A strange gate to the Somnoire appears.",
       "detail": "A strange gate to the Somnoire appears. Through it, a curious Conductor glimpses a forsaken Dreamland. There, a host of peculiar Echoes have gathered, striving to restore its former glory. The Conductor chooses to linger, silently awaiting the unfolding of this dream...)",
-      "rewards": "Astrite x1200, Dreamland Reverie x1, Phantom: Nightmare Inferno Rider x1, Modifier x10, Premium Tuner x150, Forgery Premium Supply x10, Shell Credit x870000",
+      "rewards": "Astrite x300, Advanced Resonance Potion x10, Shell Credit x420000, Advanced Energy Core x10, Advanced Sealed Tube x10, Forgery Advanced Supply x15, Advanced Enclosure Tank x39",
       "eligibility": "",
       "art": {
         "url": "assets/events/phantasma-dreamland.jpg",
@@ -222,7 +222,7 @@
       "end": null,
       "summary": "The agents of the Black Shores have long been the first to respond in times of crisis.",
       "detail": "The agents of the Black Shores have long been the first to respond in times of crisis. To lower the risks they face in fighting the TDs, the Black Shores has developed specialized combat devices designed to counter the threat. Valentina is now leading simulation tests of the devices, and she's counting on your assistance to push the tests forward.",
-      "rewards": "Astrite x1200, TD Terminator x1, Catcher in the Tide x1, Phantom: Fallacy of No Return x1, Modifier x10, Premium Tuner x150, Forgery Premium Supply x8, Shell Credit x980000",
+      "rewards": "Astrite x300, Advanced Resonance Potion x8, Shell Credit x590000, Advanced Energy Core x8, Advanced Sealed Tube x4, TD Terminator x1, Forgery Advanced Supply x13, Forgery Premium Supply x2, Premium Enclosure Tank x12",
       "eligibility": "",
       "art": {
         "url": "assets/events/tidal-defense-simulator.jpg",
@@ -245,7 +245,7 @@
       "end": null,
       "summary": "After the end of Honami's City looping crisis.",
       "detail": "After the end of Honami's City looping crisis. Namipon from Shashou Cafe contacts you to request your and Chisa's help in investigating a series of strange occurrences throughout Honami City. Assist Namipon with the investigation while also gathering supplies to renovate Shashou Cafe.",
-      "rewards": "Astrite x1200, Honami Doom Walker x1, Post-Doomsday Coffee x1, Phantom: The False Sovereign x1, Modifier x8, Premium Tuner x150, Forgery Premium Supply x10, Premium Enclosure Tank x20, Premium Resonance Potion x18, Premium Energy Core x18, Premium Sealed Tube x16, Forgery Advanced Supply x10, Advanced Enclosure Tank x20, Summer Flower x30, Shell Credit x560000",
+      "rewards": "Summer Flower x15, Shell Credit x230000, Astrite x160, Premium Resonance Potion x6, Premium Energy Core x6, Premium Sealed Tube x6, Forgery Advanced Supply x10, Advanced Enclosure Tank x20",
       "eligibility": "",
       "art": {
         "url": "assets/events/stranger-things-in-honami.jpg",
@@ -337,7 +337,7 @@
       "end": null,
       "summary": "Lately, \"Stellar Orbit Beats\" has been taking the Mind Dive Arcade by storm!",
       "detail": "Lately, \"Stellar Orbit Beats\" has been taking the Mind Dive Arcade by storm! It's officially the go-to game for everyone to unwind and have fun here at the Academy. Got a free minute between classes? Grab your friends and let the rhythm carry you on a trip through the stars!",
-      "rewards": "Astrite x800, Forgery Premium Supply - Lahai-Roi x4, Premium Enclosure Tank - Lahai-Roi x8, Premium Resonance Potion x10, Premium Energy Core x10, Premium Sealed Tube x10, Premium Tuner x100, Modifier x2, Astral Flight x1, Advanced Resonance Potion x4, Advanced Energy Core x4, Advanced Sealed Tube x4, Shell Credit x390000",
+      "rewards": "Astrite x200, Advanced Resonance Potion x4, Advanced Energy Core x4, Advanced Sealed Tube x4, Shell Credit x50000, Forgery Premium Supply - Lahai-Roi x4, Premium Enclosure Tank - Lahai-Roi x8",
       "eligibility": "",
       "art": null,
       "confidence": "official",
@@ -401,7 +401,7 @@
       "end": null,
       "summary": "Guided by the orbit, led by luck, and fueled by romanticism.",
       "detail": "Guided by the orbit, led by luck, and fueled by romanticism. This is the great adventure—a vibrant trek across the galaxy. Time to let the sea of stars bounce in rhythm with your heart!",
-      "rewards": "Astrite x1200, Forgery Premium Supply - Lahai-Roi x6, Premium Enclosure Tank - Lahai-Roi x12, Premium Resonance Potion x15, Premium Energy Core x11, Premium Sealed Tube x13, Premium Tuner x100, Modifier x4, Phantom: Reactor Husk x1, Supernova Launcher x1, Forgery Advanced Supply - Lahai-Roi x24, Advanced Enclosure Tank - Lahai-Roi x36, Advanced Resonance Potion x8, Advanced Energy Core x8, Advanced Sealed Tube x6, Shell Credit x730000",
+      "rewards": "Astrite x400, Advanced Resonance Potion x8, Shell Credit x300000, Advanced Energy Core x8, Advanced Sealed Tube x6, Forgery Advanced Supply - Lahai-Roi x16, Advanced Enclosure Tank - Lahai-Roi x24, Premium Resonance Potion x7, Premium Energy Core x3, Premium Sealed Tube x3",
       "eligibility": "",
       "art": {
         "url": "assets/events/star-bouncing.jpg",
@@ -493,7 +493,7 @@
       "end": null,
       "summary": "To help Solaris prepare for future crises, the Black Shores and Spacetrek Collective have launched a new hologram simulation project.",
       "detail": "To help Solaris prepare for future crises, the Black Shores and Spacetrek Collective have launched a new hologram simulation project. At Yhoran’s invitation, you and your companions step up to take part, ready to fight for humanity's survival in a simulated doomsday.",
-      "rewards": "Astrite x1200, Space and Blake Bloom Medal x1, Premium Resonance Potion x24, Premium Energy Core x8, Premium Sealed Tube x15, Modifier x6, Premium Tuner x100, Forgery Premium Supply - Lahai-Roi x3, Premium Enclosure Tank - Land of Xuanfang x6, Space and Blake Bloom x1, Advanced Resonance Potion x8, Advanced Energy Core x8, Advanced Sealed Tube x6, Forgery Advanced Supply - Lahai-Roi x18, Advanced Enclosure Tank - Land of Xuanfang x30, Shell Credit x510000",
+      "rewards": "Astrite x400, Advanced Resonance Potion x8, Advanced Energy Core x8, Advanced Sealed Tube x6, Shell Credit x210000, Premium Sealed Tube x3, Advanced Enclosure Tank - Land of Xuanfang x6, Premium Resonance Potion x4, Premium Energy Core x4, Forgery Advanced Supply - Lahai-Roi x6, Premium Enclosure Tank - Land of Xuanfang x6",
       "eligibility": "",
       "art": {
         "url": "assets/events/lament-recon-tacet-crisis.jpg",
@@ -506,5 +506,5 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Lament_Recon%3A_Tacet_Crisis"
     }
   ],
-  "updated": "2026-08-21T19:41:45.238Z"
+  "updated": "2026-08-21T21:08:45.249Z"
 }

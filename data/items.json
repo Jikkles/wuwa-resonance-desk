@@ -74,14 +74,6 @@
       "description": "An advanced material used for Weapon Ascension and Skill Upgrade for Rectifier Resonators.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Andante_Helix"
     },
-    "Astral Flight": {
-      "icon": "assets/items/astral-flight.png",
-      "page": "Astral Flight",
-      "rarity": 5,
-      "type": "Sigil",
-      "description": "If we could break free from the gravity of reality, would our worries and sorrows lighten as well?",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Astral_Flight"
-    },
     "Astrite": {
       "icon": "assets/items/astrite.png",
       "page": "Astrite",
@@ -97,14 +89,6 @@
       "type": "Weapon and Skill Material",
       "description": "A material used to break through weapons, ascend [[Resonators]] and upgrade skills.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Basic_Ring"
-    },
-    "Blue-Spotted Giant Fish": {
-      "icon": "assets/items/blue-spotted-giant-fish.png",
-      "page": "Blue-Spotted Giant Fish",
-      "rarity": 4,
-      "type": "Material",
-      "description": "Used to increase the Syntonization Rank of [[Ocean's Gift]].",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Blue-Spotted_Giant_Fish"
     },
     "Broken String": {
       "icon": "assets/items/broken-string.png",
@@ -161,14 +145,6 @@
       "type": "Sigil",
       "description": "The best movie is the next movie.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Deep_Dreams_Film_Festival"
-    },
-    "Dreamland Reverie": {
-      "icon": "assets/items/dreamland-reverie.png",
-      "page": "The Dreamland",
-      "rarity": 5,
-      "type": "Sigil",
-      "description": "Ride the Ferris wheel of the Dreamland and gaze down upon the world below.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/The_Dreamland"
     },
     "Extracted Phlogiston": {
       "icon": "assets/items/extracted-phlogiston.png",
@@ -241,22 +217,6 @@
       "type": "Weapon and Skill Material",
       "description": "A material used to break through weapons, ascend Resonators, and upgrade skills.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/HF_Whisperin_Core"
-    },
-    "Hearty Supper": {
-      "icon": "assets/items/hearty-supper.png",
-      "page": "Hearty Supper",
-      "rarity": 4,
-      "type": "Material",
-      "description": "Used to increase the Syntonization Rank of [[Somnoire Anchor]].",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Hearty_Supper"
-    },
-    "Honami Doom Walker": {
-      "icon": "assets/items/honami-doom-walker.png",
-      "page": "Honami Doom Walker",
-      "rarity": 5,
-      "type": "Title",
-      "description": "A special reward obtained from the \"Stranger Things in Honami\" event.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Honami_Doom_Walker"
     },
     "Improved Ring": {
       "icon": "assets/items/improved-ring.png",
@@ -361,6 +321,38 @@
       "description": "A material used to break through weapons, ascend Resonators, and upgrade skills.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/MF_Whisperin_Core"
     },
+    "Malleable Elite Class Echo I": {
+      "icon": "assets/items/malleable-elite-class-echo-i.png",
+      "page": "Malleable Elite Class Echo I",
+      "rarity": 5,
+      "type": "Random Echo Item",
+      "description": "Open to claim one 5-Star Elite Class Echo of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Malleable_Elite_Class_Echo_I"
+    },
+    "Malleable Elite Class Echo II": {
+      "icon": "assets/items/malleable-elite-class-echo-ii.png",
+      "page": "Malleable Elite Class Echo II",
+      "rarity": 5,
+      "type": "Random Echo Item",
+      "description": "Open to claim one 5-Star Elite Class Echo of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Malleable_Elite_Class_Echo_II"
+    },
+    "Malleable Elite Class Echo III": {
+      "icon": "assets/items/malleable-elite-class-echo-iii.png",
+      "page": "Malleable Elite Class Echo III",
+      "rarity": 5,
+      "type": "Random Echo Item",
+      "description": "Open to claim one 5-Star Elite Class Echo of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Malleable_Elite_Class_Echo_III"
+    },
+    "Malleable Elite Class Echo IV": {
+      "icon": "assets/items/malleable-elite-class-echo-iv.png",
+      "page": "Malleable Elite Class Echo IV",
+      "rarity": 5,
+      "type": "Random Echo Item",
+      "description": "Open to claim one 5-Star Elite Class Echo of your choice.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Malleable_Elite_Class_Echo_IV"
+    },
     "Modifier": {
       "icon": "assets/items/modifier.png",
       "page": "Modifier",
@@ -383,21 +375,6 @@
       "type": "Weapon and Skill Material",
       "description": "A medium material used for Weapon Ascension and Skill Upgrade for Sword Resonators.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Monowing_Polarizer"
-    },
-    "Ocean's Gift": {
-      "icon": "assets/items/ocean-s-gift.png",
-      "page": "Ocean's Gift",
-      "rarity": 4,
-      "type": "Rectifier",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Ocean's_Gift"
-    },
-    "Once Together": {
-      "icon": "assets/items/once-together.png",
-      "page": "Once Together",
-      "rarity": 5,
-      "type": "Sigil",
-      "description": "Let's keep on going, like a never-ending song.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Once_Together"
     },
     "Phantom — Myriad Snare: Rustfire Chassis": {
       "icon": "assets/items/phantom-myriad-snare-rustfire-chassis.png",
@@ -429,47 +406,17 @@
       "type": "Common",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Fae_Ignis%2FEcho"
     },
-    "Phantom: Fallacy of No Return": {
-      "icon": "assets/items/phantom-fallacy-of-no-return.png",
-      "page": "Fallacy of No Return/Echo",
-      "type": "Overlord",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Fallacy_of_No_Return%2FEcho"
-    },
-    "Phantom: Lorelei": {
-      "icon": "assets/items/phantom-lorelei.png",
-      "page": "Lorelei/Echo",
-      "type": "Overlord",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Lorelei%2FEcho"
-    },
     "Phantom: Nightmare Crownless": {
       "icon": "assets/items/phantom-nightmare-crownless.png",
       "page": "Nightmare: Crownless/Echo",
       "type": "Nightmare",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Nightmare%3A_Crownless%2FEcho"
     },
-    "Phantom: Nightmare Inferno Rider": {
-      "icon": "assets/items/phantom-nightmare-inferno-rider.png",
-      "page": "Nightmare: Inferno Rider/Echo",
-      "type": "Nightmare",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Nightmare%3A_Inferno_Rider%2FEcho"
-    },
-    "Phantom: Reactor Husk": {
-      "icon": "assets/items/phantom-reactor-husk.png",
-      "page": "Reactor Husk/Echo",
-      "type": "Overlord",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Reactor_Husk%2FEcho"
-    },
     "Phantom: Smiter": {
       "icon": "assets/items/phantom-smiter.png",
       "page": "Smiter/Echo",
       "type": "Common",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Smiter%2FEcho"
-    },
-    "Phantom: The False Sovereign": {
-      "icon": "assets/items/phantom-the-false-sovereign.png",
-      "page": "The False Sovereign/Echo",
-      "type": "Overlord",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/The_False_Sovereign%2FEcho"
     },
     "Phantom: Twin Nova — Collapsar Blade": {
       "icon": "assets/items/phantom-twin-nova-collapsar-blade.png",
@@ -490,13 +437,6 @@
       "type": "Weapon and Skill Material",
       "description": "An advanced material used for Weapon Ascension and Skill Upgrade for Sword Resonators.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Polarized_Metallic_Drip"
-    },
-    "Post-Doomsday Coffee": {
-      "icon": "assets/items/post-doomsday-coffee.png",
-      "page": "Post-Doomsday Coffee",
-      "rarity": 4,
-      "type": "Avatar",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Post-Doomsday_Coffee"
     },
     "Premium Enclosure Tank": {
       "icon": "assets/items/premium-enclosure-tank.png",
@@ -552,20 +492,6 @@
       "description": "Adjust Echoes' frequencies, removes any noise, and unleash their true potential.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Premium_Tuner"
     },
-    "Projection: Ocean's Gift": {
-      "icon": "assets/items/projection-ocean-s-gift.png",
-      "page": "Projection: Ocean's Gift",
-      "rarity": 4,
-      "type": "Rectifier",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Projection%3A_Ocean's_Gift"
-    },
-    "Projection: Somnoire Anchor": {
-      "icon": "assets/items/projection-somnoire-anchor.png",
-      "page": "Projection: Somnoire Anchor",
-      "rarity": 4,
-      "type": "Sword",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Projection%3A_Somnoire_Anchor"
-    },
     "Radiant Tide": {
       "icon": "assets/items/radiant-tide.png",
       "page": "Radiant Tide",
@@ -595,13 +521,6 @@
       "rarity": 3,
       "type": "Universal Currency",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Shell_Credit"
-    },
-    "Somnoire Anchor": {
-      "icon": "assets/items/somnoire-anchor.png",
-      "page": "Somnoire Anchor",
-      "rarity": 4,
-      "type": "Sword",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Somnoire_Anchor"
     },
     "Space and Blake Bloom Medal": {
       "icon": "assets/items/space-and-blake-bloom-medal.png",
@@ -667,5 +586,5 @@
       "wiki": "https://wutheringwaves.fandom.com/wiki/Xuanfang_Wonder"
     }
   },
-  "updated": "2026-08-21T19:46:19.770Z"
+  "updated": "2026-08-21T21:08:48.606Z"
 }
