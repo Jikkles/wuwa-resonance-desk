@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-22T14:22:11.486Z",
+  "fetched": "2026-08-22T20:23:18.268Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 675,
-      "ms": 1464
+      "ms": 855
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 732
+      "ms": 1040
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 497
+      "ms": 447
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 535
+      "ms": 585
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2637,
+      "ms": 2578,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 65,
-      "ms": 428
+      "fetched": 64,
+      "ms": 588
     },
     {
       "id": "mmoculture",
@@ -72,7 +72,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 167
+      "ms": 330
     }
   ],
   "errors": [],
@@ -114,6 +114,16 @@
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "All Wuthering Waves characters listed",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBhZ3l4eGlpNWYzU214blBuY0Y2ZV9zVUNXYkNqODNfcEhoRTdZRExLdkktYmRWLXNZSTNhMWNjTlQzQjJyWnVFcDE3UUNWajhZNld4N2VOVGlONFVZc19IOWZJa05qTVE?oc=5",
+      "date": "2026-08-21T15:05:39.000Z",
+      "source": "Pocket Tactics",
+      "sourceId": "google-news",
+      "kind": "press",
       "lang": "en",
       "hot": false
     },
@@ -1192,16 +1202,6 @@
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOUXYtLVhVVF9tTkdwdUtKRDNIRGhUUEhXU0gwSDlJWWNyU0RkUkZjbm91VUtEUEZ5RkxQdTFuRUZPM0g5OVVnV2ZaLVk5U25mNnJtX2VUaC1sdkt5NzBsTnVpOVJYdEw3S0tneUxXMUdHSUs2ZkpFU1E0VmNIMjhkakNKeU5fSWJQbjV2bVFrd1RFNnBhWkxlckNuZjNZVV9fTVVXWDM0c1h5VnBEN1EzOVpqZmZVbWdzTjN3Q2pNbE1xeHpHUkR1TQ?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
       "source": "Gematsu",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 banners schedule (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOcDVqOWtDVnIzQ1dkZHNuMEtLZnhoZGc5cGdGZW1uTFdzdnBqZElUQmg2MFlMT09IYUsyTjd5ek5fTGhFZG9zTkw3SFlZWUJ3MENVa19TS2RqY041SXlTLWJmX1p3SGc1Vk5wcnl5XzRiRHB5S1Znb2tQRTRpX09nWVhZNA?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
