@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/resonators@1.1",
-  "updated": "2026-08-21",
+  "updated": "2026-08-22",
   "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
   "resonators": [
     {
@@ -3231,7 +3231,8 @@
           "url": "https://www.topuplive.com/news/wuwa-3-6-jingran-build.html"
         }
       ],
-      "epithet": "Nether Qi Art"
+      "epithet": "Nether Qi Art",
+      "released": "2026-09-10"
     },
     {
       "name": "Hsin",
