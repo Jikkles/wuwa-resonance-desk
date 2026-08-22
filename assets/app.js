@@ -1198,6 +1198,11 @@ function patchCard(v, role){
      covered by the picture in every case that mattered. */
   const art = kv ? "" : cardArt(v);
   const figs = kv ? [] : cardFigures(v);
+  /* Held rather than called inline, because the head band asks it two
+     questions: draw yourself, and did you draw anything — a patch with no
+     window has no bar, and that is the one case the dates still have to be
+     printed as type. */
+  const bar = track(v, role);
 
   const state = role === "live"
     ? `<span class="pill live">Current</span>`
@@ -1373,18 +1378,27 @@ function patchCard(v, role){
       <!-- Rings only when there is neither a poster nor a figure — a patch we
            know nothing about yet. They are a held signal, not a backdrop. -->
       ${art || (kv || figs.length ? "" : `<div class="rings"></div>`)}
-      <!-- Status and the run bar ride the top rail; the version number and its
-           codename sit side by side underneath. Stacked the other way round,
-           the number was buried under four lines of metadata. -->
+      <!-- One rail across the top: state, codename, where the patch is in its
+           run. The codename moved up here off its own line under the number —
+           it is a designation, the same kind of thing as the pill beside it,
+           and the gap between "Current" and "Live" was the width of it.
+
+           The dates went with it. They were printed twice: once as a line of
+           type here and once as the ends of the run bar directly above, which
+           is the same two dates doing a job the bar does better, because the
+           bar also says where today falls between them. So the line is drawn
+           only when there is no bar to have said it — an undated patch, where
+           "Dates unknown" is the honest thing to print and nothing else is
+           printing it. -->
       <div class="pcard-head">
-        <div class="pcard-top">${state}${status}</div>
-        ${track(v, role)}
+        <div class="pcard-top">${state}${
+          v.title ? `<div class="pcard-title">${esc(v.title)}</div>` : ""}${status}</div>
+        ${bar}
         <div class="pcard-main">
           <div class="pcard-num">${esc(v.id)}</div>
-          <div class="pcard-idtext">
-            ${v.title ? `<div class="pcard-title">${esc(v.title)}</div>` : ""}
+          ${bar ? "" : `<div class="pcard-idtext">
             <div class="pcard-dates">${[v.start ? fmtDate(v.start) : "", versionEnd(v)].filter(Boolean).join(" — ") || "Dates unknown"}</div>
-          </div>
+          </div>`}
         </div>
       </div>
       <!-- The clear part, and where the debut figures live. Putting them in

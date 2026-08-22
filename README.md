@@ -313,13 +313,24 @@ altogether.
 
 The head is itself three lines, in this order for a reason:
 
-1. **Status rail** — the state pill left, live/countdown right. Both are status, so
-   they share a line.
+1. **Status rail** — the state pill left, the codename in the middle, live/countdown
+   right. All three are the same kind of fact — what this patch is and where it is —
+   and the gap between the pill and the countdown was the width of a codename.
 2. **Run bar** — where the patch is in its own cycle.
-3. **Identity** — the version number, with the codename and dates *beside* it rather
-   than under it. Stacked, four lines of metadata sat below the number and pushed the
-   whole band down over the character's face; alongside, they cost one line and the
-   number gets to be 57px.
+3. **Identity** — the version number, and on most cards nothing else.
+
+The codename takes `flex:1 1 0` on that rail, which is what keeps it *on* the rail
+rather than under it. The rail still wraps, because on a phone the pill and the run
+state have to, but a flex basis of zero means the codename never *causes* the wrap: it
+is laid out at nothing, takes whatever the line has left, and ellipsises inside that. At
+`auto` it asked for its full 533px, which at three cards across is more than the line
+has, so it dropped to a second row and read as a caption for the pill above it.
+
+**The dates under the number are gone**, because they were printed twice — once as a
+line of type there and once as the two ends of the run bar directly above, which does
+the same job better by also saying where today falls between them. The line is now drawn
+only when there is no bar to have said it: an undated patch, where `Dates unknown` is
+the honest thing to print and nothing else is printing it. That is 3.7's card today.
 
 **The card is two blocks and the boundary between them is the whole layout.**
 `.pcard-stage` is the artwork's own space: the picture fills it and the *only* thing
@@ -365,7 +376,7 @@ Three rules make that work, and all three invert what the stage does otherwise:
   that isn't 16:9 gets its own shape instead of an assumed one.
 - **The head band comes down onto the art**, rather than sitting above it. On a `.kv`
   card `.pcard-head` is `position:absolute`, so it costs the stage no height and the
-  painting starts at y=0 underneath it — version number, codename, dates and run bar
+  painting starts at y=0 underneath it — the status rail, version number and run bar
   all read over the picture. This is `.figs`' -78px bleed done from the other side, and
   it has to be done from that side: pulling a key visual *up* by a fixed amount crops
   the top off a composition whose subject is the whole frame. The band is also washed

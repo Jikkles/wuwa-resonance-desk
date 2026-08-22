@@ -906,6 +906,23 @@ button{font:inherit;color:inherit}
    the closing bracket alone on the last line. */
 .pcard-title::before{content:"[\00a0"}
 .pcard-title::after{content:"\00a0]"}
+/* In the top rail it is one line, not two, and it gives way before the two
+   things either side of it do: the pill and the run state are fixed facts a
+   few characters wide, and the codename is the only item on the rail that can
+   afford to lose its tail.
+
+   `flex:1 1 0` is what keeps it on the rail rather than under it. The rail
+   still wraps — on a phone the pill and the run state have to — but a flex
+   basis of zero means the codename never *causes* a wrap: it is laid out at
+   nothing, takes whatever the line has left, and ellipsises inside that. At
+   `auto` it asked for its full 533px, which at three cards across is more
+   than the line has, so it dropped to a second row and read as a caption for
+   the pill it sat under. */
+.pcard-top .pcard-title{
+  margin-top:0;flex:1 1 0;min-width:0;
+  display:block;-webkit-line-clamp:none;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
 .pcard-dates{
   font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
   color:var(--fg-2);margin-top:8px;
