@@ -76,12 +76,23 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-weapons.mjs
 
+      # English for the Chinese headlines, looked up rather than translated —
+      # Kuro publish most of these notices on their own English site. Last,
+      # because it reads the feed the first step wrote: a signal has to be in
+      # the window before there is any point resolving a line for it. Not
+      # allowed to fail the run, because a headline left in Chinese is the
+      # desk's ordinary state and the badge already says so.
+      - name: Translate signal headlines
+        if: always()
+        continue-on-error: true
+        run: node scripts/translate-signals.mjs
+
       - name: Commit if changed
         if: always()
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/feed.json data/art.json data/events.json data/items.json data/portraits.json data/weapons.json assets/items assets/portraits assets/weapons
+          git add data/feed.json data/art.json data/events.json data/items.json data/portraits.json data/translations.json data/weapons.json assets/items assets/portraits assets/weapons
           if git diff --staged --quiet; then
             echo "no change"
             exit 0

@@ -8,29 +8,44 @@ Wuthering Waves patch timeline, leak feed and resonator database. Static site, n
 index.html                     shell markup — rail, HUD, panels, drawer, palette
 assets/app.css                 all styling
 assets/app.js                  reads the JSON, renders every view
-data/versions.json             patch timeline + banner phases
-data/news.json                 curated leak/news entries
-data/events.json               event calendar (written by Actions)
-data/resonators.json           resonator index — identity, debut, reruns
-data/kits.json                 skills + Resonance Chains, loaded on demand
-data/weapons.json              weapon database — stats, passives (written by Actions)
-data/feed.json                 auto-fetched headlines (written by Actions)
-data/art.json                  resolved official key art (written by Actions)
-data/portraits.json            character art map (written by Actions)
-data/translations.json         English for non-English signal headlines
+data/versions.json             patch timeline + banner phases — hand-written
+data/news.json                 curated leak/news entries — hand-written
+data/resonators.json           resonator index — identity, debut, reruns (Actions)
+data/kits.json                 skills + Resonance Chains, loaded on demand (Actions)
+data/weapons.json              weapon database — stats, passives (Actions)
+data/events.json               event calendar (Actions)
+data/permanents.json           the modes that are always on (Actions)
+data/items.json                reward item names and icons (Actions)
+data/archive.json              every shipped patch, for the Past window (Actions)
+data/feed.json                 auto-fetched headlines (Actions)
+data/art.json                  resolved official key art (Actions)
+data/portraits.json            character art map (Actions)
+data/translations.json         English for non-English signal headlines (Actions + hand)
 assets/portraits/              cached busts and waist-up cut-outs
 assets/weapons/                cached weapon icons
+assets/events/                 cached event banners
+assets/items/                  cached reward icons
 scripts/fetch-feeds.mjs        the headline fetcher
 scripts/fetch-art.mjs          the key art resolver
 scripts/fetch-events.mjs       the event calendar builder
+scripts/fetch-permanents.mjs   the always-on modes builder
+scripts/fetch-items.mjs        the reward name and icon resolver
+scripts/fetch-archive.mjs      the shipped-patch archive builder
 scripts/find-event-art.mjs     finds event banners inside Kuro's patch infographics
 scripts/fetch-portraits.mjs    the character art resolver
 scripts/fetch-weapons.mjs      the weapon stat, passive and icon resolver
 scripts/fetch-kits.mjs         the roster, kit and banner-history builder
 scripts/confirm-dates.mjs      retires estimated phase dates once they're known
-.github/workflows/update-feeds.yml   cron, every 6h — feed, art, events, portraits, weapons
-.github/workflows/update-kits.yml    cron, daily — resonators.json + kits.json
+scripts/translate-signals.mjs  finds Kuro's own English for a Chinese headline
+.github/workflows/update-feeds.yml   cron, every 6h — feed, art, portraits, events,
+                                     reward icons, weapons, headline translations
+.github/workflows/update-kits.yml    cron, daily — resonators + kits, confirmed phase
+                                     dates, permanents, patch archive
 ```
+
+`find-event-art.mjs` is the one script not on a schedule, deliberately: it takes an
+article id and answers a question about one patch's infographic. Everything else runs
+itself.
 
 Six views:
 
@@ -75,7 +90,37 @@ replaced every 6 hours, so translations can't live in it — they live in
 The row then shows English with the original underneath and a `ZH→EN` badge; anything
 without an entry shows as published with a plain language badge. Game terms use the
 **English client's** names — 星声 is Astrite, 玄方地界 is Land of Xuanfang, 穗穗 is
-Suisui. Adding new ones is part of a desk update, same as tiering an entry.
+Suisui.
+
+**`translate-signals.mjs` fills most of this in, and it does not translate.** Hand-written
+lines could never keep up: the feed is a rolling window and an item drops off it in about
+a week, so a line typed by hand had a shelf life shorter than the gap between sessions. By
+the time the script was written, all 31 hand-written lines pointed at items that had
+already rolled off and all 29 Chinese signals on the desk were showing raw Chinese — the
+file was doing nothing at all.
+
+What saves it is that **Kuro publish most of these notices in English themselves**, on the
+same website `fetch-events.mjs` already reads. So the job is to *find* the English, not
+invent it. Two ways in:
+
+- **Kuro's own title.** The two systems share no id, but the notices are structural:
+  `档案公开` is a Profile Reveal and nothing else is, `[X]角色活动唤取` is a Featured
+  Resonator Convene. Match the marker, require the version number to agree where the
+  title carries one, allow up to five days of drift (the English post can lead the
+  Chinese one by three), and accept **only when exactly one English article fits**. One
+  candidate is a match; two is a coincidence.
+- **Built from the desk's own record.** A couple of headlines are pure formula with a
+  version number in them, and `versions.json` already knows that version's English
+  codename. Still nothing translated — the words come from the desk.
+
+Anything neither can answer is left in Chinese, which is the honest outcome and what the
+badge is for: a wrong English line reads as authoritative and carries nothing to tell you
+it isn't. On the 3.6 cycle that is 9 of 29 resolved, and the nine are the recurring
+official notices — convenes, version notes, profile reveals — so the same nine shapes
+land again every patch.
+
+Lines the script wrote are listed in `generated`. It will rewrite those and **never
+touch anything else**, so correcting one by hand makes the correction permanent.
 
 Character names get checked against Kuro's own EN article titles rather than community
 spelling — that's how `Yuno` was caught and corrected to **Iuno**.
@@ -1331,7 +1376,10 @@ node scripts/fetch-weapons.mjs
 ```
 
 **Still yours**, and no script will ever do it: `news.json` entries and their tiers,
-`outcome` on a leak that resolved, `translations.json`, and the `keyVisual*` crop values.
+`outcome` on a leak that resolved, and the `keyVisual*` crop values. `translations.json`
+used to be on that list; `translate-signals.mjs` now resolves the notices Kuro publish in
+English themselves and leaves the rest, so what is left there is a shorter version of the
+same job rather than the whole of it.
 
 ### Estimated dates retire themselves
 
