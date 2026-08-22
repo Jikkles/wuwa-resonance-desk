@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-18",
+  "updated": "2026-08-22",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -29,7 +29,8 @@
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhwxd6/365_beta_updates_via_seele/"
         }
-      ]
+      ],
+      "outcome": "confirmed"
     },
     {
       "id": "2026-08-07-36-performance",
@@ -98,7 +99,8 @@
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vjtsgv/the_adventures_of_suisui_and_suicune_weekly/"
         }
-      ]
+      ],
+      "outcome": "superseded"
     },
     {
       "id": "2026-08-09-37-suoming-element",
@@ -468,7 +470,8 @@
           "lang": "en",
           "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
         }
-      ]
+      ],
+      "outcome": "confirmed"
     },
     {
       "id": "2026-07-26-qingxiao-kit",
@@ -494,7 +497,8 @@
           "lang": "en",
           "url": "https://allthings.how/wuthering-waves-3-6-leaks-qingxiao-and-jingran-characters-and-weapons/"
         }
-      ]
+      ],
+      "outcome": "confirmed"
     },
     {
       "id": "2026-07-26-jingran-kit",
@@ -941,6 +945,105 @@
           "name": "r/WutheringWavesLeaks - Suoming facial expressions via SolonLeak",
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vrhepi/suoming_facial_expressions_via_solonleak/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-20-36-live",
+      "date": "2026-08-20",
+      "version": "3.6",
+      "category": "system",
+      "confidence": "official",
+      "title": "3.6 ships with a new domain and two permanent chapters",
+      "body": "Patch notes for \"Lamplight in Mirage, Sword's Resolve in Heart\" are up. Maintenance ran 2026-08-20 04:00-11:00 (UTC+8) for Astrite x300 and Crystal Solvent x2, with a further Astrite x300 for bug fixes; both stay claimable until the next version. Qingxiao ships as an Aero Sword with the combat roles Main Damage Dealer and Tune Strain Response, out of the Wind of Transcendence convene. Jingran is a Fusion Broadblade with Main Damage Dealer and Heavy Attack DMG, out of Where Santu Beckons in Phase 2. New weapons are Glint of Clouds (Sword) and Thousandfold Deliverance (Broadblade). The new location is Xuanyuan Domain, reached during Main Quest Chapter IV Act III \"Song of the Heart Sword\", which is followed by Chapter IV Segue \"The Nethermancer's Requiem\" - both permanent after the update. Calamity Effigy joins as the new Echo, and the new Tactical Hologram: Sparring challenge is Myriad Snare: Rustfire Chassis, whose Phantom Echo and the title \"Resonance! Best Combo\" both come out of the Resonance Sim Realm event rather than the challenge. Also in: accessories Cloudbloom and Snowpaw, motorbike liveries Cloud Voyage and Jadie the Mightiest Autopuppet, a 200-message mailbox holding 40 attachments per mail with a 100-mail Favorites shelf that survives expiry, and an Echo Recommendation rebuild with preview-and-apply comparison. Kuro notes the recommendation data itself is scheduled to be re-derived from recently active players on 2026-08-26, so the suggestions will move again that day.",
+      "tags": [
+        "3.6",
+        "patch notes",
+        "Qingxiao",
+        "Jingran",
+        "Xuanyuan Domain"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games - Patch Notes for Version 3.6",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-20-36-shipped-kit-names",
+      "date": "2026-08-20",
+      "version": "3.6",
+      "category": "kit",
+      "confidence": "official",
+      "title": "Qingxiao's numbers survived the beta, her names did not",
+      "body": "The live client keeps the mechanics the beta showed and renames most of the furniture around them. Her twin resources are Qin Heart and Sword Cadence, not \"Sword Rhythm\"; the state a full gauge buys is Ephemeral Transcendence, not \"Ethereal Immortal State\"; the Resonance Liberation is Billows Beneath Heaven, not \"Celestial Light, Cloudshadow, Azure Tides Arise\"; the debuff is Mindlock, the sword damage it feeds is Juque Perdition, and the Inherent Skill behind that is To Know, To Banish. The scaling came through untouched. Resonance Chain 6 amplifies Juque Perdition by 2% per Mindlock stack with the first seven stacks granting a further 5% each, and mirrors the same onto the Inherent Skill - which is exactly what the 3.6.5 beta pass described on 7 August under the older names. Sheathed and Drawn Stance, the four-stage Stringblade chain, Sword Flight and the Tune Strain Response role all shipped as leaked. One thing does not line up: the live English Resonance Chain 6 node is \"Cleanse This Tarnished Age, Till All Runs Clear\", where the 18 August leak gave her S6 title as \"Immortal's Mortal Dream\". That leak was translating the Chinese, and the two may not be the same field, so it keeps its tier for now.",
+      "tags": [
+        "3.6",
+        "Qingxiao",
+        "kit",
+        "localisation"
+      ],
+      "sources": [
+        {
+          "name": "Prydwen - Qingxiao, transcribing the live client",
+          "lang": "en",
+          "url": "https://www.prydwen.gg/wuthering-waves/characters/qingxiao"
+        },
+        {
+          "name": "Kuro Games - Patch Notes for Version 3.6",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-20-36-programming-language",
+      "date": "2026-08-20",
+      "version": "3.6",
+      "category": "qol",
+      "confidence": "official",
+      "title": "The frame rate work ships as a staged test, not a switch everyone gets",
+      "body": "The patch notes file the performance work under \"Performance Optimization (At Testing Stage)\": a change of programming language rolled out in stages across every platform as online testing, lifting overall performance and average frame rate on devices that meet the requirements. It is off on iOS devices with 4GB of RAM or less and on iPhone 14 units running iOS 16.0, 17.0, 17.1 or 17.2, with further exclusions listed. That makes the \"around 10 extra frames per second across every platform\" figure from the 7 August broadcast a ceiling on eligible hardware rather than a floor everyone gets on day one. The rest of the graphics block is unconditional by comparison: DLSS 4.5 with 5x and 6x frame generation on RTX 50 series under DX12 with driver 595.97 or newer, Vulkan extended to Snapdragon 8 Gen 2, Dimensity 9200 and 9200+ and XRing O1, Ray Tracing Megalights extended to AMD graphics, and Kuro's own frame generation extended to Snapdragon 8 Gen 5. Vulkan is now on by default on Snapdragon 8 Elite, 8 Elite 2, 8 Gen 5 and Dimensity 9500. Players began posting 3.5-against-3.6 comparisons on 21 August.",
+      "tags": [
+        "3.6",
+        "performance",
+        "DLSS",
+        "Vulkan"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games - Patch Notes for Version 3.6",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - 3.5 vs 3.6 performance comparison",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vuh36s/performance_comparison_between_35_vs_36_c/"
+        }
+      ]
+    },
+    {
+      "id": "2026-08-19-37-suoming-jp-voice",
+      "date": "2026-08-19",
+      "version": "3.7",
+      "category": "meta",
+      "confidence": "datamined",
+      "title": "Suoming's Japanese voice rips out, her voice actor does not",
+      "body": "SolonLeak posted a clip of Suoming's Japanese voice out of the 3.7 beta client, a day after the model wave. She refers to herself as warawa, an archaic feminine pronoun that reads as an older character wearing a young body - consistent with the small build the 18 August rip showed rather than at odds with it. The voice actor is not named anywhere in the leak, and the subreddit's own guesses split between Okubo Rumi and Ayana Taketatsu without settling, so the casting is open. Nothing in the clip touches her attribute, weapon or kit, and the Electro-versus-Havoc question flagged on 9 August is still unresolved.",
+      "tags": [
+        "3.7",
+        "Suoming",
+        "voice",
+        "beta"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Suoming JP VA via SolonLeak",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vsoiu5/suoming_jp_va_v%C3%ADa_solonleak/"
         }
       ]
     }
