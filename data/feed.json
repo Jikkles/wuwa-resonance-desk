@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-22T08:31:36.334Z",
+  "fetched": "2026-08-22T14:22:11.486Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 675,
-      "ms": 555
+      "ms": 1464
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 845
+      "ms": 732
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 205
+      "ms": 497
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 529
+      "ms": 535
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2631,
+      "ms": 2637,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 66,
-      "ms": 462
+      "fetched": 65,
+      "ms": 428
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,31 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 617
+      "ms": 167
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Resonator Highlights | Qingxiao",
+      "url": "https://www.youtube.com/shorts/X2TiBbnTxnU",
+      "date": "2026-08-22T10:00:04.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "共鸣者瞬间 | 清宵",
+      "url": "https://www.kurobbs.com/mc/post/1540312539186806784",
+      "date": "2026-08-22T10:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
     {
       "title": "《鸣潮》剧情动画 | 仙尘",
       "url": "https://www.kurobbs.com/mc/post/1540021530303434752",
@@ -948,16 +968,6 @@
       "hot": false
     },
     {
-      "title": "档案公开 | 天地弦心剑——清宵",
-      "url": "https://www.kurobbs.com/mc/post/1538855383172419584",
-      "date": "2026-08-17T03:05:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves Resonator Combat Showcase | Qingxiao",
       "url": "https://www.youtube.com/watch?v=op22gIZneCk",
       "date": "2026-08-17T03:00:08.000Z",
@@ -1346,16 +1356,6 @@
       "kind": "video",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "New 5-Star Weapon \"Firstlight's Herald\" Coming Soon",
-      "url": "https://www.youtube.com/shorts/wRwgdLVTnZc",
-      "date": "2026-07-26T10:30:01.000Z",
-      "source": "Wuthering Waves (YouTube)",
-      "sourceId": "youtube",
-      "kind": "video",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Profile Reveal | Host of Harmony - Suisui",
