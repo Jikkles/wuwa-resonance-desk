@@ -64,6 +64,17 @@ jobs:
       - name: Confirm estimated phase dates
         run: node scripts/confirm-dates.mjs
 
+      # Drafts the next version's record off Kuro's own announcement posts, the
+      # day they go up. Idle for most of the cycle and by design: it declines
+      # until an Update Content post exists to date the patch, and once the
+      # record has phases in it every later run is a no-op. Never overwrites a
+      # field that has a value, so it cannot undo the step above, and daily
+      # rather than 6-hourly because a patch is announced once.
+      - name: Draft the next version
+        if: always()
+        continue-on-error: true
+        run: node scripts/seed-version.mjs
+
       # The permanent event list, off the wiki's own Permanent Events category.
       # Here rather than in update-feeds.yml for the reason at the top of this
       # file: it is a Fandom job that answers a question which only changes

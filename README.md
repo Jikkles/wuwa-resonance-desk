@@ -36,11 +36,12 @@ scripts/fetch-portraits.mjs    the character art resolver
 scripts/fetch-weapons.mjs      the weapon stat, passive and icon resolver
 scripts/fetch-kits.mjs         the roster, kit and banner-history builder
 scripts/confirm-dates.mjs      retires estimated phase dates once they're known
+scripts/seed-version.mjs       drafts the next version off Kuro's announcement posts
 scripts/translate-signals.mjs  finds Kuro's own English for a Chinese headline
 .github/workflows/update-feeds.yml   cron, every 6h — feed, art, portraits, events,
                                      reward icons, weapons, headline translations
 .github/workflows/update-kits.yml    cron, daily — resonators + kits, confirmed phase
-                                     dates, permanents, patch archive
+                                     dates, next-version draft, permanents, archive
 ```
 
 `find-event-art.mjs` is the one script not on a schedule, deliberately: it takes an
@@ -1376,10 +1377,15 @@ node scripts/fetch-weapons.mjs
 ```
 
 **Still yours**, and no script will ever do it: `news.json` entries and their tiers,
-`outcome` on a leak that resolved, and the `keyVisual*` crop values. `translations.json`
-used to be on that list; `translate-signals.mjs` now resolves the notices Kuro publish in
-English themselves and leaves the rest, so what is left there is a shorter version of the
-same job rather than the whole of it.
+`outcome` on a leak that resolved, a version's `notes`, and the `keyVisual*` crop values.
+
+Two things used to be on that list and are not any more. `translations.json` is now
+mostly `translate-signals.mjs`, which resolves the notices Kuro publish in English
+themselves and leaves the rest. The bones of a new `versions.json` record — codename,
+release date, phases, banners, signatures — are now `seed-version.mjs`, which drafts them
+off Kuro's announcement posts the day they go up. What is left in both cases is the
+judgement: which leaks to promote, what a patch *means* in its `notes`, and where to crop
+a picture.
 
 ### Estimated dates retire themselves
 
@@ -1396,6 +1402,49 @@ why it runs immediately after it.
 The catch is that it is retrospective: a phase's dates are confirmed once that phase has
 started, not when Kuro announces them. It closes the estimate out mid-patch rather than
 ahead of time, which is worth having but is not a reason to skip reading the notice.
+
+### The next version drafts itself
+
+`versions.json` is the desk's spine and was the last big thing typed by hand — but most
+of what goes in it isn't judgement, it's Kuro announcing a patch, and they announce it
+the same way every cycle in three posts the article feed already carries:
+
+| Post | What it gives |
+|---|---|
+| `Update Content \| Version X.Y "Codename"` | the codename and the release date. Published for every version back to 3.1 — the only one of the three that never goes missing |
+| `Patch Notes for Version X.Y` | each debut's attribute, weapon class and combat roles. **Not** always published — 3.5 has none — so nothing depends on it |
+| the convene posts | the banner line-up: every 5-star, the convene it runs on, and the window |
+
+`seed-version.mjs` reads those and merges. Three things it learned the hard way:
+
+- **The post titled `[Version 3.6 Featured Resonator/Weapon Convene: Phase I]` is not a
+  roll-up.** It covers a single pair, and the rest of the phase goes up two days later
+  under titles naming the convene and not the version. So the script takes every
+  convene-shaped post in a window around the patch and lets the *durations inside* decide
+  what belongs — a post's own dates say which phase it is in better than its headline
+  does. Phases are then grouped by close date and numbered by which closes first, which
+  sidesteps Kuro's Roman numerals having been both `II` and `Ⅱ`.
+- **Blocks are segmented on the `During the event, 5-Star Resonator: X` line**, never on
+  the `[Convene Name] Featured … Convene` heading. A single-convene post has that name
+  only in its article title, and a multi-convene post line-anchors just the first of
+  them; segmenting on the heading silently dropped two of 3.5's five banners.
+- **Signatures pair by publication order.** Kuro post a Resonator's convene and the
+  weapon convene beside it together, so sorting each side by article id and zipping
+  reproduces the pairing. The zip stops at the shorter side: a phase whose weapon posts
+  haven't all gone up loses a `signature`, which the next run fills, rather than gaining
+  a wrong one, which nothing ever corrects.
+
+The merge rules are `confirm-dates.mjs`'s: **a field with a value is never touched**, an
+existing phase is left whole, and `notes` is never written at all. It also refuses to
+draft a version with no release date yet — every convene post is titled after its banner
+rather than its version, so without the patch window the filter matches all 118 posts
+Kuro have ever published. And a version absent from `versions.json` only counts if it is
+*ahead* of everything in there; without that the no-argument run walks backwards through
+the article history reinstating 3.4, then 3.3, one retired patch per night.
+
+Validated by reconstruction: stripped back to a bare `{"id": "3.5"}` it rebuilds that
+record field for field against the hand-written one — same banners, same order, same
+signatures — and 3.5 is the awkward case, with no patch notes post and two phases.
 
 Three rules keep it off your writing:
 
