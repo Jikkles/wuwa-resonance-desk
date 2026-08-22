@@ -1046,6 +1046,27 @@
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vsoiu5/suoming_jp_va_v%C3%ADa_solonleak/"
         }
       ]
+    },
+    {
+      "id": "2026-08-22-4x-names",
+      "date": "2026-08-22",
+      "version": null,
+      "category": "banner",
+      "confidence": "reported",
+      "title": "Three 4.x Resonator names surface, and nothing else about them",
+      "body": "Seele posted three names as playable units for 4.x: Anna, Lucille and Amethyst. That is the whole of it - no attributes, no weapon classes, no roles, and no patch attached to any of the three beyond the 4.x label. Nothing here says whether they arrive together, in which order, or in the same year. The names have not turned up in a datamine, and no beta client exists this far ahead for one to come out of, so this is a leaker relaying a list rather than file evidence. Roadmap claims more than two versions past live are the weakest category on the desk whatever the source, and this is four out. It is logged so the names can be checked against what actually ships, which is the only use a list like this has until something with files behind it lands. Sits alongside the reported 1.0 revamp for 4.0 and the reported move of the story arc to the Federation across 4.x.",
+      "tags": [
+        "4.x",
+        "roadmap",
+        "characters"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - 4.X character names via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vuxpw3/4x_character_names_via_seele/"
+        }
+      ]
     }
   ]
 }
