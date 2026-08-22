@@ -277,24 +277,13 @@
       <aside class="aside" id="aside"></aside>
     </div>
 
-    <!-- What the desk is, at the end of the page rather than in the rail. It
-         was a boxed card wedged between the navigation and the GitHub links,
-         where it competed with the filters for a column that is otherwise all
-         controls. It is orientation, not navigation — you read it once — so it
-         belongs at the foot of the page, directly above the disclaimer it is
-         really a preamble to. Centred, and no box: at the bottom of a page
-         there is nothing left for a border to separate it from. -->
-    <section class="deskabout">
-      <div class="label">About the desk</div>
-      <p>
-        Patch timeline, curated intel and automated signal capture for Wuthering
-        Waves — everything tagged by how much you should trust it.
-      </p>
-      <!-- data-act, not data-open: the one delegated click handler dispatches
-           on [data-act], so any other attribute is a button that does nothing. -->
-      <button class="linkout" data-act="open" data-id="methodology">Methodology <svg width="12" height="12"><use href="#i-arrow"/></svg></button>
-    </section>
-
+    <!-- No standing "About the desk" card here. It was orientation you read
+         once, sat at the foot of the page where nobody arriving needs it, and
+         it restated in three sentences what the header, the tier legend and
+         the disclaimer below already say between them. The Methodology drawer
+         it linked to is still one click away from the Intel view's footer,
+         which is where you want it — after reading something tiered, not
+         before. -->
     <footer class="foot">
       <svg class="foot-i" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><use href="#i-info"/></svg>
       <span>

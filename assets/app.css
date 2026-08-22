@@ -801,6 +801,57 @@ button{font:inherit;color:inherit}
   .figs.n2 .fig-cell:first-child img.fig{left:46%;object-position:center top}
   .figs.n2 .fig-cell:last-child img.fig{left:54%;object-position:center top}
 }
+/* The live patch's key visual, whole. Every other picture on this card is a
+   crop — a figure framed to its half, a poster zoomed past its own name plate —
+   because those are pictures of a character and the card wants the character.
+   This one is a picture of the patch: both debuts are already inside it and
+   the codename is set into the paint. Crop it and you keep a vertical strip of
+   the middle and lose the two people standing at the edges, which is the whole
+   reason to show it. So it runs the card's full width at its own aspect and
+   the stage gives up being a fixed band to let it.
+
+   That inversion is the rule below. The stage normally has a floor and a
+   ceiling and takes any slack in the row as extra picture; on a key-visual
+   card it is exactly as tall as the head band plus the painting, and slack
+   goes to the body instead — a card stretched to match its neighbour should
+   not answer by letterboxing its own art.
+
+   No height is declared for the image, so a key visual that is not 16:9 gets
+   its own shape rather than being squeezed into an assumed one.
+
+   The painting starts at the top of the card and the head band is lifted onto
+   it — the version number, codename, dates and run bar all read over the art
+   rather than off a dark strip above it. That is what the band was drawn for
+   in the first place: its gradient runs from near-solid at the top to nothing
+   at the bottom, which is a scrim looking for a picture to lie on. Below the
+   band nothing is set over the art at all, and the codename Kuro paints into
+   the lower left is part of what the card is showing. */
+/* Out of flow, so the band costs the stage no height and the picture can start
+   at y=0 underneath it. This is the same trick .figs plays with its -78px
+   bleed, done from the other side: there the picture reaches up past the band,
+   here the band comes down onto the picture. The bleed cannot work for a key
+   visual, because pulling the image up by a fixed amount crops the top off a
+   composition whose subject is the whole frame.
+
+   And the wash comes back. Against a cut-out the scrim only has to cover a
+   gradient; here it covers the top of a painting, and on a narrow card — where
+   the picture is short because its height is locked to the card's width — that
+   is most of a face. The text carries its own shadow, so the band can be
+   thinner than the one a figure gets and still be read. */
+.pcard.kv .pcard-head{
+  position:absolute;top:0;left:0;right:0;
+  background:linear-gradient(180deg,
+    rgba(11,10,15,.80) 0%,rgba(11,10,15,.70) 46%,rgba(11,10,15,.40) 78%,transparent 100%);
+}
+/* The stage stops growing, and that is the point. Normally it takes any slack
+   in the row as extra picture; a key visual cannot use extra height — it is
+   already as tall as its own width makes it — so the slack would come out as
+   dead space under the art. Let the body have it instead. With the band out of
+   flow the stage is now exactly the height of the painting. */
+.pcard.kv .pcard-stage{flex:0 0 auto;min-height:0;max-height:none}
+.pcard.kv .pcard-window{flex:0 0 auto}
+.pcard-kv{position:relative}
+.pcard-kv img{display:block;width:100%;height:auto}
 /* A hairline of shade where the picture meets the body, and nothing else. No
    type sits on the art below the head band any more, so there is nothing left
    for a scrim to rescue — this is purely so the crop lands on the body rather
@@ -3610,28 +3661,6 @@ img.astrite-pic{
 }
 
 /* ══ footer / dock ══════════════════════════════════════════════════ */
-/* The standing description of the desk, centred at the end of the page.
-   It keeps its plate. Below the header the ground opens up and the key visual
-   comes through, so the rule the whole page follows is that every line of type
-   sits on a surface of its own — three centred sentences floating on a blurred
-   patch banner is the one place that rule visibly breaks. So this is the same
-   card it was in the rail, only centred, capped at a readable measure, and
-   frosted like the panels it now sits under rather than beside. */
-.deskabout{
-  margin:34px auto 18px;width:min(560px,calc(100% - 48px));
-  padding:20px 26px 22px;text-align:center;
-  border:1px solid var(--line);border-radius:var(--r-sm);
-  /* --panel, not a colour of its own: the no-backdrop-filter fallback below
-     swaps that token for a solid, and this card needs to go with it. */
-  background:var(--panel);
-  backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
-  -webkit-backdrop-filter:blur(var(--panel-frost)) saturate(1.25);
-  display:flex;flex-direction:column;align-items:center;gap:9px;
-}
-.deskabout p{margin:0;font-size:.9375rem;line-height:1.65;color:var(--fg-2)}
-/* The link's own top margin is for a left-aligned card; here the flex gap
-   spaces it and the centring wants it tight to the sentence. */
-.deskabout .linkout{margin-top:2px}
 .foot{
   display:flex;align-items:center;gap:12px;padding:14px 24px;border-top:1px solid var(--line);
   font-family:var(--mono);font-size:.625rem;letter-spacing:.06em;color:var(--fg-3);line-height:1.7;

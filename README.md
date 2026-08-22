@@ -169,10 +169,27 @@ re-render can't leave a stale listener behind.
 
 ### The landing view fits a screen
 
-Timeline is Now / Next / Future across the top, the event band under it and the intel +
+Timeline is Now and Next across the top, the event band under it and the intel +
 signals duo at the foot. That is the whole page — roughly 1750px at 1080p, where it used
 to be about 4500. The band earns its height by being pictures: an event has a name, a kind
 and a state, and nothing else worth printing at that size.
+
+**Two slots, not three.** The row was Now / Next / Future, where Next held the announced
+patch and Future held the beta one — and those two are never both populated. The moment a
+patch ships, the one after it is a beta rumour and stays that way until Kuro's preview
+broadcast a month later, at which point it *becomes* the announced patch and the beta slot
+moves on to the version after. So the row spent every day of every cycle drawing one real
+card beside a placeholder reading "nothing past the current cycle has surfaced yet",
+printed next to a populated 3.7 card. Now the second slot is just "the next patch",
+whichever of the two it is, and `roleOf()` labels announced and beta alike as **Upcoming**
+— the same merge `bucketOf()` has always made for the nav chips, which listed 3.7 under
+Upcoming while its own card called it Future.
+
+How much of it to believe is a separate fact and stays in a separate place. An
+unannounced patch still prints **Highly speculative** in the status line under the pill,
+where an announced one prints "In 12 days" — it has a start date, so it never reaches
+that branch. Where a patch sits in the calendar and how sure we are about it are two
+different things, and the card has always had two places to say them.
 
 **The band is two rows of large tiles rather than one strip of small ones.** Each tile is a
 fifth of the band and the headline takes two of those fifths, so a patch of eight events
@@ -313,7 +330,7 @@ covering nothing. The rows used to be an 80%-opaque slab lying on the lower half
 picture, so a busy patch quietly ate its own art.
 
 The stage has both a floor and a ceiling (`min-height` / `max-height`) and that pairing
-is the point. Three cards in a row are all as tall as the busiest one and that slack has
+is the point. Cards in a row are all as tall as the busiest one and that slack has
 to go somewhere: without the floor, a patch running five banners letterboxes its own
 art; without the ceiling, a quiet patch beside a busy one gets a picture twice its
 neighbour's height. The stage also outgrows the body 6:1, so slack becomes picture
@@ -326,8 +343,51 @@ their faces otherwise sit behind the head band. The poster also gets zoomed past
 name plate and role bullets along its bottom edge. Retune that transform if you change
 the stage height — a crop that frames a torso at 450px frames a chin at 330px.
 
-The backdrop is the patch's **debut characters**, not a generic key visual. Most patches
-run two, and two split the frame down the middle.
+**A patch that has happened shows its key visual whole.** On the live card and the Past
+card, `patchCard()` drops the figures and puts Kuro's own 16:9 painting for that version
+across the stage — both debuts are already inside it and the codename is set into the
+paint, so it answers "what is this version" better than two cut-outs on a gradient can.
+The card takes a `.kv` class and the picture runs the full width at its own aspect ratio.
+
+**The Upcoming card keeps its figures**, and the split is tense-shaped rather than
+arbitrary. A patch nobody has played is a promise about who you can pull: the faces are
+the fact and the calendar is the open question, and its key visual either doesn't exist
+yet or is a poster for something that hasn't happened. A live or closed patch is a thing
+that exists, and the picture Kuro shipped with it is the truest single image of it —
+which is the same reason the archive rows below already stand on that art.
+
+Three rules make that work, and all three invert what the stage does otherwise:
+
+- **Contained, never cropped.** The painting is 3840×2160 in a box that is normally
+  taller than it is wide. `cover` would keep a vertical strip through the middle and
+  throw away the two characters standing at the left and right edges, which is most of
+  the reason to show it. No height is declared on the image either, so a key visual
+  that isn't 16:9 gets its own shape instead of an assumed one.
+- **The head band comes down onto the art**, rather than sitting above it. On a `.kv`
+  card `.pcard-head` is `position:absolute`, so it costs the stage no height and the
+  painting starts at y=0 underneath it — version number, codename, dates and run bar
+  all read over the picture. This is `.figs`' -78px bleed done from the other side, and
+  it has to be done from that side: pulling a key visual *up* by a fixed amount crops
+  the top off a composition whose subject is the whole frame. The band is also washed
+  lighter here (`.80` at the top against the default `.93`), because on a narrow card
+  its 188px covers most of a face; the text has its own shadow and survives it.
+- **The stage stops growing.** Normally `.pcard-stage` takes any slack in the row as
+  extra picture (`flex:6`); a key visual can't use extra height, so on a `.kv` card the
+  stage is `flex:0 0 auto` — exactly the height of the painting — and the slack goes to
+  the body instead. Letting it grow was tried and hands you a band of dead blur under
+  the art, which is a smear rather than a picture.
+
+There is no background layer under any of this. A blurred wash of the same key visual
+was carried here for a while, on the layer a single debut's poster uses; once the band
+moved onto the art the picture covered the whole stage and the wash was never visible.
+
+The one cost, and it is real: the narrower the card, the shorter the painting (its
+height is locked to the card's width) while the band stays 188px, so on the three-across
+**All** row the band reaches further down the art than it does on **Current**, where
+the card has the full width.
+
+Everywhere else the backdrop is the patch's **debut characters**, not a generic key
+visual. Most patches run two, and two split the frame down the middle.
 
 **Only a cut-out can be halved.** A reveal poster is a whole composition — framing,
 backdrop, the character placed inside it — and cutting one down the middle crops
@@ -353,12 +413,14 @@ feet so the figure sits *in* the light rather than in front of it. This is the c
 only colour and it does real work: Denia's half reads Fusion-orange before you've read
 a word of the tile below.
 
-Two backdrops were tried and dropped. Standing the pair on one of their *own* posters
-put Suisui in front of a washed-out Suisui. The **patch key visual** is worse: it is a
-marketing image with the version name set across it in type, so behind two cut-outs you
-read "LAMPLIGHT IN MIRAGE" through the gap between them. A single debut with a poster
-and no partner still gets that poster full-bleed (`cardArt()`); everything else is
-figures on colour (`cardFigures()`).
+Two backdrops were tried and dropped *behind figures*. Standing the pair on one of their
+*own* posters put Suisui in front of a washed-out Suisui. The **patch key visual** is
+worse in that position: it is a marketing image with the version name set across it in
+type, so behind two cut-outs you read "LAMPLIGHT IN MIRAGE" through the gap between
+them. That objection is about the key visual as a *backdrop* and does not carry over to
+the live card above, where the painting is the picture and its type is part of what is
+being shown. A single debut with a poster and no partner still gets that poster
+full-bleed (`cardArt()`); everything else is figures on colour (`cardFigures()`).
 
 The figures sit at `z-index:1` inside `.pcard-art`, which puts them **above** that
 element's scrim but still below `.pcard-head`. The scrim exists to push the key visual
@@ -449,7 +511,7 @@ A patch with no banners yet — 3.7 — fills its card from the resonator databa
 listing anything flagged for that version plus the version notes. Otherwise the card is
 a large empty box, and empty space is the thing this layout exists to avoid.
 
-On a phone the three cards become a snap-scrolling carousel — stacked, they were a
+On a phone the cards become a snap-scrolling carousel — stacked, they were a
 thousand pixels before the first headline. The debut/rerun split collapses to one
 column there, and the four grid children get **explicit `grid-row`s**: source order is
 head-l, head-r, cell-l, cell-r, so left to itself a single column stacks both headings

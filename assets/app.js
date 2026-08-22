@@ -1175,8 +1175,29 @@ function patchCard(v, role){
   const phases = allPhases(v);
   const banners = phases.flatMap(p => p.banners);
   const days = v.start ? daysTo(v.start) : null;
-  const art = cardArt(v);
-  const figs = cardFigures(v);
+  /* A patch that has happened shows its own key visual instead of its debuts.
+     Kuro paints one 16:9 picture per version with the whole cast of it inside
+     and the codename set into the art, and for a patch you have played — or
+     are playing — that is a better answer to "what is this version" than two
+     cut-outs on a gradient. It is the image the game wore, and the faces are
+     in it anyway.
+
+     The Upcoming card keeps its figures, and the split is tense-shaped rather
+     than arbitrary: a patch nobody has played is a promise about who you can
+     pull, so the faces are the fact and the calendar is the question. A live
+     or closed one is a thing that exists, and the picture Kuro shipped with it
+     is the truest single image of it. The archive rows below already stand on
+     the same art for the same reason.
+
+     Falls back to the figures when there is no key visual on file, so nothing
+     here depends on art.json having resolved. */
+  const kv = (role === "live" || role === "past") && v.keyVisual?.url ? v.keyVisual : null;
+  /* No separate background layer: the painting fills the stage on its own, and
+     the head band is lifted onto it rather than sitting above it — see
+     .pcard.kv .pcard-head. A blurred wash was carried here for a while and was
+     covered by the picture in every case that mattered. */
+  const art = kv ? "" : cardArt(v);
+  const figs = kv ? [] : cardFigures(v);
 
   const state = role === "live"
     ? `<span class="pill live">Current</span>`
@@ -1196,9 +1217,15 @@ function patchCard(v, role){
   }else if(days != null){
     status = `<div class="pcard-state">${days > 0 ? `<span class="t-datamined">In ${plural(days, "day")}</span>`
       : `<span class="t-datamined">Launching now</span>`}</div>`;
-  }else if(role === "future"){
+  }else{
     /* No dates, no art, no banners — say why the card is nearly empty rather
-       than leaving a hole and letting it read as something failing to load. */
+       than leaving a hole and letting it read as something failing to load.
+       This is also the whole of the Upcoming pill's hedge: the patch after the
+       live one is usually a beta with nothing confirmed about it, and it now
+       sits in the Upcoming slot like an announced patch would. What separates
+       them is this line, which an announced patch never reaches — it has a
+       start date, so it is caught by the branch above and says "In 12 days"
+       instead. */
     status = `<div class="pcard-state"><span style="color:var(--fg-3)">Highly speculative</span></div>`;
   }
 
@@ -1340,12 +1367,12 @@ function patchCard(v, role){
      lives in the body underneath, on solid ground, where it covers nothing.
      Before this the rows were an 80%-opaque slab sitting on the lower half of
      the picture, so a busy patch quietly ate its own art. */
-  return `<article class="pcard is-${role}" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
+  return `<article class="pcard is-${role}${kv ? " kv" : ""}" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}"
            aria-label="Version ${esc(v.id)} detail">
     <div class="pcard-stage">
       <!-- Rings only when there is neither a poster nor a figure — a patch we
            know nothing about yet. They are a held signal, not a backdrop. -->
-      ${art || (figs.length ? "" : `<div class="rings"></div>`)}
+      ${art || (kv || figs.length ? "" : `<div class="rings"></div>`)}
       <!-- Status and the run bar ride the top rail; the version number and its
            codename sit side by side underneath. Stacked the other way round,
            the number was buried under four lines of metadata. -->
@@ -1364,7 +1391,12 @@ function patchCard(v, role){
            here rather than behind the whole stage is what keeps a head out of
            the head band's shadow: this box *is* the space below the band, so a
            figure framed to it can't be framed into the dark. -->
-      <div class="pcard-window">${figs.length
+      <div class="pcard-window">${kv
+        ? `<div class="pcard-kv">
+             <img src="${esc(cdnWidth(kv.url, 1800))}"
+                  alt="${esc(kv.title || `Version ${v.id} key visual`)}" decoding="async">
+           </div>`
+        : figs.length
         ? `<div class="figs n${figs.length}">${figs.map(f =>
             `<div class="fig-cell">
                <img class="fig-wash" src="${esc(f.src)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
@@ -1451,8 +1483,13 @@ function streamVideo(v){
    have to agree or the filter looks broken. */
 const bucketOf = v => statusOf(v) === "live" ? "current"
   : (statusOf(v) === "announced" || statusOf(v) === "beta") ? "upcoming" : "past";
+/* Announced and beta are both "next" — the same merge the row above makes, and
+   the same one bucketOf has always made. A patch the Upcoming chip lists ought
+   to say Upcoming on its own pill; it said Future, which read as a third
+   category the filter did not have. What is still unknown about it is said in
+   the status line under the pill, not by demoting where it sits. */
 const roleOf = v => statusOf(v) === "live" ? "live"
-  : statusOf(v) === "announced" ? "next"
+  : (statusOf(v) === "announced" || statusOf(v) === "beta") ? "next"
   /* A shipped patch is not a future one. Nothing rendered a card for a closed
      patch until the Past window started doing it, so "anything that is not live
      or announced" quietly meant "beta" — and 3.5, six weeks over, came up
@@ -1468,21 +1505,28 @@ function renderTimeline(){
   const list = [...versions()].filter(inWindow)
     .sort((a, b) => rank(a) - rank(b) || parseFloat(b.id) - parseFloat(a.id));
 
-  /* Now / Next / Future as three cards across, narrowing to whichever the
-     chips asked for. The filter has to change the thing directly underneath
-     it — it used to sit on this panel and quietly re-filter a lane list two
-     thousand pixels further down, which reads as a button that does nothing. */
-  /* The Next slot goes empty for most of a patch's life: the moment one ships,
-     the patch after it is a beta rumour rather than an announcement, and stays
-     that way until Kuro's preview broadcast a month later. Its placeholder
-     says "nothing past the current cycle has surfaced yet", which is the right
-     thing to say when the row really is bare and a plain falsehood printed
-     beside a populated 3.7 card — the exact shape of every patch day. So the
-     slot is dropped when there is a future card to carry the message instead,
-     and the row closes to two. */
-  const trio = [[live, "live"], [next, "next"], [future, "future"]];
+  /* Now and Next, two cards across, narrowing to whichever the chips asked
+     for. The filter has to change the thing directly underneath it — it used
+     to sit on this panel and quietly re-filter a lane list two thousand pixels
+     further down, which reads as a button that does nothing. */
+  /* One upcoming slot, not two. This used to be Now / Next / Future, where
+     Next held the announced patch and Future held the beta one — but those two
+     are never both populated in practice. The moment a patch ships, the one
+     after it is a beta rumour and stays that way until Kuro's preview
+     broadcast a month later, at which point it becomes the announced patch and
+     the beta slot moves on to the version after. So the row spent every day of
+     every cycle drawing one real card and one placeholder reading "nothing
+     past the current cycle has surfaced yet" — printed directly beside a
+     populated 3.7 card, which is a plain falsehood.
+
+     Now the second slot is simply "the next patch", whichever of the two it
+     is, and it is labelled Upcoming either way. How much of it to believe is
+     not the pill's job: an unannounced patch still says Highly speculative
+     under it, and its tiles still carry their own confidence. Where it sits in
+     the calendar and how sure we are about it are two different facts, and
+     the card has always had two places to put them. */
   const cards = S.when === "all"
-    ? trio.filter(([v], i) => v || !(i === 1 && future))
+    ? [[live, "live"], [next || future, "next"]]
     : list.map(v => [v, roleOf(v)]);
 
   const body = cards.length
