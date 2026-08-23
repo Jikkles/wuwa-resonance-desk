@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-22T20:23:18.268Z",
+  "fetched": "2026-08-23T03:03:41.353Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 675,
-      "ms": 855
+      "ms": 742
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 1040
+      "ms": 1108
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 447
+      "ms": 290
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 585
+      "ms": 375
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2578,
+      "ms": 2445,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 64,
-      "ms": 588
+      "fetched": 63,
+      "ms": 443
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 330
+      "ms": 1011
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "《鸣潮》过场动画 | 此时彼刻，众生一剑",
+      "url": "https://www.kurobbs.com/mc/post/1540022799548620800",
+      "date": "2026-08-23T03:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
     {
       "title": "Resonator Highlights | Qingxiao",
       "url": "https://www.youtube.com/shorts/X2TiBbnTxnU",
@@ -908,16 +918,6 @@
       "hot": true
     },
     {
-      "title": "《鸣潮》共鸣者「清宵」PV | 修行",
-      "url": "https://www.kurobbs.com/mc/post/1538883932359565312",
-      "date": "2026-08-18T03:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "“万念证心，一剑清平。”",
       "url": "https://www.kurobbs.com/mc/post/1538978125048258560",
       "date": "2026-08-18T02:00:00.000Z",
@@ -941,7 +941,7 @@
       "title": "Wuthering Waves codes (August 2026) and how to redeem",
       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wZkFzeGowc0poaHpKVmRVRFMxd19POUQyNzltR00zakduR1kyOEVocUQta3IyWjQyRURPYlZheFlYcElOUDV0dEFrRUlDMzgwWnhUeFhpWUNqZw?oc=5",
       "date": "2026-08-17T13:32:07.000Z",
-      "source": "pcgamesn.com",
+      "source": "PCGamesN",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1004,16 +1004,6 @@
       "source": "Kuro Games (official EN)",
       "sourceId": "kuro-en",
       "kind": "official",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Is Wuthering Waves cross-platform? Crossplay for PC, Android and iOS",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOZHJRWXBZakJIM1ZkTWE5ZjhfckROYk51LV9jRkZqNGdjXzhJcTZiNjdrWWJ3aHRuOVBIRl9sVzMtNnFXcWN1N1Nnb2VvT1F5Z1E3R0haWnNUaEQ5REJMS2JzTzhBb3V6czBsSmd1S1Vva0wzOFFsSWZ1dXFxZjYzOFl3LTgwUTJJZGtlbEhPdHFwWHVLVE9iVGtrWkRQRFk?oc=5",
-      "date": "2026-08-15T07:00:00.000Z",
-      "source": "Dexerto",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": false
     },
@@ -1202,6 +1192,16 @@
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOUXYtLVhVVF9tTkdwdUtKRDNIRGhUUEhXU0gwSDlJWWNyU0RkUkZjbm91VUtEUEZ5RkxQdTFuRUZPM0g5OVVnV2ZaLVk5U25mNnJtX2VUaC1sdkt5NzBsTnVpOVJYdEw3S0tneUxXMUdHSUs2ZkpFU1E0VmNIMjhkakNKeU5fSWJQbjV2bVFrd1RFNnBhWkxlckNuZjNZVV9fTVVXWDM0c1h5VnBEN1EzOVpqZmZVbWdzTjN3Q2pNbE1xeHpHUkR1TQ?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
       "source": "Gematsu",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "WuWa 3.6 banners schedule (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOcDVqOWtDVnIzQ1dkZHNuMEtLZnhoZGc5cGdGZW1uTFdzdnBqZElUQmg2MFlMT09IYUsyTjd5ek5fTGhFZG9zTkw3SFlZWUJ3MENVa19TS2RqY041SXlTLWJmX1p3SGc1Vk5wcnl5XzRiRHB5S1Znb2tQRTRpX09nWVhZNA?oc=5",
+      "date": "2026-08-07T07:00:00.000Z",
+      "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
