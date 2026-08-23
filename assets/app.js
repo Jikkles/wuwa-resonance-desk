@@ -44,10 +44,15 @@ const SOURCE_ICON = {
 };
 const KIND_ICON = {official:"i-kuro", video:"i-youtube", community:"i-comm", press:"i-press"};
 
-/* Attribute drives each card's accent so a banner row reads at a glance. */
+/* Attribute drives each card's accent so a banner row reads at a glance. These
+   six are Kuro's own — sampled off the client's attribute icons, the same
+   artwork scripts/fetch-element-icons.mjs traces the glyphs from — rather than
+   picked to sit on the desk's dark ground. A muted approximation of Aero reads
+   as some other green next to the game, and the element is the one fact on a
+   Resonator a reader already knows the colour of. */
 const ATTR_COLOUR = {
-  aero:"#7FD4B0", glacio:"#78BFE8", fusion:"#E8734A",
-  electro:"#B98BE0", spectro:"#E8C24A", havoc:"#D4557A"
+  aero:"#55FFB5", glacio:"#41AEFB", fusion:"#F0744E",
+  electro:"#B46BFF", spectro:"#F8E56C", havoc:"#E649A6"
 };
 
 /* The three rarity colours, the same three the Weapons page heads its tables
@@ -55,7 +60,13 @@ const ATTR_COLOUR = {
    a weapon record with no element has to fall back to one inline — two thirds
    of the database is nobody's signature, and a record accented in the site
    accent says nothing about what you opened. Kept beside ATTR_COLOUR so the
-   two lists that colour the desk are in one place. */
+   two lists that colour the desk are in one place.
+
+   They used to be described as borrowed from the electro and glacio accents,
+   which stopped being true when those took the client's own hexes. They are
+   the gacha ramp on their own terms now — gold, purple, blue, the three the
+   game prints a pull in — and deliberately quieter than an element, because a
+   rarity heads a whole table where an element accents one record. */
 const RAR_COLOUR = {5:"#E3AC55", 4:"#B98BE0", 3:"#78BFE8"};
 
 /* Nav order, top to bottom and left to right, in one place: the rail, the tab

@@ -38,6 +38,7 @@ scripts/fetch-kits.mjs         the roster, kit and banner-history builder
 scripts/confirm-dates.mjs      retires estimated phase dates once they're known
 scripts/seed-version.mjs       drafts the next version off Kuro's announcement posts
 scripts/translate-signals.mjs  finds Kuro's own English for a Chinese headline
+scripts/fetch-element-icons.mjs traces the six attribute glyphs off Kuro's badges
 .github/workflows/update-feeds.yml   cron, every 6h — feed, art, portraits, events,
                                      reward icons, weapons, headline translations
 .github/workflows/update-kits.yml    cron, daily — resonators + kits, confirmed phase
@@ -1097,15 +1098,31 @@ The rail is skipped entirely for anyone with no signature, and the art takes tha
 instead — ten of the sixty are in that state, and an empty box standing beside the name is
 worse than the room it was holding.
 
-### Elements and kit slots are drawn here
+### The elements are Kuro's, the kit slots are ours
 
-`index.html` carries a glyph for each of the six elements and each of the six kit slots.
-Both sets are the desk's own marks, not the client's: these render at 13px beside a name
-and at 56px in the rotation band, and the game's own attribute icons are painted 128px
-badges with a bevel on them. Each glyph inherits `currentColor`, which the record sets to
-`--attr`, so a Glacio record's marks are Glacio-coloured without a second table of hex to
-keep in step.
+`index.html` carries a glyph for each of the six elements and each of the six kit slots,
+and only one of those sets is the desk's own work.
 
+**Kit slots are drawn here.** They are marks for a flow diagram and a card header — the
+client has no single icon for "Resonance Liberation" that means anything at 13px, and
+lifting one would mean six files per Resonator.
+
+**Elements are traced off the client.** They used to be drawn here too, and every one of
+them was wrong. An element is the one icon on a record a reader can check against the game
+in about a second: Aero is a plume, not a wind swirl, and it is `#55FFB5`, not a muted
+mint that reads as some other green. Six near-misses look like six mistakes about the
+characters rather than six liberties taken with an icon set.
+
+So `scripts/fetch-element-icons.mjs` pulls Kuro's own attribute badges off the Wuthering
+Waves Wiki, samples the flat cut-out for the colour `ATTR_COLOUR` should carry, lifts the
+white glyph out of the coloured disc, traces its outline and refits it to the 16×16 box
+the sprite is drawn in. The six keep their sizes relative to one another — the snowflake
+really does span wider than the Havoc spiral — because that difference is drawn on
+purpose. It is not on a schedule: there have been six elements since launch and their art
+has not moved.
+
+Either way the glyph inherits `currentColor`, which the record sets to `--attr`, so a
+Glacio record's marks are Glacio-coloured without a second table of hex to keep in step.
 The same mark appears at three sizes — the element beside the name, in the At a glance
 tile, and in the sprite the grid card already uses — so they read as one thing.
 

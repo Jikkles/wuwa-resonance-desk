@@ -2621,10 +2621,10 @@ img.astrite-pic{
    the desk means nothing on a weapon, and a weapon's rarity is the first thing
    anyone sorts on, so --rar takes the accent slot per panel and the cards feed
    it straight into --attr — which is what .rec's hover, name colour and art
-   gradient are already wired to. All three values are already in the palette:
-   5★ is the desk's amber, 4★ and 3★ are borrowed from the electro and glacio
-   attribute colours, so no new hue enters the system to say something the
-   system already says. */
+   gradient are already wired to. Gold, purple, blue — the ramp the game prints
+   a pull in, and deliberately quieter than the attribute colours, which are
+   Kuro's own vivid six: a rarity heads a whole table of weapons where an
+   element accents one record, and at that size the vivid version shouts. */
 .wpanel{--rar:var(--accent)}
 .wpanel.r-5{--rar:#E3AC55}
 .wpanel.r-4{--rar:#B98BE0}
