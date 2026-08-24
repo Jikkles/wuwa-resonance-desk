@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-23T20:24:01.062Z",
+  "fetched": "2026-08-24T03:03:51.848Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 675,
-      "ms": 829
+      "ms": 872
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 960
+      "ms": 865
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 132
+      "ms": 191
     },
     {
       "id": "reddit-leaks",
@@ -41,17 +41,18 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 426
+      "ms": 578
     },
     {
       "id": "reddit-main",
       "name": "r/WutheringWaves",
       "kind": "community",
       "lang": "en",
-      "status": "ok",
-      "count": 25,
-      "fetched": 25,
-      "ms": 1219
+      "status": "skipped",
+      "count": 0,
+      "fetched": 0,
+      "ms": 2636,
+      "error": "HTTP 429 Too Many Requests"
     },
     {
       "id": "google-news",
@@ -61,7 +62,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 66,
-      "ms": 454
+      "ms": 437
     },
     {
       "id": "mmoculture",
@@ -71,267 +72,17 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 162
+      "ms": 71
     }
   ],
   "errors": [],
   "items": [
-    {
-      "title": "issue with sword flight quest",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwguxt/issue_with_sword_flight_quest/",
-      "date": "2026-08-23T19:42:44.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Now we’re raising some very important questions",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwgoj3/now_were_raising_some_very_important_questions/",
-      "date": "2026-08-23T19:35:49.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Need More Uniqueness in Character Stories",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwgffc/need_more_uniqueness_in_character_stories/",
-      "date": "2026-08-23T19:25:55.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "There's facing Denia to get her own materials... and then there's the pressing need for her materials for others",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwfmxm/theres_facing_denia_to_get_her_own_materials_and/",
-      "date": "2026-08-23T18:55:56.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "I feel like the Devs dont care about QoL changes for Material/Echo specific things",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwflaa/i_feel_like_the_devs_dont_care_about_qol_changes/",
-      "date": "2026-08-23T18:54:13.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "I want my Yuan Fortress",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwfazv/i_want_my_yuan_fortress/",
-      "date": "2026-08-23T18:43:22.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "S0R0 Fusion 🔥 Burst no Chisa/Suisui/Lupa - ToA#39 2-4",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwf0in/s0r0_fusion_burst_no_chisasuisuilupa_toa39_24/",
-      "date": "2026-08-23T18:32:23.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "I wanna give her a hug",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwehyu/i_wanna_give_her_a_hug/",
-      "date": "2026-08-23T18:13:32.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Those are some beautiful Jade eggs.",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwdkz4/those_are_some_beautiful_jade_eggs/",
-      "date": "2026-08-23T17:39:26.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "my drawing for denia ✨",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwcwwt/my_drawing_for_denia/",
-      "date": "2026-08-23T17:14:07.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Sword ride challenges",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwcqa7/sword_ride_challenges/",
-      "date": "2026-08-23T17:07:00.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Qingxiao Fanart drawn by me",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwcm3n/qingxiao_fanart_drawn_by_me/",
-      "date": "2026-08-23T17:02:33.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Qingxiao",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwbypa/qingxiao/",
-      "date": "2026-08-23T16:37:27.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "New Wuwa ad makes you go on a date with Qingxiao",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwb92i/new_wuwa_ad_makes_you_go_on_a_date_with_qingxiao/",
-      "date": "2026-08-23T16:10:34.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Your paralysis demon at 3 am",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwb6qs/your_paralysis_demon_at_3_am/",
-      "date": "2026-08-23T16:08:01.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Happy birthday to me 🎉🎂",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwb1gu/happy_birthday_to_me/",
-      "date": "2026-08-23T16:02:25.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Chibi Suoming! @shigureszku",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwar0a/chibi_suoming_shigureszku/",
-      "date": "2026-08-23T15:51:27.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "What makes you pull for a character except Performance (Meta)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwaq7r/what_makes_you_pull_for_a_character_except/",
-      "date": "2026-08-23T15:50:33.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Anime inspiration in Wuwa from Kagurabachi",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwah9l/anime_inspiration_in_wuwa_from_kagurabachi/",
-      "date": "2026-08-23T15:40:49.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
     {
       "title": "My wallet is in financial Denia-L - Weekly Questions & Discussions Megathread",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vwadnu/my_wallet_is_in_financial_denial_weekly_questions/",
       "date": "2026-08-23T15:36:51.000Z",
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "A little help with teams",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwadm7/a_little_help_with_teams/",
-      "date": "2026-08-23T15:36:48.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Team Recommendation for Aemeath",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwab4u/team_recommendation_for_aemeath/",
-      "date": "2026-08-23T15:34:09.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Bro is locked in...",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vwa9rk/bro_is_locked_in/",
-      "date": "2026-08-23T15:32:39.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Was I supposed to get this far out?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vw9upc/was_i_supposed_to_get_this_far_out/",
-      "date": "2026-08-23T15:16:25.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Qingxiao farming aura",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vw9lua/qingxiao_farming_aura/",
-      "date": "2026-08-23T15:06:39.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Guy i think , rover is the heavenly dao",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1vw9220/guy_i_think_rover_is_the_heavenly_dao/",
-      "date": "2026-08-23T14:45:11.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
       "kind": "community",
       "lang": "en",
       "hot": false
@@ -1287,9 +1038,9 @@
       "hot": false
     },
     {
-      "title": "Wuthering Waves: Release date, platforms, & everything we know",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaGRnbDlmWUR6Vlp3Yl92UkRHYnpBb0hKanVWMHBJdU80ZE9FRjJTcThvNklfZDhUSjBFTzBiNHRRNzdWOVVtTjlzTWNBSy1oc213UWU2UHFiTWJqM3JJNkQyZmxGWWU4SDJTT0FKSldtMGxLQUlKbkp5bkdXRjRfdVExMTBQMDFXTFh6Sk5BcXV0QQ?oc=5",
-      "date": "2026-08-15T07:00:00.000Z",
+      "title": "Best Xiangli Yao Wuthering Waves build: Weapons, Echoes & team comp",
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOb19BNi1wTlFIREdlbUN2TXZ1cWlyU1o4VFJnbWJXaFJmZFA2djJhSmZjQlZBY1ZwbGNwZzhNdEt2SHFDMjZNbWRBWVQ1T1Z5Nk1Fam0zMTJBOE4tVW1kTDFqeVNWZnpzV2cxbXhHYVdCamRjcVVHWm5KRjFDcnoya01R?oc=5",
+      "date": "2026-08-14T07:00:00.000Z",
       "source": "Dexerto",
       "sourceId": "google-news",
       "kind": "press",
@@ -1487,8 +1238,8 @@
       "hot": true
     },
     {
-      "title": "WuWa 3.6 release date and time (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNd3JvUHUzY2NEWlJxeEhWQzBla0lRTk5ITVpFOVROdnpMajhqeW9YcEJsdko4QVI3eXl1aWh3V2ZTbmg0azg2MENGSm9PRUFwSlF6dkI4aWE4N3ZORC0weU94U19kTkdRbThYejAxRzFSX3JWQk1ORVJmdmt4RFlZTlFRdmY?oc=5",
+      "title": "WuWa 3.6 livestream summary: Release date, banners, codes, and everything new (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQMERaNk80d1Iya040TmVtN3lycEVXYm5hWmlrbFpHOHFoRFVlTzB2Tk5kYmo2UVJiekNTT2ZUcDF3MFQwbkxtQktqWnNYMGctbGxxTFZzSmhhalZVMENGT1czcU9ZN3NrQ3FRZ1YzYzNDMU4ybDliM1RKSG40LTJHQ2lQQVpRRU9TQ1VNRmdFemFnU3d6OEozeUZ4T2tYblZNLWFEQ0swQXdHdDRFTW9vWUUta0FMSG50eFIxSEdn?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
