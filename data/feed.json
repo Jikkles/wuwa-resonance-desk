@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-24T03:03:51.848Z",
+  "fetched": "2026-08-24T08:49:39.185Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 675,
-      "ms": 872
+      "ms": 432
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 865
+      "ms": 1090
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 191
+      "ms": 87
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 578
+      "ms": 597
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2636,
+      "ms": 2565,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 66,
-      "ms": 437
+      "fetched": 65,
+      "ms": 574
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 71
+      "ms": 1113
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "“徒儿，看剑。”",
+      "url": "https://www.kurobbs.com/mc/post/1541387698362597376",
+      "date": "2026-08-24T04:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
     {
       "title": "My wallet is in financial Denia-L - Weekly Questions & Discussions Megathread",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vwadnu/my_wallet_is_in_financial_denial_weekly_questions/",
@@ -798,16 +808,6 @@
       "hot": true
     },
     {
-      "title": "档案回顾 | 泡影视阈——达妮娅",
-      "url": "https://www.kurobbs.com/mc/post/1538941738676527104",
-      "date": "2026-08-18T10:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "v3.6 Event Calendar",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vriywy/v36_event_calendar/",
       "date": "2026-08-18T08:11:38.000Z",
@@ -1198,16 +1198,6 @@
       "hot": false
     },
     {
-      "title": "Wuthering Waves Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\" launches August 20",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQVzR0cFRXd0dZUGVOR0JYQWZzb1Z5eWFKaUd4ZU1RVk5zUHdmeHZzRGtDOU9SN1hDZTVsdjZ4eDZrZ0RDVUlLM2MxQXhsbXBCSGVLcWVpN09SMUtoejl5WkxTVnJxXzhuWmt2SW1MdGQ2akYteWg5MFQ5UzZrWTlSeUxCd3pOTG9ZYTVldWtQS29YOHpoLTVBM1FJVGNONGlMRlRR?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "RPG Site",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Wuthering Waves version 3.6 update ‘Lamplight in Mirage, Sword’s Resolve in Heart’ launches August 20",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOUXYtLVhVVF9tTkdwdUtKRDNIRGhUUEhXU0gwSDlJWWNyU0RkUkZjbm91VUtEUEZ5RkxQdTFuRUZPM0g5OVVnV2ZaLVk5U25mNnJtX2VUaC1sdkt5NzBsTnVpOVJYdEw3S0tneUxXMUdHSUs2ZkpFU1E0VmNIMjhkakNKeU5fSWJQbjV2bVFrd1RFNnBhWkxlckNuZjNZVV9fTVVXWDM0c1h5VnBEN1EzOVpqZmZVbWdzTjN3Q2pNbE1xeHpHUkR1TQ?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
@@ -1240,6 +1230,16 @@
     {
       "title": "WuWa 3.6 livestream summary: Release date, banners, codes, and everything new (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQMERaNk80d1Iya040TmVtN3lycEVXYm5hWmlrbFpHOHFoRFVlTzB2Tk5kYmo2UVJiekNTT2ZUcDF3MFQwbkxtQktqWnNYMGctbGxxTFZzSmhhalZVMENGT1czcU9ZN3NrQ3FRZ1YzYzNDMU4ybDliM1RKSG40LTJHQ2lQQVpRRU9TQ1VNRmdFemFnU3d6OEozeUZ4T2tYblZNLWFEQ0swQXdHdDRFTW9vWUUta0FMSG50eFIxSEdn?oc=5",
+      "date": "2026-08-07T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "WuWa 3.6 release date and time (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNd3JvUHUzY2NEWlJxeEhWQzBla0lRTk5ITVpFOVROdnpMajhqeW9YcEJsdko4QVI3eXl1aWh3V2ZTbmg0azg2MENGSm9PRUFwSlF6dkI4aWE4N3ZORC0weU94U19kTkdRbThYejAxRzFSX3JWQk1ORVJmdmt4RFlZTlFRdmY?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
