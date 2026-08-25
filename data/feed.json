@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-25T02:59:36.531Z",
+  "fetched": "2026-08-25T08:42:55.081Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 675,
-      "ms": 1422
+      "ms": 571
     },
     {
       "id": "kurobbs",
@@ -21,18 +21,17 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 873
+      "ms": 1226
     },
     {
       "id": "youtube",
       "name": "Wuthering Waves (YouTube)",
       "kind": "video",
       "lang": "en",
-      "status": "failed",
-      "count": 0,
-      "fetched": 0,
-      "ms": 2700,
-      "error": "HTTP 404 Not Found"
+      "status": "ok",
+      "count": 15,
+      "fetched": 15,
+      "ms": 183
     },
     {
       "id": "reddit-leaks",
@@ -42,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 561
+      "ms": 447
     },
     {
       "id": "reddit-main",
@@ -52,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2618,
+      "ms": 2444,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -63,7 +62,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 62,
-      "ms": 413
+      "ms": 460
     },
     {
       "id": "mmoculture",
@@ -73,13 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 139
+      "ms": 1159
     }
   ],
-  "errors": [
-    "youtube: HTTP 404 Not Found"
-  ],
+  "errors": [],
   "items": [
+    {
+      "title": "3.7 | yet another sus Hsin info via Seele",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vxormh/37_yet_another_sus_hsin_info_via_seele/",
+      "date": "2026-08-25T03:40:58.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "Wuthering Waves brings more characters, new main quests, and new events with latest update",
       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOdExKUVFySzZHQjBlUVNCMi1RRWY5WUtTaXh4RHZSZDdBUHFxLXBYQXJ4TnQwQzBrTEZseGJUS1RTeDB2LTB4TW9hVWNWZ0xzWW1SV3RUSUhQTkRkQzRza0xqckx3b3RPcDBZajFVOWNGYl90ZDl4ZmdvQjZDUEl6cEp6QmlpeV85ZE12aVNzU2p1Uk9aOXFyb2VpZERPOXZFUjFseTdrb0lJMFVqWVZpZF83VU1ub3N5VlFlbTBQMUhHdw?oc=5",
@@ -159,6 +166,16 @@
       "kind": "official",
       "lang": "zh",
       "hot": false
+    },
+    {
+      "title": "Resonator Highlights | Qingxiao",
+      "url": "https://www.youtube.com/shorts/X2TiBbnTxnU",
+      "date": "2026-08-22T10:00:04.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "共鸣者瞬间 | 清宵",
@@ -248,6 +265,16 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Insider Channel: Special Program | Crystal Clear",
+      "url": "https://www.youtube.com/watch?v=om6QZVMX9-M",
+      "date": "2026-08-21T09:00:06.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
       "hot": false
     },
     {
@@ -498,6 +525,16 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves EP3.6 — Qingxiao - \"Outside the Mountain\"",
+      "url": "https://www.youtube.com/watch?v=qaVli_4qiVs",
+      "date": "2026-08-20T02:30:04.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
       "hot": false
     },
     {
@@ -922,11 +959,11 @@
     },
     {
       "title": "Wuthering Waves | Resonator Showcase | Qingxiao — CULTIVATION",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vrdanl/wuthering_waves_resonator_showcase_qingxiao/",
-      "date": "2026-08-18T03:05:53.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
+      "url": "https://www.youtube.com/watch?v=mT86JXY6oEw",
+      "date": "2026-08-18T03:00:18.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": true
     },
@@ -941,12 +978,42 @@
       "hot": false
     },
     {
+      "title": "New 5-Star Weapon \"Glint of Clouds\" Coming Soon",
+      "url": "https://www.youtube.com/shorts/eK1ARxPfGZY",
+      "date": "2026-08-17T10:30:30.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "Profile Reveal | Heart Sword — Qingxiao",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5294",
       "date": "2026-08-17T03:05:00.000Z",
       "source": "Kuro Games (official EN)",
       "sourceId": "kuro-en",
       "kind": "official",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves Resonator Combat Showcase | Qingxiao",
+      "url": "https://www.youtube.com/watch?v=op22gIZneCk",
+      "date": "2026-08-17T03:00:08.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Post-Lament Anthropocene: Stars Intertwined | Qingxiao",
+      "url": "https://www.youtube.com/shorts/nbAIWYJmOPY",
+      "date": "2026-08-16T03:00:31.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -1071,10 +1138,30 @@
       "hot": true
     },
     {
+      "title": "Wuthering Waves Version 3.6 Preview Special Broadcast",
+      "url": "https://www.youtube.com/watch?v=URrFKyAoPw4",
+      "date": "2026-08-07T11:56:21.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves Version 3.6 Official Trailer | Lamplight in Mirage, Sword's Resolve in Heart",
+      "url": "https://www.youtube.com/watch?v=ksCqVD10Cqc",
+      "date": "2026-08-07T11:55:34.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
       "title": "Wuthering Waves codes and how to redeem them (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQLVA1Ul9DcVhDcUZ5cDVlQ05ZdmdWZjJkRnhqU2F5ZVNHbUxXWGFGQU1NTlBzSno4S1FCMHhoa1hyRmFtQS1GMlpxZ1dXRG9VV2VzUFdrTWtFV0Y5VlUyM2RpUGNKQV9uNGVFNHE1ckNRVEhQMkd4aG9GV21fZ3dOMnNMZw?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
-      "source": "Eurogamer.net",
+      "source": "Eurogamer",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1161,6 +1248,36 @@
       "hot": true
     },
     {
+      "title": "Insider Channel: Special Program | Unconventional Art",
+      "url": "https://www.youtube.com/shorts/sbhzI7OBO80",
+      "date": "2026-08-05T03:00:16.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Resonator Highlights | Suisui",
+      "url": "https://www.youtube.com/shorts/VdITILRddyc",
+      "date": "2026-08-04T10:00:12.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Midnight Podcast | Suisui",
+      "url": "https://www.youtube.com/watch?v=lJ4h0nO80EE",
+      "date": "2026-08-03T05:00:17.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "Resonator Review | Guiding Starlance — Aemeath",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5224",
       "date": "2026-07-29T10:00:00.000Z",
@@ -1169,6 +1286,26 @@
       "kind": "official",
       "lang": "en",
       "hot": true
+    },
+    {
+      "title": "⋆The Four Seasons of Suisui⋆",
+      "url": "https://www.youtube.com/shorts/kdig-KE1RfQ",
+      "date": "2026-07-29T06:00:06.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves EP3.5 — Suisui - \"When Spring Returns\"",
+      "url": "https://www.youtube.com/watch?v=wtk8NOzyX9s",
+      "date": "2026-07-29T04:00:36.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
     },
     {
       "title": "[Firstlight's Herald] Featured Weapon Convene",
@@ -1207,6 +1344,16 @@
       "source": "Kuro Games (official EN)",
       "sourceId": "kuro-en",
       "kind": "official",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves | Resonator Showcase | Suisui — CHONGMING",
+      "url": "https://www.youtube.com/watch?v=c6njTc7ySiU",
+      "date": "2026-07-28T03:00:18.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": true
     },
