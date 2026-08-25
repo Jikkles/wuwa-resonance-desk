@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-25T08:42:55.081Z",
+  "fetched": "2026-08-25T14:46:53.184Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 675,
-      "ms": 571
+      "ms": 1495
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 1226
+      "ms": 990
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 183
+      "ms": 165
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 447
+      "ms": 436
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2444,
+      "ms": 2489,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 62,
-      "ms": 460
+      "fetched": 61,
+      "ms": 457
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 1159
+      "ms": 750
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "先约电台深夜频道 | 清宵",
+      "url": "https://www.kurobbs.com/mc/post/1540405891439824896",
+      "date": "2026-08-25T13:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
     {
       "title": "3.7 | yet another sus Hsin info via Seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vxormh/37_yet_another_sus_hsin_info_via_seele/",
@@ -948,16 +958,6 @@
       "hot": false
     },
     {
-      "title": "悠悠光影铺 | 「清宵PV」壁纸",
-      "url": "https://www.kurobbs.com/mc/post/1538943975687286784",
-      "date": "2026-08-18T03:30:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves | Resonator Showcase | Qingxiao — CULTIVATION",
       "url": "https://www.youtube.com/watch?v=mT86JXY6oEw",
       "date": "2026-08-18T03:00:18.000Z",
@@ -1090,7 +1090,7 @@
     {
       "title": "Wuthering Waves – Version 3.6 Trailer & Overview",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQaXZYUDk4cFQwa1BkUnhxaG9vaS1OVGFxeGdBUEdpYUh3emlBekxrbmg0dEl0Mk1MWkllRWFtSmJlbFRCQnkxRUhPZmJhaEI4UDNuc0pOeDlHSDBkUmIxR0xKREtUTV84WTNLamhXdDdRWmJTaDgwc0c4TTVUZUNfMGpNZ2pIeUtJRFdfdUZR?oc=5",
-      "date": "2026-08-10T13:00:04.000Z",
+      "date": "2026-08-10T07:00:00.000Z",
       "source": "GameSpace.com",
       "sourceId": "google-news",
       "kind": "press",
