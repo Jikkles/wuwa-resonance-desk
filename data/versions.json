@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-08-20",
+  "updated": "2026-08-26",
   "current": "3.5",
   "versions": [
     {
@@ -167,7 +167,7 @@
       "title": "",
       "status": "beta",
       "phases": [],
-      "notes": "Hsin flagged as an Electro Rectifier Sentinel, now also reported to run two switchable stances and coordinated attack damage. Suoming is the second new Resonator, listed as an Electro Sword on 9 Aug after the same list called her Havoc a week earlier - still contested. The beta has now opened: a model-rip wave (render, 360, walk/stand/umbrella animations, facial expressions) hit r/WutheringWavesLeaks on 17-18 Aug carrying the subreddit's genuine-beta-capture disclaimer, well ahead of the community's own 4 Sep guess below - so treat that whole projection as already stale. The rip confirms she's a small Verina/Roccia/Encore-height build but shows no attribute mark or weapon, so it doesn't settle the Havoc-vs-Electro question. Community arithmetic on past patch lengths (now superseded on the beta date, kept for the rest) projects drip around 28-29 Aug, broadcast 18 Sep, Phase 1 2 Oct and Phase 2 24 Oct; none of that is from Kuro."
+      "notes": "Drip marketing for Hsin landed on 26 August - Kuro's own card, five stars, no attribute or weapon mark on it - which retires the community's 28-29 August drip projection along with the 4 Sep beta guess the model-rip wave already broke. Hsin is flagged as an Electro Rectifier Sentinel running two switchable stances, now named as Electro Flare and a new Tune Break: Harmony system, plus coordinated attack damage; none of that is on the card. Suoming is the second new Resonator, listed as an Electro Sword on 9 Aug after the same list called her Havoc a week earlier - still contested, and she has no drip card yet. The beta has now opened: a model-rip wave (render, 360, walk/stand/umbrella animations, facial expressions) hit r/WutheringWavesLeaks on 17-18 Aug carrying the subreddit's genuine-beta-capture disclaimer. The rip confirms she's a small Verina/Roccia/Encore-height build but shows no attribute mark or weapon, so it doesn't settle the Havoc-vs-Electro question. Community arithmetic on past patch lengths projects broadcast 18 Sep, Phase 1 2 Oct and Phase 2 24 Oct; none of that is from Kuro."
     }
   ]
 }

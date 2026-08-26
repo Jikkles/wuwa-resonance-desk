@@ -3244,7 +3244,7 @@
       "status": "teased",
       "region": "Mengzhou",
       "epithet": "Clear moonlight drapes the lonely keep",
-      "summary": "Teased via a Mandelbrot fractal image, read as pointing at a recursive, self-scaling kit. Appears in Kuro's second-half 3.x cast reveal poster set, filed to Mengzhou. The leaker Sleep since described two switchable modes - one named Electro Flare, one built on Tune Strain with a field component - plus coordinated attack damage, which would make her the first coordinated attacker able to hold the on-field slot. No file data yet; 3.7 beta has not opened.",
+      "summary": "Kuro's drip marketing card landed on 26 August, ahead of the community's own 28-29 August projection: Hsin as a 5-star, seated below the Moon Fox spirit over a burning Mengzhou, captioned \"To share in the world's joy, and keep the lanterns... burning bright.\" The card settles her rarity and her design and nothing else - Kuro's drip cards carry no attribute or weapon mark, and the EN news site has published no Profile Reveal yet, so Electro Rectifier is still the leaks' claim rather than Kuro's. The kit reports have firmed up around two switchable modes - Electro Flare, and a new Tune Break: Harmony system - plus coordinated attack damage, which would make her the first coordinated attacker able to hold the on-field slot. A sentinel form surfaced the same night. No file data yet; 3.7 beta has not opened.",
       "kit": [],
       "materials": {
         "ascension": [],
@@ -3256,21 +3256,28 @@
       },
       "sources": [
         {
-          "name": "MMO Culture",
+          "name": "r/WutheringWavesLeaks - Hsin drip marketing",
           "lang": "en",
-          "url": "https://mmoculture.com/2026/08/wuthering-waves-3-6-leaks/"
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vykz4x/hsin_drip_marketing/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Hsin sentinel form via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vylkgm/hsin_sentinel_form_via_seele/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Electro Flare and Tune Break: Harmony via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vxormh/37_yet_another_sus_hsin_info_via_seele/"
         },
         {
           "name": "Prydwen - upcoming roster",
           "lang": "en",
           "url": "https://www.prydwen.gg/wuthering-waves/characters/hsin"
-        },
-        {
-          "name": "r/WutheringWavesLeaks - Hsin info via Sleep",
-          "lang": "en",
-          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vikye9/37_info_about_hsin_via_sleep/"
         }
-      ]
+      ],
+      "image": "assets/reveals/hsin-card.jpg",
+      "imageCredit": "Drip marketing card © Kuro Games"
     },
     {
       "name": "Suoming",

@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-22",
+  "updated": "2026-08-26",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -8,6 +8,39 @@
     "rumour": "One unverified source, or sources disagreeing. Assume it's wrong until something better shows up."
   },
   "entries": [
+    {
+      "id": "2026-08-26-37-hsin-drip",
+      "date": "2026-08-26",
+      "version": "3.7",
+      "category": "identity",
+      "confidence": "reported",
+      "title": "Hsin's drip marketing card is out — 5-star, Moon Fox, and no attribute mark",
+      "body": "The 3.7 drip card and its animation reached r/WutheringWavesLeaks in the early hours of 26 August, two or three days ahead of the community's projected window. It is Kuro's own marketing template - logo band, name plate, five stars, the illustration-purposes-only line and the Kuro copyright - showing Hsin seated in red and white below a vast pale Moon Fox spirit, over a Mengzhou skyline shot through with fire, and captioned \"To share in the world's joy, and keep the lanterns... burning bright.\" What it settles is her rarity and her design. What it does not settle is the rest: a drip card carries no attribute or weapon mark, and Kuro's EN news site had published no Profile Reveal for her at the time of writing, so this sits at reported rather than official and the Electro Rectifier line is still the leaks' claim. Two related posts went up the same night - a sentinel form via Seele, and a kit note naming Electro Flare alongside a new Tune Break: Harmony system.",
+      "tags": [
+        "3.7",
+        "Hsin",
+        "identity",
+        "drip"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Hsin drip marketing",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vykz4x/hsin_drip_marketing/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Hsin drip marketing animation",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vyl2ys/hsin_drip_marketing_animation/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Hsin sentinel form via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vylkgm/hsin_sentinel_form_via_seele/"
+        }
+      ],
+      "outcome": ""
+    },
     {
       "id": "2026-08-07-36-beta-365",
       "date": "2026-08-07",
