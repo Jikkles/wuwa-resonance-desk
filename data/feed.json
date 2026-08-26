@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-26T14:45:10.824Z",
+  "fetched": "2026-08-26T22:48:54.948Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 675,
-      "ms": 1308
+      "ms": 814
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 908
+      "ms": 1034
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 81
+      "ms": 208
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 447
+      "ms": 434
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2491,
+      "ms": 2522,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 64,
-      "ms": 439
+      "fetched": 63,
+      "ms": 554
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,31 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 973
+      "ms": 1147
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Trails in the Sky 2nd Chapter, Wuthering Waves, and Zenless Zone Zero Physical Editions Headline PM Studios’ New PANAX Store Focused on Bringing Games to Physical Media",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1ETDQwVFlmUXNKUWxkYkZIX1BSdVFpM3E3d2VrOHRZYWN5aU9MRjdDbWU0SW1BSTl4SHRXU0xITnBTdXBaRkxsSE0tU2tYV3JUSHRXZUI0Qm9xdC10RTVhS0V4ai1LWFZVTlhsV19zcG5EQQ?oc=5",
+      "date": "2026-08-26T18:24:40.000Z",
+      "source": "Noisy Pixel",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves Qingxiao build, weapon, and teams",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBQYzRwQjF2dThuOUN6RHJsR1I1REdGeVZjYmpCcFVfa2JaejBDXzVmend2TG5vbFhvZXBSQ084eWVaZWt1ZTdZZkNob1FBUTYxZzlIaFpnME9MS2syS1E1N0swZU4?oc=5",
+      "date": "2026-08-26T16:24:09.000Z",
+      "source": "Pocket Tactics",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "Midnight Podcast | Qingxiao",
       "url": "https://www.youtube.com/watch?v=eUz1KwRDbKg",
@@ -165,6 +185,16 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "All Wuthering Waves characters listed",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBhZ3l4eGlpNWYzU214blBuY0Y2ZV9zVUNXYkNqODNfcEhoRTdZRExLdkktYmRWLXNZSTNhMWNjTlQzQjJyWnVFcDE3UUNWajhZNld4N2VOVGlONFVZc19IOWZJa05qTVE?oc=5",
+      "date": "2026-08-25T15:10:31.000Z",
+      "source": "Pocket Tactics",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
       "hot": false
     },
     {
@@ -334,16 +364,6 @@
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "All Wuthering Waves characters listed",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBhZ3l4eGlpNWYzU214blBuY0Y2ZV9zVUNXYkNqODNfcEhoRTdZRExLdkktYmRWLXNZSTNhMWNjTlQzQjJyWnVFcDE3UUNWajhZNld4N2VOVGlONFVZc19IOWZJa05qTVE?oc=5",
-      "date": "2026-08-21T15:05:39.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": false
     },
@@ -748,16 +768,6 @@
       "hot": true
     },
     {
-      "title": "Wuthering Waves codes August 2026",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5ZbGRQMnBzdE9xamlDMzNMTVd2ZFN3WVlLcmZjWkVKUWVSbmVoTWxIdC1zd28wanhfcWpGYktTWE0xMlpUekdDajhUOER5TGxsR1hmZS1fak0yN2wyMER4NQ?oc=5",
-      "date": "2026-08-19T16:07:53.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "3.6 | A very Pretty YOUNG Lady via Seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vsnf3f/36_a_very_pretty_young_lady_via_seele/",
       "date": "2026-08-19T14:05:38.000Z",
@@ -958,22 +968,22 @@
       "hot": true
     },
     {
+      "title": "When is Wuthering Waves 3.6 Release Date For Qingxiao Banner? Find Out Here.",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPbEJHbElUWjkxVk5KUU5qZ0NDcklPaHRGakRiQjYzdXZrN1F4NVRRWEFza29EMkl2OHJGenhHMHZrYXJyd0YwUHFkZWN2WXZtbnJMMTZ0bDFqd2hQVHYzM3lVX0xsRlQxU1ZrOVRKSEpQM3JPRlpjcXppa183a21SX3B3YUgyZVJRV0FyYTBlbmRRYVB4dGd3bTd5eVlYdw?oc=5",
+      "date": "2026-08-18T07:33:31.000Z",
+      "source": "GameRant",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
       "title": "3.7 | 3D graph Entity via GamedataLeaks",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vri7jh/37_3d_graph_entity_via_gamedataleaks/",
       "date": "2026-08-18T07:25:49.000Z",
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "When is Wuthering Waves 3.6 Release Date For Qingxiao Banner? Find Out Here.",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPbEJHbElUWjkxVk5KUU5qZ0NDcklPaHRGakRiQjYzdXZrN1F4NVRRWEFza29EMkl2OHJGenhHMHZrYXJyd0YwUHFkZWN2WXZtbnJMMTZ0bDFqd2hQVHYzM3lVX0xsRlQxU1ZrOVRKSEpQM3JPRlpjcXppa183a21SX3B3YUgyZVJRV0FyYTBlbmRRYVB4dGd3bTd5eVlYdw?oc=5",
-      "date": "2026-08-18T07:00:00.000Z",
-      "source": "GameRant",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": true
     },
@@ -1222,16 +1232,6 @@
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQLVA1Ul9DcVhDcUZ5cDVlQ05ZdmdWZjJkRnhqU2F5ZVNHbUxXWGFGQU1NTlBzSno4S1FCMHhoa1hyRmFtQS1GMlpxZ1dXRG9VV2VzUFdrTWtFV0Y5VlUyM2RpUGNKQV9uNGVFNHE1ckNRVEhQMkd4aG9GV21fZ3dOMnNMZw?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
       "source": "Eurogamer.net",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves codes for August 2026",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBOeWRua3AyNW1vUkszZDVZdk56Tkt4QTc4TFdpSTdEYWE2dGo3YjNfQmVTNkJyczFabzZrWmk4cF9oNkMzWWVrWDQwMkV3cnlTbl9SdHVJWFRlN3ZDcWhR?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "VG247",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
