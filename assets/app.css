@@ -927,6 +927,24 @@ button{font:inherit;color:inherit}
   font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
   color:var(--fg-2);margin-top:8px;
 }
+/* The number and its metadata stop sitting side by side once there is not
+   enough card for both. .pcard-main is a 57px numeral with everything else in
+   a min-width:0 column beside it, which is the right layout at 300px and a
+   trap at 190px — the future slot's own width, and where the desk sits for
+   most of a cycle with one announced patch and one speculative one. There the
+   numeral took 123px of 151 and handed the column the remaining ten, so "Dates
+   unknown" came out as a vertical stack of single letters.
+
+   Under 230px the two stack instead and the numeral steps down to something a
+   narrow card can carry. Asked of the card rather than the window, because
+   this is a question about how much room this card got — the same card is
+   190px wide on a 1440px desktop and 340px wide on a phone. */
+@container (max-width:230px){
+  .pcard-main{display:block}
+  .pcard-num{font-size:2.75rem;line-height:1}
+  .pcard-idtext{margin-top:4px}
+  .pcard-title{margin-top:6px}
+}
 .pcard-state{
   display:flex;align-items:center;gap:9px;margin-top:10px;
   font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2);
@@ -2368,11 +2386,56 @@ img.astrite-pic{
   /* min-width:0 first: the band's floor is a desktop number, and left standing
      it beats the max-width below — min-width always does — and puts one tile a
      row on a 400px phone with half the width empty beside it. */
-  .ev{flex:1 1 44%;min-width:0;height:186px;max-width:calc(50% - .3125rem)}
+  .ev{flex:1 1 44%;min-width:0;height:210px;max-width:calc(50% - .3125rem)}
   /* The headline tile drops to the same size as the rest here. Two up on a
      phone means an odd-width tile leaves half a row empty behind it, and the
      band is a queue now — every hole in it reads as a missing event. */
-  .ev.head{flex:1 1 44%;min-width:0;height:186px;max-width:calc(50% - .3125rem)}
+  .ev.head{flex:1 1 44%;min-width:0;height:210px;max-width:calc(50% - .3125rem)}
+
+  /* ── three lines of name, and the 24px of tile that pays for them ──
+     Kuro names an event and then names the instance after a colon, and on a
+     tile this narrow two lines stop at the colon every time: "Wuthering
+     Exploration:…" and "Second Coming of Solaris:…" are a row of tiles all
+     called the same thing, when the half that got cut is the half that says
+     which one it is.
+
+     The caption bar's two lines were what made the fixed 186px work — the
+     picture took whatever the caption left — so a third line has to be bought
+     rather than taken. 24px on the tile is the price: the longest caption now
+     runs to 110px and the picture keeps ~100px under it, which is what the
+     chips across its top and the reward badge at its foot need to sit clear of
+     one another. Below that the badge climbs into the countdown chip, which is
+     what a three-line name did before the height moved. */
+  .ev-cap{padding:9px 11px 11px}
+  .ev-cap h3{font-size:.875rem;-webkit-line-clamp:3;line-height:1.3}
+  .ev-kind{letter-spacing:.11em}
+  /* The countdown and the version face each other across the top of the
+     picture, and on a 140px tile the long countdowns do not leave the version
+     room to finish: "Starts today" and "3.6" want 168px between them, so the
+     version was being pushed past the tile's edge and losing its right border.
+
+     Wrapping rather than shrinking either of them. Both are 10px mono already
+     and the next step down is not a size you read across a grid — and both
+     carry something the band above cannot: the countdown is the only thing on
+     the tile you can act on, and in the permanent band the version is the
+     patch the event arrived in, which that band's header does not say. So the
+     version takes a second line, right-aligned under the countdown, and only
+     on the tiles that actually need it — "Running" and "3.6" still share the
+     one line they fit on. */
+  .ev-top{flex-wrap:wrap}
+  /* And the badge comes down with it. At 48px tall on a 156px tile the reward
+     was half the height of the picture it sits on — that size was set for a
+     300px desktop tile, where it reads as a corner mark rather than as the
+     subject of the photograph.
+
+     !important because astriteMark() writes the stone's size as an inline
+     style, and it does that to outrank `.ev-pic img` — which fills its box for
+     the event banner behind this badge and would otherwise blow the stone up
+     to the width of the tile. That is a fight with one stylesheet rule, not a
+     final say on the size, and this is the only place that needs to reopen
+     it. */
+  .ev-astrite:not(.inline){gap:5px;padding:3px 9px 3px 5px;border-radius:8px;font-size:.75rem}
+  .ev-astrite:not(.inline) img,.ev-astrite:not(.inline) svg{width:24px!important;height:24px!important}
   .ev-cap h3,.ev.head .ev-cap h3{font-size:.8125rem}
   .ev.head .ev-cap p{display:none}
 }
@@ -3770,6 +3833,14 @@ img.astrite-pic{
   /* .wide is a multi-column flow, not a grid — the rule above doesn't reach it. */
   .skills.grid.wide{column-count:1}
   .app{grid-template-columns:minmax(0,1fr)}
+  /* Dynamic, not large. 100vh on a phone means the viewport with the browser's
+     own chrome pretended away, so a page sized to it is always a URL bar
+     taller than the screen it is on — which on the desk showed up as the foot
+     of the drawer and the last row of a list sitting under the address bar
+     until you scrolled the chrome away. dvh is the height that is actually
+     visible right now. Left as a second declaration so a browser without it
+     keeps the vh above rather than losing the rule. */
+  .app{min-height:100dvh}
   .rail{
     position:static;height:auto;flex-direction:row;align-items:center;gap:14px;
     padding:12px 16px;border-right:0;border-bottom:1px solid var(--line);
@@ -3780,6 +3851,27 @@ img.astrite-pic{
   .rail-group,.rail-links,.rail-foot{display:none}
   /* The header lives inside .body now and takes its gutters from it. */
   .body,.foot{padding-left:16px;padding-right:16px}
+
+  /* ── the filter bar, as one row that scrolls ──────────────────────
+     The rail is a strip carrying only the brand at this width, so .fbar is the
+     desk's whole filter surface on a phone — and it was wrapping. Four chips
+     on the timeline took two rows; Signals' six took three, 130px of a 844px
+     screen spent on a control, above a feed you had not reached yet.
+
+     One row that scrolls instead. It is the same bargain the dock and the
+     patch carousel already strike a few rules down, so it is not a new idea on
+     the page, and the mask below is what tells you the row moves: the strip
+     fades out at whichever edge still has chips behind it rather than ending
+     on a hard cut that reads as the last one. */
+  .fbar{flex-wrap:nowrap;gap:0;padding:8px 0}
+  .fbar .chips{
+    flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    padding:0 16px;gap:7px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 16px),transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 16px),transparent);
+  }
+  .fbar .chips::-webkit-scrollbar{display:none}
+  .fbar .chips button{flex:none}
   /* Swipe rather than stack. Three patch cards down a phone is a thousand
      pixels of scrolling before the first headline; side by side they cost one
      card's height, and the sliver of the next one showing at the edge is what
@@ -3792,6 +3884,71 @@ img.astrite-pic{
   .hero::-webkit-scrollbar{display:none}
   .hero .pcard{flex:0 0 88%;scroll-snap-align:center}
   .pcard{min-height:21.25rem}
+  /* The codename takes the line under the rail rather than the gap left on it.
+     On three cards across a desktop the rail has room for all three of pill,
+     codename and run state, and the codename is rightly the one that gives way
+     — see .pcard-top .pcard-title. On one card across a phone the rail has
+     153px to hand it, and "Lamplight in Mirage, Sword's Resolve in Heart"
+     arrives as "[ LAMPLIGHT I… ]", which is the card's own headline reduced to
+     a stub. Below this width it wraps under the pill and the run state instead
+     and gets its two lines back. */
+  .pcard-top{row-gap:9px}
+  /* Three lines, not two. Kuro's codenames run to about fifty characters and
+     the longest of them lands three words into a third line — clamping at two
+     buys back nineteen pixels and spends the end of the patch's name on them,
+     which is the wrong way round on the card the name belongs to. */
+  .pcard-top .pcard-title{
+    order:3;flex:1 0 100%;
+    white-space:normal;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+  }
+  /* And the band comes back into flow to hold it. On a key-visual card the
+     band is lifted onto the painting and the stage is exactly the painting's
+     height — which works while the band is four short rows, and stops working
+     the moment the card is one phone wide: a 16:9 key visual in a 343px card
+     is 193px tall, and a band carrying a pill, a run state, two lines of
+     codename, the bar and its three dates is half again that. It was
+     overrunning the picture and setting the run dates half-under the body.
+
+     So at this width the scrim stops being a scrim. It keeps its gradient and
+     sits above the painting rather than on it, the picture starts underneath,
+     and the card grows by the difference — which is the one dimension a phone
+     has to spend. The text shadows stay; they cost nothing over a dark ground
+     and they are what make the band legible again the moment it is over art. */
+  .pcard.kv .pcard-head{position:relative;padding-bottom:14px}
+  .pcard.kv .pcard-stage{min-height:0}
+  /* Three labels under the run bar, and at one card across there is no longer
+     room to space them a desktop's distance apart — "Day 7 of 42", the middle
+     one and the only one that moves, was ellipsising to "Day 7 of 4…". The
+     tracking comes off with the gap: at this size it is the difference
+     between the count fitting and not, and these are three date stamps read
+     as a group rather than a line of display type. */
+  .track-k{gap:6px;font-size:.625rem;letter-spacing:.03em}
+  /* The bar's own gutters come in with them. Eight pixels, and it is the
+     difference between "Day 7 of 42" fitting on a 360px phone and not. */
+  .track{margin-left:14px;margin-right:14px}
+  /* A name under a 56px thumbnail, and "Qingxiao" is one word that cannot wrap
+     — so at 14px it was not ellipsising, it was being cut mid-letter. Two
+     sizes down is the whole fix: these are labels on a face you have already
+     recognised, not the row's heading. */
+  .bmini b{font-size:.75rem;letter-spacing:-.02em}
+  /* The same word, in the banner tile beside the portrait, and short by the
+     same few pixels at every width — because both halves of the sum scale
+     with the tile: the type is set in cqi and the box it sits in is a fraction
+     of the same container, so an eight-letter name is about 8% over the line
+     whether the phone is 360 or 430. A single word has nowhere to wrap to, so
+     what came out was "Qingxia" with the tail sliced off mid-letter.
+
+     Fixed from both ends, small enough that neither shows: four pixels off the
+     cell's side padding, and a hair of negative tracking on the name. Both are
+     flat numbers on purpose — the type here is sized in cqi against the strip,
+     so anything expressed as a fraction moves when the tile does and stops
+     being a fix at some width you did not test. */
+  .bp-who{padding-left:8px;padding-right:8px}
+  .bp-who b{letter-spacing:-.035em}
+  /* Same trade as .sig above, one component along: the dashboard's compact
+     signal rows size their date column to the content here, so the source name
+     gets the ~20px back rather than "r/WutheringWavesLeaks" losing its tail. */
+  .term.mini .sig{grid-template-columns:auto minmax(0,1fr) auto;gap:5px 9px}
   /* A phone card is one column wide and everything in it stacks, so the body
      runs long. The art band gives some of its height back rather than putting
      the banner list a screen and a half down. */
@@ -3808,19 +3965,78 @@ img.astrite-pic{
   .ps-col{padding:0}
   .ps-col.div{padding:14px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.09)}
   .hero .pcard.is-future{grid-column:auto;min-height:0}
-  .body{padding-bottom:88px}
-  .sig{grid-template-columns:4rem minmax(0,1fr);gap:4px 12px;padding:11px 16px}
-  .sig .src{grid-row:2;grid-column:1/-1;gap:8px;align-items:center}
+  /* Clear of the dock, plus whatever the phone reserves for its own home
+     indicator — the dock pads itself by the same inset, so without this the
+     last row of every view ends underneath it by exactly that much. */
+  .body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  /* The headline first and across the whole row, with the date, the source and
+     the kind on a second line under it.
+
+     It used to be date | headline on row one and the source spanning row two,
+     which sounds like two columns and rendered as four: the source claimed
+     1/-1 of row two, so the kind badge — auto-placed, and with nowhere left on
+     that row — opened an implicit third column, and that column took its width
+     out of the headline's 1fr. The result was a 132px headline column with an
+     87px hole beside it, every post in the feed clipped to two half-lines of
+     type while a quarter of the row sat empty. Every child is placed by hand
+     now, so the grid is the three tracks it says it is and the headline gets
+     the row. */
+  .sig{grid-template-columns:auto minmax(0,1fr) auto;gap:7px 10px;padding:12px 16px}
+  .sig .head{grid-row:1;grid-column:1/-1}
+  .sig .t{grid-row:2;grid-column:1}
+  .sig .src{grid-row:2;grid-column:2;gap:8px;align-items:center}
+  .sig .flags{grid-row:2;grid-column:3;justify-self:end}
   .sig .sname{flex-direction:row;gap:8px;align-items:baseline}
   .smark{width:20px;height:20px}
   .smark svg{width:11px;height:11px}
-  .sig .head{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-  .sig .flags{grid-row:2;justify-self:end}
+  /* The kind badge at the end of the row is the third printing of a fact the
+     coloured mark beside the source already carries — which is the argument
+     .smark itself is written on, and the reason the dashboard's compact rows
+     drop it too. Desktop can afford all three. A phone row cannot: the badge
+     was taking 95px of a 326px line, and what it took it from was the source
+     name, which came out as "R/WUTHERINGWAV…" — the one truncation on the desk
+     that actually costs you something, because r/WutheringWaves and
+     r/WutheringWavesLeaks are the two ends of this site's whole trust scale
+     and that ellipsis is placed exactly where they stop differing.
+
+     So the badge goes and the mark comes up to full strength to carry the kind
+     on its own. The filter chips above the feed still name all five. */
+  .sig .flags .kind{display:none}
+  .smark{opacity:1}
+  /* And what is left over still will not seat "Kurobbs (official CN)" on one
+     line, where the tail that goes is the half that says which country's
+     official channel it was. So the name wraps rather than truncating: two
+     short lines cost this row nothing it was using, and the alternative is an
+     ellipsis landing in the middle of the only word that distinguishes one
+     source from another. Only the long names ever take the second line. */
+  .sig .src b{white-space:normal;overflow:visible;letter-spacing:.06em;line-height:1.35}
+  /* Two lines of a real headline, at a size you read rather than decode: the
+     feed is the one view on the desk that is nothing but other people's
+     sentences, and 13.5px was set for a column half this wide. */
+  .sig .head{
+    white-space:normal;font-size:.9063rem;line-height:1.4;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  }
+  /* The original headline is a third and fourth line under a translation that
+     already says it. On a phone that is the row's whole height spent twice on
+     one post — and it is the copy nobody reading the English feed needs. It is
+     still in the record behind the row. */
+  .sig .head .orig{display:none}
   /* No room to float a card at this width — the modal goes full-bleed and
-     behaves like the sheet it used to be. */
-  .drawer{padding:0}
+     behaves like the sheet it used to be. Height in dvh for the reason given
+     on .app above: inset:0 on a fixed element is measured against the large
+     viewport, so the record's last paragraph was ending underneath the
+     browser's address bar. */
+  .drawer{padding:0;height:100dvh}
   .drawer-panel{width:100%;max-height:100%;height:100%;border:0;border-radius:0}
-  .cmd{padding-top:8vh}
+  .cmd{padding-top:8vh;height:100dvh}
+  /* Notches and home indicators. The dock already pads itself out of the
+     indicator's way; these are the two gutters either side of it, which matter
+     the moment the phone is turned on its side. */
+  .body,.foot{
+    padding-left:max(16px,env(safe-area-inset-left));
+    padding-right:max(16px,env(safe-area-inset-right));
+  }
   /* bottom dock replaces the rail's nav */
   /* Six across a 360px phone is 60px a column, and "Resonators" is ten
      characters — hence the tighter tracking and the short labels from VIEWS.
@@ -3845,6 +4061,21 @@ img.astrite-pic{
   /* 112px of thumbnail out of a 360px row leaves no headline. */
   .intel.has-art{grid-template-columns:4.875rem minmax(0,1fr);gap:12px}
   .intel{padding-left:16px}
+  /* The confidence line is a caption, a four-bar meter and the tier's word,
+     and it wants about 250px. The column under a thumbnail is about 236px, so
+     it was running off the right edge of every row on the view and the word —
+     which is the reading, and the reason the line is there — arrived as
+     "CONFIRME". It wraps onto a second line now rather than losing its end;
+     the meter is a fixed 57px and the caption is what moves, so the two never
+     part company. */
+  .conf{flex-wrap:wrap;row-gap:5px}
+  /* The countdown and the version pill face each other across the top of an
+     event's artwork. Two up on a phone the card is ~166px wide, and "In 26
+     days" against "3.6" overran it — flex items do not shrink below their
+     content unless told to, so the pill was being pushed clean off the card
+     rather than the pair tightening up to fit. */
+  .ev-top{gap:5px;left:7px;right:7px;top:7px}
+  .ev-top .pill{padding:2px 6px;letter-spacing:.06em}
 
   /* The source report used to be reordered below the log here. With it gone
      Signals is header → warning → filters → feed in source order, which is the
@@ -3853,12 +4084,48 @@ img.astrite-pic{
   .warnbar span{font-size:.7188rem;line-height:1.5}
 }
 @media (max-width:520px){
-  /* The readings wrap onto two lines at this width, so they get the same right
-     edge as the search button above them rather than a ragged one. */
-  .hud-strip{gap:8px 16px;justify-content:flex-end}
+  /* ── the top of the screen, which was most of the screen ──────────
+     A phone landing on the timeline was giving ~370px of an 844px viewport to
+     furniture before the first patch card: brand strip, then the search
+     button on a line of its own, then three status readings stacked one per
+     line because none of them fits beside another, then the view's name, then
+     two rows of chips. Nearly half a screen, and the only line in it that ever
+     changes is the timestamp.
+
+     So the readings go back to one row and the strip loses the reading that
+     cannot change. The search button keeps its own line and grows to fill it:
+     it is the primary action on a phone — there is no Ctrl-K here — and a
+     full-width target is the cheapest thing on the page to hit. */
+  .hud{gap:8px}
+  .hud .mini-b{gap:9px}
+  .hud .searchbtn{width:100%;justify-content:center}
+  .hud-strip{gap:6px 16px;justify-content:flex-end}
+  /* "Feed 6h cycle" is a constant. It is in the README and on the Signals
+     view's own header, and on a phone it was costing a line of the fold to
+     say the same four words on every view, every visit. */
+  .hud-strip span:last-child{display:none}
   /* Out of room for a line that says the same thing on every view. */
   .hud .mini-h{display:none}
-  .cgrid,.rgrid{grid-template-columns:1fr}
+  .cgrid{grid-template-columns:1fr}
+  /* ── two records to a row ─────────────────────────────────────────
+     One was indefensible. A resonator card is a 4:5 portrait and a name, so at
+     full phone width one record is about 1,150px tall — and the grid holds
+     sixty of them, which made the view a 58,000px scroll where a face and a
+     name arrived one per swipe and a half. That is not a database you can
+     look through; it is a slideshow you have to sit through.
+
+     The argument against half width is written on .wgrid, and it is real: a
+     weapon card is art and two short lines and survives being halved, where a
+     resonator card is a face. But 185px is not the 152px that argument was
+     made about — it is wider than the grid's own desktop floor of 190px by a
+     hair, the face is still the biggest thing on the card, and two at a time
+     is what makes the difference between scanning the roster and scrolling
+     past it. The name steps down with the card so it still fits on one line. */
+  .rgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .rec-n{padding:9px 10px 10px;font-size:.8125rem;gap:5px}
+  .rec .cart .debut,.rec .cart .flag{font-size:.6875rem;padding:2px 6px;top:7px}
+  .rec .cart .debut{right:7px}
+  .rec .cart .flag{left:7px}
 }
 @media (max-width:1080px){.duo{grid-template-columns:1fr}}
 
@@ -3869,6 +4136,87 @@ img.astrite-pic{
   .wgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .wrec-b{padding:9px}
   .wrec-b h3{font-size:.7813rem}
+}
+
+/* ══ the smallest phones ════════════════════════════════════════════
+   320px, which is an iPhone SE of the first shape and the cover screen of a
+   folding phone. Everything above holds down to about 360; this is the width
+   where the banner tile stops working, because it is three things across —
+   portrait, name, weapon — and 253px of card cannot seat them: the name column
+   came out at 30px, which is not a truncated name, it is two letters and a
+   guess. So the tile's two halves stop being halves and stack, the character
+   over their signature weapon. Each half then has the tile's full width, which
+   is more than either needs. The height ceiling has to come off with them or
+   the second half is cropped away by the rule that was keeping one row short. */
+@media (max-width:340px){
+  .bpair{grid-template-columns:minmax(0,1fr)}
+  .ps-col .bstrip.rows>.bpair{max-height:none}
+  .bp-right{border-left:0;border-top:1px solid var(--line)}
+  /* The run bar's three labels stop sharing a line. Two dates and a day count
+     want about 200px between them and there are 190, and the count is the one
+     set to give way — which at this width means giving way to nothing. It
+     takes the line under the two dates instead, centred, which is where it
+     points anyway. */
+  .track{margin-left:11px;margin-right:11px}
+  .track-k{gap:2px 4px;letter-spacing:0;flex-wrap:wrap}
+  .track-k .mid{order:3;flex:1 0 100%;text-align:center;overflow:visible}
+}
+
+/* ══ a phone on its side ════════════════════════════════════════════
+   Same width rules as above — this is still the stacked, docked layout — but
+   with about 390px of height to put it in, and the header furniture does not
+   shrink with the screen it is on. Brand strip, search, readings, the view's
+   name and its filter row came to more than the viewport, which put the first
+   row of every list below the fold on a phone held the way you hold it to read
+   a table.
+
+   Nothing is removed that is not repeated elsewhere: the view's name is on the
+   dock item that is lit, and the readings are the same two lines the portrait
+   layout keeps. The rest is padding. */
+@media (max-width:900px) and (max-height:500px) and (orientation:landscape){
+  .rail{padding:7px 16px}
+  .brand-name{font-size:1rem}
+  .brand-sub{font-size:.6875rem}
+  .brand svg{width:20px;height:20px}
+  .hud .mini-h{display:none}
+  .body{gap:10px;padding-top:8px}
+  .fbar{padding:5px 0}
+  /* The dock loses its label row's air rather than its labels — six icons with
+     no words under them is a puzzle, and it is the only navigation here. */
+  .dock button{padding:6px 2px 7px;gap:2px}
+}
+
+/* ══ touch targets ══════════════════════════════════════════════════
+   Keyed off the pointer, not the width, because that is the thing that
+   actually changed: the desk's controls were drawn for a cursor, which lands
+   where you point it, and a fingertip is about 9mm across and lands roughly.
+   Everything below was between 15px and 34px tall, which is fine to click and
+   a coin-toss to tap — so it comes up to the 44px that Apple, Google and WCAG
+   2.5.5 have all independently settled on.
+
+   Padding rather than a scale: the chips, the buttons and the marks keep the
+   type sizes and the borders they were drawn with, and only the box around
+   them grows. Nothing here moves on a desktop. */
+@media (hover:none){
+  .chips button{min-height:44px;padding:5px 15px}
+  .searchbtn{min-height:44px;padding:5px 13px 5px 15px}
+  /* "View all", "How the tiers work", "Show more — 114 older". These sit alone
+     on a panel's footer rule with nothing to mis-hit, so they were the easiest
+     to leave at 23px and the most annoying to miss. */
+  .more{min-height:44px;padding:0 6px}
+  /* The two marks in the page footer and the two in the rail's foot were 15px
+     of SVG with no box at all around them. */
+  .foot .links a,.rail-foot a{
+    min-width:44px;min-height:44px;align-items:center;justify-content:center;margin:-10px 0;
+  }
+  .foot .links{margin-left:-10px}
+  /* The record's close button. Below 860px the panel is full-bleed, which
+     leaves no scrim to tap past it and no Esc key to press — so on a phone
+     this 26px square is the only way out of an open record, and it has to be
+     the easiest thing on the panel to hit rather than the hardest. */
+  .iconbtn{min-width:44px;min-height:44px;align-items:center;justify-content:center;padding:5px}
+  /* Filter rows in the rail, for a tablet wide enough to still have one. */
+  .sublink,.tierlink{min-height:44px}
 }
 
 @media (prefers-reduced-motion:reduce){
