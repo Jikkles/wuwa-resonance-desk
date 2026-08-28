@@ -122,14 +122,18 @@ const S = {
   kind:"all",   // signals
   elem:"all",   // resonators
   wtype:"all",  // weapons
-  ecls:"all"    // echoes
+  /* Echoes. A sonata set id, or "all". Unlike every other filter on the desk
+     this one is not drawn in the rail — the sonata index at the top of the
+     view is the control, because the sets are the page's own headings and a
+     34-item list in a 250px rail is not a filter anyone would use. */
+  eset:"all"
 };
 /* Which of those a view actually reads — drives Reset, and stops a stale
    element filter from silently narrowing a list you have navigated away from. */
 const VIEW_FILTERS = {
   timeline:["when"], intel:["tier"],
   signals:["kind"], resonators:["elem"],
-  weapons:["wtype"], echoes:["ecls"],
+  weapons:["wtype"], echoes:["eset"],
   /* Every view needs a row here even with nothing in it — filtersOn() and
      Reset both index this table unguarded. */
   events:[]
@@ -1000,26 +1004,11 @@ const RAIL_FILTERS = {
     items: () => [["all","All"]].concat(
       WTYPES.filter(t => weapons().some(w => w.type === t)).map(t => [t, t]))
   },
-  /* Class rather than sonata set. Sonata is the axis anyone building a
-     character thinks in, and it is the wrong one for a rail: there are 34 of
-     them, which is a scrolling list where every other view has four or five,
-     and a set is a thing you read rather than a slice of the roster you want
-     to see the whole of. It gets a panel of its own at the foot of the view
-     instead, and a record behind each crest.
-
-     Class is the axis the grid is actually sorted into — it is cost, which is
-     the constraint the game puts on a build — and it comes off the data for
-     the same reason every other list here does. "Unclassified" is last and
-     only appears when there is something in it: nineteen boss parts with no
-     cost published anywhere is a real corner of the database, and hiding it
-     would be the desk quietly dropping records it holds. */
-  echoes: {
-    scope:"ecls", label:"Class",
-    items: () => [["all","All"]].concat(
-      ECLASSES.filter(c => echoes().some(e => e.class === c))
-        .map(c => [c, `${c} · ${ECLASS_COST[c]}◆`]))
-      .concat(echoes().some(e => !e.class) ? [["none","Unclassified"]] : [])
-  },
+  /* No entry for Echoes, deliberately. Its axis is the sonata set, there are
+     34 of them, and a 34-item disclosure list in a 250px rail is a scrollbar
+     inside a nav. The sets are that view's own headings instead, indexed as
+     tiles at the top of the page, and the tile is the filter — see
+     sonataIndex(). Echoes is a plain nav item like Events. */
   /* Tier carries counts and its own colours — it is the legend and the filter
      at once, which is what the standalone "Filter by tier" group was for
      before it became Intel's own list. */
@@ -2754,7 +2743,7 @@ function emptyWhy(what){
   const on = filtersOn();
   if(!on.length) return `Nothing here yet.`;
   const names = {tier:"confidence", kind:"kind", elem:"element",
-                 when:"window", wtype:"class", ecls:"class"};
+                 when:"window", wtype:"class", eset:"sonata"};
   return `No ${what} matches this ${on.map(k => names[k]).join(" + ")} filter.
     <button class="more" data-act="reset" style="margin-left:10px">Reset ${icon("i-arrow", 12)}</button>`;
 }
@@ -3422,48 +3411,56 @@ function renderWeapons(){
 }
 
 /* ── echoes ──────────────────────────────────────────────────────────
-   The third database, and the one the game is worst at showing you. A
-   Resonator has a page in the client and a weapon has a card; an echo is a
-   monster you have already killed, and the three things anyone wants to know
-   about it — what it costs to slot, which sonata sets it can roll, and what
-   its skill does at rank 5 — are spread across the data terminal, the tuning
-   screen and the creature itself.
+   One page, and it is organised the way the game asks you to think.
 
-   Two lists, one subject, so one view. The roster leads, split into the three
-   costs, because cost is the constraint the game actually puts on a build —
-   five slots, twelve points — and a grid that ignores it is a grid you have to
-   do arithmetic against. The sonata sets follow as the reference half: nobody
-   farms a Lampylumen Myriad, they farm Freezing Frost and take whichever body
-   carries it, and the set is the thing you look up rather than the thing you
-   browse. See renderEchoes for why they are not the other way round.
+   A Resonator has a page in the client and a weapon has a card; an echo is a
+   monster you have already killed, and the four things anyone wants to know
+   about it — which sonata sets it can roll, what its skill does at rank 5,
+   what it costs to slot, and where to go and find the thing — are spread
+   across the data terminal, the tuning screen, the map and the creature.
 
-   What is not here yet, deliberately: main-stat pools, sub-stat weights, and
-   which echo a given Resonator should be running. Those are judgements rather
-   than records, they are the reason this view exists at all, and they want a
-   file of their own with a source on every line. This pass is the database
-   under them. */
+   Sonata is the spine. Nobody farms a Lampylumen Myriad; they farm Freezing
+   Frost and take whichever body carries it. So the sets are the index at the
+   top of the page, the roster below is one section per set, and clicking a set
+   at the top narrows the page to that section. There is no drawer on a sonata
+   set and no filter list in the rail — an echo view whose organising idea is
+   the sonata set does not also need a rail axis, and a set is a heading you
+   scroll to rather than a dialog you dismiss.
 
-/* Class, in the order the page stacks them — most expensive first, which is
-   also most powerful first. The game charges by class, and the two 4-cost
-   classes are the reason cost is derived from class rather than the other way
-   round: Calamity and Overlord both cost four and are not the same thing. */
+   The cost of this shape, stated plainly: an echo that rolls three sets is
+   drawn three times, so 181 echoes make about 360 cards. That is the honest
+   rendering of a many-to-many, and every alternative — filing each echo under
+   one "primary" set, or listing the sets as text on a flat grid — either
+   invents a fact or buries the one you came for.
+
+   What is deliberately not here yet: main-stat pools, sub-stat weights, and
+   which echo a given Resonator should run. Those are judgements rather than
+   records, they want a file of their own with a source on every line, and this
+   is the database that goes under them. */
+
+/* Class, most expensive first. Not a filter any more — the sonata sets took
+   that job — but still what orders a section and what a card says under its
+   name, because two classes share the 4-cost price and are not the same
+   thing. */
 const ECLASSES = ["Calamity", "Overlord", "Elite", "Common"];
-const ECLASS_COST = {Calamity:4, Overlord:4, Elite:3, Common:1};
 
-/* Cost heads a table the way rarity does on Weapons, and takes the same three
-   colours for the same reason: it is the axis the whole page is sorted into,
-   it wants to be quieter than an element accent, and a reader who has just
-   come from the weapon database already knows what gold over purple over blue
-   means. An unclassified echo has no cost and gets the site accent — it is not
-   a fourth tier below 1-cost, it is a record with a hole in it. */
-const COST_COLOUR = {4:"#E3AC55", 3:"#B98BE0", 1:"#78BFE8"};
+/* A one-line gloss on what a class *is*, for the record. This is the one thing
+   on the view that is general game knowledge rather than a fetched fact, and
+   it is written to describe the class rather than the echo — the echo's own
+   answer to "where" is its `where` block, off the wiki, right underneath. */
+const ECLASS_MEANS = {
+  Common:   "An ordinary overworld enemy — the most common thing you will absorb.",
+  Elite:    "An elite overworld enemy, marked on the map and worth stopping for.",
+  Overlord: "A field boss. It stands in one place and comes back.",
+  Calamity: "A weekly boss, fought in its own arena."
+};
 
 /* The element a sonata set reads in, taken off the set's own bonus text rather
    than from a table — fetch-echoes.mjs keeps the element mark the source wrote
    on the words it wrote it on, so Freezing Frost says Glacio in its own
-   2-piece line and the crest can be lit from that. Sets that buff a mechanic
+   2-piece line and the section can be lit from that. Sets that buff a mechanic
    rather than an element — Moonlit Clouds, Rejuvenating Glow — name none, and
-   get the site accent, which is correct: they are not anybody's element. */
+   take the site accent, which is correct: they are not anybody's element. */
 function sonataElem(s){
   const m = (s?.pieces || []).map(p => p.text).join(" ").match(/class="e-([a-z]+)"/);
   return m ? m[1] : null;
@@ -3557,16 +3554,11 @@ function erankBar(e){
   </label>`;
 }
 
-/* The crest row on a card and in a record. Sets, not effects: a card has room
-   for three 15px marks and no room at all for "Spectro DMG increases by 10%",
-   and which sets an echo can roll is the one fact that decides whether you
-   pick it up. Titled rather than labelled, because the record one click away
-   spells all of them out. */
-/* Four is the cap. Most echoes roll one or two sets and a handful roll three;
-   Hecate rolls seven, and seven marks on a card is a bar chart of nothing —
-   it pushes the class label off the line and stops reading as "these sets" at
-   about the fifth. Past four the row says how many more there are and the
-   record lists them all. */
+/* Four is the cap on a card's crest row. Most echoes roll one or two sets and
+   a handful roll three; Hecate rolls seven, and seven marks on a card is a bar
+   chart of nothing — it pushes the class label off the line and stops reading
+   as "these sets" at about the fifth. Past four the row says how many more
+   there are and the record lists them all. */
 const CREST_MAX = 4;
 
 function crests(ids, size = 15){
@@ -3583,10 +3575,12 @@ function crests(ids, size = 15){
 }
 
 /* One echo. The picture, the name, and the two facts the grid is scanned for:
-   what it costs, and what it rolls. The class is on the card as well because
-   two classes share the 4-cost table and the header cannot say which is which;
-   everything else — the skill, the rank scaling, the full set names — is in the
-   record one click away, on the same bargain the weapon grid struck. */
+   what it costs, and what else it rolls. The class is on the card because two
+   classes share the 4-cost price and the section header cannot say which; the
+   crests are there because inside a Freezing Frost section, what you want to
+   know about a body is what *else* it can be. The skill, the rank scaling and
+   where to find it are in the record one click away, on the same bargain the
+   weapon grid struck. */
 function echoCard(e){
   const cost = e.cost ? `<b class="ecost">${e.cost}◆</b>` : `<b class="ecost na">—</b>`;
   return `<article class="rec erec" role="button" tabindex="0" data-act="echo" data-id="${esc(e.name)}">
@@ -3603,30 +3597,25 @@ function echoCard(e){
   </article>`;
 }
 
-function echoTable(title, rows, total, cost, {under = "", foot = ""} = {}){
-  return `<div class="panel epanel c-${cost || 0}">
-    <div class="panel-h">
-      <h2>${title}</h2>
-      <span class="sub">${plural(rows.length, "echo", "echoes")}${
-        rows.length === total ? "" : ` of ${total}`} · by class</span>
-    </div>
-    ${under}
-    <div class="panel-b">
-      ${rows.length ? `<div class="rgrid wgrid egrid">${rows.map(echoCard).join("")}</div>`
-        : `<div class="empty">${emptyWhy("echo")}</div>`}
-    </div>
-    ${foot ? `<div class="panel-f"><span class="tier-note">${foot}</span></div>` : ""}
-  </div>`;
-}
+/* ── the sonata index ─────────────────────────────────────────────
+   The tiles at the top. Each one is the filter for its own section below, not
+   a link to a dialog: the thing you want after clicking Freezing Frost is
+   eleven echoes, and eleven echoes will not fit in a modal that then has to be
+   dismissed before you can act on any of them.
 
-/* One sonata set, as a tile. Crest, name, and the piece counts it pays at —
-   which is the whole reason the compact sets exist and the one thing that
-   separates them from the standard ones at a glance. The effects themselves
-   are two paragraphs each and thirty-four of those is a page nobody reads to
-   the end of, so they are in the record. */
+   Clicking the lit tile clears back to all, which is the same gesture the rail
+   uses to fold a view's filter list — one control, two directions. */
 function sonataTile(s){
+  const on = String(S.eset) === String(s.id);
   const n = echoesInSet(s.id).length;
-  return `<button class="stile" data-act="sonata" data-id="${s.id}"${sonataStyle(s)}>
+  /* A toggle, so the id it sends is "all" once it is the one that is on.
+     Clicking the lit set to clear it is the same gesture the rail uses to fold
+     an open filter list, and doing it here rather than in setSonata keeps the
+     set links inside an echo record as plain navigation — following a link to
+     the set you are already looking at should take you to it, not empty the
+     page. */
+  return `<button class="stile${on ? " on" : ""}" data-act="eset" data-id="${on ? "all" : s.id}"
+          data-set="${s.id}" aria-pressed="${on}"${sonataStyle(s)}>
     <span class="stile-c">${s.icon
       ? `<img src="${esc(s.icon)}" alt="" loading="lazy" decoding="async">`
       : icon("i-sonata", 22)}</span>
@@ -3638,117 +3627,197 @@ function sonataTile(s){
   </button>`;
 }
 
-function sonataPanel(){
+function sonataIndex(){
   const sets = sonataSets();
+  const on = S.eset !== "all" ? sonataFor(S.eset) : null;
   return `<div class="panel spanel">
     <div class="panel-h">
       <h2>Sonata effects</h2>
-      <span class="sub">${plural(sets.length, "set")} · what an echo is picked for</span>
+      <span class="sub">${on
+        ? `showing <b class="accent">${esc(on.name)}</b> below`
+        : `${plural(sets.length, "set")} · pick one to narrow the roster`}</span>
+      ${on ? `<button class="more" data-act="eset" data-id="all">All sets ${icon("i-close", 11)}</button>` : ""}
     </div>
     <div class="panel-b">
       ${sets.length ? `<div class="sgrid">${sets.map(sonataTile).join("")}</div>`
         : `<div class="empty">No sonata data loaded.</div>`}
     </div>
     <div class="panel-f"><span class="tier-note">
-      Standard sets pay at 2 and 5 pieces; the compact sets pay once, at 3. Open one for
-      its full text and every echo that rolls it.
+      Standard sets pay at 2 and 5 pieces; the five compact sets pay once, at 3. An echo
+      that rolls more than one set appears under each of them.
     </span></div>
   </div>`;
 }
 
+/* ── the roster, one section per set ──────────────────────────────
+   The set's bonuses ride in the section header rather than in a record of
+   their own. They are two sentences, they are the reason the section exists,
+   and putting them behind a click would mean reading the answer in one place
+   and acting on it in another. */
+function sonataSection(s, rows){
+  const el = sonataElem(s);
+  return `<div class="panel epanel"${sonataStyle(s)}>
+    <div class="panel-h ssec-h">
+      <span class="ssec-c">${s.icon
+        ? `<img src="${esc(s.icon)}" alt="" loading="lazy" decoding="async">`
+        : icon("i-sonata", 20)}</span>
+      <h2>${esc(s.name)}</h2>
+      <span class="sub">${plural(rows.length, "echo", "echoes")}${
+        s.alias ? ` · was ${esc(s.alias)}` : ""}${el ? ` · ${esc(el)}` : ""}</span>
+      <!-- The way out, in the header you were just scrolled to. The index at
+           the top of the page carries the same control, and by the time the
+           page has narrowed to one section that control is above the fold
+           behind you — which makes it the wrong place for it to be the only
+           one. (No backticks in here: this is inside a template literal.) -->
+      ${S.eset === "all" ? "" :
+        `<button class="more" data-act="eset" data-id="all" data-set="${s.id}">
+           All sets ${icon("i-close", 11)}</button>`}
+    </div>
+    <div class="ssec-b">${s.pieces.length
+      ? s.pieces.map(p => `<div class="sbonus">
+          <span class="sbonus-n">${p.n}<i>pc</i></span>
+          <div class="sbonus-t">${p.text}</div>
+        </div>`).join("")
+      : `<p class="wr-thin">No bonus text published for this set yet.</p>`}</div>
+    <div class="panel-b">
+      ${rows.length ? `<div class="rgrid wgrid egrid">${rows.map(echoCard).join("")}</div>`
+        : `<div class="empty">Nothing in the database rolls this one yet.</div>`}
+    </div>
+  </div>`;
+}
+
 /* Cost first, then class within it, then name. That puts Calamity above
-   Overlord inside the 4-cost table — the two are the same price and not the
-   same thing — and leaves each table alphabetical from there, which is how you
-   find a name you already know. */
+   Overlord inside a section — the two are the same price and not the same
+   thing — and leaves the rest alphabetical, which is how you find a name you
+   already know. */
 const byCostThenName = (a, b) =>
   ((b.cost || 0) - (a.cost || 0)) ||
   (ECLASSES.indexOf(a.class) - ECLASSES.indexOf(b.class)) ||
   a.name.localeCompare(b.name);
 
+/* Narrow the roster to one set, or back to all. Three callers — a tile, a link
+   inside an echo record, and the command palette — so it lives here rather than
+   inside the click handler.
+
+   It closes any open record, because this is the one filter on the desk that
+   can be reached from inside a drawer: leaving the record standing over a page
+   that has just changed underneath it would hide the only thing the click did. */
+function setSonata(id){
+  const narrowing = !(id == null || id === "all");
+  S.eset = narrowing ? String(id) : "all";
+  closeDrawer();
+  if(S.view !== "echoes") setView("echoes");
+  else draw("echoes");
+
+  /* Land on the section, not on the index that sent you there. The sets sit
+     above the roster because that is the order you read the page in, but it
+     means the one section a click leaves standing is below thirty-four tiles —
+     and a control whose effect is off the bottom of the screen reads as a
+     control that did nothing. So a pick scrolls; clearing back to all does
+     not, because "all" is the state the top of the page already describes.
+
+     Same gesture the kit band uses to jump to a skill card. Focus is put back
+     on the tile by the caller with preventScroll, or the browser would drag
+     the page back up to it and undo this. */
+  if(narrowing) document.querySelector("#p-echoes .epanel")
+    ?.scrollIntoView({block:"start", behavior:"smooth"});
+}
+
 function renderEchoes(){
-  const all = [...echoes()].sort(byCostThenName);
-  const pick = src => S.ecls === "all" ? src
-    : S.ecls === "none" ? src.filter(e => !e.class)
-    : src.filter(e => e.class === S.ecls);
-  const list = pick(all);
+  const sets = sonataSets();
+  const shown = S.eset === "all" ? sets : sets.filter(s => String(s.id) === String(S.eset));
 
-  /* One table per cost, and the unclassified records at the foot under their
-     own heading. Empty groups are dropped rather than drawn empty: filtering to
-     Elite leaves two of the four with nothing in them, and three "no echoes
-     match" panels stacked above the one you asked for is the page arguing with
-     you. Weapons can draw all three of its tables always because its filter cuts
-     across rarity rather than along it — a class filter there thins every table
-     instead of emptying two. */
-  const groups = [
-    [4, "4-cost echoes", "Calamity and Overlord. One of these and one 3-cost is the whole twelve-point budget."],
-    [3, "3-cost echoes", ""],
-    [1, "1-cost echoes", ""],
-    [0, "Unclassified", "Boss parts and set dressing the source publishes no class or cost for. Real echoes with real skills — kept rather than dropped."]
-  ].map(([cost, title, foot]) => ({
-    cost, title, foot,
-    rows: list.filter(e => (e.cost || 0) === cost),
-    total: all.filter(e => (e.cost || 0) === cost).length
-  })).filter(g => g.rows.length);
+  /* An echo that rolls nothing at all. There are none today — every record on
+     file names at least one set — but a new body arriving before its sonata
+     data does would otherwise be in the database and on no page, which is the
+     one failure mode a database view must not have. */
+  const loose = [...echoes()].filter(e => !(e.sonata || []).length).sort(byCostThenName);
 
-  /* Roster first, sets after it — the opposite of how this view was first
-     built, and of how the source arranges the same two lists.
-
-     The argument for sets on top is that a set is what an echo is picked for.
-     The argument against is what happens when you use the rail: the class
-     filter changes the roster and nothing else, and with thirty-four crest
-     tiles above it, clicking Calamity moved nothing on the screen. A control
-     whose effect is below the fold reads as a control that did not work. The
-     sets are reference — you go and look them up — and reference goes under
-     the thing it is reference for.
-
-     The filter bar rides on whichever cost table came out first rather than
-     sitting loose above them, which is where every other view puts it. */
   $("#p-echoes").innerHTML = `<div class="stack">
     ${pageTitle("echoes")}
-    ${groups.length
-      ? groups.map((g, i) => echoTable(g.title, g.rows, g.total, g.cost, {
-          under: i === 0 ? fbar("echoes") : "",
-          foot: g.foot
-        })).join("")
-      : `<div class="panel"><div class="panel-b">
-           <div class="empty">${emptyWhy("echo")}</div></div>${fbar("echoes")}</div>`}
-    ${sonataPanel()}
+    ${sonataIndex()}
+    ${shown.map(s => sonataSection(s, [...echoesInSet(s.id)].sort(byCostThenName))).join("")}
+    ${S.eset === "all" && loose.length ? `<div class="panel epanel">
+      <div class="panel-h">
+        <h2>No sonata set</h2>
+        <span class="sub">${plural(loose.length, "echo", "echoes")} · rolls nothing on file</span>
+      </div>
+      <div class="panel-b"><div class="rgrid wgrid egrid">${loose.map(echoCard).join("")}</div></div>
+    </div>` : ""}
   </div>`;
 }
 
-/* ── echo and sonata records ─────────────────────────────────────── */
+/* ── the echo record ─────────────────────────────────────────────────
+   Same two-column shape as the weapon record, and reusing its classes rather
+   than growing a parallel set: a picture, a block of prose and a rail of
+   facts is one layout, and it is already built, measured and responsive.
 
-/* The record. Same two-column shape as the weapon record, and reusing its
-   classes rather than growing a parallel set: a picture, a block of prose and
-   a rail of figures is one layout, and it is already built, measured and
-   responsive. What differs is what goes in the rail — a rank rather than an
-   ascension, and the sets rather than the stats. */
+   What goes in the rail is what the grid could not say — the rank scaling,
+   where the creature stands, and the other sets this body can roll. There is
+   no sonata record any more; a set is a section of the page, and a link to one
+   from here closes the record and takes you to it. */
+
+/* Where to go and kill it. Off the wiki's enemy infobox, and everything in it
+   is optional — a Nightmare variant has one dungeon and no region chain, a
+   Reminiscence echo has no enemy page at all — so each row draws only if it
+   has something to say, and the block itself disappears rather than standing
+   there labelled and empty. */
+function echoWhere(e){
+  const w = e.where;
+  const cls = e.class ? `<p class="ewhere-m">${esc(ECLASS_MEANS[e.class] || "")}</p>` : "";
+  /* No location, and therefore no class gloss either. "A field boss, it stands
+     in one place" is a sentence about where Overlords are, and printing it
+     directly above "the wiki has no location for this one" is the record
+     arguing with itself — which is exactly what it did before this line. The
+     class is still stated, as a pill, at the top of the record. */
+  if(!w) return `<section class="wr-intel">
+    <span class="label">Where to find it</span>
+    <p class="wr-thin">The wiki has no location for this one. Most of the Reminiscence
+      echoes are fought inside a mode rather than standing somewhere on the map.</p>
+  </section>`;
+
+  /* Nation › Region › Subregion, or the single location a Nightmare variant
+     gets instead. Joined with a mark rather than a comma so it reads as a
+     path narrowing rather than as a list of three equal places. */
+  const path = [w.nation, w.region, w.subregion].filter(Boolean);
+  const rows = [
+    ["Found in", path.length ? path.join(" › ") : w.location],
+    ["Family", [w.family, w.group].filter(Boolean).join(" · ")],
+    ["Also drops", w.drops]
+  ].filter(([, v]) => v);
+
+  return `<section class="wr-intel">
+    <span class="label">Where to find it</span>
+    ${cls}
+    <div class="ewhere">${rows.map(([k, v]) =>
+      `<div><span class="k">${k}</span><b>${esc(v)}</b></div>`).join("")}</div>
+    ${w.wiki ? `<a class="dsrc" href="${esc(w.wiki)}" target="_blank" rel="noopener">
+      ${icon("i-book", 14)}Wiki page<span class="arrow">${icon("i-arrow", 13)}</span></a>` : ""}
+  </section>`;
+}
+
 function drawerEcho(name){
   const e = echoFor(name);
   if(!e) return;
 
   const sets = (e.sonata || []).map(sonataFor).filter(Boolean);
-  /* The record's accent. An echo has no element of its own, so it takes the
-     one thing it is filed under — cost — for the same reason a weapon with no
-     holder takes its rarity. Where every set it rolls reads in one element,
-     that wins: an echo that only ever appears in Freezing Frost is a Glacio
-     echo in every practical sense, and opening it in the game's own blue says
-     more than opening it in table-header gold. */
+  /* The record's accent. An echo has no element of its own, so where every set
+     it rolls reads in one element, that wins: an echo that only ever appears
+     in Freezing Frost is a Glacio echo in every practical sense. Failing that,
+     the creature's own damage type off the wiki, which is the next most
+     honest thing on file. Failing both, the site accent. */
   const elems = [...new Set(sets.map(sonataElem).filter(Boolean))];
   const accent = (elems.length === 1 ? attrStyle(elems[0]) : "")
-    || (COST_COLOUR[e.cost] ? ` style="--attr:${COST_COLOUR[e.cost]}"` : "");
+    || attrStyle(e.where?.element);
 
   const setList = sets.length ? `<section class="wr-intel">
     <span class="label">Sonata sets — ${sets.length}</span>
     <div class="wr-intel-l">${sets.map(s => `
-      <span class="dsrc" role="button" tabindex="0" data-act="sonata" data-id="${s.id}">
+      <span class="dsrc" role="button" tabindex="0" data-act="eset" data-id="${s.id}">
         ${s.icon ? `<img class="dsrc-c" src="${esc(s.icon)}" alt="" width="17" height="17"
                         loading="lazy" decoding="async">` : `<i class="dot"></i>`}
         ${esc(s.name)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div>
-  </section>` : `<section class="wr-intel">
-    <span class="label">Sonata sets</span>
-    <p class="wr-thin">This one rolls none — it is a body with a skill and no set behind it.</p>
-  </section>`;
+  </section>` : "";
 
   openDrawer("Echo record", `<div class="drawer-b wrec-r erec-r"${accent}>
     <div class="wr-main">
@@ -3764,9 +3833,9 @@ function drawerEcho(name){
       </header>
 
       <div class="wr-body">
-        <!-- The creature at the size it was drawn. Same squared plate the
-             weapon record uses; an echo render is an object on transparent
-             ground in exactly the same way.
+        <!-- The creature at the size it was drawn. Squared plate: an echo
+             render is the square card the game files the creature under,
+             background and all.
              (No backticks in here: this comment is inside a template literal.) -->
         <figure class="wr-art">${e.icon
           ? `<img src="${esc(e.icon)}" alt="${esc(e.name)}" decoding="async">`
@@ -3779,56 +3848,15 @@ function drawerEcho(name){
       </div>
     </div>
     <aside class="wr-rail">
-      <h3 class="wr-rail-h">Rank and sets</h3>
+      <h3 class="wr-rail-h">Rank, place and sets</h3>
       <div class="wr-lv">
         <span class="label">Skill values by rank</span>
         ${erankBar(e)}
       </div>
+      ${echoWhere(e)}
       ${setList}
     </aside>
   </div>`, `echo:${e.name}`);
-}
-
-/* The set record. The other direction of the same link: what the bonus says,
-   and every body that can carry it. The echo list is the point — a set effect
-   you cannot farm is trivia — so it takes the width and the bonuses sit above
-   it rather than beside. */
-function drawerSonata(id){
-  const s = sonataFor(id);
-  if(!s) return;
-  const rows = [...echoesInSet(s.id)].sort(byCostThenName);
-  const accent = sonataStyle(s);
-
-  const bonuses = s.pieces.length
-    ? s.pieces.map(p => `<div class="sbonus">
-        <span class="sbonus-n">${p.n}<i>pc</i></span>
-        <div class="sbonus-t">${p.text}</div>
-      </div>`).join("")
-    : `<p class="wr-thin">No bonus text published for this set yet.</p>`;
-
-  openDrawer("Sonata set", `<div class="drawer-b srec"${accent}>
-    <header class="srec-h">
-      <span class="srec-c">${s.icon
-        ? `<img src="${esc(s.icon)}" alt="" decoding="async">`
-        : icon("i-sonata", 30)}</span>
-      <div class="wr-id">
-        <div class="meta">
-          <span class="pill">${s.pieces.map(p => `${p.n}pc`).join(" / ") || "—"}</span>
-          <span class="pill ver">${plural(rows.length, "echo", "echoes")}</span>
-          ${s.alias ? `<span class="pill">was ${esc(s.alias)}</span>` : ""}
-        </div>
-        <h2>${esc(s.name)}</h2>
-      </div>
-    </header>
-
-    <div class="dsec"><span class="label">Set bonus</span>${bonuses}</div>
-
-    <div class="dsec"><span class="label">Echoes that roll it — ${rows.length}</span>
-      ${rows.length
-        ? `<div class="rgrid wgrid egrid">${rows.map(echoCard).join("")}</div>`
-        : `<p class="wr-thin">Nothing in the database rolls this one yet.</p>`}
-    </div>
-  </div>`, `sonata:${s.id}`);
 }
 
 /* ── aside ───────────────────────────────────────────────────────── */
@@ -4554,11 +4582,14 @@ function cmdIndex(){
     : allWeapons().map(w => ({name:w.name, hint:`${w.holder} · ${w.version}`})))
     .forEach(w => out.push({group:"Weapons", label:w.name, hint:w.hint, act:["weapon", w.name], tier:null}));
   /* Sets before bodies. Somebody typing "frost" almost always wants Freezing
-     Frost, and the eleven echoes that roll it are one click further on. */
+     Frost, and picking it here lands on the Echoes view narrowed to that set —
+     its bonuses and everything that rolls it, on the page rather than in a
+     dialog. Searching by the old name works too, which is the point of
+     carrying the alias at all. */
   sonataSets().forEach(s => out.push({
     group:"Sonata sets", label:s.name,
     hint:[s.pieces.map(p => `${p.n}pc`).join("/"), s.alias].filter(Boolean).join(" · "),
-    act:["sonata", String(s.id)], tier:null
+    act:["eset", String(s.id)], tier:null
   }));
   echoes().forEach(e => out.push({
     group:"Echoes", label:e.name,
@@ -4679,7 +4710,10 @@ function dispatch(kind, id){
   else if(kind === "version") drawerVersion(id);
   else if(kind === "weapon") drawerWeapon(id);
   else if(kind === "echo") drawerEcho(id);
-  else if(kind === "sonata") drawerSonata(id);
+  /* Not a record — a sonata set is a section of the Echoes page, so picking
+     one out of the palette navigates and narrows rather than opening a
+     dialog. */
+  else if(kind === "eset") setSonata(id);
   else if(kind === "event") drawerEvent(id);
   else if(kind === "open" && id === "methodology") drawerMethodology();
 }
@@ -4724,6 +4758,26 @@ function bind(){
       back(`[data-act="railfilter"][data-view="${view}"][data-scope="${scope}"][aria-pressed="true"]`);
     }
     else if(act === "filter"){ S[scope] = id; S.sigLimit = 60; draw(S.view); }
+    /* A sonata set, from its tile at the top of the Echoes view or from a link
+       inside an echo record. Clicking the set that is already on clears back
+       to all, which is the gesture the rail already uses to fold a view's own
+       filter list — one control, both directions.
+
+       It closes any open record and navigates, because this is the one filter
+       on the desk that can be reached from inside a drawer: leaving the record
+       standing over a page that has just changed underneath it would hide the
+       only thing the click did. */
+    else if(act === "eset"){
+      /* The tile's own set, read before the redraw replaces it. data-id is the
+         action's payload — "all" on the tile that is currently on, because it
+         is a toggle — and data-set is which tile this is, which is the one the
+         keyboard has to be put back on either way. Falls back to the panel
+         when the click came from inside a record, where there was no tile. */
+      const back = el.dataset.set;
+      setSonata(id);
+      (document.querySelector(`.stile[data-set="${back}"]`)
+        || document.getElementById("p-echoes"))?.focus?.({preventScroll:true});
+    }
     /* Reset clears the primary axis too, and that one is drawn in the rail. */
     else if(act === "reset"){
       VIEW_FILTERS[S.view].forEach(k => S[k] = "all");

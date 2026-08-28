@@ -68,6 +68,14 @@ const UA =
 const ECHOES_URL = "https://www.prydwen.gg/wuthering-waves/echoes";
 const ECHO_IMG = id => `https://cdn.prydwen.gg/images/wuthering-waves/monsters/${id}.webp`;
 const SET_IMG  = id => `https://cdn.prydwen.gg/images/wuthering-waves/icons/set_${id}.webp`;
+/* Second source, for the half Prydwen's echo dataset does not carry: where the
+   creature stands. Same wiki fetch-items.mjs, fetch-kits.mjs and
+   fetch-permanents.mjs already read, and it serves Actions normally. */
+const FANDOM_API = "https://wutheringwaves.fandom.com/api.php";
+const FANDOM_WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(String(t).replace(/ /g, "_"))}`;
+/* 45 titles a request. The API takes 50 for an anonymous client and the margin
+   costs one extra round trip out of four. */
+const FANDOM_BATCH = 45;
 const OUT = "data/echoes.json";
 const DIR = "assets/echoes";
 const SET_DIR = "assets/echoes/sets";
@@ -203,6 +211,12 @@ const CLASSES = {
   "2":  { name: "Overlord",  cost: 4 },
   "3":  { name: "Calamity",  cost: 4 }
 };
+/* The four spellings a class can legitimately have, for reading the wiki's own
+   `class` field back — an unrecognised spelling there is dropped rather than
+   carried through as a fifth class. */
+const ECLASS_NAMES = ["Common", "Elite", "Overlord", "Calamity"];
+const COST_FOR = Object.fromEntries(
+  Object.values(CLASSES).filter(c => c.name).map(c => [c.name, c.cost]));
 
 /* {0}…{9} in the skill text, resolved to the five values each takes across the
    echo's ranks. Indexed by placeholder number so a template can skip one —
@@ -243,6 +257,209 @@ function minRank(ranks) {
 }
 
 const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+/* ── where the creature stands ────────────────────────────────────────
+   Prydwen's echo dataset says what an echo does and nothing about where it
+   comes from, which is the other half of the question anyone opens an echo
+   record to answer: you have read the skill, now go and kill the thing. The
+   wiki's enemy pages carry that in their infobox — the family and group the
+   creature belongs to, the nation, region and subregion it stands in, and what
+   else it drops — so this is a second pass over the roster against Fandom.
+
+   Three infobox templates cover the roster, because a wiki is a wiki:
+
+     Enemy Infobox           141 of them. nation/region/subregion.
+     Nightmare Enemy Infobox  25. One `location` field instead of the three —
+                                  a Nightmare variant lives in one dungeon.
+     Echo Infobox              7. The pages that never got an enemy article, so
+                                  there is no location on them at all. Kept for
+                                  the class and cost they do carry.
+
+   Fields are read by name rather than by template, so a fourth template with
+   the same field names would be read correctly and one that renames them shows
+   up as a blank rather than as a wrong answer. */
+
+/* Every {{…Infobox}} on a page, flattened to one map of field to value. Wiki
+   infoboxes are written by hand and no two agree on whitespace — `|class=Elite`
+   and ` |class    = Elite ` both appear on pages three lines apart — so the
+   parse is deliberately loose about it and strict about nothing else.
+
+   Only the first infobox is read. A few pages carry a second one for a variant
+   or a tab, and the first is always the subject of the page. */
+function parseInfobox(wikitext) {
+  const src = String(wikitext || "");
+  const m = src.match(/\{\{\s*[A-Za-z ]*Infobox\b/);
+  if (!m) return null;
+
+  /* Braces are counted rather than matched to a closing `\n}}`. Most pages
+     close the template on its own line and a lazy regex is right about them;
+     a handful close it on the last field's line — `|nation=Rinascita}}` — and
+     there the regex runs on into the next template and hands back a nation
+     with a whole {{Description}} stuck to it. That happened, and it is exactly
+     the kind of fault that reaches the page looking like data. */
+  let depth = 0, end = -1;
+  for (let i = m.index; i < src.length - 1; i++) {
+    if (src[i] === "{" && src[i + 1] === "{") { depth++; i++; }
+    else if (src[i] === "}" && src[i + 1] === "}") { if (--depth === 0) { end = i; break; } i++; }
+  }
+  const body = src.slice(src.indexOf("\n", m.index) + 1, end === -1 ? src.length : end);
+
+  const out = {};
+  for (const line of body.split("\n")) {
+    const f = line.match(/^\s*\|\s*([A-Za-z0-9_]+)\s*=\s*(.*?)\s*$/);
+    /* Wiki links and bold markup do appear in these values — `[[Tiger's Maw]]`
+       is how a region is written on half the pages. Unwrapped to the display
+       text here, so the desk never has to know what a wiki link looks like. */
+    if (f) out[f[1].toLowerCase()] = f[2]
+      .replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1")
+      .replace(/'''?/g, "")
+      .replace(/<[^>]*>/g, "")
+      .trim();
+  }
+  return out;
+}
+
+/* Wikitext for a batch of titles. `redirects=1` follows a rename; `normalized`
+   is how the API tells you it capitalised or de-underscored what you asked for,
+   and both have to be tracked or a page comes back under a key the caller
+   cannot look up. Returns a map keyed by the title as asked for. */
+async function fandomBatch(titles) {
+  const args = [
+    "--data-urlencode", "action=query",
+    "--data-urlencode", "format=json",
+    "--data-urlencode", "formatversion=2",
+    "--data-urlencode", "prop=revisions",
+    "--data-urlencode", "rvprop=content",
+    "--data-urlencode", "rvslots=main",
+    "--data-urlencode", "redirects=1",
+    "--data-urlencode", `titles=${titles.join("|")}`
+  ];
+  const { stdout } = await run("curl", [
+    "--silent", "--show-error", "--fail", "--compressed",
+    "--max-time", String(Math.round(TIMEOUT_MS / 1000)),
+    "-A", UA, "-G", FANDOM_API, ...args
+  ], { maxBuffer: 64 * 1024 * 1024, encoding: "buffer" });
+
+  const d = JSON.parse(stdout.toString("utf8"));
+  const by = new Map();
+  for (const p of d.query?.pages || []) by.set(p.title, p.missing ? null : (p.revisions?.[0]?.slots?.main?.content || ""));
+  /* Walk the two redirect chains back to what was asked for. */
+  const alias = new Map();
+  for (const r of d.query?.redirects   || []) alias.set(r.from, r.to);
+  for (const n of d.query?.normalized  || []) alias.set(n.from, n.to);
+  const resolve = t => { let cur = t; for (let i = 0; i < 4 && alias.has(cur); i++) cur = alias.get(cur); return cur; };
+
+  const out = new Map();
+  for (const t of titles) {
+    const final = resolve(t);
+    out.set(t, { title: final, wikitext: by.has(final) ? by.get(final) : null });
+  }
+  return out;
+}
+
+/* The page the wiki files a name under when it isn't the name itself. Seven
+   echoes need this, and each for its own reason: Prydwen writes "Chop Chop:
+   Headless" where the wiki writes "Chop Chop Headless", "Fusion Dreamane" is a
+   typo for "Fusion Dreadmane", "Young Roseshroom" is the wiki's "Baby
+   Roseshroom", and Hoochief and Hooscamp have an /Echo subpage and no enemy
+   article. A search is the general answer to all four rather than a table of
+   four special cases that the eighth one would not be in.
+
+   Tutorial and history subpages are skipped — they match the name and carry
+   nothing. Whatever is left is taken in the wiki's own relevance order. */
+async function fandomSearch(name) {
+  try {
+    const { stdout } = await run("curl", [
+      "--silent", "--show-error", "--fail", "--compressed",
+      "--max-time", String(Math.round(TIMEOUT_MS / 1000)),
+      "-A", UA, "-G", FANDOM_API,
+      "--data-urlencode", "action=query",
+      "--data-urlencode", "format=json",
+      "--data-urlencode", "formatversion=2",
+      "--data-urlencode", "list=search",
+      "--data-urlencode", `srsearch=${name}`,
+      "--data-urlencode", "srlimit=5"
+    ], { maxBuffer: 16 * 1024 * 1024, encoding: "buffer" });
+    const hits = (JSON.parse(stdout.toString("utf8")).query?.search || [])
+      .map(s => s.title)
+      .filter(t => !/^Tutorial\//.test(t) && !/\/Change History$/.test(t));
+    return hits[0] || null;
+  } catch { return null; }
+}
+
+/* One echo's row, out of whatever infobox the page turned out to have. Empty
+   strings are dropped rather than kept: the wiki writes `|region=` for a
+   creature whose region nobody has filled in, and an empty string reaching the
+   view would draw a label with nothing after it. */
+function whereFrom(box, title) {
+  if (!box) return null;
+  const val = k => {
+    const v = String(box[k] ?? "").trim();
+    return v && v !== "-" && !/^unknown$/i.test(v) ? v : null;
+  };
+  const out = {
+    family:    val("family"),
+    group:     val("group"),
+    nation:    val("nation"),
+    region:    val("region"),
+    subregion: val("subregion"),
+    /* The Nightmare template's single field, and the two stragglers that use
+       `area` for the same thing. */
+    location:  val("location") || val("area"),
+    drops:     val("drops"),
+    element:   val("dmgtype"),
+    wiki:      FANDOM_WIKI(title)
+  };
+  /* A row with nothing but its own link on it is not a row. */
+  return Object.entries(out).some(([k, v]) => k !== "wiki" && v) ? out : null;
+}
+
+/* The whole second pass. Returns a map of echo name to {where, class, cost},
+   and never throws: the wiki being down is a record with no location on it,
+   which the view draws, and not a reason to lose 181 skills and 34 set
+   bonuses. */
+async function resolveWhere(names) {
+  const boxes = new Map();
+  const missing = [];
+
+  for (let i = 0; i < names.length; i += FANDOM_BATCH) {
+    const slice = names.slice(i, i + FANDOM_BATCH);
+    let got;
+    try { got = await fandomBatch(slice); }
+    catch (err) { console.log(`  wiki batch ${i / FANDOM_BATCH + 1} failed: ${err.message}`); continue; }
+    for (const [name, { title, wikitext }] of got) {
+      const box = wikitext == null ? null : parseInfobox(wikitext);
+      if (box) boxes.set(name, { title, box });
+      else missing.push(name);
+    }
+  }
+
+  /* One search apiece for the handful the direct lookup could not place. */
+  for (const name of missing) {
+    const hit = await fandomSearch(name);
+    if (!hit) continue;
+    try {
+      const got = await fandomBatch([hit]);
+      const { title, wikitext } = got.get(hit);
+      const box = wikitext == null ? null : parseInfobox(wikitext);
+      if (box) boxes.set(name, { title, box });
+    } catch { /* leave it unresolved */ }
+  }
+
+  const out = new Map();
+  for (const [name, { title, box }] of boxes) {
+    out.set(name, {
+      where: whereFrom(box, title),
+      /* The wiki's own class and cost, kept separately from Prydwen's. They
+         are only ever used to fill a blank — see the merge in main() — because
+         two sources agreeing is worth nothing next to one of them silently
+         overwriting the other. */
+      wikiClass: ECLASS_NAMES.find(c => c.toLowerCase() === String(box.class || "").trim().toLowerCase()) || null,
+      wikiCost: Number(box.cost) || null
+    });
+  }
+  return out;
+}
 
 /* ── icons ────────────────────────────────────────────────────────────
    One file per echo and one per sonata set, written under the id the source
@@ -325,11 +542,38 @@ async function main() {
         skill: cleanMarkup(e.Echo_skill),
         ranks,
         minRank: minRank(ranks),
+        /* Filled by the wiki pass below, and null for anything it cannot
+           place. The key is always here so the shape of a record does not
+           depend on whether a second source answered. */
+        where: null,
         icon: `${DIR}/${String(e.ID || "")}.webp`
       };
     })
     .filter(e => e.name && e.id)
     .sort((a, b) => a.name.localeCompare(b.name));
+
+  console.log(`resolving locations for ${echoes.length} echoes against the wiki`);
+  const wiki = await resolveWhere(echoes.map(e => e.name));
+
+  /* Fill blanks, never overwrite. The same rule confirm-dates.mjs and the
+     event merge already work to: where two sources both have an answer,
+     the one that was there first stands, and the second is only allowed to
+     fill a hole. So Prydwen's class wins wherever Prydwen has one, and the
+     wiki's class rescues the records Prydwen filed under nothing — which is
+     most of the nineteen, because a boss part with no class on one site is
+     usually a Common echo with a class on the other. */
+  let filledClass = 0, placed = 0;
+  for (const e of echoes) {
+    const w = wiki.get(e.name);
+    if (!w) continue;
+    if (w.where) { e.where = w.where; placed++; }
+    if (!e.class && w.wikiClass) {
+      e.class = w.wikiClass;
+      e.cost = w.wikiCost || COST_FOR[w.wikiClass] || null;
+      filledClass++;
+    }
+  }
+  console.log(`  ${placed} placed on the map, ${filledClass} classes filled from the wiki`);
 
   /* Reported, not corrected. An echo filed under no class is a real record
      with a real skill and no published cost, and the view has a table for
@@ -337,8 +581,13 @@ async function main() {
      visible in the log rather than discovered on the page. */
   const unclassed = echoes.filter(e => !e.class);
   if (unclassed.length) {
-    console.log(`${unclassed.length} echoes carry no class or cost upstream:`);
+    console.log(`${unclassed.length} echoes carry no class or cost on either source:`);
     console.log(`  ${unclassed.map(e => e.name).join(", ")}`);
+  }
+  const unplaced = echoes.filter(e => !e.where).map(e => e.name);
+  if (unplaced.length) {
+    console.log(`${unplaced.length} echoes have no location on the wiki:`);
+    console.log(`  ${unplaced.join(", ")}`);
   }
   const orphans = echoes.filter(e => !e.sonata.length).map(e => e.name);
   if (orphans.length) console.log(`${orphans.length} echoes roll no known sonata set`);
@@ -359,9 +608,10 @@ async function main() {
   await mkdir("data", { recursive: true });
   await writeFile(OUT, JSON.stringify({
     schema: "wuwa-desk/echoes@1.0",
-    note: "Every echo in the game: class, slot cost, the sonata sets it can roll, and its echo skill as a template with the five values each hole takes across ranks 1–5. ranks[n] holds what {n} in `skill` becomes at each rank; a null is a value the source does not publish and the view prints as ?. minRank is the lowest rank the echo has real numbers at — most of the roster starts at 2. Cost is derived from class (Common 1, Elite 3, Overlord 4, Calamity 4) and is the only field here not read from the source; an echo the source has not classified carries null for both. Sonata set bonuses are the same data, cleaned to bold-only markup. Icons are cached in assets/echoes/. Stats and text via prydwen.gg; echo art © Kuro Games.",
-    credit: "Echo and sonata data via prydwen.gg · echo art © Kuro Games",
+    note: "Every echo in the game: class, slot cost, the sonata sets it can roll, its echo skill as a template with the five values each hole takes across ranks 1–5, and where the creature stands. ranks[n] holds what {n} in `skill` becomes at each rank; a null is a value the source does not publish and the view prints as ?. minRank is the lowest rank the echo has real numbers at — most of the roster starts at 2. Cost is derived from class (Common 1, Elite 3, Overlord 4, Calamity 4) and is the only field here not read from a source. `where` is the Wuthering Waves wiki's enemy infobox — family, group, the nation/region/subregion chain or a single dungeon location for Nightmare variants, and what else the creature drops; null means the wiki has no page or no location for it. A class the echoes source left blank is filled from the wiki and never overwritten. Sonata set bonuses are the same data, cleaned to bold-only markup. Icons are cached in assets/echoes/. Skills, sets and art via prydwen.gg; locations via the Wuthering Waves wiki; echo art © Kuro Games.",
+    credit: "Echo and sonata data via prydwen.gg, locations via the Wuthering Waves wiki · echo art © Kuro Games",
     source: ECHOES_URL,
+    sourceLocations: FANDOM_API.replace("/api.php", ""),
     generated: new Date().toISOString(),
     sonata,
     echoes

@@ -2825,27 +2825,20 @@ img.astrite-pic{
 .wstats b{font-family:var(--mono);font-size:1.1875rem;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
 
 /* ══ echoes ═════════════════════════════════════════════════════════
-   The Weapons view's furniture, filed under cost instead of rarity, and one
-   thing of its own: the sonata panel above the roster.
+   One page: the sonata index at the top, then one section per set.
 
-   Cost takes the accent slot per panel exactly as rarity does on .wpanel, and
-   feeds --attr for the same reason — .rec's hover, its name colour and the art
-   plate's gradient are already wired to that name, and a second variable doing
-   the same job in the same grid is two things to keep in step. Four-cost gold,
-   three purple, one blue: the ramp a reader coming from the weapon database has
-   just learned. An unclassified echo has no cost and keeps the site accent —
-   it is a record with a hole in it, not a fourth tier below 1-cost. */
-.epanel{--rar:var(--accent)}
-.epanel.c-4{--rar:#E3AC55}
-.epanel.c-3{--rar:#B98BE0}
-.epanel.c-1{--rar:#78BFE8}
-.epanel .panel-h{box-shadow:inset 3px 0 0 var(--rar)}
-.epanel .panel-h h2{color:var(--rar)}
-/* Scoped to the roster, not to the card. In the grid an echo is coloured by
-   the cost table it sits in; the same card inside a sonata record inherits
-   that record's accent instead, so Celestial Light's sixteen bodies all read
-   in Spectro — which is the fact the record was opened to establish. */
-.epanel .erec{--attr:var(--rar)}
+   Every section carries its own accent inline, taken from the element its
+   bonus text names — so the page reads as runs of Glacio, Fusion, Havoc as you
+   scroll it, and the cards inside a section inherit that rather than each
+   arguing for its own colour. Sets that buff a mechanic rather than an element
+   name none and fall through to the site accent, which is right: they are not
+   anybody's element.
+
+   That is a different arrangement from the Weapons view, which colours by
+   rarity per panel, and for a different reason. Rarity is the axis that view is
+   sorted into; here the axis is the set, and the set has a colour of its own
+   already. */
+.epanel .erec{--attr:inherit}
 
 /* Square, not the 4:5 the resonator and weapon cards share. An echo render is
    neither a portrait nor an object on transparent ground — it is the square
@@ -2857,13 +2850,12 @@ img.astrite-pic{
 .eart img{object-position:center}
 /* Three to a row where the weapon grid takes two. An echo card is a square
    picture and two short lines against the weapon card's 4:5 and its stat row,
-   so it is a third shorter at the same width — and at the weapon grid's
-   13.875rem the 1-cost table alone ran to five screens. */
+   so it is a third shorter at the same width. */
 .egrid{grid-template-columns:repeat(auto-fill,minmax(12rem,1fr))}
 
 /* Cost, class and the sets it rolls, on one line under the name. The cost is
    the figure the grid is scanned for, so it is the only thing here in the
-   record's own colour. */
+   section's own colour. */
 .erec-s{display:flex;align-items:center;gap:6px;min-width:0}
 .ecost{color:var(--attr);font-weight:600}
 .ecost.na{color:var(--fg-3)}
@@ -2878,13 +2870,11 @@ img.astrite-pic{
    still one hover away rather than lost. */
 .ecrest-n{font-style:normal;color:var(--fg-3);padding-left:2px}
 
-/* ── the sonata panel ─────────────────────────────────────────────
-   Thirty-four tiles at the head of the view. This is the reference half of the
-   page — you read it, then go and find a body that carries what you read — so
-   it is dense on purpose: a crest, a name, the piece counts and how many
-   echoes roll it, and nothing else. The effects themselves are two paragraphs
-   each, and thirty-four of those is a page that ends before anybody reaches
-   the roster underneath it. */
+/* ── the sonata index ─────────────────────────────────────────────
+   Thirty-four tiles at the head of the view, and each one is the filter for
+   its own section further down. Dense on purpose: a crest, a name, the piece
+   counts and how many echoes roll it. The bonuses themselves are two sentences
+   each and they live on the section, where the echoes they apply to are. */
 .sgrid{display:grid;gap:9px;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr))}
 .stile{
   display:flex;align-items:center;gap:10px;min-width:0;text-align:left;cursor:pointer;
@@ -2895,11 +2885,18 @@ img.astrite-pic{
   border-color:color-mix(in srgb,var(--attr) 50%,var(--line));
   background:var(--bg-2);color:var(--fg);outline:none;
 }
-/* The crest sits on a disc lit from the set's own element, which is what makes
-   the panel scannable — the Glacio sets read as one run of blue without anyone
-   having to read a word. A set that buffs a mechanic rather than an element
-   names none and takes the site accent, correctly: it is not anybody's
-   element. */
+/* The set the page is currently narrowed to. Lit from its own element rather
+   than the site accent — the tile, the section below it and every card in that
+   section are then one colour, which is the whole argument for filtering by
+   set rather than by anything else. */
+.stile.on{
+  border-color:var(--attr);color:var(--fg);
+  background:color-mix(in srgb,var(--attr) 12%,var(--tint-sink));
+}
+.stile.on .stile-t b{color:var(--attr)}
+/* The crest on a disc lit from the set's element, which is what makes the
+   index scannable — the Glacio sets read as one run of blue without anyone
+   having to read a word. */
 .stile-c{
   flex:none;display:grid;place-items:center;width:2.125rem;height:2.125rem;border-radius:50%;
   background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--attr) 26%,transparent),transparent 72%);
@@ -2919,60 +2916,73 @@ img.astrite-pic{
   font-style:normal;padding:1px 5px;border-radius:999px;
   background:var(--tint-sink);border:1px solid var(--line);color:var(--fg-2);
 }
+/* "All sets", which only exists while one is picked. Pushed to the far end of
+   the header so it reads as the way out of the state the header just described
+   rather than as a second heading. */
+.spanel .panel-h .more,.ssec-h .more{margin-left:auto}
+
+/* ── a set's section ──────────────────────────────────────────────
+   Crest, name, counts — then the bonuses, then the echoes. The bonuses ride in
+   the section rather than behind a click because they are the reason the
+   section exists, and reading the answer in one place and acting on it in
+   another is how a reference page wastes your time. */
+.ssec-h{box-shadow:inset 3px 0 0 var(--attr)}
+.ssec-h h2{color:var(--attr)}
+.ssec-c{
+  flex:none;display:grid;place-items:center;width:1.5rem;height:1.5rem;color:var(--attr);
+}
+.ssec-c img{width:1.5rem;height:1.5rem;object-fit:contain;display:block}
+/* A band between the header and the grid, on the sunk ground the header uses,
+   so the section reads as one block with a caption rather than as two panels
+   that happen to touch. */
+.ssec-b{
+  padding:12px 16px;border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--attr) 5%,transparent),transparent);
+}
+
+/* One bonus. The piece count is the heading — 2pc and 5pc are different
+   effects that happen to be filed together, and running them in as prose is
+   how a reader ends up building for the wrong one. */
+.sbonus{display:flex;gap:13px;align-items:flex-start;padding:7px 0}
+.sbonus+.sbonus{border-top:1px solid var(--line)}
+.sbonus-n{
+  flex:none;min-width:2.75rem;font-family:var(--mono);font-size:1.0625rem;font-weight:500;
+  color:var(--attr);font-variant-numeric:tabular-nums;line-height:1.2;
+}
+.sbonus-n i{font-style:normal;font-size:.5625rem;letter-spacing:.1em;margin-left:2px;color:var(--fg-3)}
+.sbonus-t{min-width:0;font-size:.8125rem;line-height:1.6;color:var(--fg-2)}
+.sbonus-t b{color:var(--fg);font-weight:600}
 
 /* ── the echo record ──────────────────────────────────────────────
-   Borrows .wrec-r wholesale — see drawerEcho. What is different is the rail's
-   contents, and the one control in it that the weapon record has no use for:
-   ranks an echo never drops at, greyed rather than removed. That an echo
-   starts at rank 2 is a fact about the echo; a slider that silently spans a
-   different range on every record is a control the reader re-learns each
-   time. */
-.ascend-ticks i.off{color:color-mix(in srgb,var(--fg-3) 45%,transparent)}
-/* The plate, squared and unpadded. Everything .wr-art does for a weapon is
-   wrong for an echo: the inset, the diamond frame and the drop shadow are
-   there to stand a cut-out render on a dark ground, and an echo render is a
-   finished square picture with its own background. So the picture fills the
-   plate and the plate is the picture's own shape. */
+   Borrows .wrec-r wholesale — see drawerEcho. The plate is squared and
+   unpadded: everything .wr-art does for a weapon is there to stand a cut-out
+   render on a dark ground, and an echo render is a finished square picture
+   with its own background. */
 .erec-r .wr-art{height:auto;aspect-ratio:1;padding:0}
 .erec-r .wr-art::before{display:none}
 .erec-r .wr-art img{
   width:100%;height:100%;object-fit:cover;border-radius:calc(var(--r) - 1px);filter:none;
 }
-
+/* Ranks this echo never drops at, greyed rather than removed. */
+.ascend-ticks i.off{color:color-mix(in srgb,var(--fg-3) 45%,transparent)}
 /* A sonata crest standing in for the confidence dot in the record's set list.
    Same row, same size budget — the dot is 7px and this is 17px, which is the
    smallest a crest is still legible at. */
 .dsrc-c{flex:none;display:block;object-fit:contain}
 
-/* ── the sonata record ────────────────────────────────────────────
-   One column, not two. The bonuses are the answer and the echo grid is the
-   thing you act on, so they stack in that order and the grid takes the full
-   width — a set with eleven bodies under it in a 300px rail would be a
-   scrolling list beside two paragraphs of white space. */
-.srec-h{display:flex;align-items:center;gap:16px;padding-bottom:6px}
-.srec-c{
-  flex:none;display:grid;place-items:center;width:4.5rem;height:4.5rem;border-radius:50%;
-  background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--attr) 30%,transparent),transparent 72%);
-  border:1px solid color-mix(in srgb,var(--attr) 26%,var(--line));color:var(--attr);
+/* Where to go and kill it. A short definition list, not prose: "Huanglong ›
+   Tiger's Maw › Dust-Sealed Track" is a path you follow on a map, and a
+   sentence built around it would be three words of glue holding up one fact. */
+.ewhere-m{margin:0 0 11px;font-size:.8125rem;line-height:1.55;color:var(--fg-2)}
+.ewhere{display:grid;gap:9px;margin-bottom:11px}
+.ewhere>div{
+  padding:9px 11px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+  display:flex;flex-direction:column;gap:3px;
 }
-.srec-c img{width:3.125rem;height:3.125rem;object-fit:contain;display:block}
-.drawer-b.srec .wr-id h2{
-  margin:0;font-size:clamp(1.5rem,2.8vw,2.25rem);font-weight:600;letter-spacing:-.03em;line-height:1.05;
+.ewhere .k{
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);
 }
-.drawer-b.srec .wr-id .meta{margin-bottom:9px}
-
-/* One bonus. The piece count is the heading — 2pc and 5pc are different
-   effects that happen to be filed together, and running them in as prose is
-   how a reader ends up building for the wrong one. */
-.sbonus{display:flex;gap:13px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line)}
-.sbonus:first-child{border-top:0;padding-top:2px}
-.sbonus-n{
-  flex:none;min-width:2.75rem;font-family:var(--mono);font-size:1.125rem;font-weight:500;
-  color:var(--attr);font-variant-numeric:tabular-nums;line-height:1.15;
-}
-.sbonus-n i{font-style:normal;font-size:.5625rem;letter-spacing:.1em;margin-left:2px;color:var(--fg-3)}
-.sbonus-t{min-width:0;font-size:.8438rem;line-height:1.62;color:var(--fg-2)}
-.sbonus-t b{color:var(--fg);font-weight:600}
+.ewhere b{font-size:.8125rem;font-weight:500;color:var(--fg);line-height:1.4}
 
 /* The element marks fetch-echoes.mjs keeps on the words the source wrote them
    on. Six colours, the same six the rest of the desk uses, so "Spectro DMG" in
@@ -3114,7 +3124,10 @@ img.astrite-pic{
   content:"";position:absolute;left:0;top:.66em;width:4px;height:4px;border-radius:50%;
   background:var(--attr);
 }
-.drawer-b .wr-thin{color:var(--fg-3);font-size:.8125rem;line-height:1.65;margin:0;max-width:56ch}
+/* .ssec-b joins the list because a sonata section says the same kind of thing
+   in the same voice — "no bonus text published for this set yet" — and it is
+   on the page rather than in a record. */
+.drawer-b .wr-thin,.ssec-b .wr-thin{color:var(--fg-3);font-size:.8125rem;line-height:1.65;margin:0;max-width:56ch}
 
 /* The rail. A rule rather than a card: the figures are part of this record,
    not a panel sitting next to it. */

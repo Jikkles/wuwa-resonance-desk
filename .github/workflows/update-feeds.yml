@@ -76,10 +76,14 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-weapons.mjs
 
-      # Echoes and the sonata sets they roll. Same host again, same caveat, its
-      # own step. Cheapest of the three to lose and the most expensive to
-      # notice: a missing weapon is a name on a banner with no record behind it,
-      # where a missing echo looks exactly like an echo that does not exist.
+      # Echoes, the sonata sets they roll, and where each creature stands.
+      # Two sources: Prydwen for the skills and sets, Fandom for the locations.
+      # Same caveat as the step above and its own step for the same reason —
+      # and note the wiki half would run here perfectly well, it just never
+      # gets that far, because the Prydwen fetch is the first thing the script
+      # does. Cheapest of the three to lose and the most expensive to notice: a
+      # missing weapon is a name on a banner with no record behind it, where a
+      # missing echo looks exactly like an echo that does not exist.
       - name: Resolve echoes
         if: always()
         continue-on-error: true
