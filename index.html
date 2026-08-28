@@ -18,7 +18,7 @@
      browser (and Pages' CDN, which sends max-age=600) will happily serve you
      yesterday's stylesheet on a normal refresh. Bump this on every change to
      either asset — it is the whole reason a deploy shows up immediately. -->
-<link rel="stylesheet" href="assets/app.css?v=73">
+<link rel="stylesheet" href="assets/app.css?v=74">
 </head>
 <body>
 
@@ -80,6 +80,27 @@
     <g id="i-events" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       <path d="M4 2.1v12.4"/>
       <path d="M4 3.3h8.4l-2 2.9 2 2.9H4"/>
+    </g>
+    <!-- Echoes. The hexagonal core the game draws every echo slot as, with a
+         captured shape sitting inside it. Not a monster and not a crest: an
+         echo is a creature put in a socket, and the socket is the half a
+         reader recognises at 19px in a nav. Kept clear of the brand's nested
+         diamonds and of i-k-lib's four-point star, which are the two other
+         things on this desk drawn as a shape inside a shape. -->
+    <g id="i-echo" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 1.5 13.6 4.6v6.8L8 14.5 2.4 11.4V4.6Z"/>
+      <path d="M8 5.4 10.6 7v3l-2.6 1.6L5.4 10V7Z"/>
+    </g>
+    <!-- A sonata set. Five links closed into a ring — what a set bonus is: the
+         pieces counted, not the effect. Marks the sonata panel and every crest
+         tile that has no icon behind it yet. -->
+    <g id="i-sonata" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="8" cy="8" r="4.8"/>
+      <circle cx="8" cy="1.9" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="13.4" cy="5.6" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="11.4" cy="13.4" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="4.6" cy="13.4" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="2.6" cy="5.6" r="1.3" fill="currentColor" stroke="none"/>
     </g>
     <!-- The disclosure mark on a nav item that has a filter list under it.
          Drawn pointing right and rotated a quarter turn when the list is open,
@@ -254,6 +275,7 @@
         <section id="p-timeline" role="region" aria-labelledby="tab-timeline" tabindex="-1"></section>
         <section id="p-resonators" role="region" aria-labelledby="tab-resonators" tabindex="-1" hidden></section>
         <section id="p-weapons" role="region" aria-labelledby="tab-weapons" tabindex="-1" hidden></section>
+        <section id="p-echoes" role="region" aria-labelledby="tab-echoes" tabindex="-1" hidden></section>
         <section id="p-events" role="region" aria-labelledby="tab-events" tabindex="-1" hidden></section>
         <section id="p-intel" role="region" aria-labelledby="tab-intel" tabindex="-1" hidden></section>
         <section id="p-signals" role="region" aria-labelledby="tab-signals" tabindex="-1" hidden></section>
@@ -328,6 +350,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=73"></script>
+<script src="assets/app.js?v=74"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* Resonance Desk — presentation layer.
-   Reads data/*.json, renders four views into one dashboard shell.
+   Reads data/*.json, renders seven views into one dashboard shell.
    No build step, no framework: render whole panels to innerHTML, bind by
    delegation, so a re-render never leaves a stale listener behind. */
 "use strict";
@@ -11,6 +11,7 @@ const FALLBACK = {
   news:       {updated:"", confidenceTiers:{}, entries:[]},
   resonators: {updated:"", resonators:[]},
   weapons:    {updated:"", weapons:[]},
+  echoes:     {generated:"", sonata:[], echoes:[]},
   feed:       {fetched:"", sources:[], errors:[], items:[]},
   events:     {updated:"", events:[]},
   permanents: {updated:"", events:[]},
@@ -81,6 +82,7 @@ const VIEWS = [
   {id:"timeline",   label:"Timeline",     icon:"i-timeline"},
   {id:"resonators", label:"Resonators",   icon:"i-res"},
   {id:"weapons",    label:"Weapons",      icon:"i-weapon"},
+  {id:"echoes",     label:"Echoes",       icon:"i-echo"},
   {id:"events",     label:"Events",       icon:"i-events"},
   {id:"intel",      label:"Intel",        icon:"i-intel"},
   {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified", short:"Signals"}
@@ -109,18 +111,25 @@ const S = {
      Reset leaves it alone. The stats never move with it: those are level 90,
      full stop. */
   rank:1,
+  /* Echo rank, 1–5, and the same bargain as the ascension slider above: not a
+     filter, so Reset leaves it alone, and it persists between one record and
+     the next. It opens at 5 rather than at 1 because an echo's rank is its
+     star rarity — everything anyone farms is rank 5, and rank 1 is a column of
+     zeroes for two thirds of the roster. */
+  erank:5,
   when:"all",   // timeline
   tier:"all",   // intel
   kind:"all",   // signals
   elem:"all",   // resonators
-  wtype:"all"   // weapons
+  wtype:"all",  // weapons
+  ecls:"all"    // echoes
 };
 /* Which of those a view actually reads — drives Reset, and stops a stale
    element filter from silently narrowing a list you have navigated away from. */
 const VIEW_FILTERS = {
   timeline:["when"], intel:["tier"],
   signals:["kind"], resonators:["elem"],
-  weapons:["wtype"],
+  weapons:["wtype"], echoes:["ecls"],
   /* Every view needs a row here even with nothing in it — filtersOn() and
      Reset both index this table unguarded. */
   events:[]
@@ -270,13 +279,22 @@ function daysTo(d){
   const b = new Date(dt); b.setHours(0,0,0,0);
   return Math.round((b - a) / DAY);
 }
-const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+/* Third argument for the words an s does not pluralise. Only "echoes" needs it
+   so far, and a table header that reads "34 echos" is the kind of thing a
+   reader notices before anything else on the page. */
+const plural = (n, w, many) => `${n} ${n === 1 ? w : (many || w + "s")}`;
 
 /* ── data accessors ──────────────────────────────────────────────── */
 const versions   = () => DATA.versions?.versions || [];
 const entries    = () => DATA.news?.entries || [];
 const resonators = () => DATA.resonators?.resonators || [];
 const weapons    = () => DATA.weapons?.weapons || [];
+/* The echo roster and the sonata sets it rolls, from one file. They are two
+   lists and one subject: a sonata set with no echoes under it is a bonus
+   nobody can build, and an echo with no set is a slot with no reason to be
+   filled, so neither is worth loading without the other. */
+const echoes     = () => DATA.echoes?.echoes || [];
+const sonataSets = () => DATA.echoes?.sonata || [];
 /* The event calendar. Named for the game's events, not the DOM's — this file
    already has an events section and it binds clicks.
 
@@ -523,6 +541,36 @@ function weaponFor(name){
    only wants the picture and the rarity, and doesn't care that the record
    behind it now carries stats and a passive too. */
 const weaponArtFor = weaponFor;
+
+/* Echoes are addressed by name like everything else on the desk, because a
+   name is what the palette matches and what a link between two records is
+   written in. The id is in the record and is only the icon's filename.
+
+   Two of them differ by nothing a lowercase comparison can see — Jué and Jue
+   do not both exist, but "Fog Lionarch" and "Fog Lionarch: Head" do, and an
+   accidental prefix match would open the wrong one — so this is an equality
+   test and never a startsWith. */
+function echoFor(name){
+  const k = String(name||"").toLowerCase();
+  return echoes().find(e => e.name.toLowerCase() === k) || null;
+}
+/* A sonata set by its id, which is what an echo record carries, or by its name,
+   which is what a link and the palette carry. One lookup for both: the two
+   never collide, because an id is a number and a name is not. */
+function sonataFor(key){
+  if(key == null) return null;
+  const n = Number(key);
+  if(Number.isFinite(n) && String(key).trim() !== "")
+    return sonataSets().find(s => s.id === n) || null;
+  const k = String(key).toLowerCase();
+  return sonataSets().find(s =>
+    s.name.toLowerCase() === k || String(s.alias || "").toLowerCase() === k) || null;
+}
+/* Every echo that can roll a set, in the order the grid shows them. The set
+   record has no list of its own — the link is written on the echo, once, which
+   is the direction the source publishes it in and the only direction that
+   cannot go stale against itself. */
+const echoesInSet = id => echoes().filter(e => (e.sonata || []).includes(Number(id)));
 
 /* Whose signature a weapon is. The resonator records carry the link in that
    direction, so this is that map read backwards, falling back to the timeline's
@@ -951,6 +999,26 @@ const RAIL_FILTERS = {
     scope:"wtype", label:"Class",
     items: () => [["all","All"]].concat(
       WTYPES.filter(t => weapons().some(w => w.type === t)).map(t => [t, t]))
+  },
+  /* Class rather than sonata set. Sonata is the axis anyone building a
+     character thinks in, and it is the wrong one for a rail: there are 34 of
+     them, which is a scrolling list where every other view has four or five,
+     and a set is a thing you read rather than a slice of the roster you want
+     to see the whole of. It gets a panel of its own at the foot of the view
+     instead, and a record behind each crest.
+
+     Class is the axis the grid is actually sorted into — it is cost, which is
+     the constraint the game puts on a build — and it comes off the data for
+     the same reason every other list here does. "Unclassified" is last and
+     only appears when there is something in it: nineteen boss parts with no
+     cost published anywhere is a real corner of the database, and hiding it
+     would be the desk quietly dropping records it holds. */
+  echoes: {
+    scope:"ecls", label:"Class",
+    items: () => [["all","All"]].concat(
+      ECLASSES.filter(c => echoes().some(e => e.class === c))
+        .map(c => [c, `${c} · ${ECLASS_COST[c]}◆`]))
+      .concat(echoes().some(e => !e.class) ? [["none","Unclassified"]] : [])
   },
   /* Tier carries counts and its own colours — it is the legend and the filter
      at once, which is what the standalone "Filter by tier" group was for
@@ -2686,7 +2754,7 @@ function emptyWhy(what){
   const on = filtersOn();
   if(!on.length) return `Nothing here yet.`;
   const names = {tier:"confidence", kind:"kind", elem:"element",
-                 when:"window", wtype:"class"};
+                 when:"window", wtype:"class", ecls:"class"};
   return `No ${what} matches this ${on.map(k => names[k]).join(" + ")} filter.
     <button class="more" data-act="reset" style="margin-left:10px">Reset ${icon("i-arrow", 12)}</button>`;
 }
@@ -3351,6 +3419,416 @@ function renderWeapons(){
     ${weaponTable("4★ Weapons", rows("4"), total("4"))}
     ${weaponTable("3★ Weapons", rows("3"), total("3"))}
   </div>`;
+}
+
+/* ── echoes ──────────────────────────────────────────────────────────
+   The third database, and the one the game is worst at showing you. A
+   Resonator has a page in the client and a weapon has a card; an echo is a
+   monster you have already killed, and the three things anyone wants to know
+   about it — what it costs to slot, which sonata sets it can roll, and what
+   its skill does at rank 5 — are spread across the data terminal, the tuning
+   screen and the creature itself.
+
+   Two lists, one subject, so one view. The roster leads, split into the three
+   costs, because cost is the constraint the game actually puts on a build —
+   five slots, twelve points — and a grid that ignores it is a grid you have to
+   do arithmetic against. The sonata sets follow as the reference half: nobody
+   farms a Lampylumen Myriad, they farm Freezing Frost and take whichever body
+   carries it, and the set is the thing you look up rather than the thing you
+   browse. See renderEchoes for why they are not the other way round.
+
+   What is not here yet, deliberately: main-stat pools, sub-stat weights, and
+   which echo a given Resonator should be running. Those are judgements rather
+   than records, they are the reason this view exists at all, and they want a
+   file of their own with a source on every line. This pass is the database
+   under them. */
+
+/* Class, in the order the page stacks them — most expensive first, which is
+   also most powerful first. The game charges by class, and the two 4-cost
+   classes are the reason cost is derived from class rather than the other way
+   round: Calamity and Overlord both cost four and are not the same thing. */
+const ECLASSES = ["Calamity", "Overlord", "Elite", "Common"];
+const ECLASS_COST = {Calamity:4, Overlord:4, Elite:3, Common:1};
+
+/* Cost heads a table the way rarity does on Weapons, and takes the same three
+   colours for the same reason: it is the axis the whole page is sorted into,
+   it wants to be quieter than an element accent, and a reader who has just
+   come from the weapon database already knows what gold over purple over blue
+   means. An unclassified echo has no cost and gets the site accent — it is not
+   a fourth tier below 1-cost, it is a record with a hole in it. */
+const COST_COLOUR = {4:"#E3AC55", 3:"#B98BE0", 1:"#78BFE8"};
+
+/* The element a sonata set reads in, taken off the set's own bonus text rather
+   than from a table — fetch-echoes.mjs keeps the element mark the source wrote
+   on the words it wrote it on, so Freezing Frost says Glacio in its own
+   2-piece line and the crest can be lit from that. Sets that buff a mechanic
+   rather than an element — Moonlit Clouds, Rejuvenating Glow — name none, and
+   get the site accent, which is correct: they are not anybody's element. */
+function sonataElem(s){
+  const m = (s?.pieces || []).map(p => p.text).join(" ").match(/class="e-([a-z]+)"/);
+  return m ? m[1] : null;
+}
+const sonataStyle = s => attrStyle(sonataElem(s));
+
+/* The echo skill, resolved to one rank.
+
+   The text arrives already sanitised — fetch-echoes.mjs strips it to bold and
+   bold-in-an-element-colour at the point the data is written, precisely so
+   this does not have to choose between escaping the markup Kuro wrote into a
+   skill ("CD: 15s" in bold) and putting somebody else's HTML into innerHTML.
+   So the prose goes in as it stands and only the filled values are escaped.
+
+   Same split as a weapon passive, and the same reason: Kuro writes the long
+   ones as a paragraph and then a list, and the break reaches the desk as the
+   two characters backslash-n rather than as a newline. A run of parts that all
+   open with a dash is the list Kuro wrote and is set as one; anything else
+   stays paragraphs. */
+function echoSkillHtml(e, rank){
+  const i = Math.min(5, Math.max(1, rank || 1)) - 1;
+  const fill = s => s.replace(/\{(\d)\}/g, (_, n) => {
+    const v = e.ranks?.[Number(n)]?.[i];
+    /* A hole the source ships no value for at this rank. Say so rather than
+       print a number from a rank the reader did not ask for. */
+    return v == null ? `<b class="wval na">?</b>` : `<b class="wval">${esc(v)}</b>`;
+  });
+  const parts = String(e.skill || "").split(/\\n|\n/).map(s => s.trim()).filter(Boolean);
+  if(!parts.length) return `<span class="wnone">No skill published for this one.</span>`;
+  const [lead, ...rest] = parts;
+  const listed = rest.length && rest.every(s => /^[-–•]/.test(s));
+  return `<p>${fill(lead)}</p>` + (!rest.length ? ""
+    : listed
+      ? `<ul class="weff-l">${rest.map(s =>
+          `<li>${fill(s.replace(/^[-–•]\s*/, ""))}</li>`).join("")}</ul>`
+      : rest.map(s => `<p>${fill(s)}</p>`).join(""));
+}
+
+/* Which rank an open record is actually showing. S.erank is one number across
+   the whole desk — set it once and every echo you open after that is already
+   there — but an echo that does not drop below rank 2 has nothing to show at
+   rank 1, so the record floors it at the lowest rank the source publishes
+   numbers for. The slider's own min moves with it, so the thumb cannot be
+   dragged to a position the record would then ignore. */
+const erankOf = e => Math.max(Number(e?.minRank) || 1, S.erank);
+
+/* Repaints the open record in place rather than redrawing it — a redraw would
+   rebuild the input the thumb is being dragged on, which ends the drag. Same
+   arrangement as paintRank, and deliberately a second function rather than a
+   parameterised one: the two sliders mean different things, move different
+   text, and sharing them would tie the weapon record's ascension to the echo
+   record's rank the first time both are on screen. */
+function paintERank(){
+  document.querySelectorAll("[data-eskill]").forEach(el => {
+    const e = echoFor(el.dataset.eskill);
+    if(e) el.innerHTML = echoSkillHtml(e, erankOf(e));
+  });
+  document.querySelectorAll("[data-eranklabel]").forEach(el => {
+    const e = echoFor(el.dataset.eranklabel);
+    el.textContent = `R${e ? erankOf(e) : S.erank}`;
+  });
+  document.querySelectorAll("[data-eranktick]").forEach(el => {
+    const e = echoFor(el.dataset.for || "");
+    el.classList.toggle("on", Number(el.dataset.eranktick) === (e ? erankOf(e) : S.erank));
+    el.classList.toggle("off", !!e && Number(el.dataset.eranktick) < (Number(e.minRank) || 1));
+  });
+  document.querySelectorAll("[data-erank]").forEach(el => {
+    const e = echoFor(el.dataset.erank);
+    const r = e ? erankOf(e) : S.erank;
+    el.value = r;
+    el.setAttribute("aria-valuetext", `Rank ${r} of 5`);
+  });
+}
+
+/* The five stops, named, with the ones this echo never drops at greyed rather
+   than removed — that an echo starts at rank 2 is a fact about the echo, and a
+   slider that silently spans a different range on every record is a control
+   the reader has to re-read each time. */
+function erankBar(e){
+  const r = erankOf(e), min = Number(e.minRank) || 1;
+  return `<label class="ascend">
+    <span class="ascend-h">
+      <span class="label">Rank</span>
+      <output class="ascend-v" data-eranklabel="${esc(e.name)}">R${r}</output>
+    </span>
+    <input type="range" min="${min}" max="5" step="1" value="${r}" data-erank="${esc(e.name)}"
+           aria-label="Echo rank" aria-valuetext="Rank ${r} of 5">
+    <span class="ascend-ticks" aria-hidden="true">${[1, 2, 3, 4, 5].map(n =>
+      `<i data-eranktick="${n}" data-for="${esc(e.name)}"
+          class="${n === r ? "on" : ""}${n < min ? " off" : ""}">R${n}</i>`).join("")}</span>
+  </label>`;
+}
+
+/* The crest row on a card and in a record. Sets, not effects: a card has room
+   for three 15px marks and no room at all for "Spectro DMG increases by 10%",
+   and which sets an echo can roll is the one fact that decides whether you
+   pick it up. Titled rather than labelled, because the record one click away
+   spells all of them out. */
+/* Four is the cap. Most echoes roll one or two sets and a handful roll three;
+   Hecate rolls seven, and seven marks on a card is a bar chart of nothing —
+   it pushes the class label off the line and stops reading as "these sets" at
+   about the fifth. Past four the row says how many more there are and the
+   record lists them all. */
+const CREST_MAX = 4;
+
+function crests(ids, size = 15){
+  const list = (ids || []).map(sonataFor).filter(Boolean);
+  if(!list.length) return `<span class="ecrest-none" title="Rolls no sonata set">—</span>`;
+  const shown = list.slice(0, CREST_MAX), rest = list.length - shown.length;
+  return `<span class="ecrests">${shown.map(s => s.icon
+    ? `<img src="${esc(s.icon)}" alt="" title="${esc(s.name)}" width="${size}" height="${size}"
+           loading="lazy" decoding="async">`
+    : `<i class="ecrest-g" title="${esc(s.name)}"${sonataStyle(s)}>${icon("i-sonata", size)}</i>`
+  ).join("")}${rest
+    ? `<i class="ecrest-n" title="${esc(list.slice(CREST_MAX).map(s => s.name).join(", "))}">+${rest}</i>`
+    : ""}</span>`;
+}
+
+/* One echo. The picture, the name, and the two facts the grid is scanned for:
+   what it costs, and what it rolls. The class is on the card as well because
+   two classes share the 4-cost table and the header cannot say which is which;
+   everything else — the skill, the rank scaling, the full set names — is in the
+   record one click away, on the same bargain the weapon grid struck. */
+function echoCard(e){
+  const cost = e.cost ? `<b class="ecost">${e.cost}◆</b>` : `<b class="ecost na">—</b>`;
+  return `<article class="rec erec" role="button" tabindex="0" data-act="echo" data-id="${esc(e.name)}">
+    <div class="cart eart${e.icon ? " has-art" : ""}">${e.icon
+      ? `<img src="${esc(e.icon)}" alt="${esc(e.name)}" loading="lazy" decoding="async">`
+      : `<span class="wart-g">${icon("i-echo", 34)}</span>`}</div>
+    <div class="wrec-b">
+      <h3>${esc(e.name)}</h3>
+      <span class="wrec-s erec-s">
+        ${cost} ${esc(e.class || "Unclassified")}
+        ${crests(e.sonata)}
+      </span>
+    </div>
+  </article>`;
+}
+
+function echoTable(title, rows, total, cost, {under = "", foot = ""} = {}){
+  return `<div class="panel epanel c-${cost || 0}">
+    <div class="panel-h">
+      <h2>${title}</h2>
+      <span class="sub">${plural(rows.length, "echo", "echoes")}${
+        rows.length === total ? "" : ` of ${total}`} · by class</span>
+    </div>
+    ${under}
+    <div class="panel-b">
+      ${rows.length ? `<div class="rgrid wgrid egrid">${rows.map(echoCard).join("")}</div>`
+        : `<div class="empty">${emptyWhy("echo")}</div>`}
+    </div>
+    ${foot ? `<div class="panel-f"><span class="tier-note">${foot}</span></div>` : ""}
+  </div>`;
+}
+
+/* One sonata set, as a tile. Crest, name, and the piece counts it pays at —
+   which is the whole reason the compact sets exist and the one thing that
+   separates them from the standard ones at a glance. The effects themselves
+   are two paragraphs each and thirty-four of those is a page nobody reads to
+   the end of, so they are in the record. */
+function sonataTile(s){
+  const n = echoesInSet(s.id).length;
+  return `<button class="stile" data-act="sonata" data-id="${s.id}"${sonataStyle(s)}>
+    <span class="stile-c">${s.icon
+      ? `<img src="${esc(s.icon)}" alt="" loading="lazy" decoding="async">`
+      : icon("i-sonata", 22)}</span>
+    <span class="stile-t">
+      <b data-fit="1.05" data-fit-lines="2">${esc(s.name)}</b>
+      <span class="stile-m">${s.pieces.map(p => `${p.n}pc`).join(" · ") || "—"}
+        <i>${n}</i></span>
+    </span>
+  </button>`;
+}
+
+function sonataPanel(){
+  const sets = sonataSets();
+  return `<div class="panel spanel">
+    <div class="panel-h">
+      <h2>Sonata effects</h2>
+      <span class="sub">${plural(sets.length, "set")} · what an echo is picked for</span>
+    </div>
+    <div class="panel-b">
+      ${sets.length ? `<div class="sgrid">${sets.map(sonataTile).join("")}</div>`
+        : `<div class="empty">No sonata data loaded.</div>`}
+    </div>
+    <div class="panel-f"><span class="tier-note">
+      Standard sets pay at 2 and 5 pieces; the compact sets pay once, at 3. Open one for
+      its full text and every echo that rolls it.
+    </span></div>
+  </div>`;
+}
+
+/* Cost first, then class within it, then name. That puts Calamity above
+   Overlord inside the 4-cost table — the two are the same price and not the
+   same thing — and leaves each table alphabetical from there, which is how you
+   find a name you already know. */
+const byCostThenName = (a, b) =>
+  ((b.cost || 0) - (a.cost || 0)) ||
+  (ECLASSES.indexOf(a.class) - ECLASSES.indexOf(b.class)) ||
+  a.name.localeCompare(b.name);
+
+function renderEchoes(){
+  const all = [...echoes()].sort(byCostThenName);
+  const pick = src => S.ecls === "all" ? src
+    : S.ecls === "none" ? src.filter(e => !e.class)
+    : src.filter(e => e.class === S.ecls);
+  const list = pick(all);
+
+  /* One table per cost, and the unclassified records at the foot under their
+     own heading. Empty groups are dropped rather than drawn empty: filtering to
+     Elite leaves two of the four with nothing in them, and three "no echoes
+     match" panels stacked above the one you asked for is the page arguing with
+     you. Weapons can draw all three of its tables always because its filter cuts
+     across rarity rather than along it — a class filter there thins every table
+     instead of emptying two. */
+  const groups = [
+    [4, "4-cost echoes", "Calamity and Overlord. One of these and one 3-cost is the whole twelve-point budget."],
+    [3, "3-cost echoes", ""],
+    [1, "1-cost echoes", ""],
+    [0, "Unclassified", "Boss parts and set dressing the source publishes no class or cost for. Real echoes with real skills — kept rather than dropped."]
+  ].map(([cost, title, foot]) => ({
+    cost, title, foot,
+    rows: list.filter(e => (e.cost || 0) === cost),
+    total: all.filter(e => (e.cost || 0) === cost).length
+  })).filter(g => g.rows.length);
+
+  /* Roster first, sets after it — the opposite of how this view was first
+     built, and of how the source arranges the same two lists.
+
+     The argument for sets on top is that a set is what an echo is picked for.
+     The argument against is what happens when you use the rail: the class
+     filter changes the roster and nothing else, and with thirty-four crest
+     tiles above it, clicking Calamity moved nothing on the screen. A control
+     whose effect is below the fold reads as a control that did not work. The
+     sets are reference — you go and look them up — and reference goes under
+     the thing it is reference for.
+
+     The filter bar rides on whichever cost table came out first rather than
+     sitting loose above them, which is where every other view puts it. */
+  $("#p-echoes").innerHTML = `<div class="stack">
+    ${pageTitle("echoes")}
+    ${groups.length
+      ? groups.map((g, i) => echoTable(g.title, g.rows, g.total, g.cost, {
+          under: i === 0 ? fbar("echoes") : "",
+          foot: g.foot
+        })).join("")
+      : `<div class="panel"><div class="panel-b">
+           <div class="empty">${emptyWhy("echo")}</div></div>${fbar("echoes")}</div>`}
+    ${sonataPanel()}
+  </div>`;
+}
+
+/* ── echo and sonata records ─────────────────────────────────────── */
+
+/* The record. Same two-column shape as the weapon record, and reusing its
+   classes rather than growing a parallel set: a picture, a block of prose and
+   a rail of figures is one layout, and it is already built, measured and
+   responsive. What differs is what goes in the rail — a rank rather than an
+   ascension, and the sets rather than the stats. */
+function drawerEcho(name){
+  const e = echoFor(name);
+  if(!e) return;
+
+  const sets = (e.sonata || []).map(sonataFor).filter(Boolean);
+  /* The record's accent. An echo has no element of its own, so it takes the
+     one thing it is filed under — cost — for the same reason a weapon with no
+     holder takes its rarity. Where every set it rolls reads in one element,
+     that wins: an echo that only ever appears in Freezing Frost is a Glacio
+     echo in every practical sense, and opening it in the game's own blue says
+     more than opening it in table-header gold. */
+  const elems = [...new Set(sets.map(sonataElem).filter(Boolean))];
+  const accent = (elems.length === 1 ? attrStyle(elems[0]) : "")
+    || (COST_COLOUR[e.cost] ? ` style="--attr:${COST_COLOUR[e.cost]}"` : "");
+
+  const setList = sets.length ? `<section class="wr-intel">
+    <span class="label">Sonata sets — ${sets.length}</span>
+    <div class="wr-intel-l">${sets.map(s => `
+      <span class="dsrc" role="button" tabindex="0" data-act="sonata" data-id="${s.id}">
+        ${s.icon ? `<img class="dsrc-c" src="${esc(s.icon)}" alt="" width="17" height="17"
+                        loading="lazy" decoding="async">` : `<i class="dot"></i>`}
+        ${esc(s.name)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div>
+  </section>` : `<section class="wr-intel">
+    <span class="label">Sonata sets</span>
+    <p class="wr-thin">This one rolls none — it is a body with a skill and no set behind it.</p>
+  </section>`;
+
+  openDrawer("Echo record", `<div class="drawer-b wrec-r erec-r"${accent}>
+    <div class="wr-main">
+      <header class="wr-head bare">
+        <div class="wr-id">
+          <div class="meta">
+            <span class="pill">${esc(e.class || "Unclassified")}</span>
+            ${e.cost ? `<span class="pill ver">${e.cost}-cost</span>` : ""}
+            ${Number(e.minRank) > 1 ? `<span class="pill">Rank ${e.minRank}+</span>` : ""}
+          </div>
+          <h2>${esc(e.name)}</h2>
+        </div>
+      </header>
+
+      <div class="wr-body">
+        <!-- The creature at the size it was drawn. Same squared plate the
+             weapon record uses; an echo render is an object on transparent
+             ground in exactly the same way.
+             (No backticks in here: this comment is inside a template literal.) -->
+        <figure class="wr-art">${e.icon
+          ? `<img src="${esc(e.icon)}" alt="${esc(e.name)}" decoding="async">`
+          : `<span class="wr-art-g">${icon("i-echo", 56)}</span>`}</figure>
+
+        <section class="wr-eff">
+          <span class="label">Echo skill <em data-eranklabel="${esc(e.name)}">R${erankOf(e)}</em></span>
+          <div class="weff" data-eskill="${esc(e.name)}">${echoSkillHtml(e, erankOf(e))}</div>
+        </section>
+      </div>
+    </div>
+    <aside class="wr-rail">
+      <h3 class="wr-rail-h">Rank and sets</h3>
+      <div class="wr-lv">
+        <span class="label">Skill values by rank</span>
+        ${erankBar(e)}
+      </div>
+      ${setList}
+    </aside>
+  </div>`, `echo:${e.name}`);
+}
+
+/* The set record. The other direction of the same link: what the bonus says,
+   and every body that can carry it. The echo list is the point — a set effect
+   you cannot farm is trivia — so it takes the width and the bonuses sit above
+   it rather than beside. */
+function drawerSonata(id){
+  const s = sonataFor(id);
+  if(!s) return;
+  const rows = [...echoesInSet(s.id)].sort(byCostThenName);
+  const accent = sonataStyle(s);
+
+  const bonuses = s.pieces.length
+    ? s.pieces.map(p => `<div class="sbonus">
+        <span class="sbonus-n">${p.n}<i>pc</i></span>
+        <div class="sbonus-t">${p.text}</div>
+      </div>`).join("")
+    : `<p class="wr-thin">No bonus text published for this set yet.</p>`;
+
+  openDrawer("Sonata set", `<div class="drawer-b srec"${accent}>
+    <header class="srec-h">
+      <span class="srec-c">${s.icon
+        ? `<img src="${esc(s.icon)}" alt="" decoding="async">`
+        : icon("i-sonata", 30)}</span>
+      <div class="wr-id">
+        <div class="meta">
+          <span class="pill">${s.pieces.map(p => `${p.n}pc`).join(" / ") || "—"}</span>
+          <span class="pill ver">${plural(rows.length, "echo", "echoes")}</span>
+          ${s.alias ? `<span class="pill">was ${esc(s.alias)}</span>` : ""}
+        </div>
+        <h2>${esc(s.name)}</h2>
+      </div>
+    </header>
+
+    <div class="dsec"><span class="label">Set bonus</span>${bonuses}</div>
+
+    <div class="dsec"><span class="label">Echoes that roll it — ${rows.length}</span>
+      ${rows.length
+        ? `<div class="rgrid wgrid egrid">${rows.map(echoCard).join("")}</div>`
+        : `<p class="wr-thin">Nothing in the database rolls this one yet.</p>`}
+    </div>
+  </div>`, `sonata:${s.id}`);
 }
 
 /* ── aside ───────────────────────────────────────────────────────── */
@@ -4075,6 +4553,18 @@ function cmdIndex(){
     ? weapons().map(w => ({name:w.name, hint:[`${w.rarity}★`, w.type].filter(Boolean).join(" ")}))
     : allWeapons().map(w => ({name:w.name, hint:`${w.holder} · ${w.version}`})))
     .forEach(w => out.push({group:"Weapons", label:w.name, hint:w.hint, act:["weapon", w.name], tier:null}));
+  /* Sets before bodies. Somebody typing "frost" almost always wants Freezing
+     Frost, and the eleven echoes that roll it are one click further on. */
+  sonataSets().forEach(s => out.push({
+    group:"Sonata sets", label:s.name,
+    hint:[s.pieces.map(p => `${p.n}pc`).join("/"), s.alias].filter(Boolean).join(" · "),
+    act:["sonata", String(s.id)], tier:null
+  }));
+  echoes().forEach(e => out.push({
+    group:"Echoes", label:e.name,
+    hint:[e.cost ? `${e.cost}-cost` : "", e.class].filter(Boolean).join(" ") || "Unclassified",
+    act:["echo", e.name], tier:null
+  }));
   gameEvents().forEach(ev => out.push({
     group:"Events", label:ev.name, hint:[ev.version, ev.kind].filter(Boolean).join(" · "),
     act:["event", ev.id], tier:ev.confidence
@@ -4134,6 +4624,7 @@ const RENDER = {
   timeline: renderTimeline,
   resonators: renderResonators,
   weapons: renderWeapons,
+  echoes: renderEchoes,
   events: renderEvents,
   intel: renderIntel,
   signals: renderSignals
@@ -4187,6 +4678,8 @@ function dispatch(kind, id){
   else if(kind === "resonator") drawerResonator(id);
   else if(kind === "version") drawerVersion(id);
   else if(kind === "weapon") drawerWeapon(id);
+  else if(kind === "echo") drawerEcho(id);
+  else if(kind === "sonata") drawerSonata(id);
   else if(kind === "event") drawerEvent(id);
   else if(kind === "open" && id === "methodology") drawerMethodology();
 }
@@ -4275,9 +4768,20 @@ function bind(){
      than redraws, because redrawing would replace the input mid-drag. */
   document.addEventListener("input", e => {
     const r = e.target.closest("[data-rank]");
-    if(!r) return;
-    S.rank = Math.min(5, Math.max(1, Number(r.value) || 1));
-    paintRank();
+    if(r){
+      S.rank = Math.min(5, Math.max(1, Number(r.value) || 1));
+      paintRank();
+      return;
+    }
+    /* The echo record's rank slider, on the same terms. Its own state and its
+       own repaint: an ascension and a rank are different numbers about
+       different things, and the two records can be opened one after the other
+       without either moving the other's control. */
+    const er = e.target.closest("[data-erank]");
+    if(er){
+      S.erank = Math.min(5, Math.max(1, Number(er.value) || 1));
+      paintERank();
+    }
   });
 
   /* Cards are role=button, so Enter/Space have to act like a click. */
@@ -4334,7 +4838,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events","permanents","items","archive","astrite"];
+  const names = ["versions","news","resonators","weapons","echoes","feed","art","portraits","translations","events","permanents","items","archive","astrite"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 

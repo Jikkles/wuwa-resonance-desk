@@ -2824,6 +2824,167 @@ img.astrite-pic{
 .wstats .k{font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
 .wstats b{font-family:var(--mono);font-size:1.1875rem;font-weight:500;color:var(--fg);font-variant-numeric:tabular-nums}
 
+/* ══ echoes ═════════════════════════════════════════════════════════
+   The Weapons view's furniture, filed under cost instead of rarity, and one
+   thing of its own: the sonata panel above the roster.
+
+   Cost takes the accent slot per panel exactly as rarity does on .wpanel, and
+   feeds --attr for the same reason — .rec's hover, its name colour and the art
+   plate's gradient are already wired to that name, and a second variable doing
+   the same job in the same grid is two things to keep in step. Four-cost gold,
+   three purple, one blue: the ramp a reader coming from the weapon database has
+   just learned. An unclassified echo has no cost and keeps the site accent —
+   it is a record with a hole in it, not a fourth tier below 1-cost. */
+.epanel{--rar:var(--accent)}
+.epanel.c-4{--rar:#E3AC55}
+.epanel.c-3{--rar:#B98BE0}
+.epanel.c-1{--rar:#78BFE8}
+.epanel .panel-h{box-shadow:inset 3px 0 0 var(--rar)}
+.epanel .panel-h h2{color:var(--rar)}
+/* Scoped to the roster, not to the card. In the grid an echo is coloured by
+   the cost table it sits in; the same card inside a sonata record inherits
+   that record's accent instead, so Celestial Light's sixteen bodies all read
+   in Spectro — which is the fact the record was opened to establish. */
+.epanel .erec{--attr:var(--rar)}
+
+/* Square, not the 4:5 the resonator and weapon cards share. An echo render is
+   neither a portrait nor an object on transparent ground — it is the square
+   card the game itself files the creature under, background and all — so a 4:5
+   frame crops a scene that was composed to its own edges, and a contain fit
+   would letterbox it into a plate it does not need. Source and frame are both
+   1:1 and the picture arrives whole. */
+.eart{aspect-ratio:1}
+.eart img{object-position:center}
+/* Three to a row where the weapon grid takes two. An echo card is a square
+   picture and two short lines against the weapon card's 4:5 and its stat row,
+   so it is a third shorter at the same width — and at the weapon grid's
+   13.875rem the 1-cost table alone ran to five screens. */
+.egrid{grid-template-columns:repeat(auto-fill,minmax(12rem,1fr))}
+
+/* Cost, class and the sets it rolls, on one line under the name. The cost is
+   the figure the grid is scanned for, so it is the only thing here in the
+   record's own colour. */
+.erec-s{display:flex;align-items:center;gap:6px;min-width:0}
+.ecost{color:var(--attr);font-weight:600}
+.ecost.na{color:var(--fg-3)}
+/* The crests take the end of the line and never wrap it: three 15px marks are
+   a texture that says "this one is flexible", and a fourth pushing the class
+   onto a second line would cost more than the mark is worth. */
+.ecrests{margin-left:auto;display:flex;align-items:center;gap:2px;flex:none}
+.ecrests img{display:block;width:15px;height:15px;opacity:.9}
+.ecrest-g{display:flex;color:var(--attr);opacity:.7}
+.ecrest-none{margin-left:auto;color:var(--fg-3)}
+/* The sets past the cap, counted. Titled with their names, so the fact is
+   still one hover away rather than lost. */
+.ecrest-n{font-style:normal;color:var(--fg-3);padding-left:2px}
+
+/* ── the sonata panel ─────────────────────────────────────────────
+   Thirty-four tiles at the head of the view. This is the reference half of the
+   page — you read it, then go and find a body that carries what you read — so
+   it is dense on purpose: a crest, a name, the piece counts and how many
+   echoes roll it, and nothing else. The effects themselves are two paragraphs
+   each, and thirty-four of those is a page that ends before anybody reaches
+   the roster underneath it. */
+.sgrid{display:grid;gap:9px;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr))}
+.stile{
+  display:flex;align-items:center;gap:10px;min-width:0;text-align:left;cursor:pointer;
+  padding:9px 11px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--tint-sink);color:var(--fg-2);transition:.15s;
+}
+.stile:hover,.stile:focus-visible{
+  border-color:color-mix(in srgb,var(--attr) 50%,var(--line));
+  background:var(--bg-2);color:var(--fg);outline:none;
+}
+/* The crest sits on a disc lit from the set's own element, which is what makes
+   the panel scannable — the Glacio sets read as one run of blue without anyone
+   having to read a word. A set that buffs a mechanic rather than an element
+   names none and takes the site accent, correctly: it is not anybody's
+   element. */
+.stile-c{
+  flex:none;display:grid;place-items:center;width:2.125rem;height:2.125rem;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--attr) 26%,transparent),transparent 72%);
+  color:var(--attr);
+}
+.stile-c img{width:1.625rem;height:1.625rem;object-fit:contain;display:block}
+.stile-t{min-width:0;display:grid;gap:2px}
+.stile-t b{font-size:.8125rem;font-weight:600;line-height:1.25;color:var(--fg)}
+.stile:hover .stile-t b{color:var(--attr)}
+.stile-m{
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--fg-3);display:flex;align-items:center;gap:7px;
+}
+/* How many echoes roll it, set apart from the piece counts — the two are both
+   numbers about the same set and mean completely different things. */
+.stile-m i{
+  font-style:normal;padding:1px 5px;border-radius:999px;
+  background:var(--tint-sink);border:1px solid var(--line);color:var(--fg-2);
+}
+
+/* ── the echo record ──────────────────────────────────────────────
+   Borrows .wrec-r wholesale — see drawerEcho. What is different is the rail's
+   contents, and the one control in it that the weapon record has no use for:
+   ranks an echo never drops at, greyed rather than removed. That an echo
+   starts at rank 2 is a fact about the echo; a slider that silently spans a
+   different range on every record is a control the reader re-learns each
+   time. */
+.ascend-ticks i.off{color:color-mix(in srgb,var(--fg-3) 45%,transparent)}
+/* The plate, squared and unpadded. Everything .wr-art does for a weapon is
+   wrong for an echo: the inset, the diamond frame and the drop shadow are
+   there to stand a cut-out render on a dark ground, and an echo render is a
+   finished square picture with its own background. So the picture fills the
+   plate and the plate is the picture's own shape. */
+.erec-r .wr-art{height:auto;aspect-ratio:1;padding:0}
+.erec-r .wr-art::before{display:none}
+.erec-r .wr-art img{
+  width:100%;height:100%;object-fit:cover;border-radius:calc(var(--r) - 1px);filter:none;
+}
+
+/* A sonata crest standing in for the confidence dot in the record's set list.
+   Same row, same size budget — the dot is 7px and this is 17px, which is the
+   smallest a crest is still legible at. */
+.dsrc-c{flex:none;display:block;object-fit:contain}
+
+/* ── the sonata record ────────────────────────────────────────────
+   One column, not two. The bonuses are the answer and the echo grid is the
+   thing you act on, so they stack in that order and the grid takes the full
+   width — a set with eleven bodies under it in a 300px rail would be a
+   scrolling list beside two paragraphs of white space. */
+.srec-h{display:flex;align-items:center;gap:16px;padding-bottom:6px}
+.srec-c{
+  flex:none;display:grid;place-items:center;width:4.5rem;height:4.5rem;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--attr) 30%,transparent),transparent 72%);
+  border:1px solid color-mix(in srgb,var(--attr) 26%,var(--line));color:var(--attr);
+}
+.srec-c img{width:3.125rem;height:3.125rem;object-fit:contain;display:block}
+.drawer-b.srec .wr-id h2{
+  margin:0;font-size:clamp(1.5rem,2.8vw,2.25rem);font-weight:600;letter-spacing:-.03em;line-height:1.05;
+}
+.drawer-b.srec .wr-id .meta{margin-bottom:9px}
+
+/* One bonus. The piece count is the heading — 2pc and 5pc are different
+   effects that happen to be filed together, and running them in as prose is
+   how a reader ends up building for the wrong one. */
+.sbonus{display:flex;gap:13px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line)}
+.sbonus:first-child{border-top:0;padding-top:2px}
+.sbonus-n{
+  flex:none;min-width:2.75rem;font-family:var(--mono);font-size:1.125rem;font-weight:500;
+  color:var(--attr);font-variant-numeric:tabular-nums;line-height:1.15;
+}
+.sbonus-n i{font-style:normal;font-size:.5625rem;letter-spacing:.1em;margin-left:2px;color:var(--fg-3)}
+.sbonus-t{min-width:0;font-size:.8438rem;line-height:1.62;color:var(--fg-2)}
+.sbonus-t b{color:var(--fg);font-weight:600}
+
+/* The element marks fetch-echoes.mjs keeps on the words the source wrote them
+   on. Six colours, the same six the rest of the desk uses, so "Spectro DMG" in
+   a set bonus is the yellow a Spectro Resonator's record is accented in.
+   They appear in a set bonus and in an echo skill both. */
+.e-aero{color:#55FFB5}
+.e-glacio{color:#41AEFB}
+.e-fusion{color:#F0744E}
+.e-electro{color:#B46BFF}
+.e-spectro{color:#F8E56C}
+.e-havoc{color:#E649A6}
+
 /* ══ the weapon record ══════════════════════════════════════════════
    Two columns and a rule: the weapon on the left, what the desk measured about
    it on the right. Same bones as the resonator record — the reasoning is in
@@ -4147,21 +4308,34 @@ img.astrite-pic{
     padding-right:max(16px,env(safe-area-inset-right));
   }
   /* bottom dock replaces the rail's nav */
-  /* Six across a 360px phone is 60px a column, and "Resonators" is ten
+  /* Seven across a 360px phone is 51px a column, and "Resonators" is ten
      characters — hence the tighter tracking and the short labels from VIEWS.
-     Anything narrower than that lets the row scroll rather than clip. */
+     Anything narrower than that lets the row scroll rather than clip.
+
+     Auto columns rather than a count. It was repeat(6, …) while there were six
+     views, and adding the seventh wrapped the dock onto a second row across
+     the bottom of every phone — a fixed count silently turns an overflowing
+     row into a stack. Flowing by column means the row grows sideways and
+     scrolls, which is what the overflow-x below was always for, and the next
+     view added to VIEWS needs nothing here. */
   .dock{
-    display:grid;grid-template-columns:repeat(6,minmax(3.25rem,1fr));
+    display:grid;grid-auto-flow:column;grid-auto-columns:minmax(2.5rem,1fr);
     position:fixed;left:0;right:0;bottom:0;z-index:20;
     background:rgba(19,18,24,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);
     padding-bottom:env(safe-area-inset-bottom);
     overflow-x:auto;scrollbar-width:none;
   }
   .dock::-webkit-scrollbar{display:none}
+  /* A step smaller and a hair tighter than it was at six views. Seven columns
+     across a 390px phone is 55px each, and "Resonators" set at .5rem is 60 —
+     which does not clip, it pushes Live Signals off the end of a row that
+     scrolls, and a view nobody can see is a view nobody visits. The label is
+     already the small half of an icon-and-label pair; this is the size it can
+     afford to be. */
   .dock button{
     display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;
     padding:9px 2px 10px;cursor:pointer;color:var(--fg-3);white-space:nowrap;
-    font-family:var(--mono);font-size:.5rem;letter-spacing:.02em;text-transform:uppercase;
+    font-family:var(--mono);font-size:.4375rem;letter-spacing:0;text-transform:uppercase;
   }
   .dock button[aria-current="true"]{color:var(--accent)}
   .foot{margin-bottom:64px;flex-direction:column;align-items:flex-start}

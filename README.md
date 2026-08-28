@@ -14,6 +14,7 @@ data/astrite.json              what a patch pays — income model, hand-written
 data/resonators.json           resonator index — identity, debut, reruns (Actions)
 data/kits.json                 skills + Resonance Chains, loaded on demand (Actions)
 data/weapons.json              weapon database — stats, passives (Actions)
+data/echoes.json               echo database + sonata set effects (Actions)
 data/events.json               event calendar (Actions)
 data/permanents.json           the modes that are always on (Actions)
 data/items.json                reward item names and icons (Actions)
@@ -24,6 +25,7 @@ data/portraits.json            character art map (Actions)
 data/translations.json         English for non-English signal headlines (Actions + hand)
 assets/portraits/              cached busts and waist-up cut-outs
 assets/weapons/                cached weapon icons
+assets/echoes/                 cached echo renders, and sets/ for sonata crests
 assets/events/                 cached event banners
 assets/items/                  cached reward icons
 scripts/fetch-feeds.mjs        the headline fetcher
@@ -35,13 +37,15 @@ scripts/fetch-archive.mjs      the shipped-patch archive builder
 scripts/find-event-art.mjs     finds event banners inside Kuro's patch infographics
 scripts/fetch-portraits.mjs    the character art resolver
 scripts/fetch-weapons.mjs      the weapon stat, passive and icon resolver
+scripts/fetch-echoes.mjs       the echo, sonata-set and icon resolver
 scripts/fetch-kits.mjs         the roster, kit and banner-history builder
 scripts/confirm-dates.mjs      retires estimated phase dates once they're known
 scripts/seed-version.mjs       drafts the next version off Kuro's announcement posts
 scripts/translate-signals.mjs  finds Kuro's own English for a Chinese headline
 scripts/fetch-element-icons.mjs traces the six attribute glyphs off Kuro's badges
 .github/workflows/update-feeds.yml   cron, every 6h — feed, art, portraits, events,
-                                     reward icons, weapons, headline translations
+                                     reward icons, weapons, echoes, headline
+                                     translations
 .github/workflows/update-kits.yml    cron, daily — resonators + kits, confirmed phase
                                      dates, next-version draft, permanents, archive
 ```
@@ -50,7 +54,7 @@ scripts/fetch-element-icons.mjs traces the six attribute glyphs off Kuro's badge
 article id and answers a question about one patch's infographic. Everything else runs
 itself.
 
-Six views:
+Seven views:
 
 | View | Source | Tiered? |
 |---|---|---|
@@ -60,6 +64,7 @@ Six views:
 | Live Signals | `feed.json` | **no** — raw lead list |
 | Resonators | `resonators.json` + `kits.json` | yes, per kit |
 | Weapons | `weapons.json` | — |
+| Echoes | `echoes.json` | — |
 
 The split matters. Live Signals is a machine telling you something happened; Intel is
 you deciding what it was worth. A cron job can't judge whether a post is a datamine or
@@ -1329,10 +1334,26 @@ being moved.
 
 ### Where the numbers come from
 
-Kuro publishes no weapon endpoint. Prydwen's weapons page embeds its entire dataset as
-JSON in the page source — one request for all 120 — and it is the same host
+Kuro publishes no weapon endpoint. Prydwen's weapons page embeds its entire dataset in
+the page source — one request for all 120 — and it is the same host
 `fetch-portraits.mjs` already reads, so it is the source here too and is credited as
 such. Same Cloudflare caveat, same `curl` workaround, still dependency-free.
+
+**Where in the page source moved.** Prydwen was a Gatsby site, which left the dataset as
+plain JSON in a script tag with every quote escaped exactly once; unescaping the page
+with two `.replace()` calls and indexing into it was the whole parser. It is a Next.js
+site now, and the data arrives as React flight chunks —
+`self.__next_f.push([1,"…"])` — where the payload is a *JavaScript string literal*, so
+every backslash in it is doubled on top of the escaping the JSON already carries. The
+blanket unescape then produces text that no longer parses: the `\n` in a passive comes
+out as a lone backslash before an `n`. `flightPayload()` reads each chunk with
+`JSON.parse` and joins them back into one payload before anything looks for a key in it.
+
+This is worth knowing because of *how* it failed. The step is `continue-on-error`, the
+script threw on the first weapon it parsed, and `data/weapons.json` simply stopped
+changing — a green tick in the Actions UI over a database quietly frozen at whatever the
+last good run wrote. Nothing said so; the file's own `updated` field was the only
+evidence, and you have to go and look at it.
 
 Two things are cleaned up on the way in and one deliberately isn't. Stat **names** are
 folded by `STAT_NAME`: the page is hand-maintained and ships "Crit. Rate" and "CRIT
@@ -1346,6 +1367,152 @@ a desk starts publishing its own guesses.
 
 The script refuses to overwrite the file if it parses fewer than 60 weapons, and reports
 any weapon class it doesn't recognise rather than dropping it.
+
+## The echo database
+
+181 echoes and 34 sonata sets in `data/echoes.json`, written by
+`scripts/fetch-echoes.mjs`. This is the third database on the desk and the one the game
+is worst at showing you: a Resonator has a page in the client and a weapon has a card,
+but an echo is a monster you have already killed, and the three things anyone wants to
+know about it — what it costs to slot, which sonata sets it can roll, and what its skill
+does at rank 5 — are spread across the data terminal, the tuning screen and the creature
+itself.
+
+**What is deliberately not here yet.** Main-stat pools, sub-stat weights, and which echo
+a given Resonator should be running. Those are judgements rather than records, they are
+the reason the view is worth building at all, and they want a file of their own with a
+source on every line — the same separation `news.json` already keeps from `feed.json`.
+This pass is the database that goes under them.
+
+### The roster leads, the sets follow
+
+The view was built the other way round first — thirty-four crest tiles at the top,
+because a set is what an echo is actually picked for, and because that is how the source
+arranges the same two lists. It was wrong, and the rail is what showed it: the class
+filter changes the roster and nothing else, so clicking **Calamity** moved nothing that
+was on the screen. A control whose effect is below the fold reads as a control that did
+not work.
+
+So the roster is first, split into one panel per cost, and the sonata panel is the
+reference block underneath it. Sets are the thing you look up; echoes are the thing you
+browse.
+
+### Cost is the split, class is the filter
+
+Three cost tables — 4, 3, 1 — plus **Unclassified** at the foot. Cost is the constraint
+the game puts on a build (five slots, twelve points) and a grid that ignores it is a grid
+you have to do arithmetic against. Cost takes the accent slot per panel exactly as rarity
+does on the Weapons view, in the same gold/purple/blue ramp, so a reader arriving from
+the weapon database already knows what the colours mean.
+
+The rail filters on **class**, not cost, because two classes share the 4-cost table:
+Calamity and Overlord cost the same and are not the same thing. Class is on every card
+for the same reason — the panel header cannot say which of the two you are looking at.
+
+Empty groups are dropped rather than drawn empty. Filtering to Elite leaves two of the
+four tables with nothing in them, and three "no echoes match" panels stacked above the
+one you asked for is the page arguing with you. Weapons can afford to draw all three of
+its tables always, because a class filter there thins every rarity instead of emptying
+two.
+
+**Unclassified is 19 real records** — Fog Lionarch: Head, the six Kernel Puppets, the
+pickets — with skills, art and no class or cost published anywhere. They are kept, under
+their own heading, with a footnote saying what they are. Dropping a fifth of a table
+because the source left a field blank is the sort of tidiness that turns a database into
+a summary.
+
+### Cards, crests and the cap
+
+The card reuses `.rec` and the weapon grid's body outright. Two things are its own:
+
+- **The frame is square, not 4:5.** An echo render is neither a portrait nor an object on
+  transparent ground — it is the square card the game files the creature under,
+  background and all. A 4:5 frame crops a scene composed to its own edges; a contained
+  fit letterboxes it into a plate it does not need. Source and frame are both 1:1 and the
+  picture arrives whole. The record's plate is squared for the same reason, and drops the
+  diamond frame and drop shadow that exist to stand a weapon cut-out on a dark ground.
+- **Crests, capped at four.** Which sets an echo can roll is the fact that decides
+  whether you pick it up, so it is on the card as a row of 15px marks. Most echoes roll
+  one or two; Hecate rolls seven, and seven marks is a bar chart of nothing — it pushes
+  the class label off the line and stops reading as "these sets" at about the fifth. Past
+  four the row says `+3` and titles itself with the names, and the record lists them all.
+
+### The rank slider
+
+Same idea as the weapon record's ascension slider, and deliberately a second control
+rather than a parameterised one: `Skill_1`…`Skill_5` are the echo's **rank**, which is its
+star rarity, and an ascension and a rank are different numbers about different things.
+Sharing the implementation would tie one to the other the first time both were on screen.
+
+Two things it does that the weapon slider doesn't:
+
+- **It opens at 5.** Everything anyone farms is rank 5. `S.rank` opens at 1 because
+  ascension 1 is a weapon you own; rank 1 is an echo almost nothing drops at.
+- **It floors per record.** Two thirds of the roster has a rank-1 column of zeroes, so
+  `minRank` is read off the values — not assumed from the class, because some Common
+  echoes do have real numbers down there — and the record shows the lowest rank the
+  source actually publishes. The stops below it are greyed rather than removed: that an
+  echo starts at rank 2 is a fact about the echo, and a slider that silently spans a
+  different range on every record is a control you re-learn each time.
+
+### Sonata sets, both directions
+
+A set record carries its bonuses and every echo that can roll it; an echo record carries
+its skill and every set it can roll. The link is written **once**, on the echo, which is
+the direction the source publishes it in and the only direction that cannot go stale
+against itself — `echoesInSet()` is that list read backwards.
+
+Standard sets pay at 2 and 5 pieces. The five **compact** sets pay once, at 3, and are
+the ones built for three-echo loadouts. The data stores the piece counts a set actually
+has rather than three fixed fields, so the panel prints what exists instead of printing
+"3-piece: —" twenty-nine times.
+
+Sets are coloured by the element they read in, taken off the set's own bonus text rather
+than from a table: `fetch-echoes.mjs` keeps the element mark the source wrote on the
+words it wrote it on, so Freezing Frost says Glacio in its own 2-piece line and the crest
+is lit from that. Sets that buff a mechanic rather than an element — Moonlit Clouds,
+Rejuvenating Glow — name none and take the site accent, which is correct: they are not
+anybody's element. Inside a set record the echo cards inherit that accent, so Celestial
+Light's sixteen bodies all read in Spectro — which is the fact you opened it to
+establish.
+
+### Where the numbers come from, and the one field that is inferred
+
+Same source, same host, same `curl` workaround as the weapons fetcher, and the same
+flight-payload parser — see above, and note that the two scripts carry their own copies
+rather than importing one another, because no fetcher in `scripts/` imports another.
+
+Everything in `echoes.json` is read from the source except **cost**, which is derived
+from class: Common 1, Elite 3, Overlord 4, Calamity 4. It is derivable because the two
+move together in the game, and the source publishes the class as an index (`Rarity`,
+which is not a star rating: `-1` unclassified, `0` Common, `1` Elite, `2` Overlord, `3`
+Calamity). A class index the table doesn't know is kept with a null class rather than
+guessed at — a sixth one arriving should show up as a gap, not as a wrong number.
+
+Two things are cleaned on the way in:
+
+- **Markup.** Skill text and set bonuses arrive as HTML, and the desk does not put
+  somebody else's markup into `innerHTML`. `cleanMarkup()` fixes the vocabulary at the
+  point the data is written — bold, and bold in an element's colour, nothing else — so
+  the renderer can trust what it gets and only has to escape the values it fills in
+  itself. Order is load-bearing: surviving tags are parked on control-character
+  sentinels, then everything else is stripped, then entities are decoded, then the whole
+  string is escaped, then the sentinels become tags again. Decode first and an `&lt;` in
+  the prose becomes a bracket the strip pass reads as markup; escape first and every tag
+  on the page survives as visible text.
+- **Sonata ids** are filtered to sets that exist, because an id with no set behind it
+  would be a crest the view cannot draw and a filter nothing is filed under.
+
+What is **not** cleaned is the prose. Bell-Borne Geochelone's skill is missing a full
+stop after "lasts for 15s" and the desk prints it missing, because that is what the
+source says.
+
+Icons are cached rather than hotlinked, same bargain as the portraits and weapon icons:
+181 echo renders under `assets/echoes/` filed by monster id, 34 crests under
+`assets/echoes/sets/` filed by sonata id, about 5MB in total. An icon that will not come
+down leaves `icon: null` and the card draws its glyph plate — a path to a file that is
+not there draws a broken image, and the desk would rather say it has no picture than
+pretend.
 
 ## Setup
 
@@ -1404,6 +1571,7 @@ left is the editorial, which is the part worth your time.
 | `kits.json` — skill text | Prydwen | **no — run locally** |
 | `portraits.json` + `assets/portraits/` | Prydwen galleries | **no — run locally** |
 | `weapons.json` + `assets/weapons/` | Prydwen weapon pages | **no — run locally** |
+| `echoes.json` + `assets/echoes/` | Prydwen echoes page | **no — run locally** |
 
 All of them are driven off the names already in `versions.json`, so writing a banner row
 is what queues that character's art, portrait, weapon and kit. You never hand-place an
@@ -1418,11 +1586,12 @@ tries to get around it.
 
 The practical consequences, because they are easy to miss:
 
-- `fetch-portraits.mjs` and `fetch-weapons.mjs` **have never once succeeded in a
-  scheduled run.** They are marked `continue-on-error`, which paints the step green in
-  the Actions UI whatever happens, so this failed silently for a long time. Everything
-  in `assets/portraits/`, `assets/weapons/` and `data/weapons.json` got there from a
-  local run.
+- `fetch-portraits.mjs`, `fetch-weapons.mjs` and `fetch-echoes.mjs` **have never once
+  succeeded in a scheduled run.** They are marked `continue-on-error`, which paints the
+  step green in the Actions UI whatever happens, so this failed silently for a long time.
+  Everything in `assets/portraits/`, `assets/weapons/`, `assets/echoes/`,
+  `data/weapons.json` and `data/echoes.json` got there from a local run. They stay in the
+  workflow so that the day Prydwen serves Actions again, nothing needs adding back.
 - `fetch-kits.mjs` splits along the same line and carries on with the half it can reach.
   From Actions it builds the full index off the wiki — identity, debut, rerun history,
   and the convene dates `confirm-dates.mjs` needs — and leaves `kits.json` exactly as it
@@ -1437,7 +1606,12 @@ on patch day, when you're editing `news.json` anyway:
 node scripts/fetch-kits.mjs && node scripts/confirm-dates.mjs
 node scripts/fetch-portraits.mjs
 node scripts/fetch-weapons.mjs
+node scripts/fetch-echoes.mjs
 ```
+
+`fetch-echoes.mjs` is the least urgent of the four — a patch adds a handful of echoes
+where it adds a whole character's kit — but it is also the one whose staleness is
+invisible, because a missing echo looks exactly like an echo that does not exist yet.
 
 **Still yours**, and no script will ever do it: `news.json` entries and their tiers,
 `outcome` on a leak that resolved, a version's `notes`, and the `keyVisual*` crop values.
