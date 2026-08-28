@@ -106,6 +106,15 @@ const S = {
      toggle in the Skills header swaps them to the client's full text. A kit is
      five thousand words; the default has to be the one you can scan. */
   kitSimple:true,
+  /* Which half of a Resonator record you are looking at — "kit" or "build".
+     Unlike kitSimple and the two sliders, this one does NOT persist between
+     records: every record opens on the kit and drawerResonator resets it. The
+     kit is what the character *is* and the build is what somebody thinks you
+     should do about it, so the record has to open on the first — a record that
+     opens on advice is a record that has answered a question you did not ask
+     yet. Kept on S rather than in the markup so the toggle survives the
+     redraws that happen inside an open record. */
+  rtab:"kit",
   /* Weapon ascension, 1–5. Not a filter — it doesn't change which weapons you
      can see, only what the passive says — so it sits outside VIEW_FILTERS and
      Reset leaves it alone. The stats never move with it: those are level 90,
@@ -530,6 +539,29 @@ function kitFor(name){
   if(!KITS) return null;
   const k = String(name||"").toLowerCase();
   return KITS[name] || Object.entries(KITS).find(([n]) => n.toLowerCase() === k)?.[1] || null;
+}
+
+/* Builds and teams, on the same terms as the kit and for the same reason: a
+   third of a megabyte that nobody arriving at the timeline reads, wanted only
+   once a record is open. The first record you open fetches it and every one
+   after that is instant.
+
+   It is also the one file on the desk that is somebody's opinion rather than a
+   record — which sonata set to farm, what to put in the main slot, who to
+   build a team around. That is why it is a file of its own rather than more
+   fields on resonators.json, and why every panel drawn from it carries
+   Prydwen's name and the game version their write-up was last revised
+   against. See scripts/fetch-builds.mjs. */
+let BUILDS = null, buildsInFlight = null;
+function loadBuilds(){
+  if(BUILDS) return Promise.resolve(BUILDS);
+  if(!buildsInFlight) buildsInFlight = load("builds").then(d => (BUILDS = d?.builds || {}));
+  return buildsInFlight;
+}
+function buildFor(name){
+  if(!BUILDS) return null;
+  const k = String(name||"").toLowerCase();
+  return BUILDS[name] || Object.entries(BUILDS).find(([n]) => n.toLowerCase() === k)?.[1] || null;
 }
 
 function portraitFor(name){ return (DATA.portraits?.characters || {})[name] || null; }
@@ -3711,7 +3743,10 @@ const byCostThenName = (a, b) =>
 function setSonata(id){
   const narrowing = !(id == null || id === "all");
   S.eset = narrowing ? String(id) : "all";
-  closeDrawer();
+  /* All the way out, trail and all. This is leaving the drawer for a page, not
+     backing out of one panel into the one underneath it — coming back here
+     from the Echoes view would be going forward again. */
+  closeDrawer(true);
   if(S.view !== "echoes") setView("echoes");
   else draw("echoes");
 
@@ -3943,13 +3978,49 @@ function renderAside(){
 /* ── drawer ──────────────────────────────────────────────────────── */
 let lastFocus = null;
 
+/* ── where you came from ──────────────────────────────────────────
+   Records open other records. A build names its main-slot echo, an echo names
+   the sets it rolls, a Resonator names their signature weapon — and every one
+   of those replaces the panel you were reading. Before this, closing the echo
+   you had opened from Zhezhi's build dropped you on the page behind both, and
+   the way back to Zhezhi was to search for her again.
+
+   So the drawer keeps a trail. Opening a record while one is already up pushes
+   the old one; closing pops back to it instead of dismissing, and the header
+   carries a labelled way back so the behaviour is visible rather than
+   something you find out by pressing Escape.
+
+   Kept as (kind, id) rather than as saved markup: replaying dispatch() rebuilds
+   the panel from current data, so a record you return to is not a stale
+   snapshot of one — and it costs two strings per level instead of a document.
+
+   `drawerSeq` is how the stack knows a click actually opened something. Half
+   the openers bail — drawerEcho on a name it has no record for, drawerWeapon
+   on a weapon with neither a row nor a convene — and pushing the current panel
+   on a call that turned out to be a no-op would put a duplicate in the trail
+   and make Back do nothing. */
+let drawerTrail = [], drawerNow = null, drawerSeq = 0;
+const DRAWER_MAX = 12;
+
+/* What to call the panel underneath, on the way back to it. Ids are display
+   names for most kinds and internal for two, so those two are looked up. */
+function drawerLabel(kind, id){
+  if(kind === "intel") return entries().find(e => e.id === id)?.title || "intel";
+  if(kind === "event") return gameEvents().find(e => e.id === id)?.name || "event";
+  if(kind === "version") return `Version ${id}`;
+  if(kind === "open") return "Methodology";
+  return String(id || "");
+}
+
 /* `id` names what the drawer is currently showing. Only the resonator record
    needs it — it is the one panel that finishes drawing after an await, and it
    has to know whether the reader has moved on before answering. */
 function openDrawer(kind, html, id = null){
   S.drawer = id;
+  drawerSeq++;
   $("#drawer-kind").textContent = kind;
   $("#drawer-body").innerHTML = html;
+  paintDrawerBack();
   const d = $("#drawer");
   if(d.hidden){
     lastFocus = document.activeElement;
@@ -3960,9 +4031,44 @@ function openDrawer(kind, html, id = null){
   d.querySelector(".drawer-panel").focus();
   fitSoon();
 }
-function closeDrawer(){
+
+/* The back control lives in the drawer's own header, beside the kind label,
+   because that is the one strip every panel shares — putting it inside a
+   record would mean seven renderers each remembering to draw it. */
+function paintDrawerBack(){
+  const slot = $("#drawer-back");
+  if(!slot) return;
+  const prev = drawerTrail[drawerTrail.length - 1];
+  slot.innerHTML = prev
+    ? `<button class="drawer-backb" data-act="drawerback">
+         ${icon("i-arrow", 12)}<span>${esc(prev.label)}</span></button>`
+    : "";
+}
+
+/* Pops one level, or closes when there is nothing to pop back to. `all` skips
+   the trail entirely, for the two places that are navigating away from the
+   drawer rather than backing out of it — picking a sonata set, which leaves
+   for the Echoes page, and any redraw that replaces the view underneath. */
+function closeDrawer(all){
   const d = $("#drawer");
-  if(d.hidden) return;
+  if(d.hidden){ drawerTrail = []; drawerNow = null; return; }
+  if(!all && drawerTrail.length){
+    const prev = drawerTrail.pop();
+    drawerNow = prev;
+    /* Straight to the opener rather than through dispatch(), which is what
+       pushes onto the trail — going back must not record itself as a step
+       forward. */
+    reopenDrawer(prev.kind, prev.id);
+    /* And back onto the half you left it on. Every record opens on the kit,
+       which is right when you asked for the record and wrong when you are
+       returning to one: you were reading a build, you followed an echo out of
+       it, and the way back should not quietly be somewhere else. Coming back
+       is not opening. */
+    if(prev.kind === "resonator" && prev.tab === "build") showRecordTab("build");
+    return;
+  }
+  drawerTrail = [];
+  drawerNow = null;
   S.drawer = null;
   d.hidden = true;
   document.body.style.overflow = "";
@@ -4133,6 +4239,10 @@ function drawerResonator(name){
   const r = resonatorFor(name);
   const b = bannerFor(name) || {};
   if(!r.name && !b.name) return;
+  /* Every record opens on the kit. See S.rtab — the kit is what the character
+     is, the build is what somebody thinks you should do about it, and the
+     second is not the thing to answer with before it has been asked. */
+  S.rtab = "kit";
   const f = figure({name, ...b});
   const kitTier = r.confidence?.kit;
   const sig = r.signature || b.signature;
@@ -4220,16 +4330,30 @@ function drawerResonator(name){
       </div>`).join("")}
     </div>` : ""}
 
-    ${r.kit?.length ? `<div class="dsec">
-      <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
-      <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
-      <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
-      <p class="tier-note" style="margin-top:14px">Pre-balance. Multipliers and mechanics
-      routinely shift between beta phases.</p>
-    </div>` : ""}
+    ${recordTabs()}
 
-    <div id="kitwrap"><div class="dsec"><span class="label">Skills</span>
-      <p style="margin:0;color:var(--fg-3)">Loading kit…</p></div></div>
+    <!-- Both halves of the record, both in the DOM, one of them hidden. The
+         toggle is a hidden flip rather than a redraw: the kit is a lazy
+         megabyte and the build is a lazy third of one, and swapping tabs twice
+         should not cost two fetches or throw away where you had scrolled to.
+         (No backticks in here: this comment is inside a template literal.) -->
+    <div id="kittab"${S.rtab === "kit" ? "" : " hidden"}>
+      ${r.kit?.length ? `<div class="dsec">
+        <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
+        <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
+        <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
+        <p class="tier-note" style="margin-top:14px">Pre-balance. Multipliers and mechanics
+        routinely shift between beta phases.</p>
+      </div>` : ""}
+
+      <div id="kitwrap"><div class="dsec"><span class="label">Skills</span>
+        <p style="margin:0;color:var(--fg-3)">Loading kit…</p></div></div>
+    </div>
+
+    <div id="buildtab"${S.rtab === "build" ? "" : " hidden"}>
+      <div id="buildwrap"><div class="dsec"><span class="label">Builds and teams</span>
+        <p style="margin:0;color:var(--fg-3)">Loading builds…</p></div></div>
+    </div>
 
     <div class="rr-cols">
       ${releaseHistory(r)}
@@ -4237,10 +4361,15 @@ function drawerResonator(name){
     </div>
   </div>`, `resonator:${name}`);
 
-  /* The record is on screen already; this drops the kit in underneath when the
-     file lands. Guarded on the drawer still showing this Resonator, because a
-     megabyte over a slow connection is long enough to open a record, read the
-     summary and click through to somebody else before it arrives. */
+  /* The record is on screen already; these drop the kit and the build in
+     underneath when their files land. Guarded on the drawer still showing this
+     Resonator, because a megabyte over a slow connection is long enough to
+     open a record, read the summary and click through to somebody else before
+     it arrives.
+
+     Only the half you are looking at is fetched, and a record always opens on
+     the kit — so builds.json is not requested until somebody asks for it, and
+     then only once. */
   fillKit(name);
 }
 
@@ -4263,6 +4392,403 @@ function fillKit(name){
       <p style="margin:0;color:var(--fg-3)">Kit data did not load.</p></div>`;
   });
 }
+/* ── builds and teams ────────────────────────────────────────────────
+   The other half of a Resonator record, behind the toggle under the glance
+   strip. The kit says what the character does; this says what to put on them
+   and who to stand them next to.
+
+   It is the one thing on the desk that is a judgement rather than a record. A
+   patch has a start date and a weapon has a base ATK; "run Qingxiao on Heart
+   of Evil's Purge with Calamity Effigy in the main slot" depends on the patch,
+   on who else you own, on what the current endgame rewards, and two competent
+   people can disagree about it. So it is fetched into a file of its own, it is
+   never restated in the desk's own voice, and every panel here carries whose
+   opinion it is and which version of the game they last revised it against —
+   at the top, where you read it before the advice, not in a footer after you
+   have acted on it.
+
+   Deliberately not a second grid of cards. Everything on this panel points at
+   something the desk already holds a record for — an echo, a sonata set, a
+   weapon, a Resonator — so every name here is a way into that record, and the
+   panel itself is prose and figures rather than another wall of pictures. */
+
+/* The main-slot echo, drawn at the size a decision deserves. This is the one
+   line on the panel that changes how the character is played rather than what
+   their numbers are: it is the echo whose skill you actually cast, and picking
+   a different one changes the rotation. */
+function buildEchoRow(e, i = 0){
+  const rec = echoFor(e.name);
+  const inner = `<span class="be-art">${rec?.icon
+    ? `<img src="${esc(rec.icon)}" alt="" loading="lazy" decoding="async">`
+    : icon("i-echo", 20)}</span>
+    <span class="be-t">
+      <span class="label">${i ? "Or in the main slot" : "Main slot"}</span>
+      <b>${esc(e.name)}</b>
+      ${rec?.cost ? `<em>${rec.cost}◆ ${esc(rec.class || "")}</em>` : ""}
+    </span>
+    ${rec ? `<span class="arrow">${icon("i-arrow", 13)}</span>` : ""}`;
+  return `<div class="be-row">
+    ${rec
+      ? `<button class="be-echo" data-act="echo" data-id="${esc(e.name)}">${inner}</button>`
+      : `<span class="be-echo dead">${inner}</span>`}
+    ${e.note ? `<p class="be-note">${esc(e.note)}</p>` : ""}
+  </div>`;
+}
+
+/* One recommended set. A character can have more than one and they are not a
+   first and second choice — Shorekeeper's are a damage build and a support
+   build, which is why the upstream label ("Best", "Special") is printed as it
+   stands rather than turned into a rank. */
+function buildSet(s){
+  const set = sonataFor(s.name);
+  const pieces = set?.pieces?.map(p => `${p.n}pc`).join(" · ");
+  const crest = set?.icon
+    ? `<img src="${esc(set.icon)}" alt="" loading="lazy" decoding="async">`
+    : icon("i-sonata", 22);
+
+  /* The hybrid case. A compact set fills three slots and the other two are a
+     2-piece of your choosing, so the source writes the partners as groups of
+     interchangeable sets — and that is what they are printed as. Each group is
+     one 2-piece decision, not a list of things to wear at once. */
+  const mix = s.mix?.length ? `<div class="bset-mix">
+    <span class="label">Best combined with your choice of</span>
+    ${s.mix.map(group => `<div class="bset-mix-r"><i>2pc</i>${
+      group.split(",").map(n => n.trim()).filter(Boolean).map(n => {
+        const g = sonataFor(n);
+        return `<button class="bset-chip" data-act="eset" data-id="${g ? g.id : "all"}"
+                title="Show this set on the Echoes page"${
+          g ? sonataStyle(g) : ""}>${g?.icon
+            ? `<img src="${esc(g.icon)}" alt="" loading="lazy" decoding="async">` : ""}${esc(n)}</button>`;
+      }).join("")}</div>`).join("")}
+  </div>` : "";
+
+  /* Two columns, and the split is by subject rather than by size: the left is
+     the set — what it is, what it does, what you may pair it with — and the
+     right is what you do about it, which is the echo that goes in the main
+     slot and the share this whole build is worth. Stacked, the set's paragraph
+     ran the full width of a wide modal and pushed the one clickable thing on
+     the block below the fold; side by side they are the same height and the
+     block is read in one look.
+
+     A set with neither a share nor a main-slot echo has nothing to put in the
+     right column, so it does not get one — an empty pane beside a paragraph is
+     worse than a paragraph. */
+  /* Only the first echo goes in the column. A set that names an alternative
+     for the main slot — twenty of them do — puts two cards and two paragraphs
+     against one short set description, and the column that wins by six hundred
+     characters leaves the other one looking abandoned. The alternative spans
+     the full width underneath instead, where the same words take half the
+     height, and it reads in the order it is meant to: this set, this echo, or
+     failing that, this one. */
+  const [lead, ...extra] = s.echoes;
+
+  /* How wide the left column gets, from how much there is to put in it. Two
+     paragraphs of unequal length side by side end at unequal heights, and the
+     shorter one leaves a hole inside the block's border — Shorekeeper's set is
+     three hundred characters against nine hundred, which is four lines against
+     twelve. Height falls as width rises, so a column weighted by its own
+     content lands both at roughly the same depth.
+
+     Counting characters, not measuring. Both columns are the same face at
+     roughly the same size, so lines-per-character is near enough equal on the
+     two sides for the ratio to come out right; the echo card is the one thing
+     with a height and no prose in it, and 190 is about what it costs in the
+     same currency. Measuring properly would mean laying the block out, reading
+     it back and laying it out again, which is a reflow per set block to save
+     half a line.
+
+     Clamped on both sides, because it is a nudge rather than a solver: the
+     header needs room for a set name whatever the paragraph under it is doing,
+     and at the far end a column narrow enough to break "Rejuvenating" would be
+     buying a flush bottom edge with a worse read. Within those bounds it takes
+     the worst blocks from twelve lines of slack to two. */
+  const lChars = String(s.note || "").length + (s.mix || []).join(" ").length;
+  const rChars = lead ? String(lead.note || "").length + 190 : 0;
+  const grow = rChars ? Math.min(1.9, Math.max(0.5, (lChars + 40) / rChars)) : 1.15;
+  const right = `<div class="bset-rh${s.share ? "" : " none"}">${s.share
+    ? `<span class="bset-p" title="Damage share against the best option">${esc(s.share)}</span>`
+    : ""}</div>${lead ? buildEchoRow(lead) : ""}`;
+  const split = Boolean(s.share || s.echoes.length);
+
+  return `<div class="bset${split ? " bset--split" : ""}"${set ? sonataStyle(set) : ""}>
+    <div class="bset-l"${split ? ` style="flex-grow:${grow.toFixed(2)}"` : ""}>
+      <div class="bset-h">
+        <button class="bset-c" data-act="eset" data-id="${set ? set.id : "all"}"
+                title="Show this set on the Echoes page">${crest}</button>
+        <div class="bset-n">
+          <b>${esc(s.name)}</b>
+          <span class="bset-m">${[s.type, pieces].filter(Boolean).map(esc).join(" · ")}</span>
+        </div>
+      </div>
+      ${s.note ? `<p class="bset-note">${esc(s.note)}</p>` : ""}
+      ${mix}
+    </div>
+    ${split ? `<div class="bset-r">${right}</div>` : ""}
+    ${extra.length ? `<div class="bset-x">${
+      extra.map((e, i) => buildEchoRow(e, i + 1)).join("")}</div>` : ""}
+  </div>`;
+}
+
+/* The five slots, with the cost of each read off the format string. "43311" is
+   how the source writes a layout and it is a shape rather than a number — the
+   first slot is the 4-cost, which is the one the main echo goes in, and that
+   is why the two are on the same panel. A format the desk cannot read five
+   costs out of drops the badges rather than guessing at them. */
+/* A substat name, folded to something two sources can be compared on. The
+   priority list writes what you roll ("ATK%", "Flat HP", "CRIT RATE") and the
+   endgame list writes what it adds up to ("ATK", "HP", "CRIT Rate"), and the
+   two are the same stat under different names.
+
+   Folded whole and matched whole, never on a substring: "Liberation ATK DMG%"
+   contains "ATK" and is a different stat from it, and hanging a total-ATK
+   target off that row would be a plain lie. The parenthetical goes too — it is
+   a condition on the rolling ("Until Satisfied"), not part of the name. */
+const statKey = s => String(s || "").toLowerCase()
+  .replace(/\([^)]*\)/g, " ").replace(/[%]/g, " ")
+  .replace(/\b(?:flat|bonus)\b/g, " ")
+  .replace(/\s+/g, " ").trim();
+
+/* "Energy Regen (Until Satisfied) > CRIT Rate = CRIT DMG > ATK%" as the tiers
+   it is: split on ">" for rank, and on "=" or "≥" inside a tier for the stats
+   that share that rank. The joiner is kept rather than normalised — "≥" is a
+   lean and "=" is a tie, and the source means the difference. */
+function substatTiers(s){
+  return String(s || "").split(">").map(g => g.trim()).filter(Boolean).map(g => {
+    const parts = g.split(/\s*([=≥])\s*/);
+    const out = [];
+    for(let i = 0; i < parts.length; i += 2){
+      const raw = (parts[i] || "").trim();
+      if(!raw) continue;
+      const m = raw.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
+      out.push({name:(m ? m[1] : raw).trim(), when:m ? m[2].trim() : null, tie:i ? parts[i - 1] : null});
+    }
+    return out;
+  }).filter(t => t.length);
+}
+
+/* The priority, as a list with the number to stop at beside each line.
+   The order alone never answered the question a reader actually has — roll
+   Energy Regen first, yes, but how much of it is enough before crit is worth
+   more? — and the endgame targets are exactly that answer, so they are drawn
+   on the rows they belong to rather than as a second list further down.
+
+   A target is claimed by the first row that folds to it, and claimed once. Two
+   rows fold to ATK on most builds ("ATK%" then "ATK") and printing the same
+   1800-2500 twice would read as two separate goals. Whatever no row claims is
+   still printed, under the list — HP and DEF matter to a build that never
+   rolls for them, and a target with nowhere to go is not a target to drop. */
+function buildSubstats(st){
+  const tiers = substatTiers(st.substats);
+  const targets = (st.targets || []).map(t => ({...t, key:statKey(t.stat)}));
+  const taken = new Set();
+  const notes = [];
+
+  const rows = tiers.map((tier, i) => tier.map((x, j) => {
+    const hit = targets.find(t => !taken.has(t) && t.key === statKey(x.name));
+    if(hit){
+      taken.add(hit);
+      if(hit.note) notes.push({stat:x.name, note:hit.note});
+    }
+    return `<li class="bsub${j ? " tied" : ""}">
+      <span class="bsub-r">${j ? esc(x.tie || "=") : i + 1}</span>
+      <span class="bsub-n"><b>${esc(x.name)}</b>${
+        x.when ? `<em>${esc(x.when)}</em>` : ""}</span>
+      ${hit ? `<span class="bsub-v">${esc(hit.value)}</span>` : ""}
+    </li>`;
+  }).join("")).join("");
+
+  const rest = targets.filter(t => !taken.has(t));
+  for(const t of rest) if(t.note) notes.push({stat:t.stat, note:t.note});
+
+  if(!rows && !targets.length) return "";
+  return `<div class="bsubs">
+    <span class="label">Substat priority</span>
+    ${targets.length ? `<p class="bsubs-cap">Roll top down. The figure beside a stat is
+      where it is enough — a level 90 stat screen, out of combat with the character in the
+      party, so some of your own buffs will not be in it.</p>` : ""}
+    ${rows ? `<ol class="bsubl">${rows}</ol>` : ""}
+    ${rest.length ? `<div class="bsub-rest">
+      <span class="label">Also worth reaching</span>
+      <div>${rest.map(t => `<span class="bsub-chip"><b>${esc(t.stat)}</b>${esc(t.value)}</span>`).join("")}</div>
+    </div>` : ""}
+    ${notes.map(n => `<p class="bsub-fn"><b>${esc(n.stat)}</b> — ${esc(n.note)}</p>`).join("")}
+  </div>`;
+}
+
+function buildStats(st){
+  const costs = /^\d{5}$/.test(String(st.format || "")) ? String(st.format).split("") : null;
+  const rows = (st.slots || []).map((v, i) => v ? `<div class="bstat">
+    <span class="bstat-c">${costs ? `${costs[i]}◆` : i + 1}</span>
+    <b>${esc(v)}</b>
+  </div>` : "").join("");
+  return `<div class="dsec">
+    <span class="label">Main stats${st.format ? ` — ${esc(st.format)}` : ""}</span>
+    ${rows ? `<div class="bstats">${rows}</div>` : ""}
+    ${buildSubstats(st)}
+    ${st.note ? `<p class="bset-note">${esc(st.note)}</p>` : ""}
+  </div>`;
+}
+
+/* The weapon ranking. Kept to a row apiece — name, how many copies it assumes,
+   and the damage share — because the desk already holds a record for every one
+   of them and the note is one hover or one click away. The signature is
+   usually first and already has a card at the top of the record; what this
+   answers is the other question, which is what to use instead. */
+function buildWeapons(list){
+  return `<div class="dsec"><span class="label">Weapons — ${list.length} ranked</span>
+    <div class="bweps">${list.map((w, i) => {
+      const rec = weaponFor(w.name);
+      const inner = `<span class="bw-n">${i + 1}</span>
+        <span class="bw-art">${rec?.icon
+          ? `<img src="${esc(rec.icon)}" alt="" loading="lazy" decoding="async">`
+          : icon("i-weapon", 16)}</span>
+        <b>${esc(w.name)}</b>
+        ${w.dupes > 1 ? `<em>S${w.dupes}</em>` : ""}
+        ${w.share ? `<span class="bw-p">${esc(w.share)}</span>` : ""}`;
+      return rec
+        ? `<button class="bwep" data-act="weapon" data-id="${esc(w.name)}"
+                   title="${esc(w.note || "")}">${inner}</button>`
+        : `<span class="bwep dead" title="${esc(w.note || "")}">${inner}</span>`;
+    }).join("")}</div>
+  </div>`;
+}
+
+/* A team. Three seats, and a seat can name more than one Resonator — which is
+   the whole reason the slots are kept as slots rather than flattened to a list
+   of six names. "Verina or Shorekeeper in the third seat" is a different
+   statement from "these six work together", and the second one is not true. */
+/* One name in a seat, at a size worth looking at. The waist-up cut-out rather
+   than the 54px tile: this is the one panel where the answer is "these three
+   people", and three faces you recognise across a row is the whole point of
+   drawing it rather than listing it. */
+function buildWho(who){
+  const r = resonatorFor(who);
+  const f = figure({name:who});
+  const art = f.image || f.icon;
+  const inner = `<span class="bwho-a${art ? "" : " none"}">${art
+    ? `<img src="${esc(art)}" alt="" loading="lazy" decoding="async">`
+    : `<i>${esc(String(who).slice(0, 1))}</i>`}</span>
+    <span class="bwho-n">${esc(who)}</span>`;
+  return r.name
+    ? `<button class="bwho" data-act="resonator" data-id="${esc(who)}"${
+        attrStyle(r.attribute)}>${inner}</button>`
+    : `<span class="bwho dead">${inner}</span>`;
+}
+
+/* A team, as columns. One column per seat, and the alternatives for a seat
+   stacked inside its own column under an "or".
+
+   This was a single wrapping row with the seats separated by a "+", and the
+   fault with it is what a wrap does to the meaning: once "Mornye or Ciaccona
+   or The Shorekeeper" runs past the end of a line, which seat the "or" belongs
+   to stops being visible and the row reads as six interchangeable people. A
+   column cannot wrap into its neighbour, so the grouping holds at every width
+   — and it stops being ambiguous exactly where the old layout stopped being
+   readable.
+
+   No "+" between the columns any more. Three columns of a bordered block are
+   already one thing; the plus was doing work the layout now does. */
+function buildTeams(list){
+  return `<div class="dsec"><span class="label">Teams — ${list.length}</span>
+    <div class="bteams">${list.map(t => `<div class="bteam">
+      <div class="bteam-h"><b>${esc(t.name)}</b></div>
+      <div class="bteam-s" style="--seats:${t.slots.length}">${t.slots.map(slot =>
+        `<div class="bseat">${slot.map(buildWho)
+          .join(`<span class="bslot-or"><i></i>or<i></i></span>`)}</div>`).join("")}</div>
+      ${t.note ? `<p class="bset-note">${esc(t.note)}</p>` : ""}
+    </div>`).join("")}</div>
+  </div>`;
+}
+
+/* The whole panel, and the caveat is the first thing in it rather than the
+   last: this is advice, the reader is about to spend a week of waveplate on
+   it, and what it is and is not are what decide whether to follow it.
+
+   It says what the panel is worth, not where it came from — the desk credits
+   its sources in the README, in each data file's own `credit` field and in the
+   Methodology drawer, and stopped printing a bibliography on the page itself
+   a long time ago. What a reader standing here actually needs to know is that
+   these are dependable general-purpose answers rather than a solved optimum,
+   and the version they were last written against, which is the one thing that
+   tells them whether the advice has gone stale. */
+function buildPanel(name, b){
+  return `<div class="bwrap">
+    <div class="bcredit">
+      ${icon("i-info", 14)}
+      <span>Not a solved answer. These are general-purpose builds and teams that hold up
+        across most content — for one specific fight, or for the roster you actually own,
+        something else may well be better.${
+        b.reviewed ? ` Last reviewed against <b>version ${esc(b.reviewed)}</b>.` : ""}</span>
+    </div>
+
+    ${b.sets?.length ? `<div class="dsec">
+      <span class="label">Echo set${b.sets.length > 1 ? "s" : ""} — ${b.sets.length}</span>
+      <div class="bsets">${b.sets.map(buildSet).join("")}</div>
+    </div>` : ""}
+
+    ${b.stats ? buildStats(b.stats) : ""}
+    ${b.teams?.length ? buildTeams(b.teams) : ""}
+    ${b.weapons?.length ? buildWeapons(b.weapons) : ""}
+  </div>`;
+}
+
+/* Drops the build in underneath the record once builds.json lands, on exactly
+   the terms fillKit works to — including the guard on the drawer still showing
+   the Resonator that asked for it, because a third of a megabyte over a slow
+   connection is long enough to open a record and click through to somebody
+   else before it arrives. */
+function fillBuild(name){
+  return loadBuilds().then(() => {
+    const wrap = $("#buildwrap");
+    if(!wrap || S.drawer !== `resonator:${name}`) return;
+    const b = buildFor(name);
+    wrap.innerHTML = b
+      ? buildPanel(name, b)
+      : `<div class="dsec"><span class="label">Builds and teams</span>
+          <p style="margin:0;color:var(--fg-3)">Nothing published yet. Nobody writes a build for a
+          Resonator who has not shipped — the numbers move until the patch does.</p></div>`;
+    fitSoon();
+  }).catch(() => {
+    const wrap = $("#buildwrap");
+    if(wrap) wrap.innerHTML = `<div class="dsec"><span class="label">Builds and teams</span>
+      <p style="margin:0;color:var(--fg-3)">Build data did not load.</p></div>`;
+  });
+}
+
+/* The toggle. Two buttons rather than a tablist: what it switches is the lower
+   half of a record, the two halves are not panels of equal weight, and a
+   tablist promises arrow-key navigation between siblings that this does not
+   have. Both halves stay in the DOM — the switch is a `hidden` flip, so the
+   kit does not re-fetch and neither side loses its place when you come back. */
+/* Shows one half of a record. A `hidden` flip on two sections that are both
+   already in the DOM — no redraw, so neither half re-fetches and neither loses
+   where you had scrolled to. The half being shown for the first time fills
+   itself; the guard inside fillKit/fillBuild makes the repeat calls free.
+
+   Its own function because two things switch tabs: the toggle, and coming back
+   to a record you left on the build half. */
+function showRecordTab(id, scroll){
+  S.rtab = id === "build" ? "build" : "kit";
+  const cur = String(S.drawer || "");
+  const kitOn = S.rtab === "kit";
+  document.getElementById("kittab")?.toggleAttribute("hidden", !kitOn);
+  document.getElementById("buildtab")?.toggleAttribute("hidden", kitOn);
+  document.querySelectorAll('[data-act="rtab"]').forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.id === S.rtab)));
+  if(cur.startsWith("resonator:")){
+    const who = cur.slice(10);
+    if(kitOn) fillKit(who); else fillBuild(who);
+  }
+  if(scroll) document.querySelector(".rr-tabs")?.scrollIntoView({block:"start", behavior:"smooth"});
+}
+
+function recordTabs(){
+  return `<div class="rr-tabs" role="group" aria-label="What to show below">
+    ${[["kit", "Combat kit"], ["build", "Builds and teams"]].map(([id, label]) =>
+      `<button data-act="rtab" data-id="${id}" aria-pressed="${S.rtab === id}">${label}</button>`).join("")}
+  </div>`;
+}
+
 function drawerVersion(id){
   /* versions.json for the arc the desk is watching; the archive for the
      eighteen patches behind it, which have no record in that file and are
@@ -4543,6 +5069,23 @@ function drawerMethodology(){
       their CDN, credited back to the source post. Pre-release art from beta files is labelled as such on the
       card. All of it is © Kuro Games and used unofficially.</p>
     </div>
+    <!-- The one place on the page that says where the databases come from. The
+         panels themselves stopped carrying a byline for the same reason the
+         footer's bibliography went: a credit repeated on every card is
+         furniture, and a reader who wants to know where a number came from
+         comes looking. The builds are worth naming here in particular, because
+         they are the one thing on the desk that is judgement rather than
+         record.
+         (No backticks in here: this comment is inside a template literal.) -->
+    <div class="dsec"><span class="label">Databases</span>
+      <p style="margin:0">Weapon stats and passives, the echo roster and its sonata sets, and the
+      recommended builds and teams are all resolved from
+      <a href="https://www.prydwen.gg/wuthering-waves/" target="_blank" rel="noopener">prydwen.gg</a>.
+      Echo locations, the Resonator roster, kits, event history and reward items come from the
+      <a href="https://wutheringwaves.fandom.com/" target="_blank" rel="noopener">Wuthering Waves wiki</a>.
+      The builds are the only thing on the desk that is somebody's judgement rather than a
+      published fact, and every one of them says so where it is shown.</p>
+    </div>
   </div>`);
 }
 
@@ -4711,15 +5254,51 @@ function dispatch(kind, id){
     if(cur.startsWith("resonator:")) fillKit(cur.slice(10)).then(() => $(".kitmode")?.focus());
     return;
   }
+  /* Kit or build. A `hidden` flip on two sections that are both already in the
+     DOM — no redraw, so neither half re-fetches and neither loses where you
+     had scrolled to. The half being shown for the first time fills itself; the
+     guard inside fillKit/fillBuild makes the repeat calls free. */
+  if(kind === "rtab"){
+    if(S.rtab === id) return;
+    /* The panel above is what changed, and it is off the top of the screen by
+       the time anyone reaches this toggle in a long record — so this call
+       scrolls, and the one closeDrawer() makes on the way back does not. */
+    showRecordTab(id, true);
+    return;
+  }
+  /* One step back down the trail. */
+  if(kind === "drawerback"){ closeDrawer(); return; }
+  /* Not a record — a sonata set is a section of the Echoes page, so picking
+     one out of the palette navigates and narrows rather than opening a
+     dialog, and that is leaving the drawer rather than backing out of it. */
+  if(kind === "eset"){ setSonata(id); return; }
+
+  /* Everything else opens a panel, so it is a step forward: remember where we
+     were, then go. See drawerTrail — the seq check is what stops an opener
+     that bailed from leaving a duplicate in the trail. */
+  /* The tab is read here, before the opener runs, because opening a record
+     resets it — going from one record to another would otherwise remember the
+     new record's kit tab as the old record's state. */
+  const was = drawerNow, wasTab = S.rtab, seq = drawerSeq;
+  reopenDrawer(kind, id);
+  if(drawerSeq === seq) return;                       // nothing opened
+  if(was && !(was.kind === kind && was.id === id)){
+    drawerTrail.push({...was, tab:wasTab});
+    if(drawerTrail.length > DRAWER_MAX) drawerTrail.shift();
+  }
+  drawerNow = {kind, id, label: drawerLabel(kind, id)};
+  paintDrawerBack();
+}
+
+/* The bare openers, with no trail bookkeeping. Called by dispatch() on the way
+   forward and by closeDrawer() on the way back, which is the whole reason it
+   is a function of its own: going back must not record itself as a step. */
+function reopenDrawer(kind, id){
   if(kind === "intel") drawerIntel(id);
   else if(kind === "resonator") drawerResonator(id);
   else if(kind === "version") drawerVersion(id);
   else if(kind === "weapon") drawerWeapon(id);
   else if(kind === "echo") drawerEcho(id);
-  /* Not a record — a sonata set is a section of the Echoes page, so picking
-     one out of the palette navigates and narrows rather than opening a
-     dialog. */
-  else if(kind === "eset") setSonata(id);
   else if(kind === "event") drawerEvent(id);
   else if(kind === "open" && id === "methodology") drawerMethodology();
 }
@@ -4727,7 +5306,11 @@ function dispatch(kind, id){
 /* ── events ──────────────────────────────────────────────────────── */
 function bind(){
   document.addEventListener("click", e => {
-    if(e.target.closest("[data-close]")){ closeDrawer(); closeCmd(); return; }
+    /* data-close="all" is the scrim. Clicking the page outside a panel means
+       "get me out", where the × in the panel's own header means "close this
+       one" — and with a trail behind it those are different requests. */
+    const closer = e.target.closest("[data-close]");
+    if(closer){ closeDrawer(closer.dataset.close === "all"); closeCmd(); return; }
 
     const cmd = e.target.closest(".cmd-item");
     if(cmd){ runCmdItem(Number(cmd.dataset.i)); return; }

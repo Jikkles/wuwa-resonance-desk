@@ -25,7 +25,12 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Was 10, which was comfortable while every Prydwen step failed in under a
+    # second. fetch-builds.mjs walks 57 character pages with a courtesy gap and
+    # takes about four minutes when it is actually served — so the day Prydwen
+    # stops turning Actions away, the old ceiling would have killed the job
+    # mid-run and taken the commit step with it.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -89,6 +94,16 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-echoes.mjs
 
+      # Recommended builds and teams — the one file on the desk that is
+      # somebody's judgement rather than a record, which is why it is credited
+      # on every panel that draws from it. Fifty-seven character pages one at a
+      # time, so it is the slowest step here by a distance; last of the Prydwen
+      # three for that reason, and on the same caveat as the other two.
+      - name: Resolve builds and teams
+        if: always()
+        continue-on-error: true
+        run: node scripts/fetch-builds.mjs
+
       # English for the Chinese headlines, looked up rather than translated —
       # Kuro publish most of these notices on their own English site. Last,
       # because it reads the feed the first step wrote: a signal has to be in
@@ -105,7 +120,7 @@ jobs:
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/feed.json data/art.json data/events.json data/items.json data/portraits.json data/translations.json data/weapons.json data/echoes.json assets/items assets/portraits assets/weapons assets/echoes
+          git add data/feed.json data/art.json data/events.json data/items.json data/portraits.json data/translations.json data/weapons.json data/echoes.json data/builds.json assets/items assets/portraits assets/weapons assets/echoes
           if git diff --staged --quiet; then
             echo "no change"
             exit 0

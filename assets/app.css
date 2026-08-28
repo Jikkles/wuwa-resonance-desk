@@ -3269,6 +3269,30 @@ img.astrite-pic{
   padding:14px clamp(18px,2.4vw,38px);border-bottom:1px solid var(--line);background:var(--bg-2);
 }
 .drawer-h .label{margin-right:auto}
+/* The way back to the panel underneath this one, when there is one. Pushed to
+   the far end beside the close button rather than sitting next to the kind
+   label: they are the two ways out of the panel and they belong together. */
+#drawer-back:empty{display:none}
+.drawer-backb{
+  display:inline-flex;align-items:center;gap:7px;max-width:16rem;cursor:pointer;
+  padding:5px 11px 5px 9px;border:1px solid var(--line);border-radius:999px;
+  background:var(--tint-sink);color:var(--fg-3);transition:.15s;
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.11em;text-transform:uppercase;
+}
+/* The arrow points forward everywhere else on the desk, so it is turned round
+   here rather than a second glyph being drawn for one button. */
+.drawer-backb svg{flex:none;transform:rotate(180deg)}
+.drawer-backb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.drawer-backb:hover,.drawer-backb:focus-visible{
+  border-color:var(--line-2);color:var(--fg);background:var(--bg-2);outline:none;
+}
+@media (max-width:560px){
+  /* At this width the kind label, a name and a close button do not all fit —
+     and the label is the one of the three that is describing what you can
+     already see. */
+  .drawer-h .label{display:none}
+  .drawer-backb{margin-right:auto;max-width:11rem}
+}
 .iconbtn{
   background:none;border:1px solid var(--line);border-radius:8px;padding:5px;
   cursor:pointer;color:var(--fg-3);display:flex;transition:.15s;
@@ -4018,6 +4042,363 @@ img.astrite-pic{
   .kflow-i{grid-area:i;width:44px;height:44px;align-self:center}
   .kflow em{grid-area:e;align-self:end;text-align:left}
   .kflow b{grid-area:b;align-self:start;text-align:left}
+}
+
+/* ══ builds and teams ═══════════════════════════════════════════════
+   The second half of a Resonator record, and the first thing on the desk that
+   is an opinion. Everything here is styled a step quieter than the record it
+   sits in: no art plates, no full-bleed pictures, no colour that is not either
+   the character's own element or a link into a record the desk already holds.
+   A page that shouts advice reads as the desk's advice, and it is not. */
+
+/* The toggle, under the glance strip and right-aligned — it belongs to what is
+   below it, and putting it at the left would set it against the strip's own
+   left edge as if it were another fact. A segmented pair rather than a tablist:
+   what it switches is the lower half of a record, the two halves are not panels
+   of equal weight, and a tablist promises arrow-key navigation between siblings
+   that this deliberately does not have. */
+.rr-tabs{
+  display:flex;justify-content:flex-end;gap:0;
+  margin-top:clamp(16px,2vh,22px);
+}
+.rr-tabs button{
+  position:relative;
+  cursor:pointer;padding:9px 16px;border:1px solid var(--line);background:var(--tint-sink);
+  color:var(--fg-3);transition:.15s;
+  font-family:var(--mono);font-size:.6563rem;letter-spacing:.13em;text-transform:uppercase;
+}
+.rr-tabs button:first-child{border-radius:var(--r-sm) 0 0 var(--r-sm)}
+.rr-tabs button:last-child{border-radius:0 var(--r-sm) var(--r-sm) 0}
+/* Both buttons keep all four borders and the pair overlaps by the width of
+   one, so the join is a single hairline rather than two stacked. Dropping the
+   second button's left border instead — which is the usual trick and is what
+   this did first — leaves the lit button with an open left side the moment it
+   is the second one, and that gap is exactly where the eye goes. Raised while
+   pressed so its own colour wins the shared edge in both directions. */
+.rr-tabs button+button{margin-left:-1px}
+.rr-tabs button:hover{color:var(--fg-2);background:var(--bg-2);z-index:1}
+.rr-tabs button[aria-pressed="true"]{
+  z-index:2;
+  color:var(--attr,var(--accent));border-color:color-mix(in srgb,var(--attr,var(--accent)) 55%,var(--line));
+  background:color-mix(in srgb,var(--attr,var(--accent)) 12%,var(--tint-sink));
+}
+
+/* Whose opinion, and how old. First thing in the panel rather than a footer:
+   the reader is about to spend a week of resin on what follows, and both facts
+   change whether they should. */
+.bcredit{
+  display:flex;align-items:flex-start;gap:9px;margin:22px 0 4px;
+  padding:11px 13px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--tint-sink);color:var(--fg-3);font-size:.7813rem;line-height:1.55;
+}
+.bcredit svg{flex:none;margin-top:2px;color:var(--amber, var(--fg-3))}
+.bcredit a{color:var(--fg-2);text-decoration:underline;text-underline-offset:2px}
+.bcredit a:hover{color:var(--attr,var(--accent))}
+.bcredit b{color:var(--fg-2);font-weight:600}
+
+/* ── the echo set ─────────────────────────────────────────────────
+   One block per recommended set, coloured by the element that set reads in —
+   the same accent the Echoes view gives it, so a build and the page you go and
+   farm it on are visibly the same subject. */
+.bsets{display:grid;gap:12px}
+.bset{
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  background:linear-gradient(168deg,color-mix(in srgb,var(--attr) 6%,transparent),transparent 60%);
+}
+/* Two columns: the set on the left, what you do about it on the right.
+   Stacked, the set's paragraph ran the full width of a wide modal and pushed
+   the main-slot echo — the one thing on the block worth clicking — below it.
+
+   The two header bands are one band. `.bset-rh` carries the same padding,
+   background and rule as `.bset-h` and a matching minimum height, so the crest
+   on the left and the damage share on the right sit on one line across the
+   whole block rather than in two boxes that nearly line up. That is also why
+   the right column keeps an empty band when there is no share to put in it —
+   on a phone, where the columns stack, the empty one is dropped instead.
+
+   Flex rather than a two-column grid because the split is not fixed: the left
+   column's `flex-grow` is written inline from how much prose each side has, so
+   a long set description and a long echo note both get the width that lands
+   them at about the same height. See buildSet for the arithmetic and why it is
+   clamped. */
+.bset--split{display:flex;flex-wrap:wrap;align-items:flex-start}
+.bset-l,.bset-r{min-width:0;flex:1 1 0}
+.bset-r{align-self:stretch;border-left:1px solid var(--line);padding-bottom:1px}
+.bset-h,.bset-rh{
+  display:flex;align-items:center;gap:12px;padding:11px 14px;box-sizing:border-box;
+  border-bottom:1px solid var(--line);background:var(--tint-sink);
+}
+.bset-h{box-shadow:inset 3px 0 0 var(--attr)}
+.bset--split .bset-h,.bset--split .bset-rh{min-height:3.8125rem}
+.bset-rh{justify-content:flex-end}
+.bset--split .be-row{padding-top:13px}
+/* The alternative for the main slot, spanning both columns underneath them —
+   the same paragraph is half as tall across the full width, which is what
+   keeps a two-echo set from leaving a hole beside a three-line description. */
+.bset-x{flex:0 0 100%;border-top:1px solid var(--line)}
+.bset-x .be-row{padding-top:12px}
+.bset-c{
+  flex:none;display:grid;place-items:center;width:2.375rem;height:2.375rem;border-radius:50%;cursor:pointer;
+  border:1px solid color-mix(in srgb,var(--attr) 26%,var(--line));color:var(--attr);
+  background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--attr) 24%,transparent),transparent 72%);
+  transition:.15s;
+}
+.bset-c:hover,.bset-c:focus-visible{border-color:var(--attr);outline:none}
+.bset-c img{width:1.625rem;height:1.625rem;object-fit:contain;display:block}
+.bset-n{min-width:0;display:grid;gap:2px}
+.bset-n b{font-size:.9375rem;font-weight:600;color:var(--fg);line-height:1.25}
+.bset-m{
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
+}
+/* The damage share against the best option. A figure, so it is set as one. */
+.bset-p{
+  margin-left:auto;flex:none;font-family:var(--mono);font-size:.8125rem;font-weight:500;
+  color:var(--attr);font-variant-numeric:tabular-nums;
+}
+.bset-note{margin:0;padding:12px 14px;font-size:.8125rem;line-height:1.65;color:var(--fg-2)}
+
+/* The hybrid case: a compact set fills three slots and the other two are a
+   2-piece of your choosing. Each row is one such choice and the chips inside it
+   are interchangeable — which is why they are chips in a row rather than a list,
+   and why the row carries its own "2pc". */
+.bset-mix{padding:0 14px 12px}
+.bset-mix>.label{display:block;margin-bottom:8px}
+.bset-mix-r{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:6px}
+.bset-mix-r>i{
+  flex:none;font-style:normal;font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--fg-3);min-width:2.25rem;
+}
+.bset-chip{
+  display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+  padding:4px 9px 4px 5px;border:1px solid var(--line);border-radius:999px;
+  background:var(--tint-sink);color:var(--fg-2);font-size:.75rem;transition:.15s;
+}
+.bset-chip img{width:16px;height:16px;object-fit:contain;display:block}
+.bset-chip:hover,.bset-chip:focus-visible{
+  border-color:color-mix(in srgb,var(--attr) 55%,var(--line));color:var(--fg);outline:none;
+}
+
+/* The main slot. The one decision on this panel that changes how a character is
+   played rather than what their numbers are, so it is the one thing here drawn
+   as an object with a picture. */
+.be-row{padding:0 14px 13px}
+.be-echo{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;cursor:pointer;
+  padding:8px 11px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--bg-2);color:inherit;font:inherit;transition:.15s;
+}
+.be-echo.dead{cursor:default}
+.be-echo:not(.dead):hover,.be-echo:not(.dead):focus-visible{
+  border-color:color-mix(in srgb,var(--attr) 50%,var(--line));outline:none;
+}
+.be-art{
+  flex:none;width:2.5rem;height:2.5rem;border-radius:var(--r-sm);overflow:hidden;
+  display:grid;place-items:center;background:var(--tint-sink);color:var(--attr);
+}
+.be-art img{width:100%;height:100%;object-fit:cover;display:block}
+.be-t{min-width:0;display:grid;gap:1px}
+.be-t b{font-size:.875rem;font-weight:600;color:var(--fg);line-height:1.25}
+.be-echo:not(.dead):hover .be-t b{color:var(--attr)}
+.be-t em{
+  font-style:normal;font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.be-echo .arrow{margin-left:auto;color:var(--fg-3)}
+.be-note{margin:9px 0 0;font-size:.7813rem;line-height:1.6;color:var(--fg-3)}
+
+/* ── stats ────────────────────────────────────────────────────────
+   Five slots, each with the cost of the echo that goes in it read off the
+   format string. The first slot is the 4-cost, which is where the main echo
+   above goes — the two panels are about the same object. */
+.bstats{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr))}
+.bstat{
+  display:flex;align-items:center;justify-content:center;gap:9px;padding:9px 11px;
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+}
+.bstat-c{
+  flex:none;display:grid;place-items:center;min-width:1.75rem;height:1.75rem;padding:0 6px;
+  border-radius:var(--r-sm);background:var(--bg-2);color:var(--attr);
+  font-family:var(--mono);font-size:.6875rem;font-weight:500;
+}
+.bstat b{font-size:.8125rem;font-weight:500;color:var(--fg);line-height:1.35;text-align:center}
+
+/* ── the substat priority ─────────────────────────────────────────
+   A ranked list with the figure to stop at beside each line, rather than the
+   one long "A > B = C > D" sentence it arrives as. Two reasons it is worth
+   breaking up: a chain of five stats separated by ">" is read as a wall, and
+   an order on its own never answers the question the reader actually has,
+   which is how much of the first thing is enough before the second is worth
+   more. The endgame targets answer that, so they are drawn on the rows they
+   belong to.
+
+   The rank column carries the tie glyph instead of a number on a row that
+   shares its rank with the one above — "=" for a tie, "≥" for a lean, which is
+   a distinction the source makes and this keeps. */
+.bsubs{
+  margin-top:10px;padding:12px 13px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--tint-sink);display:grid;gap:9px;
+}
+.bsubs-cap{margin:-3px 0 0;font-size:.75rem;line-height:1.55;color:var(--fg-3)}
+.bsubl{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+/* The panel's own bullets, which every other list in a `.dsec` wants and this
+   one does not: the rank column is the marker here, and a second dot outside
+   the row reads as an extra level of nesting that is not there. */
+.dsec .bsubl li::before{content:none}
+.dsec .bsubl li{padding-left:10px}
+.bsub{
+  display:grid;grid-template-columns:1.375rem minmax(0,1fr) auto;align-items:baseline;gap:10px;
+  padding:7px 10px;border-radius:var(--r-sm);background:var(--bg-2);
+}
+.bsub.tied{background:color-mix(in srgb,var(--bg-2) 50%,transparent)}
+.bsub-r{
+  font-family:var(--mono);font-size:.6875rem;text-align:center;color:var(--fg-3);
+  font-variant-numeric:tabular-nums;
+}
+.bsub:not(.tied) .bsub-r{color:var(--attr,var(--accent))}
+.bsub-n{min-width:0;display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+.bsub-n b{font-size:.8125rem;font-weight:500;color:var(--fg);line-height:1.45}
+.bsub-n em{
+  font-style:normal;font-family:var(--mono);font-size:.5625rem;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.bsub-v{
+  font-family:var(--mono);font-size:.75rem;color:var(--fg-2);white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+/* Targets no row in the list claimed. HP and DEF matter to a build that never
+   rolls for them, so they are printed rather than dropped — as chips, under
+   the list, because they are goals without a place in the order. */
+.bsub-rest{display:grid;gap:7px}
+.bsub-rest>div{display:flex;flex-wrap:wrap;gap:6px}
+.bsub-chip{
+  display:inline-flex;align-items:baseline;gap:7px;padding:4px 10px;
+  border:1px solid var(--line);border-radius:999px;background:var(--bg-2);
+  font-family:var(--mono);font-size:.6875rem;color:var(--fg-2);
+}
+.bsub-chip b{font-family:var(--sans);font-size:.75rem;font-weight:500;color:var(--fg-3)}
+.bsub-fn{margin:0;font-size:.75rem;line-height:1.6;color:var(--fg-3)}
+.bsub-fn b{color:var(--fg-2);font-weight:600}
+
+/* ── weapons ──────────────────────────────────────────────────────
+   A ranking, one row each. The desk already holds a record for every one of
+   them, so this is a way in rather than a second weapon database. */
+.bweps{display:grid;gap:7px}
+.bwep{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;
+  padding:7px 11px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--tint-sink);color:var(--fg-2);font:inherit;transition:.15s;
+}
+.bwep.dead{cursor:default}
+.bwep:not(.dead):hover,.bwep:not(.dead):focus-visible{
+  border-color:color-mix(in srgb,var(--attr) 45%,var(--line));color:var(--fg);
+  background:var(--bg-2);outline:none;
+}
+.bw-n{
+  flex:none;min-width:1.25rem;font-family:var(--mono);font-size:.625rem;color:var(--fg-3);
+  font-variant-numeric:tabular-nums;
+}
+.bw-art{
+  flex:none;width:1.75rem;height:1.75rem;display:grid;place-items:center;color:var(--fg-3);
+}
+.bw-art img{width:100%;height:100%;object-fit:contain;display:block}
+.bwep b{min-width:0;font-size:.8125rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bwep em{
+  flex:none;font-style:normal;font-family:var(--mono);font-size:.5625rem;letter-spacing:.1em;
+  padding:1px 5px;border-radius:999px;border:1px solid var(--line);color:var(--fg-3);
+}
+.bw-p{
+  margin-left:auto;flex:none;font-family:var(--mono);font-size:.75rem;color:var(--attr);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ── teams ────────────────────────────────────────────────────────
+   Three seats with a + between them, and a seat may name alternatives with an
+   "or" between those. Kept as seats rather than flattened to a row of six
+   faces: "Verina or Shorekeeper in the third seat" is a different statement
+   from "these six work together", and the second one is not true. */
+.bteams{display:grid;gap:12px}
+.bteam{border:1px solid var(--line);border-radius:var(--r);background:var(--tint-sink);overflow:hidden}
+.bteam-h{padding:10px 14px;border-bottom:1px solid var(--line);background:var(--bg-2)}
+.bteam-h b{font-size:.8125rem;font-weight:600;color:var(--fg)}
+/* One column per seat, --seats set on the element because a team is almost
+   always three and occasionally is not. Equal columns rather than auto: the
+   seat with three alternatives in it is not entitled to three times the width
+   of the seat with one, and the row only reads as a team if the seats line
+   up. */
+.bteam-s{
+  display:grid;grid-template-columns:repeat(var(--seats,3),minmax(0,1fr));
+  gap:10px;padding:14px;align-items:start;
+}
+.bseat{
+  display:grid;gap:8px;justify-items:center;
+  padding:10px 8px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--bg-2);
+}
+/* The divider between two names in the same seat, with a rule either side so
+   it reads as a break in a column rather than as a word under a picture. */
+.bslot-or{
+  display:flex;align-items:center;gap:8px;width:100%;
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.bslot-or i{flex:1;height:1px;background:var(--line)}
+
+/* A name in a seat: the waist-up cut-out at a size you can recognise across
+   the room, with the name under it. Capped rather than filling the column —
+   at 1240px a third of the panel is 380px, and a 380px portrait of a support
+   is not three times more useful than a 190px one, it is just louder than the
+   set it is standing next to. */
+.bwho{
+  display:grid;gap:7px;justify-items:center;width:100%;max-width:9.5rem;cursor:pointer;
+  padding:0;border:0;background:none;color:var(--fg-2);font:inherit;font-size:.8125rem;
+  transition:color .15s;
+}
+.bwho.dead{cursor:default}
+.bwho-a{
+  width:100%;aspect-ratio:1;border-radius:var(--r-sm);overflow:hidden;position:relative;
+  display:grid;place-items:center;
+  border:1px solid color-mix(in srgb,var(--attr,var(--accent)) 30%,var(--line));
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 106%,color-mix(in srgb,var(--attr,var(--accent)) 30%,transparent),transparent 70%),
+    linear-gradient(165deg,var(--bg-3),var(--bg));
+  transition:border-color .15s,transform .15s;
+}
+/* Cut-outs are drawn full-length and the face is in the top third, so a square
+   crop centred on the middle of the image is a picture of a torso. */
+.bwho-a img{width:100%;height:100%;object-fit:cover;object-position:center 8%;display:block}
+.bwho-a.none i{font-style:normal;font-family:var(--mono);font-size:1.25rem;color:var(--fg-3)}
+.bwho:not(.dead):hover .bwho-a,.bwho:not(.dead):focus-visible .bwho-a{
+  border-color:var(--attr,var(--accent));transform:translateY(-2px);
+}
+.bwho:not(.dead):focus-visible{outline:none}
+.bwho:not(.dead):hover .bwho-n{color:var(--attr,var(--accent))}
+.bwho-n{line-height:1.3;text-align:center;transition:color .15s}
+.bteam .bset-note{padding:0 14px 13px}
+
+/* The record is a wide modal and these are all one-column blocks. At a phone's
+   width the seats stack, which is correct — a three-seat team wrapped across
+   two lines with a stray "+" leading the second is not a team. */
+@media (max-width:620px){
+  .rr-tabs button{padding:8px 11px;font-size:.6172rem;letter-spacing:.09em}
+  /* Three seats across a phone is a 100px portrait with "The Shorekeeper"
+     under it on three lines. The seats keep their columns — that is the whole
+     point of them — they just get one per row. */
+  .bteam-s{grid-template-columns:1fr;gap:8px}
+  .bseat{grid-template-columns:1fr}
+  .bwho{max-width:11rem}
+  .bstats{grid-template-columns:1fr}
+  /* Two columns of a set block is a paragraph three words wide at this size.
+     They stack, and the empty header band that was holding the share line up
+     with the crest has nothing left to line up with, so it goes. */
+  .bset--split{display:block}
+  .bset-r{border-left:0;border-top:1px solid var(--line)}
+  .bset-rh.none{display:none}
+  /* The share band's height existed to line up with the crest across the
+     block. Stacked there is nothing to line up with, and it would be a
+     three-line box holding one number. */
+  .bset--split .bset-h,.bset--split .bset-rh{min-height:0}
+  .bsub{grid-template-columns:1.375rem minmax(0,1fr);row-gap:2px}
+  .bsub-v{grid-column:2}
 }
 
 /* ══ command palette ════════════════════════════════════════════════ */

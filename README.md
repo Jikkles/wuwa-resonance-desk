@@ -13,6 +13,7 @@ data/news.json                 curated leak/news entries — hand-written
 data/astrite.json              what a patch pays — income model, hand-written
 data/resonators.json           resonator index — identity, debut, reruns (Actions)
 data/kits.json                 skills + Resonance Chains, loaded on demand (Actions)
+data/builds.json               recommended builds and teams, on demand (Actions)
 data/weapons.json              weapon database — stats, passives (Actions)
 data/echoes.json               echo database, sonata sets, echo locations (Actions)
 data/events.json               event calendar (Actions)
@@ -38,6 +39,7 @@ scripts/find-event-art.mjs     finds event banners inside Kuro's patch infograph
 scripts/fetch-portraits.mjs    the character art resolver
 scripts/fetch-weapons.mjs      the weapon stat, passive and icon resolver
 scripts/fetch-echoes.mjs       the echo, sonata-set, location and icon resolver
+scripts/fetch-builds.mjs       the recommended build and team resolver
 scripts/fetch-kits.mjs         the roster, kit and banner-history builder
 scripts/confirm-dates.mjs      retires estimated phase dates once they're known
 scripts/seed-version.mjs       drafts the next version off Kuro's announcement posts
@@ -65,6 +67,10 @@ Seven views:
 | Resonators | `resonators.json` + `kits.json` | yes, per kit |
 | Weapons | `weapons.json` | — |
 | Echoes | `echoes.json` | — |
+
+Every Resonator record also carries a **Builds and teams** half, from `builds.json` — the
+one file on the desk that is judgement rather than record, and labelled as such wherever it
+shows. See below.
 
 The split matters. Live Signals is a machine telling you something happened; Intel is
 you deciding what it was worth. A cron job can't judge whether a post is a datamine or
@@ -1574,6 +1580,239 @@ Icons are cached rather than hotlinked, same bargain as the portraits and weapon
 down leaves `icon: null` and the card draws its glyph plate — a path to a file that is not
 there draws a broken image, and the desk would rather say it has no picture than pretend.
 
+## Builds and teams
+
+`data/builds.json`, written by `scripts/fetch-builds.mjs`, behind a toggle on every
+Resonator record: **Combat kit** or **Builds and teams**. 57 of the 60 Resonators on the
+desk have one — the three that don't have not shipped yet.
+
+### This is the one file that is an opinion
+
+Everything else on the desk is a record. A patch has a start date, a weapon has a base ATK,
+an echo rolls a sonata set or it does not. "Run Qingxiao on Heart of Evil's Purge with
+Calamity Effigy in the main slot" is a **judgement**: it depends on the patch, on who else
+you own, on what the current endgame rewards, and two competent people can disagree about
+it.
+
+So it is treated differently everywhere:
+
+- It is a **file of its own** rather than more fields on `resonators.json`, the same
+  separation `news.json` already keeps from `feed.json`.
+- The panel opens with **what it is worth**, not where it came from: "Not a solved answer.
+  These are general-purpose builds and teams that hold up across most content — for one
+  specific fight, or for the roster you actually own, something else may well be better."
+  At the top, where you read it before acting on it, not in a footer after you have.
+- **Sourcing lives in the Methodology drawer**, one click from the Intel footer, alongside
+  the art credit that was already there. The desk stopped printing a bibliography on the
+  page itself a long time ago — a credit repeated on every card is furniture — and the
+  panels follow that rule rather than making an exception of themselves. The README, each
+  data file's own `credit` field and that drawer all name the source.
+- `reviewed` is the game version the write-up was last revised against, straight off the
+  source. It is the one fact that tells a reader whether to trust the rest, so a record
+  that has it prints it and a record that doesn't says nothing rather than implying today.
+- Nothing is restated in the desk's own voice, averaged with anything, or re-ranked.
+
+### What the panel shows
+
+**Echo sets.** One block per recommended set, coloured by the element that set reads in —
+the same accent the Echoes view gives it, so a build and the page you go and farm it on are
+visibly the same subject. A character can have more than one and they are **not** a first
+and second choice: Shorekeeper's two are a damage build on Rejuvenating Glow and a support
+build on Moonlit Clouds, which is why the upstream label ("Best", "Special") is printed as
+it stands rather than turned into a rank.
+
+Nine characters run a **hybrid**: a compact set fills three slots and the other two are a
+2-piece of your choosing. The source writes the partners as groups of interchangeable sets
+and that is exactly how they are drawn — each row is one 2-piece decision, the chips in it
+are alternatives, and every chip is a way onto that set's section of the Echoes page.
+
+**The main slot** is the one line on the panel that changes how a character is *played*
+rather than what their numbers are — it is the echo whose Echo Skill you actually cast, and
+picking a different one changes the rotation. So it is the one thing here drawn as an
+object with a picture, and it opens that echo's own record.
+
+**The block is two columns.** The left is the set — what it is, what it does, what you may
+pair it with. The right is what you do about it: the echo for the main slot, and the damage
+share the build is worth. Stacked, the set's paragraph ran the full width of a wide modal
+and pushed the one clickable thing on the block below it.
+
+The split is not fixed. The left column's `flex-grow` is written inline from how much prose
+each side has to place, because two paragraphs of unequal length side by side end at
+unequal heights and the shorter one leaves a hole inside the block's border — Shorekeeper's
+set description is three hundred characters against her echo note's nine hundred, which was
+four lines against twelve.
+
+Characters are counted, not lines measured. Both columns are the same face at roughly the
+same size, so lines-per-character is near enough equal on the two sides for the ratio to
+come out right; the echo card is the one thing with a height and no prose in it, and 190 is
+about what it costs in the same currency. Measuring properly would mean laying the block
+out, reading it back and laying it out again — a reflow per set block, to save half a line.
+It is clamped at both ends because it is a nudge rather than a solver: the header needs room
+for a set name whatever the paragraph under it is doing, and a column narrow enough to break
+"Rejuvenating" would be buying a flush bottom edge with a worse read. Within those bounds it
+takes the worst blocks from twelve lines of slack to two.
+
+A set that names a second echo for the main slot — twenty do — puts it **full width
+underneath both columns** rather than stacking it in the right one. The same paragraph is
+half as tall across the whole block, and it reads in the order it means: this set, this
+echo, or failing that, this one.
+
+**Main stats**, five slots, each badged with the cost of the echo that goes in it, read off
+the format string. `43311` is a shape rather than a number: the first slot is the 4-cost,
+which is where the main echo above goes, which is why the two sit on the same panel. A
+format the desk cannot read five costs out of drops the badges rather than guessing. 56 of
+the 57 are `43311`; Jiyan is `44111`. The five boxes are centred on their own width, which
+is the only way a row of them reads as five of one thing rather than a left-aligned list
+that happens to be in boxes.
+
+**Substat priority**, as a ranked list with the figure to stop at beside each line. See
+below — it is the one part of this panel that is assembled out of two separate things the
+source never puts together.
+
+**Teams**, as columns — one per seat, with the alternatives for a seat stacked inside its
+own column under an "or", at a portrait size you can recognise across the room.
+
+It was a single wrapping row with the seats separated by a `+`, and the fault with that is
+what a wrap does to the meaning: once "Mornye or Ciaccona or The Shorekeeper" runs past the
+end of a line, which seat the "or" belongs to stops being visible and the row reads as six
+interchangeable people. A column cannot wrap into its neighbour, so the grouping holds at
+every width, and it stops being ambiguous exactly where the old layout stopped being
+readable. The `+` went with it: three columns of a bordered block are already one thing.
+
+On a phone the seats keep their columns and get one per row. Every face opens that
+Resonator's record.
+
+**Weapons**, ranked, with the damage share the source calculates against the best option.
+One row each: the desk already holds a record for every one of them, so this is a way in
+rather than a second weapon database. The signature is usually first and already has a card
+at the top of the record; what this answers is the other question, which is what to use
+instead.
+
+### How much is enough
+
+The substat priority arrives as one sentence — `Energy Regen (Until Satisfied) > CRIT Rate =
+CRIT DMG > ATK% > ATK` — and it is drawn as a list, one row per stat, ranked.
+
+The rank column carries a number, or the tie glyph on a row that shares its rank with the
+one above: `=` for a tie, `≥` for a lean. That is a distinction the source makes and the
+desk keeps. The parenthetical stays with the stat as a qualifier ("until satisfied", "until
+250%") rather than being folded into the name, because it is a condition on the rolling.
+
+That would still leave the panel answering the wrong question. An order tells you what to
+roll first and never tells you **when to stop** — how much Energy Regen is enough before
+crit is worth more is the thing a reader actually wants, and a chain of five stats separated
+by `>` does not contain it.
+
+The answer is on the same page upstream, in a different place: a list of what each stat
+should read at level 90. So the desk parses that too, and draws each figure on the row it
+belongs to.
+
+- **A target is claimed by the first row that folds to it, once.** Two rows fold to ATK on
+  most builds — "ATK%" then a plain "ATK" further down — and printing 1800-2500 against both
+  reads as two separate goals.
+- **Folding is whole-string, never a substring.** "Liberation ATK DMG%" contains "ATK" and is
+  a different stat from it; hanging a total-ATK figure off that row would be a plain lie. The
+  fold drops the parenthetical, the `%`, and the words "flat" and "bonus", so "Flat HP",
+  "HP%" and "HP" meet, and "Fusion DMG%" meets "Fusion DMG Bonus".
+- **What no row claims is still printed**, as chips under the list. HP and DEF matter to a
+  build that never rolls for them, and the element DMG Bonus target belongs to a main stat
+  rather than a substat. A target with nowhere to go is not a target to drop.
+- **A caveat on a figure stays with it.** Some carry a nested note upstream — Shorekeeper's
+  Energy Regen requirement moves by 10% depending on which echo she is holding — and those
+  are printed under the list against the stat they qualify, not flattened into the list as
+  though they were rows of their own.
+
+The caption says what the figures are measured on, because it changes what they mean: a
+level 90 stat screen, out of combat with the character in the party, so some of your own
+buffs are not in the number.
+
+One thing about the fetch. This is the only field on the desk parsed out of markup rather
+than read off a form — upstream it is a paragraph of HTML, not an array — and the separator
+that holds is the bold, not the colon. Phrolova's row is written `Energy Regen <b>100%</b>`
+with no colon at all, and splitting on one gave her a stat called "Energy Regen 100%": a
+label with its own answer baked into it, which then matches nothing in the priority list. So
+the figure is taken from the bold and the label is whatever is left.
+
+### The toggle
+
+Two buttons under the glance strip, right-aligned — they belong to what is below them, and
+at the left they would sit against the strip's own edge as if they were another fact.
+
+Not a tablist. What it switches is the lower half of a record, the two halves are not panels
+of equal weight, and `role="tablist"` promises arrow-key navigation between siblings that
+this deliberately does not have.
+
+Three things about how it behaves:
+
+- **Every record opens on the kit.** `S.rtab` lives on `S` so the toggle survives the
+  redraws inside an open record, but `drawerResonator` resets it every time. Unlike
+  `kitSimple` and the two sliders it deliberately does not persist between records: the kit
+  is what the character *is* and the build is what somebody thinks you should do about it,
+  and a record that opens on advice has answered a question you did not ask yet. Coming
+  **back** to a record is the exception — see below.
+- **It is a `hidden` flip, not a redraw.** Both halves are in the DOM. Switching tabs twice
+  does not cost two fetches, and neither side loses where you had scrolled to.
+- **Only the half you are looking at is fetched.** Land on the kit and `builds.json` is never
+  requested; switch once and it is, once. Both files are lazy for the same reason —
+  `kits.json` is a megabyte and `builds.json` is a third of one, and nobody arriving at the
+  timeline reads either.
+
+### Going back
+
+Records open other records. A build names its main-slot echo, an echo names the sets it
+rolls, a Resonator names their signature weapon — and every one of those replaces the panel
+you were reading. Closing the echo you had opened from Zhezhi's build used to drop you on
+the page behind both, and the way back to Zhezhi was to search for her again.
+
+So the drawer keeps a trail. Opening a record while one is already up pushes the old one;
+the header grows a labelled way back (`← Zhezhi`), and closing pops to it instead of
+dismissing.
+
+Three details:
+
+- **It remembers which half you were on.** Opening a record always lands on the kit, but
+  returning to one lands where you left it: you were reading a build, you followed the echo
+  it named out of the panel, and the way back should not quietly be somewhere else. The tab
+  is read as the step is pushed rather than as it is popped, because opening the next record
+  has already reset it by then.
+- **The trail holds `(kind, id)`, not saved markup.** Going back replays the opener, so a
+  record you return to is rebuilt from current data rather than restored as a stale
+  snapshot — and it costs two strings per level instead of a document.
+- **`drawerSeq` is how the stack knows a click actually opened something.** Half the openers
+  bail — `drawerEcho` on a name it has no record for, `drawerWeapon` on a weapon with
+  neither a database row nor a convene — and pushing the current panel on a call that turned
+  out to be a no-op would put a duplicate in the trail and make Back appear to do nothing.
+- **The scrim still closes everything.** Clicking the page outside a panel means "get me
+  out", where the × in the panel's own header means "close this one", and with a trail
+  behind it those are different requests. Escape follows the ×. Picking a sonata set clears
+  the trail outright, because that is leaving the drawer for a page rather than backing out
+  of one panel into the one underneath it.
+
+### Where it comes from
+
+Prydwen's character pages, one request each, same host and the same `curl` workaround as
+the weapon and echo fetchers, and the same React flight payload walker — the third copy of
+it in `scripts/`, and deliberately a copy, because no fetcher in that directory imports
+another and the day Prydwen moves again all three want fixing together rather than one of
+them quietly inheriting a change made for a different page.
+
+Five arrays out of each page: `echoBuilds`, `echoStatBuilds`, `weaponBuilds`, `teams`, and
+`ratings` — that last one being every character's name and slug, which is the only place
+the slug map comes from. It rides on every character page, so the first fetch supplies it
+for all the rest, and the desk never has to slugify "The Shorekeeper" and hope.
+
+Two guards worth knowing:
+
+- **The seed page is not hardcoded.** The roster is walked, guessing the obvious slug for
+  each name, until one page answers. A script that dies because one character's page 404s
+  has picked a needless single point of failure.
+- **It refuses to overwrite a good file with a bad run.** Prydwen turns away datacenter IPs
+  outright; without the guard a run from one would walk all 57 pages, catch 57 failures and
+  write an empty object over a file that took four minutes to build.
+
+Nothing is cached to disk. Echo icons, weapon icons and portraits are already on the desk
+from the other three fetchers, and this file is entirely names and prose that point at them.
+
 ## Setup
 
 ```bash
@@ -1632,6 +1871,7 @@ left is the editorial, which is the part worth your time.
 | `portraits.json` + `assets/portraits/` | Prydwen galleries | **no — run locally** |
 | `weapons.json` + `assets/weapons/` | Prydwen weapon pages | **no — run locally** |
 | `echoes.json` + `assets/echoes/` | Prydwen echoes page + the wiki (locations) | **no — run locally** |
+| `builds.json` | Prydwen character pages | **no — run locally** |
 
 All of them are driven off the names already in `versions.json`, so writing a banner row
 is what queues that character's art, portrait, weapon and kit. You never hand-place an
@@ -1646,12 +1886,13 @@ tries to get around it.
 
 The practical consequences, because they are easy to miss:
 
-- `fetch-portraits.mjs`, `fetch-weapons.mjs` and `fetch-echoes.mjs` **have never once
+- `fetch-portraits.mjs`, `fetch-weapons.mjs`, `fetch-echoes.mjs` and `fetch-builds.mjs` **have never once
   succeeded in a scheduled run.** They are marked `continue-on-error`, which paints the
   step green in the Actions UI whatever happens, so this failed silently for a long time.
   Everything in `assets/portraits/`, `assets/weapons/`, `assets/echoes/`,
-  `data/weapons.json` and `data/echoes.json` got there from a local run. They stay in the
-  workflow so that the day Prydwen serves Actions again, nothing needs adding back.
+  `data/weapons.json`, `data/echoes.json` and `data/builds.json` got there from a local
+  run. They stay in the workflow so that the day Prydwen serves Actions again, nothing
+  needs adding back.
 - `fetch-kits.mjs` splits along the same line and carries on with the half it can reach.
   From Actions it builds the full index off the wiki — identity, debut, rerun history,
   and the convene dates `confirm-dates.mjs` needs — and leaves `kits.json` exactly as it
@@ -1667,9 +1908,16 @@ node scripts/fetch-kits.mjs && node scripts/confirm-dates.mjs
 node scripts/fetch-portraits.mjs
 node scripts/fetch-weapons.mjs
 node scripts/fetch-echoes.mjs
+node scripts/fetch-builds.mjs
 ```
 
-`fetch-echoes.mjs` is the least urgent of the four — a patch adds a handful of echoes
+`fetch-builds.mjs` is the slowest of them — 57 character pages, one at a time with a
+courtesy gap, about four minutes — and the one whose output ages fastest, because a build
+written against 3.4 can be wrong by 3.6 without anything on the page changing. Its
+`reviewed` field is what tells a reader that, so the file staying stale is visible rather
+than silent.
+
+`fetch-echoes.mjs` is the least urgent of the five — a patch adds a handful of echoes
 where it adds a whole character's kit — but it is also the one whose staleness is
 invisible, because a missing echo looks exactly like an echo that does not exist yet. Its
 second source, the wiki, would serve Actions perfectly well; it never gets that far,
