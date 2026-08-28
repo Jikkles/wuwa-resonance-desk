@@ -2845,25 +2845,56 @@ img.astrite-pic{
    card the game itself files the creature under, background and all — so a 4:5
    frame crops a scene that was composed to its own edges, and a contain fit
    would letterbox it into a plate it does not need. Source and frame are both
-   1:1 and the picture arrives whole. */
-.eart{aspect-ratio:1}
+   1:1 and the picture arrives whole.
+
+   Written as .cart.eart, not .eart: the 4:5 it is overriding is set by
+   .cart.has-art, and a single class does not outweigh two however far down the
+   file it sits. This was a one-class selector for two commits and quietly did
+   nothing — the cards were 4:5 all along, cropping the top and bottom off every
+   render, which is subtle enough on a monster shot to pass a glance. */
+.cart.eart{aspect-ratio:1}
 .eart img{object-position:center}
-/* Three to a row where the weapon grid takes two. An echo card is a square
-   picture and two short lines against the weapon card's 4:5 and its stat row,
-   so it is a third shorter at the same width. */
-.egrid{grid-template-columns:repeat(auto-fill,minmax(12rem,1fr))}
+/* Half the cell the weapon grid uses, and half what this grid started at.
+
+   The size an echo card wants is set by what you do with it, and what you do
+   with a sonata section is scan it: you already know you want Freezing Frost,
+   and the question is which of the fifteen bodies carrying it you recognise
+   and can be bothered to go and kill. That is a picture-matching task, and a
+   250px render of a Gulpuff answers it no better than a 125px one — it just
+   costs a screen and a half of scrolling per set, across 34 sets.
+
+   So the cell is ~125px and the whole card body is scaled to match rather than
+   left at the size a half-width card cannot hold. Names still get two lines,
+   which is what "Rocksteady Guardian" needs down here. */
+.egrid{grid-template-columns:repeat(auto-fill,minmax(6.25rem,1fr));gap:10px}
+/* Flex column rather than the grid .wrec-b uses, so the meta line can be
+   pinned to the bottom. A grid row stretches every card in it to the tallest,
+   and at this width names run to one, two or three lines — "Zig Zag" beside
+   "Twin Nova: Nebulous Cannon" — which left the cost-and-crest lines wandering
+   up and down a row that is otherwise perfectly aligned. Pinned, they sit on
+   one baseline whatever the names above them did. */
+.erec .wrec-b{padding:6px 7px 7px;gap:3px;display:flex;flex-direction:column;flex:1}
+.erec .wrec-b h3{font-size:.6875rem;line-height:1.25}
+.erec .erec-s{margin-top:auto}
 
 /* Cost, class and the sets it rolls, on one line under the name. The cost is
    the figure the grid is scanned for, so it is the only thing here in the
-   section's own colour. */
-.erec-s{display:flex;align-items:center;gap:6px;min-width:0}
+   section's own colour. Class is allowed to be clipped rather than to wrap:
+   at this width "Calamity" and a full crest row do not both fit, the crests
+   are the half you cannot reconstruct from the cost, and the record one click
+   away spells all of it out. */
+.erec-s{
+  display:flex;align-items:center;gap:5px;min-width:0;overflow:hidden;
+  font-size:.5rem;letter-spacing:.03em;
+}
+.ecls{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ecost{color:var(--attr);font-weight:600}
 .ecost.na{color:var(--fg-3)}
 /* The crests take the end of the line and never wrap it: three 15px marks are
    a texture that says "this one is flexible", and a fourth pushing the class
    onto a second line would cost more than the mark is worth. */
-.ecrests{margin-left:auto;display:flex;align-items:center;gap:2px;flex:none}
-.ecrests img{display:block;width:15px;height:15px;opacity:.9}
+.ecrests{margin-left:auto;display:flex;align-items:center;gap:1px;flex:none}
+.ecrests img{display:block;width:11px;height:11px;opacity:.9}
 .ecrest-g{display:flex;color:var(--attr);opacity:.7}
 .ecrest-none{margin-left:auto;color:var(--fg-3)}
 /* The sets past the cap, counted. Titled with their names, so the fact is
@@ -4432,6 +4463,12 @@ img.astrite-pic{
   .wgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .wrec-b{padding:9px}
   .wrec-b h3{font-size:.7813rem}
+  /* Echoes keep counting themselves. The rule above is a flat two, which is
+     right for a weapon card and wrong for one half its size — it would make an
+     echo card *bigger* on a phone than on the desk it was sized for. Restated
+     after .wgrid rather than excluded from it, because an echo card carries
+     both classes and the two selectors weigh the same. */
+  .egrid{grid-template-columns:repeat(auto-fill,minmax(5.5rem,1fr))}
 }
 
 /* ══ the smallest phones ════════════════════════════════════════════

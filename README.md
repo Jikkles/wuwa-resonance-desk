@@ -1437,23 +1437,45 @@ already describes.
 
 ### Cards, crests and the cap
 
-The card reuses `.rec` and the weapon grid's body outright. Three things are its own:
+The card reuses `.rec` and the weapon grid's body outright. Four things are its own:
 
+- **It is half the weapon card's size** — a ~125px cell against the weapon grid's 250px.
+  The size a card wants is set by what you do with it, and what you do with a sonata
+  section is scan it: you already know you want Freezing Frost, and the question is which
+  of the fifteen bodies carrying it you recognise and can be bothered to go and kill. That
+  is picture-matching, and a 250px render of a Gulpuff answers it no better than a 125px
+  one — it just costs a screen and a half of scrolling per set, across 34 sets. The whole
+  card body is scaled to match rather than left at a size a half-width card cannot hold,
+  and the phone grid keeps counting columns instead of snapping to the flat two the weapon
+  grid uses, which would make an echo card *bigger* on a phone than on the desk.
 - **The frame is square, not 4:5.** An echo render is neither a portrait nor an object on
   transparent ground — it is the square card the game files the creature under, background
   and all. A 4:5 frame crops a scene composed to its own edges; a contained fit letterboxes
   it into a plate it does not need. Source and frame are both 1:1 and the picture arrives
   whole. The record's plate is squared for the same reason, and drops the diamond frame and
   drop shadow that exist to stand a weapon cut-out on a dark ground.
+
+  That rule is written `.cart.eart`, not `.eart`, and it has to be. The 4:5 it overrides is
+  set by `.cart.has-art`, and one class does not outweigh two however far down the file it
+  sits — so for two commits it was a one-class selector that quietly did nothing, and every
+  card was 4:5 with the top and bottom cropped off the render. On a monster shot that is
+  subtle enough to pass a glance, which is exactly why it survived two rounds of looking at
+  screenshots.
 - **Cost and class, both.** Cost is the constraint the game puts on a build — five slots,
   twelve points — and class is on the card because two classes share the 4-cost price:
-  Calamity and Overlord cost the same and are not the same thing. Cards inside a section
-  sort cost-descending, then class, then name.
-- **Crests, capped at four.** Inside a Freezing Frost section, what you want to know about
+  Calamity and Overlord cost the same and are not the same thing. At 125px the class is
+  allowed to clip to an ellipsis rather than wrap: the crests are the half of that line you
+  cannot reconstruct from the cost, and the record one click away spells all of it out.
+  Cards inside a section sort cost-descending, then class, then name.
+- **Crests, capped at three.** Inside a Freezing Frost section, what you want to know about
   a body is what *else* it can be. Most echoes roll one or two sets; Hecate rolls seven,
-  and seven marks is a bar chart of nothing — it pushes the class label off the line and
-  stops reading as "these sets" at about the fifth. Past four the row says `+3` and titles
+  and seven marks is a bar chart of nothing. Past the cap the row says `+4` and titles
   itself with the names, and the record lists them all.
+
+The card body is a flex column with the cost line pinned to the bottom by `margin-top:auto`
+over `flex:1`. A grid row stretches every card in it to the tallest, and at this width names
+run to one, two or three lines — "Zig Zag" beside "Twin Nova: Nebulous Cannon" — which left
+the cost-and-crest lines wandering up and down a row that is otherwise perfectly aligned.
 
 ### The rank slider
 

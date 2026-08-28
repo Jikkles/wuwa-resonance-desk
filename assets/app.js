@@ -3554,14 +3554,15 @@ function erankBar(e){
   </label>`;
 }
 
-/* Four is the cap on a card's crest row. Most echoes roll one or two sets and
-   a handful roll three; Hecate rolls seven, and seven marks on a card is a bar
-   chart of nothing — it pushes the class label off the line and stops reading
-   as "these sets" at about the fifth. Past four the row says how many more
-   there are and the record lists them all. */
-const CREST_MAX = 4;
+/* Three is the cap on a card's crest row. It was four while the card was twice
+   this wide; on a 125px cell a fourth 11px mark and a "+n" beside it leave the
+   class nothing to be clipped down to. Most echoes roll one or two sets, so
+   three is past the common case either way — and Hecate, which rolls seven,
+   was never going to fit whatever the cap was. Past the cap the row says how
+   many more there are and the record lists them all. */
+const CREST_MAX = 3;
 
-function crests(ids, size = 15){
+function crests(ids, size = 11){
   const list = (ids || []).map(sonataFor).filter(Boolean);
   if(!list.length) return `<span class="ecrest-none" title="Rolls no sonata set">—</span>`;
   const shown = list.slice(0, CREST_MAX), rest = list.length - shown.length;
@@ -3589,8 +3590,13 @@ function echoCard(e){
       : `<span class="wart-g">${icon("i-echo", 34)}</span>`}</div>
     <div class="wrec-b">
       <h3>${esc(e.name)}</h3>
+      <!-- The class is in a span of its own rather than a bare text node so
+           it can be the thing that clips when the line runs out of room. A
+           text node between two elements is an anonymous flex item, and
+           text-overflow has nothing to hang on.
+           (No backticks in here: this comment is inside a template literal.) -->
       <span class="wrec-s erec-s">
-        ${cost} ${esc(e.class || "Unclassified")}
+        ${cost}<span class="ecls">${esc(e.class || "Unclassified")}</span>
         ${crests(e.sonata)}
       </span>
     </div>
