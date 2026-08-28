@@ -587,7 +587,7 @@
       "stat": "CRIT Rate",
       "statValue90": 36,
       "source": "",
-      "effect": "ATK is increased by {0}. Inflicting Tune Strain - Shifting grants {1} Aero DMG Bonus for 2s, stacking up to 5 times. This effect can be triggered once every 0.5s. Upon reaching the max stack limit, gain the following effects:\\n- This Aero DMG Bonus effect's duration is extended to 30s.\\n- Aero DMG ignores {2} of the target's DEF during this effect.",
+      "effect": "ATK is increased by {0}. Inflicting Tune Strain - Shifting grants {1} Aero DMG Bonus for 2s, stacking up to 5 times. This effect can be triggered once every 0.5s. Upon reaching the max stack limit, gain the following effects:\n- This Aero DMG Bonus effect's duration is extended to 30s.\n- Aero DMG ignores {2} of the target's DEF during this effect.",
       "ranks": [
         [
           "12%",
@@ -3296,5 +3296,5 @@
       "icon": "assets/weapons/w-tyro-sword.webp"
     }
   ],
-  "updated": "2026-08-20T18:37:55.765Z"
+  "updated": "2026-08-28T16:28:31.094Z"
 }

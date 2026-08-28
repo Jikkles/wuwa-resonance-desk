@@ -139,11 +139,44 @@ async function fandomIcon(name) {
   } catch { return null; }
 }
 
-/* The page ships its data as a JSON string inside a script tag, so every quote
-   in it arrives escaped. Unescape once and the payload is plain JSON again. */
-const unescaped = html => html
-  .replace(/\\"/g, '"')
-  .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+/* Every self.__next_f.push([1,"…"]) on the page, read as the string literal it
+   is and joined in document order. That reassembles the React server payload,
+   which is where the page's data lives.
+
+   It used to live somewhere simpler. Prydwen was a Gatsby site, which left the
+   dataset as plain JSON in a script tag with every quote escaped exactly once,
+   and this function was two .replace() calls that undid that in place. Next.js
+   streams it as flight chunks instead, and a chunk is a JavaScript string
+   literal — so a backslash inside it is doubled on top of the escaping the
+   JSON already carries, and a blanket unescape produces text that no longer
+   parses: the "\\n" in a passive comes out as a lone backslash before an n.
+   The migration is what stopped this script writing weapons.json, silently,
+   because the workflow step is continue-on-error.
+
+   So each chunk is parsed as the string it is. The literal is walked rather
+   than matched with a regex for the usual reason: a lazy match stops at the
+   first quote inside the payload, of which there are thousands, and a greedy
+   one runs to the last quote on the page. Stepping over an escaped character
+   is the whole trick. A chunk that will not parse is skipped — the page
+   carries chunks that are not data, and one of those failing is not a reason
+   to lose the roster. scripts/fetch-echoes.mjs reads the same host the same
+   way and carries its own copy; no fetcher in this directory imports
+   another. */
+function flightPayload(html) {
+  const out = [];
+  const re = /self\.__next_f\.push\(\[1,"/g;
+  let m;
+  while ((m = re.exec(html))) {
+    const open = m.index + m[0].length - 1;   // the literal's opening quote
+    let i = open + 1;
+    for (; i < html.length; i++) {
+      if (html[i] === "\\") { i++; continue; }
+      if (html[i] === '"') break;
+    }
+    try { out.push(JSON.parse(html.slice(open, i + 1))); } catch { /* not data */ }
+  }
+  return out.join("");
+}
 
 /* One canonical spelling per stat. Everything the source has ever written for
    a stat maps to the name the game uses on the weapon itself. An unmapped
@@ -173,7 +206,8 @@ const TYPES = ["Broadblade", "Sword", "Pistols", "Gauntlets", "Rectifier"];
    with a regex: the payload contains bracketed prose ("[Aero]") and nested
    arrays, and a lazy regex stops at the first of either. */
 function parseWeapons(html) {
-  const un = unescaped(html);
+  const un = flightPayload(html);
+  if (!un) throw new Error("no flight payload on the page — the source layout changed");
   const at = un.indexOf('"weapons":[');
   if (at === -1) throw new Error('no "weapons" key in page — the source layout changed');
   const open = un.indexOf("[", at);
