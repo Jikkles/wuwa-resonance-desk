@@ -3354,6 +3354,115 @@ img.astrite-pic{
    the way out sits where a link on a card always sits. */
 .dkv figcaption a{margin-left:auto;color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
 .dkv figcaption a:hover{color:var(--accent)}
+
+/* ── the patch's Astrite estimate ───────────────────────────────────
+   Directly under the poster, and held to the poster's own width so the two
+   share an edge — this is a fact about the patch the picture is of, not a new
+   section of the record.
+
+   One figure is the point of the whole block, so it is drawn once, large, next
+   to Kuro's own stone: what a full clear leaves you with, and what that buys
+   in pulls. Everything under it is smaller by a step each time — the two paid
+   tracks, then the lines the figure is made of — because each is read less
+   often than the one above it, and a reader who only wants the headline
+   should be able to stop after the first row. */
+.aest{max-width:var(--kv-w);margin-inline:auto}
+/* Not a claim, and it says so on the heading rather than in a footnote
+   nobody reaches. Every other number in this record is Kuro's. */
+.aest-tag{
+  flex:none;font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-3);border:1px solid var(--line);border-radius:999px;padding:2px 8px;
+}
+.aest-hero{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--tint);
+}
+/* The stone is the size it is on an event tile — the glyph is what says
+   "Astrite" before the label does. */
+.aest-hero img.astrite-pic,.aest-hero svg{flex:none}
+.aest-hero svg{color:color-mix(in srgb,var(--accent) 62%,#FFFFFF)}
+.aest-fig,.aest-pulls{display:flex;flex-direction:column;gap:3px;min-width:0}
+.aest-fig b{font-family:var(--mono);font-size:1.6875rem;font-weight:500;line-height:1;letter-spacing:-.01em}
+.aest-pulls{margin-left:auto;text-align:right;align-items:flex-end}
+.aest-pulls b{
+  font-family:var(--mono);font-size:1.1875rem;font-weight:500;line-height:1;
+  color:color-mix(in srgb,var(--accent) 72%,#FFFFFF);
+}
+.aest-fig span,.aest-pulls span{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+}
+/* Tides are pulls too, but not the same currency, so they sit outside the box
+   the Astrite figure is in rather than as a third number inside it. */
+.aest-tides{
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:9px;
+  font-family:var(--mono);font-size:.6875rem;color:var(--fg-2);
+}
+.aest-tides>span{font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+/* The two paid tracks. A row apiece, because the reader either pays or does
+   not and only ever reads one of them. */
+.aest-tracks{display:grid;gap:7px;margin-top:12px}
+.aest-tracks>div{display:flex;align-items:baseline;gap:12px;font-size:.8125rem;color:var(--fg-2)}
+.aest-tracks b{margin-left:auto;font-family:var(--mono);font-weight:500;color:var(--fg)}
+.aest-tracks em{
+  flex:none;text-align:right;font-style:normal;white-space:nowrap;
+  font-family:var(--mono);font-size:.6875rem;color:var(--fg-3);
+}
+/* Where the figure comes from, closed. Thirteen rows of arithmetic set under
+   the poster push the phases and the events off the screen, and the record is
+   about the patch rather than about the sum — so the headline stays out and
+   the working is one click away, the same disclosure a skill card uses. */
+.aest-src{margin-top:14px;border-top:1px solid var(--line)}
+.aest-src summary{
+  display:flex;align-items:baseline;gap:10px;cursor:pointer;list-style:none;
+  padding:10px 2px;font-size:.75rem;color:var(--fg-3);transition:color .15s;
+}
+.aest-src summary::-webkit-details-marker{display:none}
+.aest-src summary:hover{color:var(--fg-2)}
+.aest-src summary span{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
+}
+/* The same plus that opens a skill, turning into a minus on the way. */
+.aest-src summary::after{
+  content:"+";margin-left:auto;font-family:var(--mono);font-size:.875rem;line-height:1;
+  color:var(--fg-3);transition:transform .18s;
+}
+.aest-src[open] summary::after{transform:rotate(45deg)}
+/* Ruled rows rather than bullets: every line is a label against an amount,
+   which is a table, and .dsec li would put a dot in front of each one. */
+.aest-lines{border-top:1px solid var(--line)}
+.aest-lines>div{
+  display:flex;align-items:baseline;gap:14px;
+  padding:8px 2px;border-bottom:1px solid var(--line);
+}
+.aest-lines span{font-size:.8125rem;color:var(--fg-2);min-width:0}
+/* How many times the line runs in this patch — 42 dailies, 6 weekly clears. */
+.aest-lines i{font-family:var(--mono);font-size:.6875rem;font-style:normal;color:var(--fg-3)}
+.aest-lines em{display:block;margin-top:2px;font-style:normal;font-size:.6875rem;color:var(--fg-3)}
+.aest-lines b{
+  margin-left:auto;flex:none;white-space:nowrap;
+  font-family:var(--mono);font-size:.75rem;font-weight:500;font-variant-numeric:tabular-nums;color:var(--fg);
+}
+.aest-foot{
+  margin:10px 0 0;font-size:.6875rem;line-height:1.6;color:var(--fg-3);
+  display:flex;gap:4px 10px;flex-wrap:wrap;align-items:baseline;
+}
+.drawer-b .aest-foot{max-width:none}
+.aest-foot a{margin-left:auto;color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
+.aest-foot a:hover{color:var(--accent)}
+@media (max-width:560px){
+  /* The pull count drops under the Astrite figure rather than squeezing beside
+     it — two mono numbers on one phone-width line is one of them wrapping. */
+  .aest-hero{gap:12px}
+  .aest-fig{flex:1 1 auto}
+  .aest-fig b{font-size:1.4375rem}
+  .aest-pulls{
+    flex:1 0 100%;margin-left:0;flex-direction:row;align-items:baseline;gap:7px;
+    text-align:left;padding-top:11px;border-top:1px solid var(--line);
+  }
+  .aest-lines>div{flex-wrap:wrap;gap:2px 14px}
+  .aest-foot a{margin-left:0}
+}
 .dsrc{
   display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:var(--r-sm);
   text-decoration:none;font-size:.7813rem;color:var(--fg-2);transition:.15s;

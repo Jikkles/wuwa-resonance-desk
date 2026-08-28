@@ -1,0 +1,56 @@
+{
+  "schema": "wuwa-desk/astrite@1.0",
+  "updated": "2026-08-28",
+  "note": "An estimate, not a Kuro figure — nobody publishes what a patch pays out. This is the community's arithmetic on a full clear, and the lines are the biggest of what it counts rather than an exact sum of the total.",
+  "pullCost": 160,
+  "source": {
+    "title": "Version 3.6 Astrite calculation & pull income",
+    "url": "https://gamemarket.gg/news/wuthering-waves/wuthering-waves-3-6-astrite-calculation-pull-income",
+    "credit": "GameMarket"
+  },
+  "baseline": {
+    "days": 42,
+    "tracks": [
+      {
+        "id": "f2p",
+        "label": "F2P full clear",
+        "astrite": 13000,
+        "tides": {"radiant": 12, "lustrous": 27, "forging": 7}
+      },
+      {
+        "id": "lunite",
+        "label": "Lunite Subscription",
+        "astrite": 16800,
+        "tides": {"radiant": 12, "lustrous": 27, "forging": 7}
+      },
+      {
+        "id": "pass",
+        "label": "Lunite + Insider Battle Pass",
+        "astrite": 17500,
+        "tides": {"radiant": 17, "lustrous": 29, "forging": 7}
+      }
+    ],
+    "lines": [
+      {"id": "daily",       "label": "Daily activity quests", "per": "day", "astrite": 60, "note": "60 a day"},
+      {"id": "gateways",    "label": "Fantasies of the Thousand Gateways", "per": "week", "astrite": 160, "note": "One weekly clear"},
+      {"id": "tower",       "label": "Tower of Adversity", "per": "patch", "range": [700, 1400], "note": "Bi-weekly resets, depends on stars"},
+      {"id": "matrix",      "label": "Endstate Matrix", "per": "patch", "astrite": 400, "note": "One-time clear"},
+      {"id": "exploration", "label": "Exploration in the new region", "per": "patch", "range": [1500, 2000]},
+      {"id": "quests",      "label": "Main story and segue quests", "per": "patch", "range": [200, 400]},
+      {"id": "trophies",    "label": "Trophies and achievements", "per": "patch", "range": [200, 600]},
+      {"id": "holograms",   "label": "Holograms and Calamity Effigy", "per": "patch", "astrite": 140, "note": "First clears"},
+      {"id": "compo",       "label": "Maintenance and bug compensation", "per": "patch", "range": [300, 600]},
+      {"id": "codes",       "label": "Livestream redemption codes", "per": "patch", "astrite": 300},
+      {"id": "events",      "label": "Limited-time events", "per": "patch", "tides": {"radiant": [10, 15], "lustrous": [20, 30]}},
+      {"id": "bp",          "label": "Free Battle Pass milestones", "per": "patch", "tides": {"lustrous": 5}},
+      {"id": "coral",       "label": "Coral shop resets", "per": "month", "tides": {"radiant": 7, "lustrous": 7, "forging": 7}}
+    ]
+  },
+  "versions": {
+    "3.6": {
+      "lines": {
+        "exploration": {"label": "Xuanfang expansion exploration", "range": [1500, 2000]}
+      }
+    }
+  }
+}

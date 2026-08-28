@@ -10,6 +10,7 @@ assets/app.css                 all styling
 assets/app.js                  reads the JSON, renders every view
 data/versions.json             patch timeline + banner phases — hand-written
 data/news.json                 curated leak/news entries — hand-written
+data/astrite.json              what a patch pays — income model, hand-written
 data/resonators.json           resonator index — identity, debut, reruns (Actions)
 data/kits.json                 skills + Resonance Chains, loaded on demand (Actions)
 data/weapons.json              weapon database — stats, passives (Actions)
@@ -1021,6 +1022,51 @@ own, because they have no deadline, which is the one thing the patch panels sort
 half of them predate any patch the desk holds a record of. The record says
 `The Wuthering Waves Wiki on Fandom` under "Written by" rather than implying a post the
 desk could go and show you.
+### What a patch pays
+
+`data/astrite.json`, and the one number on the desk nobody publishes.
+
+Every other figure here is Kuro's: the banners, the windows, the reward line under an
+event. What a patch is *worth* — the Astrite a full clear leaves you holding, and the
+pulls that buys — is never stated by anyone, and it is the number a reader opens a version
+record to plan against. The banner strip says who is running; this says whether you can
+afford them. So it is the one thing the desk models rather than fetches, and the panel
+says so on its heading rather than in a footnote: a chip reading **estimate**, and the
+source it is modelled on linked underneath.
+
+The file is a baseline plus per-version overrides:
+
+- **`baseline.tracks`** — the three ways an account earns: a free clear, Lunite, Lunite
+  with the Insider pass. Each carries a patch's Astrite and its bonus tides. The F2P row
+  is the headline because it is the floor every account clears to; the other two are a
+  line each underneath.
+- **`baseline.lines`** — where the figure comes from, one row per income source, each
+  either a fixed amount, a `range`, or a handful of `tides`. `per` says how often it pays:
+  `day`, `week`, `month` or `patch`.
+- **`versions.<id>.lines`** — a patch over the baseline, keyed by line id. An object
+  refines that line (3.6's exploration row is named for the Xuanfang expansion), `null`
+  drops it — a patch that opens no new region pays no exploration Astrite — and an id the
+  baseline has never heard of is a line only this patch has. Anything else in a version
+  block (`days`, `note`, `source`, `tracks`) replaces the baseline's outright.
+
+Two things are computed rather than stored, because the file would go stale on both.
+**The patch's length** comes off the version's own window, not the baseline's — 3.5 ran 40
+days and 3.6 runs 42, and the daily line is 60 a day whichever it is. **The recurring
+difference** moves the totals with it: a patch two days longer is two days of dailies and
+no more story quests, so only the `day` and `week` lines shift the figure, and the result
+is rounded to the nearest hundred. A total reading 12,834 claims a precision an estimate
+does not have.
+
+Pulls are Astrite over 160 plus the Radiant Tides, which are limited convenes already.
+Lustrous and Forging are the standard and the weapon banner — a different budget, so they
+are shown beside the figure and left out of it.
+
+The panel is drawn under the patch's poster, and only for a patch that has not closed. An
+estimate of what a patch will pay is planning; the same panel over a patch that ended in
+April is a guess at a number the reader already lived through. A version with no window at
+all — 3.7 is a beta with a drip card and no dates — gets the baseline, labelled as
+modelled on a 42-day patch rather than as this patch's own arithmetic.
+
 ## The resonator database
 
 `node scripts/fetch-kits.mjs` builds the whole roster — sixty Resonators including the

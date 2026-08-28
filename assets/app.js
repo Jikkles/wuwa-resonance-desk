@@ -16,6 +16,7 @@ const FALLBACK = {
   permanents: {updated:"", events:[]},
   archive:    {updated:"", versions:[]},
   items:      {items:{}},
+  astrite:    {baseline:null, versions:{}},
   art:        {art:{}},
   portraits:  {characters:{}},
   translations: {titles:{}}
@@ -1739,6 +1740,168 @@ const astriteMark = (size = 12) => {
            style="width:${size}px;height:${size}px" loading="lazy" decoding="async">`
     : icon("i-astrite", size);
 };
+
+/* ── what a patch pays ────────────────────────────────────────────── */
+/* An estimate of the Astrite a patch hands out, which is the one number a
+   reader opens a version record to plan against: the banner strip says who is
+   running, and this says whether you can afford them.
+
+   It is the one figure on the desk nobody publishes. Kuro announces the
+   banners, the dates and the events, and never once says what the patch is
+   worth — so unlike every other number here it cannot be fetched, only
+   modelled. data/astrite.json holds that model: a baseline drawn from the
+   community calculation the file credits, and a per-version block that
+   overrides any part of it once a patch turns out to differ.
+
+   Two things are computed rather than stored, because the file would go stale
+   on both:
+
+   - **The patch's length.** Taken off the version's own window, not the
+     baseline's — 3.5 ran 40 days and 3.6 runs 42, and the daily line is 60 a
+     day whichever it is.
+   - **The recurring difference.** A patch two days longer is two days of
+     dailies and no more story quests, so only the per-day and per-week lines
+     move the totals. Rounded to the nearest hundred afterwards: this is an
+     estimate, and a total reading 12,834 claims a precision it does not have.
+
+   Null when the file is missing, or when a patch has neither a window nor a
+   baseline length to fall back on — the panel is dropped rather than drawn
+   over numbers that stand for nothing. */
+function astritePlan(v){
+  const cfg  = DATA.astrite;
+  const base = cfg?.baseline;
+  if(!v || !base?.tracks?.length || !base?.lines?.length) return null;
+
+  const over = cfg.versions?.[v.id] || {};
+  const {start, end} = versionWindow(v);
+  const dated = start && end ? Math.round((new Date(end) - new Date(start)) / DAY) : 0;
+  const days  = dated > 0 ? dated : (over.days || base.days || 0);
+  if(!days) return null;
+  const baseDays = over.days || base.days || days;
+
+  /* A version's `lines` is a patch over the baseline's, keyed by line id: an
+     object refines that line, `null` drops it — a patch that opens no new
+     region pays no exploration Astrite — and an id the baseline has never
+     heard of is a line only this patch has. */
+  const edits = over.lines || {};
+  const lines = [
+    ...base.lines.filter(l => edits[l.id] !== null).map(l => ({...l, ...(edits[l.id] || {})})),
+    ...Object.entries(edits)
+      .filter(([id, l]) => l && !base.lines.some(b => b.id === id))
+      .map(([id, l]) => ({id, ...l}))
+  ];
+
+  const weeks  = Math.round(days / 7);
+  const months = Math.max(1, Math.floor(days / 30));
+  const runs   = l => l.per === "day" ? days : l.per === "week" ? weeks : l.per === "month" ? months : 1;
+  const mid    = l => l.astrite ?? (l.range ? (l.range[0] + l.range[1]) / 2 : 0);
+
+  /* What one extra day of this patch is worth, off the lines that actually
+     repeat. A range counts at its midpoint, the same figure the line renders. */
+  const perDay = lines.reduce((n, l) =>
+    n + (l.per === "day" ? mid(l) : l.per === "week" ? mid(l) / 7 : 0), 0);
+  const shift  = (days - baseDays) * perDay;
+  const round  = n => Math.round(n / 100) * 100;
+  const cost   = Number(cfg.pullCost) || 160;
+
+  return {
+    days, baseDays,
+    /* No window on the version at all — 3.7 is a beta with a drip card and no
+       dates — so what comes back is the shape of a patch rather than this
+       patch's own arithmetic, and the panel says so. */
+    modelled: !dated,
+    lines: lines.map(l => ({...l, runs: runs(l)})),
+    tracks: base.tracks.map(t => {
+      const astrite = Math.max(0, round((Number(t.astrite) || 0) + shift));
+      /* Astrite buys pulls at 160; a Radiant Tide is a limited pull already.
+         Lustrous and Forging are the standard and the weapon banner, which is
+         a different budget — they are shown, and not counted in this figure. */
+      return {...t, astrite, pulls: Math.floor(astrite / cost) + (Number(t.tides?.radiant) || 0)};
+    }),
+    source: over.source || cfg.source || null,
+    note:   over.note   || cfg.note   || ""
+  };
+}
+
+const TIDE_LABEL = {radiant:"Radiant", lustrous:"Lustrous", forging:"Forging"};
+const numFmt = n => Number(n).toLocaleString("en-GB");
+/* A count in the file is either a figure or a range: 7, or [10, 15]. */
+const tideList = (t, runs = 1) => Object.entries(t || {})
+  .filter(([, n]) => n)
+  .map(([k, n]) => `${Array.isArray(n) ? `${n[0] * runs}–${n[1] * runs}` : n * runs} ${TIDE_LABEL[k] || k}`)
+  .join(" · ");
+
+/* One income line as it reads in the list: a fixed figure, a range, or a
+   handful of tides — multiplied out where the line recurs. */
+function astriteAmount(l){
+  if(l.tides) return tideList(l.tides, l.runs);
+  if(l.range) return `${numFmt(l.range[0] * l.runs)} – ${numFmt(l.range[1] * l.runs)}`;
+  return numFmt((Number(l.astrite) || 0) * l.runs);
+}
+
+/* The panel, under the patch's poster. The F2P figure is the headline because
+   it is the floor every account clears to; a reader on a subscription finds
+   their own row two lines below it.
+
+   Only for a patch that has not closed. An estimate of what a patch will pay
+   is planning; the same panel over a patch that ended in April is a guess at a
+   number the reader already lived through. */
+function astritePanel(v, status){
+  if(status === "past" || v?.archived) return "";
+  const p = astritePlan(v);
+  if(!p) return "";
+  const [head, ...rest] = p.tracks;
+
+  const tides = tideList(head.tides);
+  const foot = [
+    p.modelled
+      ? `Modelled on a ${p.baseDays}-day patch — ${esc(v.id)} has no window yet.`
+      : `Scaled to this patch's ${p.days} days.`,
+    esc(p.note)
+  ].filter(Boolean).join(" ");
+
+  return `<div class="dsec aest">
+    <div class="dsec-h">
+      <span class="label">Estimated Astrite this patch</span>
+      <span class="aest-tag" title="Not a Kuro figure. Nobody publishes what a patch pays — this is the community's arithmetic on a full clear.">estimate</span>
+    </div>
+
+    <div class="aest-hero">
+      ${astriteMark(46)}
+      <div class="aest-fig">
+        <b>~${numFmt(head.astrite)}</b>
+        <span>Astrite — ${esc(head.label)}</span>
+      </div>
+      <div class="aest-pulls">
+        <b>≈ ${head.pulls}</b>
+        <span>limited pulls</span>
+      </div>
+    </div>
+    ${tides ? `<div class="aest-tides" title="Tides come on top of the Astrite. A Radiant Tide is a limited convene, so those are already in the pull count; Lustrous is the standard banner and Forging the weapon one, which is a different budget and is not.">
+      <span>plus</span>${esc(tides)} Tides</div>` : ""}
+
+    ${rest.length ? `<div class="aest-tracks">${rest.map(t => `
+      <div>
+        <span>${esc(t.label)}</span>
+        <b>~${numFmt(t.astrite)}</b>
+        <em>≈ ${t.pulls} pulls</em>
+      </div>`).join("")}</div>` : ""}
+
+    <details class="aest-src">
+      <summary>Where the figure comes from<span>${p.lines.length} lines</span></summary>
+      <div class="aest-lines">${p.lines.map(l => `
+        <div>
+          <span>${esc(l.label)}${l.runs > 1 ? ` <i>× ${l.runs}</i>` : ""}
+            ${l.note ? `<em>${esc(l.note)}</em>` : ""}</span>
+          <b>${esc(astriteAmount(l))}</b>
+        </div>`).join("")}</div>
+    </details>
+
+    <p class="aest-foot">${foot}
+      ${p.source?.url ? `<a href="${esc(p.source.url)}" target="_blank" rel="noopener">
+        ${esc(p.source.credit || "Source")}${p.source.title ? ` — ${esc(p.source.title)}` : ""}</a>` : ""}</p>
+  </div>`;
+}
 
 /* Kuro's own banner, or nothing. There is no fallback picture by design — see
    the note at the top of this section. */
@@ -3690,6 +3853,7 @@ function drawerVersion(id){
       ${kv}
       ${versionEnd(v) ? `<div><span>Ends</span><b>${versionEnd(v)}</b></div>` : ""}
     </div>
+    ${astritePanel(v, status)}
     ${v.notes ? `<div class="vnote" style="margin-top:16px">${esc(v.notes)}</div>` : ""}
     ${phases}
     ${events}
@@ -4170,7 +4334,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events","permanents","items","archive"];
+  const names = ["versions","news","resonators","weapons","feed","art","portraits","translations","events","permanents","items","archive","astrite"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 
