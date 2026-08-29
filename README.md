@@ -1052,8 +1052,18 @@ The file is a baseline plus per-version overrides:
   is the headline because it is the floor every account clears to; the other two are a
   line each underneath.
 - **`baseline.lines`** — where the figure comes from, one row per income source, each
-  either a fixed amount, a `range`, or a handful of `tides`. `per` says how often it pays:
-  `day`, `week`, `month` or `patch`.
+  either a fixed amount, a `range`, or a handful of `tides` (a line can carry both — the
+  events row pays Astrite *and* convenes). `per` says how often it pays: `day`, `week`,
+  `month` or `patch`. `group` files it under one of the headings below.
+- **`baseline.groups`** — the handful of things a patch actually pays you *for*: the daily
+  routine, the endgame, the world, the events, the compensation, the passes. Each has a
+  `blurb` saying what is true of every line under it — that the routine cannot be missed,
+  that the events all expire, that the endgame's one-time clears are worth nothing to an
+  account that has already done them.
+- **`baseline.excludes`** — what the figure deliberately leaves out. On an estimate this is
+  as load-bearing as what it counts: Astrite you already hold, Waveplate (which pays
+  materials and no Astrite at all), permanent content cleared before this patch, and the
+  anniversary mail nobody has announced, which is most of how a patch beats its own number.
 - **`versions.<id>.lines`** — a patch over the baseline, keyed by line id. An object
   refines that line (3.6's exploration row is named for the Xuanfang expansion), `null`
   drops it — a patch that opens no new region pays no exploration Astrite — and an id the
@@ -1077,6 +1087,49 @@ estimate of what a patch will pay is planning; the same panel over a patch that 
 April is a guess at a number the reader already lived through. A version with no window at
 all — 3.7 is a beta with a drip card and no dates — gets the baseline, labelled as
 modelled on a 42-day patch rather than as this patch's own arithmetic.
+
+#### Breaking the figure down
+
+The headline is a button, and the whole box is the target: the figure a reader stops on is
+the figure they want taken apart, and putting that behind a separate link underneath would
+mean the one thing on the panel everybody looks at is the one thing that does nothing when
+clicked. It opens `drawerAstrite()` over the version record — six groups, fourteen lines,
+three tracks and the exclusions is a page, and a page set under the patch poster pushes the
+phases and the events off the screen. The drawer's own back control puts the record one
+click behind it either way.
+
+Three things the breakdown does that the flat list of rows it replaced did not:
+
+- **It groups.** "The events are worth three thousand and every one of them expires" is a
+  decision a reader can act on. Fourteen rows in source order is a spreadsheet, and nobody
+  reads a spreadsheet to work out whether they can afford a banner.
+- **It shows the shape.** One bar, six colours, a key underneath: what share of a patch is
+  paid for turning up, what share for clearing, what share you forfeit by not logging in.
+  That is the part worth knowing and it is invisible in a column of figures. It is the one
+  place on the desk that uses a spectrum for something other than confidence, which is safe
+  because it is local — six hues defined against each other, never leaving the panel — and
+  because every segment is named in the key.
+- **It admits the gap.** The lines have never summed to the headline and were never meant
+  to: the community figure is a total, and what gets itemised is the biggest dozen sources
+  rather than every one of them. The difference is drawn as its own hatched segment rather
+  than spread across the lines to make the sum come out. An estimate massaged into
+  balancing is just an estimate that has stopped saying where it is unsure. It runs about
+  4% on 3.6, where the desk holds every event's reward line, and 15% on 3.7, where it holds
+  none.
+
+**One line is not modelled at all, because the desk already knows the answer.** A line
+marked `"desk": "events"` is priced off `events.json` — Kuro's own reward line for every
+event in the patch, run through the same `astriteFrom()` the event tiles use, and summed.
+3.6's eight events publish 3,400 Astrite between them, which is a fact rather than an
+estimate and is drawn as one, with a **published** badge on the row.
+
+But a reward line is a *floor*, not a total: the desk holds one for five of 3.6's eight
+events and none at all for the two that are only a double-drop window. So the sum raises
+the low end of the modelled range and becomes the whole answer only once it has overtaken
+the high one — where it has stopped being a floor. Letting the sum stand as the answer
+wherever it existed would have made a patch the desk knows something about look *poorer*
+than one it knows nothing about, which is exactly backwards, and 3.5 is the patch that
+proves it: two published reward lines totalling 1,600 against a modelled 1,000–3,000.
 
 ## The resonator database
 
@@ -1663,7 +1716,11 @@ which is where the main echo above goes, which is why the two sit on the same pa
 format the desk cannot read five costs out of drops the badges rather than guessing. 56 of
 the 57 are `43311`; Jiyan is `44111`. The five boxes are centred on their own width, which
 is the only way a row of them reads as five of one thing rather than a left-aligned list
-that happens to be in boxes.
+that happens to be in boxes. The badge is the bare figure — it used to carry the game's own
+◆ after it, which at that size is four pixels of clutter against a number already sitting
+in a coloured pill under a heading reading "Main stats — 43311". Nothing about a `4` in
+that position could be a slot index or a percentage. The cost is spelled out on hover for
+the reader for whom it could.
 
 **Substat priority**, as a ranked list with the figure to stop at beside each line. See
 below — it is the one part of this panel that is assembled out of two separate things the

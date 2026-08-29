@@ -1885,13 +1885,94 @@ function astritePlan(v){
   const runs   = l => l.per === "day" ? days : l.per === "week" ? weeks : l.per === "month" ? months : 1;
   const mid    = l => l.astrite ?? (l.range ? (l.range[0] + l.range[1]) / 2 : 0);
 
+  /* One line does not have to be modelled at all, because the desk already
+     knows the answer. `desk:"events"` says: events.json carries Kuro's own
+     reward line for every event that has been announced, and a published sum
+     beats a community range every time — 3.6's events pay 3,400 between them,
+     which is a fact rather than an estimate and is drawn as one.
+
+     It falls back to the range on a patch whose events nobody has announced,
+     which is every patch at the point a reader most wants this figure. */
+  const priced = lines.map(l => {
+    if(l.desk !== "events") return l;
+    const evs  = patchEvents(v.id);
+    const paid = evs.filter(e => astriteFrom(e));
+    if(!paid.length) return l;
+    const sum  = paid.reduce((n, e) => n + astriteFrom(e), 0);
+    const lo   = l.range ? l.range[0] : Number(l.astrite) || 0;
+    const hi   = l.range ? l.range[1] : Number(l.astrite) || 0;
+
+    /* Published beats modelled, but only upwards. A reward line is a floor and
+       not a total: the desk holds one for five of 3.6's eight events and none
+       at all for the two that are only a double-drop window. Letting the sum
+       stand as the answer wherever it exists would make a patch the desk knows
+       something about look poorer than one it knows nothing about — which is
+       exactly backwards, and 3.5 is the patch that proves it.
+
+       So the sum raises the low end and is the whole answer only once it has
+       overtaken the high one, which is where it has stopped being a floor. */
+    const whole = sum >= hi;
+    return {...l,
+      whole, published: paid.length,
+      range:   whole ? null : [Math.max(lo, sum), hi],
+      astrite: whole ? sum  : null,
+      note: whole
+        ? `Kuro's own reward lines, across ${plural(paid.length, "event")}`
+        : `At least ${numFmt(sum)} published, across ${paid.length} of ${plural(evs.length, "event")} — the rest carry no reward line yet`};
+  });
+
   /* What one extra day of this patch is worth, off the lines that actually
      repeat. A range counts at its midpoint, the same figure the line renders. */
-  const perDay = lines.reduce((n, l) =>
+  const perDay = priced.reduce((n, l) =>
     n + (l.per === "day" ? mid(l) : l.per === "week" ? mid(l) / 7 : 0), 0);
   const shift  = (days - baseDays) * perDay;
   const round  = n => Math.round(n / 100) * 100;
   const cost   = Number(cfg.pullCost) || 160;
+
+  /* Every line multiplied out for this patch — 42 dailies, 6 weekly clears,
+     one region. `low` and `high` are the two ends of a range and the same
+     figure twice for a fixed line, so everything downstream adds them the same
+     way without asking which shape it was given. */
+  const out = priced.map(l => {
+    const n    = runs(l);
+    const low  = (l.range ? l.range[0] : Number(l.astrite) || 0) * n;
+    const high = (l.range ? l.range[1] : Number(l.astrite) || 0) * n;
+    return {...l, runs:n, low, high, mid:(low + high) / 2};
+  });
+
+  const tracks = base.tracks.map(t => {
+    const astrite = Math.max(0, round((Number(t.astrite) || 0) + shift));
+    /* Astrite buys pulls at 160; a Radiant Tide is a limited pull already.
+       Lustrous and Forging are the standard and the weapon banner, which is
+       a different budget — they are shown, and not counted in this figure. */
+    return {...t, astrite, pulls: Math.floor(astrite / cost) + (Number(t.tides?.radiant) || 0)};
+  });
+
+  /* The lines gathered into the handful of things a patch actually pays you
+     for, because that is the shape a reader plans against. "The events are
+     worth three thousand and they all expire" is a decision; fourteen rows of
+     arithmetic in source order is a spreadsheet, and nobody reads a spreadsheet
+     to work out whether they can afford a banner. */
+  const gdefs  = over.groups || base.groups || [];
+  const filed  = new Set();
+  const total  = ls => ({
+    low:  ls.reduce((n, l) => n + l.low,  0),
+    high: ls.reduce((n, l) => n + l.high, 0),
+    mid:  ls.reduce((n, l) => n + l.mid,  0)
+  });
+  const groups = gdefs.map(g => {
+    const gl = out.filter(l => l.group === g.id);
+    gl.forEach(l => filed.add(l));
+    return {...g, lines:gl, ...total(gl)};
+  }).filter(g => g.lines.length);
+
+  /* A line the file files under nothing, or under a group it never defined. It
+     still counts towards the total, so it still gets a row rather than quietly
+     going missing from the one panel whose whole job is adding up. */
+  const loose = out.filter(l => !filed.has(l));
+  if(loose.length) groups.push({id:"other", label:"Everything else", lines:loose, ...total(loose)});
+
+  const counted = out.reduce((n, l) => n + l.mid, 0);
 
   return {
     days, baseDays,
@@ -1899,16 +1980,21 @@ function astritePlan(v){
        dates — so what comes back is the shape of a patch rather than this
        patch's own arithmetic, and the panel says so. */
     modelled: !dated,
-    lines: lines.map(l => ({...l, runs: runs(l)})),
-    tracks: base.tracks.map(t => {
-      const astrite = Math.max(0, round((Number(t.astrite) || 0) + shift));
-      /* Astrite buys pulls at 160; a Radiant Tide is a limited pull already.
-         Lustrous and Forging are the standard and the weapon banner, which is
-         a different budget — they are shown, and not counted in this figure. */
-      return {...t, astrite, pulls: Math.floor(astrite / cost) + (Number(t.tides?.radiant) || 0)};
-    }),
-    source: over.source || cfg.source || null,
-    note:   over.note   || cfg.note   || ""
+    lines: out,
+    groups,
+    tracks,
+    counted,
+    /* The lines have never added up to the headline and were never meant to:
+       the community figure is a total, and what gets itemised is the biggest
+       dozen sources rather than every one of them. The difference is drawn as
+       its own segment instead of being spread across the lines to make the sum
+       come out — an estimate massaged into balancing is just an estimate that
+       has stopped saying where it is unsure. */
+    gap: Math.max(0, (tracks[0]?.astrite || 0) - counted),
+    source:   over.source   || cfg.source   || null,
+    sources:  over.sources  || cfg.sources  || [],
+    excludes: over.excludes || base.excludes || [],
+    note:     over.note     || cfg.note     || ""
   };
 }
 
@@ -1920,13 +2006,20 @@ const tideList = (t, runs = 1) => Object.entries(t || {})
   .map(([k, n]) => `${Array.isArray(n) ? `${n[0] * runs}–${n[1] * runs}` : n * runs} ${TIDE_LABEL[k] || k}`)
   .join(" · ");
 
-/* One income line as it reads in the list: a fixed figure, a range, or a
-   handful of tides — multiplied out where the line recurs. */
+/* One income line as it reads in the list: a fixed figure, a range, or — where
+   the line pays no Astrite at all, which is what the Battle Pass track and the
+   Coral shop are — the tides it pays instead. A line can be both: the events
+   line pays Astrite *and* Tides, and the Astrite is the part that belongs in
+   the column of numbers. */
 function astriteAmount(l){
-  if(l.tides) return tideList(l.tides, l.runs);
   if(l.range) return `${numFmt(l.range[0] * l.runs)} – ${numFmt(l.range[1] * l.runs)}`;
-  return numFmt((Number(l.astrite) || 0) * l.runs);
+  const n = (Number(l.astrite) || 0) * l.runs;
+  return n ? numFmt(n) : tideList(l.tides, l.runs);
 }
+
+/* A subtotal, which is a range whenever anything under it was one. */
+const astriteSpan = (low, high) =>
+  low === high ? numFmt(low) : `${numFmt(low)} – ${numFmt(high)}`;
 
 /* The panel, under the patch's poster. The F2P figure is the headline because
    it is the floor every account clears to; a reader on a subscription finds
@@ -1955,17 +2048,19 @@ function astritePanel(v, status){
       <span class="aest-tag" title="Not a Kuro figure. Nobody publishes what a patch pays — this is the community's arithmetic on a full clear.">estimate</span>
     </div>
 
-    <div class="aest-hero">
+    <button class="aest-hero" data-act="open" data-id="astrite:${esc(v.id)}"
+            aria-label="Break down the ${numFmt(head.astrite)} Astrite estimate for version ${esc(v.id)}">
       ${astriteMark(46)}
-      <div class="aest-fig">
+      <span class="aest-fig">
         <b>~${numFmt(head.astrite)}</b>
         <span>Astrite — ${esc(head.label)}</span>
-      </div>
-      <div class="aest-pulls">
+      </span>
+      <span class="aest-pulls">
         <b>≈ ${head.pulls}</b>
         <span>limited pulls</span>
-      </div>
-    </div>
+      </span>
+      <span class="aest-go">${icon("i-arrow", 14)}</span>
+    </button>
     ${tides ? `<div class="aest-tides" title="Tides come on top of the Astrite. A Radiant Tide is a limited convene, so those are already in the pull count; Lustrous is the standard banner and Forging the weapon one, which is a different budget and is not.">
       <span>plus</span>${esc(tides)} Tides</div>` : ""}
 
@@ -1976,15 +2071,11 @@ function astritePanel(v, status){
         <em>≈ ${t.pulls} pulls</em>
       </div>`).join("")}</div>` : ""}
 
-    <details class="aest-src">
-      <summary>Where the figure comes from<span>${p.lines.length} lines</span></summary>
-      <div class="aest-lines">${p.lines.map(l => `
-        <div>
-          <span>${esc(l.label)}${l.runs > 1 ? ` <i>× ${l.runs}</i>` : ""}
-            ${l.note ? `<em>${esc(l.note)}</em>` : ""}</span>
-          <b>${esc(astriteAmount(l))}</b>
-        </div>`).join("")}</div>
-    </details>
+    <button class="aest-more" data-act="open" data-id="astrite:${esc(v.id)}">
+      <span>Where the figure comes from</span>
+      <em>${p.lines.length} lines · ${p.groups.length} groups</em>
+      ${icon("i-arrow", 12)}
+    </button>
 
     <p class="aest-foot">${foot}
       ${p.source?.url ? `<a href="${esc(p.source.url)}" target="_blank" rel="noopener">
@@ -4008,7 +4099,7 @@ function drawerLabel(kind, id){
   if(kind === "intel") return entries().find(e => e.id === id)?.title || "intel";
   if(kind === "event") return gameEvents().find(e => e.id === id)?.name || "event";
   if(kind === "version") return `Version ${id}`;
-  if(kind === "open") return "Methodology";
+  if(kind === "open") return String(id).startsWith("astrite:") ? "Astrite estimate" : "Methodology";
   return String(id || "");
 }
 
@@ -4618,7 +4709,7 @@ function buildSubstats(st){
 function buildStats(st){
   const costs = /^\d{5}$/.test(String(st.format || "")) ? String(st.format).split("") : null;
   const rows = (st.slots || []).map((v, i) => v ? `<div class="bstat">
-    <span class="bstat-c">${costs ? `${costs[i]}◆` : i + 1}</span>
+    <span class="bstat-c" title="${costs ? `${costs[i]}-cost echo` : `Slot ${i + 1}`}">${costs ? costs[i] : i + 1}</span>
     <b>${esc(v)}</b>
   </div>` : "").join("");
   return `<div class="dsec">
@@ -4901,6 +4992,179 @@ function drawerVersion(id){
         <span class="dsrc" role="button" tabindex="0" data-act="intel" data-id="${esc(e.id)}">
           <i class="dot t-${esc(e.confidence)}" style="width:7px;height:7px;border-radius:50%;background:currentColor;flex:none"></i>
           ${esc(e.title)}<span class="arrow">${icon("i-arrow", 13)}</span></span>`).join("")}</div></div>` : ""}
+  </div>`);
+}
+
+/* ── the estimate, taken apart ────────────────────────────────────── */
+/* The panel in the version record answers "can I afford them". This answers
+   the question a reader asks about half a second later, which is "off what?"
+
+   It is a fair question and it deserves a whole panel, because the headline is
+   the one figure on the desk nobody published. Everything else here is Kuro's
+   own — dates, banners, reward lines — and this is arithmetic. Arithmetic that
+   will not show its working is a rumour with a number on it.
+
+   Three things this tries to do that a flat list of fourteen rows did not:
+
+   - **Group it.** "The events are worth three thousand and every one of them
+     expires" is a decision a reader can act on. Fourteen rows in source order
+     is a spreadsheet, and nobody reads a spreadsheet to work out whether they
+     can afford a banner.
+   - **Show the shape.** One bar, six colours: what share of a patch is paid
+     for turning up, what share for clearing, what share you forfeit by
+     missing the window. That is the part worth knowing and it is invisible in
+     a column of figures.
+   - **Admit the gap.** The lines have never summed to the headline. Rather
+     than quietly inflating them until they do, the difference is drawn.
+
+   It opens as a drawer over the version record rather than unfolding inside
+   it: six groups, three tracks and a list of what the figure deliberately
+   ignores is a page, and a page set under the patch poster pushes the phases
+   and the events off the screen. The drawer's own back control puts the record
+   one click behind it either way. */
+function drawerAstrite(id){
+  const v = versions().find(x => x.id === id) || archivePatch(id);
+  const p = v && astritePlan(v);
+  if(!p) return;
+
+  const head  = p.tracks[0];
+  const whole = head?.astrite || 1;
+  const pct   = n => Math.round(n / whole * 100);
+  const cost  = Number(DATA.astrite?.pullCost) || 160;
+
+  /* The bar and the sections read off one list, so a group is the same colour
+     in both. The remainder is a segment like any other — it is a real third of
+     this patch's figure, and leaving it out would make the bar lie by exactly
+     as much as it is worth. */
+  const groups = p.groups.map((g, i) => ({...g, tone:String(i % 6)}));
+  const segs   = [
+    ...groups.filter(g => g.mid > 0),
+    ...(p.gap > 0 ? [{id:"gap", label:"Not itemised", mid:p.gap, tone:"gap"}] : [])
+  ];
+
+  /* One line. The runs multiplier and the note sit under the label rather than
+     beside it, because "Daily activity quests × 42" with "60 a day" behind it
+     is the whole of what the row has to say and it says it in the order you
+     would ask: what, how often, how much. */
+  const lineRow = l => `<li>
+    <span class="agrp-lab">
+      <b>${esc(l.label)}</b>${l.runs > 1 ? `<i>× ${l.runs}</i>` : ""}
+      ${l.whole ? `<span class="agrp-pub"
+        title="Not modelled. This is the sum of the reward lines Kuro published with the events themselves.">published</span>` : ""}
+      ${l.note ? `<em>${esc(l.note)}</em>` : ""}
+    </span>
+    <span class="agrp-amt${l.range || Number(l.astrite) ? "" : " wrap"}">
+      <b>${esc(astriteAmount(l))}</b>
+      ${l.tides && (l.astrite || l.range) ? `<em>+ ${esc(tideList(l.tides, l.runs))}</em>` : ""}
+    </span>
+  </li>`;
+
+  const section = g => `<section class="agrp" data-tone="${g.tone}">
+    <div class="agrp-h">
+      <b>${esc(g.label)}</b>
+      ${g.mid > 0
+        ? `<span class="agrp-n">${esc(astriteSpan(g.low, g.high))}</span><em>${pct(g.mid)}%</em>`
+        : `<em class="agrp-off">Tides only</em>`}
+    </div>
+    ${g.blurb ? `<p class="agrp-b">${esc(g.blurb)}</p>` : ""}
+    <ol class="agrp-l">${g.lines.map(lineRow).join("")}</ol>
+  </section>`;
+
+  const gap = p.gap > 0 ? `<section class="agrp" data-tone="gap">
+    <div class="agrp-h">
+      <b>Not itemised</b>
+      <span class="agrp-n">~${numFmt(Math.round(p.gap / 50) * 50)}</span><em>${pct(p.gap)}%</em>
+    </div>
+    <p class="agrp-b">The lines above come to about ${numFmt(Math.round(p.counted / 50) * 50)}, and the
+    community's total is ${numFmt(whole)}. The difference is everything an infographic stops short of —
+    login mail, the odd one-off buried in a web event, the small change nobody bothers to itemise. It is
+    left standing as a gap rather than folded into the lines above it, because a breakdown that has been
+    massaged into balancing has stopped saying where it is unsure.</p>
+  </section>` : "";
+
+  const tides = tideList(head?.tides);
+  const srcs  = p.sources?.length ? p.sources : p.source ? [p.source] : [];
+  /* What one more day of this patch is worth, which is the only thing a
+     changed window can move. The recurring lines are already multiplied out,
+     so this is them back over the length that multiplied them. */
+  const daily = Math.round(p.lines.reduce((n, l) =>
+    n + (l.per === "day" || l.per === "week" ? l.mid : 0), 0) / Math.max(1, p.days));
+
+  openDrawer("Astrite estimate", `<div class="drawer-b">
+    <div class="meta">
+      <span class="pill ver">${esc(v.id)}</span>
+      <span class="pill">${p.modelled ? `modelled on ${p.baseDays} days` : plural(p.days, "day")}</span>
+      <span class="aest-tag">estimate</span>
+    </div>
+    <h2>Where the ${numFmt(whole)} Astrite comes from</h2>
+    <p>${esc(p.note)}</p>
+
+    <div class="asum">
+      ${astriteMark(38)}
+      <div class="aest-fig">
+        <b>~${numFmt(whole)}</b>
+        <span>Astrite — ${esc(head?.label || "full clear")}</span>
+      </div>
+      <div class="aest-pulls">
+        <b>≈ ${head?.pulls || 0}</b>
+        <span>limited pulls</span>
+      </div>
+    </div>
+
+    <div class="abar" role="img" aria-label="${esc(segs.map(s =>
+      `${s.label} ${pct(s.mid)} per cent`).join(", "))}">${segs.map(s => `
+      <span data-tone="${s.tone}" style="flex:${Math.max(1, Math.round(s.mid))}"
+            title="${esc(s.label)} — ${numFmt(Math.round(s.mid))} Astrite, ${pct(s.mid)}%"></span>`).join("")}</div>
+    <div class="akey">${segs.map(s => `
+      <span data-tone="${s.tone}"><i></i>${esc(s.label)}<b>${pct(s.mid)}%</b></span>`).join("")}</div>
+
+    <div class="agrps">${groups.map(section).join("")}${gap}</div>
+
+    ${tides ? `<div class="dsec">
+      <span class="label">And the Tides, which are not Astrite</span>
+      <p style="margin:0 0 10px">A full clear also pays <b>${esc(tides)}</b> Tides. Radiant is a limited
+      convene and is already counted in the pull figure above; Lustrous buys the standard banner and
+      Forging the weapon one, which are a different budget and are not.</p>
+    </div>` : ""}
+
+    <div class="dsec"><span class="label">The same patch, on the paid tracks</span>
+      <div class="atrk">${p.tracks.map((t, i) => `
+        <div${i ? "" : ` class="on"`}>
+          <span>${esc(t.label)}</span>
+          <b>~${numFmt(t.astrite)}</b>
+          <em>≈ ${t.pulls} pulls</em>
+        </div>`).join("")}</div>
+      <p class="agrp-b">A pull is ${cost} Astrite, and every Radiant Tide is one on top. The subscription
+      and the pass move the total and change nothing about the lines above — they are the same patch,
+      cleared the same way, with a standing order on top of it.</p>
+    </div>
+
+    ${p.excludes?.length ? `<div class="dsec"><span class="label">What this figure does not count</span>
+      <ul class="aexcl">${p.excludes.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}
+
+    <div class="dsec"><span class="label">How the days were worked out</span>
+      <p style="margin:0">${p.modelled
+        ? `${esc(v.id)} has no window yet, so the recurring lines run at the shape of a standard
+           ${p.baseDays}-day patch. Dates will move them and nothing else: a day is worth about
+           ${numFmt(daily)} Astrite of dailies and weeklies, and every other line on this page is paid
+           once whether the patch runs five weeks or seven.`
+        : `Taken off this patch's own window — ${plural(p.days, "day")} — rather than off a
+           standard-length one. Only the per-day, per-week and per-month lines scale with it; a longer
+           patch is more dailies and the same story quests.`}</p>
+    </div>
+
+    ${srcs.length ? `<div class="dsec"><span class="label">Where the lines come from</span>
+      <div style="display:grid;gap:10px">${srcs.map(s => `<div>
+        <a class="dsrc" href="${esc(s.url)}" target="_blank" rel="noopener">
+          ${esc(s.credit || "Source")}${s.title ? ` — ${esc(s.title)}` : ""}
+          <span class="arrow">${icon("i-arrow", 13)}</span></a>
+        ${s.note ? `<p class="asrc-n">${esc(s.note)}</p>` : ""}</div>`).join("")}</div>
+    </div>` : ""}
+
+    <div class="dsec">
+      <span class="dsrc" role="button" tabindex="0" data-act="version" data-id="${esc(v.id)}">
+        Back to the ${esc(v.id)} record<span class="arrow">${icon("i-arrow", 13)}</span></span>
+    </div>
   </div>`);
 }
 
@@ -5301,6 +5565,10 @@ function reopenDrawer(kind, id){
   else if(kind === "echo") drawerEcho(id);
   else if(kind === "event") drawerEvent(id);
   else if(kind === "open" && id === "methodology") drawerMethodology();
+  /* "open" is the drawer that belongs to no record. The astrite breakdown
+     carries which patch it is for in its id, because the same panel is a
+     different page for every version. */
+  else if(kind === "open" && String(id).startsWith("astrite:")) drawerAstrite(String(id).slice(8));
 }
 
 /* ── events ──────────────────────────────────────────────────────── */

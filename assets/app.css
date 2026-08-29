@@ -3602,10 +3602,28 @@ img.astrite-pic{
   flex:none;font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg-3);border:1px solid var(--line);border-radius:999px;padding:2px 8px;
 }
+/* The headline is a button now, and the whole box is the target. It is the
+   figure a reader stops on, so it is also the figure they want taken apart —
+   putting that behind a separate link underneath would mean the one thing on
+   the panel everybody looks at is the one thing that does nothing when
+   clicked. The arrow sits in the corner rather than in the row, because the
+   row reflows to two lines on a phone and the affordance must not move with
+   it. The gutter it sits in is taken out of the padding rather than out of the
+   flow, so the pull figure keeps its right edge instead of being nudged left
+   by a 14px arrow. */
 .aest-hero{
+  position:relative;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);
-  background:var(--tint);
+  padding:14px 34px 14px 16px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--tint);transition:border-color .15s,background .15s;
+}
+.aest-hero:hover,.aest-hero:focus-visible{border-color:var(--line-2);background:var(--bg-2)}
+.aest-go{
+  position:absolute;top:50%;right:11px;transform:translateY(-50%);display:grid;place-items:center;
+  color:var(--fg-3);opacity:.55;transition:opacity .15s,color .15s,transform .15s;
+}
+.aest-hero:hover .aest-go,.aest-hero:focus-visible .aest-go{
+  opacity:1;color:var(--accent);transform:translate(3px,-50%);
 }
 /* The stone is the size it is on an event tile — the glyph is what says
    "Astrite" before the label does. */
@@ -3637,41 +3655,22 @@ img.astrite-pic{
   flex:none;text-align:right;font-style:normal;white-space:nowrap;
   font-family:var(--mono);font-size:.6875rem;color:var(--fg-3);
 }
-/* Where the figure comes from, closed. Thirteen rows of arithmetic set under
-   the poster push the phases and the events off the screen, and the record is
-   about the patch rather than about the sum — so the headline stays out and
-   the working is one click away, the same disclosure a skill card uses. */
-.aest-src{margin-top:14px;border-top:1px solid var(--line)}
-.aest-src summary{
-  display:flex;align-items:baseline;gap:10px;cursor:pointer;list-style:none;
-  padding:10px 2px;font-size:.75rem;color:var(--fg-3);transition:color .15s;
+/* The second door to the same breakdown. The hero above it is the target most
+   people will use, but a coloured box that happens to be clickable is a thing
+   you have to discover — this is the row that says so in words, and it costs
+   one line to keep. */
+.aest-more{
+  display:flex;align-items:baseline;gap:10px;width:100%;cursor:pointer;
+  margin-top:14px;padding:11px 2px;border:0;border-top:1px solid var(--line);
+  background:none;font:inherit;font-size:.75rem;color:var(--fg-3);transition:color .15s;
 }
-.aest-src summary::-webkit-details-marker{display:none}
-.aest-src summary:hover{color:var(--fg-2)}
-.aest-src summary span{
-  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3);
+.aest-more:hover,.aest-more:focus-visible{color:var(--fg)}
+.aest-more em{
+  font-style:normal;font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-3);
 }
-/* The same plus that opens a skill, turning into a minus on the way. */
-.aest-src summary::after{
-  content:"+";margin-left:auto;font-family:var(--mono);font-size:.875rem;line-height:1;
-  color:var(--fg-3);transition:transform .18s;
-}
-.aest-src[open] summary::after{transform:rotate(45deg)}
-/* Ruled rows rather than bullets: every line is a label against an amount,
-   which is a table, and .dsec li would put a dot in front of each one. */
-.aest-lines{border-top:1px solid var(--line)}
-.aest-lines>div{
-  display:flex;align-items:baseline;gap:14px;
-  padding:8px 2px;border-bottom:1px solid var(--line);
-}
-.aest-lines span{font-size:.8125rem;color:var(--fg-2);min-width:0}
-/* How many times the line runs in this patch — 42 dailies, 6 weekly clears. */
-.aest-lines i{font-family:var(--mono);font-size:.6875rem;font-style:normal;color:var(--fg-3)}
-.aest-lines em{display:block;margin-top:2px;font-style:normal;font-size:.6875rem;color:var(--fg-3)}
-.aest-lines b{
-  margin-left:auto;flex:none;white-space:nowrap;
-  font-family:var(--mono);font-size:.75rem;font-weight:500;font-variant-numeric:tabular-nums;color:var(--fg);
-}
+.aest-more svg{margin-left:auto;flex:none;transition:transform .15s}
+.aest-more:hover svg{transform:translateX(3px)}
 .aest-foot{
   margin:10px 0 0;font-size:.6875rem;line-height:1.6;color:var(--fg-3);
   display:flex;gap:4px 10px;flex-wrap:wrap;align-items:baseline;
@@ -3679,6 +3678,131 @@ img.astrite-pic{
 .drawer-b .aest-foot{max-width:none}
 .aest-foot a{margin-left:auto;color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
 .aest-foot a:hover{color:var(--accent)}
+
+/* ── the breakdown, opened ────────────────────────────────────────
+   The panel above is a figure; this is the anatomy of it, and the two are
+   drawn on different principles. The panel wants to be skimmed past — it is
+   one row of a version record. This one has been asked for, so it can afford
+   to be long, and the thing it owes the reader is not compactness but shape:
+   which sixth of the patch each part is, and which parts vanish if you do not
+   log in.
+
+   Colour carries that shape, and it is the one place on the desk that uses a
+   spectrum for something other than confidence. It is safe here because it is
+   local — six hues, defined against each other, never leaving this panel — and
+   because every segment is labelled in the key underneath. The bar is the
+   picture; the key is the actual reading. */
+.asum{
+  display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin:16px 0 14px;
+  padding:13px 15px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint);
+}
+.asum img.astrite-pic,.asum svg{flex:none}
+.asum .aest-fig b{font-size:1.5rem}
+
+/* One bar, at the full width of the panel. Segments are flex-grown by their
+   own share, so the picture is the arithmetic rather than a drawing of it. */
+.abar{display:flex;gap:2px;height:10px;border-radius:999px;overflow:hidden}
+.abar>span{background:var(--g);min-width:3px}
+.abar>span[data-tone="gap"]{
+  background:repeating-linear-gradient(135deg,var(--line-2) 0 3px,transparent 3px 6px),var(--bg-2);
+}
+.akey{display:flex;flex-wrap:wrap;gap:7px 16px;margin-top:11px}
+.akey>span{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--fg-2)}
+.akey i{width:8px;height:8px;border-radius:2px;background:var(--g);flex:none}
+.akey>span[data-tone="gap"] i{background:var(--line-2)}
+.akey b{font-family:var(--mono);font-size:.6875rem;font-weight:500;color:var(--fg-3)}
+
+/* The six hues. Cyan is the desk's own accent and goes to the routine, which
+   is the part that is always there; red to the endgame, green to the world,
+   amber to the events, blue to the compensation, violet to the shops. A
+   seventh group the data invents inherits the grey and still reads. */
+.abar>span,.akey>span,.agrp{--g:var(--fg-3)}
+:is(.abar>span,.akey>span,.agrp)[data-tone="0"]{--g:var(--accent)}
+:is(.abar>span,.akey>span,.agrp)[data-tone="1"]{--g:var(--t-rumour)}
+:is(.abar>span,.akey>span,.agrp)[data-tone="2"]{--g:var(--t-official)}
+:is(.abar>span,.akey>span,.agrp)[data-tone="3"]{--g:var(--amber)}
+:is(.abar>span,.akey>span,.agrp)[data-tone="4"]{--g:var(--t-datamined)}
+:is(.abar>span,.akey>span,.agrp)[data-tone="5"]{--g:#B48CE0}
+
+/* A group. The colour is a rule down the left edge rather than a fill, because
+   six filled panels in a column is a chart with words in it — the eye should
+   still be reading a list. */
+/* minmax(0,1fr) rather than the implicit auto track. A grid column sized auto
+   is at least as wide as its widest item's min-content, and one row on this
+   page cannot be broken — "7 Radiant · 7 Lustrous · 7 Forging" in the Coral
+   shop line. Left to itself that one string sets the width of all seven
+   sections and pushes the whole panel off a 360px screen. */
+.agrps{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;margin:20px 0 4px}
+.agrp{
+  min-width:0;padding:12px 14px 4px;border:1px solid var(--line);border-left:2px solid var(--g);
+  border-radius:var(--r-sm);background:var(--tint-sink);
+}
+.agrp[data-tone="gap"]{border-left-style:dashed;border-left-color:var(--line-2)}
+.agrp-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.agrp-h>b{font-size:.875rem;font-weight:600;color:var(--fg)}
+.agrp-n{
+  margin-left:auto;font-family:var(--mono);font-size:.8125rem;font-weight:500;
+  font-variant-numeric:tabular-nums;color:var(--fg);white-space:nowrap;
+}
+.agrp-h>em,.agrp-off{
+  flex:none;font-style:normal;font-family:var(--mono);font-size:.6875rem;color:var(--g);
+}
+.agrp-off{margin-left:auto}
+.drawer-b p.agrp-b{margin:7px 0 0;font-size:.75rem;line-height:1.65;color:var(--fg-3);max-width:none}
+
+/* Ruled rows rather than bullets: every line is a label against an amount,
+   which is a table, and .dsec li would put a dot in front of each one. */
+.agrp-l{list-style:none;margin:10px 0 0;padding:0}
+.agrp-l li{display:flex;align-items:baseline;gap:14px;padding:8px 0;border-top:1px solid var(--line)}
+.agrp-lab{min-width:0}
+.agrp-lab>b{font-size:.8125rem;font-weight:500;color:var(--fg-2)}
+/* How many times the line runs in this patch — 42 dailies, 6 weekly clears. */
+.agrp-lab i{margin-left:6px;font-family:var(--mono);font-size:.6875rem;font-style:normal;color:var(--fg-3)}
+.agrp-lab em{display:block;margin-top:3px;font-style:normal;font-size:.6875rem;line-height:1.5;color:var(--fg-3)}
+/* One line on this page is not an estimate at all — it is Kuro's own reward
+   lines added up — and the whole panel is about which is which. */
+.agrp-pub{
+  margin-left:6px;font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--t-official);border:1px solid color-mix(in srgb,var(--t-official) 40%,transparent);
+  border-radius:999px;padding:1px 6px;white-space:nowrap;
+}
+.agrp-amt{margin-left:auto;flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right}
+.agrp-amt b{
+  font-family:var(--mono);font-size:.8125rem;font-weight:500;
+  font-variant-numeric:tabular-nums;color:var(--fg);white-space:nowrap;
+}
+.agrp-amt em{font-style:normal;font-family:var(--mono);font-size:.625rem;color:var(--fg-3);white-space:nowrap}
+/* A figure must never break: "700 – 1,400" wrapped at the dash reads as two
+   numbers, so the column is flex:none and nowrap by default. A line that pays
+   no Astrite at all puts its Tides in that slot instead, and "7 Radiant ·
+   7 Lustrous · 7 Forging" is a sentence rather than a figure — it has to be
+   allowed to shrink and wrap, because held on one line it is wider than a
+   phone and it sets the width of every section on the page. */
+.agrp-amt.wrap{flex:1 1 auto;min-width:0}
+.agrp-amt.wrap b{white-space:normal}
+
+/* The three tracks, as rows rather than as cards: the reader either pays or
+   does not, and only ever reads one of them. The free one is lit because it is
+   the one the rest of the panel was about. */
+.atrk{display:grid;gap:7px}
+.atrk>div{
+  display:flex;align-items:baseline;gap:12px;padding:9px 11px;
+  border:1px solid var(--line);border-radius:var(--r-sm);font-size:.8125rem;color:var(--fg-2);
+}
+.atrk>div.on{border-color:color-mix(in srgb,var(--accent) 34%,var(--line));background:var(--accent-soft)}
+.atrk b{margin-left:auto;font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums;color:var(--fg)}
+.atrk em{
+  flex:none;text-align:right;white-space:nowrap;font-style:normal;
+  font-family:var(--mono);font-size:.6875rem;color:var(--fg-3);
+}
+/* What the figure leaves out, which on an estimate is as load-bearing as what
+   it counts. Dashes rather than dots: these are caveats, not an inventory. */
+.aexcl{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.aexcl li{
+  position:relative;padding-left:16px;font-size:.7813rem;line-height:1.65;color:var(--fg-3);
+}
+.aexcl li::before{content:"—";position:absolute;left:0;color:var(--line-2)}
+.drawer-b p.asrc-n{margin:5px 0 0 2px;font-size:.6875rem;line-height:1.6;color:var(--fg-3)}
 @media (max-width:560px){
   /* The pull count drops under the Astrite figure rather than squeezing beside
      it — two mono numbers on one phone-width line is one of them wrapping. */
@@ -3689,8 +3813,16 @@ img.astrite-pic{
     flex:1 0 100%;margin-left:0;flex-direction:row;align-items:baseline;gap:7px;
     text-align:left;padding-top:11px;border-top:1px solid var(--line);
   }
-  .aest-lines>div{flex-wrap:wrap;gap:2px 14px}
   .aest-foot a{margin-left:0}
+  /* At this width the hero is two rows and there is no corner left that the
+     figure or its caption is not already using. The arrow goes; the row
+     underneath it says the same thing in words and is the better target on a
+     touchscreen anyway. */
+  .aest-go{display:none}
+  .aest-hero{padding-right:16px}
+  .agrp-l li{flex-wrap:wrap;gap:4px 14px}
+  .agrp-amt{align-items:flex-start;text-align:left}
+  .akey{gap:6px 14px}
 }
 .dsrc{
   display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:var(--r-sm);
@@ -4209,7 +4341,13 @@ img.astrite-pic{
 /* ── stats ────────────────────────────────────────────────────────
    Five slots, each with the cost of the echo that goes in it read off the
    format string. The first slot is the 4-cost, which is where the main echo
-   above goes — the two panels are about the same object. */
+   above goes — the two panels are about the same object.
+
+   The badge is the bare figure. It used to carry the game's own ◆ after it,
+   which at this size is four pixels of clutter against a number that is
+   already in a coloured pill under a heading reading "Main stats — 43311":
+   nothing about "4" in that position could be a slot index or a percentage.
+   The cost is still spelled out on hover, for the reader for whom it could. */
 .bstats{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr))}
 .bstat{
   display:flex;align-items:center;justify-content:center;gap:9px;padding:9px 11px;

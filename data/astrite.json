@@ -1,6 +1,6 @@
 {
-  "schema": "wuwa-desk/astrite@1.0",
-  "updated": "2026-08-28",
+  "schema": "wuwa-desk/astrite@1.1",
+  "updated": "2026-08-29",
   "note": "An estimate, not a Kuro figure — nobody publishes what a patch pays out. This is the community's arithmetic on a full clear, and the lines are the biggest of what it counts rather than an exact sum of the total.",
   "pullCost": 160,
   "source": {
@@ -8,6 +8,20 @@
     "url": "https://gamemarket.gg/news/wuthering-waves/wuthering-waves-3-6-astrite-calculation-pull-income",
     "credit": "GameMarket"
   },
+  "sources": [
+    {
+      "title": "Version 3.6 Astrite calculation & pull income",
+      "url": "https://gamemarket.gg/news/wuthering-waves/wuthering-waves-3-6-astrite-calculation-pull-income",
+      "credit": "GameMarket",
+      "note": "The totals, and most of the lines under them."
+    },
+    {
+      "title": "Whimpering Wastes — reset date and rewards",
+      "url": "https://game8.co/games/Wuthering-Waves/archives/498614",
+      "credit": "Game8",
+      "note": "What the Respawning Waters pay back on each monthly reset."
+    }
+  ],
   "baseline": {
     "days": 42,
     "tracks": [
@@ -30,20 +44,61 @@
         "tides": {"radiant": 17, "lustrous": 29, "forging": 7}
       }
     ],
+    "groups": [
+      {
+        "id": "routine",
+        "label": "Daily and weekly routine",
+        "blurb": "The floor. It is paid for turning up rather than for being good, so it is the one part of this figure that does not move — and over six weeks it is nearly a quarter of the patch."
+      },
+      {
+        "id": "endgame",
+        "label": "Endgame combat",
+        "blurb": "The part that pays for clearing rather than for showing up. Tower and the Wastes reset and pay again; the Matrix and the boss challenges pay once and never again, which is why a caught-up account earns less here than the estimate assumes."
+      },
+      {
+        "id": "world",
+        "label": "Story, world and records",
+        "blurb": "The new region and everything filed against it — the quests through it, the chests in it, and the trophies for having done both. The single biggest swing in the estimate, because a patch that opens no map pays none of it."
+      },
+      {
+        "id": "events",
+        "label": "Limited-time events",
+        "blurb": "What the patch runs on top of itself, and the codes read out on the livestream. Every line here expires. It is the one part of the figure that is simply gone if you do not log in for it, which is why it is the part worth planning around rather than the biggest."
+      },
+      {
+        "id": "goodwill",
+        "label": "Compensation and gifts",
+        "blurb": "Astrite handed out for downtime and for bugs. Kuro has never promised it and has never once skipped it, which is exactly why it sits in an estimate and not in a plan."
+      },
+      {
+        "id": "standing",
+        "label": "Passes and shops",
+        "blurb": "Tides rather than Astrite — the free Battle Pass track and the Coral shop's monthly stock. Convenes in their own right, counted beside the figure instead of inside it."
+      }
+    ],
     "lines": [
-      {"id": "daily",       "label": "Daily activity quests", "per": "day", "astrite": 60, "note": "60 a day"},
-      {"id": "gateways",    "label": "Fantasies of the Thousand Gateways", "per": "week", "astrite": 160, "note": "One weekly clear"},
-      {"id": "tower",       "label": "Tower of Adversity", "per": "patch", "range": [700, 1400], "note": "Bi-weekly resets, depends on stars"},
-      {"id": "matrix",      "label": "Endstate Matrix", "per": "patch", "astrite": 400, "note": "One-time clear"},
-      {"id": "exploration", "label": "Exploration in the new region", "per": "patch", "range": [1500, 2000]},
-      {"id": "quests",      "label": "Main story and segue quests", "per": "patch", "range": [200, 400]},
-      {"id": "trophies",    "label": "Trophies and achievements", "per": "patch", "range": [200, 600]},
-      {"id": "holograms",   "label": "Holograms and Calamity Effigy", "per": "patch", "astrite": 140, "note": "First clears"},
-      {"id": "compo",       "label": "Maintenance and bug compensation", "per": "patch", "range": [300, 600]},
-      {"id": "codes",       "label": "Livestream redemption codes", "per": "patch", "astrite": 300},
-      {"id": "events",      "label": "Limited-time events", "per": "patch", "tides": {"radiant": [10, 15], "lustrous": [20, 30]}},
-      {"id": "bp",          "label": "Free Battle Pass milestones", "per": "patch", "tides": {"lustrous": 5}},
-      {"id": "coral",       "label": "Coral shop resets", "per": "month", "tides": {"radiant": 7, "lustrous": 7, "forging": 7}}
+      {"id": "daily",       "group": "routine",  "label": "Daily activity quests", "per": "day", "astrite": 60, "note": "60 a day for filling the activity bar"},
+      {"id": "gateways",    "group": "routine",  "label": "Fantasies of the Thousand Gateways", "per": "week", "astrite": 160, "note": "One weekly clear"},
+      {"id": "tower",       "group": "endgame",  "label": "Tower of Adversity", "per": "patch", "range": [700, 1400], "note": "Bi-weekly resets, depends on stars"},
+      {"id": "wastes",      "group": "endgame",  "label": "Whimpering Wastes", "per": "month", "astrite": 800, "note": "The Respawning Waters, refreshed on each monthly reset"},
+      {"id": "matrix",      "group": "endgame",  "label": "Endstate Matrix", "per": "patch", "astrite": 400, "note": "One-time clear"},
+      {"id": "holograms",   "group": "endgame",  "label": "Holograms and Calamity Effigy", "per": "patch", "astrite": 140, "note": "First clears"},
+      {"id": "exploration", "group": "world",    "label": "Exploration in the new region", "per": "patch", "range": [1500, 2000], "note": "Chests, beacons and puzzles at 100%"},
+      {"id": "quests",      "group": "world",    "label": "Main story and segue quests", "per": "patch", "range": [200, 400]},
+      {"id": "trophies",    "group": "world",    "label": "Trophies and achievements", "per": "patch", "range": [200, 600], "note": "The ones the patch adds, not the backlog"},
+      {"id": "events",      "group": "events",   "label": "Limited-time events", "per": "patch", "range": [1000, 3000], "desk": "events",
+                            "note": "Combat, leisure and exploration events across the patch",
+                            "tides": {"radiant": [10, 15], "lustrous": [20, 30]}},
+      {"id": "codes",       "group": "events",   "label": "Livestream redemption codes", "per": "patch", "astrite": 300, "note": "Three codes, live for 24 hours"},
+      {"id": "compo",       "group": "goodwill", "label": "Maintenance and bug compensation", "per": "patch", "range": [300, 600], "note": "Update downtime, plus whatever gets fixed mid-patch"},
+      {"id": "bp",          "group": "standing", "label": "Free Battle Pass milestones", "per": "patch", "tides": {"lustrous": 5}},
+      {"id": "coral",       "group": "standing", "label": "Coral shop resets", "per": "month", "tides": {"radiant": 7, "lustrous": 7, "forging": 7}}
+    ],
+    "excludes": [
+      "Astrite you already hold. This is what the patch pays, not what you will have when the banner opens.",
+      "Waveplate. Spending it pays materials and Shell Credits and no Astrite at all — the 60 a day is the activity list, not the energy behind it.",
+      "Permanent content cleared before this patch: old regions, old holograms, the trophy backlog. Worth tens of thousands to a new account and nothing to a caught-up one.",
+      "Anniversary gifts and apology mail nobody has announced yet, which is most of how a patch quietly beats its own estimate."
     ]
   },
   "versions": {
