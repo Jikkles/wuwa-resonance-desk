@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-26",
+  "updated": "2026-08-29",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -8,6 +8,77 @@
     "rumour": "One unverified source, or sources disagreeing. Assume it's wrong until something better shows up."
   },
   "entries": [
+    {
+      "id": "2026-08-27-37-suoming-drip",
+      "date": "2026-08-27",
+      "version": "3.7",
+      "category": "identity",
+      "confidence": "official",
+      "title": "Suoming's drip card lands a day after Hsin's - Ten Seals Covenant, Intendant, and still no attribute mark",
+      "body": "Kuro published Suoming's drip card at 03:00 UTC on 27 August, one day behind Hsin's, under the usual \"Post-Lament Anthropocene: Stars Intertwined\" banner. Hsin's card reached the leaks subreddit ahead of Kuro's own channels, which is why the desk filed it as reported. This one did not: it went up on Kurobbs and Kuro's YouTube channel at the same moment the subreddit mirrored it, so it is official on arrival rather than a leak. The illustration is her small and red-haired under a wide paper parasol, over the caption \"'Let go. Forget'... I've heard those words a thousand times. I've said them to myself a thousand more. But this obsession... this is exactly what I want.\" The archive text is the part that carries information: born in Huating, Mengzhou, she founded the Ten Seals Covenant as its Seal Master to drive the Evil Miasma out of her homeland, and later served as Intendant of the Ministry of Sentinel Affairs by the Sentinel's decree - which places her under Hsin's authority rather than beside it. Her proportions on the card match the Verina-height model rip from 18 August, settling a community argument that had read her as Danjin-sized. Like every drip card it carries no attribute or weapon mark, so the contested Electro-versus-Havoc question outlived this post by exactly one day.",
+      "tags": [
+        "3.7",
+        "Suoming",
+        "identity",
+        "drip"
+      ],
+      "sources": [
+        {
+          "name": "Kurobbs - Post-Lament Anthropocene: Stars Intertwined, Suoming",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1541816017508257792"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming drip marketing",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vzi4yx/suoming_drip_marketing/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming drip marketing animation",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vzi9hn/suoming_drip_marketing_animation/"
+        }
+      ],
+      "outcome": ""
+    },
+    {
+      "id": "2026-08-28-37-profile-reveals",
+      "date": "2026-08-28",
+      "version": "3.7",
+      "category": "identity",
+      "confidence": "official",
+      "title": "Profile reveals settle it - Hsin is an Electro Rectifier, Suoming an Electro Sword",
+      "body": "Kuro posted both 3.7 profile cards on 28 August, Hsin at 03:00 UTC and Suoming at 04:01, on Kurobbs as 共鸣者档案前瞻 and mirrored in English on the leaks subreddit within a minute of each. Unlike drip cards these carry the attribute and weapon marks, so they close three weeks of argument. Hsin is Electro Rectifier, which is what the Seele reports had said since early August. Suoming is Electro Sword - the first Electro sword Resonator who isn't Rover, and Rover's Electro form has no 5-star signature sword, so her weapon banner has no precedent to be compared against. Two Electro Resonators sharing a patch was part of why the 9 August Electro listing was doubted; it is now Kuro's own line rather than a tracked-list claim. The subreddit's reading of the art is that the parasol shaft is the sheath and the blade draws out of the handle, which fits the hilt break visible partway down it - that part is community inference, not something Kuro stated. Neither card touches kit, multipliers, banner order or dates. Those stay leaks until the beta opens.",
+      "tags": [
+        "3.7",
+        "Hsin",
+        "Suoming",
+        "identity"
+      ],
+      "sources": [
+        {
+          "name": "Kurobbs - Resonator Profile Preview, Hsin",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1541817234393473024"
+        },
+        {
+          "name": "Kurobbs - Resonator Profile Preview, Suoming",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1541817798688280576"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Resonator Preview | Hsin",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w0esy3/resonator_preview_hsin/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Resonator Preview | Suoming",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w0g0gf/resonator_preview_suoming/"
+        }
+      ],
+      "outcome": ""
+    },
     {
       "id": "2026-08-26-37-hsin-drip",
       "date": "2026-08-26",
@@ -39,7 +110,7 @@
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vylkgm/hsin_sentinel_form_via_seele/"
         }
       ],
-      "outcome": ""
+      "outcome": "confirmed"
     },
     {
       "id": "2026-08-07-36-beta-365",
@@ -164,7 +235,8 @@
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vh1s0n/37_about_suoming_via_seele/"
         }
-      ]
+      ],
+      "outcome": "confirmed"
     },
     {
       "id": "2026-08-08-37-hsin-modes",

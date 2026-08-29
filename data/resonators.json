@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/resonators@1.1",
-  "updated": "2026-08-28",
+  "updated": "2026-08-29",
   "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
   "resonators": [
     {
@@ -3244,17 +3244,22 @@
       "status": "teased",
       "region": "Mengzhou",
       "epithet": "Clear moonlight drapes the lonely keep",
-      "summary": "Kuro's drip marketing card landed on 26 August, ahead of the community's own 28-29 August projection: Hsin as a 5-star, seated below the Moon Fox spirit over a burning Mengzhou, captioned \"To share in the world's joy, and keep the lanterns... burning bright.\" The card settles her rarity and her design and nothing else - Kuro's drip cards carry no attribute or weapon mark, and the EN news site has published no Profile Reveal yet, so Electro Rectifier is still the leaks' claim rather than Kuro's. The kit reports have firmed up around two switchable modes - Electro Flare, and a new Tune Break: Harmony system - plus coordinated attack damage, which would make her the first coordinated attacker able to hold the on-field slot. A sentinel form surfaced the same night. No file data yet; 3.7 beta has not opened.",
+      "summary": "Kuro's drip marketing card landed on 26 August, ahead of the community's own 28-29 August projection: Hsin as a 5-star, seated below the Moon Fox spirit over a burning Mengzhou, captioned \"To share in the world's joy, and keep the lanterns... burning bright.\" The card settled her rarity and her design and nothing else, because Kuro's drip cards carry no attribute or weapon mark. Her profile reveal on 28 August carries both: Electro Rectifier is now Kuro's own line, not the leaks'. The kit reports have firmed up around two switchable modes - Electro Flare, and a new Tune Break: Harmony system - plus coordinated attack damage, which would make her the first coordinated attacker able to hold the on-field slot. A sentinel form surfaced the same night. No file data yet; 3.7 beta has not opened.",
       "kit": [],
       "materials": {
         "ascension": [],
         "skill": []
       },
       "confidence": {
-        "identity": "reported",
+        "identity": "official",
         "kit": "reported"
       },
       "sources": [
+        {
+          "name": "Kurobbs - Resonator Profile Preview, Hsin",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1541817234393473024"
+        },
         {
           "name": "r/WutheringWavesLeaks - Hsin drip marketing",
           "lang": "en",
@@ -3288,17 +3293,27 @@
       "status": "teased",
       "region": "Mengzhou",
       "epithet": "Locked in the past, the prisoner lingers long",
-      "summary": "Revealed in Kuro's second-half 3.x cast poster set alongside Hsin. Red-haired, carries a wide paper parasol with lock and songbook motifs. Element and weapon are contested: the leaks subreddit's tracked list called her Havoc on 2 August and Electro Sword on 9 August, without explaining the switch, and no beta has opened to settle it. She appeared in the 3.6 broadcast in a scene with Yinlin, and the community reading ties her to Hsin's disappearance. Treat the Electro Sword line as the later claim rather than a confirmed one.",
+      "summary": "Kuro's drip card landed 27 August and her profile reveal 28 August, which together make her identity official: 5-star, Electro, Sword. The archive text names her as founder and Seal Master of the Ten Seals Covenant in Huating, Mengzhou, raised afterwards to Intendant of the Ministry of Sentinel Affairs by the Sentinel's decree - so she serves under Hsin. The earlier Havoc-versus-Electro dispute, which ran from the 2 August tracked-list entry to the 9 August correction, is resolved in Electro's favour. She is the first Electro sword Resonator other than Rover. The August model rips put her at Verina height, and the card art agrees. Kit is untouched by any of this: the Tieba report of skill-damage scaling with an outro buffing Skill and Electro DMG is still a leaker claim, and no beta files exist yet.",
       "kit": [],
       "materials": {
         "ascension": [],
         "skill": []
       },
       "confidence": {
-        "identity": "rumour",
+        "identity": "official",
         "kit": "rumour"
       },
       "sources": [
+        {
+          "name": "Kurobbs - Resonator Profile Preview, Suoming",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1541817798688280576"
+        },
+        {
+          "name": "Kurobbs - Post-Lament Anthropocene: Stars Intertwined, Suoming",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1541816017508257792"
+        },
         {
           "name": "Prydwen - upcoming roster",
           "lang": "en",
