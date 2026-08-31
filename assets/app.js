@@ -3472,15 +3472,23 @@ function renderPulls(){
      things you hold are objects the game draws, and the desk already caches
      Kuro's own art for them — a labelled box saying ASTRITE next to a labelled
      box saying RADIANT TIDES is three words of mono doing a job three pictures
-     do faster. The two pity fields take no icon and want none: a counter is not
-     a thing you own. */
-  const field = (k, label, hint, item, attrs = "") => {
+     do faster. `glyph` is what a field takes instead when there is no art to
+     draw: pity is a count the game keeps about you rather than a thing you own,
+     so it gets a sprite in the same figure, which is the difference stated
+     rather than a fifth tile built to a different shape. */
+  const field = (k, label, hint, item, attrs = "", glyph = "") => {
     const art = item && itemFor(item)?.icon;
     return `<label class="pf">
-      <span class="pf-k">
-        ${art ? `<img src="${esc(art)}" alt="" loading="lazy" decoding="async">` : ""}${esc(label)}</span>
-      <input type="number" inputmode="numeric" min="0" step="1" autocomplete="off"
-             data-pull="${k}" value="${P[k] || ""}" placeholder="0"${attrs}>
+      <span class="pf-top">
+        <span class="pf-fig${art ? "" : " glyph"}">${art
+          ? `<img src="${esc(art)}" alt="" loading="lazy" decoding="async">`
+          : icon(glyph, 21)}</span>
+        <span class="pf-k">${esc(label)}</span>
+      </span>
+      <span class="pf-in">
+        <input type="number" inputmode="numeric" min="0" step="1" autocomplete="off"
+               data-pull="${k}" value="${P[k] || ""}" placeholder="0"${attrs}>
+      </span>
       <em class="pf-h" id="pf-h-${k}">${hint}</em>
     </label>`;
   };
@@ -3506,8 +3514,12 @@ function renderPulls(){
       </div>
 
       <div class="panel">
+        ${/* "Type what you have", not "Empty means none". The panel is the only
+             one on the desk that does nothing until you fill it in, and the
+             sub-heading is the first thing read after the title, so it says
+             what to do here before it says what a blank box means. */""}
         <div class="panel-h"><h2>Where you stand</h2>
-          <span class="sub">Empty means none</span>
+          <span class="sub">Type what you have · empty means none</span>
         </div>
         <div class="panel-b">
           <div class="pfset">
@@ -3531,8 +3543,8 @@ function renderPulls(){
                    already says pity, and the longer label was the one string
                    here wide enough to wrap a tile and leave the two boxes
                    different heights. */""}
-              ${field("pity",  "Resonator", `Since your last 5★`, null, ` max="${CONVENE.pity - 1}"`)}
-              ${field("wpity", "Weapon", `Counts on its own`, null, ` max="${CONVENE.pity - 1}"`)}
+              ${field("pity",  "Resonator", `Since your last 5★`, null, ` max="${CONVENE.pity - 1}"`, "i-pulls")}
+              ${field("wpity", "Weapon", `Counts on its own`, null, ` max="${CONVENE.pity - 1}"`, "i-weapon")}
             </div>
             <button class="pguar" data-act="pullguar" aria-pressed="${!!P.guaranteed}">
               <span class="ptg-box">${icon("i-check", 11)}</span>

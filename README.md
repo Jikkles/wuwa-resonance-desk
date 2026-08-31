@@ -1259,6 +1259,17 @@ neither grid caps its track: `auto-fit`/`auto-fill` count repetitions off the *m
 that is a definite length, so capping the card at 17rem made a 679px column fit one card
 instead of three.
 
+The form's track has **two minimums**, because that grid meets two very different widths.
+Stacked below 1900 the panel is the full 810 of the stage, and a track sized to pair up
+beside the picker left five of them holding three tiles — so "What you hold", the row read
+first, stopped two thirds of the way across and the rest of the panel was empty. 11.5rem is
+the width at which those three fill their row exactly at both 1500 and 1200; beside the
+picker the panel is closer to 500 and the same value breaks the three into two-and-one, so
+a `min-width:1900px` query hands back 9.75rem. That query lives *below* the rule it
+overrides rather than up with the `.play` split it belongs to — a media query adds no
+specificity, so from up there the plain `.pfields` further down won every time and the wide
+screens silently kept the stacked value.
+
 #### The odds, which are the one modelled thing here
 
 Everything above is arithmetic over published numbers. The **Chance of getting there**
@@ -1305,6 +1316,19 @@ answer is the Astrite panel's hero row with a summary strip welded under it, whi
 who has met that panel already knows how to read. The guarantee is a full-width row rather
 than a fourth number box, because it is worth 80 pulls and would have been missed in a grid
 of tiles.
+
+**A field leads with the picture and draws the box.** Astrite, Radiant Tide and Forging
+Tide are things the game draws, and the desk already caches Kuro's art for all three — so
+each heads its tile at portrait size in a 44px figure rather than sitting beside the label
+as a 17px bullet, which on a site whose whole argument is that key art carries a page was
+the one panel reading as a spreadsheet. Pity takes the same figure with a sprite in it and
+no tint behind: it is a count the game keeps about you rather than a thing you own, and
+that difference is worth drawing rather than asserting. The number sits in a bordered,
+inset well with a focus ring, and the sub-heading says *Type what you have* before it says
+what a blank box means — flat on panel ground with a dim `0` in it, the one control on the
+desk that does nothing at all until you fill it in was the one that did not look like a
+control, and the placeholder read as a figure the desk had already worked out. The whole
+tile is the `<label>`, so a click on the artwork puts the caret in the box.
 
 A target card carries the element and whether it is a debut, and not the weapon class —
 which weapon a Resonator swings is a fact about building them rather than about whether you

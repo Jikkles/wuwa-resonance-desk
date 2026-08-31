@@ -4007,41 +4007,82 @@ img.astrite-pic{
 /* ── where you stand ──────────────────────────────────────────────── */
 .pfset+.pfset{margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
 .pfset>.label{display:block;margin-bottom:8px}
-/* Narrow enough that the boxes pair up inside the right-hand column, and go
-   three or more across on the single-column layout below 1180. */
 /* Same reason as .pcards: three boxes under "What you hold" and two under the
-   pity heading, and with auto-fit the two came out wider than the three. */
-.pfields{display:grid;grid-template-columns:repeat(auto-fill,minmax(7rem,1fr));gap:8px}
+   pity heading, and with auto-fit the two came out wider than the three.
+
+   Two minimums, because this grid meets two very different widths. Stacked
+   below 1900 the panel is the full 810 of the stage, and a track small enough
+   to pair up beside the picker left five of them holding three tiles — so the
+   row you read first stopped two thirds of the way across and the rest of the
+   panel was empty. The wide value is the width at which "What you hold" fills
+   its row exactly. Beside the picker the panel is closer to 500 and the same
+   value would break the three into two-and-one, so the media query hands it
+   back the smaller track. */
+.pfields{
+  --pf-min:11.5rem;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--pf-min),1fr));gap:9px;
+}
+/* Below the rule it overrides, not up with the .play split it belongs to: a
+   media query adds no specificity, so from up there the plain .pfields further
+   down won every time and the wide screens silently kept the stacked value. */
+@media (min-width:1900px){ .pfields{--pf-min:9.75rem} }
+/* A label, so a click anywhere on the tile — the art included — puts the caret
+   in the box. */
 .pf{
-  display:flex;flex-direction:column;gap:3px;
-  padding:8px 10px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+  display:flex;flex-direction:column;gap:7px;cursor:text;
+  padding:11px 12px 10px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
   transition:border-color .15s;
 }
 .pf:focus-within{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
-.pf-k{
-  display:flex;align-items:center;gap:6px;min-width:0;
-  font-family:var(--mono);font-size:.5938rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
+.pf-top{display:flex;align-items:center;gap:11px;min-width:0}
+/* Kuro's own item art, cached by fetch-items.mjs, drawn at portrait size
+   rather than beside the label as a bullet. `contain` because these are drawn
+   to their own aspect and a tide is taller than a crystal — cropping them to a
+   square box would cut the top off one and not the other. */
+.pf-fig{
+  flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 15%,transparent),var(--bg-2));
+  border:1px solid var(--line-2);
 }
-/* Kuro's own item art, cached by fetch-items.mjs. `contain` because these are
-   drawn to their own aspect and a tide is taller than a crystal — cropping
-   them to a square box would cut the top off one and not the other. Two sizes
-   above the label they head: the picture is what the eye lands on. */
-.pf-k img{width:17px;height:17px;object-fit:contain;flex:none}
+.pf-fig img{width:33px;height:33px;object-fit:contain}
+/* Pity has no art and should not borrow any: it is a count the game keeps
+   about you, not a thing you own. It takes the same figure so the five tiles
+   stay one shape, with a sprite inside it and no tint behind — which is the
+   distinction drawn rather than asserted. */
+.pf-fig.glyph{background:none;color:var(--fg-3)}
+.pf-k{
+  min-width:0;
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-2);
+}
+/* The box has to look like a box. Drawn flat on panel ground with a dim 0 in
+   it, the number read as a figure the desk had worked out — the one control on
+   the page that does nothing at all until you type in it was the one that did
+   not look like a control. */
+.pf-in{
+  display:flex;align-items:center;
+  padding:6px 10px;border:1px solid var(--line-2);border-radius:var(--r-sm);
+  background:color-mix(in srgb,var(--bg) 55%,transparent);
+  transition:border-color .15s,box-shadow .15s;
+}
+.pf:focus-within .pf-in{
+  border-color:color-mix(in srgb,var(--accent) 70%,transparent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent);
+}
 /* The figure is the point of the tile, so it is set at the size .wstats sets
    its figures at. Everything native is stripped: the spinners are 20px of
    chrome on a control that is already 5 characters wide, and the arrow keys
    still step the value without them. */
 .pf input{
   width:100%;border:0;background:none;padding:0;margin:0;
-  font-family:var(--mono);font-size:1rem;font-weight:500;color:var(--fg);
+  font-family:var(--mono);font-size:1.1875rem;font-weight:500;color:var(--fg);
   font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield;
 }
 .pf input::-webkit-outer-spin-button,
 .pf input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .pf input:focus{outline:none}
-.pf input::placeholder{color:var(--fg-3);opacity:.5}
+.pf input::placeholder{color:var(--fg-3);opacity:.45}
 .pf-h{
-  font-style:normal;font-size:.625rem;line-height:1.4;color:var(--fg-3);
+  font-style:normal;font-size:.6563rem;line-height:1.4;color:var(--fg-3);
 }
 /* The guarantee. A whole row rather than a field, because it is worth 80
    pulls — a fifth of the biggest number on the page — and it would be missed
