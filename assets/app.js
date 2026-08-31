@@ -2909,6 +2909,61 @@ const CONVENE = {
 const intOf    = v => { const n = Math.floor(Number(v)); return Number.isFinite(n) ? n : 0; };
 const clampInt = (v, lo, hi) => Math.min(hi, Math.max(lo, intOf(v)));
 
+/* ── the odds ─────────────────────────────────────────────────────
+   Everything else on this view is arithmetic over numbers Kuro publishes.
+   This is not, and it is labelled twice because of it.
+
+   The *shape* of the curve is the community's and always has been: a flat 0.8%
+   until the rate starts climbing around 66, then a ramp to a certain 5-star at
+   80. Kuro has never published it and probably never will.
+
+   The *scale* is not guesswork, though, and this is the part that makes the
+   block defensible. Kuro does publish a comprehensive probability — 1.8%,
+   which is one over the average number of Convenes a 5-star takes — and that
+   single figure pins the one free parameter in the model. A 2% step per pull
+   from 66 puts the average at 55.60 Convenes, or 1.7985%, against Kuro's
+   1.80%. Steeper ramps overshoot: 4% a pull, the figure most calculators use,
+   lands at 1.84% and quietly makes everybody luckier than Kuro says they are.
+
+   So: assumed shape, fitted scale, and a model either way. The worst case
+   above it is the number a reader can actually hold Kuro to. */
+const CONVENE_RAMP = 0.02;
+
+function fiveStarRate(n){
+  if(n >= CONVENE.pity) return 1;
+  return n < CONVENE.soft ? 0.008 : Math.min(1, 0.008 + CONVENE_RAMP * (n - CONVENE.soft + 1));
+}
+
+/* P(the next 5-star lands exactly n pulls from now), given the pity already
+   carried into it. Index 0 is left empty so these convolve as pull counts. */
+function fiveStarDist(carried){
+  const out = [0];
+  let alive = 1;
+  for(let n = 1; n + carried <= CONVENE.pity; n++){
+    const p = alive * fiveStarRate(n + carried);
+    out[n] = p;
+    alive -= p;
+  }
+  return out;
+}
+
+/* Two independent waits add by convolution, which is what lets the whole plan
+   be one distribution: lose a 50/50 and you are waiting for a second 5-star,
+   chase two characters and you are waiting for both. */
+function convolve(a, b){
+  const out = new Array(a.length + b.length - 1).fill(0);
+  for(let i = 0; i < a.length; i++){
+    if(!a[i]) continue;
+    for(let j = 0; j < b.length; j++) out[i + j] += a[i] * b[j];
+  }
+  return out;
+}
+function mixDist(a, wa, b, wb){
+  const out = new Array(Math.max(a.length, b.length)).fill(0);
+  for(let i = 0; i < out.length; i++) out[i] = (a[i] || 0) * wa + (b[i] || 0) * wb;
+  return out;
+}
+
 /* The banners worth planning against: the patch running now, and the one Kuro
    has announced. Deliberately not the beta — a 3.7 banner list is a rumour,
    and a calculator that quietly adds a rumour to a budget is worse than one
@@ -3012,6 +3067,30 @@ function pullPlan(){
     };
   };
 
+  /* The same walk as the legs above, in distributions rather than in ceilings.
+     Win the 50/50 and the first 5-star is the one you wanted; lose it and you
+     are waiting for a second, which is those two waits convolved. */
+  let dist = [1];
+  let dp = clampInt(P.pity, 0, CONVENE.pity - 1), dg = !!P.guaranteed;
+  for(const t of picked.filter(x => x.kind === "resonator")){
+    const first = fiveStarDist(dp);
+    dist = convolve(dist, dg ? first : mixDist(first, .5, convolve(first, fiveStarDist(0)), .5));
+    dp = 0; dg = false;
+  }
+  let dw = clampInt(P.wpity, 0, CONVENE.pity - 1);
+  for(const t of picked.filter(x => x.kind === "weapon")){
+    dist = convolve(dist, fiveStarDist(dw));
+    dw = 0;
+  }
+  const cum = [];
+  for(let i = 0, run = 0; i < dist.length; i++){ run += dist[i]; cum[i] = run; }
+  const quantile = q => { for(let i = 0; i < cum.length; i++) if(cum[i] >= q) return i; return cum.length - 1; };
+  /* Pooled rather than split by banner, unlike the bill above. Astrite really
+     is fungible between the two convenes; the Tides are not, so a plan leaning
+     hard on Tides is a shade worse than this says. It is a modelled figure read
+     to the nearest per cent, and splitting it would be false precision. */
+  const afford = Math.floor(held / cost) + radiant + forging;
+
   /* What the patches these targets run in are estimated to pay, so the
      shortfall can be read against the income rather than against nothing. The
      free-to-play track, because that is the floor and a floor is what a
@@ -3026,7 +3105,13 @@ function pullPlan(){
     cost, legs, held, radiant, forging, patches,
     income: patches.reduce((n, x) => n + (Number(x.plan.tracks[0].astrite) || 0), 0),
     worst: bill("worst"),
-    lucky: bill("lucky")
+    lucky: bill("lucky"),
+    odds: {
+      afford,
+      chance: cum[Math.min(afford, cum.length - 1)] || 0,
+      median: quantile(.5),
+      high:   quantile(.9)
+    }
   };
 }
 
@@ -3110,7 +3195,7 @@ function pullOut(){
     <div class="phero-top">
       ${astriteMark(40)}
       <span class="phero-fig">
-        <b>${numFmt(w.short)}</b><span>Astrite you still need</span></span>
+        <b>${numFmt(w.short)}</b><span>Astrite you still need · worst case</span></span>
       <span class="phero-pulls">${w.short
         ? `<b>${numFmt(pullsFor(w.short))}</b><span>pulls to find</span>`
         : `<b>${numFmt(w.spare)}</b><span>Astrite to spare</span>`}</span>
@@ -3122,6 +3207,43 @@ function pullOut(){
       ${k.pulls !== w.pulls
         ? `<span><em>If the 50/50 lands</em><b>${numFmt(k.astrite)}</b> · ${plural(k.pulls, "pull")}</span>` : ""}
     </div>
+  </div>`;
+
+  /* The other lens on the same total, and the only block on the page that is
+     not a guarantee. Read against the pulls you can afford today, because
+     "62% with what you are holding" is a decision and "62% eventually" is not.
+
+     Rounded to whole per cent and clamped at both ends: a model fitted to a
+     figure Kuro published to two significant figures has no business printing
+     99.7%, and a reader who sees 100% will hold the page to it. */
+  const o = p.odds;
+  /* Once you can afford the worst case the answer is not "almost certain", it
+     is certain — that is what the guarantee means, and it is the one place the
+     model and the published rule meet. Everywhere else it is clamped: a curve
+     fitted to a figure Kuro gave to two significant figures has no business
+     printing 99.7%, and a reader who sees 100% will hold the page to it. */
+  const pctOf = v => o.afford >= w.pulls ? "100"
+    : v >= .995 ? "&gt;99" : v < .005 && v > 0 ? "&lt;1" : String(Math.round(v * 100));
+  const odds = `<div class="podds">
+    <div class="podds-h">
+      <span class="label">Chance of getting there</span>
+      <span class="aest-tag">Modelled, not published</span>
+    </div>
+    <div class="podds-b">
+      <b>${pctOf(o.chance)}<i>%</i></b>
+      <span>with the ${plural(o.afford, "pull")} you can afford today</span>
+      <span class="podds-bar" role="presentation">
+        <i style="width:${(Math.max(0, Math.min(1, o.chance)) * 100).toFixed(1)}%"></i></span>
+    </div>
+    <div class="podds-m">
+      <span><em>Half get there by</em><b>${numFmt(o.median)}</b> pulls</span>
+      <span><em>Nine in ten by</em><b>${numFmt(o.high)}</b> pulls</span>
+    </div>
+    <p class="podds-f">A model, not a promise, and the one thing on this page you cannot hold Kuro to.
+      The ${CONVENE.pity}-Convene guarantee is published and so is the 1.8% comprehensive rate; the curve
+      between them never has been, so the shape here is the community's, scaled until it reproduces
+      that 1.8%. It describes the shape of your luck. It does not predict it, and no percentage on it
+      is a reason to expect anything — the worst case above is the only figure here that is certain.</p>
   </div>`;
 
   /* The working. The "worst case, everything" row that used to close this list
@@ -3175,10 +3297,11 @@ function pullOut(){
   return `<div class="panel">
     <div class="panel-h"><h2>What you need</h2>
       <span class="sub">${plural(p.legs.length, "target")}</span>
-      <div class="right"><span class="aest-tag">Ceiling, not a forecast</span></div>
+      <div class="right"><span class="aest-tag warn">Worst case scenario</span></div>
     </div>
     <div class="panel-b">
       ${need}
+      ${odds}
       ${legs}
       ${income}
     </div>
@@ -3188,7 +3311,10 @@ function pullOut(){
          under them, and a separate panel for one sentence was 100px of the
          height this view was asked to give back. */""}
     <div class="panel-f">
-      <span class="tier-note">The ${CONVENE.pity}-Convene guarantee and the 50/50 are Kuro's, published on every banner. The curve that makes most 5★s land sooner is not, so nothing here averages it — these are ceilings, and most accounts pay less.</span>
+      ${/* This used to end "so nothing here averages it", which stopped being
+           true the moment the odds block landed. The line the reader needs is
+           not that nothing is modelled — it is which half is. */""}
+      <span class="tier-note">The ${CONVENE.pity}-Convene guarantee and the 50/50 are Kuro's, published on every banner, and everything outside the dashed box is worked from them alone. Inside it is a model. Ceilings are certain; odds are not.</span>
     </div>
   </div>`;
 }

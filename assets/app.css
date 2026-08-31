@@ -4096,6 +4096,55 @@ img.astrite-pic{
 }
 .phero-sum b{font-family:var(--mono);font-size:.8125rem;font-weight:500;color:var(--fg-2)}
 
+/* ── the odds ─────────────────────────────────────────────────────
+   Set apart from everything above it on purpose. The hero and the working are
+   Kuro's arithmetic; this is a model, and it is drawn as a quotation rather
+   than as another readout — hairline box, its own heading, its own caveat
+   under it — so a reader can see at a glance which half of the panel is a
+   guarantee and which half is a guess with a method. Deliberately not the
+   accent colour: that is the desk's "this is a figure" colour, and this is
+   not that kind of figure. */
+.podds{
+  margin-top:14px;padding:11px 13px 10px;
+  border:1px dashed var(--line-2);border-radius:var(--r-sm);
+  background:color-mix(in srgb,var(--bg) 30%,transparent);
+}
+.podds-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.podds-h .aest-tag{margin-left:auto}
+.podds-b{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
+.podds-b>b{
+  font-family:var(--mono);font-size:1.5rem;font-weight:500;line-height:1;
+  color:var(--fg);font-variant-numeric:tabular-nums;
+}
+/* The sign a size down, so 62 reads as the number and % as its unit. */
+.podds-b>b i{font-style:normal;font-size:.875rem;color:var(--fg-3);margin-left:1px}
+.podds-b>span{font-size:.75rem;color:var(--fg-3)}
+/* The figure again as a length. A percentage is a hard thing to feel and an
+   easy thing to see. */
+.podds-bar{
+  flex:1 1 8rem;min-width:6rem;height:4px;border-radius:2px;
+  background:var(--line);overflow:hidden;align-self:center;
+}
+.podds-bar i{
+  display:block;height:100%;border-radius:2px;
+  background:color-mix(in srgb,var(--fg-2) 70%,transparent);
+}
+.podds-m{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:9px}
+.podds-m>span{display:flex;align-items:baseline;gap:7px;font-size:.75rem;color:var(--fg-3)}
+.podds-m em{
+  font-style:normal;font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.podds-m b{font-family:var(--mono);font-size:.8125rem;font-weight:500;color:var(--fg-2)}
+.podds-f{
+  margin:10px 0 0;padding-top:9px;border-top:1px solid var(--line);
+  font-size:.6875rem;line-height:1.55;color:var(--fg-3);
+}
+/* The one tag on the desk that is a warning rather than a note. */
+.aest-tag.warn{
+  border-color:color-mix(in srgb,var(--amber) 50%,transparent);color:var(--amber);
+}
+
 /* The working. One row per thing you are chasing, each carrying the sentence
    that produced its number — a total nobody can check is a rumour with a
    number on it, which is the same rule the Astrite breakdown is built on. */

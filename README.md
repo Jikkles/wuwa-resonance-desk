@@ -1248,6 +1248,53 @@ one view missing the panel every other view carries reads as a page that failed 
 rather than as a page that chose something, and a margin note the desk shows everywhere is
 worth more than a scroll it costs once.
 
+Both grids use `repeat(auto-fill, …)` rather than `auto-fit`, and that one word is most of
+what made the panels look uneven. `auto-fit` collapses the tracks it has no item for and
+hands their width to the items that remain — so Phase 1, which runs two banners, drew them
+half again as wide as Phase 2's three, with each tick floating that much further from the
+name it belonged to; and the two pity boxes came out wider than the three above them.
+`auto-fill` keeps the empty track, everything in a panel is the same size, and the slack
+sits at the end of the short row where it reads as a row that is short. Note also that
+neither grid caps its track: `auto-fit`/`auto-fill` count repetitions off the *max* when
+that is a definite length, so capping the card at 17rem made a 679px column fit one card
+instead of three.
+
+#### The odds, which are the one modelled thing here
+
+Everything above is arithmetic over published numbers. The **Chance of getting there**
+block is not, and it is drawn as a quotation rather than another readout — hairline dashed
+box, its own heading, a `Modelled, not published` tag and its own caveat underneath — so a
+reader can see at a glance which half of the panel is a guarantee and which half is a
+guess with a method.
+
+The *shape* of the curve is the community's and always has been: a flat 0.8% until the
+rate starts climbing around 66, then a ramp to a certain 5★ at 80. Kuro has never
+published it.
+
+The *scale* is not guesswork, and this is what makes the block defensible. Kuro does
+publish a comprehensive probability — 1.8%, which is one over the average Convenes a 5★
+takes — and that single figure pins the one free parameter. A **2% step per pull from 66**
+puts the average at 55.60 Convenes, or 1.7985%, against Kuro's 1.80%. Steeper ramps
+overshoot: 4% a pull, the figure most calculators use, lands at 1.84% and quietly makes
+everybody luckier than Kuro says they are.
+
+From there it is convolution. `fiveStarDist(carried)` is the distribution of when the next
+5★ lands given the pity already banked; a Resonator leg is that distribution if you are
+holding a guarantee, or a half-and-half mix of it and it convolved with itself if you are
+not — win the 50/50 and the first 5★ is the one you wanted, lose it and you are waiting
+for a second. Legs chain the same way the ceilings do, in the order the patch runs them,
+and the whole plan comes out as one distribution. The headline reads it at the pulls you
+can afford *today*, because "62% with what you are holding" is a decision and "62%
+eventually" is not; the two landmarks under it are its median and its ninth decile.
+
+Two honest edges. The figure is clamped — `>99` and `<1` rather than 99.7%, since a curve
+fitted to two significant figures cannot support a third — **except** once you can afford
+the worst case, where it reads a flat 100%, because at that point the guarantee makes it
+certain and that is the one place the model and the published rule meet. And the affordable
+pull count pools Astrite with both kinds of Tide; Astrite really is fungible between the
+two convenes and the Tides are not, so a plan leaning hard on Tides is a shade worse than
+the percentage says.
+
 #### The form
 
 The desk has no input styling anywhere else — the only other text field on it is inside the
