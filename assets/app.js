@@ -980,9 +980,15 @@ function bannerCard(b){
      of them is noise, but a card is one of three and the strip is the patch's
      banner list — "is this her first run" is the question it exists to answer. */
   const flag = b.new ? `<i class="bflag new">New</i>` : b.rerun ? `<i class="bflag">Rerun</i>` : "";
+  /* The whole tag list where there is one, not the one-word compression of it.
+     This card is the version record's banner strip, and on an unannounced patch
+     it is the first place a reader meets either Resonator — "Main DPS" alone
+     there is the desk answering a question about rotations that nobody has
+     published an answer to. See roleTagPanel(). The value column wraps, so a
+     five-item list costs two lines and no layout. */
   const facts = [["Element", attr],
                  ["Weapon", b.weapon || r.weapon],
-                 ["Role", r.role || b.role],
+                 ["Role", r.roleTags?.length ? r.roleTags.join(" · ") : (r.role || b.role)],
                  ["Convene", b.convene]].filter(([, v]) => v);
   /* Same rule as the tile: the innermost [data-act] wins, so the card opens the
      Resonator and the weapon inside it opens the weapon. An unnamed banner —
@@ -4377,6 +4383,41 @@ function unreleasedNote(r){
   </div>`;
 }
 
+/* The role tags as the source actually has them.
+
+   Kuro gives a Resonator a list — "Main Damage Dealer; Basic Attack Damage;
+   Electro DMG Amplification; ..." — and fetch-kits.mjs keeps the first clause,
+   because a card has room for one short label and for a character whose kit has
+   shipped that label is the whole answer. Nobody needs the tag list to know how
+   Jingran plays.
+
+   Before release it is the opposite. The tag list is the only thing anybody has,
+   and the first clause on its own is the most misleading part of it: a Main DPS
+   tag establishes that a Resonator can hold the on-field slot, not that they
+   will — Phoebe carries it and is played as Zani's buffer — and the tags beside
+   it are the ones that say where the damage actually comes from. Compressing
+   five tags to one and printing it in the same type as the element was the desk
+   asserting a rotation nobody has published. So the list goes back. */
+function roleTagPanel(r){
+  const tags = r.roleTags;
+  if(!tags?.length) return "";
+  const t = r.confidence?.role;
+  return `<div class="rr-tags">
+    <div class="rr-tags-h">
+      <span class="label">Role tags</span>
+      ${t ? tierBadge(t, t === "official") : ""}
+    </div>
+    <div class="rr-tags-l">${tags.map((x, i) =>
+      `<span class="rr-tag${i ? "" : " lead"}">${esc(x)}</span>`).join("")}</div>
+    <p>Kuro tags a Resonator with several of these, and the Role tile above keeps
+    the first — the whole answer for a character whose kit has shipped, and not
+    the whole answer before one has. A <b>Main DPS</b> tag establishes that a
+    Resonator can hold the on-field slot, not that they are the one who will:
+    Phoebe carries it and is played as Zani's buffer. The tags beside it are what
+    say where the damage is meant to come from.</p>
+  </div>`;
+}
+
 function drawerResonator(name){
   const r = resonatorFor(name);
   const b = bannerFor(name) || {};
@@ -4408,7 +4449,7 @@ function drawerResonator(name){
        and printed in the same type as the other six it reads as the same kind
        of fact. Drawn only when it is not official — a released character's role
        is the game's own answer and needs no grading. */
-    ["Role", r.role || b.role, icon("i-role", 22), "", r.confidence?.role],
+    ["Role", r.role || b.role, icon("i-role", 22), "", r.confidence?.role, r.roleTags?.length],
     ["Region", r.region, icon("i-region", 22)],
     ["Debut", version ? `Version ${version}` : "", icon("i-timeline", 22)],
     ["Released", r.released ? fmtDate(r.released) : (hasDebuted(r) ? "" : "Not yet"), icon("i-timeline", 22)],
@@ -4474,15 +4515,21 @@ function drawerResonator(name){
     ${unreleasedNote(r)}
 
     ${glance.length ? `<div class="rr-glance">
-      ${glance.map(([k, v, ic, cls, tier]) => `<div class="${cls || ""}">
+      ${glance.map(([k, v, ic, cls, tier, tags]) => `<div class="${cls || ""}">
         <span class="rr-g-i">${ic}</span>
         <em>${esc(k)}</em><b>${esc(v)}</b>
         ${tier && tier !== "official"
           ? `<span class="rr-g-tier t-${esc(tier)}" title="${esc(TIER_MEANS[tier] || "")}">${
-              esc(TIER_LABEL[tier] || "")}</span>`
+              esc(TIER_LABEL[tier] || "")}${
+              /* "1 of 5 tags" is the whole point of the line. The tile prints one
+                 word where the source has a list, and a reader who only sees the
+                 word reads it as the finding rather than as the first item of
+                 one. Says so on the tile, and the panel underneath has the rest. */
+              tags > 1 ? ` · 1 of ${tags} tags` : ""}</span>`
           : ""}
       </div>`).join("")}
     </div>` : ""}
+    ${roleTagPanel(r)}
 
     ${recordTabs()}
 

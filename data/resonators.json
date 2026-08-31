@@ -3300,7 +3300,13 @@
         }
       ],
       "image": "assets/reveals/hsin-card.jpg",
-      "imageCredit": "Drip marketing card © Kuro Games"
+      "imageCredit": "Drip marketing card © Kuro Games",
+      "roleTags": [
+        "Main DPS",
+        "Resonance Skill DMG",
+        "Electro Flare",
+        "Tune Break: Harmony"
+      ]
     },
     {
       "name": "Suoming",
@@ -3369,7 +3375,14 @@
       ],
       "role": "Main DPS",
       "image": "assets/reveals/suoming-card.jpg",
-      "imageCredit": "Drip marketing card © Kuro Games"
+      "imageCredit": "Drip marketing card © Kuro Games",
+      "roleTags": [
+        "Main DPS",
+        "Basic Attack DMG",
+        "Electro DMG amplification",
+        "Resonance Skill DMG amplification",
+        "Tune Break"
+      ]
     },
     {
       "name": "Rover (Havoc)",
