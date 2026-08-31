@@ -4012,8 +4012,14 @@ img.astrite-pic{
 }
 .pf:focus-within{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
 .pf-k{
+  display:flex;align-items:center;gap:6px;min-width:0;
   font-family:var(--mono);font-size:.5938rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
 }
+/* Kuro's own item art, cached by fetch-items.mjs. `contain` because these are
+   drawn to their own aspect and a tide is taller than a crystal — cropping
+   them to a square box would cut the top off one and not the other. Two sizes
+   above the label they head: the picture is what the eye lands on. */
+.pf-k img{width:17px;height:17px;object-fit:contain;flex:none}
 /* The figure is the point of the tile, so it is set at the size .wstats sets
    its figures at. Everything native is stripped: the spinners are 20px of
    chrome on a control that is already 5 characters wide, and the arrow keys

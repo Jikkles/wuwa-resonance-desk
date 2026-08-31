@@ -186,6 +186,13 @@
       "description": "Open to claim one premium material for weapon ascension or skill upgrade of your choice.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Forgery_Premium_Supply"
     },
+    "Forging Tide": {
+      "icon": "assets/items/forging-tide.png",
+      "page": "Forging Tide",
+      "rarity": 5,
+      "type": "Convene Token",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Forging_Tide"
+    },
     "HF Howler Core": {
       "icon": "assets/items/hf-howler-core.png",
       "page": "HF Howler Core",
@@ -586,5 +593,5 @@
       "wiki": "https://wutheringwaves.fandom.com/wiki/Xuanfang_Wonder"
     }
   },
-  "updated": "2026-08-21T21:08:48.606Z"
+  "updated": "2026-08-31T21:36:47.678Z"
 }

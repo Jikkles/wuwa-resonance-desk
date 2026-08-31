@@ -3389,13 +3389,22 @@ function renderPulls(){
     </div>`;
   }).join("") : `<div class="empty">No 5★ banner is open or announced, so there is nothing to plan for yet.</div>`;
 
-  const field = (k, label, hint, attrs = "") => `
-    <label class="pf">
-      <span class="pf-k">${esc(label)}</span>
+  /* `item` names the entry in items.json whose icon heads the field. The three
+     things you hold are objects the game draws, and the desk already caches
+     Kuro's own art for them — a labelled box saying ASTRITE next to a labelled
+     box saying RADIANT TIDES is three words of mono doing a job three pictures
+     do faster. The two pity fields take no icon and want none: a counter is not
+     a thing you own. */
+  const field = (k, label, hint, item, attrs = "") => {
+    const art = item && itemFor(item)?.icon;
+    return `<label class="pf">
+      <span class="pf-k">
+        ${art ? `<img src="${esc(art)}" alt="" loading="lazy" decoding="async">` : ""}${esc(label)}</span>
       <input type="number" inputmode="numeric" min="0" step="1" autocomplete="off"
              data-pull="${k}" value="${P[k] || ""}" placeholder="0"${attrs}>
       <em class="pf-h" id="pf-h-${k}">${hint}</em>
     </label>`;
+  };
 
   /* The two controls sit side by side above the answer rather than stacked
      over it. Three full-width panels put the figure a reader is changing the
@@ -3425,9 +3434,15 @@ function renderPulls(){
           <div class="pfset">
             <span class="label">What you hold</span>
             <div class="pfields">
-              ${field("astrite", "Astrite", pullBuys())}
-              ${field("radiant", "Radiant Tides", "Resonator convene")}
-              ${field("forging", "Forging Tides", "Weapon convene")}
+              ${/* One word each, now that each carries Kuro's own art. "RADIANT
+                   TIDES" is thirteen tracked-out mono characters and it wrapped
+                   the moment an icon took 23px off the line, which left the
+                   three boxes you hold taller than the two you don't. The
+                   picture says which tide it is faster than the second word
+                   did, and the hint under it still names the banner. */""}
+              ${field("astrite", "Astrite", pullBuys(), "Astrite")}
+              ${field("radiant", "Radiant", "Resonator convene", "Radiant Tide")}
+              ${field("forging", "Forging", "Weapon convene", "Forging Tide")}
             </div>
           </div>
           <div class="pfset">
@@ -3437,8 +3452,8 @@ function renderPulls(){
                    already says pity, and the longer label was the one string
                    here wide enough to wrap a tile and leave the two boxes
                    different heights. */""}
-              ${field("pity",  "Resonator", `Since your last 5★`, ` max="${CONVENE.pity - 1}"`)}
-              ${field("wpity", "Weapon", `Counts on its own`, ` max="${CONVENE.pity - 1}"`)}
+              ${field("pity",  "Resonator", `Since your last 5★`, null, ` max="${CONVENE.pity - 1}"`)}
+              ${field("wpity", "Weapon", `Counts on its own`, null, ` max="${CONVENE.pity - 1}"`)}
             </div>
             <button class="pguar" data-act="pullguar" aria-pressed="${!!P.guaranteed}">
               <span class="ptg-box">${icon("i-check", 11)}</span>

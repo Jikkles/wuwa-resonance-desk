@@ -32,6 +32,20 @@ const WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(S
    the same grid — an item that only ever appears on a permanent event still
    needs its picture. */
 const EVENTS = ["data/events.json", "data/permanents.json"];
+/* Items the desk draws whether or not an event ever pays them out.
+ *
+ * Everything else in this file is discovered: the list is whatever the reward
+ * lines mention, and an icon nothing mentions any more gets pruned. That is the
+ * right rule for a reward tile and the wrong one for a currency the desk names
+ * on a page of its own. The pull calculator labels the three things you spend —
+ * Astrite, and the two Tides that buy the two limited banners — and the Forging
+ * Tide is never an event reward, so it was the one of the three that could not
+ * be discovered and the one that had no picture.
+ *
+ * Seeded rather than hand-placed in assets/items/, because a file this script
+ * did not fetch is a file this script deletes on its next run.
+ */
+const ALWAYS = ["Astrite", "Radiant Tide", "Lustrous Tide", "Forging Tide"];
 const OUT = "data/items.json";
 const DIR = "assets/items";
 const TIMEOUT_MS = 25000;
@@ -166,13 +180,13 @@ async function lookup(titles) {
     try { return JSON.parse(await readFile(f, "utf8")).events || []; }
     catch { console.log(`${f} not readable — skipped`); return []; }
   }))).flat();
-  const names = new Set();
+  const names = new Set(ALWAYS);
   for (const ev of events)
     for (const t of rewardTokens(ev.rewards))
       if (t.kind === "item") names.add(t.name);
 
   const wanted = [...names].sort();
-  console.log(`${wanted.length} distinct reward items across ${events.length} events\n`);
+  console.log(`${wanted.length} distinct items across ${events.length} events, including ${ALWAYS.length} seeded\n`);
 
   /* One query covering every candidate spelling of every name, then pick per name. */
   const pages = await lookup([...new Set(wanted.flatMap(candidates))]);
