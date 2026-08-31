@@ -2964,11 +2964,18 @@ function mixDist(a, wa, b, wb){
   return out;
 }
 
-/* The banners worth planning against: the patch running now, and the one Kuro
-   has announced. Deliberately not the beta — a 3.7 banner list is a rumour,
-   and a calculator that quietly adds a rumour to a budget is worse than one
-   that leaves it out. */
-const pullPatches = () => [liveVersion(), nextVersion()].filter(Boolean);
+/* The patches worth planning against: the one running now, the one Kuro has
+   announced, and the beta.
+
+   The beta used to be left out on the grounds that a 3.7 banner list is a
+   rumour and a rumour in a budget is worse than nothing. That was the right
+   worry and the wrong conclusion. The thing a reader saves for is the patch
+   after this one, and by the time Kuro publishes a banner list the saving has
+   already had to happen. What the desk shows for it is not a rumour either:
+   Kuro reveals the next patch's Resonators long before their banners, and
+   those two names are tagged `identity: official` in the database. So the
+   patch goes in, with what is actually known about it and nothing more. */
+const pullPatches = () => [liveVersion(), nextVersion(), futureVersion()].filter(Boolean);
 
 /* One row per 5-star banner: the Resonator, and the weapon Kuro runs beside
    them. Both are targets and they cost differently, which is the reason this
@@ -2978,6 +2985,16 @@ function pullTargets(){
   const out = [];
   for(const v of pullPatches()){
     const status = statusOf(v);
+    /* Every 5-star this patch has a banner row for, closed phases included.
+       Built before anything is emitted because the teased pass below needs it,
+       and a name in a phase that has already run is still a name Kuro has
+       scheduled — leaving it out here would resurrect Phase 1's debut as an
+       unscheduled Resonator the day Phase 1 closed. */
+    const scheduled = new Set();
+    for(const p of v.phases || [])
+      for(const b of p.banners || [])
+        if(b.name) scheduled.add(b.name.toLowerCase());
+
     for(const p of v.phases || []){
       /* A phase that has closed is not a plan, it is a regret. Phase 1 drops
          off this page the day it ends, which is also the day its pity stops
@@ -3000,6 +3017,38 @@ function pullTargets(){
             : null
         });
       }
+    }
+
+    /* Everyone the database files against this patch who has no banner row
+       yet. For 3.7 that is Hsin and Suoming: Kuro has named them and named
+       nothing else about the patch, so they are the whole line-up as far as
+       anybody knows, and a reader saving for them is saving now rather than
+       when the banner list lands.
+
+       This is also what makes the announcement automatic. The moment Kuro
+       publishes a phase — with the debut and whichever reruns Kuro puts beside
+       it — those rows come in through the loop above, `scheduled` catches the
+       names, and each one stops being drawn here. A patch mid-announcement
+       shows both halves at once: Phase 1 as Kuro published it, and whoever is
+       still only teased under it. Nothing here needs editing for any of that.
+
+       No weapon unless the database has a signature on file, which for a
+       Resonator this early it will not: the weapon convene is announced with
+       the banner, and inventing one would put 80 pulls in a budget on nobody's
+       authority. */
+    for(const r of resonators()){
+      if(r.version !== v.id || r.rarity !== 5) continue;
+      if(!r.name || scheduled.has(r.name.toLowerCase())) continue;
+      const w = r.signature ? (weaponFor(r.signature) || {name:r.signature, rarity:5}) : null;
+      out.push({
+        version:v.id, status, phase:null,
+        banner:{name:r.name, rarity:5, attribute:r.attribute, weapon:r.weapon, new:true},
+        window:null,
+        res:{key:`r:${r.name}`, kind:"resonator", name:r.name, holder:r.name},
+        weap:(w && w.rarity === 5)
+          ? {key:`w:${w.name}`, kind:"weapon", name:w.name, icon:w.icon || "", holder:r.name}
+          : null
+      });
     }
   }
   return out;
@@ -3367,25 +3416,37 @@ function renderPulls(){
     if(!ph) g.phases.push(ph = {n:t.phase, window:t.window, items:[]});
     ph.items.push(t);
   }
+  /* Announced phases first, then whoever has no phase. A null sorts to the end
+     rather than to the front, which is where "not scheduled yet" belongs. */
+  for(const g of groups)
+    g.phases.sort((a, b) => (a.n ?? 99) - (b.n ?? 99));
 
   /* Version number and state, and not the patch's title. "Lamplight in Mirage,
      Sword's Resolve in Heart" is eight words of poetry that wrapped to two
      lines in half a stage, and on a page about what a banner costs it is the
      one thing on the heading nobody is reading. The Timeline carries it. */
   const picker = groups.length ? groups.map(g => {
+    /* Said once, on the patch nobody has a banner list for. Without it the two
+       revealed Resonators read as the confirmed line-up, and the thing a
+       reader most needs to know about 3.7 is that the reruns beside them are
+       still unknown — which is Astrite this figure is not asking for yet. */
+    const unscheduled = g.phases.some(ph => ph.n == null);
     return `<div class="pgrp">
       <div class="pgrp-h">
         <span class="label">Version ${esc(g.version)}</span>
-        <span class="pill ${g.status === "live" ? "live" : "next"}">${esc(g.status)}</span>
+        <span class="pill ${g.status === "live" ? "live" : g.status === "announced" ? "next" : "future"}">${esc(g.status)}</span>
       </div>
       ${g.phases.map(ph => `<div class="pph">
         <div class="pph-h">
-          <span class="sub">Phase ${ph.n}</span>
-          ${ph.window.start && ph.window.end
+          <span class="sub">${ph.n == null ? "Revealed, not scheduled" : `Phase ${ph.n}`}</span>
+          ${ph.window?.start && ph.window?.end
             ? `<span class="sub when">${fmtShort(ph.window.start)} → ${fmtShort(ph.window.end)}${ph.window.est ? " est" : ""}</span>` : ""}
         </div>
         <div class="pcards">${ph.items.map(t => pullCard(t, want)).join("")}</div>
       </div>`).join("")}
+      ${unscheduled ? `<p class="pgrp-n">Kuro has named these Resonators and nothing else about the patch —
+        no dates, no phases, and no reruns. Whoever is announced beside them lands here on its own,
+        and their signature weapons are announced with the banners, so neither is counted yet.</p>` : ""}
     </div>`;
   }).join("") : `<div class="empty">No 5★ banner is open or announced, so there is nothing to plan for yet.</div>`;
 

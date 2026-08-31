@@ -3906,6 +3906,13 @@ img.astrite-pic{
   font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
 }
 .pgrp .sub.when{color:var(--fg-2)}
+/* The caveat under a patch with no banner list. Sits with the group rather
+   than in the panel footer: it is true of this patch and not of the one above
+   it, and a footnote would say it about both. */
+.pgrp-n{
+  margin:9px 0 0;font-size:.6875rem;line-height:1.5;color:var(--fg-3);
+  padding-left:10px;border-left:1px solid var(--line-2);
+}
 /* Auto-fit rather than a fixed count: a phase runs two banners or three, and
    a row of three that becomes a row of two with a 50% gap in it is worse than
    a grid that just reflows. */

@@ -1324,8 +1324,39 @@ one, though `S` survives navigating away and back.
 
 A phase that has closed drops off the picker the day it ends. A closed phase is not a plan,
 it is a regret — and the reader still standing on this view is now aiming at the next one.
-The beta patch is left out too: a 3.7 banner list is a rumour, and a calculator that
-quietly adds a rumour to a budget is worse than one that leaves it out.
+
+#### Three patches, and the next one fills itself in
+
+The picker covers the live patch, the announced one, and the beta. The beta was left out
+at first, on the grounds that a 3.7 banner list is a rumour and a rumour in a budget is
+worse than nothing. Right worry, wrong conclusion: the patch a reader is *saving* for is
+the one after this, and by the time Kuro publishes a banner list the saving has already
+had to happen. What the desk shows for it is not a rumour either — Kuro reveals the next
+patch's Resonators long before their banners, and Hsin and Suoming are both
+`identity: official` in `resonators.json`.
+
+So `pullTargets()` reads a patch twice. First every 5★ with a **banner row** in a phase,
+which is the announced line-up. Then every 5★ the **resonator database files against that
+version** who has no banner row yet — that is where Hsin and Suoming come from, and they
+group under *Revealed, not scheduled* rather than under a phase, because there is no phase
+to put them in.
+
+**This is also what makes Kuro's announcement land on its own.** The moment a phase is
+published — with the debut and whichever reruns Kuro puts beside it — those rows arrive
+through the first pass, the `scheduled` set catches the names, and each one stops being
+drawn by the second. A patch caught mid-announcement shows both halves at once: Phase 1 as
+Kuro published it, and whoever is still only teased underneath. None of that needs a code
+change; it all falls out of `versions.json` gaining rows.
+
+`scheduled` is built from *every* phase including closed ones, which is not an oversight:
+without that, Phase 1's debut would reappear as an unscheduled Resonator on the day Phase 1
+closed and dropped out of the first pass.
+
+A teased Resonator gets no weapon unless the database already has a signature on file,
+which this early it will not — the weapon convene is announced with the banner, and
+inventing one would put 80 pulls into a budget on nobody's authority. The group says so in
+a line under it, because two revealed names otherwise read as a confirmed line-up when the
+reruns beside them are the part still missing.
 
 Not counted, and said so in the footer: the standard banner and Lustrous Tides, Sequence
 Nodes past the first copy, and the Beginner's Choice Convene.
