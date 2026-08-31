@@ -3682,13 +3682,11 @@ img.astrite-pic{
 }
 .aest-more svg{margin-left:auto;flex:none;transition:transform .15s}
 .aest-more:hover svg{transform:translateX(3px)}
-.aest-foot{
-  margin:10px 0 0;font-size:.6875rem;line-height:1.6;color:var(--fg-3);
-  display:flex;gap:4px 10px;flex-wrap:wrap;align-items:baseline;
-}
+/* A plain paragraph again. The flex row and the `margin-left:auto` under it
+   existed to push a source link to the right-hand end of this line; there is
+   no link any more, and one sentence does not need a layout. */
+.aest-foot{margin:10px 0 0;font-size:.6875rem;line-height:1.6;color:var(--fg-3)}
 .drawer-b .aest-foot{max-width:none}
-.aest-foot a{margin-left:auto;color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
-.aest-foot a:hover{color:var(--accent)}
 
 /* ── the breakdown, opened ────────────────────────────────────────
    The panel above is a figure; this is the anatomy of it, and the two are
@@ -3824,7 +3822,6 @@ img.astrite-pic{
     flex:1 0 100%;margin-left:0;flex-direction:row;align-items:baseline;gap:7px;
     text-align:left;padding-top:11px;border-top:1px solid var(--line);
   }
-  .aest-foot a{margin-left:0}
   /* At this width the hero is two rows and there is no corner left that the
      figure or its caption is not already using. The arrow goes; the row
      underneath it says the same thing in words and is the better target on a

@@ -2090,9 +2090,12 @@ function astritePanel(v, status){
       ${icon("i-arrow", 12)}
     </button>
 
-    <p class="aest-foot">${foot}
-      ${p.source?.url ? `<a href="${esc(p.source.url)}" target="_blank" rel="noopener">
-        ${esc(p.source.credit || "Source")}${p.source.title ? ` — ${esc(p.source.title)}` : ""}</a>` : ""}</p>
+    ${/* No source link here. The panel already has one control for "where did
+          this number come from", and it is the row above — the full breakdown,
+          which carries the sources itself under a heading that says so. A
+          second link beside it sent you off the desk to read one of them
+          instead, which is the wrong of the two answers to offer first. */""}
+    <p class="aest-foot">${foot}</p>
   </div>`;
 }
 
