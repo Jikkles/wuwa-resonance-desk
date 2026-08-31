@@ -1232,17 +1232,21 @@ as its taller panel, so the shortest page is the one where the picker holds thre
 across *and* the form holds three boxes across. Tip it either way and one of them drops to
 two columns and grows a row. The same arithmetic sets `.pcards` at 10.5rem rather than a
 rounder 11 — at 11 the third track overran its column by three pixels, which is not a
-rounding error you can see and is a whole extra row of cards you can. Below 1180 the two
-panels stack and the grids spread instead.
+rounding error you can see and is a whole extra row of cards you can.
 
-This is also the one view that takes the aside's column, via `solo` on its VIEWS entry and
-`.body.solo` in the stylesheet. Everything else on the desk is content with a margin note
-beside it and the note earns its 375px; a calculator is inputs and the figure they
-produce, and four tier counts and a portrait have nothing to say about a pull budget. The
-rules are the ones the 1340px breakpoint already applies to every view — the hud unbuilds
-itself into a strip, the views drop to row two behind it — under a class instead of a
-width. `setView` owns the class, not the renderer, so it cannot be left behind on the way
-out. Between that, the split and the folded hero, the page went from 1,691px to 956px.
+**It only splits above 1900px**, and the threshold is that high because the aside is on
+this view like every other one: above 1340 the stage is the window less the rail, the
+padding and a 375px margin column, so a 1500px screen leaves about 810px to work in. Two
+panels of grids do not fit in 810 — the form drops to one box a row and grows taller than
+splitting it saved. Stacked, that same 810 gives the picker three cards across and the
+form all five boxes on two rows, which is shorter. The answer spans the full width
+underneath at every size.
+
+The view did take the aside's column for a while, on the argument that a calculator is a
+tool rather than a page and wants its inputs and its figure on one screen. It went back:
+one view missing the panel every other view carries reads as a page that failed to load
+rather than as a page that chose something, and a margin note the desk shows everywhere is
+worth more than a scroll it costs once.
 
 #### The form
 

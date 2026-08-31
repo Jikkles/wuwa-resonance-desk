@@ -455,41 +455,13 @@ button{font:inherit;color:inherit}
    thing paying for the width. */
 .aside,.hud{zoom:.875}
 
-/* ── a view that asks for the whole stage ─────────────────────────
-   `solo` on a VIEWS entry, set on .body by setView. One view uses it: the pull
-   calculator, which is a tool rather than a page you read. Everything else on
-   the desk is content with a margin note beside it, and the note earns its
-   column — but a calculator is inputs and the figure they produce, and those
-   two have to be on screen together or every keystroke is typed blind and
-   confirmed by scrolling. The aside's 375px is what stood between them: four
-   tier counts and a portrait, neither of which has anything to say about a
-   pull budget, taking a third of the stage on the one view whose whole job is
-   to fit on a screen.
-
-   These are the rules the 1340px breakpoint already applies to every view,
-   under a class instead of a width — the hud unbuilds itself into the strip it
-   was, the views drop to row two behind it, and the ~40px that costs buys back
-   ten times as much by letting the picker and the form go to three columns
-   apiece. The declarations are written twice because CSS cannot hand a class
-   to a media query; if one side changes, change both. */
-.body.solo{grid-template-columns:minmax(0,1fr)}
-.body.solo .aside{display:none}
-.body.solo .col{grid-row:2}
-.body.solo .hud{
-  grid-column:1;grid-row:1;
-  display:flex;flex-direction:column;align-items:flex-end;gap:5px;
-  background:none;border:0;border-radius:0;overflow:visible;
-  backdrop-filter:none;-webkit-backdrop-filter:none;
-  zoom:1;
-}
-.body.solo .hud .mini-h{order:2;padding:0;border-bottom:0;background:none}
-.body.solo .hud .mini-h h3{font-size:.6563rem;letter-spacing:.18em;color:var(--fg-2)}
-.body.solo .hud .mini-b{
-  padding:0;display:flex;align-items:center;justify-content:flex-end;
-  flex-wrap:wrap;gap:16px;
-}
-.body.solo .hud .searchbtn{width:auto}
-.body.solo .hud-strip{flex-direction:row;align-items:center;flex-wrap:wrap;gap:16px;margin-top:0}
+/* The pull calculator used to take this column, on the argument that it is a
+   tool rather than a page and wanted its inputs and its figure on one screen.
+   It went back: the aside is on every other view, and one view missing the
+   panel every other view carries reads as a page that failed to load rather
+   than as a page that chose something. The calculator pays for it in height,
+   which is the right way round — a margin note the desk shows everywhere is
+   worth more than a scroll it costs once. */
 
 /* Frosted, not merely translucent. The backdrop behind these is a sharp
    picture with faces and lettering in it, and 12px body copy laid over that at
@@ -3905,28 +3877,22 @@ img.astrite-pic{
    taller panel, so the split that makes the page shortest is the one where the
    picker holds three cards across AND the form holds three boxes across. Tip it
    either way and one of them drops to two columns and grows a row. */
-.play{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+/* One column until there is genuinely room for two, and the threshold is high
+   because the aside is back: above 1340 the stage is the window less the rail,
+   the padding and a 375px margin column, so a 1500px screen leaves this view
+   about 810px to work in. Two panels of grids do not fit in 810 — the form
+   drops to a single box per row and grows taller than the two-column layout
+   saved. Stacked, the same 810 gives the picker three cards across and the
+   form all five boxes on two rows, which is shorter than splitting it.
+
+   1900 is where the split starts paying: the stage clears 1,200px, and the
+   picker holds three cards AND the form three boxes with both panels side by
+   side. The answer spans the full width underneath at every size. */
+.play{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
 .play>#pull-out{grid-column:1/-1}
-
-/* The one capped view on the desk. --page is 100% everywhere else and that is
-   right for a timeline, which genuinely wants a 2,560px monitor — but this is a
-   form and a figure, and a form stretched to two and a half thousand pixels is
-   a row of labels with a metre of nothing after each one. 60rem is the width at
-   which the picker holds three cards and the form three boxes with nothing left
-   over: past it the panels were growing and their contents were not. */
-#p-pulls .stack{max-width:60rem;margin-inline:auto}
-
-/* Wide enough for three, so the answer comes up out of the second row and
-   stands beside the two controls rather than under them. This is what the
-   width is for: the cap above is a way of not wasting a big screen, and this
-   is a way of using one — picking, pricing and the figure all in one band, and
-   the page half as tall again. */
-@media (min-width:1800px){
-  #p-pulls .stack{max-width:96rem}
-  .play{grid-template-columns:minmax(0,1.15fr) minmax(0,.75fr) minmax(0,1.05fr)}
-  .play>#pull-out{grid-column:3;grid-row:1}
+@media (min-width:1900px){
+  .play{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
 }
-@media (max-width:1180px){.play{grid-template-columns:minmax(0,1fr)}}
 
 /* ── picking targets ──────────────────────────────────────────────── */
 .pgrp+.pgrp{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
@@ -5029,9 +4995,6 @@ img.astrite-pic{
 
 /* ══ responsive ═════════════════════════════════════════════════════ */
 @media (max-width:1340px){
-  /* Same layout as .body.solo above, at a width instead of on a class. Keep
-     the two in step — see the note over that block for why it is written out
-     twice rather than shared. */
   .body{grid-template-columns:minmax(0,1fr)}
   .aside{display:none}
   /* It takes the header's column with it. There is nowhere left to put a

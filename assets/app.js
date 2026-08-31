@@ -85,10 +85,8 @@ const VIEWS = [
   {id:"echoes",     label:"Echoes",       icon:"i-echo"},
   {id:"events",     label:"Events",       icon:"i-events"},
   /* Under Events, because it answers the other half of the same question. The
-     Events view says what the patch pays; this says what the patch costs.
-     `solo` takes the aside's column — see .body.solo. It is the only view that
-     asks for it, and the only one that is a tool rather than a page. */
-  {id:"pulls",      label:"Pull calculator", icon:"i-pulls", short:"Pulls", solo:true},
+     Events view says what the patch pays; this says what the patch costs. */
+  {id:"pulls",      label:"Pull calculator", icon:"i-pulls", short:"Pulls"},
   {id:"intel",      label:"Intel",        icon:"i-intel"},
   {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified", short:"Signals"}
 ];
@@ -6102,11 +6100,6 @@ function setView(id, focus){
      the page can be narrowed by is a list nobody finds. */
   S.railOpen = id;
   VIEWS.forEach(v => { document.getElementById(`p-${v.id}`).hidden = v.id !== id; });
-  /* A view that wants the aside's column takes it here rather than in its own
-     renderer: the aside is the shell's, not the view's, and a renderer that
-     reached out to restyle the page around itself would leave the class behind
-     the moment you navigated away from it. */
-  document.querySelector(".body")?.classList.toggle("solo", !!VIEWS.find(v => v.id === id)?.solo);
   /* Rebuilds the nav, its filter lists and the dock — aria-current, the open
      item and every count come out of S and the data in one pass. */
   renderRail();
