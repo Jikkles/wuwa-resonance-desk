@@ -3304,8 +3304,12 @@ function pullOut(){
       <div class="right"><span class="aest-tag warn">Worst case scenario</span></div>
     </div>
     <div class="panel-b">
-      ${need}
-      ${odds}
+      ${/* The ceiling and the odds side by side, because they are one thought:
+           what it costs at worst, and how likely you are to pay less. Stacked,
+           the hero sat in the left half of a wide panel with nothing beside it
+           and the odds were a scroll below — so the three figures a reader
+           actually came for were never on screen together. */""}
+      <div class="pband">${need}${odds}</div>
       ${legs}
       ${income}
     </div>

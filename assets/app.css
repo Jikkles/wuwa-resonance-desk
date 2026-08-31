@@ -4061,14 +4061,32 @@ img.astrite-pic{
    palette, because those are already this page's colours for unsettled and
    settled. The border carries it; the figure stays in the ink colour, so the
    number is read before its mood is. */
+/* The certain figure and the modelled one, in one band. Two columns as soon as
+   there is room for two of 22rem and one otherwise, which is a property of the
+   panel rather than of the window — this panel is a different width on every
+   view width and a viewport breakpoint would guess at it.
+
+   Stretched rather than start-aligned: these two are a pair and boxes of a pair
+   should agree on a height. The hero is the shorter of them, so its summary
+   strip is pushed to the bottom to take up the difference — see .phero-sum. */
+.pband{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(22rem,1fr));
+  gap:12px;align-items:stretch;
+}
 .phero{
+  display:flex;flex-direction:column;
   border:1px solid color-mix(in srgb,currentColor 34%,transparent);
   border-radius:var(--r-sm);background:var(--tint);overflow:hidden;
 }
 .phero.short{color:var(--amber)}
 .phero.ok{color:var(--t-official)}
+/* flex:1 so the tinted block takes whatever height the odds box beside it adds,
+   with the figures centred in it. Pushing the summary strip down on its own
+   left a band of bare panel between the two halves of the hero, which is the
+   dead space this layout was meant to remove — growing the tint fills it and
+   reads as one block rather than as two with a hole between them. */
 .phero-top{
-  display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:11px 15px;
+  display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:11px 15px;flex:1;
   background:color-mix(in srgb,currentColor 7%,transparent);
 }
 .phero img.astrite-pic,.phero-top>svg{flex:none}
@@ -4119,7 +4137,7 @@ img.astrite-pic{
    accent colour: that is the desk's "this is a figure" colour, and this is
    not that kind of figure. */
 .podds{
-  margin-top:14px;padding:11px 13px 10px;
+  display:flex;flex-direction:column;padding:11px 13px 10px;
   border:1px dashed var(--line-2);border-radius:var(--r-sm);
   background:color-mix(in srgb,var(--bg) 30%,transparent);
 }
@@ -4150,8 +4168,15 @@ img.astrite-pic{
   text-transform:uppercase;color:var(--fg-3);
 }
 .podds-m b{font-family:var(--mono);font-size:.8125rem;font-weight:500;color:var(--fg-2)}
+/* The caveat stays inside the dashed rule, always. The panel's own footer
+   points at this box — everything outside it is worked from Kuro's figures,
+   inside it is a model — so lifting the disclaimer out to balance the two
+   columns would break the only sentence telling a reader which half is which.
+   `auto` on the top margin takes the slack instead, so when the odds box is
+   the shorter of the pair the caveat sits on its floor rather than leaving a
+   gap under it. */
 .podds-f{
-  margin:10px 0 0;padding-top:9px;border-top:1px solid var(--line);
+  margin:auto 0 0;padding-top:9px;border-top:1px solid var(--line);
   font-size:.6875rem;line-height:1.55;color:var(--fg-3);
 }
 /* The one tag on the desk that is a warning rather than a note. */
