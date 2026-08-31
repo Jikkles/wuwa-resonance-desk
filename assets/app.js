@@ -3136,13 +3136,17 @@ function pullOut(){
     w.weap ? `${plural(w.weap, "pull")} on the weapon convene` : ""
   ].filter(Boolean).join(" · ");
 
+  /* The figure sits against the name, on the name's own line, and the sentence
+     that produced it runs underneath. It used to be pinned to the right edge of
+     the panel, which on a wide screen left a metre of empty rule between
+     "Qingxiao" and the number of pulls Qingxiao costs. */
   const legs = `<ul class="plegs">${p.legs.map(l => `
     <li class="pleg${l.kind === "weapon" ? " wpn" : ""}">
-      <span class="pleg-t">
+      <span class="pleg-h">
         <b>${esc(l.name)}</b>
-        <em>${pullWhy(l)}</em>
+        <span class="pleg-n"><b>${numFmt(l.worst)}</b><span>pulls</span></span>
       </span>
-      <span class="pleg-n"><b>${numFmt(l.worst)}</b><span>pulls</span></span>
+      <em>${pullWhy(l)}</em>
     </li>`).join("")}
   </ul>
   ${/* Only once there are enough rows that adding them up is work. On two legs
@@ -3297,8 +3301,12 @@ function renderPulls(){
           <div class="pfset">
             <span class="label">Where your pity stands</span>
             <div class="pfields">
-              ${field("pity",  "Resonator pity", `0–${CONVENE.pity - 1} since your last 5★`, ` max="${CONVENE.pity - 1}"`)}
-              ${field("wpity", "Weapon pity", `0–${CONVENE.pity - 1}, its own counter`, ` max="${CONVENE.pity - 1}"`)}
+              ${/* "Resonator", not "Resonator pity" — the heading over the row
+                   already says pity, and the longer label was the one string
+                   here wide enough to wrap a tile and leave the two boxes
+                   different heights. */""}
+              ${field("pity",  "Resonator", `Since your last 5★`, ` max="${CONVENE.pity - 1}"`)}
+              ${field("wpity", "Weapon", `Counts on its own`, ` max="${CONVENE.pity - 1}"`)}
             </div>
             <button class="pguar" data-act="pullguar" aria-pressed="${!!P.guaranteed}">
               <span class="ptg-box">${icon("i-check", 11)}</span>
@@ -3308,9 +3316,13 @@ function renderPulls(){
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="pull-out">${pullOut()}</div>
+      ${/* Inside the grid rather than under it, so a wide screen can lift it
+           into a third column beside the controls instead of leaving it in a
+           row of its own with a screen's width of nothing either side. It
+           spans both columns at every narrower width — see .play. */""}
+      <div id="pull-out">${pullOut()}</div>
+    </div>
   </div>`;
 }
 

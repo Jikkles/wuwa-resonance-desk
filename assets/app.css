@@ -3906,6 +3906,26 @@ img.astrite-pic{
    picker holds three cards across AND the form holds three boxes across. Tip it
    either way and one of them drops to two columns and grows a row. */
 .play{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+.play>#pull-out{grid-column:1/-1}
+
+/* The one capped view on the desk. --page is 100% everywhere else and that is
+   right for a timeline, which genuinely wants a 2,560px monitor — but this is a
+   form and a figure, and a form stretched to two and a half thousand pixels is
+   a row of labels with a metre of nothing after each one. 60rem is the width at
+   which the picker holds three cards and the form three boxes with nothing left
+   over: past it the panels were growing and their contents were not. */
+#p-pulls .stack{max-width:60rem;margin-inline:auto}
+
+/* Wide enough for three, so the answer comes up out of the second row and
+   stands beside the two controls rather than under them. This is what the
+   width is for: the cap above is a way of not wasting a big screen, and this
+   is a way of using one — picking, pricing and the figure all in one band, and
+   the page half as tall again. */
+@media (min-width:1800px){
+  #p-pulls .stack{max-width:96rem}
+  .play{grid-template-columns:minmax(0,1.15fr) minmax(0,.75fr) minmax(0,1.05fr)}
+  .play>#pull-out{grid-column:3;grid-row:1}
+}
 @media (max-width:1180px){.play{grid-template-columns:minmax(0,1fr)}}
 
 /* ── picking targets ──────────────────────────────────────────────── */
@@ -3928,7 +3948,19 @@ img.astrite-pic{
    10.5 rather than 11: at 11 the third track overran the column by three
    pixels, which is not a rounding error you can see and is a whole extra row
    of cards you can. */
-.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:8px}
+/* No max on the track, deliberately, though a stretched card is exactly what
+   this section is trying to avoid: `auto-fit` counts its repetitions off the
+   *max* when that is a definite length, so capping the track at 17rem made a
+   679px column fit one card instead of three and cost the panel two rows. The
+   card is kept honest by the width the stack is capped to instead. */
+/* auto-FILL, not auto-fit, and that one word is most of what made this panel
+   look uneven. auto-fit collapses the tracks it has no card for and hands their
+   width to the cards that remain — so Phase 1, which runs two banners, drew
+   them half again as wide as Phase 2's three, with each tick floating that much
+   further from the name it belongs to. auto-fill keeps the empty track, every
+   card in the panel is the same size, and the slack sits at the end of the
+   short row where it reads as a row that is short. */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(10.5rem,1fr));gap:8px}
 /* The Resonator and their weapon in one frame, because "her and her weapon"
    is one decision made twice, not two unrelated ones — and the frame is what
    says the weapon underneath belongs to the face above it. */
@@ -3990,7 +4022,9 @@ img.astrite-pic{
 .pfset>.label{display:block;margin-bottom:8px}
 /* Narrow enough that the boxes pair up inside the right-hand column, and go
    three or more across on the single-column layout below 1180. */
-.pfields{display:grid;grid-template-columns:repeat(auto-fit,minmax(7rem,1fr));gap:8px}
+/* Same reason as .pcards: three boxes under "What you hold" and two under the
+   pity heading, and with auto-fit the two came out wider than the three. */
+.pfields{display:grid;grid-template-columns:repeat(auto-fill,minmax(7rem,1fr));gap:8px}
 .pf{
   display:flex;flex-direction:column;gap:3px;
   padding:8px 10px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
@@ -4064,7 +4098,15 @@ img.astrite-pic{
   font-family:var(--mono);font-size:1.8125rem;font-weight:500;line-height:1;letter-spacing:-.015em;
   color:var(--fg);
 }
-.phero-pulls{margin-left:auto;text-align:right;align-items:flex-end}
+/* Beside the headline, not at the far end of the panel. `margin-left:auto` put
+   these two figures on opposite edges of the box, which on a wide screen is a
+   thousand pixels of nothing between a number and the number it is being
+   compared against — and the comparison is the whole reason both are here. A
+   rule and a fixed gap instead: one group, read left to right. */
+.phero-pulls{
+  padding-left:20px;margin-left:4px;
+  border-left:1px solid color-mix(in srgb,currentColor 30%,transparent);
+}
 .phero-pulls b{
   font-family:var(--mono);font-size:1.25rem;font-weight:500;line-height:1;
   color:color-mix(in srgb,var(--accent) 72%,#FFFFFF);
@@ -4093,11 +4135,11 @@ img.astrite-pic{
    number on it, which is the same rule the Astrite breakdown is built on. */
 .plegs{list-style:none;margin:11px 0 0;padding:0}
 .pleg{
-  display:flex;align-items:baseline;gap:16px;padding:6px 2px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:2px;padding:6px 2px;border-top:1px solid var(--line);
 }
-.pleg-t{display:flex;flex-direction:column;gap:2px;min-width:0}
-.pleg-t b{font-size:.8125rem;font-weight:600;color:var(--fg)}
-.pleg-t em{font-style:normal;font-size:.6875rem;line-height:1.45;color:var(--fg-3)}
+.pleg-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
+.pleg-h>b{font-size:.8125rem;font-weight:600;color:var(--fg)}
+.pleg>em{font-style:normal;font-size:.6875rem;line-height:1.45;color:var(--fg-3)}
 /* How the pulls split across the two convenes. It was a summed row under a
    summed headline; as a caption it says the one thing the headline can't. */
 .plegs-f{
@@ -4105,9 +4147,7 @@ img.astrite-pic{
   font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--fg-3);
 }
-.pleg-n{
-  margin-left:auto;flex:none;display:flex;align-items:baseline;gap:6px;
-}
+.pleg-n{flex:none;display:flex;align-items:baseline;gap:6px}
 .pleg-n b{font-family:var(--mono);font-size:1.0625rem;font-weight:500;font-variant-numeric:tabular-nums}
 .pleg-n span{
   font-family:var(--mono);font-size:.5938rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
