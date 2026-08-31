@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-08-29",
+  "updated": "2026-08-31",
   "current": "3.5",
   "versions": [
     {
@@ -175,7 +175,7 @@
         "note": "Not a version key visual — Kuro has not published a 3.7 preview yet. This is the character drip card, standing in as the patch record's only art. Replace it when the real preview key visual lands."
       },
       "phases": [],
-      "notes": "Both 3.7 Resonators are now officially identified. Hsin's drip card landed 26 August (ahead of Kuro's own channels, which is why the desk filed it as reported), Suoming's on 27 August, and Kuro's profile reveals for both went up on 28 August - Hsin at 03:00 UTC, Suoming at 04:01. The profile cards carry attribute and weapon marks, so they confirm Hsin as an Electro Rectifier and Suoming as an Electro Sword, closing the Havoc-vs-Electro dispute that ran from 2 August in Electro's favour. Suoming's archive text places her as founder and Seal Master of the Ten Seals Covenant in Huating, Mengzhou, later Intendant of the Ministry of Sentinel Affairs - serving under Hsin. What is still leak-only: Hsin's two switchable stances (Electro Flare and a new Tune Break: Harmony system) plus coordinated attack damage, and a Tieba report giving Suoming skill-damage scaling with an outro buffing Skill and Electro DMG. The beta opened mid-August - a model-rip wave (render, 360, walk/stand/umbrella animations, facial expressions) hit r/WutheringWavesLeaks on 17-18 Aug - and put Suoming at a small Verina/Roccia/Encore height, which the drip art agrees with. No kit files, banner order or dates yet. Community arithmetic on past patch lengths projects broadcast 18 Sep, Phase 1 2 Oct and Phase 2 24 Oct; none of that is from Kuro."
+      "notes": "Both 3.7 Resonators are officially identified and both now have a reported role. Kuro's own line covers identity and stops there: Hsin is a 5-star Electro Rectifier, Suoming a 5-star Electro Sword, confirmed by the drip cards of 26 and 27 August and the profile cards of 28 August. Suoming's archive text places her as founder and Seal Master of the Ten Seals Covenant in Huating, later Intendant of the Ministry of Sentinel Affairs - serving under Hsin. Everything about how either of them plays is leak-only. Team Gemberry's tag list of 29 August gives Hsin as a Main DPS scaling off the Resonance Skill, with two switchable modes - Electro Flare and a Tune Break system rendered as Harmony - and Suoming as a Main Damage Dealer on Basic Attack who also amplifies Electro and Resonance Skill damage, which reverses six weeks of reports treating her as Hsin's support. Two Electro echo sets followed on 31 August, and the trigger written into Hsin's is 同奏 - the characters the English client already renders as Unison for Jinhsi - which puts the long-running coordinated attack claim in doubt as a translation rather than a mechanic. No kit files, banner order or dates: the beta had not opened as of 28 August. Community arithmetic on past patch lengths projects beta 4 September, broadcast 18 September, Phase 1 2 October and Phase 2 24 October, and reads Hsin into Phase 1 off the drip order alone. None of that is from Kuro."
     }
   ]
 }

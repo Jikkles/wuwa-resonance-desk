@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-29",
+  "updated": "2026-08-31",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -1172,6 +1172,69 @@
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vuxpw3/4x_character_names_via_seele/"
         }
       ]
+    },
+    {
+      "id": "2026-08-29-37-role-tags",
+      "date": "2026-08-29",
+      "version": "3.7",
+      "category": "kit",
+      "confidence": "reported",
+      "title": "Both 3.7 Resonators get role tags - and Suoming is filed as a main damage dealer",
+      "body": "Team Gemberry's character tag list for 3.7 reached the leaks subreddit on 29 August, the first thing on either Resonator that names a role. Hsin reads Main DPS, Resonance Skill Damage, Electro Flare, and the tune tag rendered as Synchronization; the subreddit's own FAQ carries the same list with the fourth item written Tune Break: Harmony. Suoming reads Main Damage Dealer, Basic Attack Damage, Electro DMG Amplification, Resonance Skill DMG Amplification, and the same tune tag. Hsin's line is what six weeks of Seele and Sleep reports had already implied. Suoming's is not: every report before this had her built around Hsin as a support or sub-DPS, and a Main Damage Dealer tag alongside two amplification tags is the pattern Phoebe and Iuno set, where one Resonator can carry a team or buff one and gives up damage to do the second. The two elements of her amplification - Electro, and Resonance Skill damage - are exactly what Hsin is, so the pairing survives the reversal; what it also opens is a Suoming team with Electro Rover or Carlotta and no Hsin in it. CN and EN comment sections both read it as Kuro selling two on-field Electro Resonators in one patch. Tags are marked subject to change by the leak group itself, no file evidence is attached, and 3.7 beta has not opened - the community's projection puts that at 4 September.",
+      "tags": [
+        "3.7",
+        "Hsin",
+        "Suoming",
+        "kit",
+        "roles"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - roles via Team Gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w1b4v0/roles_via_team_gemberry_stc_translation_in_the/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - weekly megathread, 30 August",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w2h8lj/do_you_love_denia_and_her_twopersonality_hit/"
+        }
+      ],
+      "outcome": ""
+    },
+    {
+      "id": "2026-08-31-37-echo-sets",
+      "date": "2026-08-31",
+      "version": "3.7",
+      "category": "system",
+      "confidence": "reported",
+      "title": "Two Electro echo sets surface for 3.7, and one of them puts Unison where the coordinated attack was",
+      "body": "Team Gemberry posted three new 3.7 echo sets on 31 August, two of them Electro. The one carried as Hsin's gives Electro DMG at 2-piece; at 5-piece it raises the wearer's own Crit Rate and Electro DMG when they inflict Electro-Magnetic Effect on an enemy, gain a Unison effect, or trigger a Unison Intro. The second, posted without a name attached, gives Electro DMG at 2-piece and at 5-piece raises the wearer's Electro DMG on inflicting Electro-Magnetic Effect, with an Outro Skill cast during that window raising the next Resonator's Electro DMG - an amplifier shape that fits Suoming's tag list, though nothing in the post says so. A third set is a healing set and belongs to neither. The interesting word is the trigger on Hsin's: it is written 同奏, which the English client already renders as Unison in Jinhsi's kit, where it replaces Concerto Energy for triggering an Intro or Outro. The poster flagged the same thing - that the coordinated attack attached to Hsin since 8 August may be a translation of 同奏 rather than the off-field mechanic Jinhsi's teams have been waiting for, and that Harmony and Synchronization are two more renderings of those same two characters. Set names, effects and numbers are all pre-balance and none of it is in beta files yet.",
+      "tags": [
+        "3.7",
+        "Hsin",
+        "Suoming",
+        "echoes",
+        "translation"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - Hsin echo set via Team Gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w33ql0/hsin_echo_set_via_team_gemberry/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - another echo set via Gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w36e7h/another_echo_set_via_gemberry/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - a third new echo set via team Gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w37g42/37_another_new_echo_set_via_team_gemberry/"
+        }
+      ],
+      "outcome": ""
     }
   ]
 }

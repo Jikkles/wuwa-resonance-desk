@@ -827,9 +827,16 @@ function figure(b){
        big picture above so the two never have to compromise on one crop. */
     icon: port?.icon || null,
     glyph: r.nameCN || b.name?.slice(0,1) || "?",
-    credit: !cutout ? null
-          : own ? (b.imageCredit || r.imageCredit || null)
-          : PORTRAIT_CREDIT,
+    /* A hand-set `imageCredit` is credited whatever the picture is. This used to
+       be gated behind `cutout` along with the portrait credit, which was right
+       for the portraits — the credit line names Prydwen, and it should not be
+       named for a file that came from somewhere else — and wrong for the two
+       drip cards the desk rehosts, which are Kuro's own marketing art sitting
+       uncredited on the only page that shows them. The gate belongs on the
+       fallback, not on the override. */
+    credit: own && image === own ? (b.imageCredit || r.imageCredit || null)
+          : cutout ? PORTRAIT_CREDIT
+          : null,
     source: art && image === art?.url ? art : shared,
     shared: !!shared,
     /* Kuro's Profile Reveal posters are a fixed 1080x1920 template — logo top,
@@ -4326,6 +4333,50 @@ function releaseHistory(r){
   </div>`;
 }
 
+/* The one thing a record for an unreleased Resonator has to say before anything
+   else on it can be read safely.
+
+   The tiers have always been on this page — a badge on the identity, another
+   over the kit notes — and they are the right way to grade a single claim once
+   a reader knows to look for one. What they cannot do is answer the question
+   somebody arrives on an unreleased record already asking, which is how much of
+   this is real. A character three weeks from beta gets the same strip of facts,
+   the same headings and the same confident type as one who shipped a year ago:
+   the tiers are the fine print, the layout is the headline, and the headline is
+   wrong. So it is said once, in words, at the top.
+
+   Three tiers rather than the usual two. Identity, role and kit confirm at
+   different moments — the drip card and profile card settle attribute, weapon
+   and rarity within days of each other, the role tag turns up in a leak group's
+   spreadsheet weeks before Kuro says it, and the kit is not final until the last
+   beta phase — so a record with one badge on it is grading whichever of the
+   three the reader happened to be looking at. */
+function unreleasedNote(r){
+  if(!r.name || hasDebuted(r)) return "";
+  const rows = [
+    ["Identity", r.confidence?.identity, "Attribute, weapon, rarity"],
+    ["Role", r.confidence?.role, "Where they play in a team"],
+    ["Kit", r.confidence?.kit, "Skills, scaling, mechanics"]
+  ].filter(([, t]) => t);
+  return `<div class="rr-unrel">
+    <div class="rr-unrel-h">
+      <span class="pill future">Not released yet</span>
+      ${r.version ? `<span class="tier-note">Debuts in version ${esc(r.version)}</span>` : ""}
+    </div>
+    <p>Kuro has not shipped ${esc(r.name)}. Anything on this page not marked
+    <b>Official</b> is pre-release reporting — leaker claims, beta files, community
+    translation — and any of it can change or turn out to be wrong before release
+    day. Roles get rewritten, multipliers move between beta phases, and the names
+    for new mechanics stay fan translations until the English client ships its
+    own.</p>
+    ${rows.length ? `<div class="rr-unrel-t">${rows.map(([k, t, sub]) => `<div>
+      <span class="label">${esc(k)}</span>
+      <span title="${esc(TIER_MEANS[t] || "")}">${tierBadge(t, t === "official")}</span>
+      <em>${esc(sub)}</em>
+    </div>`).join("")}</div>` : ""}
+  </div>`;
+}
+
 function drawerResonator(name){
   const r = resonatorFor(name);
   const b = bannerFor(name) || {};
@@ -4350,7 +4401,14 @@ function drawerResonator(name){
   const glance = [
     ["Element", attr, attr ? attrIcon(attr, 22) : icon("i-res", 22), "attr"],
     ["Weapon", r.weapon || b.weapon, icon("i-weapon", 22)],
-    ["Role", r.role || b.role, icon("i-role", 22)],
+    /* Role carries a tier of its own, where the other six do not, because it is
+       the one tile on the strip that can be somebody's guess. Element, weapon
+       and rarity come off Kuro's profile card; the dates come off the calendar.
+       "Main DPS" on an unreleased Resonator comes off a leak group's tag list,
+       and printed in the same type as the other six it reads as the same kind
+       of fact. Drawn only when it is not official — a released character's role
+       is the game's own answer and needs no grading. */
+    ["Role", r.role || b.role, icon("i-role", 22), "", r.confidence?.role],
     ["Region", r.region, icon("i-region", 22)],
     ["Debut", version ? `Version ${version}` : "", icon("i-timeline", 22)],
     ["Released", r.released ? fmtDate(r.released) : (hasDebuted(r) ? "" : "Not yet"), icon("i-timeline", 22)],
@@ -4413,11 +4471,16 @@ function drawerResonator(name){
       ${debutBadge(r)}
     </header>
     ${creditLine({name, ...b})}
+    ${unreleasedNote(r)}
 
     ${glance.length ? `<div class="rr-glance">
-      ${glance.map(([k, v, ic, cls]) => `<div class="${cls || ""}">
+      ${glance.map(([k, v, ic, cls, tier]) => `<div class="${cls || ""}">
         <span class="rr-g-i">${ic}</span>
         <em>${esc(k)}</em><b>${esc(v)}</b>
+        ${tier && tier !== "official"
+          ? `<span class="rr-g-tier t-${esc(tier)}" title="${esc(TIER_MEANS[tier] || "")}">${
+              esc(TIER_LABEL[tier] || "")}</span>`
+          : ""}
       </div>`).join("")}
     </div>` : ""}
 
@@ -4907,6 +4970,32 @@ function drawerVersion(id){
         bannerCard({...b, phase:p.n, keyVisual:v.keyVisual})).join("")}</div>
     </div>`).join("");
 
+  /* A patch Kuro has named the cast of but not the banner order. versions.json
+     holds no phases for one — inventing two so the record has headings would be
+     asserting a split nobody has published, and the phase a Resonator lands in
+     is the whole of what a reader budgets against — but the Resonator database
+     already carries whoever is flagged for the version, and they are the
+     substance of the patch. So: the same cards a phase strip draws, under a
+     heading that says what is missing rather than a date that is made up.
+
+     The timeline's patch card has shown these as tiles for a while. The record
+     it opens was the one place still showing an empty page for the version the
+     desk has the most to say about. */
+  const teased = phases ? "" : (() => {
+    const cast = castOrder(resonators().filter(x => x.version === v.id && isFive(x)));
+    if(!cast.length) return "";
+    return `<div class="dsec">
+      <span class="label">Announced for this patch — ${cast.length}</span>
+      <div class="bstrip cards">${cast.map(r => bannerCard({
+        name:r.name, rarity:r.rarity, attribute:r.attribute, weapon:r.weapon, new:true
+      })).join("")}</div>
+      <p class="tier-note" style="margin-top:14px">Banner order and phase dates are
+      not published. Kuro has said who is in this version, not when either of them
+      runs — and the roles on these cards are pre-release reporting, not Kuro's own
+      line. Open a record for what is confirmed and what is not.</p>
+    </div>`;
+  })();
+
   /* The patch's key visual, between the two dates that bracket it. It used to
      be the page backdrop, where it was blurred to weather and credited in a
      footer — here it is a picture: shown whole, at the size it was drawn to be
@@ -4985,6 +5074,7 @@ function drawerVersion(id){
     ${astritePanel(v, status)}
     ${v.notes ? `<div class="vnote" style="margin-top:16px">${esc(v.notes)}</div>` : ""}
     ${phases}
+    ${teased}
     ${events}
     ${arcSource}
     ${news.length ? `<div class="dsec"><span class="label">Intel on this version — ${news.length}</span>

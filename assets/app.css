@@ -4053,6 +4053,51 @@ img.astrite-pic{
 }
 .rr-glance b{font-size:.8438rem;font-weight:500;line-height:1.35;color:var(--fg)}
 .rr-glance>div.attr b{color:var(--attr,var(--fg))}
+/* The tier under a glance value, for the one tile that can be a guess. Sized
+   below the value it grades and coloured in the tier's own colour, so it reads
+   as a qualifier on that tile rather than a second fact standing beside it. */
+.rr-glance .rr-g-tier{
+  font-family:var(--mono);font-size:.5313rem;letter-spacing:.12em;text-transform:uppercase;
+  color:currentColor;margin-top:-2px;
+}
+.rr-g-tier.t-official{color:var(--t-official)}
+.rr-g-tier.t-datamined{color:var(--t-datamined)}
+.rr-g-tier.t-reported{color:var(--t-reported)}
+.rr-g-tier.t-rumour{color:var(--t-rumour)}
+
+/* ── the unreleased banner ─────────────────────────────────────────
+   Amber, left-striped, and the same object as .vnote on a patch record — that
+   is the desk's one shape for "read the rest of this with a caveat", and a
+   second shape for the same job would only be a second thing to learn. Wide,
+   above the facts rather than beside them, because a caveat in a column next
+   to the strip it qualifies is a caveat the eye skips on its way to the strip. */
+.rr-unrel{
+  margin-top:clamp(16px,2.2vh,22px);padding:14px 16px 15px;border-radius:var(--r-sm);
+  background:color-mix(in srgb,var(--amber) 7%,transparent);
+  border-left:2px solid color-mix(in srgb,var(--amber) 55%,transparent);
+}
+.rr-unrel-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.rr-unrel-h .pill{border-color:color-mix(in srgb,var(--amber) 50%,transparent);color:var(--amber)}
+.rr-unrel p{margin:0;font-size:.8125rem;color:var(--fg-2);line-height:1.65}
+.rr-unrel p b{color:var(--fg);font-weight:500}
+/* Three rows, each one claim: what it covers, how good it is, what that means.
+   A grid rather than a flex row so the badges line up down the middle — the
+   column is the thing being compared, and ragged badges make three tiers look
+   like three unrelated notes. */
+.rr-unrel-t{
+  display:grid;gap:7px;margin-top:12px;padding-top:12px;
+  border-top:1px solid color-mix(in srgb,var(--amber) 22%,transparent);
+}
+.rr-unrel-t>div{display:grid;grid-template-columns:4.5rem auto 1fr;align-items:center;gap:10px}
+.rr-unrel-t .label{margin:0}
+.rr-unrel-t em{
+  font-family:var(--mono);font-size:.5625rem;font-style:normal;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+@media (max-width:34rem){
+  .rr-unrel-t>div{grid-template-columns:4.5rem 1fr}
+  .rr-unrel-t em{grid-column:1 / -1}
+}
 
 /* ── the rotation ──────────────────────────────────────────────────
    Six names in the order you press them. A kit page is asked for the shape of

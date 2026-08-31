@@ -3239,20 +3239,28 @@
       "rarity": 5,
       "attribute": "Electro",
       "weapon": "Rectifier",
-      "role": "Sentinel",
+      "role": "Main DPS",
       "version": "3.7",
       "status": "teased",
       "region": "Mengzhou",
       "epithet": "Clear moonlight drapes the lonely keep",
-      "summary": "Kuro's drip marketing card landed on 26 August, ahead of the community's own 28-29 August projection: Hsin as a 5-star, seated below the Moon Fox spirit over a burning Mengzhou, captioned \"To share in the world's joy, and keep the lanterns... burning bright.\" The card settled her rarity and her design and nothing else, because Kuro's drip cards carry no attribute or weapon mark. Her profile reveal on 28 August carries both: Electro Rectifier is now Kuro's own line, not the leaks'. The kit reports have firmed up around two switchable modes - Electro Flare, and a new Tune Break: Harmony system - plus coordinated attack damage, which would make her the first coordinated attacker able to hold the on-field slot. A sentinel form surfaced the same night. No file data yet; 3.7 beta has not opened.",
-      "kit": [],
+      "summary": "Sentinel of Mengzhou, and the first of them the game has made playable. Kuro's drip card landed 26 August and the profile card 28 August, which between them settle rarity, design, attribute and weapon: a 5-star Electro Rectifier, seated below the Moon Fox spirit over a burning Mengzhou, captioned \"To share in the world's joy, and keep the lanterns... burning bright.\" Kuro has published nothing about how she plays. What the leaks have is consistent across six weeks and four sources: two switchable Resonance modes, one of them Electro Flare and the other built on a Tune Break system rendered as Harmony, damage scaling off the Resonance Skill, and something that keeps being translated as coordinated attack. Team Gemberry's tag list of 29 August is the first to give her a role, and files her as a Main DMG Dealer rather than the off-field coordinated attacker the earlier reports implied. Beta opens 4 September on the community's projection, so none of this is in files yet.",
+      "kit": [
+        "Two switchable Resonance modes. One is Electro Flare. The other runs on a Tune Break system rendered as Harmony, which would be the fourth after Strain, Rupture and Hack, and has no English client name yet.",
+        "Damage scales off the Resonance Skill. Team Gemberry's 29 August tag list reads Main DMG Dealer, Resonance Skill Damage, Electro Flare, Tune Break: Harmony.",
+        "Coordinated attack damage is attached to her in every report from 8 August on. The 31 August echo-set text points elsewhere: the trigger there is written 同奏, which the English client already renders as Unison for Jinhsi's passive, so \"coordinated attack\" may be a translation of that rather than the mechanic Jinhsi's teams are short of.",
+        "An Electro echo set surfaced alongside her on 31 August. 2-piece raises Electro DMG. 5-piece raises the wearer's own Crit Rate and Electro DMG when they inflict Electro-Magnetic Effect on an enemy, gain a Unison effect, or trigger a Unison Intro.",
+        "A sentinel form is in the model rips. Nothing states whether it is a kit mode or a story asset.",
+        "CN and EN comment sections converged on the same objection: a Tune-based mode ties her to Denia the way Qingxiao already is, and no released support buffs a Tune type that does not exist yet."
+      ],
       "materials": {
         "ascension": [],
         "skill": []
       },
       "confidence": {
         "identity": "official",
-        "kit": "reported"
+        "kit": "reported",
+        "role": "reported"
       },
       "sources": [
         {
@@ -3266,14 +3274,24 @@
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vykz4x/hsin_drip_marketing/"
         },
         {
-          "name": "r/WutheringWavesLeaks - Hsin sentinel form via Seele",
+          "name": "r/WutheringWavesLeaks - roles via Team Gemberry",
           "lang": "en",
-          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vylkgm/hsin_sentinel_form_via_seele/"
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w1b4v0/roles_via_team_gemberry_stc_translation_in_the/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Hsin echo set via Team Gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w33ql0/hsin_echo_set_via_team_gemberry/"
         },
         {
           "name": "r/WutheringWavesLeaks - Electro Flare and Tune Break: Harmony via Seele",
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vxormh/37_yet_another_sus_hsin_info_via_seele/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Hsin sentinel form via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vylkgm/hsin_sentinel_form_via_seele/"
         },
         {
           "name": "Prydwen - upcoming roster",
@@ -3293,15 +3311,23 @@
       "status": "teased",
       "region": "Mengzhou",
       "epithet": "Locked in the past, the prisoner lingers long",
-      "summary": "Kuro's drip card landed 27 August and her profile reveal 28 August, which together make her identity official: 5-star, Electro, Sword. The archive text names her as founder and Seal Master of the Ten Seals Covenant in Huating, Mengzhou, raised afterwards to Intendant of the Ministry of Sentinel Affairs by the Sentinel's decree - so she serves under Hsin. The earlier Havoc-versus-Electro dispute, which ran from the 2 August tracked-list entry to the 9 August correction, is resolved in Electro's favour. She is the first Electro sword Resonator other than Rover. The August model rips put her at a small Verina/Roccia/Encore height; the drip card neither confirms nor contradicts that, since it gives no scale reference. Kit is untouched by any of this: the Tieba report of skill-damage scaling with an outro buffing Skill and Electro DMG is still a leaker claim, and no beta files exist yet.",
-      "kit": [],
+      "summary": "Kuro's drip card landed 27 August and her profile card 28 August, making her identity official: 5-star, Electro, Sword — the first Electro sword Resonator other than Rover. The archive text names her founder and Seal Master of the Ten Seals Covenant in Huating, Mengzhou, raised afterwards to Intendant of the Ministry of Sentinel Affairs by the Sentinel's decree, which places her under Hsin rather than beside her. The August model rips put her at a small Verina or Roccia height and the drip art agrees. Her role was the surprise: every report before 29 August had her built around Hsin, and Team Gemberry's tag list files her as a Main Damage Dealer in her own right who also amplifies Electro and Resonance Skill damage — the Phoebe and Iuno shape, where the same Resonator can hold the on-field slot or hand the damage to whoever she stands next to. No beta files exist yet.",
+      "kit": [
+        "Team Gemberry's 29 August tag list: Main Damage Dealer, Basic Attack Damage, Electro DMG Amplification, Resonance Skill DMG Amplification, and the same 同奏 tag Hsin carries.",
+        "Her own damage runs off Basic Attack. Every other tag on the list is amplification for somebody else, which is the pattern Phoebe and Iuno set — a carry slot and a buffer slot in one Resonator, with the damage traded away when she takes the second.",
+        "The two things she amplifies are what Hsin is: Electro, scaling off the Resonance Skill. They are also what Electro Rover and Carlotta are, so a Suoming team does not have to contain Hsin.",
+        "A 6 August Tieba report gave her skill-damage scaling and an outro buffing Skill and Electro DMG. The outro half survives into the tag list. The scaling half does not — Gemberry has her own damage on Basic Attack, not Skill.",
+        "An unattributed Electro echo set landed beside Hsin's on 31 August. 2-piece raises Electro DMG. 5-piece raises the wearer's Electro DMG on inflicting Electro-Magnetic Effect, and an Outro Skill cast during that raises the next Resonator's Electro DMG. The shape fits her tags; nothing in the post names her.",
+        "The community read of the reversal, CN and EN alike: Kuro is selling two on-field Electro Resonators in one patch rather than a carry and a dedicated buffer, and the amount she gives up to buff is the open question."
+      ],
       "materials": {
         "ascension": [],
         "skill": []
       },
       "confidence": {
         "identity": "official",
-        "kit": "rumour"
+        "kit": "reported",
+        "role": "reported"
       },
       "sources": [
         {
@@ -3315,21 +3341,34 @@
           "url": "https://www.kurobbs.com/mc/post/1541816017508257792"
         },
         {
+          "name": "r/WutheringWavesLeaks - Suoming drip marketing",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vzi4yx/suoming_drip_marketing/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - roles via Team Gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w1b4v0/roles_via_team_gemberry_stc_translation_in_the/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - a second Electro echo set via Gemberry",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w36e7h/another_echo_set_via_gemberry/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Suoming via Seele",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vh1s0n/37_about_suoming_via_seele/"
+        },
+        {
           "name": "Prydwen - upcoming roster",
           "lang": "en",
           "url": "https://www.prydwen.gg/wuthering-waves/characters/suoming"
-        },
-        {
-          "name": "r/WutheringWavesLeaks - megathread, 9 August",
-          "lang": "en",
-          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vjtsgv/the_adventures_of_suisui_and_suicune_weekly/"
-        },
-        {
-          "name": "r/WutheringWavesLeaks - second half of 3.x cast reveal, compiled",
-          "lang": "en",
-          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1u65lvi/second_half_of_3x_cast_reveal_compiled/"
         }
-      ]
+      ],
+      "role": "Main DPS",
+      "image": "assets/reveals/suoming-card.jpg",
+      "imageCredit": "Drip marketing card © Kuro Games"
     },
     {
       "name": "Rover (Havoc)",
