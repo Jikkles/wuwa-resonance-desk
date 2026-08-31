@@ -3919,14 +3919,22 @@ img.astrite-pic{
    *max* when that is a definite length, so capping the track at 17rem made a
    679px column fit one card instead of three and cost the panel two rows. The
    card is kept honest by the width the stack is capped to instead. */
-/* auto-FILL, not auto-fit, and that one word is most of what made this panel
-   look uneven. auto-fit collapses the tracks it has no card for and hands their
-   width to the cards that remain — so Phase 1, which runs two banners, drew
-   them half again as wide as Phase 2's three, with each tick floating that much
-   further from the name it belongs to. auto-fill keeps the empty track, every
-   card in the panel is the same size, and the slack sits at the end of the
-   short row where it reads as a row that is short. */
-.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(10.5rem,1fr));gap:8px}
+/* auto-FIT here and auto-FILL on the fields below, which is a real distinction
+   and not an oversight.
+
+   The two differ only in what they do with a track they have no item for: fit
+   collapses it and hands the width to the items that remain, fill keeps it
+   empty. So fit always produces a full row and cards that change size with how
+   many banners a phase runs; fill always produces cards of one size and a hole
+   at the end of a short row.
+
+   The picker takes fit because the hole is what you see. A patch runs two
+   banners in one phase and three in the other, and against a stage this wide
+   that left Phase 1 with two cards and three empty slots — which reads as a
+   panel that failed to load rather than as a phase with fewer banners in it.
+   Rows that fill read as rows. The cost is that a two-banner phase draws wider
+   cards than a three-banner one, and that is the cheaper of the two faults. */
+.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:8px}
 /* The Resonator and their weapon in one frame, because "her and her weapon"
    is one decision made twice, not two unrelated ones — and the frame is what
    says the weapon underneath belongs to the face above it. */
@@ -3979,7 +3987,13 @@ img.astrite-pic{
   flex:none;width:17px;height:17px;border-radius:5px;display:grid;place-items:center;
   border:1px solid var(--line-2);color:transparent;transition:.15s;
 }
-.ptg[aria-pressed="true"] .ptg-box{
+/* Both controls that own one of these boxes, not just the target cards. The
+   guarantee toggle borrows .ptg-box but is a .pguar, so for a while it was the
+   one checkbox on the desk that stayed empty when you checked it — the row
+   lit, the box did not, and the box is the part you look at. It fills amber
+   rather than an element colour because .pguar overrides --attr. */
+.ptg[aria-pressed="true"] .ptg-box,
+.pguar[aria-pressed="true"] .ptg-box{
   border-color:var(--attr);background:var(--attr);color:var(--bg);
 }
 

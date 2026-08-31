@@ -3196,8 +3196,12 @@ function pullOut(){
       ${astriteMark(40)}
       <span class="phero-fig">
         <b>${numFmt(w.short)}</b><span>Astrite you still need · worst case</span></span>
+      ${/* "to guarantee", not "to find": this is the shortfall against the
+           worst case, so buying it is the point at which the outcome stops
+           being a question rather than the point at which you have enough to
+           try. The whole panel is that distinction. */""}
       <span class="phero-pulls">${w.short
-        ? `<b>${numFmt(pullsFor(w.short))}</b><span>pulls to find</span>`
+        ? `<b>${numFmt(pullsFor(w.short))}</b><span>pulls to guarantee</span>`
         : `<b>${numFmt(w.spare)}</b><span>Astrite to spare</span>`}</span>
     </div>
     <div class="phero-sum">
