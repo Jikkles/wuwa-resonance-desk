@@ -455,6 +455,42 @@ button{font:inherit;color:inherit}
    thing paying for the width. */
 .aside,.hud{zoom:.875}
 
+/* ── a view that asks for the whole stage ─────────────────────────
+   `solo` on a VIEWS entry, set on .body by setView. One view uses it: the pull
+   calculator, which is a tool rather than a page you read. Everything else on
+   the desk is content with a margin note beside it, and the note earns its
+   column — but a calculator is inputs and the figure they produce, and those
+   two have to be on screen together or every keystroke is typed blind and
+   confirmed by scrolling. The aside's 375px is what stood between them: four
+   tier counts and a portrait, neither of which has anything to say about a
+   pull budget, taking a third of the stage on the one view whose whole job is
+   to fit on a screen.
+
+   These are the rules the 1340px breakpoint already applies to every view,
+   under a class instead of a width — the hud unbuilds itself into the strip it
+   was, the views drop to row two behind it, and the ~40px that costs buys back
+   ten times as much by letting the picker and the form go to three columns
+   apiece. The declarations are written twice because CSS cannot hand a class
+   to a media query; if one side changes, change both. */
+.body.solo{grid-template-columns:minmax(0,1fr)}
+.body.solo .aside{display:none}
+.body.solo .col{grid-row:2}
+.body.solo .hud{
+  grid-column:1;grid-row:1;
+  display:flex;flex-direction:column;align-items:flex-end;gap:5px;
+  background:none;border:0;border-radius:0;overflow:visible;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  zoom:1;
+}
+.body.solo .hud .mini-h{order:2;padding:0;border-bottom:0;background:none}
+.body.solo .hud .mini-h h3{font-size:.6563rem;letter-spacing:.18em;color:var(--fg-2)}
+.body.solo .hud .mini-b{
+  padding:0;display:flex;align-items:center;justify-content:flex-end;
+  flex-wrap:wrap;gap:16px;
+}
+.body.solo .hud .searchbtn{width:auto}
+.body.solo .hud-strip{flex-direction:row;align-items:center;flex-wrap:wrap;gap:16px;margin-top:0}
+
 /* Frosted, not merely translucent. The backdrop behind these is a sharp
    picture with faces and lettering in it, and 12px body copy laid over that at
    any alpha is unreadable — the blur has to happen between the picture and the
@@ -3860,14 +3896,26 @@ img.astrite-pic{
    with an input where the figure goes; the answer is the Astrite panel's hero
    row, which is already the shape "big number, what it is, what it buys". */
 
+/* The two controls beside each other, answer underneath. Weighted hard to the
+   picker: it holds up to six cards carrying names like "Thousandfold
+   Deliverance", and the form holds five boxes of at most five digits. An even
+   split truncated every weapon on the page to buy the number fields room they
+   had no use for. */
+/* 1.5, and the ratio is measured rather than chosen: the row is as tall as its
+   taller panel, so the split that makes the page shortest is the one where the
+   picker holds three cards across AND the form holds three boxes across. Tip it
+   either way and one of them drops to two columns and grows a row. */
+.play{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:1180px){.play{grid-template-columns:minmax(0,1fr)}}
+
 /* ── picking targets ──────────────────────────────────────────────── */
-.pgrp+.pgrp{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
-.pgrp-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.pgrp+.pgrp{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.pgrp-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px}
 /* The phase inside the patch, not beside it. Both phases are the same forty-two
    days and the same Astrite income, so the patch is named once and the phases
    are rows under it — which is also the order the pity moves through them. */
-.pph+.pph{margin-top:16px}
-.pph-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.pph+.pph{margin-top:12px}
+.pph-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:7px}
 .pgrp .sub{
   font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
 }
@@ -3875,7 +3923,12 @@ img.astrite-pic{
 /* Auto-fit rather than a fixed count: a phase runs two banners or three, and
    a row of three that becomes a row of two with a 50% gap in it is worse than
    a grid that just reflows. */
-.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:10px}
+/* Sized so three sit across the picker's column — a phase runs two banners or
+   three, and three on one row is what keeps the panel to a row per phase.
+   10.5 rather than 11: at 11 the third track overran the column by three
+   pixels, which is not a rounding error you can see and is a whole extra row
+   of cards you can. */
+.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:8px}
 /* The Resonator and their weapon in one frame, because "her and her weapon"
    is one decision made twice, not two unrelated ones — and the frame is what
    says the weapon underneath belongs to the face above it. */
@@ -3883,7 +3936,7 @@ img.astrite-pic{
   border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--tint-sink);
 }
 .ptg{
-  display:flex;align-items:center;gap:11px;width:100%;padding:9px 11px;
+  display:flex;align-items:center;gap:9px;width:100%;padding:7px 9px;
   border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;
   transition:background .15s;
 }
@@ -3897,7 +3950,7 @@ img.astrite-pic{
 .ptg[aria-pressed="true"]:hover{background:color-mix(in srgb,var(--attr) 18%,transparent)}
 
 .ptg-fig{
-  flex:none;width:38px;height:38px;border-radius:50%;overflow:hidden;
+  flex:none;width:32px;height:32px;border-radius:50%;overflow:hidden;
   display:grid;place-items:center;
   background:linear-gradient(160deg,color-mix(in srgb,var(--attr) 26%,transparent),var(--bg-2));
   border:1px solid color-mix(in srgb,var(--attr) 30%,transparent);
@@ -3933,12 +3986,14 @@ img.astrite-pic{
 }
 
 /* ── where you stand ──────────────────────────────────────────────── */
-.pfset+.pfset{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
-.pfset>.label{display:block;margin-bottom:10px}
-.pfields{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:10px}
+.pfset+.pfset{margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
+.pfset>.label{display:block;margin-bottom:8px}
+/* Narrow enough that the boxes pair up inside the right-hand column, and go
+   three or more across on the single-column layout below 1180. */
+.pfields{display:grid;grid-template-columns:repeat(auto-fit,minmax(7rem,1fr));gap:8px}
 .pf{
-  display:flex;flex-direction:column;gap:5px;
-  padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+  display:flex;flex-direction:column;gap:3px;
+  padding:8px 10px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
   transition:border-color .15s;
 }
 .pf:focus-within{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
@@ -3951,7 +4006,7 @@ img.astrite-pic{
    still step the value without them. */
 .pf input{
   width:100%;border:0;background:none;padding:0;margin:0;
-  font-family:var(--mono);font-size:1.125rem;font-weight:500;color:var(--fg);
+  font-family:var(--mono);font-size:1rem;font-weight:500;color:var(--fg);
   font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield;
 }
 .pf input::-webkit-outer-spin-button,
@@ -3959,14 +4014,14 @@ img.astrite-pic{
 .pf input:focus{outline:none}
 .pf input::placeholder{color:var(--fg-3);opacity:.5}
 .pf-h{
-  font-style:normal;font-size:.6875rem;line-height:1.45;color:var(--fg-3);
+  font-style:normal;font-size:.625rem;line-height:1.4;color:var(--fg-3);
 }
 /* The guarantee. A whole row rather than a field, because it is worth 80
    pulls — a fifth of the biggest number on the page — and it would be missed
    as a fourth box in a grid of number tiles. */
 .pguar{
-  display:flex;align-items:flex-start;gap:11px;width:100%;margin-top:10px;
-  padding:11px 12px;border:1px solid var(--line);border-radius:var(--r-sm);
+  display:flex;align-items:flex-start;gap:10px;width:100%;margin-top:8px;
+  padding:9px 10px;border:1px solid var(--line);border-radius:var(--r-sm);
   background:var(--tint-sink);font:inherit;color:inherit;text-align:left;cursor:pointer;
   --attr:var(--amber);transition:border-color .15s,background .15s;
 }
@@ -3982,62 +4037,74 @@ img.astrite-pic{
 }
 
 /* ── the answer ───────────────────────────────────────────────────── */
-/* Deliberately the Astrite panel's hero row, one step larger. A reader who
-   has met that panel in a version record already knows how to read this:
-   stone, figure, what the figure is, and what it buys on the right. */
+/* The Astrite panel's hero row with a summary strip welded under it. A reader
+   who has met that panel in a version record already knows how to read the top
+   half: stone, figure, what the figure is, and a second number on the right.
+   The strip is what used to be three separate blocks below it — the verdict,
+   the 50/50 row and the total — and folding them in is what let the answer,
+   the picker and the form share one screen.
+   Amber when you are short and green when you are not, off the confidence
+   palette, because those are already this page's colours for unsettled and
+   settled. The border carries it; the figure stays in the ink colour, so the
+   number is read before its mood is. */
 .phero{
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding:15px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint);
+  border:1px solid color-mix(in srgb,currentColor 34%,transparent);
+  border-radius:var(--r-sm);background:var(--tint);overflow:hidden;
 }
-.phero img.astrite-pic,.phero svg{flex:none}
-.phero svg{color:color-mix(in srgb,var(--accent) 62%,#FFFFFF)}
+.phero.short{color:var(--amber)}
+.phero.ok{color:var(--t-official)}
+.phero-top{
+  display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:11px 15px;
+  background:color-mix(in srgb,currentColor 7%,transparent);
+}
+.phero img.astrite-pic,.phero-top>svg{flex:none}
+.phero-top>svg{color:color-mix(in srgb,var(--accent) 62%,#FFFFFF)}
 .phero-fig,.phero-pulls{display:flex;flex-direction:column;gap:3px;min-width:0}
 .phero-fig b{
-  font-family:var(--mono);font-size:1.9375rem;font-weight:500;line-height:1;letter-spacing:-.015em;
+  font-family:var(--mono);font-size:1.8125rem;font-weight:500;line-height:1;letter-spacing:-.015em;
+  color:var(--fg);
 }
 .phero-pulls{margin-left:auto;text-align:right;align-items:flex-end}
 .phero-pulls b{
-  font-family:var(--mono);font-size:1.3125rem;font-weight:500;line-height:1;
+  font-family:var(--mono);font-size:1.25rem;font-weight:500;line-height:1;
   color:color-mix(in srgb,var(--accent) 72%,#FFFFFF);
 }
 .phero-fig span,.phero-pulls span{
   font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
 }
-
-/* Can you afford it — the sentence, under the figure. Amber for short and
-   green for covered, borrowed from the confidence palette because those are
-   the two colours this page already uses for "not settled" and "settled". */
-.pverd{
-  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:10px;
-  padding:10px 13px;border-radius:var(--r-sm);
-  border:1px solid color-mix(in srgb,currentColor 38%,transparent);
-  background:color-mix(in srgb,currentColor 9%,transparent);
+/* Everything the headline is not: the bill, what you already have, what the
+   Tides cover, and the 50/50 landing. Four facts on one rule, each a label and
+   a figure, so they read as a strip rather than as four more rows. */
+.phero-sum{
+  display:flex;flex-wrap:wrap;gap:5px 20px;padding:9px 15px;
+  border-top:1px solid color-mix(in srgb,currentColor 24%,transparent);
 }
-.pverd.short{color:var(--amber)}
-.pverd.ok{color:var(--t-official)}
-.pverd b{font-family:var(--mono);font-size:.875rem;font-weight:500;letter-spacing:.02em;flex:none}
-.pverd span{font-size:.7813rem;line-height:1.5;color:var(--fg-2);min-width:0}
-
-/* The same sum with the coin landing right. A row rather than a second hero:
-   it is a hope, and a hope does not get the big type. */
-.plucky{
-  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:9px;padding:0 2px;
+.phero-sum>span{
+  display:flex;align-items:baseline;gap:7px;font-size:.75rem;color:var(--fg-3);
 }
-.plucky b{font-family:var(--mono);font-size:.9375rem;font-weight:500;color:var(--fg)}
-.plucky em{
-  font-style:normal;font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;color:var(--fg-3);
+.phero-sum em{
+  font-style:normal;font-family:var(--mono);font-size:.5938rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--fg-3);
 }
+.phero-sum b{font-family:var(--mono);font-size:.8125rem;font-weight:500;color:var(--fg-2)}
 
 /* The working. One row per thing you are chasing, each carrying the sentence
    that produced its number — a total nobody can check is a rumour with a
    number on it, which is the same rule the Astrite breakdown is built on. */
-.plegs{list-style:none;margin:18px 0 0;padding:0}
+.plegs{list-style:none;margin:11px 0 0;padding:0}
 .pleg{
-  display:flex;align-items:baseline;gap:16px;padding:11px 2px;border-top:1px solid var(--line);
+  display:flex;align-items:baseline;gap:16px;padding:6px 2px;border-top:1px solid var(--line);
 }
-.pleg-t{display:flex;flex-direction:column;gap:3px;min-width:0}
-.pleg-t b{font-size:.8438rem;font-weight:600;color:var(--fg)}
-.pleg-t em{font-style:normal;font-size:.7188rem;line-height:1.5;color:var(--fg-3)}
+.pleg-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pleg-t b{font-size:.8125rem;font-weight:600;color:var(--fg)}
+.pleg-t em{font-style:normal;font-size:.6875rem;line-height:1.45;color:var(--fg-3)}
+/* How the pulls split across the two convenes. It was a summed row under a
+   summed headline; as a caption it says the one thing the headline can't. */
+.plegs-f{
+  padding:7px 2px 0;border-top:1px solid var(--line-2);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-3);
+}
 .pleg-n{
   margin-left:auto;flex:none;display:flex;align-items:baseline;gap:6px;
 }
@@ -4048,30 +4115,36 @@ img.astrite-pic{
 /* A weapon leg costs one number and a character leg can cost two, so the two
    kinds are marked apart by the rule rather than by a badge. */
 .pleg.wpn .pleg-n b{color:var(--fg-2)}
-.pleg.total{border-top-width:2px;border-top-color:var(--line-2);margin-top:2px}
-.pleg.total .pleg-n b{color:color-mix(in srgb,var(--accent) 72%,#FFFFFF)}
 
 /* What the patch pays, read against what it costs — the row that turns a
    shortfall into a decision. It opens the same breakdown the version record
    does, so the estimate can be taken apart from here too. */
+/* One line: the label, the figure, and what it does to the shortfall. It was
+   two rows with the sentence wrapped under them, which is a paragraph's layout
+   for eleven words. */
 .pincome{
-  display:grid;grid-template-columns:1fr auto;gap:4px 12px;width:100%;margin-top:16px;
-  padding:12px 34px 12px 13px;position:relative;
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;width:100%;margin-top:10px;
+  padding:9px 30px 9px 12px;position:relative;
   border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
   font:inherit;color:inherit;text-align:left;cursor:pointer;transition:.15s;
 }
 .pincome:hover,.pincome:focus-visible{border-color:var(--line-2);background:var(--bg-2)}
+.pincome .label{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .pincome b{
-  grid-column:2;grid-row:1;font-family:var(--mono);font-size:.9375rem;font-weight:500;
+  font-family:var(--mono);font-size:.9375rem;font-weight:500;
   color:color-mix(in srgb,var(--accent) 72%,#FFFFFF);white-space:nowrap;
 }
-.pincome em{grid-column:1/-1;font-style:normal;font-size:.7188rem;line-height:1.55;color:var(--fg-3)}
+.pincome em{
+  font-style:normal;font-family:var(--mono);font-size:.5625rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-3);
+}
+.pincome-l{margin-left:auto;font-size:.75rem;color:var(--fg-3)}
 .pincome-go{
-  position:absolute;top:14px;right:11px;display:grid;place-items:center;
+  position:absolute;top:50%;right:10px;transform:translateY(-50%);display:grid;place-items:center;
   color:var(--fg-3);opacity:.55;transition:.15s;
 }
 .pincome:hover .pincome-go,.pincome:focus-visible .pincome-go{
-  opacity:1;color:var(--accent);transform:translateX(3px);
+  opacity:1;color:var(--accent);transform:translate(3px,-50%);
 }
 
 @media (max-width:560px){
@@ -4916,6 +4989,9 @@ img.astrite-pic{
 
 /* ══ responsive ═════════════════════════════════════════════════════ */
 @media (max-width:1340px){
+  /* Same layout as .body.solo above, at a width instead of on a class. Keep
+     the two in step — see the note over that block for why it is written out
+     twice rather than shared. */
   .body{grid-template-columns:minmax(0,1fr)}
   .aside{display:none}
   /* It takes the header's column with it. There is nowhere left to put a

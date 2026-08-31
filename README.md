@@ -1168,9 +1168,22 @@ on its heading in the same chip the Astrite estimate uses.
 
 That is also the right number to hand someone. A plan built on the average fails half the
 time, and the reader asking this question is the reader who does not want to be sixty
-pulls short on the last day of a phase. The one concession is a second row under the
-headline: the same arithmetic with the coin landing right, drawn only when a 50/50 is
-actually in play — so a weapon-only plan does not get the headline printed twice.
+pulls short on the last day of a phase. The one concession is a chip on the summary
+strip: the same arithmetic with the coin landing right, drawn only when a 50/50 is
+actually in play — so a weapon-only plan does not carry a coin it never flips.
+
+#### The headline is the shortfall, not the bill
+
+Those are different numbers and only one of them is a decision. What the banner costs is
+a fact about the banner; what you are short is a fact about you, and the reader who
+opened this view already knows they want her. A hero reading 36,800 made everybody do
+the same subtraction by hand against a figure two rows below it.
+
+So the big number is **Astrite you still need**, with pulls-to-find beside it — or, once
+you are covered, a zero and what you have to spare. The bill is the anchor on a summary
+strip welded under it, next to what you hold, what your Tides already pay for, and the
+50/50 landing. Those four were three separate blocks stacked down the page before; one
+strip says the same things in a fifth of the height.
 
 #### Two counters, never one
 
@@ -1199,9 +1212,37 @@ that produced its number — "70 pulls to the first 5★ (80 less the 10 you are
 then 80 more if that one loses the 50/50" — so a reader can check it against their own
 account rather than trusting it.
 
+There is no summed row closing the list: the hero above it is that number, and a total
+under a total is the same figure twice. How the pulls split across the two convenes
+survives as a caption, and only once there are more than two rows to add up.
+
 The last row reads the shortfall against what the patch is estimated to pay, and opens the
 same `drawerAstrite()` breakdown the version record does. It is labelled an estimate here
 exactly as it is there.
+
+#### It is laid out to fit on one screen
+
+Picking and pricing are one gesture, so the controls sit beside each other above the
+answer rather than stacked over it — three full-width panels put the figure you are
+changing the inputs to watch below the fold, and every keystroke was typed blind and
+confirmed by scrolling.
+
+The split is 1.5fr to 1fr and the ratio is measured rather than chosen: the row is as tall
+as its taller panel, so the shortest page is the one where the picker holds three cards
+across *and* the form holds three boxes across. Tip it either way and one of them drops to
+two columns and grows a row. The same arithmetic sets `.pcards` at 10.5rem rather than a
+rounder 11 — at 11 the third track overran its column by three pixels, which is not a
+rounding error you can see and is a whole extra row of cards you can. Below 1180 the two
+panels stack and the grids spread instead.
+
+This is also the one view that takes the aside's column, via `solo` on its VIEWS entry and
+`.body.solo` in the stylesheet. Everything else on the desk is content with a margin note
+beside it and the note earns its 375px; a calculator is inputs and the figure they
+produce, and four tier counts and a portrait have nothing to say about a pull budget. The
+rules are the ones the 1340px breakpoint already applies to every view — the hud unbuilds
+itself into a strip, the views drop to row two behind it — under a class instead of a
+width. `setView` owns the class, not the renderer, so it cannot be left behind on the way
+out. Between that, the split and the folded hero, the page went from 1,691px to 956px.
 
 #### The form
 
@@ -1209,9 +1250,18 @@ The desk has no input styling anywhere else — the only other text field on it 
 command palette — so the controls are built out of parts that already exist. A target is
 the filter chip's pressed state with a face on it, tinted by the Resonator's own element; a
 field is the `.wstats` tile with an input where the figure goes, spinners stripped; the
-answer is the Astrite panel's hero row one step larger, which a reader who has met that
-panel already knows how to read. The guarantee is a full-width row rather than a fourth
-number box, because it is worth 80 pulls and would have been missed in a grid of tiles.
+answer is the Astrite panel's hero row with a summary strip welded under it, which a reader
+who has met that panel already knows how to read. The guarantee is a full-width row rather
+than a fourth number box, because it is worth 80 pulls and would have been missed in a grid
+of tiles.
+
+A target card carries the element and whether it is a debut, and not the weapon class —
+which weapon a Resonator swings is a fact about building them rather than about whether you
+want them, and it was the word that pushed "FUSION · BROADBLADE · NEW" past the edge of the
+card on every Broadblade in the patch. The patch heading names the version and its state
+and drops the title for the same reason: "Lamplight in Mirage, Sword's Resolve in Heart" is
+eight words of poetry that wrapped to two lines in half a stage, on the one page where
+nobody is reading it.
 
 The form lives on `S.pull` and only `#pull-out` is repainted, on the keystroke. The figure
 has to move while you are still typing in the box that changed it — trying figures against

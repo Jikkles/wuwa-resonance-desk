@@ -85,8 +85,10 @@ const VIEWS = [
   {id:"echoes",     label:"Echoes",       icon:"i-echo"},
   {id:"events",     label:"Events",       icon:"i-events"},
   /* Under Events, because it answers the other half of the same question. The
-     Events view says what the patch pays; this says what the patch costs. */
-  {id:"pulls",      label:"Pull calculator", icon:"i-pulls", short:"Pulls"},
+     Events view says what the patch pays; this says what the patch costs.
+     `solo` takes the aside's column — see .body.solo. It is the only view that
+     asks for it, and the only one that is a tool rather than a page. */
+  {id:"pulls",      label:"Pull calculator", icon:"i-pulls", short:"Pulls", solo:true},
   {id:"intel",      label:"Intel",        icon:"i-intel"},
   {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified", short:"Signals"}
 ];
@@ -3042,22 +3044,29 @@ function pullCard(t, want){
   const attr = t.banner.attribute || r.attribute;
   const run  = t.banner.new ? "New" : t.banner.rerun ? "Rerun" : "";
 
-  const row = (tg, fig, title, sub) => `
+  /* The card is a third of the picker's column, so every word on it has to
+     earn the room. `title` carries the full name for the few weapons that
+     still run past the box. */
+  const row = (tg, fig, name, sub) => `
     <button class="ptg" data-act="pulltarget" data-id="${esc(tg.key)}"
-            aria-pressed="${want.has(tg.key)}">
+            aria-pressed="${want.has(tg.key)}" title="${esc(name)}">
       <span class="ptg-fig">${fig}</span>
-      <span class="ptg-t"><b>${esc(title)}</b><em>${esc(sub)}</em></span>
+      <span class="ptg-t"><b>${esc(name)}</b><em>${esc(sub)}</em></span>
       <span class="ptg-box">${icon("i-check", 11)}</span>
     </button>`;
 
+  /* Element and debut, and not the weapon class. Which weapon a Resonator
+     swings is a fact about building them, not about whether you want them, and
+     it was the word that pushed "FUSION · BROADBLADE · NEW" past the edge of
+     the card on every Broadblade in the patch. The record carries it. */
   return `<div class="ptc"${attrStyle(attr)}>
     ${row(t.res, face, t.banner.name,
-          [attr, t.banner.weapon, run].filter(Boolean).join(" · ") || "Resonator")}
+          [attr, run].filter(Boolean).join(" · ") || "Resonator")}
     ${t.weap ? row(t.weap,
         t.weap.icon
           ? `<img class="wpn" src="${esc(t.weap.icon)}" alt="" loading="lazy" decoding="async">`
           : `<span class="g">${icon("i-weapon", 15)}</span>`,
-        t.weap.name, "Signature weapon") : ""}
+        t.weap.name, "Signature") : ""}
   </div>`;
 }
 
@@ -3086,52 +3095,46 @@ function pullOut(){
   const w = p.worst, k = p.lucky;
   const pullsFor = n => Math.ceil(n / p.cost);
 
-  /* The headline is the worst case, because that is what was asked for and
-     because it is the only one of the two figures that is a guarantee. The
-     lucky run is a real number too — it is the same arithmetic with the coin
-     landing right — but it is a hope, and a hope does not get the big type. */
-  const hero = `<div class="phero">
-    ${astriteMark(44)}
-    <span class="phero-fig"><b>${numFmt(w.astrite)}</b><span>Astrite, worst case</span></span>
-    <span class="phero-pulls"><b>${numFmt(w.pulls)}</b><span>${
-      w.tides ? `pulls · ${w.tides} from Tides` : `pulls at ${p.cost} each`}</span></span>
+  /* The headline is what you still have to find, not what the whole thing
+     costs. Those are different numbers and only one of them is a decision: the
+     bill is a fact about the banner, the shortfall is a fact about you, and
+     the reader who opened this view already knows they want her. A hero
+     reading 30,400 made everybody do the same subtraction by hand against a
+     figure printed two rows below it.
+
+     The bill is still the anchor, on a summary strip under it that also
+     carries what you hold, what your Tides already cover, and the same
+     arithmetic with the coin landing right. That last one is a real number —
+     it is the 50/50 going your way — but it is a hope, and a hope does not get
+     the big type. Folding all three in here is also what collapsed three
+     stacked blocks into one, which is most of how this page got shorter. */
+  const need = `<div class="phero${w.short ? " short" : " ok"}">
+    <div class="phero-top">
+      ${astriteMark(40)}
+      <span class="phero-fig">
+        <b>${numFmt(w.short)}</b><span>Astrite you still need</span></span>
+      <span class="phero-pulls">${w.short
+        ? `<b>${numFmt(pullsFor(w.short))}</b><span>pulls to find</span>`
+        : `<b>${numFmt(w.spare)}</b><span>Astrite to spare</span>`}</span>
+    </div>
+    <div class="phero-sum">
+      <span><em>Total cost</em><b>${numFmt(w.astrite)}</b> · ${plural(w.pulls, "pull")}</span>
+      <span><em>You hold</em><b>${numFmt(p.held)}</b></span>
+      ${w.tides ? `<span><em>Tides cover</em><b>${numFmt(w.tides)}</b> ${w.tides === 1 ? "pull" : "pulls"}</span>` : ""}
+      ${k.pulls !== w.pulls
+        ? `<span><em>If the 50/50 lands</em><b>${numFmt(k.astrite)}</b> · ${plural(k.pulls, "pull")}</span>` : ""}
+    </div>
   </div>`;
 
-  /* "You hold 0" is what an unfilled form says, and it reads as a fact about
-     the reader's account rather than as an empty box. So the two states are
-     written apart: nothing entered is a different sentence from nothing left. */
-  const verdict = w.short
-    ? `<div class="pverd short">
-        <b>${numFmt(w.short)} short</b>
-        <span>${p.held
-          ? `You hold ${numFmt(p.held)}. That is ${plural(pullsFor(w.short), "pull")} still to find${
-              k.short ? "" : ` — though winning the 50/50 would cover it`}.`
-          : `Nothing entered above, so this is the whole bill — ${plural(w.pulls, "pull")}.`}</span>
-      </div>`
-    : `<div class="pverd ok">
-        <b>Covered</b>
-        <span>You hold ${numFmt(p.held)}, which is ${numFmt(w.spare)} more than the worst case asks for.</span>
-      </div>`;
-
-  /* Only drawn when the two runs differ, which is exactly when a 50/50 is in
-     play. A weapon-only plan has no coin to flip and the row would be the
-     headline said twice. */
-  const lucky = k.pulls !== w.pulls ? `<div class="plucky">
-    <span class="label">If the 50/50 goes your way</span>
-    <b>${numFmt(k.astrite)}</b><em>Astrite · ${plural(k.pulls, "pull")}</em>
-  </div>` : "";
-
-  /* The total is dropped on a single target, where it is the row above said a
-     second time. It earns its rule the moment there are two things to add. */
+  /* The working. The "worst case, everything" row that used to close this list
+     went when the hero grew a total: a summed row directly under a summed
+     headline is the same number twice, and this page was asked to get shorter.
+     What it carried that the hero does not — how the pulls split across the two
+     convenes — is a caption on the list now rather than a row in it. */
   const sides = [
     w.char ? `${plural(w.char, "pull")} on the Resonator convene` : "",
     w.weap ? `${plural(w.weap, "pull")} on the weapon convene` : ""
-  ].filter(Boolean).join(", ");
-  const total = p.legs.length > 1 ? `<li class="pleg total">
-      <span class="pleg-t"><b>Worst case, everything</b>
-        <em>${sides}${w.tides ? `, ${w.tides} of them paid by Tides you already hold` : ""}</em></span>
-      <span class="pleg-n"><b>${numFmt(w.pulls)}</b><span>pulls</span></span>
-    </li>` : "";
+  ].filter(Boolean).join(" · ");
 
   const legs = `<ul class="plegs">${p.legs.map(l => `
     <li class="pleg${l.kind === "weapon" ? " wpn" : ""}">
@@ -3140,8 +3143,11 @@ function pullOut(){
         <em>${pullWhy(l)}</em>
       </span>
       <span class="pleg-n"><b>${numFmt(l.worst)}</b><span>pulls</span></span>
-    </li>`).join("")}${total}
-  </ul>`;
+    </li>`).join("")}
+  </ul>
+  ${/* Only once there are enough rows that adding them up is work. On two legs
+       the split is the two numbers above it, read in order. */""}
+  ${p.legs.length > 2 ? `<div class="plegs-f">${sides}</div>` : ""}`;
 
   /* Read against what the patch pays, which the desk already models — the one
      comparison that turns a shortfall into a decision. It is an estimate and
@@ -3153,27 +3159,34 @@ function pullOut(){
     const line  = !w.short
       ? `You do not need it for this.`
       : gap
-      ? `Against the ${numFmt(w.short)} you are short, that still leaves ${numFmt(gap)} to find — ${plural(pullsFor(gap), "pull")}.`
-      : `That covers the ${numFmt(w.short)} you are short, with ${numFmt(p.income - w.short)} over.`;
+      ? `${numFmt(gap)} short even so — ${plural(pullsFor(gap), "pull")}.`
+      : `Covers it, with ${numFmt(p.income - w.short)} over.`;
     return `<button class="pincome" data-act="open" data-id="astrite:${esc(names[0])}">
-      <span class="label">What ${names.length > 1 ? `${names.join(" and ")} pay` : `${names[0]} pays`}</span>
-      <b>~${numFmt(p.income)} Astrite</b>
-      <em>On a full free-to-play clear — the desk's own estimate, not a Kuro figure. ${line}</em>
+      <span class="label">${names.length > 1 ? `${names.join(" and ")} pay` : `${names[0]} pays`}
+        <em>free-to-play clear · estimate</em></span>
+      <b>~${numFmt(p.income)}</b>
+      <span class="pincome-l">${line}</span>
       <span class="pincome-go">${icon("i-arrow", 13)}</span>
     </button>`;
   })() : "";
 
   return `<div class="panel">
-    <div class="panel-h"><h2>What it will cost</h2>
+    <div class="panel-h"><h2>What you need</h2>
       <span class="sub">${plural(p.legs.length, "target")}</span>
       <div class="right"><span class="aest-tag">Ceiling, not a forecast</span></div>
     </div>
     <div class="panel-b">
-      ${hero}
-      ${verdict}
-      ${lucky}
+      ${need}
       ${legs}
       ${income}
+    </div>
+    ${/* In this panel's own footer rather than a panel of its own. Every other
+         view's caveat gets a card at the foot of the page because it is about
+         the whole page; this one is about these figures, it sits directly
+         under them, and a separate panel for one sentence was 100px of the
+         height this view was asked to give back. */""}
+    <div class="panel-f">
+      <span class="tier-note">The ${CONVENE.pity}-Convene guarantee and the 50/50 are Kuro's, published on every banner. The curve that makes most 5★s land sooner is not, so nothing here averages it — these are ceilings, and most accounts pay less.</span>
     </div>
   </div>`;
 }
@@ -3184,8 +3197,8 @@ function pullBuys(){
   const cost = Number(DATA.astrite?.pullCost) || 160;
   const held = Math.max(0, intOf(S.pull.astrite));
   return held
-    ? `Buys ${plural(Math.floor(held / cost), "pull")} at ${cost} each`
-    : `A pull is ${cost} Astrite`;
+    ? `${plural(Math.floor(held / cost), "pull")} at ${cost}`
+    : `${cost} a pull`;
 }
 
 function paintPullOut(){
@@ -3219,11 +3232,14 @@ function renderPulls(){
     ph.items.push(t);
   }
 
+  /* Version number and state, and not the patch's title. "Lamplight in Mirage,
+     Sword's Resolve in Heart" is eight words of poetry that wrapped to two
+     lines in half a stage, and on a page about what a banner costs it is the
+     one thing on the heading nobody is reading. The Timeline carries it. */
   const picker = groups.length ? groups.map(g => {
-    const v = versions().find(x => x.id === g.version);
     return `<div class="pgrp">
       <div class="pgrp-h">
-        <span class="label">${esc(g.version)}${v?.title ? ` — ${esc(v.title)}` : ""}</span>
+        <span class="label">Version ${esc(g.version)}</span>
         <span class="pill ${g.status === "live" ? "live" : "next"}">${esc(g.status)}</span>
       </div>
       ${g.phases.map(ph => `<div class="pph">
@@ -3245,52 +3261,56 @@ function renderPulls(){
       <em class="pf-h" id="pf-h-${k}">${hint}</em>
     </label>`;
 
+  /* The two controls sit side by side above the answer rather than stacked
+     over it. Three full-width panels put the figure a reader is changing the
+     inputs to watch below the fold, so every keystroke was typed blind and
+     confirmed by scrolling. Picking and pricing are one gesture, and this is
+     the layout that lets a screen hold both ends of it. Collapses to one
+     column at 1180, where the columns stop being wide enough to be two. */
   $("#p-pulls").innerHTML = `<div class="stack">
     ${pageTitle("pulls")}
 
-    <div class="panel">
-      <div class="panel-h"><h2>What you're after</h2>
-        <span class="sub" id="pull-count">${plural(S.pull.want.length, "target")}</span>
-        <div class="right">
-          <button class="more" data-act="pullreset">Clear ${icon("i-arrow", 12)}</button>
+    <div class="play">
+      <div class="panel">
+        <div class="panel-h"><h2>What you're after</h2>
+          <span class="sub" id="pull-count">${plural(S.pull.want.length, "target")}</span>
+          <div class="right">
+            <button class="more" data-act="pullreset">Clear ${icon("i-arrow", 12)}</button>
+          </div>
         </div>
+        <div class="panel-b">${picker}</div>
       </div>
-      <div class="panel-b">${picker}</div>
-    </div>
 
-    <div class="panel">
-      <div class="panel-h"><h2>Where you stand</h2>
-        <span class="sub">Leave a box empty for nothing</span>
-      </div>
-      <div class="panel-b">
-        <div class="pfset">
-          <span class="label">What you hold</span>
-          <div class="pfields">
-            ${field("astrite", "Astrite", pullBuys())}
-            ${field("radiant", "Radiant Tides", "Pulls on the Resonator convene")}
-            ${field("forging", "Forging Tides", "Pulls on the weapon convene")}
-          </div>
+      <div class="panel">
+        <div class="panel-h"><h2>Where you stand</h2>
+          <span class="sub">Empty means none</span>
         </div>
-        <div class="pfset">
-          <span class="label">Where your pity stands</span>
-          <div class="pfields">
-            ${field("pity",  "Resonator convene pity", `Convenes since your last 5★, 0–${CONVENE.pity - 1}`, ` max="${CONVENE.pity - 1}"`)}
-            ${field("wpity", "Weapon convene pity", `Its own counter, 0–${CONVENE.pity - 1}`, ` max="${CONVENE.pity - 1}"`)}
+        <div class="panel-b">
+          <div class="pfset">
+            <span class="label">What you hold</span>
+            <div class="pfields">
+              ${field("astrite", "Astrite", pullBuys())}
+              ${field("radiant", "Radiant Tides", "Resonator convene")}
+              ${field("forging", "Forging Tides", "Weapon convene")}
+            </div>
           </div>
-          <button class="pguar" data-act="pullguar" aria-pressed="${!!P.guaranteed}">
-            <span class="ptg-box">${icon("i-check", 11)}</span>
-            <span class="ptg-t"><b>I lost the last 50/50</b>
-              <em>Then your next 5★ on the Resonator convene is the featured one, and ${CONVENE.pity} pulls come off the worst case.</em></span>
-          </button>
+          <div class="pfset">
+            <span class="label">Where your pity stands</span>
+            <div class="pfields">
+              ${field("pity",  "Resonator pity", `0–${CONVENE.pity - 1} since your last 5★`, ` max="${CONVENE.pity - 1}"`)}
+              ${field("wpity", "Weapon pity", `0–${CONVENE.pity - 1}, its own counter`, ` max="${CONVENE.pity - 1}"`)}
+            </div>
+            <button class="pguar" data-act="pullguar" aria-pressed="${!!P.guaranteed}">
+              <span class="ptg-box">${icon("i-check", 11)}</span>
+              <span class="ptg-t"><b>I lost the last 50/50</b>
+                <em>Your next 5★ is guaranteed featured — ${CONVENE.pity} pulls off the worst case.</em></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
     <div id="pull-out">${pullOut()}</div>
-
-    <div class="panel"><div class="panel-f">
-      <span class="tier-note">Worked off the guarantee Kuro publishes in every banner's Convene Details — a 5★ within ${CONVENE.pity} Convenes on both limited banners, a 50/50 on the first featured Resonator with the next one guaranteed if it loses, and no 50/50 at all on the Featured Weapon Convene. Pity and the guarantee carry from one Featured Resonator Convene to the next and are never shared with the weapon banner, which counts on its own. The rate curve that makes most 5★s land before ${CONVENE.pity} — agreed to start climbing around ${CONVENE.soft} — has never been published, so nothing here averages it: these are ceilings, and most accounts pay less. Not counted: the standard banner and Lustrous Tides, Sequence Nodes past the first copy, and the Beginner's Choice Convene.</span>
-    </div></div>
   </div>`;
 }
 
@@ -6070,6 +6090,11 @@ function setView(id, focus){
      the page can be narrowed by is a list nobody finds. */
   S.railOpen = id;
   VIEWS.forEach(v => { document.getElementById(`p-${v.id}`).hidden = v.id !== id; });
+  /* A view that wants the aside's column takes it here rather than in its own
+     renderer: the aside is the shell's, not the view's, and a renderer that
+     reached out to restyle the page around itself would leave the class behind
+     the moment you navigated away from it. */
+  document.querySelector(".body")?.classList.toggle("solo", !!VIEWS.find(v => v.id === id)?.solo);
   /* Rebuilds the nav, its filter lists and the dock — aria-current, the open
      item and every count come out of S and the data in one pass. */
   renderRail();
