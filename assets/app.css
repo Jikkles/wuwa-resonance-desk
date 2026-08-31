@@ -190,13 +190,22 @@ button{font:inherit;color:inherit}
 .app{display:grid;grid-template-columns:var(--rail-w) minmax(0,1fr);min-height:100vh}
 
 .rail{
-  /* Two sizes off the dial, the same move the aside got and for the same
+  /* Four sizes off the dial, the same move the aside got and for the same
      reason: this is a column of labels you navigate by, not text you read, and
      at the page's own size the word RESONATORS was the largest thing on a
      screen whose subject is a patch. zoom rather than a font-size because
      every size here is a rem — see the note over .aside,.hud for the whole of
-     why. --rail-w comes down with it, 296 to 259, which is the same layout in
-     a narrower track and 37px handed back to the stage.
+     why, and because one dial is what makes "smaller" mean the nav, its filter
+     lists, the wordmark and the source links all at once, at every width.
+
+     It was two sizes for a long time and went to four when the nav grew a
+     two-word item: PULL CALCULATOR is fifteen tracked-out mono characters and
+     it broke onto a second line, which reads as a layout fault in the one
+     column that has to be scannable. --rail-w deliberately did NOT come down
+     with it this time — it did on the first step, 296 to 259 — because the
+     width is the whole point. Narrowing the track in proportion would leave
+     the same ratio of label to box and wrap the item all over again; holding
+     it hands the slack to the labels instead.
 
      The height has to be divided back out. zoom scales what the box renders
      at, so a rail asking for 100vh would be laid out a viewport tall and then
@@ -204,7 +213,7 @@ button{font:inherit;color:inherit}
      links floating above the bottom of the screen. Dividing first is what
      makes 100vh mean 100vh again. It is written against the same variable as
      the zoom so the two cannot drift apart. */
-  --rail-zoom:.875;
+  --rail-zoom:.75;
   zoom:var(--rail-zoom);
   position:sticky;top:0;height:calc(100vh / var(--rail-zoom));
   overflow-y:auto;overscroll-behavior:contain;
