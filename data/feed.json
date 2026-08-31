@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-08-31T08:13:08.005Z",
+  "fetched": "2026-08-31T19:51:48.426Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 677,
-      "ms": 1146
+      "ms": 1403
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 1098
+      "ms": 865
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 131
+      "ms": 421
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 432
+      "ms": 763
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2461,
+      "ms": 2637,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 58,
-      "ms": 412
+      "fetched": 56,
+      "ms": 517
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,71 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 1236
+      "ms": 1050
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "3.7| An important story leak? ( Spoilers ahead) Via Brant leaks(Seele)",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w3bs9e/37_an_important_story_leak_spoilers_ahead_via/",
+      "date": "2026-08-31T12:04:11.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "✦ September Calendar \"When Snow Settles\" ✦",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w3afv4/september_calendar_when_snow_settles/",
+      "date": "2026-08-31T11:01:36.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "✦ 9月日历「雪落满庭时」✦",
+      "url": "https://www.kurobbs.com/mc/post/1543939609716682752",
+      "date": "2026-08-31T11:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "天下第一玄门正式开始招生！",
+      "url": "https://www.kurobbs.com/mc/post/1543959032649621504",
+      "date": "2026-08-31T10:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves confirms Hsin as game's first playable Sentinel",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOeXRndC1vSHNUQXY5eUl5cFhMYjAyZ0sxU05vNlF6S3Q0R1k5T2hHVlJ6LS1aeHlxOTBQc3p1M2NNSnJsSzUzcWpzYV9rbU9nZC1oX3RYUjRNeGJhLW5Wd1YyVk1YeUw5RE9FRWFtWXR0Z2N3ZnZhRUJRT3dncjRfWkhXUDRTT01IZXYzYXJmOERGVEhVLXV6WnNOSUV0a3FSYVRPT0ctRGRSeFow?oc=5",
+      "date": "2026-08-31T08:40:00.000Z",
+      "source": "Notebookcheck",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "3.7| Another new echo set via team gemberry",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w37g42/37_another_new_echo_set_via_team_gemberry/",
+      "date": "2026-08-31T08:17:10.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "Another echo set via Gemberry",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w36e7h/another_echo_set_via_gemberry/",
@@ -488,16 +548,6 @@
       "hot": false
     },
     {
-      "title": "Wuthering Waves system requirements: Recommended PC, iOS & Android settings",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPMTRJcEtPVy1wOWRqMHJiOERySGQ0QkROcnpKX0xyOHNQdWV1S0F2NWNEUklTSlFydXA4MmlYelRpWWNaaTdvMTc3OWt1YldobVloMFh3OWRBUXp3aGR4T3FmSWU1emxjUUc0d2dJQWRPTkR3MTZobmFBWXV0YkExMVpLWlFkUEdmeTNCRGpFY1JhZk5CaHM3ekRNYmxMUkFSMVVWNURvUVE5VTFGR0xqWg?oc=5",
-      "date": "2026-08-26T07:00:00.000Z",
-      "source": "Dexerto",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Hsin sentinel form via seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vylkgm/hsin_sentinel_form_via_seele/",
       "date": "2026-08-26T03:28:27.000Z",
@@ -608,30 +658,10 @@
       "hot": true
     },
     {
-      "title": "Why Wuthering Waves is so rough on Xbox despite multiple updates",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQMEEwc0JIbGpOMmNzOC14Qm8xRjhLYmRydFktLVE1MnJENHFpU29DYmpTaHQtNExmc0htZWZsUF96Uld0NDhlcmI5ZURwaGJVbjU3RVN4VHdvRXVLVVMwQTVXaVJWVF82UmJJSUNaV3hnX2NBRWtqRERaYnZaZS0yOTcxbFhxXzRmMWc?oc=5",
-      "date": "2026-08-24T19:13:01.000Z",
-      "source": "Windows Central",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves brings more characters, new main quests, and new events with latest update",
       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOdExKUVFySzZHQjBlUVNCMi1RRWY5WUtTaXh4RHZSZDdBUHFxLXBYQXJ4TnQwQzBrTEZseGJUS1RTeDB2LTB4TW9hVWNWZ0xzWW1SV3RUSUhQTkRkQzRza0xqckx3b3RPcDBZajFVOWNGYl90ZDl4ZmdvQjZDUEl6cEp6QmlpeV85ZE12aVNzU2p1Uk9aOXFyb2VpZERPOXZFUjFseTdrb0lJMFVqWVZpZF83VU1ub3N5VlFlbTBQMUhHdw?oc=5",
       "date": "2026-08-24T18:00:00.000Z",
       "source": "Massively Overpowered",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves codes (August 2026) and how to redeem",
-      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE0wZkFzeGowc0poaHpKVmRVRFMxd19POUQyNzltR00zakduR1kyOEVocUQta3IyWjQyRURPYlZheFlYcElOUDV0dEFrRUlDMzgwWnhUeFhpWUNqZw?oc=5",
-      "date": "2026-08-24T10:31:29.000Z",
-      "source": "PCGamesN",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -661,7 +691,7 @@
       "title": "Wuthering Waves Codes (August 2026)",
       "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9Qal9Uc2xHRzZmcUdmalVEOS1ZVkNRVTZYYklCYVVwZDVGdDB4S20tYzBaYV9PVGJSTlNNcjVsX0V6bXpXdFMtWW50czVFd1V1NWFqTm1YVlpPbVgx0gFiQVVfeXFMTzBoc00td21SRmdDaGJ0Nk5QSEdaeXdpelgzTWljZFFrUmViemhYSjYzVXlBMkVQd1RwOUdJWHA0RmdxNG9SQVVjNkFVMHRybnh4U1EwY2dYWjQ5UE4wVTdOa0E?oc=5",
       "date": "2026-08-24T01:48:00.000Z",
-      "source": "beebom.com",
+      "source": "Beebom",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -808,16 +838,6 @@
       "hot": true
     },
     {
-      "title": "活动预告 | 战斗活动即将开启！",
-      "url": "https://www.kurobbs.com/mc/post/1539704532296605696",
-      "date": "2026-08-21T10:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Insider Channel: Special Program | Crystal Clear",
       "url": "https://www.youtube.com/watch?v=om6QZVMX9-M",
       "date": "2026-08-21T09:00:06.000Z",
@@ -848,16 +868,6 @@
       "hot": false
     },
     {
-      "title": "Wuthering Waves Launches Collaboration with Domino's Pizza",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMWxpWWFWQU9CSXdKZTdBQ1d4OUU5VVlCYklEVGJ0M3lkeW5EYWVwbXNRVURiNGhaRllMT2xvRW5fcGM3ZUdnMHNkNFVwWDhmWUZiRFYwYkk4WWdJR1VBRzRFc0FjYWlpZDZNVzlPYXpqR01vWml4a0ZsRERHZXVVYXRlRWhia0QwTGx2bWE0ZWtUY1RfejEtMHlrNG9md1kyNkE?oc=5",
-      "date": "2026-08-21T02:30:34.000Z",
-      "source": "Inven Global",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "EP3.6 — Qingxiao - Outside the Mountain",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vth97q/ep36_qingxiao_outside_the_mountain/",
       "date": "2026-08-20T11:49:09.000Z",
@@ -885,16 +895,6 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
-      "hot": true
-    },
-    {
-      "title": "3.7| New weekly boss name via gamedata",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vtf3z2/37_new_weekly_boss_name_via_gamedata/",
-      "date": "2026-08-20T09:58:58.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
       "hot": true
     },
     {
@@ -968,6 +968,16 @@
       "hot": true
     },
     {
+      "title": "Wuthering Waves Launches Collaboration with Domino's Pizza",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMWxpWWFWQU9CSXdKZTdBQ1d4OUU5VVlCYklEVGJ0M3lkeW5EYWVwbXNRVURiNGhaRllMT2xvRW5fcGM3ZUdnMHNkNFVwWDhmWUZiRFYwYkk4WWdJR1VBRzRFc0FjYWlpZDZNVzlPYXpqR01vWml4a0ZsRERHZXVVYXRlRWhia0QwTGx2bWE0ZWtUY1RfejEtMHlrNG9md1kyNkE?oc=5",
+      "date": "2026-08-20T07:00:00.000Z",
+      "source": "Inven Global",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "WuWa 3.6 patch notes (Wuthering Waves): New characters, events, and more",
       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPNHFXUG5ONkdnZmc2b0FXV3ctZmFNcEthWGVfMkMySS11c3BVQ0tUNU9SWUxGdWw3dWlVY1JwRmRiRGNUOVljU1BfOVN3ektEeGd3ZlZITjZMMU9oZlRTTXlpWDRKRFItejlNRzlmYVFPZ2hjaHR3N0dsdk1RaW1rN2o2MXJoNUU0aW8zN09LZlM0WlZsY0t6TkpR?oc=5",
       "date": "2026-08-20T07:00:00.000Z",
@@ -1018,16 +1028,6 @@
       "hot": false
     },
     {
-      "title": "\"寒光裁月，玉锋截云。\"",
-      "url": "https://www.kurobbs.com/mc/post/1539698734044422144",
-      "date": "2026-08-20T03:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves EP3.6 — Qingxiao - \"Outside the Mountain\"",
       "url": "https://www.youtube.com/watch?v=qaVli_4qiVs",
       "date": "2026-08-20T02:30:04.000Z",
@@ -1068,26 +1068,6 @@
       "hot": true
     },
     {
-      "title": "3.6| New NPC \"in-game\" via gamedata (story spoilers, be warned)",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vsz172/36_new_npc_ingame_via_gamedata_story_spoilers_be/",
-      "date": "2026-08-19T21:01:35.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.6| Another new NPC via hiragara",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vsy6ma/36_another_new_npc_via_hiragara/",
-      "date": "2026-08-19T20:30:06.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Wuthering Waves Fan Creation Event Winners Reveal",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5330",
       "date": "2026-08-19T12:00:00.000Z",
@@ -1100,7 +1080,7 @@
     {
       "title": "Time until Qingxiao releases in WuWa 3.6 (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNamF6NTliTmx2OXBGVG5VVm1WSkFfMVlDUG9HU01weXdBd09xMDM1UzhkM2RkSV9LSXBvSnVDYWJXTUlqMjg1bHp5NU1sZk9JWFp4dFZQaDBEcGlEVnhlUWZOdU1mNEdlTGRBclE3NWNiQUZQTnUyRnFJMTlPT25fNVpSSDJhRVFiLTJZ?oc=5",
-      "date": "2026-08-19T07:58:00.000Z",
+      "date": "2026-08-19T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
@@ -1301,6 +1281,26 @@
       "title": "Wuthering Waves events schedule",
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9tSDNaNWVYVmt3aXFfYy16Uy1VX1JFdEdDVV9CM1VveTQ3djNUV3RGajVjYTZoNjdXUDFuQ1k4QlBYY1AxLWNEaHctS0NTaDNXS1AxZWlqTmhvbWp1RDNfc0hB?oc=5",
       "date": "2026-08-11T07:00:00.000Z",
+      "source": "Pocket Tactics",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves – Version 3.6 Trailer & Overview",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQaXZYUDk4cFQwa1BkUnhxaG9vaS1OVGFxeGdBUEdpYUh3emlBekxrbmg0dEl0Mk1MWkllRWFtSmJlbFRCQnkxRUhPZmJhaEI4UDNuc0pOeDlHSDBkUmIxR0xKREtUTV84WTNLamhXdDdRWmJTaDgwc0c4TTVUZUNfMGpNZ2pIeUtJRFdfdUZR?oc=5",
+      "date": "2026-08-10T07:00:00.000Z",
+      "source": "GameSpace.com",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves tier list August 2026",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE83X3pQWThWelNncE8weFBQZXZNV0ZjOUM4T3VOay02SUxSeTU0WHlpd0pXc29Nal8yb1kzSndrUEpPVTBYbmxIZ1JsZkJfOFljVTdwSU01YUVMMExrV2hwNlFOcUp0dw?oc=5",
+      "date": "2026-08-10T07:00:00.000Z",
       "source": "Pocket Tactics",
       "sourceId": "google-news",
       "kind": "press",
