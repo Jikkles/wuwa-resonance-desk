@@ -4052,7 +4052,15 @@ function renderAside(){
   </div>`;
 
   const featSeen = feat ? lastIntelFor(feat.name) : "";
-  const featured = feat ? `<div class="panel feat"${attrStyle(feat.attribute)}>
+  /* The whole panel opens the record, not just the button at the foot of it.
+     Everything in here is about one Resonator and has one place to go — the
+     face, the name, the tier badges — so the frame is the target and "View
+     profile" is the label on it rather than the only live pixel. Same rule as
+     every other card on the desk: role=button on the frame, and the keydown
+     handler turns Enter and Space into a click. */
+  const featured = feat ? `<div class="panel feat"${attrStyle(feat.attribute)}
+    role="button" tabindex="0" data-act="resonator" data-id="${esc(feat.name)}"
+    aria-label="${esc(feat.name)} — Resonator record">
     <div class="mini-h"><h3>Featured resonator</h3>
       ${feat.version ? `<span class="pill ver">${esc(feat.version)}</span>` : ""}</div>
     ${artPanel({name:feat.name, ...(bannerFor(feat.name) || {})})}
@@ -4067,7 +4075,11 @@ function renderAside(){
       ${feat.role ? `<div class="rec-role">${esc(feat.role)}</div>` : ""}
       ${confidenceRows(feat)}
       ${featSeen ? `<div class="rec-when" style="margin-top:11px">Last intel ${fmtDate(featSeen)}</div>` : ""}
-      <button class="btn" data-act="resonator" data-id="${esc(feat.name)}">View profile ${icon("i-arrow", 12)}</button>
+      ${/* Not a <button> any more: the card around it is already the button,
+           and a second one inside would be a second tab stop and a second
+           thing to announce for the same destination. It stays as the
+           affordance — the panel needs somewhere to say it is clickable. */""}
+      <span class="btn">View profile ${icon("i-arrow", 12)}</span>
     </div>
   </div>` : "";
 

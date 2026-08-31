@@ -3220,6 +3220,17 @@ img.astrite-pic{
 .glance-row b.accent{color:var(--accent)}
 
 .feat{position:relative}
+/* The panel is the click target, so it lights as one: the border takes the
+   element colour the way a record card does, and the button at the foot lights
+   with it from anywhere on the card rather than only under the pointer. No
+   translate — this one sits in a fixed aside column, and a panel that lifts
+   off its own rail reads as a glitch rather than a hover. */
+.feat[role="button"]{cursor:pointer;transition:border-color .2s}
+.feat[role="button"]:hover{border-color:color-mix(in srgb,var(--attr,var(--accent)) 50%,var(--line))}
+.feat[role="button"]:hover .feat-b>h3{color:var(--attr,var(--accent))}
+.feat[role="button"]:hover .btn{
+  background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent);
+}
 .feat .cart{aspect-ratio:4/5}
 .feat-b{padding:14px}
 .feat-b h3{margin:0 0 3px;font-size:1.1875rem;font-weight:600}
