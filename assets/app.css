@@ -3839,6 +3839,240 @@ img.astrite-pic{
 .dsrc:hover{border-color:var(--line-2);color:var(--fg);background:var(--bg-2)}
 .dsrc[role="button"]{cursor:pointer;text-align:left}
 .dsrc .arrow{margin-left:auto;color:var(--fg-3)}
+/* ══ pull calculator ════════════════════════════════════════════════
+   A form and the number it produces, on a page whose every other view is a
+   readout. That is the one thing this section has to solve: the desk has no
+   input styling at all — the only text field on it is inside the command
+   palette — and a browser's native number box lands on this ground as a white
+   slab with a pair of spinner arrows on it.
+
+   So the controls are built out of the parts already here. A target is the
+   filter chip's pressed state with a face on it; a field is the .wstats tile
+   with an input where the figure goes; the answer is the Astrite panel's hero
+   row, which is already the shape "big number, what it is, what it buys". */
+
+/* ── picking targets ──────────────────────────────────────────────── */
+.pgrp+.pgrp{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.pgrp-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+/* The phase inside the patch, not beside it. Both phases are the same forty-two
+   days and the same Astrite income, so the patch is named once and the phases
+   are rows under it — which is also the order the pity moves through them. */
+.pph+.pph{margin-top:16px}
+.pph-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.pgrp .sub{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+}
+.pgrp .sub.when{color:var(--fg-2)}
+/* Auto-fit rather than a fixed count: a phase runs two banners or three, and
+   a row of three that becomes a row of two with a 50% gap in it is worse than
+   a grid that just reflows. */
+.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:10px}
+/* The Resonator and their weapon in one frame, because "her and her weapon"
+   is one decision made twice, not two unrelated ones — and the frame is what
+   says the weapon underneath belongs to the face above it. */
+.ptc{
+  border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--tint-sink);
+}
+.ptg{
+  display:flex;align-items:center;gap:11px;width:100%;padding:9px 11px;
+  border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;
+  transition:background .15s;
+}
+.ptg+.ptg{border-top:1px solid var(--line)}
+.ptg:hover{background:var(--tint)}
+.ptg:focus-visible{outline:2px solid var(--attr);outline-offset:-2px}
+/* Chosen reads off the element colour, the same one the Resonator's record
+   and card use. It is the only tint on the page that means "you picked this",
+   so it has to be unmistakable at a glance across a grid of six. */
+.ptg[aria-pressed="true"]{background:color-mix(in srgb,var(--attr) 13%,transparent)}
+.ptg[aria-pressed="true"]:hover{background:color-mix(in srgb,var(--attr) 18%,transparent)}
+
+.ptg-fig{
+  flex:none;width:38px;height:38px;border-radius:50%;overflow:hidden;
+  display:grid;place-items:center;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--attr) 26%,transparent),var(--bg-2));
+  border:1px solid color-mix(in srgb,var(--attr) 30%,transparent);
+}
+.ptg-fig img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+/* A weapon icon is a long thin object on transparent ground — cropping it to
+   fill a 38px circle cuts the blade off. It sits inside instead. */
+.ptg-fig img.wpn{object-fit:contain;object-position:50% 50%;padding:4px}
+.ptg-fig img.wide{object-position:50% 12%}
+.ptg-fig .g{
+  font-family:var(--cjk);font-size:.75rem;color:var(--fg-3);display:grid;place-items:center;
+}
+.ptg-t{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.ptg-t b{
+  font-size:.8125rem;font-weight:600;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.ptg-t em{
+  font-style:normal;font-family:var(--mono);font-size:.5938rem;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--fg-3);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+/* Not a checkbox. The native one is a light-mode widget and cannot take the
+   element colour; this is the same box drawn out of a border and the tick
+   from the sprite, and it is the only thing on the card that changes shape
+   rather than just tint when the target is on. */
+.ptg-box{
+  flex:none;width:17px;height:17px;border-radius:5px;display:grid;place-items:center;
+  border:1px solid var(--line-2);color:transparent;transition:.15s;
+}
+.ptg[aria-pressed="true"] .ptg-box{
+  border-color:var(--attr);background:var(--attr);color:var(--bg);
+}
+
+/* ── where you stand ──────────────────────────────────────────────── */
+.pfset+.pfset{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.pfset>.label{display:block;margin-bottom:10px}
+.pfields{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:10px}
+.pf{
+  display:flex;flex-direction:column;gap:5px;
+  padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+  transition:border-color .15s;
+}
+.pf:focus-within{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.pf-k{
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-3);
+}
+/* The figure is the point of the tile, so it is set at the size .wstats sets
+   its figures at. Everything native is stripped: the spinners are 20px of
+   chrome on a control that is already 5 characters wide, and the arrow keys
+   still step the value without them. */
+.pf input{
+  width:100%;border:0;background:none;padding:0;margin:0;
+  font-family:var(--mono);font-size:1.125rem;font-weight:500;color:var(--fg);
+  font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield;
+}
+.pf input::-webkit-outer-spin-button,
+.pf input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.pf input:focus{outline:none}
+.pf input::placeholder{color:var(--fg-3);opacity:.5}
+.pf-h{
+  font-style:normal;font-size:.6875rem;line-height:1.45;color:var(--fg-3);
+}
+/* The guarantee. A whole row rather than a field, because it is worth 80
+   pulls — a fifth of the biggest number on the page — and it would be missed
+   as a fourth box in a grid of number tiles. */
+.pguar{
+  display:flex;align-items:flex-start;gap:11px;width:100%;margin-top:10px;
+  padding:11px 12px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--tint-sink);font:inherit;color:inherit;text-align:left;cursor:pointer;
+  --attr:var(--amber);transition:border-color .15s,background .15s;
+}
+.pguar:hover{border-color:var(--line-2)}
+.pguar[aria-pressed="true"]{
+  border-color:color-mix(in srgb,var(--amber) 45%,transparent);
+  background:color-mix(in srgb,var(--amber) 10%,transparent);
+}
+.pguar .ptg-box{margin-top:1px}
+.pguar .ptg-t em{
+  font-family:var(--sans);font-size:.6875rem;letter-spacing:0;text-transform:none;
+  line-height:1.5;white-space:normal;color:var(--fg-3);
+}
+
+/* ── the answer ───────────────────────────────────────────────────── */
+/* Deliberately the Astrite panel's hero row, one step larger. A reader who
+   has met that panel in a version record already knows how to read this:
+   stone, figure, what the figure is, and what it buys on the right. */
+.phero{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:15px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint);
+}
+.phero img.astrite-pic,.phero svg{flex:none}
+.phero svg{color:color-mix(in srgb,var(--accent) 62%,#FFFFFF)}
+.phero-fig,.phero-pulls{display:flex;flex-direction:column;gap:3px;min-width:0}
+.phero-fig b{
+  font-family:var(--mono);font-size:1.9375rem;font-weight:500;line-height:1;letter-spacing:-.015em;
+}
+.phero-pulls{margin-left:auto;text-align:right;align-items:flex-end}
+.phero-pulls b{
+  font-family:var(--mono);font-size:1.3125rem;font-weight:500;line-height:1;
+  color:color-mix(in srgb,var(--accent) 72%,#FFFFFF);
+}
+.phero-fig span,.phero-pulls span{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+}
+
+/* Can you afford it — the sentence, under the figure. Amber for short and
+   green for covered, borrowed from the confidence palette because those are
+   the two colours this page already uses for "not settled" and "settled". */
+.pverd{
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:10px;
+  padding:10px 13px;border-radius:var(--r-sm);
+  border:1px solid color-mix(in srgb,currentColor 38%,transparent);
+  background:color-mix(in srgb,currentColor 9%,transparent);
+}
+.pverd.short{color:var(--amber)}
+.pverd.ok{color:var(--t-official)}
+.pverd b{font-family:var(--mono);font-size:.875rem;font-weight:500;letter-spacing:.02em;flex:none}
+.pverd span{font-size:.7813rem;line-height:1.5;color:var(--fg-2);min-width:0}
+
+/* The same sum with the coin landing right. A row rather than a second hero:
+   it is a hope, and a hope does not get the big type. */
+.plucky{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:9px;padding:0 2px;
+}
+.plucky b{font-family:var(--mono);font-size:.9375rem;font-weight:500;color:var(--fg)}
+.plucky em{
+  font-style:normal;font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;color:var(--fg-3);
+}
+
+/* The working. One row per thing you are chasing, each carrying the sentence
+   that produced its number — a total nobody can check is a rumour with a
+   number on it, which is the same rule the Astrite breakdown is built on. */
+.plegs{list-style:none;margin:18px 0 0;padding:0}
+.pleg{
+  display:flex;align-items:baseline;gap:16px;padding:11px 2px;border-top:1px solid var(--line);
+}
+.pleg-t{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pleg-t b{font-size:.8438rem;font-weight:600;color:var(--fg)}
+.pleg-t em{font-style:normal;font-size:.7188rem;line-height:1.5;color:var(--fg-3)}
+.pleg-n{
+  margin-left:auto;flex:none;display:flex;align-items:baseline;gap:6px;
+}
+.pleg-n b{font-family:var(--mono);font-size:1.0625rem;font-weight:500;font-variant-numeric:tabular-nums}
+.pleg-n span{
+  font-family:var(--mono);font-size:.5938rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+}
+/* A weapon leg costs one number and a character leg can cost two, so the two
+   kinds are marked apart by the rule rather than by a badge. */
+.pleg.wpn .pleg-n b{color:var(--fg-2)}
+.pleg.total{border-top-width:2px;border-top-color:var(--line-2);margin-top:2px}
+.pleg.total .pleg-n b{color:color-mix(in srgb,var(--accent) 72%,#FFFFFF)}
+
+/* What the patch pays, read against what it costs — the row that turns a
+   shortfall into a decision. It opens the same breakdown the version record
+   does, so the estimate can be taken apart from here too. */
+.pincome{
+  display:grid;grid-template-columns:1fr auto;gap:4px 12px;width:100%;margin-top:16px;
+  padding:12px 34px 12px 13px;position:relative;
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+  font:inherit;color:inherit;text-align:left;cursor:pointer;transition:.15s;
+}
+.pincome:hover,.pincome:focus-visible{border-color:var(--line-2);background:var(--bg-2)}
+.pincome b{
+  grid-column:2;grid-row:1;font-family:var(--mono);font-size:.9375rem;font-weight:500;
+  color:color-mix(in srgb,var(--accent) 72%,#FFFFFF);white-space:nowrap;
+}
+.pincome em{grid-column:1/-1;font-style:normal;font-size:.7188rem;line-height:1.55;color:var(--fg-3)}
+.pincome-go{
+  position:absolute;top:14px;right:11px;display:grid;place-items:center;
+  color:var(--fg-3);opacity:.55;transition:.15s;
+}
+.pincome:hover .pincome-go,.pincome:focus-visible .pincome-go{
+  opacity:1;color:var(--accent);transform:translateX(3px);
+}
+
+@media (max-width:560px){
+  /* The figure and what it buys stop sitting on one line long before the box
+     runs out — 1.94rem of mono plus 1.31rem of mono is most of a phone. */
+  .phero-pulls{margin-left:0;text-align:left;align-items:flex-start;width:100%}
+  .pleg{flex-wrap:wrap;gap:6px 16px}
+  .pleg-n{margin-left:0}
+}
+
 /* ══ the resonator record ═══════════════════════════════════════════
    Same shape as the event record, for the same reason. What this replaced was
    a 4:5 art panel across the full width of the modal with everything the record

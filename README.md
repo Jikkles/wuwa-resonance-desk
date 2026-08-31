@@ -56,12 +56,13 @@ scripts/fetch-element-icons.mjs traces the six attribute glyphs off Kuro's badge
 article id and answers a question about one patch's infographic. Everything else runs
 itself.
 
-Seven views:
+Eight views:
 
 | View | Source | Tiered? |
 |---|---|---|
 | Timeline | `versions.json` + `resonators.json` + `art.json` | — |
 | Events | `events.json` + `versions.json` (patch windows) | yes, per event |
+| Pull calculator | `versions.json` (banners) + `weapons.json` + `astrite.json` | — |
 | Intel | `news.json` | yes, by hand |
 | Live Signals | `feed.json` | **no** — raw lead list |
 | Resonators | `resonators.json` + `kits.json` | yes, per kit |
@@ -1130,6 +1131,103 @@ the high one — where it has stopped being a floor. Letting the sum stand as th
 wherever it existed would have made a patch the desk knows something about look *poorer*
 than one it knows nothing about, which is exactly backwards, and 3.5 is the patch that
 proves it: two published reward lines totalling 1,600 against a modelled 1,000–3,000.
+
+### What a patch costs
+
+The Astrite panel above answers "can I afford them". The **Pull calculator** view answers
+the question underneath it, which is the one a reader actually arrives with: I want her
+*and* her weapon, I have fifteen thousand and I am ten pulls in — how bad can this get?
+
+It sits under Events in the rail on purpose. Events says what the patch pays; this says
+what the patch costs, and they are the same question from opposite ends.
+
+Nothing in it is fetched. The banners come off `versions.json`, the weapon rarities off
+`weapons.json`, the pull price and the patch's income off `astrite.json`, and the rest is
+arithmetic over rules Kuro publishes in every banner's Convene Details.
+
+#### It only quotes the half Kuro publishes
+
+This is the whole design of the view, and `CONVENE` in `app.js` is two numbers because of
+it.
+
+**Published**, in the details attached to every banner: a 5★ is guaranteed within **80**
+Convenes on both limited banners; the featured Resonator is a **50/50** on the first 5★
+and guaranteed on the next if that one loses; the Featured Weapon Convene has **no 50/50
+at all**, so the 5★ it gives you is always the weapon on the poster. Pity and the
+guarantee carry from one Featured Resonator Convene to the next, and are never shared
+with the weapon banner, which counts on its own.
+
+**Not published, and never has been:** the rate curve that makes most 5★s arrive well
+before 80. Everyone agrees it starts climbing around 66 and nobody outside Kuro knows the
+shape of it.
+
+So every figure on the page is the guarantee arithmetic and nothing else — the pull at
+which the outcome stops being a question. `CONVENE.soft` is quoted in the footer and is
+never summed into anything. This is a **ceiling, not a forecast**, and the panel says so
+on its heading in the same chip the Astrite estimate uses.
+
+That is also the right number to hand someone. A plan built on the average fails half the
+time, and the reader asking this question is the reader who does not want to be sixty
+pulls short on the last day of a phase. The one concession is a second row under the
+headline: the same arithmetic with the coin landing right, drawn only when a 50/50 is
+actually in play — so a weapon-only plan does not get the headline printed twice.
+
+#### Two counters, never one
+
+`pullPlan()` walks the picked targets in the order the patch runs them, and the order is
+not cosmetic. Pity carries, so the second character you chase starts from whatever the
+first left — which is zero, because securing one is what resets the counter and spends the
+guarantee, whichever way the 50/50 went. Walking Phase 2 before Phase 1 would hand the
+carried pity to the wrong banner and undercount the bill.
+
+The Resonator convene and the weapon convene keep separate counters and neither can spend
+the other's, so the two runs are walked separately and only the money is added at the end.
+Tides work the same way: Radiant buys the Resonator convene, Forging buys the weapon one,
+and each comes off its own side of the bill before anything is priced in Astrite. Counting
+them as one pool would let seven Forging Tides pay for a character, which is not a thing
+the game lets you do.
+
+For the worked example in the header of this section — Qingxiao and Glint of Clouds, ten
+pulls in, no guarantee held — that is 70 to the first 5★, 80 more if it loses the 50/50,
+and 80 flat for the weapon: **230 pulls, 36,800 Astrite**, against 15,000 held.
+
+#### Every row shows its working
+
+A total nobody can check is a rumour with a number on it, which is the rule the Astrite
+breakdown is built on and the same rule here. Each target gets a row carrying the sentence
+that produced its number — "70 pulls to the first 5★ (80 less the 10 you are already in),
+then 80 more if that one loses the 50/50" — so a reader can check it against their own
+account rather than trusting it.
+
+The last row reads the shortfall against what the patch is estimated to pay, and opens the
+same `drawerAstrite()` breakdown the version record does. It is labelled an estimate here
+exactly as it is there.
+
+#### The form
+
+The desk has no input styling anywhere else — the only other text field on it is inside the
+command palette — so the controls are built out of parts that already exist. A target is
+the filter chip's pressed state with a face on it, tinted by the Resonator's own element; a
+field is the `.wstats` tile with an input where the figure goes, spinners stripped; the
+answer is the Astrite panel's hero row one step larger, which a reader who has met that
+panel already knows how to read. The guarantee is a full-width row rather than a fourth
+number box, because it is worth 80 pulls and would have been missed in a grid of tiles.
+
+The form lives on `S.pull` and only `#pull-out` is repainted, on the keystroke. The figure
+has to move while you are still typing in the box that changed it — trying figures against
+each other is the point of the view — and a repaint that replaced the input would take the
+caret with it. The two derived strings outside that div, the target count and the "buys N
+pulls" hint, are written back by hand for the same reason. Nothing is persisted: a
+calculator that remembered an Astrite figure from three patches ago is worse than an empty
+one, though `S` survives navigating away and back.
+
+A phase that has closed drops off the picker the day it ends. A closed phase is not a plan,
+it is a regret — and the reader still standing on this view is now aiming at the next one.
+The beta patch is left out too: a 3.7 banner list is a rumour, and a calculator that
+quietly adds a rumour to a budget is worse than one that leaves it out.
+
+Not counted, and said so in the footer: the standard banner and Lustrous Tides, Sequence
+Nodes past the first copy, and the Beginner's Choice Convene.
 
 ## The resonator database
 

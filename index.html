@@ -81,6 +81,23 @@
       <path d="M4 2.1v12.4"/>
       <path d="M4 3.3h8.4l-2 2.9 2 2.9H4"/>
     </g>
+    <!-- The tick inside a chosen target on the pull calculator. Its own mark
+         rather than a CSS pseudo-element, because it has to sit at 11px on a
+         box whose colour comes off the Resonator's element. -->
+    <g id="i-check" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m3.4 8.4 3 3 6.2-6.8"/>
+    </g>
+
+    <!-- The pull calculator. A pity gauge: the dial and the needle part-way
+         round it, which is the one picture of the thing this view is about —
+         how far you already are towards a guarantee. Deliberately not a
+         calculator glyph and not another crystal: i-astrite already marks the
+         currency, and what this view adds is the counter, not the money. -->
+    <g id="i-pulls" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2.2 12.4a6.6 6.6 0 1 1 11.6 0"/>
+      <path d="M8 12.4 11.3 7.2"/>
+    </g>
+
     <!-- Echoes. The hexagonal core the game draws every echo slot as, with a
          captured shape sitting inside it. Not a monster and not a crest: an
          echo is a creature put in a socket, and the socket is the half a
@@ -277,6 +294,7 @@
         <section id="p-weapons" role="region" aria-labelledby="tab-weapons" tabindex="-1" hidden></section>
         <section id="p-echoes" role="region" aria-labelledby="tab-echoes" tabindex="-1" hidden></section>
         <section id="p-events" role="region" aria-labelledby="tab-events" tabindex="-1" hidden></section>
+        <section id="p-pulls" role="region" aria-labelledby="tab-pulls" tabindex="-1" hidden></section>
         <section id="p-intel" role="region" aria-labelledby="tab-intel" tabindex="-1" hidden></section>
         <section id="p-signals" role="region" aria-labelledby="tab-signals" tabindex="-1" hidden></section>
       </div>

@@ -84,6 +84,9 @@ const VIEWS = [
   {id:"weapons",    label:"Weapons",      icon:"i-weapon"},
   {id:"echoes",     label:"Echoes",       icon:"i-echo"},
   {id:"events",     label:"Events",       icon:"i-events"},
+  /* Under Events, because it answers the other half of the same question. The
+     Events view says what the patch pays; this says what the patch costs. */
+  {id:"pulls",      label:"Pull calculator", icon:"i-pulls", short:"Pulls"},
   {id:"intel",      label:"Intel",        icon:"i-intel"},
   {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified", short:"Signals"}
 ];
@@ -135,7 +138,20 @@ const S = {
      this one is not drawn in the rail — the sonata index at the top of the
      view is the control, because the sets are the page's own headings and a
      34-item list in a 250px rail is not a filter anyone would use. */
-  eset:"all"
+  eset:"all",
+  /* The pull calculator's whole form. It lives on S rather than being read off
+     the inputs on every keystroke for one reason: the answer repaints while
+     you are still typing in the box that changed it, and a repaint that
+     replaced the input would take the caret with it. So the fields write here,
+     only #pull-out is redrawn, and the form is left standing.
+     Not persisted — nothing on the desk is, and a calculator that remembered
+     an Astrite figure from three patches ago would be worse than an empty one.
+     It does survive navigating away and back, because S does. */
+  pull:{
+    want:[],                 /* target keys, "r:<name>" and "w:<name>" */
+    astrite:0, radiant:0, forging:0,
+    pity:0, guaranteed:false, wpity:0
+  }
 };
 /* Which of those a view actually reads — drives Reset, and stops a stale
    element filter from silently narrowing a list you have navigated away from. */
@@ -145,7 +161,7 @@ const VIEW_FILTERS = {
   weapons:["wtype"], echoes:["eset"],
   /* Every view needs a row here even with nothing in it — filtersOn() and
      Reset both index this table unguarded. */
-  events:[]
+  events:[], pulls:[]
 };
 
 /* ── helpers ─────────────────────────────────────────────────────── */
@@ -2857,6 +2873,425 @@ function drawerEvent(id){
       </div>
     </div>
   </div>`, `event:${ev.id}`);
+}
+
+/* ── pull calculator ──────────────────────────────────────────────
+   The Events view says what a patch pays. This says what it costs, which is
+   the same question from the other end and the one a reader actually arrives
+   with: I want her and her weapon, I have fifteen thousand — is that enough?
+
+   Kuro publishes the guarantee and has never published the curve, and that
+   split is the whole design of this view.
+
+   Published, in the Convene Details attached to every banner: a 5-star is
+   guaranteed within 80 Convenes on both limited banners; the featured
+   Resonator is a 50/50 on the first 5-star and guaranteed on the next if that
+   one loses; the Featured Weapon Convene has no 50/50 at all, so the 5-star it
+   gives you is always the weapon on the poster. Pity and the guarantee carry
+   from one Featured Resonator Convene to the next, and are never shared with
+   the weapon banner, which keeps a counter of its own.
+
+   Not published, and never has been: the rate curve that makes most 5-stars
+   arrive well before 80. Everyone agrees it starts climbing around 66 and
+   nobody outside Kuro knows the shape of it.
+
+   So every figure on this page is the guarantee arithmetic and nothing else —
+   the pull at which the outcome stops being a question. That is a ceiling and
+   not a prediction, and the page says so. It is also the number worth
+   budgeting against: a plan built on the average is a plan that fails half
+   the time, and the reader asking this question is the reader who does not
+   want to be 60 pulls short on the last day of a phase. */
+const CONVENE = {
+  pity:80,      /* 5-star guaranteed within 80 Convenes, both limited banners */
+  soft:66       /* where the rate is agreed to start climbing — quoted, never summed */
+};
+
+const intOf    = v => { const n = Math.floor(Number(v)); return Number.isFinite(n) ? n : 0; };
+const clampInt = (v, lo, hi) => Math.min(hi, Math.max(lo, intOf(v)));
+
+/* The banners worth planning against: the patch running now, and the one Kuro
+   has announced. Deliberately not the beta — a 3.7 banner list is a rumour,
+   and a calculator that quietly adds a rumour to a budget is worse than one
+   that leaves it out. */
+const pullPatches = () => [liveVersion(), nextVersion()].filter(Boolean);
+
+/* One row per 5-star banner: the Resonator, and the weapon Kuro runs beside
+   them. Both are targets and they cost differently, which is the reason this
+   view is not a single number — the weapon is 80 pulls flat and the character
+   can be twice that. */
+function pullTargets(){
+  const out = [];
+  for(const v of pullPatches()){
+    const status = statusOf(v);
+    for(const p of v.phases || []){
+      /* A phase that has closed is not a plan, it is a regret. Phase 1 drops
+         off this page the day it ends, which is also the day its pity stops
+         being worth carrying anywhere except into Phase 2 — where the reader
+         still standing on this view is now aiming. */
+      if(p.end && daysTo(p.end) < 0) continue;
+      for(const b of p.banners || []){
+        if(b.rarity !== 5 || !b.name || b.name === "???") continue;
+        /* A brand-new character's signature is named on the banner row weeks
+           before it is in weapons.json, so a weapon the file has never heard
+           of is taken at its word and counted as a 5-star: Kuro has not once
+           run a 5-star Resonator banner without one beside it. */
+        const w = b.signature ? (weaponFor(b.signature) || {name:b.signature, rarity:5}) : null;
+        out.push({
+          version:v.id, status, phase:p.n, banner:b,
+          window:{start:p.start, end:p.end, est:!!(p.estimated_start || p.estimated_end)},
+          res:{key:`r:${b.name}`, kind:"resonator", name:b.name, holder:b.name},
+          weap:(w && w.rarity === 5)
+            ? {key:`w:${w.name}`, kind:"weapon", name:w.name, icon:w.icon || "", holder:b.name}
+            : null
+        });
+      }
+    }
+  }
+  return out;
+}
+
+/* What the picked targets cost, walked in the order the patch runs them.
+
+   The order is not cosmetic. Pity carries, so the second character you chase
+   starts from whatever the first one left — which is zero, because securing
+   one is what resets the counter. Walking Phase 2 before Phase 1 would hand
+   the carried pity to the wrong banner and undercount the bill.
+
+   Two counters, never one: the Resonator convene and the weapon convene keep
+   their own, and neither can spend the other's. So the two runs are walked
+   separately and only the money is added at the end. */
+function pullPlan(){
+  const cost = Number(DATA.astrite?.pullCost) || 160;
+  const P = S.pull;
+  const want = new Set(P.want);
+  const picked = [];
+  for(const t of pullTargets()){
+    if(t.res  && want.has(t.res.key))  picked.push({...t.res,  version:t.version, phase:t.phase});
+    if(t.weap && want.has(t.weap.key)) picked.push({...t.weap, version:t.version, phase:t.phase});
+  }
+  if(!picked.length) return null;
+
+  const legs = [];
+  let pity = clampInt(P.pity, 0, CONVENE.pity - 1), guar = !!P.guaranteed;
+  for(const t of picked.filter(x => x.kind === "resonator")){
+    const first = CONVENE.pity - pity;
+    const extra = guar ? 0 : CONVENE.pity;
+    legs.push({...t, carried:pity, guar, first, extra, lucky:first, worst:first + extra});
+    /* Whichever way the 50/50 went, the 5-star that ended this leg reset the
+       counter and spent the guarantee. The next character starts from nothing,
+       and that is true of the lucky run and the unlucky one alike. */
+    pity = 0; guar = false;
+  }
+  let wpity = clampInt(P.wpity, 0, CONVENE.pity - 1);
+  for(const t of picked.filter(x => x.kind === "weapon")){
+    const first = CONVENE.pity - wpity;
+    legs.push({...t, carried:wpity, guar:true, first, extra:0, lucky:first, worst:first});
+    wpity = 0;
+  }
+
+  const radiant = Math.max(0, intOf(P.radiant));
+  const forging = Math.max(0, intOf(P.forging));
+  const held    = Math.max(0, intOf(P.astrite));
+
+  /* Tides are pulls already owned, and each kind buys one banner and not the
+     other — Radiant is the Resonator convene, Forging the weapon one. So they
+     come off their own side of the bill before anything is priced in Astrite.
+     Counting them as one pool would let seven Forging Tides pay for a
+     character, which is not a thing the game lets you do. */
+  const bill = k => {
+    const char = legs.filter(l => l.kind === "resonator").reduce((n, l) => n + l[k], 0);
+    const weap = legs.filter(l => l.kind === "weapon").reduce((n, l) => n + l[k], 0);
+    const paid = Math.max(0, char - radiant) + Math.max(0, weap - forging);
+    const astrite = paid * cost;
+    return {
+      char, weap, paid, astrite,
+      pulls: char + weap,
+      tides: (char + weap) - paid,
+      short: Math.max(0, astrite - held),
+      spare: Math.max(0, held - astrite)
+    };
+  };
+
+  /* What the patches these targets run in are estimated to pay, so the
+     shortfall can be read against the income rather than against nothing. The
+     free-to-play track, because that is the floor and a floor is what a
+     worst-case figure deserves to be compared with. */
+  const patches = [...new Set(legs.map(l => l.version))]
+    .map(id => versions().find(v => v.id === id))
+    .filter(Boolean)
+    .map(v => ({v, plan:astritePlan(v)}))
+    .filter(x => x.plan?.tracks?.length);
+
+  return {
+    cost, legs, held, radiant, forging, patches,
+    income: patches.reduce((n, x) => n + (Number(x.plan.tracks[0].astrite) || 0), 0),
+    worst: bill("worst"),
+    lucky: bill("lucky")
+  };
+}
+
+/* ── the picker ───────────────────────────────────────────────────── */
+function pullCard(t, want){
+  const r = resonatorFor(t.banner.name);
+  const f = figure(t.banner);
+  const face = f.icon
+    ? `<img src="${esc(f.icon)}" alt="" loading="lazy" decoding="async">`
+    : f.image
+    ? `<img class="wide" src="${esc(f.image)}" alt="" loading="lazy" decoding="async"${f.style}>`
+    : `<span class="g">${esc(f.glyph)}</span>`;
+  const attr = t.banner.attribute || r.attribute;
+  const run  = t.banner.new ? "New" : t.banner.rerun ? "Rerun" : "";
+
+  const row = (tg, fig, title, sub) => `
+    <button class="ptg" data-act="pulltarget" data-id="${esc(tg.key)}"
+            aria-pressed="${want.has(tg.key)}">
+      <span class="ptg-fig">${fig}</span>
+      <span class="ptg-t"><b>${esc(title)}</b><em>${esc(sub)}</em></span>
+      <span class="ptg-box">${icon("i-check", 11)}</span>
+    </button>`;
+
+  return `<div class="ptc"${attrStyle(attr)}>
+    ${row(t.res, face, t.banner.name,
+          [attr, t.banner.weapon, run].filter(Boolean).join(" · ") || "Resonator")}
+    ${t.weap ? row(t.weap,
+        t.weap.icon
+          ? `<img class="wpn" src="${esc(t.weap.icon)}" alt="" loading="lazy" decoding="async">`
+          : `<span class="g">${icon("i-weapon", 15)}</span>`,
+        t.weap.name, "Signature weapon") : ""}
+  </div>`;
+}
+
+/* ── the answer ───────────────────────────────────────────────────── */
+/* Why a leg costs what it costs, in a sentence. This is the part that makes
+   the page a calculator rather than an oracle: 150 on its own is a number to
+   be trusted or not, and "70 to the first 5-star, 80 more if that one loses
+   the 50/50" is arithmetic a reader can check against their own account. */
+function pullWhy(l){
+  const from = l.carried
+    ? ` (${CONVENE.pity} less the ${l.carried} you are already in)`
+    : "";
+  if(l.kind === "weapon")
+    return `Weapon convene · ${plural(l.first, "pull")} to the guaranteed 5★${from} — this banner has no 50/50, so that 5★ is the weapon`;
+  if(l.guar)
+    return `Resonator convene · ${plural(l.first, "pull")} to your next 5★${from}, and the guarantee you are holding makes it the featured one`;
+  return `Resonator convene · ${plural(l.first, "pull")} to the first 5★${from}, then ${l.extra} more if that one loses the 50/50`;
+}
+
+function pullOut(){
+  const p = pullPlan();
+  if(!p) return `<div class="panel"><div class="empty">
+    Pick a Resonator or a weapon above, and this works out the most that securing it can cost.
+  </div></div>`;
+
+  const w = p.worst, k = p.lucky;
+  const pullsFor = n => Math.ceil(n / p.cost);
+
+  /* The headline is the worst case, because that is what was asked for and
+     because it is the only one of the two figures that is a guarantee. The
+     lucky run is a real number too — it is the same arithmetic with the coin
+     landing right — but it is a hope, and a hope does not get the big type. */
+  const hero = `<div class="phero">
+    ${astriteMark(44)}
+    <span class="phero-fig"><b>${numFmt(w.astrite)}</b><span>Astrite, worst case</span></span>
+    <span class="phero-pulls"><b>${numFmt(w.pulls)}</b><span>${
+      w.tides ? `pulls · ${w.tides} from Tides` : `pulls at ${p.cost} each`}</span></span>
+  </div>`;
+
+  /* "You hold 0" is what an unfilled form says, and it reads as a fact about
+     the reader's account rather than as an empty box. So the two states are
+     written apart: nothing entered is a different sentence from nothing left. */
+  const verdict = w.short
+    ? `<div class="pverd short">
+        <b>${numFmt(w.short)} short</b>
+        <span>${p.held
+          ? `You hold ${numFmt(p.held)}. That is ${plural(pullsFor(w.short), "pull")} still to find${
+              k.short ? "" : ` — though winning the 50/50 would cover it`}.`
+          : `Nothing entered above, so this is the whole bill — ${plural(w.pulls, "pull")}.`}</span>
+      </div>`
+    : `<div class="pverd ok">
+        <b>Covered</b>
+        <span>You hold ${numFmt(p.held)}, which is ${numFmt(w.spare)} more than the worst case asks for.</span>
+      </div>`;
+
+  /* Only drawn when the two runs differ, which is exactly when a 50/50 is in
+     play. A weapon-only plan has no coin to flip and the row would be the
+     headline said twice. */
+  const lucky = k.pulls !== w.pulls ? `<div class="plucky">
+    <span class="label">If the 50/50 goes your way</span>
+    <b>${numFmt(k.astrite)}</b><em>Astrite · ${plural(k.pulls, "pull")}</em>
+  </div>` : "";
+
+  /* The total is dropped on a single target, where it is the row above said a
+     second time. It earns its rule the moment there are two things to add. */
+  const sides = [
+    w.char ? `${plural(w.char, "pull")} on the Resonator convene` : "",
+    w.weap ? `${plural(w.weap, "pull")} on the weapon convene` : ""
+  ].filter(Boolean).join(", ");
+  const total = p.legs.length > 1 ? `<li class="pleg total">
+      <span class="pleg-t"><b>Worst case, everything</b>
+        <em>${sides}${w.tides ? `, ${w.tides} of them paid by Tides you already hold` : ""}</em></span>
+      <span class="pleg-n"><b>${numFmt(w.pulls)}</b><span>pulls</span></span>
+    </li>` : "";
+
+  const legs = `<ul class="plegs">${p.legs.map(l => `
+    <li class="pleg${l.kind === "weapon" ? " wpn" : ""}">
+      <span class="pleg-t">
+        <b>${esc(l.name)}</b>
+        <em>${pullWhy(l)}</em>
+      </span>
+      <span class="pleg-n"><b>${numFmt(l.worst)}</b><span>pulls</span></span>
+    </li>`).join("")}${total}
+  </ul>`;
+
+  /* Read against what the patch pays, which the desk already models — the one
+     comparison that turns a shortfall into a decision. It is an estimate and
+     is labelled as one everywhere else on the desk, so it is labelled as one
+     here, and the row opens the same breakdown the version record does. */
+  const income = p.patches.length ? (() => {
+    const names = p.patches.map(x => x.v.id);
+    const gap   = Math.max(0, w.short - p.income);
+    const line  = !w.short
+      ? `You do not need it for this.`
+      : gap
+      ? `Against the ${numFmt(w.short)} you are short, that still leaves ${numFmt(gap)} to find — ${plural(pullsFor(gap), "pull")}.`
+      : `That covers the ${numFmt(w.short)} you are short, with ${numFmt(p.income - w.short)} over.`;
+    return `<button class="pincome" data-act="open" data-id="astrite:${esc(names[0])}">
+      <span class="label">What ${names.length > 1 ? `${names.join(" and ")} pay` : `${names[0]} pays`}</span>
+      <b>~${numFmt(p.income)} Astrite</b>
+      <em>On a full free-to-play clear — the desk's own estimate, not a Kuro figure. ${line}</em>
+      <span class="pincome-go">${icon("i-arrow", 13)}</span>
+    </button>`;
+  })() : "";
+
+  return `<div class="panel">
+    <div class="panel-h"><h2>What it will cost</h2>
+      <span class="sub">${plural(p.legs.length, "target")}</span>
+      <div class="right"><span class="aest-tag">Ceiling, not a forecast</span></div>
+    </div>
+    <div class="panel-b">
+      ${hero}
+      ${verdict}
+      ${lucky}
+      ${legs}
+      ${income}
+    </div>
+  </div>`;
+}
+
+/* The one hint under a field that is arithmetic rather than a label, so the
+   one that goes stale the moment you type. Repainted with the answer. */
+function pullBuys(){
+  const cost = Number(DATA.astrite?.pullCost) || 160;
+  const held = Math.max(0, intOf(S.pull.astrite));
+  return held
+    ? `Buys ${plural(Math.floor(held / cost), "pull")} at ${cost} each`
+    : `A pull is ${cost} Astrite`;
+}
+
+function paintPullOut(){
+  const el = $("#pull-out");
+  if(el) el.innerHTML = pullOut();
+  const n = $("#pull-count");
+  if(n) n.textContent = plural(S.pull.want.length, "target");
+  const buys = $("#pf-h-astrite");
+  if(buys) buys.textContent = pullBuys();
+}
+
+function renderPulls(){
+  const rows = pullTargets();
+  const want = new Set(S.pull.want);
+  const P = S.pull;
+
+  /* Grouped the way the patch runs, because that is the order you spend in:
+     Phase 1 opens before Phase 2, and what you carry into the second is
+     whatever the first left you.
+
+     The patch is the outer heading and the phase the inner one, rather than
+     one flat list of "3.6 Phase 1" and "3.6 Phase 2" headings. Both phases
+     belong to the same forty-two days and the same Astrite income, and
+     printing the patch's title twice said they were two different things. */
+  const groups = [];
+  for(const t of rows){
+    let g = groups.find(x => x.version === t.version);
+    if(!g) groups.push(g = {version:t.version, status:t.status, phases:[]});
+    let ph = g.phases.find(x => x.n === t.phase);
+    if(!ph) g.phases.push(ph = {n:t.phase, window:t.window, items:[]});
+    ph.items.push(t);
+  }
+
+  const picker = groups.length ? groups.map(g => {
+    const v = versions().find(x => x.id === g.version);
+    return `<div class="pgrp">
+      <div class="pgrp-h">
+        <span class="label">${esc(g.version)}${v?.title ? ` — ${esc(v.title)}` : ""}</span>
+        <span class="pill ${g.status === "live" ? "live" : "next"}">${esc(g.status)}</span>
+      </div>
+      ${g.phases.map(ph => `<div class="pph">
+        <div class="pph-h">
+          <span class="sub">Phase ${ph.n}</span>
+          ${ph.window.start && ph.window.end
+            ? `<span class="sub when">${fmtShort(ph.window.start)} → ${fmtShort(ph.window.end)}${ph.window.est ? " est" : ""}</span>` : ""}
+        </div>
+        <div class="pcards">${ph.items.map(t => pullCard(t, want)).join("")}</div>
+      </div>`).join("")}
+    </div>`;
+  }).join("") : `<div class="empty">No 5★ banner is open or announced, so there is nothing to plan for yet.</div>`;
+
+  const field = (k, label, hint, attrs = "") => `
+    <label class="pf">
+      <span class="pf-k">${esc(label)}</span>
+      <input type="number" inputmode="numeric" min="0" step="1" autocomplete="off"
+             data-pull="${k}" value="${P[k] || ""}" placeholder="0"${attrs}>
+      <em class="pf-h" id="pf-h-${k}">${hint}</em>
+    </label>`;
+
+  $("#p-pulls").innerHTML = `<div class="stack">
+    ${pageTitle("pulls")}
+
+    <div class="panel">
+      <div class="panel-h"><h2>What you're after</h2>
+        <span class="sub" id="pull-count">${plural(S.pull.want.length, "target")}</span>
+        <div class="right">
+          <button class="more" data-act="pullreset">Clear ${icon("i-arrow", 12)}</button>
+        </div>
+      </div>
+      <div class="panel-b">${picker}</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-h"><h2>Where you stand</h2>
+        <span class="sub">Leave a box empty for nothing</span>
+      </div>
+      <div class="panel-b">
+        <div class="pfset">
+          <span class="label">What you hold</span>
+          <div class="pfields">
+            ${field("astrite", "Astrite", pullBuys())}
+            ${field("radiant", "Radiant Tides", "Pulls on the Resonator convene")}
+            ${field("forging", "Forging Tides", "Pulls on the weapon convene")}
+          </div>
+        </div>
+        <div class="pfset">
+          <span class="label">Where your pity stands</span>
+          <div class="pfields">
+            ${field("pity",  "Resonator convene pity", `Convenes since your last 5★, 0–${CONVENE.pity - 1}`, ` max="${CONVENE.pity - 1}"`)}
+            ${field("wpity", "Weapon convene pity", `Its own counter, 0–${CONVENE.pity - 1}`, ` max="${CONVENE.pity - 1}"`)}
+          </div>
+          <button class="pguar" data-act="pullguar" aria-pressed="${!!P.guaranteed}">
+            <span class="ptg-box">${icon("i-check", 11)}</span>
+            <span class="ptg-t"><b>I lost the last 50/50</b>
+              <em>Then your next 5★ on the Resonator convene is the featured one, and ${CONVENE.pity} pulls come off the worst case.</em></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="pull-out">${pullOut()}</div>
+
+    <div class="panel"><div class="panel-f">
+      <span class="tier-note">Worked off the guarantee Kuro publishes in every banner's Convene Details — a 5★ within ${CONVENE.pity} Convenes on both limited banners, a 50/50 on the first featured Resonator with the next one guaranteed if it loses, and no 50/50 at all on the Featured Weapon Convene. Pity and the guarantee carry from one Featured Resonator Convene to the next and are never shared with the weapon banner, which counts on its own. The rate curve that makes most 5★s land before ${CONVENE.pity} — agreed to start climbing around ${CONVENE.soft} — has never been published, so nothing here averages it: these are ceilings, and most accounts pay less. Not counted: the standard banner and Lustrous Tides, Sequence Nodes past the first copy, and the Beginner's Choice Convene.</span>
+    </div></div>
+  </div>`;
 }
 
 /* ── intel ───────────────────────────────────────────────────────── */
@@ -5622,6 +6057,7 @@ const RENDER = {
   weapons: renderWeapons,
   echoes: renderEchoes,
   events: renderEvents,
+  pulls: renderPulls,
   intel: renderIntel,
   signals: renderSignals
 };
@@ -5822,6 +6258,30 @@ function bind(){
         card.classList.add("lit");
       }
     }
+    /* The pull calculator's three controls. All of them repaint the answer and
+       none of them redraws the page: the form is standing above #pull-out with
+       a caret in one of its boxes, and replacing it to flip one aria-pressed
+       would take the caret with it. So the clicked control is corrected in
+       place and only the answer is rebuilt. */
+    else if(act === "pulltarget"){
+      const want = S.pull.want;
+      const at = want.indexOf(id);
+      if(at < 0) want.push(id); else want.splice(at, 1);
+      el.setAttribute("aria-pressed", at < 0);
+      paintPullOut();
+    }
+    else if(act === "pullguar"){
+      S.pull.guaranteed = !S.pull.guaranteed;
+      el.setAttribute("aria-pressed", S.pull.guaranteed);
+      paintPullOut();
+    }
+    /* Clear is the one that does redraw, because it has to put every number
+       box back to empty and there is nothing to preserve. */
+    else if(act === "pullreset"){
+      S.pull = {want:[], astrite:0, radiant:0, forging:0, pity:0, guaranteed:false, wpity:0};
+      draw("pulls");
+      document.querySelector('[data-act="pullreset"]')?.focus();
+    }
     else if(act === "noop"){ /* decorative */ }
     else dispatch(act, id);
   });
@@ -5830,6 +6290,25 @@ function bind(){
      drag instead of jumping when the thumb is let go — and it repaints rather
      than redraws, because redrawing would replace the input mid-drag. */
   document.addEventListener("input", e => {
+    /* The calculator's number boxes. Written straight onto S and answered on
+       the keystroke, so the figure moves as you type rather than when you tab
+       out — the whole point of the view is trying figures against each other.
+
+       The clamp is written back into the box only when it actually bit. A
+       control that rewrote every keystroke would fight you halfway through
+       typing 15000; one that silently held a value the box does not show
+       would be worse. */
+    const pf = e.target.closest("[data-pull]");
+    if(pf){
+      const k = pf.dataset.pull;
+      const max = pf.max ? Number(pf.max) : Number.MAX_SAFE_INTEGER;
+      const raw = Math.floor(Number(pf.value) || 0);
+      const val = Math.min(max, Math.max(0, raw));
+      if(pf.value !== "" && raw !== val) pf.value = val;
+      S.pull[k] = val;
+      paintPullOut();
+      return;
+    }
     const r = e.target.closest("[data-rank]");
     if(r){
       S.rank = Math.min(5, Math.max(1, Number(r.value) || 1));
