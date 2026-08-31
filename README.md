@@ -1352,11 +1352,22 @@ change; it all falls out of `versions.json` gaining rows.
 without that, Phase 1's debut would reappear as an unscheduled Resonator on the day Phase 1
 closed and dropped out of the first pass.
 
-A teased Resonator gets no weapon unless the database already has a signature on file,
-which this early it will not — the weapon convene is announced with the banner, and
-inventing one would put 80 pulls into a budget on nobody's authority. The group says so in
-a line under it, because two revealed names otherwise read as a confirmed line-up when the
-reruns beside them are the part still missing.
+Its weapon is a **placeholder** — "Hsin's signature", captioned *Not announced* — and that
+is a real claim worth being clear about. Kuro has never once run a 5★ Resonator banner
+without a Featured Weapon Convene beside it: 3.6 runs two featured weapons against Phase
+1's two banners and three against Phase 2's three, and every patch in the archive does the
+same. So the *existence* of that convene is a pattern with no exceptions and the 80 pulls
+it costs are as certain as anything else on the page. Only the name is missing, and a name
+is not what a budget is made of.
+
+`sigTarget()` keys it on the **holder** rather than on the weapon, which is what makes it
+temporary: the day a signature is recorded in `resonators.json`, that function returns the
+genuine article under its own key and the placeholder is gone with no edit anywhere. It
+stays lower-case on purpose — it sits in the same slot as "Glint of Clouds", and title
+case would dress a description up as a name.
+
+The group says all of this in a line under it, because two revealed names otherwise read as
+a confirmed line-up when the reruns beside them are the part still missing.
 
 Not counted, and said so in the footer: the standard banner and Lustrous Tides, Sequence
 Nodes past the first copy, and the Beginner's Choice Convene.

@@ -2981,6 +2981,30 @@ const pullPatches = () => [liveVersion(), nextVersion(), futureVersion()].filter
    them. Both are targets and they cost differently, which is the reason this
    view is not a single number — the weapon is 80 pulls flat and the character
    can be twice that. */
+/* The weapon convene that runs beside a 5-star banner, named where the desk
+   knows the name and a placeholder where it does not.
+
+   The placeholder is a real claim and worth being clear about what it rests
+   on. Kuro has never once run a 5-star Resonator banner without a Featured
+   Weapon Convene beside it — 3.6 runs two featured weapons against Phase 1's
+   two banners and three against Phase 2's three, and every patch on the
+   archive does the same. So the *existence* of the convene is a pattern with
+   no exceptions and the eighty pulls it costs are as certain as anything else
+   on this page. Only the name is missing, and a name is not what a budget is
+   made of.
+
+   Keyed on the holder rather than on the weapon, so it cannot collide with a
+   real weapon and cannot survive one: the day the signature is recorded this
+   returns the genuine article under its own key and the placeholder is gone. */
+function sigTarget(holder, w){
+  if(w && w.rarity === 5)
+    return {key:`w:${w.name}`, kind:"weapon", name:w.name, icon:w.icon || "", holder};
+  return {
+    key:`w:?${holder}`, kind:"weapon", name:`${holder}'s signature`,
+    icon:"", holder, unnamed:true
+  };
+}
+
 function pullTargets(){
   const out = [];
   for(const v of pullPatches()){
@@ -3012,9 +3036,7 @@ function pullTargets(){
           version:v.id, status, phase:p.n, banner:b,
           window:{start:p.start, end:p.end, est:!!(p.estimated_start || p.estimated_end)},
           res:{key:`r:${b.name}`, kind:"resonator", name:b.name, holder:b.name},
-          weap:(w && w.rarity === 5)
-            ? {key:`w:${w.name}`, kind:"weapon", name:w.name, icon:w.icon || "", holder:b.name}
-            : null
+          weap:sigTarget(b.name, w)
         });
       }
     }
@@ -3032,10 +3054,7 @@ function pullTargets(){
        shows both halves at once: Phase 1 as Kuro published it, and whoever is
        still only teased under it. Nothing here needs editing for any of that.
 
-       No weapon unless the database has a signature on file, which for a
-       Resonator this early it will not: the weapon convene is announced with
-       the banner, and inventing one would put 80 pulls in a budget on nobody's
-       authority. */
+       The weapon is a placeholder until it has a name — see sigTarget(). */
     for(const r of resonators()){
       if(r.version !== v.id || r.rarity !== 5) continue;
       if(!r.name || scheduled.has(r.name.toLowerCase())) continue;
@@ -3045,9 +3064,7 @@ function pullTargets(){
         banner:{name:r.name, rarity:5, attribute:r.attribute, weapon:r.weapon, new:true},
         window:null,
         res:{key:`r:${r.name}`, kind:"resonator", name:r.name, holder:r.name},
-        weap:(w && w.rarity === 5)
-          ? {key:`w:${w.name}`, kind:"weapon", name:w.name, icon:w.icon || "", holder:r.name}
-          : null
+        weap:sigTarget(r.name, w)
       });
     }
   }
@@ -3198,7 +3215,7 @@ function pullCard(t, want){
         t.weap.icon
           ? `<img class="wpn" src="${esc(t.weap.icon)}" alt="" loading="lazy" decoding="async">`
           : `<span class="g">${icon("i-weapon", 15)}</span>`,
-        t.weap.name, "Signature") : ""}
+        t.weap.name, t.weap.unnamed ? "Not announced" : "Signature") : ""}
   </div>`;
 }
 
@@ -3445,8 +3462,9 @@ function renderPulls(){
         <div class="pcards">${ph.items.map(t => pullCard(t, want)).join("")}</div>
       </div>`).join("")}
       ${unscheduled ? `<p class="pgrp-n">Kuro has named these Resonators and nothing else about the patch —
-        no dates, no phases, and no reruns. Whoever is announced beside them lands here on its own,
-        and their signature weapons are announced with the banners, so neither is counted yet.</p>` : ""}
+        no dates, no phases, and no reruns. Whoever is announced beside them lands here on its own.
+        Their weapon convenes are certain to run and are not named yet: budget the ${CONVENE.pity} pulls
+        against a placeholder, and it takes the real name the day Kuro gives it one.</p>` : ""}
     </div>`;
   }).join("") : `<div class="empty">No 5★ banner is open or announced, so there is nothing to plan for yet.</div>`;
 
