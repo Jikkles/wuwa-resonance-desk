@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-01T17:39:33.243Z",
+  "fetched": "2026-09-01T22:26:05.231Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 677,
-      "ms": 786
+      "ms": 1450
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 1015
+      "ms": 729
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 443
+      "ms": 174
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 492
+      "ms": 574
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2497,
+      "ms": 2641,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 56,
-      "ms": 576
+      "fetched": 51,
+      "ms": 425
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 778
+      "ms": 150
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "3.7 End State Matrix bosses via team gemberry",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w4kzky/37_end_state_matrix_bosses_via_team_gemberry/",
+      "date": "2026-09-01T18:45:02.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "同人绘画展示 | 清宵",
       "url": "https://www.kurobbs.com/mc/post/1543940707748028416",
@@ -141,7 +151,7 @@
       "title": "Wuthering Waves confirms Hsin as game's first playable Sentinel",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOeXRndC1vSHNUQXY5eUl5cFhMYjAyZ0sxU05vNlF6S3Q0R1k5T2hHVlJ6LS1aeHlxOTBQc3p1M2NNSnJsSzUzcWpzYV9rbU9nZC1oX3RYUjRNeGJhLW5Wd1YyVk1YeUw5RE9FRWFtWXR0Z2N3ZnZhRUJRT3dncjRfWkhXUDRTT01IZXYzYXJmOERGVEhVLXV6WnNOSUV0a3FSYVRPT0ctRGRSeFow?oc=5",
       "date": "2026-08-31T08:40:00.000Z",
-      "source": "notebookcheck.net",
+      "source": "Notebookcheck",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -204,16 +214,6 @@
       "source": "Wuthering Waves (YouTube)",
       "sourceId": "youtube",
       "kind": "video",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Two Years of Memories and Emotion Come Full Circle to Seoul: 'Wuthering Waves World Tour'",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPcTh6YmhvU0pwb2FncUh4a0xNX3dCYzByeUV4UTBXa296cVZkN3ZoeU1NRHhSVmZIblhWRnN4bno1eXZVSFVVMU41a05KVExqLTJVVjFJdW1MUkI4ZWhOdDgxRWdDR2Y4S2sxc3dXc0JNZWxYSVFXYXY5QTVOM012R01PUjdLcnEtdnNoc0VhYVVDZDdSNkZPWEZlZnZqVFducld6NGdzSHJDTmFsUXlpMmxwY2dxYUVDVktfYXhkLUJiSjE4TEJsZQ?oc=5",
-      "date": "2026-08-29T14:51:05.000Z",
-      "source": "Inven Global",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": false
     },
@@ -688,16 +688,6 @@
       "hot": true
     },
     {
-      "title": "Why Wuthering Waves is so rough on Xbox despite multiple updates",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQMEEwc0JIbGpOMmNzOC14Qm8xRjhLYmRydFktLVE1MnJENHFpU29DYmpTaHQtNExmc0htZWZsUF96Uld0NDhlcmI5ZURwaGJVbjU3RVN4VHdvRXVLVVMwQTVXaVJWVF82UmJJSUNaV3hnX2NBRWtqRERaYnZaZS0yOTcxbFhxXzRmMWc?oc=5",
-      "date": "2026-08-24T19:13:01.000Z",
-      "source": "Windows Central",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves brings more characters, new main quests, and new events with latest update",
       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOdExKUVFySzZHQjBlUVNCMi1RRWY5WUtTaXh4RHZSZDdBUHFxLXBYQXJ4TnQwQzBrTEZseGJUS1RTeDB2LTB4TW9hVWNWZ0xzWW1SV3RUSUhQTkRkQzRza0xqckx3b3RPcDBZajFVOWNGYl90ZDl4ZmdvQjZDUEl6cEp6QmlpeV85ZE12aVNzU2p1Uk9aOXFyb2VpZERPOXZFUjFseTdrb0lJMFVqWVZpZF83VU1ub3N5VlFlbTBQMUhHdw?oc=5",
       "date": "2026-08-24T18:00:00.000Z",
@@ -878,16 +868,6 @@
       "hot": false
     },
     {
-      "title": "EP3.6 — Qingxiao - Outside the Mountain",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vth97q/ep36_qingxiao_outside_the_mountain/",
-      "date": "2026-08-20T11:49:09.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "《鸣潮》3.6版本「蜃云灯影，凡尘剑心」全平台活动开启！",
       "url": "https://www.kurobbs.com/mc/post/1540060630518145024",
       "date": "2026-08-20T10:30:00.000Z",
@@ -976,16 +956,6 @@
       "kind": "press",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Wuthering Waves Launches Collaboration with Domino's Pizza",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMWxpWWFWQU9CSXdKZTdBQ1d4OUU5VVlCYklEVGJ0M3lkeW5EYWVwbXNRVURiNGhaRllMT2xvRW5fcGM3ZUdnMHNkNFVwWDhmWUZiRFYwYkk4WWdJR1VBRzRFc0FjYWlpZDZNVzlPYXpqR01vWml4a0ZsRERHZXVVYXRlRWhia0QwTGx2bWE0ZWtUY1RfejEtMHlrNG9md1kyNkE?oc=5",
-      "date": "2026-08-20T07:00:00.000Z",
-      "source": "Inven Global",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "WuWa 3.6 patch notes (Wuthering Waves): New characters, events, and more",
@@ -1090,16 +1060,6 @@
     {
       "title": "Time until WuWa 3.6 releases (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBNdG5tWk5BeUpjTE5FN29ZcVV2bnBjMjl2Y2RNMGpLWWxNdFFvMlJ0WGJvY1N4c0taQlVTWHlpM3VrVzFIYTdtX2lFaGlNUzJ0OEVMck1EcHpCWjA1dTBRbDROWnNYcEk3U09iV2dOaV9tZzJPcEl0R2I5MnRLWDg?oc=5",
-      "date": "2026-08-19T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "What time will WuWa 3.6 maintenance start and end? (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPTGg0ZHJOSjFoSXpMZGs3UmJ2VGkxRm0wUzA3UDlhQUN6Ym0tSEF2eVV3Zzd1YUZ6RWJQRzRMOG1pZDVoRURuYmdhUzFOMm1xOFdqX2RTMlgyTHVBVWh1OV9LWXV4RTYtY21SXzlvcG84MDQ4bG9vR3BPajA5TFBSX0xpOVdfMXBfUllacldpek5JcnplbnVBMzRkZjQ1UQ?oc=5",
       "date": "2026-08-19T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
@@ -1251,7 +1211,7 @@
       "title": "Wuthering Waves version 3.6 release date, new Resonators, and DLSS 4.5 support",
       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNNnI5ZElMRURDcVcwUDE2RmJZVG1ab3M5S1JHTTVaS0hSNVhoNDk4OXJ0dV9mR2FJczdHLTFYclk3Zy1nRGFXNEdvRmg4NGR4aVBqRE1ZS3B6dGI0RDdzdGtCc3Q2XzRnQ3g3TjJZQzQ5Q0ppZGphN2lRV2h3UW5xcHdNUl9LRXN0OGhRMWVuaU4wRWJ2eWR3cnZfWVJpN0RjYlByS1VIQkpNNVQtYkZia1dhd2hvcC0teWlWd3ln?oc=5",
       "date": "2026-08-12T07:00:00.000Z",
-      "source": "notebookcheck.net",
+      "source": "Notebookcheck",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1308,6 +1268,16 @@
       "hot": false
     },
     {
+      "title": "Wuthering Waves 2.2 Update: Release Date and Features",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE84Zm4yc2dpSjREWHhRSkxybjBCZUJsdVB5NWJEb1VwZTlpcnZFeEhSdVZKVlMtakg0NXZ5Q3UxcU9Sc1dmRXBKQmpnM0tQdjFhQnBIeDZwNzhZLW5K?oc=5",
+      "date": "2026-08-08T07:00:00.000Z",
+      "source": "MMOs.com",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
       "title": "Wuthering Waves Version Preview | Version 3.6 \"Lamplight in Mirage, Sword's Resolve in Heart\"",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5245",
       "date": "2026-08-07T12:00:00.000Z",
@@ -1324,6 +1294,36 @@
       "source": "Wuthering Waves (YouTube)",
       "sourceId": "youtube",
       "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves - Official Version 3.6 Official Trailer",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNNTdtUTd1ZEtSOU93Z0VzcWl4T0dhMW94UlVicHlIRGtqcDNNLXFVT0s2aXIyOFpqU1U2akkwUjUxMkk1VVo3LTg4M2pyLVlldWF5STZDNmd2QzY0amdZb2xaSmhMc2JLbUFPZnpBRlFiWXNibzUwUm9SYmJKWjBuRFVCd0Y4WjNfRWxtNnplLTFRdWpqREF3YmVn?oc=5",
+      "date": "2026-08-07T07:00:00.000Z",
+      "source": "IGN Africa",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves version 3.6 update ‘Lamplight in Mirage, Sword’s Resolve in Heart’ launches August 20",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOUXYtLVhVVF9tTkdwdUtKRDNIRGhUUEhXU0gwSDlJWWNyU0RkUkZjbm91VUtEUEZ5RkxQdTFuRUZPM0g5OVVnV2ZaLVk5U25mNnJtX2VUaC1sdkt5NzBsTnVpOVJYdEw3S0tneUxXMUdHSUs2ZkpFU1E0VmNIMjhkakNKeU5fSWJQbjV2bVFrd1RFNnBhWkxlckNuZjNZVV9fTVVXWDM0c1h5VnBEN1EzOVpqZmZVbWdzTjN3Q2pNbE1xeHpHUkR1TQ?oc=5",
+      "date": "2026-08-07T07:00:00.000Z",
+      "source": "Gematsu",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "WuWa 3.6 Livestream Code & Time (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE1Rd0g4emNLcUxkNTZqeHdrZF9jbGFmU1otQWthbXVHZWJlYVNJY2Y4MU9pSVctcHFZbWhib0EtTGMxVEI1N1BTRC1CUENCZTh4eTZKRDF0a3ZrMUhRS211WC1BemlnaUt3VkJCbkU3NWd6b19wOFo0Q1V2dkhIY3RXMmc4MVlTRW9XSHpxOXY2UDdtV0xVWWZrMVA3RnJX?oc=5",
+      "date": "2026-08-07T07:00:00.000Z",
+      "source": "GameRant",
+      "sourceId": "google-news",
+      "kind": "press",
       "lang": "en",
       "hot": true
     },
