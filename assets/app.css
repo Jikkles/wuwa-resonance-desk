@@ -2050,9 +2050,11 @@ img.astrite-pic{
   display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;
 }
 
-/* The state chip, on the tile and again at the top of the drawer. Running is
-   worth a colour; closing inside a week is worth the warning colour, because
-   that is the only thing on the card you can act on today. */
+/* The state chip, on the tile and again at the top of the drawer. It carries
+   the days a running event has left, so it is a number rather than a word and
+   has to keep its line: running is worth a colour, and closing inside a week
+   is worth the warning colour, because that is the one on the card you have to
+   act on today. */
 .ev-state{
   font-family:var(--mono);font-size:.5938rem;letter-spacing:.14em;text-transform:uppercase;
   padding:3px 8px;border-radius:6px;white-space:nowrap;

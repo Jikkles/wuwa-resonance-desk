@@ -1784,9 +1784,10 @@ function eventWindow(ev){
     : {start:"", end:"", inherited:true, est:false};
 }
 
-/* The state chip, and the most useful line on the tile. A running event is
-   worth a colour; one closing inside a week is worth the warning colour,
-   because that is the only fact here you can act on today. */
+/* The state chip, and the most useful line on the tile: whether it is on, and
+   for how much longer. A running event is worth a colour; one closing inside a
+   week is worth the warning colour, because that is the fact on the card you
+   have to act on today rather than next week. */
 function eventState(ev){
   if(ev.permanent) return {kind:"permanent", cls:"perm", text:"Permanent"};
   /* Kuro dates a patch's login track from "the Version 3.6 update" rather than
@@ -1812,12 +1813,21 @@ function eventState(ev){
     return {kind:"soon", cls:"soon", text:d == null ? "Upcoming" : d <= 0 ? "Starts today" : `In ${plural(d, "day")}`};
   }
   if(!start && !end) return {kind:"soon", cls:"soon", text:"Upcoming"};
-  /* Running. Inherited dates are the patch's, so they cannot carry a countdown
-     to this event's own close — that number would be invented. */
+  /* Running, and how much of it is left. The countdown used to appear only
+     inside the closing week and every other running event carried the word
+     "Running", which answers a question nobody arrives with: eight events are
+     on, they are all running, and the thing a reader wants off the band is
+     which of them closes first. Eight identical green chips cannot say it, and
+     the tile already had the room. So the number is always on, and what the
+     last week adds is the warning colour rather than the fact itself.
+
+     Inherited dates are the patch's, so they cannot carry a countdown to this
+     event's own close — that number would be invented, and the chip says the
+     state on its own. */
   const left = end && !inherited ? daysTo(end) : null;
-  if(left != null && left <= 7)
-    return {kind:"live", cls:"warn", text:left <= 0 ? "Ends today" : `Ends in ${plural(left, "day")}`};
-  return {kind:"live", cls:"live", text:"Running"};
+  if(left == null) return {kind:"live", cls:"live", text:"Running"};
+  if(left <= 0) return {kind:"live", cls:"warn", text:"Ends today"};
+  return {kind:"live", cls:left <= 7 ? "warn" : "live", text:`${plural(left, "day")} left`};
 }
 
 /* What the event pays in Astrite, off the reward line Kuro publishes with it.

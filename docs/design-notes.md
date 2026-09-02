@@ -731,7 +731,7 @@ because neither carries the whole thing:
 So the overview says what is running and when, the notice says what it looks like and what
 it pays, and the fetcher matches them on the bracketed name. Windows keep the `+08:00`
 Kuro publishes them in, so every clock the desk draws is the reader's own — which is what
-makes "Ends in 2 days" a fact rather than a guess about whose midnight.
+makes the "2 days left" on a tile a fact rather than a guess about whose midnight.
 
 **The picture is the event's own banner or there is no picture** — cropped out of Kuro's update-content sheet when that is the only place it exists yet (see below). This is the rule the
 first cut of this view got wrong: it borrowed a Resonator's key art for events that had
