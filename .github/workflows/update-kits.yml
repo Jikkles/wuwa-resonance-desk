@@ -96,6 +96,22 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-archive.mjs
 
+      # Reads Kuro's own CN board and asks whether a profile-preview headline
+      # names a Resonator the desk cannot account for. The one thing about a
+      # character nothing else automates is learning the name in the first
+      # place: fetch-kits builds its roster from the wiki's category, so a
+      # character with no page yet is preserved but never created, and Kuro's
+      # EN feed names them weeks later than the CN one does.
+      #
+      # Writes nothing and cannot fail the run — it reports, and what happens
+      # next is a person deciding a rarity, a patch and a confidence tier off
+      # the leaks. Last, and after fetch-kits, because it matches on the
+      # `nameCN` that step reads off the wiki.
+      - name: Watch CN for unannounced Resonators
+        if: always()
+        continue-on-error: true
+        run: node scripts/watch-cn.mjs
+
       # always(), so that a Prydwen 403 taking the kit step down does not also
       # throw away the event banners the wiki step just fetched. The run still
       # goes red when a step failed, which is the part worth seeing; fetch-kits
