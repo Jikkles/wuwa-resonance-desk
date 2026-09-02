@@ -26,9 +26,18 @@
 //      article fits. One candidate is a match; two is a coincidence.
 //
 //   B. Built from what the desk already holds. A handful of headlines are
-//      pure formula with a version number in them, and versions.json knows
-//      that version's English codename. Nothing is translated here either —
-//      the words come from the desk's own record.
+//      pure formula with a name in them, and the desk holds the English for
+//      that name: versions.json knows a patch's codename, and resonators.json
+//      knows a Resonator's, keyed by the Chinese one Kuro publishes them
+//      under. Nothing is translated here either — the fixed half of each
+//      formula is Kuro's own English title for the series, run verbatim, and
+//      the variable half is looked up.
+//
+//      This is the only way in for a post about a Resonator who has not
+//      shipped, which is the case that matters most. Kuro's English run of a
+//      character serial covers who is out; the Chinese one is weeks ahead of
+//      it, so for the two names a reader most wants there is no English post
+//      for strategy A to find.
 //
 // Anything neither can answer is left alone, and the desk goes on showing the
 // original with its badge. A wrong English line is worse than no English line:
@@ -48,6 +57,9 @@ const UA =
 const BASE = "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/json/G152/en";
 const FEED = "data/feed.json";
 const VERSIONS = "data/versions.json";
+/* Kuro's own name for each Resonator, which is the join key between a Chinese
+   headline and a name the desk can print. See chineseName() in fetch-kits.mjs. */
+const RESONATORS = "data/resonators.json";
 const OUT = "data/translations.json";
 const TIMEOUT_MS = 20000;
 
@@ -85,6 +97,14 @@ const MARKERS = [
   ["角色/武器活动唤取", "Featured Resonator/Weapon Convene"],
   ["角色活动唤取", "Featured Resonator Convene"],
   ["武器活动唤取", "Featured Weapon Convene"],
+  /* The lore serials. Kuro run several under one banner — 寰宇人类注疏 is
+     "Post-Lament Anthropocene", with 72 English entries behind it — so the
+     banner on its own is far too broad to match on: it would put a post about
+     an enemy under a post about a character and the date window would not
+     notice. Each sub-series is listed instead, which is specific enough that a
+     hit is the same notice rather than the same family. */
+  ["寰宇人类注疏：纪世通鉴", "Post-Lament Anthropocene: Comprehensive Mirror for Historians"],
+  ["寰宇人类注疏：群星交错", "Post-Lament Anthropocene: Stars Intertwined"],
   ["版本内容说明", "Update Content"],
   ["档案公开", "Profile Reveal"],
   ["档案回顾", "Resonator Review"],
@@ -154,22 +174,49 @@ function officialEnglish(item, articles) {
 const BUILT = [
   {
     re: /^(\d+\.\d+)版本已知问题及更新说明$/,
-    en: (m) => `Version ${m[1]} known issues and update notes`
+    en: (m, desk) => `Version ${m[1]} known issues and update notes`
   },
   {
     /* 《鸣潮》3.6版本「蜃云灯影，凡尘剑心」全平台活动开启！ — the codename in
        the quotes is the one versions.json already carries in English. */
     re: /^《鸣潮》\s*(\d+\.\d+)\s*版本[「『"](.+?)[」』"]全平台活动开启/,
-    en: (m, codename) => codename
-      ? `Wuthering Waves Version ${m[1]} "${codename}" is live on all platforms`
-      : null
+    en: (m, desk) => {
+      const codename = desk.codenames.get(m[1]);
+      return codename
+        ? `Wuthering Waves Version ${m[1]} "${codename}" is live on all platforms`
+        : null;
+    }
+  },
+  {
+    /* 《寰宇人类注疏：群星交错》——心 — the character serial, and the one
+       headline shape on this board that is about a Resonator nobody has heard
+       of yet.
+
+       Strategy A cannot answer it, and the reason is the whole point: the
+       English run of this serial only covers Resonators who have shipped, so
+       for the two the desk most wants named there is no English post to find.
+       Both halves are still sourced. "Post-Lament Anthropocene: Stars
+       Intertwined | X" is Kuro's own English title, run verbatim 31 times, and
+       the name comes out of the roster's `nameCN`, which fetch-kits reads off
+       the wiki's {{Other Languages}} block. Nothing here is translated; the
+       formula is assembled from two things Kuro has published separately.
+
+       Declines when the name is not on the roster, which is the honest answer:
+       a Resonator the desk has never heard of has no English name that
+       anything stands behind, and inventing one is what scripts/watch-cn.mjs
+       exists to ask a person to do instead. */
+    re: /^《寰宇人类注疏：群星交错》\s*[—–\-]+\s*(.+?)\s*$/,
+    en: (m, desk) => {
+      const en = desk.cnNames.get(m[1].trim());
+      return en ? `Post-Lament Anthropocene: Stars Intertwined | ${en}` : null;
+    }
   }
 ];
 
-function builtEnglish(item, codenames) {
+function builtEnglish(item, desk) {
   for (const { re, en } of BUILT) {
     const m = item.title.match(re);
-    if (m) return en(m, codenames.get(m[1]) || null);
+    if (m) return en(m, desk);
   }
   return null;
 }
@@ -177,9 +224,10 @@ function builtEnglish(item, codenames) {
 /* ── main ──────────────────────────────────────────────────────────────── */
 
 (async function main() {
-  const [feed, versions, doc] = await Promise.all([
+  const [feed, versions, roster, doc] = await Promise.all([
     readJson(FEED),
     readJson(VERSIONS).catch(() => ({ versions: [] })),
+    readJson(RESONATORS).catch(() => ({ resonators: [] })),
     readJson(OUT).catch(() => ({
       schema: "wuwa-desk/translations@1.0",
       titles: {},
@@ -191,9 +239,17 @@ function builtEnglish(item, codenames) {
   doc.generated ||= [];
   const mine = new Set(doc.generated);
 
-  const codenames = new Map(
-    (versions.versions || []).filter(v => v.id && v.title).map(v => [v.id, v.title])
-  );
+  /* Everything the formulas in BUILT are allowed to draw on: the desk's own
+     record, and nothing else. A rule that needs a word which is not in here is
+     a rule that would be translating. */
+  const desk = {
+    codenames: new Map(
+      (versions.versions || []).filter(v => v.id && v.title).map(v => [v.id, v.title])
+    ),
+    cnNames: new Map(
+      (roster.resonators || []).filter(r => r.nameCN && r.name).map(r => [r.nameCN, r.name])
+    )
+  };
 
   const items = (feed.items || feed.entries || []).filter(
     i => i.url && i.title && i.lang && i.lang !== "en"
@@ -217,7 +273,7 @@ function builtEnglish(item, codenames) {
   const declined = [];
 
   for (const item of todo) {
-    const en = officialEnglish(item, articles) || builtEnglish(item, codenames);
+    const en = officialEnglish(item, articles) || builtEnglish(item, desk);
     if (!en) {
       if (!doc.titles[item.url]) declined.push(item.title);
       continue;

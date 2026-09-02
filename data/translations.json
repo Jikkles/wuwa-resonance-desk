@@ -1,7 +1,7 @@
 {
   "schema": "wuwa-desk/translations@1.0",
   "note": "English for non-English signal headlines, keyed by the item URL. feed.json is machine-written and rolls every 6 hours, so translations cannot live there. Lines listed in `generated` were resolved by scripts/translate-signals.mjs — from Kuro's own English article title for the same notice where one exists, otherwise built from the desk's own record. Every other line is hand-written and the script will not overwrite it, so correcting one by hand makes it permanent. Game terms use the English client's names (星声 = Astrite, 玄方地界 = Land of Xuanfang). Anything without an entry here shows its original headline with a language badge.",
-  "updated": "2026-08-22",
+  "updated": "2026-09-02",
   "titles": {
     "https://www.kurobbs.com/mc/post/1537050878447546368": "[Wuthering Waves · To the New World] The Bilibili themed collection set goes live 14 August at 12:00",
     "https://www.kurobbs.com/mc/post/1536387856158638080": "WUWA! Rover! — And it was such a nice cup of tea",
@@ -42,7 +42,10 @@
     "https://www.kurobbs.com/mc/post/1539232237775523840": "[Glint of Clouds] Featured Weapon Convene",
     "https://www.kurobbs.com/mc/post/1539231604188155904": "[Wind of Transcendence] Featured Resonator Convene",
     "https://www.kurobbs.com/mc/post/1538941738676527104": "Resonator Review | Bubbles of Nihility — Denia",
-    "https://www.kurobbs.com/mc/post/1538855383172419584": "Profile Reveal | Heart Sword — Qingxiao"
+    "https://www.kurobbs.com/mc/post/1538855383172419584": "Profile Reveal | Heart Sword — Qingxiao",
+    "https://www.kurobbs.com/mc/post/1541819215950454784": "Post-Lament Anthropocene: Comprehensive Mirror for Historians—Xuanfang Finale Preview",
+    "https://www.kurobbs.com/mc/post/1541816017508257792": "Post-Lament Anthropocene: Stars Intertwined | Suoming",
+    "https://www.kurobbs.com/mc/post/1541815126139150336": "Post-Lament Anthropocene: Stars Intertwined | Hsin"
   },
   "generated": [
     "https://www.kurobbs.com/mc/post/1538855383172419584",
@@ -53,6 +56,9 @@
     "https://www.kurobbs.com/mc/post/1539678546104307712",
     "https://www.kurobbs.com/mc/post/1539704532296605696",
     "https://www.kurobbs.com/mc/post/1539943889225334784",
-    "https://www.kurobbs.com/mc/post/1540060630518145024"
+    "https://www.kurobbs.com/mc/post/1540060630518145024",
+    "https://www.kurobbs.com/mc/post/1541815126139150336",
+    "https://www.kurobbs.com/mc/post/1541816017508257792",
+    "https://www.kurobbs.com/mc/post/1541819215950454784"
   ]
 }
