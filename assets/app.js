@@ -2039,7 +2039,18 @@ function astritePlan(v){
        dozen sources rather than every one of them. The difference is drawn as
        its own segment instead of being spread across the lines to make the sum
        come out — an estimate massaged into balancing is just an estimate that
-       has stopped saying where it is unsure. */
+       has stopped saying where it is unsure.
+
+       This residual absorbs whatever the desk learns, and that is deliberate
+       rather than an oversight to tidy up later. Kuro's published rewards put
+       3.6's events at 3,400 against the model's 2,000, so `counted` rises and
+       this shrinks — 530 on 3.6 where 3.7 has 1,930 — while both patches go on
+       reading ~13,000. The alternative was to fix the residual at the
+       baseline's own remainder and let the itemised lines drive the total,
+       which would put 3.6 at ~14,400. It was considered and turned down: the
+       source article is 3.6's own, so a total that already counts 3.6's events
+       would then count them twice, and the community's figure is the thing
+       being cited. The headline is theirs and moves only with patch length. */
     gap: Math.max(0, (tracks[0]?.astrite || 0) - counted),
     source:   over.source   || cfg.source   || null,
     sources:  over.sources  || cfg.sources  || [],
