@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/permanents@1.0",
-  "note": "The game's own Permanent tab, copied by hand from the client on 2026-08-20 and then read off the Wuthering Waves Wiki on Fandom for the dates, the blurb, the payout and the banner. The list is names rather than a filter because nothing on the wiki reproduces it: the tab is Kuro's claim that a mode stayed in the game, and the wiki's dates are the event's reward run, so ten of these twelve have a closing date on the wiki and are in the menu today. The desk carries them as permanent — no closing date — which is what the tab asserts. The reward line is what the mode still pays, not what it paid when it ran: every event here has finished its run, and an event pays two layers — a limited-time one that expired with it and a standing one the wiki files as Permanent Rewards, Standard Rewards or a Field Supply. Where a page separates the two the standing side is taken, so Somnium Labyrinth reads 400 Astrite rather than the 1,200 it paid in its fortnight. Where a page states no such split the total stands, because the wiki has given no grounds to divide it — All Out! Towards the Peaks of Prestige is the awkward one, filing its whole payout under Limited-Time Rewards with no standing section to fall back to, so its 1,200 is the run's figure and overstates what is left. Banners are Kuro's own art, downloaded from the wiki at 720px rather than hotlinked.",
+  "note": "The game's own Permanent tab, copied by hand from the client on 2026-08-20 and then read off the Wuthering Waves Wiki on Fandom for the dates, the blurb, the payout and the banner. The list is names rather than a filter because nothing on the wiki reproduces it: the tab is Kuro's claim that a mode stayed in the game, and the wiki's dates are the event's reward run, so ten of these twelve have a closing date on the wiki and are in the menu today. The desk carries them as permanent — no closing date — which is what the tab asserts. The reward line is what the mode still pays, not what it paid when it ran: every event here has finished its run, and an event pays two layers — a limited-time one that expired with it and a standing one the wiki files as Permanent Rewards, Standard Rewards or a Field Supply. Where a page separates the two the standing side is taken, so Somnium Labyrinth reads 400 Astrite rather than the 1,200 it paid in its fortnight. Where a page states no such split the total stands, because the wiki has given no grounds to divide it — All Out! Towards the Peaks of Prestige is the awkward one, filing its whole payout under Limited-Time Rewards with no standing section to fall back to, so its 1,200 is the run's figure and overstates what is left. Banners are Kuro's own art, downloaded from the wiki at 720px rather than hotlinked, except where the wiki names a banner file nobody ever uploaded — Soar to the Beat is the one, and its picture is cropped live out of Kuro's own Version 3.2 update-content post instead.",
   "credit": "Event data and banners via wutheringwaves.fandom.com · © Kuro Games",
   "source": "https://wutheringwaves.fandom.com/wiki/Permanent_Events",
   "events": [
@@ -339,7 +339,20 @@
       "detail": "Lately, \"Stellar Orbit Beats\" has been taking the Mind Dive Arcade by storm! It's officially the go-to game for everyone to unwind and have fun here at the Academy. Got a free minute between classes? Grab your friends and let the rhythm carry you on a trip through the stars!",
       "rewards": "Astrite x200, Advanced Resonance Potion x4, Advanced Energy Core x4, Advanced Sealed Tube x4, Shell Credit x50000, Forgery Premium Supply - Lahai-Roi x4, Premium Enclosure Tank - Lahai-Roi x8",
       "eligibility": "",
-      "art": null,
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1773676800000/av3wvgr92tan616qne-1773734931852.jpg",
+        "crop": {
+          "x": 110,
+          "y": 988,
+          "w": 864,
+          "h": 456
+        },
+        "title": "Wuthering Waves Update Content | Version 3.2 \"Resolution to Illuminate the Shadows\" Planned for Release on March 19th (UTC+8)",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/4418",
+        "published": "2026-03-17",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own banner for the event, cropped out of the Version 3.2 update-content sheet. The wiki's page names a banner file that was never uploaded."
+      },
       "confidence": "official",
       "origin": "wiki",
       "source": "https://wutheringwaves.fandom.com/wiki/Soar_to_the_Beat"
@@ -506,5 +519,5 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Lament_Recon%3A_Tacet_Crisis"
     }
   ],
-  "updated": "2026-08-21T21:08:45.249Z"
+  "updated": "2026-09-02T16:35:22.605Z"
 }

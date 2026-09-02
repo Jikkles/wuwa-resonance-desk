@@ -46,7 +46,9 @@
 // portraits: these are Kuro's own event banners, hosted by Fandom, and a page
 // that fetches 19 pictures from a wiki CDN on every load is a page borrowing
 // somebody's bandwidth. They come down at 720px, which is the width the tile
-// asks for, and land in assets/events.
+// asks for, and land in assets/events. The exception is a page whose banner
+// the wiki names and has never had uploaded — see ART_FALLBACK, which reaches
+// past it to Kuro's own post for the one event in that state.
 
 import { writeFile, readFile, mkdir, readdir, unlink } from "node:fs/promises";
 
@@ -91,6 +93,41 @@ const BATCH = 50;
 /* What the widest tile asks for. The originals run to 1920 and 330KB, which is
    a megabyte and a half of banner nobody displays at that size. */
 const IMG_WIDTH = 720;
+
+/* Banners the wiki names but does not have.
+
+   Every page in TAB declares its banner as `|image = <Name>.jpg` in the
+   infobox, and Fandom's PageImages hands the file over. Except where nobody
+   ever uploaded it: "Soar to the Beat" is a {{Stub}} whose infobox names
+   Soar to the Beat.jpg and whose Soar to the Beat.jpg is a red link, so the
+   query comes back with no image and the tile has drawn the desk's "no banner
+   on the wiki" plate ever since. That plate was telling the truth about the
+   wiki and the wrong thing about the event, because Kuro published the banner
+   themselves: it is the first band of the events sheet in the Version 3.2
+   update-content post.
+
+   So it is shown the way events.json shows a banner that only exists inside a
+   sheet — a crop, hotlinked off Kuro's own CDN, nothing rehosted. The numbers
+   normally come from scripts/find-event-art.mjs; this band it walks straight
+   past, because it is a photograph of deep space and sits under the detail
+   threshold that tells artwork from page background, so the rectangle was
+   measured by hand off the same BMP the script reads.
+
+   This table fills a gap and is not a preference. It is consulted only when
+   the wiki has nothing, so the day somebody uploads the file the wiki's own
+   copy takes over — which is the right way round for a list whose every other
+   fact is read off that page. It should shrink over time, not grow. */
+const ART_FALLBACK = {
+  "Soar to the Beat": {
+    url: "https://hw-media-cdn-mingchao.kurogame.com/object/1773676800000/av3wvgr92tan616qne-1773734931852.jpg",
+    crop: { x: 110, y: 988, w: 864, h: 456 },
+    title: 'Wuthering Waves Update Content | Version 3.2 "Resolution to Illuminate the Shadows" Planned for Release on March 19th (UTC+8)',
+    source: "https://wutheringwaves.kurogames.com/en/main/news/detail/4418",
+    published: "2026-03-17",
+    credit: "© Kuro Games",
+    note: "Kuro's own banner for the event, cropped out of the Version 3.2 update-content sheet. The wiki's page names a banner file that was never uploaded."
+  }
+};
 
 /* One sentence, and where that sentence is long, as much of it as fits — cut
    at a space rather than through a word. A bare slice(0, 160) gave "expedition
@@ -453,6 +490,10 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
         console.log(`${name.padEnd(34)} art failed: ${err.message}`);
       }
     }
+    /* Kuro's own, where the wiki has nothing to give. See ART_FALLBACK: this
+       runs after the download rather than instead of it, so a failed fetch of
+       a picture the wiki does have falls through to it too. */
+    if (!art && ART_FALLBACK[name]) art = structuredClone(ART_FALLBACK[name]);
 
     events.push({
       id: `perm-${slug(name)}`,
@@ -513,14 +554,24 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
       "Peaks of Prestige is the awkward one, filing its whole payout under Limited-Time Rewards " +
       "with no standing section to fall back to, so its 1,200 is the run's figure and overstates " +
       "what is left. Banners are Kuro's own art, downloaded from the wiki at 720px rather than " +
-      "hotlinked.",
+      "hotlinked, except where the wiki names a banner file nobody ever uploaded — Soar to the " +
+      "Beat is the one, and its picture is cropped live out of Kuro's own Version 3.2 " +
+      "update-content post instead.",
     credit: "Event data and banners via wutheringwaves.fandom.com · © Kuro Games",
     source: WIKI(CATEGORY),
     events
   };
 
+  /* Did anything actually change. The whole payload, not just the events: the
+     note in this file's header is prose written a few lines up, and a gate
+     that only watches the events lets an edit to it sit in the script while
+     the shipped file goes on saying the old thing. `updated` is excluded
+     because it is this comparison's answer, not part of its question — count
+     it and every run differs from the last, which is the no-op commit the gate
+     exists to prevent. */
+  const settled = o => JSON.stringify({ ...o, updated: undefined });
   let unchanged = false;
-  try { unchanged = JSON.stringify(previous.events) === JSON.stringify(events); } catch {}
+  try { unchanged = settled(previous) === settled(payload); } catch {}
   if (!unchanged) {
     await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
   }
