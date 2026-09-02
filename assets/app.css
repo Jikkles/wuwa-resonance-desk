@@ -3875,25 +3875,34 @@ img.astrite-pic{
    Deliverance", and the form holds five boxes of at most five digits. An even
    split truncated every weapon on the page to buy the number fields room they
    had no use for. */
-/* 1.5, and the ratio is measured rather than chosen: the row is as tall as its
-   taller panel, so the split that makes the page shortest is the one where the
-   picker holds three cards across AND the form holds three boxes across. Tip it
-   either way and one of them drops to two columns and grows a row. */
-/* One column until there is genuinely room for two, and the threshold is high
-   because the aside is back: above 1340 the stage is the window less the rail,
-   the padding and a 375px margin column, so a 1500px screen leaves this view
-   about 810px to work in. Two panels of grids do not fit in 810 — the form
-   drops to a single box per row and grows taller than the two-column layout
-   saved. Stacked, the same 810 gives the picker three cards across and the
-   form all five boxes on two rows, which is shorter than splitting it.
+/* A fixed rail rather than a ratio, and asked of the stage rather than of the
+   window. Both used to be the other way round, and the first changed because
+   the form stopped being a grid.
 
-   1900 is where the split starts paying: the stage clears 1,200px, and the
-   picker holds three cards AND the form three boxes with both panels side by
-   side. The answer spans the full width underneath at every size. */
+   The old split was 1.5fr/1fr and could not pay for itself below a 1900px
+   window, because the form was three number boxes across and needed a third of
+   a wide stage to hold them. It is one box per row now — a tall tile with
+   Kuro's art down the left — so what it needs is 16rem and never more, at any
+   size. Handing it a fraction of the stage would only stretch a column of tiles
+   that are already as wide as they want to be, and starve the picker doing it.
+
+   The threshold is a container query because a viewport one cannot say this.
+   The stage is the window less the rail, the padding, and a 375px aside that
+   appears somewhere above 1340 — so the width this view actually gets is not
+   monotonic in the window: 881px at 1180, 1041 at 1340, and 810 at 1500, where
+   the aside has just landed. A `min-width` on the window would put the split on
+   at 1180, off at 1500 and on again at 1700, and no honest number exists.
+
+   43rem is the width at which the picker still holds two cards across beside
+   the rail — 2 tracks of .pcards, its panel's padding, the gap and 16rem. Below
+   it the picker would be one card per row, and a column of single cards is
+   taller than the whole form panel it was meant to sit beside. The answer spans
+   the full width underneath at every size. */
+#p-pulls{container:pullstage / inline-size}
 .play{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
 .play>#pull-out{grid-column:1/-1}
-@media (min-width:1900px){
-  .play{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+@container pullstage (min-width:43rem){
+  .play{grid-template-columns:minmax(0,1fr) minmax(0,16rem)}
 }
 
 /* ── picking targets ──────────────────────────────────────────────── */
@@ -3943,7 +3952,11 @@ img.astrite-pic{
    panel that failed to load rather than as a phase with fewer banners in it.
    Rows that fill read as rows. The cost is that a two-banner phase draws wider
    cards than a three-banner one, and that is the cheaper of the two faults. */
-.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:8px}
+/* 12rem, up from 10.5. The face is the part of a target row a reader actually
+   navigates by — you are picking a character, and at 32px you were picking a
+   name with a thumbnail beside it. At 52 the portrait is the row, which is
+   what the track had to grow to carry. */
+.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:8px}
 /* The Resonator and their weapon in one frame, because "her and her weapon"
    is one decision made twice, not two unrelated ones — and the frame is what
    says the weapon underneath belongs to the face above it. */
@@ -3951,7 +3964,7 @@ img.astrite-pic{
   border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--tint-sink);
 }
 .ptg{
-  display:flex;align-items:center;gap:9px;width:100%;padding:7px 9px;
+  display:flex;align-items:center;gap:11px;width:100%;padding:8px 10px;
   border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;
   transition:background .15s;
 }
@@ -3964,23 +3977,29 @@ img.astrite-pic{
 .ptg[aria-pressed="true"]{background:color-mix(in srgb,var(--attr) 13%,transparent)}
 .ptg[aria-pressed="true"]:hover{background:color-mix(in srgb,var(--attr) 18%,transparent)}
 
+/* 52px, and a rounded square rather than a disc. Both are the same change: at
+   32 in a circle the portrait was a bullet — you read the name and the face
+   confirmed it. At 52 the face is read first, which is the order the decision
+   is actually made in, and a disc that size crops a jawline the square keeps.
+   The radius is the panel's own, so a row of these reads as tiles and not as
+   avatars. */
 .ptg-fig{
-  flex:none;width:32px;height:32px;border-radius:50%;overflow:hidden;
+  flex:none;width:52px;height:52px;border-radius:10px;overflow:hidden;
   display:grid;place-items:center;
   background:linear-gradient(160deg,color-mix(in srgb,var(--attr) 26%,transparent),var(--bg-2));
   border:1px solid color-mix(in srgb,var(--attr) 30%,transparent);
 }
-.ptg-fig img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.ptg-fig img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
 /* A weapon icon is a long thin object on transparent ground — cropping it to
-   fill a 38px circle cuts the blade off. It sits inside instead. */
-.ptg-fig img.wpn{object-fit:contain;object-position:50% 50%;padding:4px}
+   fill the box cuts the blade off. It sits inside instead. */
+.ptg-fig img.wpn{object-fit:contain;object-position:50% 50%;padding:6px}
 .ptg-fig img.wide{object-position:50% 12%}
 .ptg-fig .g{
-  font-family:var(--cjk);font-size:.75rem;color:var(--fg-3);display:grid;place-items:center;
+  font-family:var(--cjk);font-size:1.125rem;color:var(--fg-3);display:grid;place-items:center;
 }
-.ptg-t{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.ptg-t{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
 .ptg-t b{
-  font-size:.8125rem;font-weight:600;
+  font-size:.875rem;font-weight:600;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 .ptg-t em{
@@ -4009,53 +4028,70 @@ img.astrite-pic{
 /* ── where you stand ──────────────────────────────────────────────── */
 .pfset+.pfset{margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
 .pfset>.label{display:block;margin-bottom:8px}
-/* Same reason as .pcards: three boxes under "What you hold" and two under the
-   pity heading, and with auto-fit the two came out wider than the three.
+/* One track width, and it is the width the tile wants rather than a fraction of
+   whatever panel it lands in. A hold tile is art down the left with a label, a
+   box and a hint stacked beside it: much under 12.5rem and the hint wraps, much
+   over and the art and the number drift apart with nothing between them. So the
+   track is pinned there and the count follows the panel — one per row in the
+   16rem rail, three across when the form is the full stage instead, and the
+   tile is the same object either way.
 
-   Two minimums, because this grid meets two very different widths. Stacked
-   below 1900 the panel is the full 810 of the stage, and a track small enough
-   to pair up beside the picker left five of them holding three tiles — so the
-   row you read first stopped two thirds of the way across and the rest of the
-   panel was empty. The wide value is the width at which "What you hold" fills
-   its row exactly. Beside the picker the panel is closer to 500 and the same
-   value would break the three into two-and-one, so the media query hands it
-   back the smaller track. */
+   auto-FILL and not fit, unlike .pcards: a short row here should keep its empty
+   track rather than stretch to fill it. */
 .pfields{
-  --pf-min:11.5rem;
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--pf-min),1fr));gap:9px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(12.5rem,1fr));gap:9px;
 }
-/* Below the rule it overrides, not up with the .play split it belongs to: a
-   media query adds no specificity, so from up there the plain .pfields further
-   down won every time and the wide screens silently kept the stacked value. */
-@media (min-width:1900px){ .pfields{--pf-min:9.75rem} }
+/* The pity pair, which has no art and holds a two-digit count. Always two
+   across — at the hold tiles' track they would sit in the left half of a wide
+   panel with a hole beside them, and there are only ever two of them to fill
+   the row with.
+
+   Capped, because filling the row is not the same as being worth it: stretched
+   across a full-width form these two became 430px boxes holding a number that
+   is never more than two digits. The cap leaves a gap on a wide panel, and the
+   gap is honest — what you hold is a row of things and this is a row of
+   counters, and they should not be the same width by accident. */
+.pfields.gauge{grid-template-columns:repeat(2,minmax(0,1fr));max-width:30rem}
 /* A label, so a click anywhere on the tile — the art included — puts the caret
    in the box. */
+/* Art down the left, everything you read stacked beside it. It used to be a
+   column — icon and label on one line, box under them, hint under that — which
+   capped the art at whatever height a label is, and Astrite is a thing you own
+   rather than a heading you skim. Turned on its side the picture gets the
+   tile's full height and the three words that name it stop competing for the
+   same line. */
 .pf{
-  display:flex;flex-direction:column;gap:7px;cursor:text;
-  padding:11px 12px 10px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
+  display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;
+  gap:2px 13px;cursor:text;
+  padding:11px 13px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--tint-sink);
   transition:border-color .15s;
 }
 .pf:focus-within{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
-.pf-top{display:flex;align-items:center;gap:11px;min-width:0}
-/* Kuro's own item art, cached by fetch-items.mjs, drawn at portrait size
-   rather than beside the label as a bullet. `contain` because these are drawn
-   to their own aspect and a tide is taller than a crystal — cropping them to a
-   square box would cut the top off one and not the other. */
+/* Kuro's own item art, cached by fetch-items.mjs, at the size the thing is
+   worth — this is one of the two pictures on the page a reader is looking for,
+   and 33px of it was a bullet with a border round it. `contain` because these
+   are drawn to their own aspect and a tide is taller than a crystal, so a
+   square crop would cut the top off one and not the other. */
+/* Spans all three rows of the tile; the label, the box and the hint take the
+   second column in order. */
 .pf-fig{
-  flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  grid-row:1/4;align-self:center;
+  flex:none;width:60px;height:60px;border-radius:14px;display:grid;place-items:center;
   background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 15%,transparent),var(--bg-2));
   border:1px solid var(--line-2);
 }
-.pf-fig img{width:33px;height:33px;object-fit:contain}
-/* Pity has no art and should not borrow any: it is a count the game keeps
-   about you, not a thing you own. It takes the same figure so the five tiles
-   stay one shape, with a sprite inside it and no tint behind — which is the
-   distinction drawn rather than asserted. */
-.pf-fig.glyph{background:none;color:var(--fg-3)}
+.pf-fig img{width:46px;height:46px;object-fit:contain}
+/* Pity has no art and does not borrow any: it is a count the game keeps about
+   you, not a thing you own. So the tile drops the figure column entirely and
+   the mark goes on the label at label size — the distinction drawn rather than
+   asserted, and it is what lets the pair sit two to a row in a 16rem rail where
+   a 60px frame each left them 60px of box to type into. */
+.pf.gauge{grid-template-columns:minmax(0,1fr)}
 .pf-k{
-  min-width:0;
+  min-width:0;display:flex;align-items:center;gap:7px;
   font-family:var(--mono);font-size:.625rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fg-2);
 }
+.pf-k svg{flex:none;color:var(--fg-3)}
 /* The box has to look like a box. Drawn flat on panel ground with a dim 0 in
    it, the number read as a figure the desk had worked out — the one control on
    the page that does nothing at all until you type in it was the one that did
@@ -4125,8 +4161,15 @@ img.astrite-pic{
    Stretched rather than start-aligned: these two are a pair and boxes of a pair
    should agree on a height. The hero is the shorter of them, so its summary
    strip is pushed to the bottom to take up the difference — see .phero-sum. */
+/* min(22rem,100%) rather than 22rem, which is the whole of what stops this
+   overflowing a phone. 22rem is 443px at the desk's 126% root, so on anything
+   narrower than about 500 the track was wider than the panel holding it and
+   both boxes hung over the right edge — the caveat under the odds lost its last
+   two characters on every line. A track minimum is a floor the grid will honour
+   even when there is no room for it; capping it at the container's own width is
+   how you say "two of these if they fit, one if they don't" and mean it. */
 .pband{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(22rem,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(22rem,100%),1fr));
   gap:12px;align-items:stretch;
 }
 .phero{
@@ -4141,8 +4184,14 @@ img.astrite-pic{
    left a band of bare panel between the two halves of the hero, which is the
    dead space this layout was meant to remove — growing the tint fills it and
    reads as one block rather than as two with a hole between them. */
+/* nowrap, and the long label under the headline takes the squeeze instead. The
+   two figures are a pair divided by a rule, and a rule only means anything
+   while the things either side of it are side by side — let the row wrap and
+   the divider becomes a 20px tick hanging off the top of the second number
+   with nothing to divide. The label is the one part of the row that can afford
+   a second line, so it is the part that gets one. */
 .phero-top{
-  display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:11px 15px;flex:1;
+  display:flex;align-items:center;gap:13px;flex-wrap:nowrap;padding:11px 15px;flex:1;
   background:color-mix(in srgb,currentColor 7%,transparent);
 }
 .phero img.astrite-pic,.phero-top>svg{flex:none}
@@ -4158,7 +4207,7 @@ img.astrite-pic{
    compared against — and the comparison is the whole reason both are here. A
    rule and a fixed gap instead: one group, read left to right. */
 .phero-pulls{
-  padding-left:20px;margin-left:4px;
+  flex:none;padding-left:20px;margin-left:4px;
   border-left:1px solid color-mix(in srgb,currentColor 30%,transparent);
 }
 .phero-pulls b{
@@ -4171,18 +4220,42 @@ img.astrite-pic{
 /* Everything the headline is not: the bill, what you already have, what the
    Tides cover, and the 50/50 landing. Four facts on one rule, each a label and
    a figure, so they read as a strip rather than as four more rows. */
+/* Columns rather than a wrapping row, which is what makes the dividers safe: a
+   rule on the left of every cell but the first is only correct while there is
+   exactly one row, and `grid-auto-flow:column` is how you promise that. The
+   cells narrow instead of wrapping, and the label is the only thing in one long
+   enough to take a second line when they do. */
 .phero-sum{
-  display:flex;flex-wrap:wrap;gap:5px 20px;padding:9px 15px;
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);
+  padding:10px 15px;
   border-top:1px solid color-mix(in srgb,currentColor 24%,transparent);
 }
 .phero-sum>span{
-  display:flex;align-items:baseline;gap:7px;font-size:.75rem;color:var(--fg-3);
+  display:flex;flex-direction:column;gap:3px;min-width:0;
+  padding:2px 16px;font-size:.75rem;color:var(--fg-3);
 }
-.phero-sum em{
+.phero-sum>span:first-child{padding-left:0}
+.phero-sum>span+span{border-left:1px solid color-mix(in srgb,currentColor 22%,transparent)}
+/* The 50/50 landing, on its own rule under the three certainties — one line,
+   read across, because it is one fact and not a column of the comparison
+   above it. */
+.phero-alt{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:8px 15px;
+  border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);
+}
+.phero-sum em,.phero-alt em{
   font-style:normal;font-family:var(--mono);font-size:.5938rem;letter-spacing:.12em;
   text-transform:uppercase;color:var(--fg-3);
 }
-.phero-sum b{font-family:var(--mono);font-size:.8125rem;font-weight:500;color:var(--fg-2)}
+.phero-sum b,.phero-alt b{
+  font-family:var(--mono);font-size:1rem;font-weight:500;line-height:1;color:var(--fg-2);
+  font-variant-numeric:tabular-nums;
+}
+.phero-alt b{font-size:.875rem}
+.phero-sum i,.phero-alt i{
+  font-style:normal;font-family:var(--mono);font-size:.5938rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--fg-3);opacity:.8;
+}
 
 /* ── the odds ─────────────────────────────────────────────────────
    Set apart from everything above it on purpose. The hero and the working are
@@ -4243,13 +4316,45 @@ img.astrite-pic{
 /* The working. One row per thing you are chasing, each carrying the sentence
    that produced its number — a total nobody can check is a rumour with a
    number on it, which is the same rule the Astrite breakdown is built on. */
-.plegs{list-style:none;margin:11px 0 0;padding:0}
+.plegs{list-style:none;margin:11px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+/* Who, how many, why — three blocks on one line, which is the order the row is
+   asked. It was a stack of two: a name with a figure floated against it, and
+   the sentence wrapped underneath across the panel's whole width. That put the
+   working on a line of its own long enough to read as a paragraph, and left
+   the face nowhere to go.
+
+   The element down the left edge rather than a border all the way round: these
+   are rows in a list and a box each would make them cards, which is what the
+   picker above already is. */
 .pleg{
-  display:flex;flex-direction:column;gap:2px;padding:6px 2px;border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:auto minmax(6rem,1fr) auto minmax(0,1.7fr);
+  align-items:center;gap:4px 16px;
+  padding:9px 12px;border:1px solid var(--line);border-left-width:2px;
+  border-left-color:color-mix(in srgb,var(--attr,var(--line-2)) 60%,transparent);
+  border-radius:var(--r-sm);background:var(--tint-sink);
 }
-.pleg-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
-.pleg-h>b{font-size:.8125rem;font-weight:600;color:var(--fg)}
-.pleg>em{font-style:normal;font-size:.6875rem;line-height:1.45;color:var(--fg-3)}
+/* Same crop as the picker's tile, a size down: the row is a confirmation of a
+   choice already made, so it does not have to carry the choosing. */
+.pleg-fig{
+  flex:none;width:44px;height:44px;border-radius:9px;overflow:hidden;display:grid;place-items:center;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--attr,var(--accent)) 24%,transparent),var(--bg-2));
+  border:1px solid color-mix(in srgb,var(--attr,var(--line-2)) 28%,transparent);
+}
+.pleg-fig img{width:100%;height:100%;object-fit:cover;object-position:50% 15%}
+.pleg-fig img.wpn{object-fit:contain;object-position:50% 50%;padding:5px}
+.pleg-fig .g{font-family:var(--cjk);font-size:.9375rem;color:var(--fg-3)}
+.pleg-t{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pleg-t b{
+  font-size:.875rem;font-weight:600;color:var(--fg);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.pleg-t em{
+  font-style:normal;font-family:var(--mono);font-size:.5938rem;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--fg-3);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.pleg-why{font-style:normal;font-size:.6875rem;line-height:1.45;color:var(--fg-3)}
 /* How the pulls split across the two convenes. It was a summed row under a
    summed headline; as a caption it says the one thing the headline can't. */
 .plegs-f{
@@ -4257,10 +4362,20 @@ img.astrite-pic{
   font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--fg-3);
 }
-.pleg-n{flex:none;display:flex;align-items:baseline;gap:6px}
+/* The figure and the counter it comes off, stacked: "80 PULLS" over "Resonator
+   convene". Which of the two counters a leg spends is half of why it costs what
+   it costs — two legs of 80 are 160 pulls or they are two banners running side
+   by side, and nothing else in the row says which. */
+.pleg-n{
+  flex:none;display:grid;grid-template-columns:auto auto;align-items:baseline;
+  gap:1px 6px;justify-content:start;
+}
 .pleg-n b{font-family:var(--mono);font-size:1.0625rem;font-weight:500;font-variant-numeric:tabular-nums}
-.pleg-n span{
+.pleg-n>span{
   font-family:var(--mono);font-size:.5938rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);
+}
+.pleg-n>em{
+  grid-column:1/-1;font-style:normal;font-size:.6875rem;color:var(--fg-3);white-space:nowrap;
 }
 /* A weapon leg costs one number and a character leg can cost two, so the two
    kinds are marked apart by the rule rather than by a badge. */
@@ -4297,12 +4412,26 @@ img.astrite-pic{
   opacity:1;color:var(--accent);transform:translate(3px,-50%);
 }
 
+/* The working is the first thing off the leg's line: it is a sentence, and a
+   sentence squeezed into a quarter of a narrow panel wraps to four lines while
+   the three blocks beside it stay one. Dropped under them it reads as the
+   caption it is. */
+@media (max-width:1000px){
+  .pleg{grid-template-columns:auto minmax(0,1fr) auto}
+  .pleg-why{grid-column:1/-1;margin-top:2px}
+}
 @media (max-width:560px){
   /* The figure and what it buys stop sitting on one line long before the box
-     runs out — 1.94rem of mono plus 1.31rem of mono is most of a phone. */
-  .phero-pulls{margin-left:0;text-align:left;align-items:flex-start;width:100%}
-  .pleg{flex-wrap:wrap;gap:6px 16px}
-  .pleg-n{margin-left:0}
+     runs out — 1.94rem of mono plus 1.31rem of mono is most of a phone. The
+     divider goes with the arrangement it belonged to. */
+  .phero-top{flex-wrap:wrap}
+  .phero-pulls{
+    margin-left:0;padding-left:0;border-left:0;
+    text-align:left;align-items:flex-start;width:100%;
+  }
+  .phero-sum>span{padding-left:0;border-left:0}
+  .pleg{grid-template-columns:auto minmax(0,1fr)}
+  .pleg-n,.pleg-why{grid-column:2}
 }
 
 /* ══ the resonator record ═══════════════════════════════════════════

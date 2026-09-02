@@ -3126,8 +3126,12 @@ function pullPlan(){
   const want = new Set(P.want);
   const picked = [];
   for(const t of pullTargets()){
-    if(t.res  && want.has(t.res.key))  picked.push({...t.res,  version:t.version, phase:t.phase});
-    if(t.weap && want.has(t.weap.key)) picked.push({...t.weap, version:t.version, phase:t.phase});
+    /* Decorated with the same face and the same sub-line the picker drew — see
+       pullFaces(). The legs below are the rows a reader matches against the
+       cards they clicked, so they are built from the same object. */
+    const d = pullFaces(t);
+    if(d.res  && want.has(d.res.key))  picked.push({...d.res,  version:t.version, phase:t.phase});
+    if(d.weap && want.has(d.weap.key)) picked.push({...d.weap, version:t.version, phase:t.phase});
   }
   if(!picked.length) return null;
 
@@ -3221,40 +3225,66 @@ function pullPlan(){
 }
 
 /* ── the picker ───────────────────────────────────────────────────── */
-function pullCard(t, want){
-  const r = resonatorFor(t.banner.name);
-  const f = figure(t.banner);
-  const face = f.icon
-    ? `<img src="${esc(f.icon)}" alt="" loading="lazy" decoding="async">`
-    : f.image
-    ? `<img class="wide" src="${esc(f.image)}" alt="" loading="lazy" decoding="async"${f.style}>`
-    : `<span class="g">${esc(f.glyph)}</span>`;
-  const attr = t.banner.attribute || r.attribute;
-  const run  = t.banner.new ? "New" : t.banner.rerun ? "Rerun" : "";
+/* A target row's two targets, each carrying the two things every renderer on
+   this view has to print about it: the picture, and the line under the name.
 
-  /* The card is a third of the picker's column, so every word on it has to
-     earn the room. `title` carries the full name for the few weapons that
-     still run past the box. */
-  const row = (tg, fig, name, sub) => `
-    <button class="ptg" data-act="pulltarget" data-id="${esc(tg.key)}"
-            aria-pressed="${want.has(tg.key)}" title="${esc(name)}">
-      <span class="ptg-fig">${fig}</span>
-      <span class="ptg-t"><b>${esc(name)}</b><em>${esc(sub)}</em></span>
-      <span class="ptg-box">${icon("i-check", 11)}</span>
-    </button>`;
-
+   Decorated once and in one place because the picker is where a reader chooses
+   a face and the answer below is where they go looking for it again. Those two
+   were built from the banner independently — the picker off `figure(t.banner)`
+   and the answer off nothing at all — and the day the answer learned to draw a
+   portrait was the day they could start disagreeing about which portrait Hsin
+   has. A face that changes between the row you clicked and the row you are
+   billed for is the one thing this view cannot afford to get wrong. */
+function pullFaces(t){
+  const r    = resonatorFor(t.banner.name);
   /* Element and debut, and not the weapon class. Which weapon a Resonator
      swings is a fact about building them, not about whether you want them, and
      it was the word that pushed "FUSION · BROADBLADE · NEW" past the edge of
      the card on every Broadblade in the patch. The record carries it. */
-  return `<div class="ptc"${attrStyle(attr)}>
-    ${row(t.res, face, t.banner.name,
-          [attr, run].filter(Boolean).join(" · ") || "Resonator")}
-    ${t.weap ? row(t.weap,
-        t.weap.icon
-          ? `<img class="wpn" src="${esc(t.weap.icon)}" alt="" loading="lazy" decoding="async">`
-          : `<span class="g">${icon("i-weapon", 15)}</span>`,
-        t.weap.name, t.weap.unnamed ? "Not announced" : "Signature") : ""}
+  const attr = t.banner.attribute || r.attribute || "";
+  const run  = t.banner.new ? "New" : t.banner.rerun ? "Rerun" : "";
+  return {
+    res:{...t.res, attr, fig:figure(t.banner),
+         sub:[attr, run].filter(Boolean).join(" · ") || "Resonator"},
+    weap:t.weap
+      ? {...t.weap, attr, sub:t.weap.unnamed ? "Not announced" : "Signature"}
+      : null
+  };
+}
+
+/* The picture itself, from a target decorated above. A weapon icon is a long
+   thin object on transparent ground and a Resonator is a face, so the two take
+   different classes and the stylesheet crops them differently. */
+function targetFace(t){
+  if(t.kind === "weapon")
+    return t.icon
+      ? `<img class="wpn" src="${esc(t.icon)}" alt="" loading="lazy" decoding="async">`
+      : `<span class="g">${icon("i-weapon", 22)}</span>`;
+  const f = t.fig || figure({name:t.name});
+  return f.icon
+    ? `<img src="${esc(f.icon)}" alt="" loading="lazy" decoding="async">`
+    : f.image
+    ? `<img class="wide" src="${esc(f.image)}" alt="" loading="lazy" decoding="async"${f.style}>`
+    : `<span class="g">${esc(f.glyph)}</span>`;
+}
+
+function pullCard(t, want){
+  const d = pullFaces(t);
+
+  /* The card is a third of the picker's column, so every word on it has to
+     earn the room. `title` carries the full name for the few weapons that
+     still run past the box. */
+  const row = tg => `
+    <button class="ptg" data-act="pulltarget" data-id="${esc(tg.key)}"
+            aria-pressed="${want.has(tg.key)}" title="${esc(tg.name)}">
+      <span class="ptg-fig">${targetFace(tg)}</span>
+      <span class="ptg-t"><b>${esc(tg.name)}</b><em>${esc(tg.sub)}</em></span>
+      <span class="ptg-box">${icon("i-check", 11)}</span>
+    </button>`;
+
+  return `<div class="ptc"${attrStyle(d.res.attr)}>
+    ${row(d.res)}
+    ${d.weap ? row(d.weap) : ""}
   </div>`;
 }
 
@@ -3263,15 +3293,24 @@ function pullCard(t, want){
    the page a calculator rather than an oracle: 150 on its own is a number to
    be trusted or not, and "70 to the first 5-star, 80 more if that one loses
    the 50/50" is arithmetic a reader can check against their own account. */
+/* Returned in two parts rather than as one sentence with the convene bolted to
+   the front of it. Which counter a leg spends is a fact about the leg and sits
+   with its figure — the number and the counter it comes off are one reading —
+   and the working is a sentence, which is a different thing to look at. Joined
+   by a dot they were one run-on line that had to be read to the middle before
+   it said anything. */
 function pullWhy(l){
   const from = l.carried
     ? ` (${CONVENE.pity} less the ${l.carried} you are already in)`
     : "";
   if(l.kind === "weapon")
-    return `Weapon convene · ${plural(l.first, "pull")} to the guaranteed 5★${from} — this banner has no 50/50, so that 5★ is the weapon`;
+    return {where:"Weapon convene",
+      why:`${plural(l.first, "pull")} to the guaranteed 5★${from} — this banner has no 50/50, so that 5★ is the weapon`};
   if(l.guar)
-    return `Resonator convene · ${plural(l.first, "pull")} to your next 5★${from}, and the guarantee you are holding makes it the featured one`;
-  return `Resonator convene · ${plural(l.first, "pull")} to the first 5★${from}, then ${l.extra} more if that one loses the 50/50`;
+    return {where:"Resonator convene",
+      why:`${plural(l.first, "pull")} to your next 5★${from}, and the guarantee you are holding makes it the featured one`};
+  return {where:"Resonator convene",
+    why:`${plural(l.first, "pull")} to the first 5★${from}, then ${l.extra} more if that one loses the 50/50`};
 }
 
 function pullOut(){
@@ -3298,7 +3337,7 @@ function pullOut(){
      stacked blocks into one, which is most of how this page got shorter. */
   const need = `<div class="phero${w.short ? " short" : " ok"}">
     <div class="phero-top">
-      ${astriteMark(40)}
+      ${astriteMark(46)}
       <span class="phero-fig">
         <b>${numFmt(w.short)}</b><span>Astrite you still need · worst case</span></span>
       ${/* "to guarantee", not "to find": this is the shortfall against the
@@ -3309,13 +3348,29 @@ function pullOut(){
         ? `<b>${numFmt(pullsFor(w.short))}</b><span>pulls to guarantee</span>`
         : `<b>${numFmt(w.spare)}</b><span>Astrite to spare</span>`}</span>
     </div>
+    ${/* Label over figure over unit, each in its own cell on a divided rule,
+         rather than three label-and-figure pairs run together on one line. The
+         strip is a comparison — what it costs against what you have against
+         what you will not be paying for — and a comparison wants its terms
+         stacked the same way and set apart, not separated by a wider gap than
+         the one inside each pair. */""}
     <div class="phero-sum">
-      <span><em>Total cost</em><b>${numFmt(w.astrite)}</b> · ${plural(w.pulls, "pull")}</span>
-      <span><em>You hold</em><b>${numFmt(p.held)}</b></span>
-      ${w.tides ? `<span><em>Tides cover</em><b>${numFmt(w.tides)}</b> ${w.tides === 1 ? "pull" : "pulls"}</span>` : ""}
-      ${k.pulls !== w.pulls
-        ? `<span><em>If the 50/50 lands</em><b>${numFmt(k.astrite)}</b> · ${plural(k.pulls, "pull")}</span>` : ""}
+      <span><em>Total cost</em><b>${numFmt(w.astrite)}</b><i>${plural(w.pulls, "pull")}</i></span>
+      <span><em>You hold</em><b>${numFmt(p.held)}</b><i>${plural(Math.floor(p.held / p.cost), "pull")}</i></span>
+      ${w.tides ? `<span><em>Tides cover</em><b>${numFmt(w.tides)}</b><i>${w.tides === 1 ? "pull" : "pulls"}</i></span>` : ""}
     </div>
+    ${/* On its own rule under the three, and not a fourth cell beside them. Two
+         reasons, and they agree. It is a different kind of fact: the three
+         above are certainties — the bill, your balance, what the Tides already
+         cover — and this is the coin landing your way, which the panel says
+         elsewhere does not get the big type. And it is the longest label of the
+         four, so as a cell it was the one that wrapped the strip onto a second
+         row, where it collected the divider meant to sit between it and the
+         cell it was no longer beside. */""}
+    ${k.pulls !== w.pulls ? `<div class="phero-alt">
+      <em>If the 50/50 lands</em><b>${numFmt(k.astrite)}</b>
+      <i>${plural(k.pulls, "pull")}</i>
+    </div>` : ""}
   </div>`;
 
   /* The other lens on the same total, and the only block on the page that is
@@ -3365,18 +3420,25 @@ function pullOut(){
     w.weap ? `${plural(w.weap, "pull")} on the weapon convene` : ""
   ].filter(Boolean).join(" · ");
 
-  /* The figure sits against the name, on the name's own line, and the sentence
-     that produced it runs underneath. It used to be pinned to the right edge of
-     the panel, which on a wide screen left a metre of empty rule between
-     "Qingxiao" and the number of pulls Qingxiao costs. */
-  const legs = `<ul class="plegs">${p.legs.map(l => `
-    <li class="pleg${l.kind === "weapon" ? " wpn" : ""}">
-      <span class="pleg-h">
-        <b>${esc(l.name)}</b>
-        <span class="pleg-n"><b>${numFmt(l.worst)}</b><span>pulls</span></span>
-      </span>
-      <em>${pullWhy(l)}</em>
-    </li>`).join("")}
+  /* One row per leg, read left to right: who, how many, why. The face is the
+     same one the picker drew — a reader who chose Hsin out of a grid of six
+     portraits should find Hsin's portrait in the bill, not her name in a list
+     of names, and the row is the only place the answer says out loud which of
+     the things you clicked this figure belongs to.
+
+     The element runs down the left edge as a rule. It is the colour the card
+     above was tinted with, so the two are visibly the same target, and it does
+     the job a badge would have done without spending a word on it. */
+  const legs = `<ul class="plegs">${p.legs.map(l => {
+    const w = pullWhy(l);
+    return `
+    <li class="pleg${l.kind === "weapon" ? " wpn" : ""}"${attrStyle(l.attr)}>
+      <span class="pleg-fig">${targetFace(l)}</span>
+      <span class="pleg-t"><b>${esc(l.name)}</b><em>${esc(l.sub || "")}</em></span>
+      <span class="pleg-n"><b>${numFmt(l.worst)}</b><span>pulls</span>
+        <em>${esc(w.where)}</em></span>
+      <em class="pleg-why">${w.why}</em>
+    </li>`; }).join("")}
   </ul>
   ${/* Only once there are enough rows that adding them up is work. On two legs
        the split is the two numbers above it, read in order. */""}
@@ -3511,19 +3573,22 @@ function renderPulls(){
      things you hold are objects the game draws, and the desk already caches
      Kuro's own art for them — a labelled box saying ASTRITE next to a labelled
      box saying RADIANT TIDES is three words of mono doing a job three pictures
-     do faster. `glyph` is what a field takes instead when there is no art to
-     draw: pity is a count the game keeps about you rather than a thing you own,
-     so it gets a sprite in the same figure, which is the difference stated
-     rather than a fifth tile built to a different shape. */
+     do faster.
+
+     `glyph` is what a field takes instead when there is no art to draw, and it
+     is a mark on the label rather than a picture beside it. The five tiles used
+     to be one shape on the grounds that a fifth built differently would read as
+     an oversight; they are two shapes now, and deliberately. What you hold are
+     objects, and they are drawn at the size an object deserves. Pity is a count
+     the game keeps about you — there is nothing to draw, and a sprite blown up
+     to fill a 60px frame beside a two-digit number was the tile inventing a
+     picture to keep the row tidy. */
   const field = (k, label, hint, item, attrs = "", glyph = "") => {
     const art = item && itemFor(item)?.icon;
-    return `<label class="pf">
-      <span class="pf-top">
-        <span class="pf-fig${art ? "" : " glyph"}">${art
-          ? `<img src="${esc(art)}" alt="" loading="lazy" decoding="async">`
-          : icon(glyph, 21)}</span>
-        <span class="pf-k">${esc(label)}</span>
-      </span>
+    return `<label class="pf${art ? "" : " gauge"}">
+      ${art ? `<span class="pf-fig">
+        <img src="${esc(art)}" alt="" loading="lazy" decoding="async"></span>` : ""}
+      <span class="pf-k">${art ? "" : icon(glyph, 14)}${esc(label)}</span>
       <span class="pf-in">
         <input type="number" inputmode="numeric" min="0" step="1" autocomplete="off"
                data-pull="${k}" value="${P[k] || ""}" placeholder="0"${attrs}>
@@ -3564,20 +3629,21 @@ function renderPulls(){
           <div class="pfset">
             <span class="label">What you hold</span>
             <div class="pfields">
-              ${/* One word each, now that each carries Kuro's own art. "RADIANT
-                   TIDES" is thirteen tracked-out mono characters and it wrapped
-                   the moment an icon took 23px off the line, which left the
-                   three boxes you hold taller than the two you don't. The
-                   picture says which tide it is faster than the second word
-                   did, and the hint under it still names the banner. */""}
+              ${/* Both words again. These were cut to "Radiant" and "Forging"
+                   because "RADIANT TIDES" is thirteen tracked-out mono
+                   characters and it wrapped the moment an icon shared its line
+                   — which left the three boxes you hold taller than the two you
+                   don't. The art is beside the label rather than in front of it
+                   now, so the line is the tile's full width and the name it was
+                   cut down from fits on it. */""}
               ${field("astrite", "Astrite", pullBuys(), "Astrite")}
-              ${field("radiant", "Radiant", "Resonator convene", "Radiant Tide")}
-              ${field("forging", "Forging", "Weapon convene", "Forging Tide")}
+              ${field("radiant", "Radiant Tides", "Resonator convene", "Radiant Tide")}
+              ${field("forging", "Forging Tides", "Weapon convene", "Forging Tide")}
             </div>
           </div>
           <div class="pfset">
             <span class="label">Where your pity stands</span>
-            <div class="pfields">
+            <div class="pfields gauge">
               ${/* "Resonator", not "Resonator pity" — the heading over the row
                    already says pity, and the longer label was the one string
                    here wide enough to wrap a tile and leave the two boxes
