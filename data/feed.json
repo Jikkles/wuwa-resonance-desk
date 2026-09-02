@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-02T12:36:26.984Z",
+  "fetched": "2026-09-02T17:40:15.654Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 677,
-      "ms": 1812
+      "ms": 740
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 989
+      "ms": 1081
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 234
+      "ms": 142
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 383
+      "ms": 308
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2436,
+      "ms": 2468,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -62,7 +62,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 40,
-      "ms": 341
+      "ms": 442
     },
     {
       "id": "mmoculture",
@@ -72,7 +72,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 668
+      "ms": 963
     }
   ],
   "errors": [],
@@ -95,16 +95,6 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
-      "hot": false
-    },
-    {
-      "title": "'Wuthering Waves' World Tour Seoul Concert Attracts 4,000 Attendees",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNVmloS1ZBWWxhQ3BfemQwb3dpTU9kbG85OEh3a2VfcHNfYW4tX1dLY0hEc1YtemQ4Z00yaFpEWVVVSHRNR01LZzlFQWZrSTQyQ0VOUFZLVWNPallkSzg4V0VsZmthYkxMSDRCT0EwazE4UFRjRW9MNjc5dnFXWUdMdGtQX0l1LWlGNUNXSjdiOU5IN18tdnZxRU1fblY0eDBEYktqcmdadXdzS0U?oc=5",
-      "date": "2026-09-02T00:48:27.000Z",
-      "source": "Inven Global",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
       "hot": false
     },
     {
@@ -301,7 +291,7 @@
       "title": "Beyond Wuthering Waves: What we know about Kuro Games' upcoming titles, Project Nami and Project SUN",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQSkc2TzdONWNuWENkXzF1bjlwMlhEakNLSTB3R0VaOGI2cGt6MjZvaEdJdXVfU053czF1NHNQUmprNDFkUlJFNEgxQ1JZRGEtaVhJZ2hvVzEyTER5TlZmeVhMRWlXTWVhd21xby1OTHFpS3hSdDQ2bkI4ajFkckdYdks1TEFHV0dqbFJvZUVhcXFPTDNFMFpwR0Y3UHpGYzlFN0lTaUFGLTRUOVRSQ3BBNDQxdUwyU25MMHhLT2N6V29Sd2V1ZHN1SQ?oc=5",
       "date": "2026-08-28T22:50:52.000Z",
-      "source": "GamingonPhone",
+      "source": "gamingonphone.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -558,6 +548,16 @@
       "hot": false
     },
     {
+      "title": "Wuthering Waves codes September 2026",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5ZbGRQMnBzdE9xamlDMzNMTVd2ZFN3WVlLcmZjWkVKUWVSbmVoTWxIdC1zd28wanhfcWpGYktTWE0xMlpUekdDajhUOER5TGxsR1hmZS1fak0yN2wyMER4NQ?oc=5",
+      "date": "2026-08-26T11:49:12.000Z",
+      "source": "Pocket Tactics",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "Midnight Podcast | Qingxiao",
       "url": "https://www.youtube.com/watch?v=eUz1KwRDbKg",
       "date": "2026-08-26T11:00:02.000Z",
@@ -738,16 +738,6 @@
       "hot": false
     },
     {
-      "title": "WuWa Resonance Sim Realm event guide (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQOXcwTUNoMkVWdm9SLXJiYTdiQWlwVlpnQ1N6YlNUWGNzN25FWTY4dUpGdUNiZXZBOXRaM0RfVTEyX2FFVlYtSnE3d3hRY0dfczNNZUYzLTE0NkFBbFRRdDFUNFlGTko2YmpWSXJLNzBwalgtX2d2YWJuODZKbDRoUEFQWkZmRnkzQlRKdnRsaUFHUQ?oc=5",
-      "date": "2026-08-23T10:57:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "“我为这人间灯火出剑，他们每一个人都具体鲜活，独一无二。”",
       "url": "https://www.kurobbs.com/mc/post/1540415685993582592",
       "date": "2026-08-23T04:00:00.000Z",
@@ -916,6 +906,16 @@
       "kind": "press",
       "lang": "en",
       "hot": true
+    },
+    {
+      "title": "Wuthering Waves Launches Collaboration with Domino's Pizza",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMWxpWWFWQU9CSXdKZTdBQ1d4OUU5VVlCYklEVGJ0M3lkeW5EYWVwbXNRVURiNGhaRllMT2xvRW5fcGM3ZUdnMHNkNFVwWDhmWUZiRFYwYkk4WWdJR1VBRzRFc0FjYWlpZDZNVzlPYXpqR01vWml4a0ZsRERHZXVVYXRlRWhia0QwTGx2bWE0ZWtUY1RfejEtMHlrNG9md1kyNkE?oc=5",
+      "date": "2026-08-20T07:00:00.000Z",
+      "source": "Inven Global",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
     },
     {
       "title": "WuWa 3.6 patch notes (Wuthering Waves): New characters, events, and more",
@@ -1231,7 +1231,7 @@
       "title": "Wuthering Waves - Official Version 3.6 Official Trailer",
       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNNTdtUTd1ZEtSOU93Z0VzcWl4T0dhMW94UlVicHlIRGtqcDNNLXFVT0s2aXIyOFpqU1U2akkwUjUxMkk1VVo3LTg4M2pyLVlldWF5STZDNmd2QzY0amdZb2xaSmhMc2JLbUFPZnpBRlFiWXNibzUwUm9SYmJKWjBuRFVCd0Y4WjNfRWxtNnplLTFRdWpqREF3YmVn?oc=5",
       "date": "2026-08-07T07:00:00.000Z",
-      "source": "IGN Africa",
+      "source": "za.ign.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
