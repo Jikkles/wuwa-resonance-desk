@@ -23,6 +23,8 @@
     }
   ],
   "baseline": {
+    "from": "3.6",
+    "note": "The patch the source actually measured. Every figure below is 3.6's, because the article the totals come from is 3.6's — so on any other patch this model is carried, not calculated, and the panel says so rather than presenting one patch's arithmetic under another patch's name.",
     "days": 42,
     "tracks": [
       {

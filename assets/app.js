@@ -2019,6 +2019,17 @@ function astritePlan(v){
        dates — so what comes back is the shape of a patch rather than this
        patch's own arithmetic, and the panel says so. */
     modelled: !dated,
+    /* And the other half of that, which is a separate question and was going
+       unsaid. `modelled` is about the patch's *length*; this is about its
+       *total*. The baseline is one patch's arithmetic — `from` names which,
+       and the source line names the article — so on every other patch the
+       headline is that patch's figure carried across, adjusted only for how
+       many days this one runs. Two patches of the same length therefore read
+       the same to the Astrite, which is honest only if the panel admits where
+       the number came from. `versions` is the file's way of saying a patch has
+       been looked at on its own; without an entry, it has not been. */
+    from: base.from || null,
+    carried: !!base.from && base.from !== v.id && !cfg.versions?.[v.id],
     lines: out,
     groups,
     tracks,
@@ -2078,6 +2089,13 @@ function astritePanel(v, status){
     p.modelled
       ? `Modelled on a ${p.baseDays}-day patch — ${esc(v.id)} has no window yet.`
       : `Scaled to this patch's ${p.days} days.`,
+    /* Said out loud, because the number is otherwise indistinguishable from
+       one worked out for this patch: two patches of the same length read the
+       same to the Astrite, and until this line the only thing separating them
+       was a sentence about the calendar. */
+    p.carried
+      ? `The total itself is ${esc(p.from)}'s — nobody has published one for ${esc(v.id)}, so this is that model carried across.`
+      : "",
     esc(p.note)
   ].filter(Boolean).join(" ");
 
