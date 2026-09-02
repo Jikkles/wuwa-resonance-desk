@@ -232,6 +232,31 @@ function sentences(text, n) {
   return parts ? parts.slice(0, n).join(" ").trim() : String(text).trim();
 }
 
+/* The character's name in Kuro's own language, off the `{{Other Languages}}`
+   block every page carries. Simplified, because that is what Kuro's CN
+   community publishes in and what a headline off Kurobbs has to be matched
+   against — the traditional field is usually the same string anyway.
+
+   Two things want it. The record heading, the search index and the timeline's
+   feature card have all been able to draw `nameCN` since the desk was built
+   and have never once had it to draw. And scripts/watch-cn.mjs matches the
+   name out of a Kurobbs profile-preview headline against this field, which is
+   the only reason it can tell a Resonator the desk already holds from one Kuro
+   has just announced. Without it that watcher has nothing to compare to. */
+function chineseName(wikitext) {
+  const box = template(wikitext, "Other Languages");
+  /* Two shapes. Most pages write the fields bare; a page listing more than one
+     name set numbers them, and then the character's own name is set 1 — for
+     Galbrena set 2 is Angel, who is a different entity sharing the page. Three
+     of the roster use the numbered form for a single set, which is why this
+     cannot key off how many sets there are. */
+  const zh = stripWiki(box?.zhs || box?.zht || box?.["1_zhs"] || box?.["1_zht"] || "");
+  /* The field is present but blank on a few pages, and on the Rover subpages
+     it carries the English name — the protagonist is named by the player, so
+     the wiki fills it with the placeholder. Neither is a Chinese name. */
+  return /[一-鿿]/.test(zh) ? zh : undefined;
+}
+
 function parseCharacter(title, wikitext) {
   /* The four Rover forms are subpages of one character and carry a stripped
      infobox — attribute, role, release date, nothing else, because everything
@@ -286,6 +311,7 @@ function parseCharacter(title, wikitext) {
   return {
     title,
     name: stripWiki(box.name) || title,
+    nameCN: chineseName(wikitext),
     epithet: stripWiki(box.title) || undefined,
     rarity: Number(box.rarity) || undefined,
     attribute: stripWiki(box.attribute) || undefined,
@@ -903,6 +929,10 @@ function deriveCurrent(doc) {
     const rec = {
       ...old,
       name,
+      /* Kuro's own name for them. A blank the wiki fills, like everything else
+         here — but a hand-written one stands, because the desk carries a CN
+         name for a character the wiki has no page for at all. */
+      nameCN: old.nameCN || c.nameCN || rover.nameCN,
       rarity: old.rarity ?? c.rarity ?? listed?.rarity,
       attribute: old.attribute || known(c.attribute) || known(listed?.element),
       weapon: old.weapon || known(c.weapon) || known(listed?.weapon),
