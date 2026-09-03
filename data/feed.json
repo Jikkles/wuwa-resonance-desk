@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 677,
-      "ms": 1084
+      "ms": 1042
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 748
+      "ms": 1054
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 59
+      "ms": 191
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 553
+      "ms": 377
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2654,
+      "ms": 2438,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -62,7 +62,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 0,
-      "ms": 123
+      "ms": 104
     },
     {
       "id": "mmoculture",
@@ -72,7 +72,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 141
+      "ms": 700
     }
   ],
   "errors": [],
