@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-03T06:56:52.237Z",
+  "fetched": "2026-09-03T12:39:32.666Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 677,
-      "ms": 1411
+      "ms": 1084
     },
     {
       "id": "kurobbs",
@@ -21,18 +21,17 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 809
+      "ms": 748
     },
     {
       "id": "youtube",
       "name": "Wuthering Waves (YouTube)",
       "kind": "video",
       "lang": "en",
-      "status": "failed",
-      "count": 0,
-      "fetched": 0,
-      "ms": 2668,
-      "error": "HTTP 404 Not Found"
+      "status": "ok",
+      "count": 15,
+      "fetched": 15,
+      "ms": 59
     },
     {
       "id": "reddit-leaks",
@@ -42,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 581
+      "ms": 553
     },
     {
       "id": "reddit-main",
@@ -52,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2646,
+      "ms": 2654,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,9 +60,9 @@
       "kind": "press",
       "lang": "en",
       "status": "ok",
-      "count": 26,
-      "fetched": 26,
-      "ms": 375
+      "count": 0,
+      "fetched": 0,
+      "ms": 123
     },
     {
       "id": "mmoculture",
@@ -73,13 +72,41 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 1026
+      "ms": 141
     }
   ],
-  "errors": [
-    "youtube: HTTP 404 Not Found"
-  ],
+  "errors": [],
   "items": [
+    {
+      "title": "鸣潮 ×陶陶居 联名月饼礼盒预售明日开启！",
+      "url": "https://www.kurobbs.com/mc/post/1545042010820472832",
+      "date": "2026-09-03T10:05:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "鸣潮×陶陶居丨月满玄方，其乐陶陶。",
+      "url": "https://www.kurobbs.com/mc/post/1545041200704815104",
+      "date": "2026-09-03T10:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "3.7| About hsin via team gemberry",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w617xw/37_about_hsin_via_team_gemberry/",
+      "date": "2026-09-03T08:15:16.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "Hsin and Suoming Gameplay",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w5viow/hsin_and_suoming_gameplay/",
@@ -231,6 +258,16 @@
       "hot": false
     },
     {
+      "title": "Wuthering Waves Story Cinematics | Then and Now, One Sword",
+      "url": "https://www.youtube.com/watch?v=NT256TQC_9s",
+      "date": "2026-08-30T03:00:28.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "「启程！鸣潮巡游巴士」活动情报",
       "url": "https://www.kurobbs.com/mc/post/1543209236598714368",
       "date": "2026-08-29T04:00:07.000Z",
@@ -261,22 +298,12 @@
       "hot": false
     },
     {
-      "title": "Beyond Wuthering Waves: What we know about Kuro Games' upcoming titles, Project Nami and Project SUN",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQSkc2TzdONWNuWENkXzF1bjlwMlhEakNLSTB3R0VaOGI2cGt6MjZvaEdJdXVfU053czF1NHNQUmprNDFkUlJFNEgxQ1JZRGEtaVhJZ2hvVzEyTER5TlZmeVhMRWlXTWVhd21xby1OTHFpS3hSdDQ2bkI4ajFkckdYdks1TEFHV0dqbFJvZUVhcXFPTDNFMFpwR0Y3UHpGYzlFN0lTaUFGLTRUOVRSQ3BBNDQxdUwyU25MMHhLT2N6V29Sd2V1ZHN1SQ?oc=5",
-      "date": "2026-08-28T22:50:52.000Z",
-      "source": "GamingonPhone",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves Yangyang Xuanling build, weapon, and teams",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFB0U2RqSjFjS0lCaDB4SmFOR294dzZvQWpaODNLdVFYbTBMX1I5MGNSdWtPb2VjNFFfNjlRVU5aOUdUQ1hkZFhEbG8ycmpvaUE1MExVTWd4Z0YtalZaWWJaRUxPUmVKd0VmU2s2WDZhTlE?oc=5",
-      "date": "2026-08-28T11:29:02.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
+      "title": "Wuthering Waves Story Cinematics | Immortal and Mortal",
+      "url": "https://www.youtube.com/watch?v=QRXTBmlVVVo",
+      "date": "2026-08-29T03:00:02.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -341,6 +368,16 @@
       "hot": false
     },
     {
+      "title": "\"When the Blight Rain and Miasmic Thunder fade, what remains is only... locked obsessions.\"",
+      "url": "https://www.youtube.com/shorts/NbZ943KYti0",
+      "date": "2026-08-28T04:05:19.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "Resonator Preview | Suoming",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w0g0gf/resonator_preview_suoming/",
       "date": "2026-08-28T04:01:03.000Z",
@@ -367,6 +404,16 @@
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "\"I have tasted every longing beneath the heavens, and at last... I know where my heart belongs.\"",
+      "url": "https://www.youtube.com/shorts/TQUyOhestvY",
+      "date": "2026-08-28T03:05:21.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -431,22 +478,22 @@
       "hot": false
     },
     {
-      "title": "WuWa 3.7 drip marketing reveals Suoming, an upcoming playable character (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQeW12OTQzeVZFeVRBcGxqUDlXczlTVzFVQlQ3bFZFWU5UY0g2dGdaV2hhWXg0VDFxek1XQ1FSUWpudXI1R3NpX3hqZExvOWZoT3FSaGVuRlVQdWpOaXBmUkZMWkNUQ0F4QXJXZzIzcVd6Z0REWVZzdy1Kc2MyN2RoMWVnU21KNVU1NkVhNmtmcElGRTJaWElEaW4yc3o3TVhFcVcxaGRjUnliOG5rU2pvdHg5RDU1TjRJN0lN?oc=5",
-      "date": "2026-08-27T03:28:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Suoming Drip Marketing Animation",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vzi9hn/suoming_drip_marketing_animation/",
       "date": "2026-08-27T03:06:14.000Z",
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Post-Lament Anthropocene: Stars Intertwined — Suoming",
+      "url": "https://www.youtube.com/shorts/0mwDm3U7m-w",
+      "date": "2026-08-27T03:05:16.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -471,12 +518,12 @@
       "hot": false
     },
     {
-      "title": "Wuthering Waves codes September 2026",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5ZbGRQMnBzdE9xamlDMzNMTVd2ZFN3WVlLcmZjWkVKUWVSbmVoTWxIdC1zd28wanhfcWpGYktTWE0xMlpUekdDajhUOER5TGxsR1hmZS1fak0yN2wyMER4NQ?oc=5",
-      "date": "2026-08-26T11:49:12.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
+      "title": "Midnight Podcast | Qingxiao",
+      "url": "https://www.youtube.com/watch?v=eUz1KwRDbKg",
+      "date": "2026-08-26T11:00:02.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -507,6 +554,16 @@
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Post-Lament Anthropocene: Stars Intertwined — Hsin",
+      "url": "https://www.youtube.com/shorts/VDtnW32JF2Y",
+      "date": "2026-08-26T03:05:07.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -581,16 +638,6 @@
       "hot": false
     },
     {
-      "title": "Guy who posted the name \"Lucille\" before SeeleLeaks said she is a Cowgirl with Cat Ears. 2 other images are just an example.",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vw8bxl/guy_who_posted_the_name_lucille_before_seeleleaks/",
-      "date": "2026-08-23T14:15:21.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "“我为这人间灯火出剑，他们每一个人都具体鲜活，独一无二。”",
       "url": "https://www.kurobbs.com/mc/post/1540415685993582592",
       "date": "2026-08-23T04:00:00.000Z",
@@ -611,19 +658,19 @@
       "hot": false
     },
     {
+      "title": "Resonator Highlights | Qingxiao",
+      "url": "https://www.youtube.com/shorts/X2TiBbnTxnU",
+      "date": "2026-08-22T10:00:04.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
       "title": "共鸣者瞬间 | 清宵",
       "url": "https://www.kurobbs.com/mc/post/1540312539186806784",
       "date": "2026-08-22T10:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
-      "title": "《鸣潮》剧情动画 | 仙尘",
-      "url": "https://www.kurobbs.com/mc/post/1540021530303434752",
-      "date": "2026-08-22T03:00:00.000Z",
       "source": "Kurobbs (official CN)",
       "sourceId": "kurobbs",
       "kind": "official",
@@ -661,6 +708,16 @@
       "hot": true
     },
     {
+      "title": "Insider Channel: Special Program | Crystal Clear",
+      "url": "https://www.youtube.com/watch?v=om6QZVMX9-M",
+      "date": "2026-08-21T09:00:06.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "《鸣潮》梦州·玄方篇OST Vol.2《云影仙迹》现已正式上架",
       "url": "https://www.kurobbs.com/mc/post/1540025910044270592",
       "date": "2026-08-21T04:00:00.000Z",
@@ -674,16 +731,6 @@
       "title": "《鸣潮》3.6版本「蜃云灯影，凡尘剑心」全平台活动开启！",
       "url": "https://www.kurobbs.com/mc/post/1540060630518145024",
       "date": "2026-08-20T10:30:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": true
-    },
-    {
-      "title": "【工具更新】3.6版本工具更新资讯速递！",
-      "url": "https://www.kurobbs.com/mc/post/1539972524141539328",
-      "date": "2026-08-20T10:00:00.000Z",
       "source": "Kurobbs (official CN)",
       "sourceId": "kurobbs",
       "kind": "official",
@@ -711,52 +758,12 @@
       "hot": false
     },
     {
-      "title": "Qingxiao vs Denia in WuWa 3.6: Who should you pull for? (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPVTdmUWlXVWs4TzE0QzFZRnY4YzRhSWFsX0R4alVFZGN5U0tUZENXVi01elRBaDVGV3pEbGtPSkZNRW11Y1VkUDRaLTJxYkFmM3B4Slk0UUpnSHFnd0lRUzc1SDg3Y1Y1dHRacE9NQTJWVkUzU1p6dzlac1BqLVdYZVlQcTQ1QU45dFcxVlRHT3hYRGxxU0E?oc=5",
-      "date": "2026-08-20T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 patch notes (Wuthering Waves): New characters, events, and more",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPNHFXUG5ONkdnZmc2b0FXV3ctZmFNcEthWGVfMkMySS11c3BVQ0tUNU9SWUxGdWw3dWlVY1JwRmRiRGNUOVljU1BfOVN3ektEeGd3ZlZITjZMMU9oZlRTTXlpWDRKRFItejlNRzlmYVFPZ2hjaHR3N0dsdk1RaW1rN2o2MXJoNUU0aW8zN09LZlM0WlZsY0t6TkpR?oc=5",
-      "date": "2026-08-20T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 redeem codes (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBJeEFacEtyVEhaRXB1Y05vbFh2R01CSTNxWGdmQWNEamhvUHA0NmZWRmdIRVlHdndHT2Y0QlVZQ1FGcmxlV1A3bU5mOHJhaWdIb2NuV25fbU41MEFoaWlIcjRFSVFlT1JsR0llY1BVSmp4a2s5RW9pRkdyU1BTdw?oc=5",
-      "date": "2026-08-20T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa Qingxiao Resonance Chain guide (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNell4WFZLaEx4Wi12eDZPeFZYNGpwekJ6OUpWcUUtYVlqS1JNWEJNSVdSNE9mbE1URlFoZ2piUG9OamJybnlELTI5TkFNOGVydkRVUlMySHljTUlNeUVFazlVOEpZbmNycDBhY0ZXZ3htZWMtelFMdVRwa3lkLXpzZF95NndPOS03SEZ0SExaRXE?oc=5",
-      "date": "2026-08-20T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Best WuWa Qingxiao build guide: Echoes, weapons, and teams (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNNkNVN0F0MDE2MVlLdE5IWXBLaXREX1hzb0ZKcEdBS1BBdmNtWmVpZXIyTDJGRXAxSURBYnlXX2FQV1AxRzcwNzNFelZFcjhTQk5TRFVpdTZOQnFHdEZRaHk3ODJaaG1DOE1GS1JsejNPNjUzeV9leVFicjNSZTQ1Q2Q3U2UyVzZWZ1NNQ1NIVXJxSWdOOGlCVkduS21hY1BNcXBVYXhR?oc=5",
-      "date": "2026-08-20T03:04:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
+      "title": "Wuthering Waves EP3.6 — Qingxiao - \"Outside the Mountain\"",
+      "url": "https://www.youtube.com/watch?v=qaVli_4qiVs",
+      "date": "2026-08-20T02:30:04.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -779,16 +786,6 @@
       "kind": "official",
       "lang": "en",
       "hot": false
-    },
-    {
-      "title": "Time until WuWa 3.6 releases (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBNdG5tWk5BeUpjTE5FN29ZcVV2bnBjMjl2Y2RNMGpLWWxNdFFvMlJ0WGJvY1N4c0taQlVTWHlpM3VrVzFIYTdtX2lFaGlNUzJ0OEVMck1EcHpCWjA1dTBRbDROWnNYcEk3U09iV2dOaV9tZzJPcEl0R2I5MnRLWDg?oc=5",
-      "date": "2026-08-19T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "[Glint of Clouds] Featured Weapon Convene",
@@ -841,14 +838,24 @@
       "hot": true
     },
     {
-      "title": "When is Wuthering Waves 3.6 Release Date For Qingxiao Banner? Find Out Here.",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPbEJHbElUWjkxVk5KUU5qZ0NDcklPaHRGakRiQjYzdXZrN1F4NVRRWEFza29EMkl2OHJGenhHMHZrYXJyd0YwUHFkZWN2WXZtbnJMMTZ0bDFqd2hQVHYzM3lVX0xsRlQxU1ZrOVRKSEpQM3JPRlpjcXppa183a21SX3B3YUgyZVJRV0FyYTBlbmRRYVB4dGd3bTd5eVlYdw?oc=5",
-      "date": "2026-08-18T07:00:00.000Z",
-      "source": "GameRant",
-      "sourceId": "google-news",
-      "kind": "press",
+      "title": "Wuthering Waves | Resonator Showcase | Qingxiao — CULTIVATION",
+      "url": "https://www.youtube.com/watch?v=mT86JXY6oEw",
+      "date": "2026-08-18T03:00:18.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": true
+    },
+    {
+      "title": "New 5-Star Weapon \"Glint of Clouds\" Coming Soon",
+      "url": "https://www.youtube.com/shorts/eK1ARxPfGZY",
+      "date": "2026-08-17T10:30:30.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
     },
     {
       "title": "Profile Reveal | Heart Sword — Qingxiao",
@@ -857,6 +864,26 @@
       "source": "Kuro Games (official EN)",
       "sourceId": "kuro-en",
       "kind": "official",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves Resonator Combat Showcase | Qingxiao",
+      "url": "https://www.youtube.com/watch?v=op22gIZneCk",
+      "date": "2026-08-17T03:00:08.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Post-Lament Anthropocene: Stars Intertwined | Qingxiao",
+      "url": "https://www.youtube.com/shorts/nbAIWYJmOPY",
+      "date": "2026-08-16T03:00:31.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -871,72 +898,12 @@
       "hot": false
     },
     {
-      "title": "Current and upcoming Wuthering Waves banners",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE0taTZ6SWt3OVpzekh5TW95eVl0MjJXeUdjRzE2Y3p5czduTDlIaW1NQXVMQ3c0Z3BhWDdBRmNxc0pGQlhvb1Yzbi1hRDhCVWdEYVd2MWFBUU00SDAyVW5qTjBn?oc=5",
-      "date": "2026-08-13T07:00:00.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Wuthering Waves Version 3.6 Update Maintenance Notice",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5281",
       "date": "2026-08-13T03:00:00.000Z",
       "source": "Kuro Games (official EN)",
       "sourceId": "kuro-en",
       "kind": "official",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Wuthering Waves version 3.6 release date, new Resonators, and DLSS 4.5 support",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNNnI5ZElMRURDcVcwUDE2RmJZVG1ab3M5S1JHTTVaS0hSNVhoNDk4OXJ0dV9mR2FJczdHLTFYclk3Zy1nRGFXNEdvRmg4NGR4aVBqRE1ZS3B6dGI0RDdzdGtCc3Q2XzRnQ3g3TjJZQzQ5Q0ppZGphN2lRV2h3UW5xcHdNUl9LRXN0OGhRMWVuaU4wRWJ2eWR3cnZfWVJpN0RjYlByS1VIQkpNNVQtYkZia1dhd2hvcC0teWlWd3ln?oc=5",
-      "date": "2026-08-12T07:00:00.000Z",
-      "source": "Notebookcheck",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Wuthering Waves events schedule",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9tSDNaNWVYVmt3aXFfYy16Uy1VX1JFdEdDVV9CM1VveTQ3djNUV3RGajVjYTZoNjdXUDFuQ1k4QlBYY1AxLWNEaHctS0NTaDNXS1AxZWlqTmhvbWp1RDNfc0hB?oc=5",
-      "date": "2026-08-11T07:00:00.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves – Version 3.6 Trailer & Overview",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQaXZYUDk4cFQwa1BkUnhxaG9vaS1OVGFxeGdBUEdpYUh3emlBekxrbmg0dEl0Mk1MWkllRWFtSmJlbFRCQnkxRUhPZmJhaEI4UDNuc0pOeDlHSDBkUmIxR0xKREtUTV84WTNLamhXdDdRWmJTaDgwc0c4TTVUZUNfMGpNZ2pIeUtJRFdfdUZR?oc=5",
-      "date": "2026-08-10T07:00:00.000Z",
-      "source": "GameSpace.com",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Wuthering Waves tier list August 2026",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE83X3pQWThWelNncE8weFBQZXZNV0ZjOUM4T3VOay02SUxSeTU0WHlpd0pXc29Nal8yb1kzSndrUEpPVTBYbmxIZ1JsZkJfOFljVTdwSU01YUVMMExrV2hwNlFOcUp0dw?oc=5",
-      "date": "2026-08-10T07:00:00.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves 2.2 Update: Release Date and Features",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE84Zm4yc2dpSjREWHhRSkxybjBCZUJsdVB5NWJEb1VwZTlpcnZFeEhSdVZKVlMtakg0NXZ5Q3UxcU9Sc1dmRXBKQmpnM0tQdjFhQnBIeDZwNzhZLW5K?oc=5",
-      "date": "2026-08-08T07:00:00.000Z",
-      "source": "mmos.com",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": true
     },
@@ -951,94 +918,14 @@
       "hot": true
     },
     {
-      "title": "Wuthering Waves - Official Version 3.6 Official Trailer",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNNTdtUTd1ZEtSOU93Z0VzcWl4T0dhMW94UlVicHlIRGtqcDNNLXFVT0s2aXIyOFpqU1U2akkwUjUxMkk1VVo3LTg4M2pyLVlldWF5STZDNmd2QzY0amdZb2xaSmhMc2JLbUFPZnpBRlFiWXNibzUwUm9SYmJKWjBuRFVCd0Y4WjNfRWxtNnplLTFRdWpqREF3YmVn?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "IGN Africa",
-      "sourceId": "google-news",
-      "kind": "press",
+      "title": "Wuthering Waves Version 3.6 Preview Special Broadcast",
+      "url": "https://www.youtube.com/watch?v=URrFKyAoPw4",
+      "date": "2026-08-07T11:56:21.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Wuthering Waves version 3.6 update ‘Lamplight in Mirage, Sword’s Resolve in Heart’ launches August 20",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOUXYtLVhVVF9tTkdwdUtKRDNIRGhUUEhXU0gwSDlJWWNyU0RkUkZjbm91VUtEUEZ5RkxQdTFuRUZPM0g5OVVnV2ZaLVk5U25mNnJtX2VUaC1sdkt5NzBsTnVpOVJYdEw3S0tneUxXMUdHSUs2ZkpFU1E0VmNIMjhkakNKeU5fSWJQbjV2bVFrd1RFNnBhWkxlckNuZjNZVV9fTVVXWDM0c1h5VnBEN1EzOVpqZmZVbWdzTjN3Q2pNbE1xeHpHUkR1TQ?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "Gematsu",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 banners schedule (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOcDVqOWtDVnIzQ1dkZHNuMEtLZnhoZGc5cGdGZW1uTFdzdnBqZElUQmg2MFlMT09IYUsyTjd5ek5fTGhFZG9zTkw3SFlZWUJ3MENVa19TS2RqY041SXlTLWJmX1p3SGc1Vk5wcnl5XzRiRHB5S1Znb2tQRTRpX09nWVhZNA?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 events and rewards (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNYkNCejBuZk9mR3FjQWt2M1E4clBjNS0zbE1XakVpX1pOX04wektkWGZvdE1OTVdXdGc1SnljdGlLOURCQ2ZReWpDLWJEOEZwRnlsVEcxNXpEek4wVFV5ZFd5NUo3YlFYZ1VsYVdfR0E2MWQyRnBvaUhYNXgyMVhaSw?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 Livestream Code & Time (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxObE1Rd0g4emNLcUxkNTZqeHdrZF9jbGFmU1otQWthbXVHZWJlYVNJY2Y4MU9pSVctcHFZbWhib0EtTGMxVEI1N1BTRC1CUENCZTh4eTZKRDF0a3ZrMUhRS211WC1BemlnaUt3VkJCbkU3NWd6b19wOFo0Q1V2dkhIY3RXMmc4MVlTRW9XSHpxOXY2UDdtV0xVWWZrMVA3RnJX?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "GameRant",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 livestream codes (Wuthering Waves): How to get 300 Astrites?",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOWGl3RUpSMUJzbF9DSzBQUDJnUVVZMmFZaTFHRFI4M2NfY0VZMVhIbGQ0cmRiUTBsRjlNTE5XU01LRl84NW1ySGstaXRleS14VDVuc2RlRkhUSWRmQ1FvODZqV2xHVzFROUM5LVk3bThmUjN4bFhKUGhIRjQwdkZxXzF5cmxvS1BuZk5wMDhWdlFDS1BPd0lYWXZlbVJ2WWc?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "WuWa 3.6 livestream summary: Release date, banners, codes, and everything new (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQMERaNk80d1Iya040TmVtN3lycEVXYm5hWmlrbFpHOHFoRFVlTzB2Tk5kYmo2UVJiekNTT2ZUcDF3MFQwbkxtQktqWnNYMGctbGxxTFZzSmhhalZVMENGT1czcU9ZN3NrQ3FRZ1YzYzNDMU4ybDliM1RKSG40LTJHQ2lQQVpRRU9TQ1VNRmdFemFnU3d6OEozeUZ4T2tYblZNLWFEQ0swQXdHdDRFTW9vWUUta0FMSG50eFIxSEdn?oc=5",
-      "date": "2026-08-07T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Wuthering Waves Taoqi build",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE8ySFFfNUVpT2FQT2JMVHBYa0Y2VHNIbzZYa0N0VWhteFpwUlNaLUF1YzhOS2ZTcy05S3g3MXkyY2ktRC1HanRYZXFQdV9UOHNEQ1cxdjdTcEhBTmhkeVFVMA?oc=5",
-      "date": "2026-08-04T07:00:00.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves tier list and who to pick at the start",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9FNTBaRkQ1NnNfU2NJVUVTa1Frck5QZXRNbDFCVkEydl9ndXZTZzJ3TTVYeVAtaXFhdWNZZEExWTAtOHF1aWU5bU9BS0ZFdEhxNF95Vk9WSFg4Zjh3b0NScXZKWHI?oc=5",
-      "date": "2026-08-04T07:00:00.000Z",
-      "source": "Pocket Gamer",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Resonator Review | Guiding Starlance — Aemeath",
