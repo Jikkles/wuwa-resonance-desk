@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-04T17:24:12.301Z",
+  "fetched": "2026-09-04T22:11:01.225Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 677,
-      "ms": 719
+      "ms": 1347
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 924
+      "ms": 990
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 49
+      "ms": 134
     },
     {
       "id": "reddit-leaks",
@@ -41,18 +41,17 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 572
+      "ms": 472
     },
     {
       "id": "reddit-main",
       "name": "r/WutheringWaves",
       "kind": "community",
       "lang": "en",
-      "status": "skipped",
-      "count": 0,
-      "fetched": 0,
-      "ms": 2624,
-      "error": "HTTP 429 Too Many Requests"
+      "status": "ok",
+      "count": 25,
+      "fetched": 25,
+      "ms": 3561
     },
     {
       "id": "google-news",
@@ -62,7 +61,7 @@
       "status": "ok",
       "count": 0,
       "fetched": 0,
-      "ms": 250
+      "ms": 245
     },
     {
       "id": "mmoculture",
@@ -72,11 +71,261 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 218
+      "ms": 747
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "KURO please remove LiNgdonDingong!",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7hlrc/kuro_please_remove_lingdondingong/",
+      "date": "2026-09-04T21:33:19.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Next patch is gonna be 3.7",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7hiee/next_patch_is_gonna_be_37/",
+      "date": "2026-09-04T21:29:32.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "The best animation",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7h84u/the_best_animation/",
+      "date": "2026-09-04T21:18:31.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Don’t you guys think the ToA arena is already outdated compared to the game’s current graphics and art direction?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7gxts/dont_you_guys_think_the_toa_arena_is_already/",
+      "date": "2026-09-04T21:07:38.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "A Short Story",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7guc8/a_short_story/",
+      "date": "2026-09-04T21:04:02.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "\"A small price to make wives smile.\" [@prr]",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7ftji/a_small_price_to_make_wives_smile_prr/",
+      "date": "2026-09-04T20:25:43.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Best global filter for android",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7fsrg/best_global_filter_for_android/",
+      "date": "2026-09-04T20:24:54.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "All Intimacy Lv5, now whats next? (where's our Resonator specific sigil?)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7foif/all_intimacy_lv5_now_whats_next_wheres_our/",
+      "date": "2026-09-04T20:20:34.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "I can't get past the Nivora puppets",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7fdah/i_cant_get_past_the_nivora_puppets/",
+      "date": "2026-09-04T20:08:50.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "kuro knows what we want",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7fcno/kuro_knows_what_we_want/",
+      "date": "2026-09-04T20:08:11.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "This little animation is top tier",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7f6n1/this_little_animation_is_top_tier/",
+      "date": "2026-09-04T20:02:06.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Any reccomendations for WhiWa Teams?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7f4mf/any_reccomendations_for_whiwa_teams/",
+      "date": "2026-09-04T20:00:25.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Swimsuit Camellya (art by @yarn_03)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7ewyr/swimsuit_camellya_art_by_yarn_03/",
+      "date": "2026-09-04T19:52:49.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "These Wuwa ads are getting kinda crazy.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7elob/these_wuwa_ads_are_getting_kinda_crazy/",
+      "date": "2026-09-04T19:41:29.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "I dont mind female sentinels/Sentinel Resonators. But i am also eager to see how a male Sentinel/Sentinel Resonator would be like.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7e4iz/i_dont_mind_female_sentinelssentinel_resonators/",
+      "date": "2026-09-04T19:24:13.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Fatal error!",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7d7ke/fatal_error/",
+      "date": "2026-09-04T18:50:56.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "After 3.6 reveals be like.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7d0ax/after_36_reveals_be_like/",
+      "date": "2026-09-04T18:43:46.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "My sentinel you are in a fight 😭🥀",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7d02s/my_sentinel_you_are_in_a_fight/",
+      "date": "2026-09-04T18:43:34.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Found sky limit!",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7cctv/found_sky_limit/",
+      "date": "2026-09-04T18:20:27.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Hi Bertolt",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w7b40k/hi_bertolt/",
+      "date": "2026-09-04T17:35:23.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "C# on PS5",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w79ov5/c_on_ps5/",
+      "date": "2026-09-04T16:45:05.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Had to draw Hsin because I'm so hyped for her!",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w79mxx/had_to_draw_hsin_because_im_so_hyped_for_her/",
+      "date": "2026-09-04T16:43:11.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Obsessed with the Terraria collab :D",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w79c9w/obsessed_with_the_terraria_collab_d/",
+      "date": "2026-09-04T16:32:43.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "WuWa has such beautiful women it’s actually crazy!!",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w78vzc/wuwa_has_such_beautiful_women_its_actually_crazy/",
+      "date": "2026-09-04T16:16:25.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "His WHAT arrives now?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1w78i8q/his_what_arrives_now/",
+      "date": "2026-09-04T16:02:54.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "3.7| About suoming's weapon via seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w75kan/37_about_suomings_weapon_via_seele/",
