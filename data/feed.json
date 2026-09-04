@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-04T12:33:43.424Z",
+  "fetched": "2026-09-04T17:24:12.301Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 677,
-      "ms": 894
+      "ms": 719
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 820
+      "ms": 924
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 471
+      "ms": 49
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 476
+      "ms": 572
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2593,
+      "ms": 2624,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -59,11 +59,10 @@
       "name": "Google News",
       "kind": "press",
       "lang": "en",
-      "status": "failed",
+      "status": "ok",
       "count": 0,
       "fetched": 0,
-      "ms": 26808,
-      "error": "HTTP 503 Service Unavailable"
+      "ms": 250
     },
     {
       "id": "mmoculture",
@@ -73,13 +72,21 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 885
+      "ms": 218
     }
   ],
-  "errors": [
-    "google-news: HTTP 503 Service Unavailable"
-  ],
+  "errors": [],
   "items": [
+    {
+      "title": "3.7| About suoming's weapon via seele",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w75kan/37_about_suomings_weapon_via_seele/",
+      "date": "2026-09-04T14:12:58.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "3.7| Story cinematic names via seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w72yh9/37_story_cinematic_names_via_seele/",
@@ -584,16 +591,6 @@
       "title": "Hsin sentinel form via seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vylkgm/hsin_sentinel_form_via_seele/",
       "date": "2026-08-26T03:28:27.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hsin Drip Marketing Animation",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vyl2ys/hsin_drip_marketing_animation/",
-      "date": "2026-08-26T03:05:46.000Z",
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
