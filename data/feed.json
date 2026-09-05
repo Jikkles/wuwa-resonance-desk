@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-05T06:44:59.365Z",
+  "fetched": "2026-09-05T16:35:14.321Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 678,
-      "ms": 1379
+      "ms": 289
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 995
+      "ms": 1045
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 151
+      "ms": 82
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 412
+      "ms": 517
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2491,
+      "ms": 2499,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -61,8 +61,8 @@
       "lang": "en",
       "status": "ok",
       "count": 40,
-      "fetched": 53,
-      "ms": 368
+      "fetched": 55,
+      "ms": 499
     },
     {
       "id": "mmoculture",
@@ -72,11 +72,31 @@
       "status": "ok",
       "count": 0,
       "fetched": 4,
-      "ms": 133
+      "ms": 161
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Post-Lament Anthropocene: Stars Intertwined | Jingran",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w82uod/postlament_anthropocene_stars_intertwined_jingran/",
+      "date": "2026-09-05T14:53:20.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "3.7 [Dev]| Early draft for the boss via seele",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w814r4/37_dev_early_draft_for_the_boss_via_seele/",
+      "date": "2026-09-05T13:43:08.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "Post-Lament Anthropocene: Stars Intertwined | Jingran",
       "url": "https://www.youtube.com/shorts/jw8-yxDAvLM",
@@ -170,8 +190,8 @@
     {
       "title": "Wuthering Waves showed off gameplay of Hsin and Suomin from patch 3.7.",
       "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1RX1Y5TUVHa0MwQWlVbGQteDJRY0lsRldzaXpMS1ZtMXZnMGtSbVZ3TENMZ1BUM2N4WE5aa2Y5eWZVc3FuamVJazB0TlBGZ0MwQkRlZGkyZnpyei1JRlNOX1FfRnJKYmZOdkduYmhXWmRsMkVIWVBYU3VUVjk?oc=5",
-      "date": "2026-09-04T00:15:24.000Z",
-      "source": "Wotpack.ru",
+      "date": "2026-09-04T02:10:14.000Z",
+      "source": "wotpack.ru",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -661,7 +681,7 @@
       "title": "Wuthering Waves announced Hsin and Suomin for patch 3.7.",
       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNaURubmNlbWlnNWxfUlVaUUg2OUlpc2hCdVRMdEVNbVpKYzZsUTVtdkx1eHRucEphNFY2WktlZUlrX3hrb0d2SVFNR2RLM1hNbzZ1VkZmakJlY1NFVGg3Vk5IelBKQkRfMEd4dF9Tak9DeWY4dXBQU2xlNXNtMTU0anBNM0tGQkE?oc=5",
       "date": "2026-08-28T01:20:31.000Z",
-      "source": "Wotpack.ru",
+      "source": "wotpack.ru",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -738,16 +758,6 @@
       "hot": false
     },
     {
-      "title": "Suoming Drip Marketing",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vzi4yx/suoming_drip_marketing/",
-      "date": "2026-08-27T03:00:33.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "《寰宇人类注疏：群星交错》——锁暝",
       "url": "https://www.kurobbs.com/mc/post/1541816017508257792",
       "date": "2026-08-27T03:00:00.000Z",
@@ -796,16 +806,6 @@
       "kind": "press",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Hsin sentinel form via seele",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vylkgm/hsin_sentinel_form_via_seele/",
-      "date": "2026-08-26T03:28:27.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Post-Lament Anthropocene: Stars Intertwined — Hsin",
@@ -1068,6 +1068,16 @@
       "hot": false
     },
     {
+      "title": "Qingxiao vs Denia in WuWa 3.6: Who should you pull for? (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPVTdmUWlXVWs4TzE0QzFZRnY4YzRhSWFsX0R4alVFZGN5U0tUZENXVi01elRBaDVGV3pEbGtPSkZNRW11Y1VkUDRaLTJxYkFmM3B4Slk0UUpnSHFnd0lRUzc1SDg3Y1Y1dHRacE9NQTJWVkUzU1p6dzlac1BqLVdYZVlQcTQ1QU45dFcxVlRHT3hYRGxxU0E?oc=5",
+      "date": "2026-08-20T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
       "title": "Wuthering Waves Launches Collaboration with Domino's Pizza",
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQMWxpWWFWQU9CSXdKZTdBQ1d4OUU5VVlCYklEVGJ0M3lkeW5EYWVwbXNRVURiNGhaRllMT2xvRW5fcGM3ZUdnMHNkNFVwWDhmWUZiRFYwYkk4WWdJR1VBRzRFc0FjYWlpZDZNVzlPYXpqR01vWml4a0ZsRERHZXVVYXRlRWhia0QwTGx2bWE0ZWtUY1RfejEtMHlrNG9md1kyNkE?oc=5",
       "date": "2026-08-20T07:00:00.000Z",
@@ -1314,16 +1324,6 @@
       "source": "Kuro Games (official EN)",
       "sourceId": "kuro-en",
       "kind": "official",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Wuthering Waves version 3.6 release date, new Resonators, and DLSS 4.5 support",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNNnI5ZElMRURDcVcwUDE2RmJZVG1ab3M5S1JHTTVaS0hSNVhoNDk4OXJ0dV9mR2FJczdHLTFYclk3Zy1nRGFXNEdvRmg4NGR4aVBqRE1ZS3B6dGI0RDdzdGtCc3Q2XzRnQ3g3TjJZQzQ5Q0ppZGphN2lRV2h3UW5xcHdNUl9LRXN0OGhRMWVuaU4wRWJ2eWR3cnZfWVJpN0RjYlByS1VIQkpNNVQtYkZia1dhd2hvcC0teWlWd3ln?oc=5",
-      "date": "2026-08-12T07:00:00.000Z",
-      "source": "Notebookcheck",
-      "sourceId": "google-news",
-      "kind": "press",
       "lang": "en",
       "hot": true
     },
