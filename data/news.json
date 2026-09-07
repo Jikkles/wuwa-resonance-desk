@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-08-31",
+  "updated": "2026-09-07",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -351,10 +351,11 @@
       "category": "banner",
       "confidence": "rumour",
       "title": "Hint-reading points to a 3.8 Resonator called Lily",
-      "body": "The leaks subreddit read a run of teasers from the leaker Step as pointing to a 3.8 Resonator named Lily, with a separate thread reading a Seele hint as the next male unit. The name itself traces back to a Tieba post rather than to Step, and the weapon read comes from Step posting separately that a girl was holding him at gunpoint, taken as a gun user. This is hint interpretation, not file evidence: no beta client exists for 3.8, and the name has not turned up in a datamine. That is three versions past live, so it stays a placeholder until something with files behind it lands.",
+      "body": "The leaks subreddit read a run of teasers from the leaker Step as pointing to a 3.8 Resonator named Lily, with a separate thread reading a Seele hint as the next male unit. Step ran them as a countdown on Telegram over 4-8 August: a black-and-white gothic dress, then \"Black Swan\", then \"strands of lavender hair kissed by pink\", closing on \"well.. she's pretty. it's like they say, the most beautiful lilies bloom in silence..\" - which is where the name comes from, as a pun rather than a statement. The name itself traces back to a Tieba post rather than to Step, and the weapon read comes from Step posting separately that a girl was holding him at gunpoint, taken as a gun user. This was hint interpretation, not file evidence: at the time no beta client existed for 3.8 and the name had not turned up in a datamine. It has since. A GameData datamine on 5 September put the role id in the client files as Spectro with Pistol ascension materials, which backs the name, the element and the weapon and leaves this entry standing as the record of how far ahead the guess ran - see the datamine entry. No outcome is marked on it: a datamine is file evidence rather than Kuro confirming anything, and the desk only calls a call right once it is official. The appearance hints are still unconfirmed, and Step's own hints are worth remembering for what they are: he is the leaker with the longest lead time and the loosest accuracy, because Kuro changes things over the six months his information is ahead of everyone else's.",
       "tags": [
         "3.8",
-        "characters"
+        "characters",
+        "Lily"
       ],
       "sources": [
         {
@@ -372,7 +373,8 @@
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vikzhc/hint_about_next_male_unit_via_seele/"
         }
-      ]
+      ],
+      "outcome": ""
     },
     {
       "id": "2026-07-29-35-phase2",
@@ -1232,6 +1234,53 @@
           "name": "r/WutheringWavesLeaks - a third new echo set via team Gemberry",
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w37g42/37_another_new_echo_set_via_team_gemberry/"
+        }
+      ],
+      "outcome": ""
+    },
+    {
+      "id": "2026-09-05-38-lily-datamine",
+      "date": "2026-09-05",
+      "version": "3.8",
+      "category": "identity",
+      "confidence": "datamined",
+      "title": "Lily turns up in the client files as a Spectro pistol user - the name is real, and it is spelled Lili",
+      "body": "GameData Leaks posted a set of new .ini files on 5 September carrying four unreleased role ids, one of them \"R2T1LiliMd10011\", followed half an hour later by that role's attribute and ascension list: new role 1512, Spectro. This is the first thing on Lily that is not somebody reading a riddle. Until now the name came out of a Tieba post and the weapon out of Step joking that a girl was holding him at gunpoint, and the desk filed the whole thing as a rumour three versions ahead of live. A role id in a shipped file is a different kind of evidence: the character exists, she is Spectro, and Kuro's own build calls her Lili rather than Lily - the English spelling everyone is using is the community's, not Kuro's, and internal romanisations do survive to launch often enough to be worth noting. The ascension list is where the weapon is settled. It runs Solitary Flame of Loyalty, a new gathering material, Full-Spectrum Automaton Core and Echoing Combustion Cluster (Pistol), then Heart of the Celestial Glazed Path, Full-Spectrum Automaton Core, Echoing Combustion Cluster (Pistol) again and Intact Tunneling Cable-Chain. The weapon material is the tell - the (Pistol) suffix is how Kuro tags a Pistol user's forgery material - and it lines up with the gunpoint hint rather than following from it. Everything here is marked STC by the leaker, which for a patch with no beta client is the honest label: none of it is balanced, and the item names are working translations off the Chinese. What it does not say is anything about her kit. The third-slot healer everyone has written her in as is inference from a healing echo set sitting in the 3.7 beta, not from this file.",
+      "tags": [
+        "3.8",
+        "Lily",
+        "identity",
+        "datamine",
+        "Spectro"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - (3.8) Lily Attribute and Materials (STC) via GameData Leaks",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8dfc2/38_lily_attribute_and_materials_stc_via_gamedata/"
+        }
+      ],
+      "outcome": ""
+    },
+    {
+      "id": "2026-08-07-38-event-teaser",
+      "date": "2026-08-07",
+      "version": "3.8",
+      "category": "event",
+      "confidence": "reported",
+      "title": "The 3.8 teaser everyone is quoting is two words and an emote - and it is about an event, not about Lily",
+      "body": "On 7 August the leaker Danjinkan posted \"3.8\" followed by a single custom emote and an attached picture into the DNIA Discord, and it travelled far enough that people now refer to it as the Lily teaser. It is worth being exact about what it says, because it says less about Lily than the retellings do. The attached picture is not game art and not a leak of one: it is a Yae Miko screenshot from Genshin Impact carrying a third-party site's watermark, which makes it a comparison the leaker was drawing rather than anything out of a build - and what the comparison was meant to point at, a look, a fox motif, or a joke, is not stated anywhere in the post. The two follow-ups are the part with content. Danjinkan wrote that 3.8 will have a story-heavy event and that Changli is one of the returning characters, then followed the reposting with \"THIS IS AN EVENT NOT MSQ\" - which is a correction aimed at people who had already started reporting it as main-quest news. So the claims worth carrying are that 3.8 has a substantial story event and that Changli features in it. Neither is attached to file evidence and neither is about the new Resonator, and the emote that made the post famous carries no information at all. Filed as reported rather than rumour because Danjinkan is named and the claim is specific enough to be wrong in public.",
+      "tags": [
+        "3.8",
+        "event",
+        "Changli",
+        "story"
+      ],
+      "sources": [
+        {
+          "name": "r/WutheringWavesLeaks - 3.8 event via FS",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vhrxm9/38_event_via_fs/"
         }
       ],
       "outcome": ""
