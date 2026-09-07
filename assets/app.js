@@ -5957,6 +5957,20 @@ function drawerResonator(name){
          should not cost two fetches or throw away where you had scrolled to.
          (No backticks in here: this comment is inside a template literal.) -->
     <div id="kittab"${S.rtab === "kit" ? "" : " hidden"}>
+      <!-- Skills first, notes after. These used to be the other way round,
+           which was right while the notes were the only thing the desk had for
+           an unshipped Resonator: there was nothing behind them to bury. Now
+           the client files put Kuro's own skill text on the same records, and
+           a reader opening Hsin met three screens of the desk's reading before
+           reaching a single skill.
+
+           Same rule the tab strip above already follows. The kit is what the
+           character is and everything else is what somebody thinks about it,
+           so the record opens on the first — a record that opens on a reading
+           has answered a question you did not ask yet. -->
+      <div id="kitwrap"><div class="dsec"><span class="label">Skills</span>
+        <p style="margin:0;color:var(--fg-3)">Loading kit…</p></div></div>
+
       ${r.kit?.length ? `<div class="dsec">
         <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
         <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
@@ -5964,9 +5978,6 @@ function drawerResonator(name){
         <p class="tier-note" style="margin-top:14px">Pre-balance. Multipliers and mechanics
         routinely shift between beta phases.</p>
       </div>` : ""}
-
-      <div id="kitwrap"><div class="dsec"><span class="label">Skills</span>
-        <p style="margin:0;color:var(--fg-3)">Loading kit…</p></div></div>
     </div>
 
     <div id="buildtab"${S.rtab === "build" ? "" : " hidden"}>
@@ -6006,9 +6017,13 @@ function fillKit(name){
              indistinguishable from a shipped Resonator's — same six slots,
              same Chain, same words out of the same client — so what marks it
              has to be read before it, not after it has been believed. */
-          ? `<p class="kit-beta">Read out of the ${esc(betaBuild() || "beta")} client files, before
-              release. This is Kuro's own skill text rather than anybody's summary of it — but the
-              beta is where the numbers move, and a mechanic can still change or be cut.</p>`
+          /* One line. The record already carries the unreleased warning at the
+             top, which says pre-release material can change — so the only work
+             left for this is the part that warning cannot know: that what
+             follows is Kuro's own text rather than a report of it, and which
+             build it came out of. Said twice at length, a reader skips both. */
+          ? `<p class="kit-beta">Kuro's own skill text, read out of the ${esc(betaBuild() || "beta")}
+              client files before release — not a summary of it, and not final.</p>`
           : "")
         + kitPanel(kit)
         + `<p class="kit-credit">${kit.beta
