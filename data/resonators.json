@@ -3299,16 +3299,14 @@
       "signature": "Blooming Jadehaven",
       "region": "Mengzhou",
       "epithet": "Clear moonlight drapes the lonely keep",
-      "summary": "Sentinel of Mengzhou, and the first of them the game has made playable. Kuro's drip card landed 26 August and the profile card 28 August, which between them settle rarity, design, attribute and weapon: a 5-star Electro Rectifier, seated below the Moon Fox spirit over a burning Mengzhou, captioned \"To share in the world's joy, and keep the lanterns... burning bright.\" Kuro has published nothing about how she plays. What the leaks have is consistent across six weeks and four sources: two switchable Resonance modes, one of them Electro Flare and the other built on a Tune Break system rendered as Harmony, damage scaling off the Resonance Skill, and something that keeps being translated as coordinated attack. Team Gemberry's tag list of 29 August is the first to give her a role, and files her as a Main DMG Dealer rather than the off-field coordinated attacker the earlier reports implied. The beta has since opened. The 3.7.0 client files carry her in full — 17 skill-tree nodes, all six Resonance Chains, her forte and her signature weapon — so everything above can now be checked against Kuro's own text rather than against leaks. That reconciliation has not been done here yet; what has landed is the signature weapon and the name of her second Resonance Mode, both below.",
+      "summary": "Sentinel of Mengzhou, and the first of them the game has made playable. Kuro's drip card landed 26 August and the profile card 28 August, which between them settle rarity, design, attribute and weapon: a 5-star Electro Rectifier, seated below the Moon Fox spirit over a burning Mengzhou, captioned \"To share in the world's joy, and keep the lanterns... burning bright.\" Kuro has published nothing about how she plays. What the leaks have is consistent across six weeks and four sources: two switchable Resonance modes, one of them Electro Flare and the other built on a Tune Break system rendered as Harmony, damage scaling off the Resonance Skill, and something that keeps being translated as coordinated attack. Team Gemberry's tag list of 29 August is the first to give her a role, and files her as a Main DMG Dealer rather than the off-field coordinated attacker the earlier reports implied. The beta has since opened, and everything from here down is Kuro's rather than anybody's report of it: the 3.7.0 client files carry her whole kit, and the skills, Inherent Skills and Resonance Chain below are that text. The paragraph above is what six weeks of leaks said before it landed, kept because most of it was right and the kit notes score the rest.",
       "kit": [
-        "Two switchable Resonance modes. One is Electro Flare. The other runs on a Tune Break system rendered as Harmony, which would be the fourth after Strain, Rupture and Hack, and has no English client name yet.",
-        "Damage scales off the Resonance Skill. Team Gemberry's 29 August tag list reads Main DMG Dealer, Resonance Skill Damage, Electro Flare, Tune Break: Harmony.",
-        "Coordinated attack damage is attached to her in every report from 8 August on. The 31 August echo-set text points elsewhere: the trigger there is written 同奏, which the English client already renders as Unison for Jinhsi's passive, so \"coordinated attack\" may be a translation of that rather than the mechanic Jinhsi's teams are short of.",
-        "An Electro echo set surfaced alongside her on 31 August. 2-piece raises Electro DMG. 5-piece raises the wearer's own Crit Rate and Electro DMG when they inflict Electro-Magnetic Effect on an enemy, gain a Unison effect, or trigger a Unison Intro.",
-        "A sentinel form is in the model rips. Nothing states whether it is a kit mode or a story asset.",
-        "CN and EN comment sections converged on the same objection: a Tune-based mode ties her to Denia the way Qingxiao already is, and no released support buffs a Tune type that does not exist yet.",
-        "Blooming Jadehaven is her signature — a 5-star Rectifier in the 3.7.0 client files, and the first hard file evidence for any of the above. Its passive grants All-Attribute DMG, then amplifies Resonance Skill DMG and ignores Electro RES after the wielder inflicts Electro Flare or triggers Unison Response. That is her reported kit written down by Kuro: Electro Flare, the Resonance Skill scaling, and 同奏 as Unison rather than as a coordinated attack.",
-        "The two switchable modes are in the 3.7.0 files and they are named Resonance Mode - Unison and Resonance Mode - Electro Flare. Electro Flare was right. The other was not: it is Unison, not the Tune Break system rendered as Harmony that six weeks of reports gave her, which settles 同奏 as Unison for a third time — the echo set, the signature weapon and now the mode itself."
+        "Two axes, not one, which is why six weeks of reports could not agree on how she works. Forms are her stance — Answering Form and Illumining Form, each with its own resource, Answering Heart to 100 and Illumining Heart to 300. Resonance Modes are a separate switch on top: Resonance Mode - Unison and Resonance Mode - Electro Flare. Every Form is playable in either Mode.",
+        "Resonance Mode - Unison is the team half. She can trigger Unison Response: when another Resonator holds Unison and you switch to Hsin, everyone in the team who can also trigger Unison Response gains Unison Boon — 3% total DMG each, stacking to 2, for 30s. Holding Unison herself and switching out fires her Outro without spending Concerto Energy.",
+        "Resonance Mode - Electro Flare is the personal half. Electro Rage the team inflicts converts to Heart of Thunder, up to 100 stacks, and Resonance Skill - Illumining Form spends them for Electro Flare damage — 5 stacks at a time at 200% of the target's current Electro Flare multiplier, then the whole remaining pile at once at 40% each. Switching Mode clears the stacks.",
+        "Her payoff attacks are Heavy Attack replacements that count as Resonance Skill DMG: Answering Form: Realm Wanderer at 100 Answering Heart, and Illumining Form: Beholding All Horizons out of the 13s Mechanism Dominion state. Both upgrade once every 25s into a bigger version — Realm Protector and Stilling All Horizons.",
+        "Her off-field damage is Edict, on the Resonance Liberation. Casting Formshift grants 21 stacks for 45s, and after the active Resonator deals damage Hsin spends one, up to once a second, to drop a Soaring Pillar on the target as a Coordinated Attack. That is the mechanic the 8 August reports were describing, and it sits alongside her on-field Forms rather than instead of them — she is both things at once, which is why the tag list and the early leaks read as contradicting each other and did not.",
+        "How the leaks scored, now the files can be read against them. Electro Flare: right, and it is a whole Resonance Mode rather than a mechanic. Damage scaling off the Resonance Skill: right, via the Heavy Attack replacements. Main DPS: right. Coordinated attack: also right, and separately real from Unison — Edict is a Coordinated Attack in the plain sense and 同奏 is Unison, and the reports ran the two together rather than mistranslating one. Tune Break: Harmony: wrong. The second Mode is Unison, and the Tune Break node on her tree is the one every Rectifier user has, word for word identical to Verina's."
       ],
       "materials": {
         "ascension": [],
@@ -3316,7 +3314,7 @@
       },
       "confidence": {
         "identity": "official",
-        "kit": "reported"
+        "kit": "datamined"
       },
       "sources": [
         {
@@ -3366,7 +3364,7 @@
         "Main DPS",
         "Resonance Skill DMG",
         "Electro Flare",
-        "Tune Break: Harmony"
+        "Unison"
       ],
       "nameCN": "心"
     },
@@ -3380,16 +3378,14 @@
       "signature": "Unspoken Rue",
       "region": "Mengzhou",
       "epithet": "Locked in the past, the prisoner lingers long",
-      "summary": "Kuro's drip card landed 27 August and her profile card 28 August, making her identity official: 5-star, Electro, Sword — the first Electro sword Resonator other than Rover. The archive text names her founder and Seal Master of the Ten Seals Covenant in Huating, Mengzhou, raised afterwards to Intendant of the Ministry of Sentinel Affairs by the Sentinel's decree, which places her under Hsin rather than beside her. The August model rips put her at a small Verina or Roccia height and the drip art agrees. Her role tag was the surprise: every report before 29 August had her built around Hsin, and Team Gemberry's list files her as a Main Damage Dealer who also amplifies Electro and Resonance Skill damage. That is Kuro's own combat-role vocabulary rather than a forecast of how she gets played — Phoebe carries the same tag and is run as Zani's buffer — so it says she can hold the on-field slot, not that she is the one who will. That was written before the beta opened. The 3.7.0 client files now carry her in full — 17 skill-tree nodes, all six Resonance Chains, her forte and her signature weapon — and this record has not been read back against them beyond the weapon below.",
+      "summary": "Kuro's drip card landed 27 August and her profile card 28 August, making her identity official: 5-star, Electro, Sword — the first Electro sword Resonator other than Rover. The archive text names her founder and Seal Master of the Ten Seals Covenant in Huating, Mengzhou, raised afterwards to Intendant of the Ministry of Sentinel Affairs by the Sentinel's decree, which places her under Hsin rather than beside her. The August model rips put her at a small Verina or Roccia height and the drip art agrees. Her role tag was the surprise: every report before 29 August had her built around Hsin, and Team Gemberry's list files her as a Main Damage Dealer who also amplifies Electro and Resonance Skill damage. That is Kuro's own combat-role vocabulary rather than a forecast of how she gets played — Phoebe carries the same tag and is run as Zani's buffer — so it says she can hold the on-field slot, not that she is the one who will. That was written before the beta opened. The 3.7.0 client files now carry her whole kit, and the skills, Inherent Skills and Resonance Chain below are Kuro's own text — including the answer to the argument above, which is that she was built to do both and cannot do them at once.",
       "kit": [
-        "Team Gemberry's 29 August tag list: Main Damage Dealer, Basic Attack Damage, Electro DMG Amplification, Resonance Skill DMG Amplification, and the same 同奏 tag Hsin carries.",
-        "Main Damage Dealer is a combat-role tag, not a verdict on how she gets played. Phoebe carries it and is run as Zani's buffer; Iuno, who is the genuinely flexible hybrid people reach for as the comparison, does not carry it at all. What the tag establishes is that Suoming can hold the on-field slot — not that she will be the one holding it.",
-        "Her own damage runs off Basic Attack. The other three tags are amplification for somebody else, and the two things she amplifies are exactly what Hsin is: Electro, scaling off the Resonance Skill. How much damage she gives up when she takes the buffer half is the question every reading of the list ends on, and nothing published answers it.",
-        "They are also what Electro Rover and Carlotta are, so a Suoming team does not have to contain Hsin.",
-        "A 6 August Tieba report gave her skill-damage scaling and an outro buffing Skill and Electro DMG. The outro half survives into the tag list. The scaling half does not — Gemberry has her own damage on Basic Attack, not Skill.",
-        "An unattributed Electro echo set landed beside Hsin's on 31 August. 2-piece raises Electro DMG. 5-piece raises the wearer's Electro DMG on inflicting Electro-Magnetic Effect, and an Outro Skill cast during that raises the next Resonator's Electro DMG. The shape fits her tags; nothing in the post names her.",
-        "The community read of the reversal, CN and EN alike: Kuro is selling two on-field Electro Resonators in one patch rather than a carry and a dedicated buffer. Zani and Phoebe are the precedent for two tagged damage dealers on one team, and one of them still ends up buffing.",
-        "Unspoken Rue is her signature — a 5-star Sword in the 3.7.0 client files. Its passive is built on Unison and on two paired states, Binding Mind and Yearning Mind, which swap: obtaining Unison gives the team Electro DMG, spending Concerto Energy moves the bonus to the wielder alone and ends when she leaves the field. A team buff on one half and a personal one on the other, which fits the 29 August reading of her as a damage dealer who also amplifies Electro over the six weeks of reports treating her as Hsin's support."
+        "One resource and three states. Delusion fills to 800 off Basic Attacks, 200 a time from Resonance Liberation and from her Intro, and spending it walks her round a loop: Awakened Mind into Deep Mind via Resonance Skill - Furled Canopy: Sealed Delusion, then Deep Mind into Calamity Mind via Unfurled Canopy: Unforsaken Mind and the Basic Attack it unlocks, which returns her to Awakened Mind when it ends.",
+        "Everything she does is Basic Attack DMG, including the two Resonance Skill replacements that headline the loop. Team Gemberry's 29 August tag list was right and the 6 August Tieba report of skill-damage scaling was wrong.",
+        "Her Outro is the amplification the tag list promised: 20% Electro DMG Amplification to the incoming Resonator, and 25% Resonance Skill DMG Amplification on top while they hold Unison Boon.",
+        "The carry-or-buffer question the reports argued over is answered in her second Inherent Skill, and the answer is that Kuro built both and made them exclusive. Being switched out while holding Unison gives Aligned Seals, which turns her Outro into 30% Electro DMG Bonus rising to 40% more with Unison Boon — the support line. Spending Unison on Resonance Skill - Furled Canopy: Rift Cleaver instead gives Seal Master: +40% to her Basic Attack multipliers and +80% Crit. DMG for 12s — the carry line. Each ends the other.",
+        "She has off-field damage too, and it is the reason the Aligned Seals line is not purely a buff. While her Outro is going out with Unison held, the active Resonator dealing damage summons a Thunder Crest on the target as a Coordinated Attack, once a second for 3s.",
+        "She shares Unison, Unison Response and Unison Boon with Hsin, on the same numbers: 3% team DMG a stack, up to 2. That is the mechanic the pair are built around, and it is why they read as designed for each other without either being the other's support."
       ],
       "materials": {
         "ascension": [],
@@ -3397,7 +3393,7 @@
       },
       "confidence": {
         "identity": "official",
-        "kit": "reported"
+        "kit": "datamined"
       },
       "sources": [
         {
@@ -3449,7 +3445,7 @@
         "Basic Attack DMG",
         "Electro DMG amplification",
         "Resonance Skill DMG amplification",
-        "Tune Break"
+        "Unison"
       ],
       "nameCN": "锁暝"
     },
