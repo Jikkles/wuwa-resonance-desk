@@ -2554,6 +2554,70 @@ img.astrite-pic{
 }
 .warnbar span{color:var(--fg-3);letter-spacing:.08em;text-transform:none;font-size:.6875rem}
 
+/* ══ leaks ══════════════════════════════════════════════════════════
+   A lens over Intel and Signals, so it borrows both their components —
+   .intel cards for the written-up rows, .term/.sig for the raw ones — and
+   owns only the two controls that are its own: the search box and the row
+   of names harvested out of the headlines.
+
+   The disclaimer is the exception to that borrowing. Signals' warnbar is a
+   single uppercase line because "unverified automated signals" is the whole
+   of what it has to say. This one has a paragraph to get through, and a
+   paragraph set as one flex row of 10px caps is a paragraph nobody reads —
+   so the label stays a caption and the prose drops underneath it at a size
+   and measure meant for reading. */
+.warnbar.big{
+  flex-direction:column;align-items:flex-start;gap:6px;padding:13px 18px;
+  background:repeating-linear-gradient(135deg,rgba(217,99,92,.07) 0 8px,transparent 8px 16px);
+}
+.warnbar.big span{font-family:var(--sans);font-size:.8125rem;line-height:1.55;letter-spacing:0;max-width:74ch}
+
+.leakfind{display:flex;flex-direction:column;gap:11px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.leakq{
+  display:flex;align-items:center;gap:10px;padding:10px 13px;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-sm);
+  color:var(--fg-3);transition:border-color .12s,background .12s;
+}
+.leakq:focus-within{border-color:var(--accent);background:var(--bg-3);color:var(--accent)}
+.leakq input{
+  flex:1;min-width:0;background:none;border:0;outline:0;
+  color:var(--fg);font-family:var(--sans);font-size:.875rem;
+}
+.leakq input::placeholder{color:var(--fg-3);opacity:.75}
+/* The clear affordance the type=search UA control draws is a grey X on a dark
+   ground in every engine that draws one at all. Hidden, and .leakclear in the
+   empty state does the job where it is actually needed. */
+.leakq input::-webkit-search-cancel-button{display:none}
+
+.subjchips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.subjchips .label{margin-right:3px}
+.subjchips button{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 9px;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:100px;
+  color:var(--fg-2);font-family:var(--mono);font-size:.6875rem;cursor:pointer;
+  transition:border-color .12s,color .12s,background .12s;
+}
+.subjchips button:hover{border-color:var(--line-2);color:var(--fg)}
+.subjchips button[aria-pressed="true"]{
+  background:var(--accent-soft);border-color:var(--accent);color:var(--accent);
+}
+.subjchips button .n{color:var(--fg-3);font-size:.625rem;font-variant-numeric:tabular-nums}
+.subjchips button[aria-pressed="true"] .n{color:inherit;opacity:.7}
+
+/* One panel per patch, stacked inside the view's own panel body. The nested
+   panels drop their card chrome — a box inside a box inside a box is three
+   borders saying nothing — and keep only the header rule that separates one
+   patch from the next. */
+.leakgrp{background:none;border:0;border-radius:0;box-shadow:none;backdrop-filter:none}
+.leakgrp + .leakgrp{border-top:1px solid var(--line)}
+.leakgrp > .panel-h{background:var(--bg-1)}
+.leakgrp > .panel-h h2{font-family:var(--mono);letter-spacing:.06em}
+.leakgrp .intel-list{padding:14px 18px}
+@media (max-width:640px){
+  .warnbar.big span{font-size:.75rem}
+  .leakfind{padding:12px 14px}
+}
+
 /* .srcstrip / .srcpill — the row of per-fetcher status pills — stood here. It
    was drawn twice, under the Live Signals header and again as a Source health
    panel in the aside, and both are gone. The methodology drawer still lists the
