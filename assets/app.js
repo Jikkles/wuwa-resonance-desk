@@ -1047,6 +1047,22 @@ function intelArt(e){
    guessed one. */
 const signatureFor = b => b.signature || resonatorFor(b.name).signature || "";
 
+/* Whether a convene is actually running, which is a question about the phase
+   and not about the patch. `status` on a run is the patch's — a 3.6 phase 2
+   banner carries status "live" from the moment 3.6 goes live, three weeks
+   before its own convene opens — so a pill drawn off that told a reader they
+   could pull Thousandfold Deliverance while phase 1 was still on.
+
+   An estimated start does not count. Most upcoming phases have one, the desk
+   marks them "est" everywhere it prints them, and "Running now" is a flat
+   claim with nowhere to put that mark: better to say nothing for a day than to
+   say a convene is open because arithmetic on past patch lengths suggests it
+   might be. */
+function runIsLive(r){
+  if(!r.start || r.estStart) return false;
+  return daysTo(r.start) <= 0 && (!r.end || daysTo(r.end) >= 0);
+}
+
 /* Everywhere a weapon runs. Reruns mean the same weapon comes back with its
    character, so this is a list, not a single hit. */
 function weaponRuns(name){
@@ -1066,7 +1082,8 @@ function weaponRuns(name){
     for(const p of v.phases || [])
       for(const b of p.banners || [])
         if(signatureFor(b).toLowerCase() === k)
-          add({...b, phase:p.n, version:v.id, start:p.start, end:p.end, status:statusOf(v)});
+          add({...b, phase:p.n, version:v.id, start:p.start, end:p.end,
+               status:statusOf(v), estStart:p.estimated_start});
   /* versions.json only carries the arc the desk is currently watching — two
      patches — so on its own it makes every weapon older than that a dead end,
      and the signature weapon card on a 1.0 Resonator's record links nowhere.
@@ -6799,7 +6816,7 @@ function drawerWeapon(name){
             ${rarity ? `<span class="pill ver">${rarity}★</span>` : ""}
             ${w?.beta ? `<span class="pill beta">Datamined</span>`
               : w?.source ? `<span class="pill">${esc(w.source)}</span>` : ""}
-            ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
+            ${runs.some(runIsLive) ? `<span class="pill live">Running now</span>` : ""}
           </div>
           <h2>${esc(name)}</h2>
         </div>
