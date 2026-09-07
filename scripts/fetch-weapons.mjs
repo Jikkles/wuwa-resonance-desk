@@ -221,12 +221,18 @@ function parseWeapons(html) {
 }
 
 /* {0}…{7} in the effect text, resolved to the five values each takes. Indexed
-   by placeholder number so a template can skip one — ranks[2] is what {2}
+   by placeholder number, and the number is matched multi-digit even though
+   this source only ever writes eight of them — effectHtml in app.js reads them
+   multi-digit, because the beta records it also draws run to {11}, and a
+   fetcher and a renderer disagreeing about what a placeholder looks like is
+   the kind of thing that is only ever found by seeing "{10}" on the page.
+
+   Indexed so a template can skip one — ranks[2] is what {2}
    means — with nulls for the holes and the tail trimmed. Numbers are stringified
    here so the renderer never has to think about the difference between a
    duration (8) and a bonus ("20%"). */
 function rankTable(w) {
-  const used = [...String(w.Effect || "").matchAll(/\{(\d)\}/g)].map(m => Number(m[1]));
+  const used = [...String(w.Effect || "").matchAll(/\{(\d+)\}/g)].map(m => Number(m[1]));
   if (!used.length) return [];
   const out = Array(Math.max(...used) + 1).fill(null);
   for (const n of new Set(used)) {
@@ -289,7 +295,7 @@ function rankTable(w) {
        hole. A null at an index the text never mentions is ordinary — Helios
        Cleaver ships two arrays its own effect line doesn't reference. */
     const ranks = rankTable(w);
-    if ([...String(w.Effect || "").matchAll(/\{(\d)\}/g)].some(m => !ranks[Number(m[1])])) holes.push(w.Name);
+    if ([...String(w.Effect || "").matchAll(/\{(\d+)\}/g)].some(m => !ranks[Number(m[1])])) holes.push(w.Name);
 
     weapons.push({
       name: String(w.Name),

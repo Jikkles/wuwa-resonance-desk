@@ -20,7 +20,8 @@ const FALLBACK = {
   astrite:    {baseline:null, versions:{}},
   art:        {art:{}},
   portraits:  {characters:{}},
-  translations: {titles:{}}
+  translations: {titles:{}},
+  clientfiles: {build:"", weapons:[], sonata:[], resonators:[]}
 };
 
 const TIERS = ["official","datamined","reported","rumour"];
@@ -330,17 +331,65 @@ function daysTo(d){
    reader notices before anything else on the page. */
 const plural = (n, w, many) => `${n} ${n === 1 ? w : (many || w + "s")}`;
 
+/* Names run into a sentence: "a", "a and b", "a, b and c". Beside plural
+   because it is the same job — a footnote that names what it counted reads as
+   English or it reads as a list somebody forgot to write out. Escaped here so
+   a caller dropping it into a template never has to remember to. */
+const listOf = xs => {
+  const a = (xs || []).map(esc);
+  return a.length < 3 ? a.join(" and ") : `${a.slice(0, -1).join(", ")} and ${a[a.length - 1]}`;
+};
+
 /* ── data accessors ──────────────────────────────────────────────── */
 const versions   = () => DATA.versions?.versions || [];
 const entries    = () => DATA.news?.entries || [];
 const resonators = () => DATA.resonators?.resonators || [];
-const weapons    = () => DATA.weapons?.weapons || [];
+
+/* ── the beta client's own tables ─────────────────────────────────
+   clientfiles.json is what the beta client carries and no live source does
+   yet: the weapons and sonata sets Kuro has built but not shipped. It is a
+   separate file rather than rows in weapons.json and echoes.json because
+   fetch-weapons.mjs and fetch-echoes.mjs rebuild those wholesale from sources
+   that only know about released content — a beta row written into either
+   would live until the next cron run and no longer.
+
+   So the merge happens here, at read time, and it is a strict append: a name
+   the live sources already carry wins, always. The beta's numbers are
+   pre-balance, and a shipped weapon whose passive was nerfed between beta and
+   release would otherwise show the version nobody can pull.
+
+   Everything merged in is stamped `beta`, and every renderer that draws one
+   says so. The desk files this class of evidence as `datamined` on the Intel
+   view — real client data, taken early — and a record on the Weapons page
+   sourced from it is making exactly the same claim at exactly the same
+   confidence. It would be dishonest to draw it as if Prydwen had written it
+   up. */
+const clientFiles = () => DATA.clientfiles || {};
+const betaBuild   = () => clientFiles().build || "";
+/* `beta` is set here rather than by the fetcher: it is a fact about how the
+   desk is using the record, not a fact about the record, and the same object
+   read out of clientfiles.json directly is just a weapon. */
+function mergeBeta(live, extra){
+  const have = new Set(live.map(x => String(x.name || "").toLowerCase()));
+  return live.concat((extra || [])
+    .filter(x => !have.has(String(x.name || "").toLowerCase()))
+    .map(x => ({...x, beta: true})));
+}
+
+const weapons    = () => mergeBeta(DATA.weapons?.weapons || [], clientFiles().weapons);
 /* The echo roster and the sonata sets it rolls, from one file. They are two
    lists and one subject: a sonata set with no echoes under it is a bonus
    nobody can build, and an echo with no set is a slot with no reason to be
    filled, so neither is worth loading without the other. */
 const echoes     = () => DATA.echoes?.echoes || [];
-const sonataSets = () => DATA.echoes?.sonata || [];
+/* Sorted after the merge, which is a no-op on the live list — fetch-echoes.mjs
+   already writes it by name — and the whole point for the beta ones. The index
+   is an alphabetical list you scan for a set you already know the name of, and
+   appending three at the end would be a second ordering rule the page never
+   explains. What marks them out is the Beta pill on the tile, not their
+   position. */
+const sonataSets = () => mergeBeta(DATA.echoes?.sonata || [], clientFiles().sonata)
+  .sort((a, b) => String(a.name).localeCompare(String(b.name)));
 /* The event calendar. Named for the game's events, not the DOM's — this file
    already has an events section and it binds clicks.
 
@@ -4695,7 +4744,11 @@ const WTYPES = ["Broadblade", "Sword", "Pistols", "Gauntlets", "Rectifier"];
    re-reading the paragraph to find it. */
 function effectHtml(w, rank){
   const i = Math.min(5, Math.max(1, rank || 1)) - 1;
-  const fill = s => esc(s).replace(/\{(\d)\}/g, (_, n) => {
+  /* Multi-digit, not \d. Every passive prydwen.gg has ever written up fits in
+     {0}–{7}, so a one-character class was right until the beta records arrived:
+     Thousandfold Deliverance's is twelve holes long, and on a single digit
+     {10} and {11} matched nothing and were printed to the page as themselves. */
+  const fill = s => esc(s).replace(/\{(\d+)\}/g, (_, n) => {
     const vals = w.ranks?.[Number(n)];
     /* A hole the source shipped no values for. Say so rather than print a
        number from the wrong slot — the whole desk runs on that rule. */
@@ -4777,7 +4830,8 @@ function weaponCard(w){
   return `<article class="rec wrec" role="button" tabindex="0" data-act="weapon" data-id="${esc(w.name)}">
     <!-- has-art is what turns off the concentric-ring plate .cart draws behind
          a card with no picture. A weapon with no published icon yet keeps it. -->
-    <div class="cart wart${w.icon ? " has-art" : ""}">${w.icon
+    <div class="cart wart${w.icon ? " has-art" : ""}">${w.beta
+      ? `<i class="flag beta">Beta</i>` : ""}${w.icon
       ? `<img src="${esc(w.icon)}" alt="${esc(w.name)}" loading="lazy" decoding="async">`
       : `<span class="wart-g">${icon("i-weapon", 34)}</span>`}</div>
     <div class="wrec-b">
@@ -4817,6 +4871,13 @@ function renderWeapons(){
   let list = all;
   if(S.wtype !== "all") list = list.filter(w => w.type === S.wtype);
 
+  /* Named in the 5★ footnote rather than counted, because at three of them the
+     names are shorter than the sentence explaining what a Beta flag means and
+     save the reader hunting the grid for them. Off `all` and not off `list`:
+     the note describes the database, and a class filter that hides two of them
+     should not make the desk claim there is one. */
+  const betaWeapons = all.filter(w => w.beta);
+
   const rows  = rarity => list.filter(w => String(w.rarity) === rarity);
   const total = rarity => all.filter(w => String(w.rarity) === rarity).length;
 
@@ -4832,6 +4893,12 @@ function renderWeapons(){
     ${weaponTable("5★ Weapons", rows("5"), total("5"), {
       under: fbar("weapons"),
       foot: "Stats are level 90 throughout. Open a weapon for its passive and the ascension slider."
+        + (betaWeapons.length
+          ? ` ${betaWeapons.length === 1 ? "One weapon carries" : `${betaWeapons.length} weapons carry`}
+             a <b class="t-datamined">Beta</b> flag: ${listOf(betaWeapons.map(w => w.name))} exist in the
+             ${esc(betaBuild())} client files and have not shipped. Their numbers are Kuro's own and
+             are pre-balance.`
+          : "")
     })}
     ${weaponTable("4★ Weapons", rows("4"), total("4"))}
     ${weaponTable("3★ Weapons", rows("3"), total("3"))}
@@ -5055,8 +5122,13 @@ function sonataTile(s){
       : icon("i-sonata", 22)}</span>
     <span class="stile-t">
       <b data-fit="1.05" data-fit-lines="2">${esc(s.name)}</b>
+      <!-- The count is how many echoes roll the set, and on a set that only
+           exists in the beta client that number is zero for a reason the
+           number cannot give. So the beta ones say Beta where the others say a
+           count: nothing rolls it because Kuro has not shipped it, not because
+           the database is thin. -->
       <span class="stile-m">${s.pieces.map(p => `${p.n}pc`).join(" · ") || "—"}
-        <i>${n}</i></span>
+        ${s.beta ? `<i class="beta">Beta</i>` : `<i>${n}</i>`}</span>
     </span>
   </button>`;
 }
@@ -5078,7 +5150,13 @@ function sonataIndex(){
     </div>
     <div class="panel-f"><span class="tier-note">
       Standard sets pay at 2 and 5 pieces; the five compact sets pay once, at 3. An echo
-      that rolls more than one set appears under each of them.
+      that rolls more than one set appears under each of them.${(() => {
+        const beta = sets.filter(s => s.beta);
+        return beta.length ? ` ${listOf(beta.map(s => s.name))} ${beta.length === 1 ? "is" : "are"}
+          flagged <b class="t-datamined">Beta</b> — in the ${esc(betaBuild())} client files and not
+          yet in the game, so nothing rolls ${beta.length === 1 ? "it" : "them"} and the bonus text
+          is pre-balance.` : "";
+      })()}
     </span></div>
   </div>`;
 }
@@ -5096,7 +5174,7 @@ function sonataSection(s, rows){
         ? `<img src="${esc(s.icon)}" alt="" loading="lazy" decoding="async">`
         : icon("i-sonata", 20)}</span>
       <h2>${esc(s.name)}</h2>
-      <span class="sub">${plural(rows.length, "echo", "echoes")}${
+      <span class="sub">${s.beta ? `Beta ${esc(betaBuild())}` : plural(rows.length, "echo", "echoes")}${
         s.alias ? ` · was ${esc(s.alias)}` : ""}${el ? ` · ${esc(el)}` : ""}</span>
       <!-- The way out, in the header you were just scrolled to. The index at
            the top of the page carries the same control, and by the time the
@@ -5115,6 +5193,9 @@ function sonataSection(s, rows){
       : `<p class="wr-thin">No bonus text published for this set yet.</p>`}</div>
     <div class="panel-b">
       ${rows.length ? `<div class="rgrid wgrid egrid">${rows.map(echoCard).join("")}</div>`
+        : s.beta
+        ? `<div class="empty">Read out of the ${esc(betaBuild() || "beta")} client files, where the set
+           exists and nothing drops it yet. Which echoes roll it is decided when the patch ships.</div>`
         : `<div class="empty">Nothing in the database rolls this one yet.</div>`}
     </div>
   </div>`;
@@ -6716,7 +6797,8 @@ function drawerWeapon(name){
           <div class="meta">
             <span class="pill">${esc(w?.type || holder.weapon || runs[0]?.weapon || "Weapon")}</span>
             ${rarity ? `<span class="pill ver">${rarity}★</span>` : ""}
-            ${w?.source ? `<span class="pill">${esc(w.source)}</span>` : ""}
+            ${w?.beta ? `<span class="pill beta">Datamined</span>`
+              : w?.source ? `<span class="pill">${esc(w.source)}</span>` : ""}
             ${runs.some(r => r.status === "live") ? `<span class="pill live">Running now</span>` : ""}
           </div>
           <h2>${esc(name)}</h2>
@@ -6735,11 +6817,27 @@ function drawerWeapon(name){
           : `<span class="wr-art-g">${icon("i-weapon", 56)}</span>`}</figure>
 
         <section class="wr-eff">
-          <span class="label">Passive${w ? ` <em data-ranklabel>S${S.rank}</em>` : ""}</span>
+          <!-- The passive's own name, which only the beta records carry: the
+               client stores it and prydwen.gg's page does not, so a shipped
+               weapon has nothing to print here. It earns the line on the ones
+               that have it — a beta weapon has no icon, no convene history and
+               no intel written about it yet, and this is the only thing on the
+               record that is a name rather than a number. -->
+          <span class="label">Passive${w?.effectName
+            ? ` <b class="wr-effname">${esc(w.effectName)}</b>` : ""}${
+            w ? ` <em data-ranklabel>S${S.rank}</em>` : ""}</span>
           ${w ? `<div class="weff" data-eff="${esc(w.name)}">${effectHtml(w, S.rank)}</div>`
             : `<p class="wr-thin">No passive published for this one yet. It has a convene on the
                timeline and no row in the weapon database — stats and passive land when the
                patch does.</p>`}
+          <!-- Said once, under the numbers it qualifies, rather than as a
+               caveat on every figure. A beta passive is real client text and
+               the values are real client values; what is not settled is that
+               they will still be these values on release, and Kuro has
+               changed them between beta and ship before. -->
+          ${w?.beta ? `<p class="wr-thin wr-beta">Read out of the ${esc(betaBuild() || "beta")} client
+             files, before release. The numbers are Kuro's, not an estimate — but they are
+             pre-balance, and a passive can change or be cut between here and the patch.</p>` : ""}
         </section>
       </div>
     </div>
@@ -7289,7 +7387,7 @@ async function load(name){
 }
 
 (async function(){
-  const names = ["versions","news","resonators","weapons","echoes","feed","art","portraits","translations","events","permanents","items","archive","astrite"];
+  const names = ["versions","news","resonators","weapons","echoes","feed","art","portraits","translations","events","permanents","items","archive","astrite","clientfiles"];
   const loaded = await Promise.all(names.map(load));
   DATA = Object.fromEntries(names.map((n, i) => [n, loaded[i]]));
 

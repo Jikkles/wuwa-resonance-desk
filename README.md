@@ -17,7 +17,7 @@ build step, no dependencies. Push to `main` and GitHub Pages serves it.
 | Intel | curated leaks, each with a confidence tier |
 | Live Signals | raw auto-fetched headlines, untiered |
 | Resonators | the roster — identity, kit, builds and teams |
-| Weapons | stats and passives at level 90 |
+| Weapons | stats and passives at level 90, shipped and beta |
 | Echoes | echoes, sonata sets and where to farm them |
 
 Intel is you deciding what a leak was worth; Signals is a cron job telling you something
@@ -39,6 +39,18 @@ Never promote to `official` without an actual Kuro source. Set `"outcome": "conf
 on an old entry once confirmation lands — that is how each source builds a visible track
 record.
 
+## Beta client records
+
+The Weapons and Echoes views also draw things that are only in the beta client — a
+weapon Kuro has built and not shipped, a sonata set that exists with nothing rolling it.
+Those come from `data/clientfiles.json`, are marked **Beta** on the card and
+**Datamined** in the record, and say in as many words that the numbers are pre-balance.
+
+They are a separate file rather than rows in `weapons.json` and `echoes.json` because
+those two are rebuilt wholesale by their own fetchers, so a beta row written into either
+would live until the next cron run. `assets/app.js` merges at read time, and a name the
+live sources already carry always wins — post-balance numbers beat beta ones.
+
 ## The files
 
 ```
@@ -58,8 +70,8 @@ scripts/*.mjs   the fetchers that write most of it
 | `data/events.json` | events Kuro has named but not yet published (`"origin": "hand"`) |
 
 Everything else — roster, kits, builds, weapons, echoes, events, art, portraits, the
-headline feed, the patch archive — is fetched. The fetchers only ever fill blanks: a
-field with a value in it survives every run.
+headline feed, the patch archive, the beta client records — is fetched. The fetchers only
+ever fill blanks: a field with a value in it survives every run.
 
 ## Working on it
 
@@ -74,9 +86,10 @@ npx serve
 touch either file.** Pages caches them for longer than a deploy takes, so without the
 bump a change can look like nothing happened.
 
-Two crons keep the data current — every 6h for the feed, art and events, daily for the
-roster and archive. Prydwen refuses GitHub Actions with a flat 403, so **kits, portraits,
-weapons, echoes and builds need a local run**, realistically on patch day:
+Two crons keep the data current — every 6h for the feed, art, events and beta client
+records, daily for the roster and archive. Prydwen refuses GitHub Actions with a flat
+403, so **kits, portraits, weapons, echoes and builds need a local run**, realistically
+on patch day:
 
 ```bash
 node scripts/fetch-kits.mjs && node scripts/confirm-dates.mjs
@@ -84,7 +97,12 @@ node scripts/fetch-portraits.mjs
 node scripts/fetch-weapons.mjs
 node scripts/fetch-echoes.mjs
 node scripts/fetch-builds.mjs
+node scripts/fetch-client-files.mjs
 ```
+
+`fetch-client-files.mjs` runs on the 6h cron too, but it reads `weapons.json` and
+`echoes.json` to decide what is unshipped — so after a local weapons or echoes run,
+run it again or it will keep listing something that has since landed.
 
 Each prints what it kept and only writes when something changed.
 

@@ -1695,6 +1695,62 @@ a desk starts publishing its own guesses.
 The script refuses to overwrite the file if it parses fewer than 60 weapons, and reports
 any weapon class it doesn't recognise rather than dropping it.
 
+### The weapons Prydwen cannot know about
+
+Prydwen writes a weapon page when the weapon ships, which is the correct default and was
+also a visible hole. `versions.json` names Thousandfold Deliverance as Jingran's
+signature on the 3.6 timeline; clicking it opened a record that said *"No passive
+published for this one yet"*. The timeline was promising a name the database could not
+answer for — and the one thing a reader deciding whether to pull actually wants to read
+is the passive.
+
+The beta client can answer for it. Kuro ships the stat curves, the passive template and
+its five ascension values into the client the moment a weapon enters beta, weeks before
+release. `scripts/fetch-client-files.mjs` reads those tables — nanoka.cc datamines each
+beta build and serves the extracted JSON, one file per entity type, keyed on the build —
+and writes anything the live sources have no row for into `data/clientfiles.json`. Three
+weapons and three sonata sets, as of the 3.7.0 build.
+
+**Why a separate file.** `fetch-weapons.mjs` and `fetch-echoes.mjs` do not merge, they
+replace. A beta row written into `weapons.json` would survive exactly until the next
+cron run. So `app.js` merges at read time instead, in `mergeBeta()`, and the merge is a
+strict append: a name the live sources already carry wins, always. Beta numbers are
+pre-balance, and a weapon nerfed between beta and release must not go on showing the
+version nobody can pull.
+
+**How it says so.** Everything merged in is stamped `beta`, and every renderer that
+draws one says which. A `Beta` flag on the card in the datamined colour, a `Datamined`
+pill in the record where a shipped weapon names its convene pool, a line under the
+passive saying the numbers are Kuro's own but pre-balance, and a footnote on the 5★
+table naming the three. Same claim, same tier, same colour as an Intel entry making it —
+drawing one as though Prydwen had written it up would be dishonest.
+
+**Three things the client tables need translating.** A stat carries either `is_percent`,
+where the value is basis points and 2430 means 24.3%, or `is_ratio`, where it is a
+fraction and 0.72225 means 72.2%. The level-90 ATK is a half — 587.5, 412.5 — which the
+client rounds up and Prydwen truncates, which is the whole of why the same weapon can
+read 588 here and 587 there. And passive text carries client-side markup the English
+client resolves before drawing it: `<SapTag=X>{n}</SapTag>` marking a number, and
+`{Cus:Sap,S=stack P=stacks SapTag=X}` for the noun that has to agree with it.
+`resolvePassive()` reads the wrappers into a map of tag id to placeholder — the tag id
+is *not* the placeholder number — and settles each noun against the value. That is exact
+rather than approximate because every count Kuro has put a Sap tag on is flat across all
+five ascensions; one that moved would take the plural and be reported, because the
+template is not rank-dependent and quietly picking one rank's word would print it at the
+other four.
+
+**A bug this surfaced.** `effectHtml()` matched `{(\d)}` — one digit. Every Prydwen
+passive fits in `{0}`–`{7}`, so it never mattered until Thousandfold Deliverance's
+twelve-hole passive arrived and printed `{10}` and `{11}` to the page as themselves.
+Both the renderer and `fetch-weapons.mjs` read them multi-digit now: a fetcher and a
+renderer disagreeing about what a placeholder looks like is the kind of thing only ever
+found by seeing it on screen.
+
+The character table is read too, and **reported rather than written**. A Resonator in
+the client files with no roster record is something for a person to write up, not for a
+fetcher to file — so the script prints the gap and stops. As of 3.7.0 there is none; the
+roster is level with the files.
+
 ## The echo database
 
 181 echoes and 34 sonata sets in `data/echoes.json`, written by
@@ -2197,6 +2253,7 @@ left is the editorial, which is the part worth your time.
 | `weapons.json` + `assets/weapons/` | Prydwen weapon pages | **no — run locally** |
 | `echoes.json` + `assets/echoes/` | Prydwen echoes page + the wiki (locations) | **no — run locally** |
 | `builds.json` | Prydwen character pages | **no — run locally** |
+| `clientfiles.json` — the weapons and sonata sets only the beta client has | nanoka.cc's datamine of the current beta build | yes |
 
 All of them are driven off the names already in `versions.json`, so writing a banner row
 is what queues that character's art, portrait, weapon and kit. You never hand-place an

@@ -612,6 +612,12 @@ button{font:inherit;color:inherit}
 .pill.live{border-color:color-mix(in srgb,var(--t-official) 50%,transparent);color:var(--t-official)}
 .pill.next{border-color:color-mix(in srgb,var(--t-datamined) 50%,transparent);color:var(--t-datamined)}
 .pill.future{border-color:var(--line-2);color:var(--fg-3)}
+/* Where a shipped weapon's pill names the convene pool it drops from, a beta
+   one names the tier its numbers are filed under instead — there is no pool
+   yet, and "Datamined" is the more useful of the two things it could say. The
+   datamined colour, so the pill agrees with the Beta flag on its own card and
+   with the rail on every Intel entry making the same class of claim. */
+.pill.beta{border-color:color-mix(in srgb,var(--t-datamined) 50%,transparent);color:var(--t-datamined)}
 
 /* ══ hero: now / next / future ══════════════════════════════════════ */
 /* Three across. Future is narrow because it has almost nothing to say, and
@@ -1812,6 +1818,12 @@ button{font:inherit;color:inherit}
 }
 .cart .flag.new{background:var(--t-official)}
 .cart .flag.up{background:var(--t-datamined)}
+/* A weapon or a set that only exists in the beta client. Same colour as
+   Upcoming and a different word on purpose: both are things that haven't
+   landed, but Upcoming is read off the timeline and this is read off the
+   client files, which is the datamined tier — so it takes that tier's colour
+   for the same reason the Intel rail does. */
+.cart .flag.beta{background:var(--t-datamined)}
 
 .cart .attrline{
   position:absolute;left:13px;right:13px;bottom:11px;z-index:2;
@@ -3058,6 +3070,12 @@ img.astrite-pic{
   font-style:normal;padding:1px 5px;border-radius:999px;
   background:var(--tint-sink);border:1px solid var(--line);color:var(--fg-2);
 }
+/* The same slot, on a set that is only in the beta client — it holds a word
+   instead of a count, in the datamined colour every other beta mark on the
+   desk takes. */
+.stile-m i.beta{
+  border-color:color-mix(in srgb,var(--t-datamined) 45%,transparent);color:var(--t-datamined);
+}
 /* "All sets", which only exists while one is picked. Pushed to the far end of
    the header so it reads as the way out of the state the header just described
    rather than as a second heading. */
@@ -3252,6 +3270,14 @@ img.astrite-pic{
 .wr-eff>.label em{
   margin-left:auto;font-style:normal;font-family:var(--mono);color:var(--rar,var(--attr));
 }
+/* Kuro's name for the passive, beside the word Passive. Set in the body face
+   rather than the label's mono caps — it is a title she wrote, not a field
+   name, and the row reads as "Passive · Locked Thunder, Trapped Rain" rather
+   than as two headings. */
+.wr-eff>.label .wr-effname{
+  font-family:var(--sans);font-size:.8125rem;font-weight:600;letter-spacing:0;
+  text-transform:none;color:var(--fg-2);min-width:0;
+}
 /* Doubled up on purpose. `.drawer-b p` is the interim measure cap further down
    this file, at equal specificity and later in source order, and it would set
    this passive at 14px on a 76ch line inside a box that is neither. */
@@ -3270,6 +3296,15 @@ img.astrite-pic{
    in the same voice — "no bonus text published for this set yet" — and it is
    on the page rather than in a record. */
 .drawer-b .wr-thin,.ssec-b .wr-thin{color:var(--fg-3);font-size:.8125rem;line-height:1.65;margin:0;max-width:56ch}
+/* The pre-balance caveat, under the passive it qualifies and inside the same
+   box, separated by the rule so it does not read as another paragraph of
+   Kuro's. Below .wr-thin rather than up with the rest of .wr-eff: it is a
+   .wr-thin too, the two selectors weigh the same, and at equal specificity the
+   later rule is the one that gets to set the colour. */
+.drawer-b .wr-eff .wr-beta{
+  margin-top:12px;padding-top:11px;border-top:1px solid var(--line);
+  color:var(--t-datamined);opacity:.82;
+}
 
 /* The rail. A rule rather than a card: the figures are part of this record,
    not a panel sitting next to it. */
