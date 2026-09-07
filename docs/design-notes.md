@@ -1746,10 +1746,54 @@ Both the renderer and `fetch-weapons.mjs` read them multi-digit now: a fetcher a
 renderer disagreeing about what a placeholder looks like is the kind of thing only ever
 found by seeing it on screen.
 
-The character table is read too, and **reported rather than written**. A Resonator in
-the client files with no roster record is something for a person to write up, not for a
-fetcher to file — so the script prints the gap and stops. As of 3.7.0 there is none; the
-roster is level with the files.
+The character table is read too, and the identity half of it is **reported rather than
+written**. A Resonator in the client files with no roster record is something for a
+person to write up, not for a fetcher to file — so the script prints the gap and stops.
+As of 3.7.0 there is none; the roster is level with the files.
+
+### The kits Prydwen cannot know about either
+
+Same hole, one view over. A Resonator who has not shipped had leak prose on their record
+and nothing else, at `reported` confidence, while Kuro's own skill text sat in the beta
+client. The importer closes that: `data/clientkits.json` carries the six skills, two
+Inherent Skills and six Resonance Chain nodes for anyone `kits.json` has no entry for —
+Jingran, Hsin and Suoming on the 3.7.0 build. It is a separate file from
+`clientfiles.json` for exactly the reason `kits.json` is separate from `resonators.json`:
+it is an order of magnitude bigger than everything around it and nobody arriving at the
+timeline reads a word of it, so it loads on demand alongside the shipped kits.
+
+**The node mapping was derived, not guessed.** A skill tree is 17 nodes: eight are flat
+Crit. Rate / ATK bonuses (`node_type` 4, not prose) and nine carry a skill. Which nine map
+to which slot was read off Qingxiao, whose kit the desk already had from Prydwen, and then
+checked against seven more Resonators — node id, `node_type` and `coordinate` agree on
+every one. All three are validated on import and a tree that doesn't match is refused,
+because filing nodes under the wrong headings is worse than having no kit: the record
+already knows how to say it has none.
+
+**It is better organised than the shipped records, not worse.** The client writes
+sub-ability headings — "Heavy Attack - Stringblade", "Dodge Counter" — as
+`<size=40><color=Title>` lines, and `blocks[].h` in `kits.json` has always supported them.
+Prydwen flattens them into one run of paragraphs. Qingxiao's imported basic attack has six
+headings where her live record has none.
+
+**Two conversion decisions, both about matching what the other 57 records look like.**
+Attribute colours become `__underline__`, which is the mark `kits.json` already uses.
+`<color=Highlight>` is dropped: the client highlights every defined term it mentions —
+three of eleven words in one Qingxiao sentence — and emphasis on everything marks nothing.
+Numbers are bolded, but only the ones sitting in a `{n}` hole, so it bolds exactly the
+figures the client itself marked as values and never a number that happened to be in the
+prose. Checked by converting a Resonator the desk already had and reading the two side by
+side: the output is line-for-line Prydwen's, plus the headings.
+
+**The Tune Break node is dropped.** Node 17 is a character's extra passive, and for almost
+everyone it holds one paragraph about filling a target's Off-Tune Level — byte for byte
+identical between Hsin and Verina, because it belongs to the Rectifier class rather than
+to either of them. `kits.json` carries it for nobody. Qingxiao's node 17 is a real Forte
+Circuit and is kept, so the rule is on the name rather than on the slot.
+
+That boilerplate is also, as it turns out, where the leaks' "Tune Break system rendered as
+Harmony" came from. Hsin's second Resonance Mode is Unison, and reading it settled a claim
+four sources had carried for six weeks.
 
 ## The echo database
 
@@ -2254,6 +2298,7 @@ left is the editorial, which is the part worth your time.
 | `echoes.json` + `assets/echoes/` | Prydwen echoes page + the wiki (locations) | **no — run locally** |
 | `builds.json` | Prydwen character pages | **no — run locally** |
 | `clientfiles.json` — the weapons and sonata sets only the beta client has | nanoka.cc's datamine of the current beta build | yes |
+| `clientkits.json` — kits for the Resonators no live source has written up | the same datamine, per-character skill trees | yes |
 
 All of them are driven off the names already in `versions.json`, so writing a banner row
 is what queues that character's art, portrait, weapon and kit. You never hand-place an

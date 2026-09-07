@@ -75,7 +75,15 @@ const UA =
 const SITE = "https://ww.nanoka.cc/";
 const BASE = build => `https://static.nanoka.cc/ww/${build}`;
 const OUT = "data/clientfiles.json";
+/* Kit text goes to a file of its own for the same reason kits.json is separate
+   from resonators.json: it is an order of magnitude bigger than everything
+   around it, and nobody arriving at the timeline reads a word of it. app.js
+   loads clientfiles.json in the boot set and this one only when a record is
+   opened, exactly as it already does for the shipped kits. */
+const KIT_OUT = "data/clientkits.json";
 const TIMEOUT_MS = 30000;
+
+const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 /* curl rather than fetch(), same as every other fetcher here that talks to a
    host behind a CDN. */
@@ -230,6 +238,169 @@ function bonusText(desc, param) {
   });
 }
 
+/* ── kits ─────────────────────────────────────────────────────────────
+   The client carries every Resonator's whole kit, and for one who has not
+   shipped that is the only place it exists: prydwen.gg writes a page on
+   release and the wiki writes one after that, so a beta Resonator's record on
+   this desk has been leak prose and nothing else, at `reported` confidence,
+   while Kuro's own text sat in the files.
+
+   The skill tree is 17 nodes. Nine carry a skill and eight are the flat
+   Crit. Rate / ATK bonuses, which are node_type 4 and are not prose. The nine
+   map onto the six skills, two Inherent Skills and one extra slot that
+   kits.json already stores, and the mapping was not guessed: it was read off
+   Qingxiao, whose kit the desk already had from prydwen.gg, and then checked
+   against seven more. Node id, type and coordinate agree on every character
+   tried, so all three are validated and a tree that does not match is refused
+   rather than filed under the wrong headings. */
+const KIT_SLOTS = {
+  1:  {slot: "basic",      type: 2, coord: 1},
+  2:  {slot: "skill",      type: 2, coord: 2},
+  3:  {slot: "liberation", type: 2, coord: 3},
+  4:  {slot: "inherent",   type: 3, coord: 2},
+  5:  {slot: "inherent",   type: 3, coord: 3},
+  6:  {slot: "intro",      type: 2, coord: 4},
+  7:  {slot: "forte",      type: 1, coord: 1},
+  8:  {slot: "outro",      type: 3, coord: 1},
+  17: {slot: "extra",      type: 3, coord: 1}
+};
+const SKILL_SLOTS = ["basic", "skill", "liberation", "forte", "intro", "outro"];
+
+/* The client's colour names for the six attributes. Kuro named these before
+   the English build settled on Electro and Havoc, so the tags still read
+   Thunder and Dark. */
+const ELEMENT_COLOUR = {
+  Thunder: "Electro", Dark: "Havoc", Wind: "Aero",
+  Light: "Spectro", Fire: "Fusion", Ice: "Glacio"
+};
+
+/* {Cus:Ipt,Touch=tap PC=press Gamepad=press} — one instruction written three
+   ways for the client to pick from by input device. The desk is a web page, so
+   it takes the PC form; the other two say the same thing and carrying all
+   three would be noise. */
+const resolveInput = s =>
+  s.replace(/\{Cus:Ipt,[^}]*?PC=([^\s}]+)[^}]*\}/g, (_, pc) => pc);
+
+/* Inline marks. Both decisions are about matching what the desk already shows
+   for the other 57 Resonators rather than about what the client stores.
+
+   Attribute colours become __underline__, which is the mark kits.json already
+   uses for them and kitText() in app.js already renders.
+
+   <color=Highlight> is dropped. The client highlights every defined term it
+   mentions — in one Qingxiao sentence that is "Basic Attack - Stringblade
+   Stage 1", "Stage 4" and "Sheathed Stance" — and emphasis on everything marks
+   nothing. prydwen.gg does not carry it, so the desk has never shown it, and a
+   beta record that suddenly did would read as a different kind of thing rather
+   than as the same kind of thing earlier.
+
+   Applied innermost-out: the colour pattern only matches a run with no tag
+   inside it, so repeating it until the string stops changing unwraps
+   <color=Highlight><te>Tune Break</te></color> in the right order without
+   needing a parser. */
+function marks(s) {
+  let out = String(s).replace(/<te\s+href=\d+>(.*?)<\/te>/g, "$1");
+  let prev;
+  do {
+    prev = out;
+    out = out.replace(/<color=(\w+)>([^<]*)<\/color>/g, (_, tag, t) => {
+      if (!t.trim()) return t;
+      const mark = ELEMENT_COLOUR[tag] ? "__" : "";
+      /* Already carrying this mark from an inner tag — a second pair around it
+         would close in the wrong place. */
+      return !mark || t.includes(mark) ? t : mark + t + mark;
+    });
+  } while (out !== prev);
+  /* Anything the list above does not know loses its tag and keeps its words. A
+     colour Kuro adds next patch should read as plain text, never as markup. */
+  return out.replace(/<[^>]*>/g, "");
+}
+
+/* One description to the blocks kits.json stores: an optional heading and the
+   paragraphs under it. The client writes those headings as
+   <size=40><color=Title>Heavy Attack</color></size> on a line of their own,
+   and they are the sub-abilities — without them a Basic Attack entry is one
+   unreadable twelve-sentence paragraph, which is the same reason app.js
+   renders `h` at all. prydwen.gg flattens them away; this keeps them, so a
+   beta record is better organised than a shipped one rather than worse. */
+function toBlocks(desc, param) {
+  let s = resolvePassive(desc, param).effect;
+  s = resolveInput(s);
+  s = s.replace(/\{(\d+)\}/g, (m, n) => {
+    const v = param?.[Number(n)];
+    /* Bolded, which is what prydwen.gg does to the same numbers and therefore
+       what the rest of kits.json looks like. Derived rather than guessed: a
+       {n} is a value the client itself marked as one, so this bolds every
+       figure and never a number that happened to be in the prose. */
+    return v == null ? m : `**${v}**`;
+  });
+
+  const parts = s.split(/<size=\d+>\s*<color=Title>(.*?)<\/color>\s*<\/size>/g);
+  const blocks = [];
+  const push = (h, body) => {
+    const p = marks(body).split("\n").map(x => x.trim()).filter(Boolean);
+    if (p.length || h) blocks.push({...(h ? {h: marks(h).trim()} : {}), p});
+  };
+  push(null, parts[0] || "");
+  for (let i = 1; i < parts.length; i += 2) push(parts[i], parts[i + 1] || "");
+  return blocks.filter(b => b.h || b.p.length);
+}
+
+/* Node 17 holds a character's extra passive, and for most of the roster that
+   is the Tune Break node — one paragraph about filling a target's Off-Tune
+   Level, identical word for word between Hsin and Verina because it belongs to
+   the Rectifier class rather than to either of them. Every character has one,
+   kits.json carries it for nobody, and printing it on the two beta records
+   would put a line on them that marks nothing and reads like a mechanic.
+   Qingxiao's node 17 is a real Forte Circuit and is kept.
+
+   Worth knowing outside this function: that boilerplate is where the leaks'
+   "Tune Break system rendered as Harmony" came from. */
+const isTuneBreak = name => /^Tune Break\b/i.test(String(name || "").trim());
+
+function buildKit(detail) {
+  const tree = detail.skill_trees || {};
+  for (const [id, want] of Object.entries(KIT_SLOTS)) {
+    const n = tree[id];
+    if (!n || !n.skill) throw new Error(`node ${id} missing`);
+    if (n.node_type !== want.type || n.coordinate !== want.coord)
+      throw new Error(`node ${id} is type ${n.node_type}/${n.coordinate}, expected ${want.type}/${want.coord}`);
+  }
+  const chainIds = Object.keys(detail.chains || {}).map(Number).sort((a, b) => a - b);
+  if (chainIds.length !== 6) throw new Error(`${chainIds.length} Resonance Chain nodes, expected 6`);
+
+  const skills = {};
+  for (const slot of SKILL_SLOTS) {
+    const id = Object.keys(KIT_SLOTS).find(k => KIT_SLOTS[k].slot === slot);
+    const s = tree[id].skill;
+    skills[slot] = {name: String(s.name || ""), blocks: toBlocks(s.desc, s.param)};
+  }
+
+  const inherent = [4, 5].map(id => ({
+    name: String(tree[id].skill.name || ""),
+    blocks: toBlocks(tree[id].skill.desc, tree[id].skill.param)
+  }));
+
+  const chain = chainIds.map(n => ({
+    n,
+    name: String(detail.chains[n].name || ""),
+    blocks: toBlocks(detail.chains[n].desc, detail.chains[n].param)
+  }));
+
+  const x = tree[17].skill;
+  const extra = isTuneBreak(x.name) ? [] : [{
+    kind: "Forte Circuit",
+    name: String(x.name || ""),
+    blocks: toBlocks(x.desc, x.param)
+  }];
+
+  return {
+    slug: slug(detail.name),
+    skills, inherent, chain,
+    ...(extra.length ? {extra} : {})
+  };
+}
+
 (async function main() {
   const page = await getText(SITE);
   const build = (page.match(/static\.nanoka\.cc\/ww\/([0-9][0-9.]*)\//) || [])[1];
@@ -258,6 +429,17 @@ function bonusText(desc, param) {
   const haveSonata = new Set((shippedEchoes.sonata || [])
     .flatMap(s => [norm(s.name), norm(s.alias)]).filter(Boolean));
   const haveResonator = new Set(roster.map(r => rosterKey(r.name)));
+  /* Keyed the tolerant way, because none of these three files spell a name
+     quite the same: the client files say "Rover: Electro" and "Shorekeeper"
+     where kits.json says "Rover (Electro)" and the roster says "The
+     Shorekeeper". On an exact match every Rover reads as a Resonator nobody
+     has ever written a kit for. */
+  const haveKit = new Set(Object.keys(
+    JSON.parse(await readFile("data/kits.json", "utf8")).kits || {}).map(rosterKey));
+  /* The roster's spelling of a name, which is the one app.js looks a kit up
+     by — and the one thing that collapses the client's two rows per Rover
+     element down to the single record the desk holds. */
+  const rosterName = new Map(roster.map(r => [rosterKey(r.name), r.name]));
 
   /* ── weapons the live sources have no row for ─────────────────── */
   const weapons = [];
@@ -315,6 +497,34 @@ function bonusText(desc, param) {
     console.log(`  sonata  ${name}`);
   }
 
+  /* ── kits for the Resonators no live source has written up ────── */
+  const kits = {};
+  const kitFails = [];
+  const extraKept = [];
+  for (const [id, c] of Object.entries(cChars)) {
+    /* On the roster, so the desk knows who they are, and with no kit from
+       prydwen.gg or the wiki. That is exactly the unshipped ones — the moment
+       either source writes a page, fetch-kits.mjs fills the slot and this
+       stops producing a record for them. */
+    const key = rosterKey(c.en);
+    if (!c.en || !haveResonator.has(key) || haveKit.has(key) || kits[rosterName.get(key)]) continue;
+    const name = rosterName.get(key);
+    try {
+      const detail = await getJSON(`${BASE(build)}/en/character/${id}.json`);
+      const kit = buildKit(detail);
+      kits[name] = kit;
+      if (kit.extra) extraKept.push(`${name} (${kit.extra[0].name})`);
+      const lines = [...Object.values(kit.skills), ...kit.inherent, ...kit.chain]
+        .reduce((a, g) => a + g.blocks.reduce((b, x) => b + x.p.length, 0), 0);
+      console.log(`  kit     ${name} — 6 skills, 2 inherent, 6 chain, ${lines} paragraphs`);
+    } catch (e) {
+      /* A tree this does not recognise is a layout change, and filing its
+         nodes under the wrong headings would be worse than having no kit —
+         the record already knows how to say it has none. */
+      kitFails.push(`${name}: ${e.message}`);
+    }
+  }
+
   /* ── everything else, reported and not written ────────────────── */
   const resonators = Object.values(cChars)
     .filter(c => c.en && !haveResonator.has(rosterKey(c.en)))
@@ -362,9 +572,43 @@ function bonusText(desc, param) {
   if (!unchanged)
     await writeFile(OUT, JSON.stringify({...payload, updated: new Date().toISOString()}, null, 2) + "\n");
 
+  const kitPayload = {
+    schema: "wuwa-desk/clientkits@1.0",
+    note:
+      "Kit text for the Resonators no live source has written up yet, read out of the beta client's " +
+      "own skill trees. Same six skills, two Inherent Skills and six Resonance Chain nodes that " +
+      "kits.json stores, in the same shape and with the same **bold** and __underline__ markers, so " +
+      "app.js can draw one without knowing where it came from — plus the sub-ability headings the " +
+      "client writes and prydwen.gg flattens away. Never merged into kits.json: that file is filled " +
+      "by prydwen.gg and the wiki, and the moment either writes a page for one of these, this record " +
+      "should lose to it. Numbers are the client's, taken before Kuro has finished balancing them. " +
+      "The Tune Break node every Resonator carries is dropped — it is one paragraph about Off-Tune " +
+      "Level, identical between everyone who holds the same weapon class, and it describes the class " +
+      "rather than the character.",
+    credit: "Kit text via nanoka.cc's datamine of the beta client · skills © Kuro Games",
+    source: SITE,
+    build,
+    kits
+  };
+
+  let kitsUnchanged = false;
+  try {
+    const prev = JSON.parse(await readFile(KIT_OUT, "utf8"));
+    kitsUnchanged = prev.build === build && prev.note === kitPayload.note
+      && JSON.stringify(prev.kits) === JSON.stringify(kits);
+  } catch {}
+  if (!kitsUnchanged)
+    await writeFile(KIT_OUT, JSON.stringify({...kitPayload, updated: new Date().toISOString()}, null, 2) + "\n");
+
   console.log(
-    `\n${weapons.length} unshipped weapons, ${sonata.length} unshipped sonata sets` +
-    (unchanged ? " (unchanged)" : ""));
+    `\n${weapons.length} unshipped weapons, ${sonata.length} unshipped sonata sets, ` +
+    `${Object.keys(kits).length} unwritten kits` +
+    (unchanged && kitsUnchanged ? " (unchanged)" : ""));
+  if (kitFails.length) console.log(`kit refused: ${kitFails.join("; ")}`);
+  /* Only the exception is worth a line. Almost every Resonator's extra slot is
+     the shared Tune Break node and gets dropped; one that holds something else
+     is a Forte Circuit the desk is now carrying. */
+  if (extraKept.length) console.log(`extra passive kept: ${extraKept.join(", ")}`);
   if (resonators.length)
     console.log(`in the client files with no roster record: ${resonators.map(r => r.name).join(", ")}`);
   else

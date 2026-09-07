@@ -41,15 +41,28 @@ record.
 
 ## Beta client records
 
-The Weapons and Echoes views also draw things that are only in the beta client — a
-weapon Kuro has built and not shipped, a sonata set that exists with nothing rolling it.
-Those come from `data/clientfiles.json`, are marked **Beta** on the card and
-**Datamined** in the record, and say in as many words that the numbers are pre-balance.
+The Weapons, Echoes and Resonators views also draw things that are only in the beta
+client — a weapon Kuro has built and not shipped, a sonata set that exists with nothing
+rolling it, the whole kit of a Resonator nobody has written up. Those are marked **Beta**
+on the card and **Datamined** in the record, and say in as many words that the numbers
+are pre-balance.
 
-They are a separate file rather than rows in `weapons.json` and `echoes.json` because
-those two are rebuilt wholesale by their own fetchers, so a beta row written into either
-would live until the next cron run. `assets/app.js` merges at read time, and a name the
-live sources already carry always wins — post-balance numbers beat beta ones.
+| File | Holds | Loaded |
+|---|---|---|
+| `data/clientfiles.json` | unshipped weapons and sonata sets | at boot |
+| `data/clientkits.json` | kits for Resonators no live source has written up | on demand, with `kits.json` |
+
+Separate files rather than rows in `weapons.json`, `echoes.json` and `kits.json` because
+those are filled by fetchers that would drop or outrank a beta row. `assets/app.js`
+merges at read time and a name the live sources already carry always wins — so the moment
+Prydwen or the wiki publishes a page, the beta record stops being drawn.
+
+The kit importer reads the client's 17-node skill tree. The mapping from node to slot was
+read off a Resonator the desk already had a kit for and checked against seven more, and a
+tree that doesn't match is refused rather than filed under the wrong headings. It keeps
+the sub-ability headings the client writes and Prydwen flattens away, so a beta kit is
+better organised than a shipped one. It drops the Tune Break node — every Resonator has
+one and it's identical between everyone holding the same weapon class.
 
 ## The files
 

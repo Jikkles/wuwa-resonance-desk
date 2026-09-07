@@ -3685,6 +3685,19 @@ img.astrite-pic{
 .kit-credit a{color:var(--fg-3);text-decoration:underline;text-underline-offset:2px}
 .kit-credit a:hover{color:var(--accent)}
 
+/* The beta note over a kit that came out of the client files. Boxed rather
+   than set as another paragraph: everything below it is Kuro's own words in
+   the desk's ordinary voice, so the thing saying it has not shipped has to
+   look like a different kind of statement. Datamined colour, same as the Beta
+   flag on a weapon card and the rail on an Intel entry making the same claim. */
+.drawer-b p.kit-beta{
+  margin:0 0 16px;padding:11px 14px;max-width:none;
+  border:1px solid color-mix(in srgb,var(--t-datamined) 38%,transparent);
+  border-radius:var(--r);
+  background:color-mix(in srgb,var(--t-datamined) 7%,transparent);
+  color:var(--t-datamined);font-size:.7813rem;line-height:1.62;
+}
+
 /* The preview broadcast, riding the status row. Not a pill: a pill is a one
    word state and this is a sentence — the label, the date it aired, and the
    way to watch it. Separated from the pills by a rule rather than another

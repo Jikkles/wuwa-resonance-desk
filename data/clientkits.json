@@ -1,0 +1,1106 @@
+{
+  "schema": "wuwa-desk/clientkits@1.0",
+  "note": "Kit text for the Resonators no live source has written up yet, read out of the beta client's own skill trees. Same six skills, two Inherent Skills and six Resonance Chain nodes that kits.json stores, in the same shape and with the same **bold** and __underline__ markers, so app.js can draw one without knowing where it came from — plus the sub-ability headings the client writes and prydwen.gg flattens away. Never merged into kits.json: that file is filled by prydwen.gg and the wiki, and the moment either writes a page for one of these, this record should lose to it. Numbers are the client's, taken before Kuro has finished balancing them. The Tune Break node every Resonator carries is dropped — it is one paragraph about Off-Tune Level, identical between everyone who holds the same weapon class, and it describes the class rather than the character.",
+  "credit": "Kit text via nanoka.cc's datamine of the beta client · skills © Kuro Games",
+  "source": "https://ww.nanoka.cc/",
+  "build": "3.7.0",
+  "kits": {
+    "Jingran": {
+      "slug": "jingran",
+      "skills": {
+        "basic": {
+          "name": "Edge of Life and Death",
+          "blocks": [
+            {
+              "h": "Basic Attack - Drink Soul",
+              "p": [
+                "While in the Yin Vessel state, perform up to 4 consecutive attacks, dealing __Fusion DMG__.",
+                "Casting Basic Attack - Drink Soul Stage 3 restores **50** points of Qi, dealing Heavy Attack DMG.",
+                "Casting Basic Attack - Drink Soul Stage 4 restores **50** points of Qi, dealing Heavy Attack DMG."
+              ]
+            },
+            {
+              "h": "Basic Attack - Devil's Bane",
+              "p": [
+                "While in the Yang Font state, perform up to 4 consecutive attacks, dealing __Fusion DMG__.",
+                "Casting Basic Attack - Devil's Bane Stage 3 restores **50** points of Qi, dealing Heavy Attack DMG.",
+                "Casting Basic Attack - Devil's Bane Stage 4 restores **50** points of Qi, dealing Heavy Attack DMG."
+              ]
+            },
+            {
+              "h": "Mid-air Attack",
+              "p": [
+                "Consume STA to perform a Plunging Attack in the air, dealing __Fusion DMG__.",
+                "While in the Yin Vessel state, press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Drink Soul Stage 2.",
+                "While in the Yang Font state, press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Devil's Bane Stage 2."
+              ]
+            },
+            {
+              "h": "Dodge Counter - Nether Dive",
+              "p": [
+                "While in the Yin Vessel state, press or hold Normal Attack shortly after a successful Dodge to attack the target, dealing __Fusion DMG__.",
+                "Casting Dodge Counter - Nether Dive restores **100** points of Qi, dealing Heavy Attack DMG.",
+                "Press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Drink Soul Stage 4."
+              ]
+            },
+            {
+              "h": "Dodge Counter - Light Watch",
+              "p": [
+                "While in the Yang Font state, press or hold Normal Attack shortly after a successful Dodge to attack the target, dealing __Fusion DMG__.",
+                "Casting Dodge Counter - Light Watch restores **100** points of Qi, dealing Heavy Attack DMG.",
+                "Press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Devil's Bane Stage 4."
+              ]
+            },
+            {
+              "h": "Shadow Step",
+              "p": [
+                "While in combat and on the ground, press Dodge with directional input to cast Shadow Step, dealing a fixed amount of __Fusion DMG__, considered Basic Attack DMG. This instance of damage is not affected by any DMG Bonus effects. A successful Dodge may be triggered within a certain time during the action of this skill.",
+                "While in the Yin Vessel state, press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Drink Soul Stage 2.",
+                "While in the Yang Font state, press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Devil's Bane Stage 2."
+              ]
+            }
+          ]
+        },
+        "skill": {
+          "name": "Malevolent Encounter",
+          "blocks": [
+            {
+              "h": "Resonance Skill - Encroaching Yin",
+              "p": [
+                "While in the Yin Vessel state, Resonance Skill - Encroaching Yin is available, which deals __Fusion DMG__.",
+                "Resonance Skill - Encroaching Yin can be cast in mid-air."
+              ]
+            },
+            {
+              "h": "Resonance Skill - Scorching Yang",
+              "p": [
+                "While in the Yang Font state, Resonance Skill - Scorching Yang is available, which deals __Fusion DMG__.",
+                "Resonance Skill - Scorching Yang can be cast in mid-air."
+              ]
+            },
+            {
+              "h": "Cleanse of Impurity",
+              "p": [
+                "Casting Resonance Skill - Encroaching Yin or Resonance Skill - Scorching Yang grants Cleanse of Impurity for **4**s or until one of the following conditions is met:",
+                "- Switching to another Resonator.",
+                "- Switching to the Yin Vessel or Yang Font state.",
+                "- Casting Resonance Skill - Netherworld Traverse or Resonance Skill - Afterlife's Guide."
+              ]
+            },
+            {
+              "h": "Resonance Skill - Netherworld Traverse",
+              "p": [
+                "While in the Yin Vessel state with Cleanse of Impurity, press or hold Normal Attack in mid-air to cast Resonance Skill - Netherworld Traverse, dealing __Fusion DMG__, considered Heavy Attack DMG.",
+                "Casting Resonance Skill - Netherworld Traverse restores **100** points of Qi.",
+                "Press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Drink Soul Stage 2."
+              ]
+            },
+            {
+              "h": "Resonance Skill - Afterlife's Guide",
+              "p": [
+                "While in the Yang Font state with Cleanse of Impurity, press or hold Normal Attack in mid-air to cast Resonance Skill - Afterlife's Guide, dealing __Fusion DMG__, considered Heavy Attack DMG.",
+                "Casting Resonance Skill - Afterlife's Guide restores **100** points of Qi.",
+                "Press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Devil's Bane Stage 2."
+              ]
+            }
+          ]
+        },
+        "liberation": {
+          "name": "Burial of Thousand Souls",
+          "blocks": [
+            {
+              "p": [
+                "Resonance Liberation - Burial of Thousand Souls can be cast in mid-air close to the ground.",
+                "Attack the target, dealing __Fusion DMG__, considered Heavy Attack DMG, and granting **100** points of Fire of Life.",
+                "Gain the following effects after casting this skill:",
+                "- If Jingran's current HP is above **50%** of the Max HP, reduce his current HP to **50%** of the Max HP.",
+                "- Gain **200** points of Qi.",
+                "- Gain **3** stacks of Wayfarer's Mark.",
+                "- Enter the Yinghuo state for **15**s."
+              ]
+            },
+            {
+              "h": "Wayfarer's Mark",
+              "p": [
+                "Max **3** stacks.",
+                "Casting Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander restores **200** points of Qi and reduces **1** stacks of Wayfarer's Mark. This effect lasts for **15**s."
+              ]
+            },
+            {
+              "h": "Yinghuo",
+              "p": [
+                "- Dealing damage with Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander summons Chimei Wangliang to attack the targets, which deals __Fusion DMG__, considered Heavy Attack DMG. This effect can be triggered once per Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander.",
+                "- All Fire of Life will be removed as Yinghuo ends."
+              ]
+            }
+          ]
+        },
+        "forte": {
+          "name": "Upstream Along Santu",
+          "blocks": [
+            {
+              "h": "Qi Modulation",
+              "p": [
+                "Jingran switches between the Yin Vessel and Yang Font states by casting Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander. Jingran is in the Yang Font state by default."
+              ]
+            },
+            {
+              "h": "Heavy Attack - Soul Raid",
+              "p": [
+                "When Jingran holds **300** points of Qi while in the Yin Vessel state, hold Normal Attack to consume **300** points of Qi to cast Heavy Attack - Soul Raid, dealing __Fusion DMG__.",
+                "After casting Heavy Attack - Soul Raid, Jingran switches to the Yang Font state.",
+                "Press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Devil's Bane Stage 2."
+              ]
+            },
+            {
+              "h": "Heavy Attack - Stardome Meander",
+              "p": [
+                "When Jingran holds **300** points of Qi while in the Yang Font state, hold Normal Attack to consume **300** points of Qi to cast Heavy Attack - Stardome Meander, dealing __Fusion DMG__.",
+                "After casting Heavy Attack - Stardome Meander, Jingran switches to the Yin Vessel state.",
+                "Press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Drink Soul Stage 2.",
+                "Heavy Attack - Stardome Meander can be cast in mid-air."
+              ]
+            },
+            {
+              "h": "Qi",
+              "p": [
+                "Max **300** points.",
+                "- Casting Basic Attack - Drink Soul Stage 3, Basic Attack - Drink Soul Stage 4, Basic Attack - Devil's Bane Stage 3, or Basic Attack - Devil's Bane Stage 4 restores **50** points of Qi.",
+                "- Casting Dodge Counter - Nether Dive, Dodge Counter - Light Watch, Resonance Skill - Netherworld Traverse, Resonance Skill - Afterlife's Guide, or Intro Skill - Question the Tombs restores **100** points of Qi.",
+                "- Casting Resonance Liberation - Burial of Thousand Souls or casting Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander with Wayfarer's Mark restores **200** points of Qi."
+              ]
+            },
+            {
+              "h": "Fire of Life",
+              "p": [
+                "Max **100** points.",
+                "- Casting Resonance Liberation - Burial of Thousand Souls grants **100** points of Fire of Life.",
+                "- All Fire of Life is cleared when Yinghuo ends.",
+                "While in Yinghuo, if Fire of Life is not at **0** points, casting Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander consumes **25** points of Fire of Life, and the DMG Multiplier of this Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander is increased based on Jingran's Max HP: The DMG Multiplier of this Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander is increased for every **1000** points of Jingran's Max HP over **25000**. Up to **25000** points of Jingran's Max HP count towards this effect."
+              ]
+            },
+            {
+              "h": "Nether to Light",
+              "p": [
+                "- Jingran's DEF is fixed at **0**.",
+                "- Jingran gains Incoming Healing Bonus based on Max HP: For every **1000** points of Max HP, Jingran receives **6.2%** Incoming Healing Bonus, up to **310%**.",
+                "- Jingran gains Fusion DMG Bonus based on Max HP: For every **1000** points of Max HP, Jingran receives **1.5%** Fusion DMG Bonus, up to **75%**."
+              ]
+            },
+            {
+              "h": "Yang Changes, Yin Unites",
+              "p": [
+                "Jingran gains additional ATK based on Max HP: For every **1000** points of Max HP, Jingran gains **36** additional ATK, up to **1800**."
+              ]
+            }
+          ]
+        },
+        "intro": {
+          "name": "Question the Tombs",
+          "blocks": [
+            {
+              "p": [
+                "Attack the target, dealing __Fusion DMG__. Consume and convert all Ghost Shroud to equal stacks of Fortune in Disguise.",
+                "Casting Question the Tombs restores **100** points of Qi.",
+                "While in the Yin Vessel state, press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Drink Soul Stage 2.",
+                "While in the Yang Font state, press or hold Normal Attack shortly after casting this skill to cast Basic Attack - Devil's Bane Stage 2."
+              ]
+            },
+            {
+              "h": "Fortune in Disguise",
+              "p": [
+                "Max **50** stacks. Each stack of Fortune in Disguise grants additional Fusion DMG Bonus based on Jingran's Max HP: For every **1000** points of Max HP, Jingran gains **0.05%** additional Fusion DMG Bonus for **15**s, up to **2.5%** for each stack of Fortune in Disguise.",
+                "Switching to another Resonator ends the effect."
+              ]
+            },
+            {
+              "h": "Ghost Shroud",
+              "p": [
+                "- Max **50** points.",
+                "- When Jingran gains a Shield, he gains **1** points of Ghost Shroud. This effect can be triggered once every **0.5**s."
+              ]
+            }
+          ]
+        },
+        "outro": {
+          "name": "Rising Fortune and Ebbing Evil",
+          "blocks": [
+            {
+              "p": [
+                "Deal __Fusion DMG__ equal to **795%** of Jingran's ATK."
+              ]
+            }
+          ]
+        }
+      },
+      "inherent": [
+        {
+          "name": "Hark the Dust",
+          "blocks": [
+            {
+              "p": [
+                "Casting Intro Skill - Question the Tombs, Resonance Skill - Encroaching Yin, or Resonance Skill - Scorching Yang grants Earth Charm."
+              ]
+            },
+            {
+              "h": "Earth Charm",
+              "p": [
+                "For **15**s, if Jingran is the active Resonator in the team, gain an unstackable Shield equal to **1.6%** of Max HP + **700** that lasts for **5**s when dealing damage. This effect can be triggered once every **0.5**s. This Shield will not be passed on to the incoming Resonator.",
+                "While Jingran is in the Yinghuo state, if he is the active Resonator in the team, he gains an unstackable Shield equal to **0.8%** of Max HP + **350** that lasts for **5**s when dealing damage. This effect can be triggered once every **0.5**s. This Shield will not be passed on to the incoming Resonator."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Trace the Vestige",
+          "blocks": [
+            {
+              "p": [
+                "Upon entering combat, if Jingran's Ghost Shroud is below **25** points, restore it to **25** points. This effect can be triggered once every **4**s.",
+                "When nearby Resonators in the team other than Jingran gain a Shield, Jingran gains **2** points of Ghost Shroud. This effect can be triggered once every **0.5**s."
+              ]
+            },
+            {
+              "h": "Fixation",
+              "p": [
+                "- Upon entering combat, Jingran gains Fixation. This effect can be triggered once every **4**s.",
+                "- Casting Outro Skill - Rising Fortune and Ebbing Evil grants Fixation.",
+                "- When nearby Resonators in the team other than Jingran gain a Shield, Jingran gains **15** points of Ghost Shroud and removes Fixation."
+              ]
+            }
+          ]
+        }
+      ],
+      "chain": [
+        {
+          "n": 1,
+          "name": "Yin and Yang in Harmony, the Ultimate Law of Being",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multipliers of Resonance Skill - Encroaching Yin, Resonance Skill - Netherworld Traverse, Resonance Skill - Scorching Yang, and Resonance Skill - Afterlife's Guide are increased by **80%**.",
+                "Resonance Skill - Encroaching Yin, Resonance Skill - Netherworld Traverse, Resonance Skill - Scorching Yang, and Resonance Skill - Afterlife's Guide are now immune to interruption."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "name": "A Solitary Lantern, Across Lands Shade-Trodden",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multipliers of Heavy Attack - Soul Raid and Heavy Attack - Stardome Meander are increased by **46%**. While in the Yinghuo state, the DMG Multiplier increase effect via Fire of Life on Heavy Attack - Soul Raid and Heavy Attack - Stardome Meander is increased by **46%**.",
+                "Upon entering combat, Jingran gains the following effects, triggered once every **4**s:",
+                "- Gains **300** points of Qi.",
+                "- Gains Netherworld's Boon."
+              ]
+            },
+            {
+              "h": "Netherworld's Boon",
+              "p": [
+                "Casting Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander restores **25%** of Max Resonance Energy and grants Heavy Attack - Soul Raid and Heavy Attack - Stardome Meander **180%** DMG Amplification for **4**s."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "name": "World's Course Shifts, Each to Their Rightful Paths",
+          "blocks": [
+            {
+              "p": [
+                "When Jingran casts Heavy Attack - Soul Raid or Heavy Attack - Stardome Meander, gain **5** points of Ghost Shroud.",
+                "When Jingran casts Resonance Liberation - Burial of Thousand Souls, Yang Changes, Yin Unites is replaced by Yin-Yang Everflow for **15**s."
+              ]
+            },
+            {
+              "h": "Yin-Yang Everflow",
+              "p": [
+                "Jingran gains additional ATK based on Max HP: For every **1000** points of Jingran's Max HP, gain **50** additional ATK, up to **2500**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "name": "Where Reality Meets Illusion, Where Living Meet Dead",
+          "blocks": [
+            {
+              "p": [
+                "When a Resonator in the team gains a Shield, all Resonators in the team gain **20%** All-Attribute DMG Bonus for **30**s."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "name": "Ends Return to Beginnings, Truth of Life Laid Bare",
+          "blocks": [
+            {
+              "p": [
+                "When Jingran takes a fatal blow, he will not fall and will instead gain a Shield equal to **50%** of Max HP for **15**s. This effect can be triggered once every **10** min. This Shield will not be passed on to the incoming Resonator."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "name": "As Favors and Feuds Fade, New Stories Await",
+          "blocks": [
+            {
+              "p": [
+                "Targets take **40%** more Heavy Attack DMG from Jingran.",
+                "The DMG Multiplier of Chimei Wangliang is increased by **80%**.",
+                "Upon entering the Yinghuo state, Jingran gains the Parade of Thousand Souls effect for **15**s. During this effect, if Jingran is the active Resonator in the team, upon dealing damage, Jingran summons Chimei Wangliang to attack the targets, dealing __Fusion DMG__, considered Heavy Attack DMG.",
+                "Chimei Wangliang can be summoned this way at an interval of **1**s for up to 8 times. Parade of Thousand Souls ends and the available summon charges of Chimei Wangliang reset when either of the following conditions is met:",
+                "- Cast Resonance Liberation - Burial of Thousand Souls.",
+                "- Yinghuo ends or is removed."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "Hsin": {
+      "slug": "hsin",
+      "skills": {
+        "basic": {
+          "name": "Manifold Bloom",
+          "blocks": [
+            {
+              "h": "Basic Attack - Answering Form",
+              "p": [
+                "While in Answering Form, perform up to 4 consecutive attacks, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Heavy Attack - Answering Form",
+              "p": [
+                "While in Answering Form, consume STA to deal __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 2."
+              ]
+            },
+            {
+              "h": "Mid-air Attack - Answering Form",
+              "p": [
+                "While in Answering Form and in mid-air, press Normal Attack then release the button to cast the skill at the cost of STA, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 2."
+              ]
+            },
+            {
+              "h": "Heavy Attack - Answering Form: Reign at Ease",
+              "p": [
+                "While in Answering Form and in mid-air, hold Normal Attack to cast Heavy Attack - Answering Form: Reign at Ease, continuously consuming STA and dealing __Electro DMG__ to the target."
+              ]
+            },
+            {
+              "h": "Mid-air Attack - Answering Form: Reign at Ease",
+              "p": [
+                "When the Normal Attack button is released during Heavy Attack - Answering Form: Reign at Ease, or when the skill ends, Hsin casts Mid-air Attack - Answering Form: Reign at Ease , consuming STA to perform a Plunging Attack, transforming into the Moon Fox upon landing and dealing __Electro DMG__.",
+                "After casting Mid-air Attack- Answering Form: Reign at Ease, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 2."
+              ]
+            },
+            {
+              "h": "Dodge Counter - Answering Form",
+              "p": [
+                "While in Answering Form, use Normal Attack within a short time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 3."
+              ]
+            },
+            {
+              "h": "Basic Attack - Illumining Form",
+              "p": [
+                "While in Illumining Form and not in the Mechanism Dominion state, command Xuanfang Mechanisms to perform up to 3 consecutive attacks, dealing __Electro DMG__.",
+                "Casting Basic Attack - Illumining Form Stage 1 generates a Modular Heartlock at the target's position. Casting Basic Attack - Illumining Form Stage 2, Heavy Attack - Illumining Form, Dodge Counter - Illumining Form, or Resonance Skill - Illumining Form causes the Modular Heartlock to collapse, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Heavy Attack - Illumining Form",
+              "p": [
+                "While in Illumining Form, consume STA to command Xuanfang Mechanisms, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Illumining Form Stage 3."
+              ]
+            },
+            {
+              "h": "Upward Cut - Illumining Form",
+              "p": [
+                "While in Illumining Form and on the ground, press Jump to cast this skill, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Mid-air Attack - Illumining Form",
+              "p": [
+                "While in Illumining Form and Hsin is in mid-air, Resonance Skill - Illumining Form is repalced with Mid-air Attack - Illumining Form.",
+                "Consume STA to perform a Plunging Attack, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Dodge Counter - Illumining Form",
+              "p": [
+                "While in Illumining Form, use Normal Attack within a short time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Illumining Form Stage 3."
+              ]
+            },
+            {
+              "h": "Basic Attack - Illumining Form: Pillars Aligned",
+              "p": [
+                "While in Illumining Form and in the Mechanism Dominion state, command Xuanfang Mechanisms to perform up to 4 consecutive attacks, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Dodge Counter - Illumining Form: Pillars Aligned",
+              "p": [
+                "While in Illumining Form and in the Mechanism Dominion state, press Normal Attack within a short time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Illumining Form: Pillars Aligned Stage 3."
+              ]
+            }
+          ]
+        },
+        "skill": {
+          "name": "Heartward by Moon",
+          "blocks": [
+            {
+              "h": "Resonance Skill - Answering Form",
+              "p": [
+                "While in Answering Form, if Hsin is on the ground, press Resonance Skill to deal __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 4.",
+                "If Hsin moves while on the ground within a short time after casting this skill, She turns into the Moon Fox.",
+                "- While turned into the Moon Fox and out of combat, Hsin gains Dustless Tread. With Dustless Tread, Hsin can enter the target's aggro range without triggering combat. Dustless Tread is removed when Hsin enters combat, is switched out, or ends the Moon Fox form by having environmental, gameplay, or feature interactions.",
+                "- While turned into the Moon Fox and out of combat, Hsin restores **2%** of Max HP each second.",
+                "- Casting Dodge or taking damage ends the Moon Fox form and makes Hsin immune to DMG and interruption for a short time. Switching to another Resonator or pressing Normal Attack also ends the Moon Fox form and casts Basic Attack - Answering Form Stage 4."
+              ]
+            },
+            {
+              "h": "Resonance Skill - Illumining Form",
+              "p": [
+                "While in Illumining Form and Hsin is on the ground, press Resonance Skill to have Hsin command a Colossal Xuanfang Mechanism, dealing __Electro DMG__."
+              ]
+            }
+          ]
+        },
+        "liberation": {
+          "name": "Nexus Alight",
+          "blocks": [
+            {
+              "h": "Formshift",
+              "p": [
+                "Casting Answering Form: Realm Wanderer unlocks Formshift.",
+                "Cast Formshift to unfurl the Manifold Sanctum. Hsin turns into Illumining Form, unlocking a new set of combat abilities, and enters the Heart Manifest state.",
+                "Can be cast in mid-air close to the ground.",
+                "While in Illumining Form, engaging in quest dialogue, performing a environmental interaction with an animation, or using a Utility switches Hsin back to Answering Form to perform the corresponding action.",
+                "While in Illumining Form, Hsin can walk on the surface of water, and will continuously consume STA in the deep water areas. In Walking Mode, Hsin in Illumining Form can step off a cliff into the air and walk slowly in mid-air, continuously consuming STA in this state. Hsin cannot restore STA while in Illumining Form and air-borne."
+              ]
+            },
+            {
+              "h": "Pillars Across Heaven",
+              "p": [
+                "Casting Illumining Form: Beholding All Horizons unlocks Pillars Across Heaven.",
+                "Cast Pillars Across Heaven to bring the Manifold Sanctum crashing down, dealing __Electro DMG__ to the target, considered Resonance Skill DMG.",
+                "Can be cast in mid-air close to the ground.",
+                "Hsin returns to Answering Form and exits the Heart Manifest state."
+              ]
+            },
+            {
+              "h": "Edict",
+              "p": [
+                "Casting Formshift grants Hsin **21** stacks of Edict for **45**s. The effect cannot exceed **21** stacks and all stacks are removed when the duration ends.",
+                "After the active Resonator in the team deals DMG, Hsin automatically consumes Edict in the following **3**s trigger the following effect up to once per second. Retriggering the effect resets the durtion:",
+                "- When Edict is consumed, summon a Soaring Pillar from the Manifold Sanctum as a Coordinated Attack to strike the target once, dealing __Electro DMG__.",
+                "- Edict can be automatically consumed up to 1 stack per second.",
+                "- Damage dealt by Soaring Pillar does not trigger this effect.",
+                "- When Hsin is knocked out, all Edict stacks are cleared."
+              ]
+            },
+            {
+              "h": "Heart Manifest",
+              "p": [
+                "Increases Hsin's resistance to interruption for **45**s.",
+                "Entering the Heart Manifest state resets Hsin's Illumining Heart.",
+                "While in the Heart Manifest state and in Illumining Form, if Pillars Across Heaven has not been unlocked, press Resonance Liberation to have Hsin cast Invoked Form: Answering. While in Answering Form, press Resonance Liberation to have Hsin cast Invoked Form: Illumining."
+              ]
+            },
+            {
+              "h": "Invoked Form: Answering",
+              "p": [
+                "Hsin temporarily reverts to Answering Form, pausing the duration timer of the Heart Manifest state.",
+                "When this skill is cast, if Hsin is on the ground, She casts Basic Attack - Answering Form Stage 3; if She is in mid-air, She casts Mid-air Attack - Answering Form."
+              ]
+            },
+            {
+              "h": "Invoked Form: Illumining",
+              "p": [
+                "Hsin turns back into Illumining Form, resuming the duration timer of the Heart Manifest state.",
+                "When this skill is cast, if Hsin is on the ground, She casts Upward Cut - Illumining Form; if She is in mid-air, She casts Mid-air Attack - Illumining Form."
+              ]
+            }
+          ]
+        },
+        "forte": {
+          "name": "Forms Turn, Heart Abides",
+          "blocks": [
+            {
+              "h": "Forms Born of Heart",
+              "p": [
+                "While in Answering Form, Hsin can gain and consume Answering Heart.",
+                "While in Illumining Form, Hsin can gain and consume Illumining Heart."
+              ]
+            },
+            {
+              "h": "Answering Form: Realm Wanderer",
+              "p": [
+                "While in Answering Form, when Hsin's Answering Heart reaches **100** points, Heavy Attack - Answering Form is replaced with Answering Form: Realm Wanderer.",
+                "Hold Normal Attack to cast the skill at the cost of STA. Hsin is immune to DMG and interruption during the action, and deals __Electro DMG__ to the target, considered Resonance Skill DMG.",
+                "Casting Answering Form: Realm Wanderer grants Hsin Resolution of Wishes. This Answering Form: Realm Wanderer consumes Resolution of Wishes to become Answering Form: Realm Protector, dealing greater DMG. Resolution of Wishes can only be gained once every **25**s.",
+                "While casting Answering Form: Realm Wanderer, if Hsin is not in the Heart Manifest state, consume **100** points of Answering Heart and unlock Resonance Liberation - Formshift."
+              ]
+            },
+            {
+              "h": "Illumining Form: Beholding All Horizons",
+              "p": [
+                "While in Illumining Form, when Hsin consumes all of her Illumining Heart during the Mechanism Dominion state, Heavy Attack - Illumining Form is replaced with Illumining Form: Beholding All Horizons.",
+                "Hold Normal Attack to cast the skill at the cost of STA, dealing __Electro DMG__ to the target, considered Resonance Skill DMG.",
+                "Casting Illumining Form: Beholding All Horizons grants Hsin Law of Heaven. This Illumining Form: Beholding All Horizons consumes Law of Heaven to become Illumining Form: Stilling All Horizons, dealing greater DMG. Law of Heaven can only be gained once every **25**s.",
+                "After casting Illumining Form: Beholding All Horizons, Hsin exits the Mechanism Dominion state and Resonance Liberation - Pillars Across Heaven is unlocked."
+              ]
+            },
+            {
+              "h": "Illumining Form: Pillars Aligned",
+              "p": [
+                "While in Illumining Form, when Hsin's Illumining Heart reaches **300** points, Resonance Skill is replaced with Illumining Form: Pillars Aligned.",
+                "When Hsin is on the ground, press Resonance Skill to deal __Electro DMG__ to surrounding targets, considered Resonance Skill DMG.",
+                "After casting Illumining Form: Pillars Aligned, Hsin enters the Mechanism Dominion state."
+              ]
+            },
+            {
+              "h": "Mechanism Dominion",
+              "p": [
+                "The Mechanism Dominion state lasts **13**s.",
+                "While this state is active, Basic Attack - Illumining Form is further enhanced into Basic Attack - Illumining Form: Pillars Aligned, and Dodge Counter - Illumining Form is replaced with Dodge Counter - Illumining Form: Pillars Aligned.",
+                "When Basic Attack - Illumining Form: Pillars Aligned or Dodge Counter - Illumining Form: Pillars Aligned hits a target, Illumining Heart is consumed if Hsin is on the field."
+              ]
+            },
+            {
+              "h": "Resonance Mode - Unison",
+              "p": [
+                "While in Resonance Mode - Unison, Hsin gains the following effects:",
+                "- Hsin can trigger Unison Response.",
+                "- Casting Resonance Liberation - Formshift grants Hsin Unison for **5**s.",
+                "- When Hsin triggers Unison Response, She gains Source Intent, and the Intro Skill cast this time is replaced with Intro Skill - Manifold Unison, dealing greater DMG.",
+                "When Hsin casts an Intro Skill without triggering Unison Response while holding Source Intent, She consumes Source Intent instead, and the Intro Skill is replaced with Intro Skill - Manifold Unison, dealing greater DMG.",
+                "- Casting Intro Skill - Illumining Form or Intro Skill - Illumining Form: Manifold Unison sends Hsin directly into the Mechanism Dominion state.",
+                "- When Hsin swiches Resonance Mode, Source Intent, Unison, and 【Unison Boon】 are removed."
+              ]
+            },
+            {
+              "h": "Resonance Mode - Electro Flare",
+              "p": [
+                "While in Resonance Mode - Electro Flare, Hsin gains the following effects:",
+                "- After Resonators in the team inflict Electro Rage to a target, every **1** stacks of Electro Rage inflicted grants Hsin **1** stacks of Heart of Thunder, stacking up to **100** times, and consumes all Electro Rage stacks from that target. Heart of Thunder is removed when Hsin switches Resonance Mode.",
+                "- When Resonance Skill - Illumining Formhits a target, if Hsin has at least **5** stacks of Heart of Thunder, then consume **5** stacks of Heart of Thunder to trigger 1 instance of Electro Flare DMG, with its DMG Multiplier equal to **200%** times the Electro Flare DMG Multiplier corresponding to the current Electro Flare stacks on the target.",
+                "Some time after casting Resonance Skill - Illumining Form, Hsin consumes all remaining stacks of Heart of Thunder at once to trigger 1 instance of Electro Flare DMG. Its DMG Multiplier equals to **40%** x (the number of Heart of Thunder stacks consumed this time) x (the Electro Flare DMG Multiplier corresponding to the target's current Electro Flare stacks).",
+                "While casting Resonance Skill - Illumining Form, switching to another Resonator or ending the skill early will end the above effects early.",
+                "- After Resonance Liberation - Formshift is cast, inflict **5** stacks of Electro Flare on the nearby targets within a certain range. When Illumining Form: Pillars Aligned, Basic Attack - Illumining Form: Pillars Aligned, or Dodge Counter - Illumining Form: Pillars Aligned hits a target, Hsin inflicts Electro Flare to that target. This can take effect up to **5** times. Each time Hsin casts Resonance Liberation - Formshift, the number of times it can take effect is reset. When Hsin switches Resonance Mode, the number of times it can take effect is removed.",
+                "Illumining Form: Pillars Aligned and Illumining Form: Stilling All Horizons inflict **5** stacks of Electro Flare on the target hit. Intro Skill - Illumining Form and Intro Skill - Answering Form inflict **1** stacks of Electro Flare on the target hit."
+              ]
+            },
+            {
+              "h": "Unison",
+              "p": [
+                "While Hsin is in Resonance Mode - Unison with Unison, switching to another Resonator will remove Hsin's Unison to trigger Hsin's Outro Skill and the incoming Resonator's Intro Skill. If Hsin has full Concerto Energy and Unison at the same time, only Unison is consumed to trigger the effect."
+              ]
+            },
+            {
+              "h": "Unison Response",
+              "p": [
+                "While Hsin is in Resonance Mode - Unison and another Resonator in the team has Unison, switching to Hsin grants **1** stacks of Unison Boon to all Resonators in the team for **30**s.",
+                "Hsin can only grant up to **1** stacks of Unison Boon in this way. Retriggering the effect resets the duration."
+              ]
+            },
+            {
+              "h": "Unison Boon",
+              "p": [
+                "Each stack of Unison Boon increase the total DMG dealt by Resonators with the Unison Response ability in the team by **3%**, stacking up to **2** times."
+              ]
+            },
+            {
+              "h": "Answering Heart",
+              "p": [
+                "Can hold up to **100** points of Answering Heart.",
+                "While in Answering Form, when Normal Attack - Answering Form, Resonance Skill - Answering Form, Intro Skill - Answering Form, or Intro Skill - Answering Form: Manifold Unison hits a target, Hsin gains Answering Heart if She is on the field.",
+                "Casting Intro Skill - Answering Form or Intro Skill - Answering Form: Manifold Unison grants **60** points of Answering Heart."
+              ]
+            },
+            {
+              "h": "Illumining Heart",
+              "p": [
+                "Can hold up to **300** points of Illumining Heart.",
+                "While in Illumining Form and not in the Mechanism Dominion state, when Normal Attack - Illumining Form, or Resonance Skill - Illumining Form hits a target, Hsin gains Illumining Heart if She is on the field.",
+                "- While in Resonance Mode - Unison, casting Intro Skill - Illumining Form or Intro Skill - Illumining Form: Manifold Unison directly sends Hsin into the Mechanism Dominion state and grants **300** points of Illumining Heart.",
+                "- While in Resonance Mode - Electro Flare, after casting Resonance Liberation - Formshift, the next time the Modular Heartlock generated by Basic Attack - Illumining Form Stage 1 is collapsed by Basic Attack - Illumining Form Stage 2, Heavy Attack - Illumining Form, Dodge Counter - Illumining Form, or Resonance Skill - Illumining Form, gain **150** points of Illumining Heart if Hsin is on the field. This effect can only be triggered once before the next cast of Resonance Liberation - Formshift resets it, and is disabled when switched to the other Resonance Mode."
+              ]
+            }
+          ]
+        },
+        "intro": {
+          "name": "Glance on a Whim",
+          "blocks": [
+            {
+              "h": "Intro Skill - Answering Form",
+              "p": [
+                "This skill becomes available while in Answering Form. Attack the target, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 3 (when in Resonance Mode - Unison) or Basic Attack - Answering Form Stage 4 (when in Resonance Mode - Electro Flare)."
+              ]
+            },
+            {
+              "h": "Intro Skill - Answering Form: Manifold Unison",
+              "p": [
+                "The skill becomes available when in Answering Form. Attack the target, dealing greater __Electro DMG__, considered Resonance Skill DMG.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 3."
+              ]
+            },
+            {
+              "h": "Intro Skill - Illumining Form",
+              "p": [
+                "This skill becomes available while in Illumining Form. Attack the target, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Intro Skill - Illumining Form: Manifold Unison",
+              "p": [
+                "The skill becomes available when in Illumining Form. Attack the target, dealing greater __Electro DMG__, considered Resonance Skill DMG."
+              ]
+            }
+          ]
+        },
+        "outro": {
+          "name": "Herself a Thousand Lanterns",
+          "blocks": [
+            {
+              "p": [
+                "Attack the target, dealing __Electro DMG__ equal to **100%** of Hsin's ATK.",
+                "Hsin gains Nightglow after casting Resonance Liberation - Pillars Across Heaven. When Hsin casts Outro Skill, Nightglow is consumed to trigger various effects depending on the Resonance Mode She is in:",
+                "- While in Resonance Mode - Unison, Resonators in the team other than Hsin gain Shared Light when they gain Unison. After Hsin casts Outro Skill, Resonators with Shared Light gain **20%** All DMG Amplification for **30**s.",
+                "- While in Resonance Mode - Electro Flare, Electro DMG dealt by Resonators in the team other than Hsin is Amplified by **20%** for **20**s.",
+                "The above effects end early when Hsin switches Resonance Mode."
+              ]
+            }
+          ]
+        }
+      },
+      "inherent": [
+        {
+          "name": "Tides of Succession",
+          "blocks": [
+            {
+              "p": [
+                "While in Resonance Mode - Unison, when Hsin casts Intro Skill - Answering Form: Manifold Unison or Intro Skill - Illumining Form: Manifold Unison, She gains **40%** Electro DMG Bonus for **8**s. Switching to another Resonator ends this effect.",
+                "While in Resonance Mode - Electro Flare, after Resonators in the team inflict Electro Flare, Hsin gains **25%** Electro DMG Bonus, stacking up to **2** times. Each Resonator can trigger this effect only once. In addition, if Rover: Electro is in the same team, when Rover: Electro casts Intro Skill - Thunderous Fury, both Hsin and Rover: Electro gain **20%** Electro DMG Bonus for 7s.",
+                "This effect resets when a Resonator is added to the team or when Hsin switches Resonance Mode."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Gleaning Simple Joys",
+          "blocks": [
+            {
+              "p": [
+                "While in Resonance Mode - Unison, the maximum stacks of the Unison Boon effect on Resonators in the team are increased by **1**. When a Resonator in the team triggers Unison Response, all Resonators in the team gain **1** stacks of Unison Boon for **30**s. This effect can only grant up to **1** stacks of Unison Boon.",
+                "While in Resonance Mode - Electro Flare and Hsin is not in the Heart Manifest state, Hsin gains 1 stack of Thunderglow after Resonators in the team other than Hsin inflict Electro Flare, stacking up to **10** times.",
+                "While Hsin is in the Heart Manifest state, when targets within a certain range around the active Resonator have 0 stacks of Electro Flare, inflict 1 stack of Electro Flare on the targets. If Thunderglow on Hsin reaches the stack limit, Hsin also inflicts Fleeting Thunder on the targets:",
+                "- When Hsin inflicts Fleeting Thunder on the target, she also inflicts Electro Flare on the target to the stack limit, up to **16** stacks of Electro Flare.",
+                "- When Fleeting Thunder is active, if the maximum stacks of Electro Flare on the target are increased, Hsin will inflict Electro Flare on the target to the stack limit again, up to **16** stacks of Electro Flare.",
+                "- When Fleeting Thunder is active, the Electro Flare stacks on the target will not be reduced when automatically triggered.",
+                "- Fleeting Thunder will be removed when the target leaves the designated range around Hsin.",
+                "Exiting the Heart Manifest state or switching Resonance Mode removes the effects mentioned above."
+              ]
+            }
+          ]
+        }
+      ],
+      "chain": [
+        {
+          "n": 1,
+          "name": "A Boat to Cross the Rising Tide",
+          "blocks": [
+            {
+              "p": [
+                "Casting Resonance Liberation - Formshift grants Hsin 2 stacks of Radiance Ward, stacking up to **2** times. Switching to Answering Form clears all stacks. When Hsin takes DMG from an enemy target's attack, 1 stack of Radiance Ward can be consumed to make Her immune to interruption and reduce DMG taken by **60%** for **1**s. This effect can be triggered once every **1**s.",
+                "While in Resonance Mode - Unison:",
+                "The DMG Multipliers of Intro Skill - Answering Form: Manifold Unison and Intro Skill - Illumining Form: Manifold Unison are increased by **15%**, and each stack of Unison Boon additionally increases the DMG Multipliers of Intro Skill - Answering Form: Manifold Unison and Intro Skill - Illumining Form: Manifold Unison by **10%**, up to a total **4** stacks.",
+                "While in Resonance Mode - Electro Flare:",
+                "When Hsin enters combat, if Heart of Thunder is below **50** stacks, it is increased to **50** stacks, triggered once every **4**s.",
+                "When Forte Circuit - Resonance Skill: Illumining Form hits a target, the DMG Multiplier of Electro Flare DMG dealt by consuming **5** stacks of Heart of Thunder is increased to **260%**, and the DMG Multiplier of Electro Flare DMG dealt by consuming all remaining Heart of Thunder at once is increased to **52%**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "name": "To Wake Is to Wonder What I Am",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multipliers of Answering Form: Realm Wanderer and Answering Form: Realm Protector are increased by **60%**.",
+                "The DMG Multipliers of Illumining Form: Beholding All Horizons and Illumining Form: Stilling All Horizons are increased by **60%**.",
+                "When Hsin enters combat, the Cooldowns for Hsin to gain Resolution of Wishes and Law of Heaven are reset. If Hsin is in Answering Form, **100** additional points of Answering Heart are also restored. This effect can be triggered once every **4**s."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "name": "A Dream of Return Among the Hills",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multiplier of Resonance Liberation - Pillars Across Heaven is increased by **70%**.",
+                "While in Resonance Mode - Unison:",
+                "The Crit. DMG of Resonance Liberation - Pillars Across Heaven is increased by **20%**, and each stack of Unison Boon additionally increases its Crit. DMG by **15%**, stacking up to **4** times.",
+                "While in Resonance Mode - Electro Flare:",
+                "When the last stage of Resonance Liberation - Pillars Across Heaven hits a target inflicted with Electro Flare, it triggers 1 instance of Electro Flare DMG, with its DMG Multiplier equal to **1500%** times the Electro Flare DMG Multiplier corresponding to the current Electro Flare stacks on the target."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "name": "A River of Lanterns, a River of Wishes",
+          "blocks": [
+            {
+              "p": [
+                "When Resonators in the team inflict Electro Flare or Electro Rage to a target, or when Resonators in the team gain Unison or trigger Unison Response, all Resonators in the team gain **20%** All-Attribute DMG Bonus for **30**s."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "name": "Forms Turn as the Heart Wills",
+          "blocks": [
+            {
+              "p": [
+                "While in Illumining Form, DMG taken by Hsin is reduced by **20%**.",
+                "When Hsin takes a fatal blow, She will not be knocked out, but instead restores **100%** of Max HP and becomes immune to DMG and interruption for **1**s. This effect can be triggered once every **10** minutes."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "name": "The Moon Owes Its Light to the Living",
+          "blocks": [
+            {
+              "p": [
+                "Targets take **40%** more Resonance Skill DMG from Hsin.",
+                "Resonance Skill DMG dealt by Hsin ignores **20%** of the target's DEF.",
+                "While in Resonance Mode - Unison:",
+                "The maximum stacks of the Unison Boon effect on Resonators in the team are increased by **1**. When a Resonator in the team triggers Unison Response, all Resonators in the team gain **1** stacks of Unison Boon for **30**s. This effect does not stack.",
+                "While in Resonance Mode - Electro Flare:",
+                "While in combat, Electro Flare DMG taken by targets within a certain range around Hsin can be Critical, with Crit. Rate fixed at **80%** and Crit. DMG fixed at **230%**."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "Suoming": {
+      "slug": "suoming",
+      "skills": {
+        "basic": {
+          "name": "Furled Canopy",
+          "blocks": [
+            {
+              "h": "Basic Attack",
+              "p": [
+                "Perform up to 3 consecutive attacks, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Basic Attack - Unfurled Canopy",
+              "p": [
+                "While in the Deep Mind state, Basic Attack is replaced with Basic Attack - Unfurled Canopy, performing up to 4 consecutive attacks, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Basic Attack - Unfurled Canopy: Whirling Thunder",
+              "p": [
+                "Shortly after casting Basic Attack - Unfurled Canopy Stage 2, hold Normal Attack to cast Basic Attack - Unfurled Canopy: Whirling Thunder Stage 1 and Stage 2 in succession, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Mid-air Attack",
+              "p": [
+                "Consume STA to perform Plunging Attack, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Dodge Counter",
+              "p": [
+                "Press Normal Attack within a certain time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "- While in the Deep Mind state, Dodge Counter is replaced with  Dodge Counter - Unfurled Canopy.",
+                "- Shortly after casting the skill, press Normal Attack to cast Basic Attack Stage 3."
+              ]
+            },
+            {
+              "h": "Dodge Counter - Unfurled Canopy",
+              "p": [
+                "Press Normal Attack within a certain time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "- Shortly after casting the skill, press Normal Attack to cast Basic Attack - Unfurled Canopy Stage 3.",
+                "- Shortly after casting the skill, hold Normal Attack to cast Basic Attack - Unfurled Canopy: Whirling Thunder Stage 1, dealing __Electro DMG__."
+              ]
+            }
+          ]
+        },
+        "skill": {
+          "name": "Furled Canopy: Rift Cleaver",
+          "blocks": [
+            {
+              "p": [
+                "Attack targets within range, dealing __Electro DMG__.",
+                "- Upon being attacked by an enemy target, cast Resonance Skill to become immune to this damage and stagnate nearby targets. This Resonance Skill is immune to interruption and triggers Resonance Skill - Unfurled Canopy: Crimson Gleam.",
+                "- Entering the Deep Mind state resets the Cooldown of Resonance Skill.",
+                "- While in the Awakened Mind state, press Normal Attack shortly after casting this skill to cast Basic Attack Stage 2.",
+                "- While in the Deep Mind state, press Normal Attack shortly after casting this skill to chain into Basic Attack - Unfurled Canopy Stage 3."
+              ]
+            },
+            {
+              "h": "Resonance Skill - Unfurled Canopy: Crimson Gleam",
+              "p": [
+                "Attack targets within range, dealing __Electro DMG__.",
+                "- While in the Awakened Mind state, press Normal Attack shortly after casting this skill to cast Basic Attack Stage 3.",
+                "- While in the Deep Mind state, press Normal Attack shortly after casting this skill to chain into Basic Attack - Unfurled Canopy Stage 4."
+              ]
+            }
+          ]
+        },
+        "liberation": {
+          "name": "Umbral Canopy: Miasma Lock",
+          "blocks": [
+            {
+              "p": [
+                "While in the Deep Mind state, Resonance Liberation becomes available. Casting Resonance Liberation deals __Electro DMG__ to targets within range.",
+                "- Casting Resonance Liberation grants Suoming Unison for **5**s, triggered only once every **25**s."
+              ]
+            },
+            {
+              "h": "Blight Rain, Miasmic Thunder",
+              "p": [
+                "While casting Outro Skill, if Suoming has Unison, when the active Resonator deals damage, a Thunder Crest is summoned as a Coordinated Attack on the target, dealing __Electro DMG__.",
+                "- Within **3**s after this damage is dealt, a Thunder Crest can be summoned each second. This effect is triggered once per second. The damage dealt by Thunder Crest does not trigger this effect.",
+                "- Only 1 Thunder Crest can be summoned per second, up to **6** in total.",
+                "- This effect lasts **8**s, or until the number of summoned Thunder Crest reaches the limit."
+              ]
+            }
+          ]
+        },
+        "forte": {
+          "name": "Bound Obsession, Forged Mind",
+          "blocks": [
+            {
+              "h": "Resonance Skill - Furled Canopy: Sealed Delusion",
+              "p": [
+                "While in the Awakened Mind state, when Delusion reaches **800** points, Resonance Skill is replaced with Resonance Skill - Furled Canopy: Sealed Delusion, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- Casting this skill sends Suoming into Deep Mind and clears all Delusion."
+              ]
+            },
+            {
+              "h": "Resonance Skill - Unfurled Canopy: Unforsaken Mind",
+              "p": [
+                "While in the Deep Mind state, when Delusion reaches **800** points, Resonance Skill is replaced with Resonance Skill - Unfurled Canopy: Unforsaken Mind, dealing __Electro DMG__, considered Basic Attack DMG."
+              ]
+            },
+            {
+              "h": "Basic Attack - Umbral Canopy: Engraved Heart",
+              "p": [
+                "After casting Resonance Skill - Unfurled Canopy: Unforsaken Mind, Basic Attack is replaced with Basic Attack - Umbral Canopy: Engraved Heart. Press or hold Normal Attack or Resonance Skill to cast this skill. Attack targets within range, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- Casting this skill sends Suoming into Calamity Mind and clears all Delusion; she enters Awakened Mind once the skill ends.",
+                "- When casting this skill, hold Normal Attack or Resonance Skill to continuously attack the target for a certain period.",
+                "- While casting this skill, Suoming is immune to interruption. During this time she cannot move, sprint, jump, dodge, or cast Basic Attack, Resonance Skill, Resonance Liberation, Dodge Counter, Plunging Attack, Mid-air Attack, or Intro Skill, and Resonator switching is also restricted."
+              ]
+            },
+            {
+              "h": "Unison",
+              "p": [
+                "When Suoming has Unison, switching to another Resonator will remove her Unison to trigger Suoming's Outro Skill and the incoming Resonator's Intro Skill. When Suoming's Concerto Energy is full and she has Unison, only the Unison effect is consumed."
+              ]
+            },
+            {
+              "h": "Unison Response",
+              "p": [
+                "Suoming can trigger Unison Response.",
+                "When a Resonator in the team has Unison, swiching to Suoming grants all Resonators in the team **1** stacks of Unison Boon for **30**s.",
+                "Suoming can grant up to **1** stacks of Unison Boon this way. Gaining it again only resets the duration."
+              ]
+            },
+            {
+              "h": "Unison Boon",
+              "p": [
+                "Each stack of Unison Boon increases DMG dealt by Resonators in the team who can trigger Unison Response by **3**%, up to **2** stacks."
+              ]
+            },
+            {
+              "h": "Delusion Gain Rules",
+              "p": [
+                "Can hold up to **800** points of Delusion.",
+                "- Hitting a target with Basic Attack, Basic Attack - Unfurled Canopy, or Basic Attack - Unfurled Canopy: Whirling Thunder grants Delusion.",
+                "- Casting Resonance Liberation grants **200** points of Delusion.",
+                "- Casting Intro Skill - Unfurled Canopy: Thunder Rending or Intro Skill - Unfurled Canopy: Whirling Thunder (Unison) grants **200** points of Delusion."
+              ]
+            }
+          ]
+        },
+        "intro": {
+          "name": "Furled Canopy: Flash Rift",
+          "blocks": [
+            {
+              "p": [
+                "Attack the target, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- While in the Awakened Mind state, casting this skill sends Suoming into the Deep Mind state and clears all Delusion.",
+                "- While in the Deep Mind state, Intro Skill is replaced with Intro Skill - Unfurled Canopy: Thunder Rending.",
+                "- While in the Awakened Mind state, triggering Unison Response replaces Intro Skill with Intro Skill - Furled Canopy: Sealed Delusion (Unison).",
+                "- While in the Deep Mind state, triggering Unison Response replaces Intro Skill with Intro Skill - Unfurled Canopy: Whirling Thunder (Unison)."
+              ]
+            },
+            {
+              "h": "Intro Skill - Unfurled Canopy: Thunder Rending",
+              "p": [
+                "Deal __Electro DMG__, considered Basic Attack DMG.",
+                "- Press Normal Attack shortly after casting this skill to chain into Basic Attack - Unfurled Canopy: Whirling Thunder Stage 2."
+              ]
+            },
+            {
+              "h": "Intro Skill - Furled Canopy: Sealed Delusion (Unison)",
+              "p": [
+                "Attack the target, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- Casting this skill sends Suoming into the Deep Mind state and clears all Delusion."
+              ]
+            },
+            {
+              "h": "Intro Skill - Unfurled Canopy: Whirling Thunder (Unison)",
+              "p": [
+                "Attack the target, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- While in the Deep Mind state, press Normal Attack shortly after casting Intro Skill - Unfurled Canopy: Whirling Thunder (Unison) to chain into Basic Attack - Unfurled Canopy: Whirling Thunder Stage 2."
+              ]
+            }
+          ]
+        },
+        "outro": {
+          "name": "Canopy Rumble",
+          "blocks": [
+            {
+              "p": [
+                "The incoming Resonator gains **20**% Electro DMG Amplification. While having Unison Boon, they gain **25**% Resonance Skill DMG Amplification for **8**s or until the Resonator is switched out."
+              ]
+            }
+          ]
+        }
+      },
+      "inherent": [
+        {
+          "name": "Rain-Soaked Covenant",
+          "blocks": [
+            {
+              "p": [
+                "Casting Intro Skill - Furled Canopy: Flash Rift, Intro Skill - Unfurled Canopy: Thunder Rending, Intro Skill - Furled Canopy: Sealed Delusion (Unison), or Intro Skill - Unfurled Canopy: Whirling Thunder (Unison) grants **50**% Electro DMG Bonus for **15**s. Switching to another Resonator ends this effect early.",
+                "- When Suoming casts Intro Skill - Furled Canopy: Sealed Delusion (Unison) or Intro Skill - Unfurled Canopy: Whirling Thunder (Unison), she additionally gains **10** points of Concerto Energy, triggered only once every **25**s."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Sunken Seal, Forged Lock",
+          "blocks": [
+            {
+              "p": [
+                "When Suoming has Unison and is switched out, she gains the Aligned Seals effect for **30**s.",
+                "While this effect is active, Suoming's Outro Skill grants the incoming Resonator **30**% Electro DMG Bonus, plus an additional **20**% for each stack of Unison Boon they have, up to **40**%. This effect lasts for **8**s or until the Resonator is switched out.",
+                "When Suoming has Unison, casting Resonance Skill - Furled Canopy: Rift Cleaver removes Unison, consumes **20** points of Concerto Energy, and clears all Delusion, granting the Seal Master effect: the DMG Multipliers of Basic Attack - Unfurled Canopy and Basic Attack - Unfurled Canopy: Whirling Thunder are increased by **40**%, and Suoming's Crit. DMG is increased by **80**%. This effect lasts for **12**s or until the Resonator is switched out.",
+                "- Gaining Unison ends this effect early.",
+                "- Gaining the Aligned Seals effect ends this effect early.",
+                "- The Seal Master effect cannot be gained while the Aligned Seals effect is active.",
+                "- While the Seal Master effect is active, press Normal Attack shortly after casting Basic Attack - Unfurled Canopy Stage 4 to chain into Basic Attack - Unfurled Canopy Stage 2."
+              ]
+            }
+          ]
+        }
+      ],
+      "chain": [
+        {
+          "n": 1,
+          "name": "Into the Blight Rain",
+          "blocks": [
+            {
+              "p": [
+                "Resonance Liberation - Unfurled Canopy: Unforsaken Mind is immune to interruption.",
+                "The DMG Multipliers of Intro Skill - Furled Canopy: Flash Rift, Intro Skill - Unfurled Canopy: Thunder Rending, Intro Skill - Furled Canopy: Sealed Delusion (Unison), and Intro Skill - Unfurled Canopy: Whirling Thunder (Unison) are increased by **60**%."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "name": "Breaking Thunder, Slaying Evil",
+          "blocks": [
+            {
+              "p": [
+                "Crit. DMG is increased by **40**%.",
+                "Casting Outro Skill increases the incoming Resonator's Crit. DMG by **10**%, plus an additional **6**% for each stack of Unison Boon they have, up to **24**%. This effect lasts for **30**s or until the Resonator is switched out."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "name": "Lone Canopy, Solitary Road",
+          "blocks": [
+            {
+              "p": [
+                "Casting Intro Skill - Furled Canopy: Flash Rift or Intro Skill - Unfurled Canopy: Thunder Rending grants **1** stacks of Unison Boon. This effect can be triggered once every **25**s.",
+                "- If Suoming has already granted Unison Boon and it still exists, triggering this effect only resets the duration of Unison Boon.",
+                "Casting Resonance Liberation grants Suoming **30**% Basic Attack DMG Amplification for **25**s."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "name": "Covenant Borne Upon the Heart",
+          "blocks": [
+            {
+              "p": [
+                "Suoming's ATK is increased by **20**%."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "name": "Seal Deep, Never Forgotten",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multiplier of Resonance Liberation - Umbral Canopy: Miasma Lock is increased by **40**%."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "name": "Nine Shadows at Her Side",
+          "blocks": [
+            {
+              "p": [
+                "The effect of each stack of Unison Boon is increased by **50**%, up to **4** stacks of Unison Boon.",
+                "The DMG Multiplier of Basic Attack - Umbral Canopy: Engraved Heart is increased by **50**%.",
+                "When Suoming has Seal Master, her Crit. DMG is further increased by **80**%."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "updated": "2026-09-07T14:13:19.846Z"
+}

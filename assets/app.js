@@ -917,10 +917,26 @@ function artFor(name){ return (DATA.art?.art || {})[name] || null; }
    rather than the result so opening two in quick succession still fetches
    once. Nothing here blocks: the record draws immediately and the kit fills
    in underneath it. */
+/* Two files, one lazy load. clientkits.json is the same six skills, two
+   Inherent Skills and six Chain nodes read out of the beta client for the
+   Resonators no live source has written up — same shape, same markers, so
+   nothing downstream of here can tell the difference and nothing needs to.
+
+   Merged on the same terms as every other beta record: a name kits.json
+   carries wins, so the moment prydwen.gg or the wiki publishes a page,
+   fetch-kits.mjs fills the slot and the beta text stops being drawn. Which
+   makes the merge order the whole safety mechanism — a stale beta kit can
+   never sit on top of a released one. */
 let KITS = null, kitsInFlight = null;
 function loadKits(){
   if(KITS) return Promise.resolve(KITS);
-  if(!kitsInFlight) kitsInFlight = load("kits").then(d => (KITS = d?.kits || {}));
+  if(!kitsInFlight) kitsInFlight = Promise.all([load("kits"), load("clientkits")])
+    .then(([live, beta]) => {
+      const out = {...(live?.kits || {})};
+      for(const [name, kit] of Object.entries(beta?.kits || {}))
+        if(!out[name]) out[name] = {...kit, beta: true};
+      return (KITS = out);
+    });
   return kitsInFlight;
 }
 function kitFor(name){
@@ -5985,7 +6001,19 @@ function fillKit(name){
     if(!wrap || S.drawer !== `resonator:${name}`) return;
     const kit = kitFor(name);
     wrap.innerHTML = kit
-      ? kitPanel(kit) + `<p class="kit-credit">Skill text as it reads in the live client. Skills © Kuro Games.</p>`
+      ? (kit.beta
+          /* Above the skills rather than under them. The rest of this panel is
+             indistinguishable from a shipped Resonator's — same six slots,
+             same Chain, same words out of the same client — so what marks it
+             has to be read before it, not after it has been believed. */
+          ? `<p class="kit-beta">Read out of the ${esc(betaBuild() || "beta")} client files, before
+              release. This is Kuro's own skill text rather than anybody's summary of it — but the
+              beta is where the numbers move, and a mechanic can still change or be cut.</p>`
+          : "")
+        + kitPanel(kit)
+        + `<p class="kit-credit">${kit.beta
+            ? "Skill text as it reads in the beta client. Skills © Kuro Games."
+            : "Skill text as it reads in the live client. Skills © Kuro Games."}</p>`
       : `<div class="dsec"><span class="label">Skills</span>
           <p style="margin:0;color:var(--fg-3)">No kit published yet — nothing has been drawn from the
           client for this Resonator.</p></div>`;
