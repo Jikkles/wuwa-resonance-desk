@@ -498,9 +498,25 @@ function buildKit(detail) {
   }
 
   /* ── kits for the Resonators no live source has written up ────── */
+
+  /* Who this file was carrying last run, so the handover to prydwen.gg can be
+     reported rather than just happening. A beta kit disappearing from the
+     output is the correct end of its life and looks identical to a fetch that
+     quietly stopped finding it. */
+  const prevKitNames = await readFile(KIT_OUT, "utf8")
+    .then(t => Object.keys(JSON.parse(t).kits || {})).catch(() => []);
+
+  /* Whether a Resonator is actually out, for the warning below. The roster's
+     own status is authoritative once it flips; before that, a release date
+     that has passed says the same thing a few hours earlier. */
+  const today = new Date().toISOString().slice(0, 10);
+  const isOut = r => r?.status === "released" || (r?.released && r.released <= today);
+  const rosterRec = new Map(roster.map(r => [rosterKey(r.name), r]));
+
   const kits = {};
   const kitFails = [];
   const extraKept = [];
+  const overdue = [];
   for (const [id, c] of Object.entries(cChars)) {
     /* On the roster, so the desk knows who they are, and with no kit from
        prydwen.gg or the wiki. That is exactly the unshipped ones — the moment
@@ -514,6 +530,13 @@ function buildKit(detail) {
       const kit = buildKit(detail);
       kits[name] = kit;
       if (kit.extra) extraKept.push(`${name} (${kit.extra[0].name})`);
+      /* Out, and still being carried here, means prydwen.gg has published a
+         page this desk has not fetched — and fetch-kits.mjs is one of the four
+         scripts Prydwen refuses to serve a GitHub runner, so nothing on the
+         cron can do it. The beta kit is still drawn and still marked, which is
+         honest, but it is pre-balance text for a Resonator whose numbers have
+         since been settled. */
+      if (isOut(rosterRec.get(key))) overdue.push(name);
       const lines = [...Object.values(kit.skills), ...kit.inherent, ...kit.chain]
         .reduce((a, g) => a + g.blocks.reduce((b, x) => b + x.p.length, 0), 0);
       console.log(`  kit     ${name} — 6 skills, 2 inherent, 6 chain, ${lines} paragraphs`);
@@ -605,6 +628,18 @@ function buildKit(detail) {
     `${Object.keys(kits).length} unwritten kits` +
     (unchanged && kitsUnchanged ? " (unchanged)" : ""));
   if (kitFails.length) console.log(`kit refused: ${kitFails.join("; ")}`);
+  /* The handover, said out loud. A beta kit is meant to be temporary — it
+     holds the slot until a live source writes the Resonator up, and then it
+     goes. Reporting that is the difference between the design working and the
+     fetcher having quietly stopped finding somebody. */
+  const handedOver = prevKitNames.filter(n => !kits[n]);
+  if (handedOver.length)
+    console.log(`handed over to the live kit, beta copy dropped: ${handedOver.join(", ")}`);
+  if (overdue.length)
+    console.log(
+      `RELEASED and still on the beta kit: ${overdue.join(", ")}\n` +
+      `  prydwen.gg refuses GitHub Actions, so the live kit needs a local run:\n` +
+      `  node scripts/fetch-kits.mjs && node scripts/fetch-client-files.mjs`);
   /* Only the exception is worth a line. Almost every Resonator's extra slot is
      the shared Tune Break node and gets dropped; one that holds something else
      is a Forte Circuit the desk is now carrying. */

@@ -57,6 +57,25 @@ those are filled by fetchers that would drop or outrank a beta row. `assets/app.
 merges at read time and a name the live sources already carry always wins — so the moment
 Prydwen or the wiki publishes a page, the beta record stops being drawn.
 
+**The policy is: take beta data whenever it exists, give it back as soon as a live source
+publishes.** Nothing should sit on the desk with an empty record just because it hasn't
+shipped, and nothing should still be showing pre-balance numbers once the real ones are
+out. The first half is automatic — `fetch-client-files.mjs` is on the 6h cron. The second
+half is not, because Prydwen refuses GitHub Actions, so **`fetch-kits.mjs` and
+`fetch-weapons.mjs` only run locally**. Until one of those runs, a Resonator can be live
+with the desk still drawing their beta kit.
+
+The fetcher says so rather than leaving you to notice:
+
+```
+RELEASED and still on the beta kit: Jingran
+  prydwen.gg refuses GitHub Actions, so the live kit needs a local run:
+  node scripts/fetch-kits.mjs && node scripts/fetch-client-files.mjs
+```
+
+and reports the handover when it completes — `handed over to the live kit, beta copy
+dropped: Jingran`. Worth watching on patch day.
+
 The kit importer reads the client's 17-node skill tree. The mapping from node to slot was
 read off a Resonator the desk already had a kit for and checked against seven more, and a
 tree that doesn't match is refused rather than filed under the wrong headings. It keeps
@@ -113,9 +132,10 @@ node scripts/fetch-builds.mjs
 node scripts/fetch-client-files.mjs
 ```
 
-`fetch-client-files.mjs` runs on the 6h cron too, but it reads `weapons.json` and
-`echoes.json` to decide what is unshipped — so after a local weapons or echoes run,
-run it again or it will keep listing something that has since landed.
+`fetch-client-files.mjs` runs on the 6h cron too, but it reads `kits.json`, `weapons.json`
+and `echoes.json` to decide what is unwritten — so **run it again after any of the local
+runs above**, or it will keep carrying a beta copy of something that has since landed.
+That last line of the block is doing real work, not tidying up.
 
 Each prints what it kept and only writes when something changed.
 

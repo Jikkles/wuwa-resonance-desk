@@ -1795,6 +1795,33 @@ That boilerplate is also, as it turns out, where the leaks' "Tune Break system r
 Harmony" came from. Hsin's second Resonance Mode is Unison, and reading it settled a claim
 four sources had carried for six weeks.
 
+### A beta record is a stopgap, and has to be able to end
+
+The policy behind all of this, weapons and sonata sets included: **take the beta data
+whenever it exists, and give it back the moment a live source publishes.** Nothing should
+sit on the desk with an empty record because it hasn't shipped, and nothing should still
+be showing pre-balance numbers once the real ones are out. Kuro does move multipliers and
+cut mechanics between a beta and a live build — that is why the live version wins rather
+than the newer one.
+
+Two mechanisms enforce it and neither is discretionary. `fetch-client-files.mjs` only
+writes a record for a name the live file has no entry for, so a published Resonator stops
+being written; and `loadKits()` / `mergeBeta()` merge live-first, so even a beta record
+left in the file loses to a published one. Belt and braces on purpose: the first is a
+cron away from being stale, the second is not.
+
+**The asymmetry worth knowing.** The taking is automatic — `fetch-client-files.mjs` is on
+the 6h cron and new beta content lands on its own. The giving back is not, because
+Prydwen returns a flat 403 to GitHub Actions, so `fetch-kits.mjs` never runs there. A
+Resonator can go live while the desk is still drawing their beta kit, correctly marked but
+pre-balance.
+
+So the fetcher reports both ends of the lifecycle rather than leaving them to be noticed.
+`RELEASED and still on the beta kit: <name>` names the local run that fixes it; `handed
+over to the live kit, beta copy dropped: <name>` confirms it worked. A beta kit vanishing
+from the output is the correct end of its life, and without that second line it looks
+exactly like a fetch that quietly stopped finding somebody.
+
 ## The echo database
 
 181 echoes and 34 sonata sets in `data/echoes.json`, written by
