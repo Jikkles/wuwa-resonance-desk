@@ -2584,10 +2584,33 @@ img.astrite-pic{
   color:var(--fg);font-family:var(--sans);font-size:.875rem;
 }
 .leakq input::placeholder{color:var(--fg-3);opacity:.75}
-/* The clear affordance the type=search UA control draws is a grey X on a dark
-   ground in every engine that draws one at all. Hidden, and .leakclear in the
-   empty state does the job where it is actually needed. */
+/* The UA's own clear control is a grey X on a dark ground in every engine that
+   draws one at all, and Firefox draws none. Hidden, and replaced by .leakx —
+   which has to exist: the search box is the one control on the desk you use
+   several times in a row, and reaching for the keyboard to empty it by hand
+   was the slowest thing in the view. */
 .leakq input::-webkit-search-cancel-button{display:none}
+.leakx{
+  flex:none;display:grid;place-items:center;width:22px;height:22px;padding:0;
+  background:var(--bg-3);border:1px solid var(--line);border-radius:50%;
+  color:var(--fg-3);cursor:pointer;transition:color .12s,border-color .12s,background .12s;
+}
+.leakx:hover{background:var(--line);border-color:var(--line-2);color:var(--fg)}
+.leakx:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* The source row. Same chips as everywhere else on the desk, kept on one
+   scrollable line rather than wrapping: it is the second axis of two, and a
+   filter row that grows to three lines pushes the answer off the screen. */
+.kindchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
+.kindchips::-webkit-scrollbar{display:none}
+.kindchips button{white-space:nowrap}
+
+/* A row filed under a patch its headline never named. Deliberately quiet —
+   it is a footnote on the filing, not a warning about the leak. */
+.sig .inferred{
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--fg-3);border:1px dashed var(--line-2);border-radius:100px;padding:1px 7px;
+}
 
 .subjchips{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .subjchips .label{margin-right:3px}
@@ -2612,6 +2635,11 @@ img.astrite-pic{
 .leakgrp + .leakgrp{border-top:1px solid var(--line)}
 .leakgrp > .panel-h{background:var(--bg-1)}
 .leakgrp > .panel-h h2{font-family:var(--mono);letter-spacing:.06em}
+/* The two tail buckets are the part of the page nobody arrived for, so their
+   headings step back to the weight of a label rather than a patch number. */
+.leakgrp.unfiled > .panel-h h2,
+.leakgrp.other > .panel-h h2{font-size:.8125rem;color:var(--fg-3);letter-spacing:.1em;text-transform:uppercase}
+.leakgrp.other{opacity:.9}
 .leakgrp .intel-list{padding:14px 18px}
 @media (max-width:640px){
   .warnbar.big span{font-size:.75rem}

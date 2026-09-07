@@ -76,8 +76,8 @@ const RAR_COLOUR = {5:"#E3AC55", 4:"#B98BE0", 3:"#78BFE8"};
    this array. `soon` marks a view that is navigable but has no data behind it
    yet — it draws the work-in-progress panel and carries a badge instead of a
    count, so the promise is visible before you click rather than after.
-   `short` is the dock's label; six items across a phone will not take
-   "Live Signals". */
+   `short` is the dock's label, for any name too long to sit across a
+   phone. */
 const VIEWS = [
   {id:"timeline",   label:"Timeline",     icon:"i-timeline"},
   {id:"resonators", label:"Resonators",   icon:"i-res"},
@@ -88,14 +88,18 @@ const VIEWS = [
      Events view says what the patch pays; this says what the patch costs. */
   {id:"pulls",      label:"Pull calculator", icon:"i-pulls", short:"Pulls"},
   {id:"intel",      label:"Intel",        icon:"i-intel"},
-  /* Between the two on purpose. Intel is what somebody read and staked a tier
-     on; Signals is the raw crawl. Leaks is neither: it is everything the desk
-     holds about a patch that has not shipped, at whatever confidence it
-     arrived with, filed by the patch it is about. Nothing is written for it
-     and nothing is filed into it — it is a lens over the other two, so it
-     cannot fall behind them. */
-  {id:"leaks",      label:"Leaks",        icon:"i-leaks", warn:"Unverified"},
-  {id:"signals",    label:"Live Signals", icon:"i-signals", warn:"Unverified", short:"Signals"}
+  /* After Intel on purpose. Intel is what somebody read and staked a tier on;
+     this is everything else the desk holds, filed by the patch it is about
+     and unread. Nothing is written for it and nothing is filed into it — it
+     is a lens over news.json and feed.json, so it cannot fall behind them.
+
+     Live Signals used to stand below it, drawing the same feed with the
+     leak-shaped rows left in rather than pulled to the top. Two views over
+     one file, differing only in what they hid, is one view and a filter —
+     so the kind row that headed its panel is a chip row in here now, and the
+     part of the crawl that is not about an unshipped patch is this view's
+     last bucket instead of its own page. */
+  {id:"leaks",      label:"Leaks",        icon:"i-leaks", warn:"Unverified"}
 ];
 
 let DATA = {};
@@ -103,7 +107,7 @@ let DATA = {};
    axes (ver/cat/weapon/src) are the quick-filter selects. All of them are one
    flat bag so a filter control never has to know which view it is in. */
 const S = {
-  view:"timeline", sigLimit:60, drawer:null,
+  view:"timeline", drawer:null,
   /* The open event record's pictures, and which one the frame is showing.
      Lives here rather than in the markup because the thumbnails repaint the
      frame in place — see paintReel. */
@@ -138,7 +142,7 @@ const S = {
   erank:5,
   when:"all",   // timeline
   tier:"all",   // intel
-  kind:"all",   // signals
+  kind:"all",   // leaks — the source axis, inherited from Live Signals
   /* Leaks. The patch chip — "3.8", "4.0", or "all" — plus the view's own
      search box and how far down the list has been unrolled. leakQ is state
      rather than a read off the input for the same reason S.pull is: the
@@ -169,8 +173,8 @@ const S = {
 /* Which of those a view actually reads — drives Reset, and stops a stale
    element filter from silently narrowing a list you have navigated away from. */
 const VIEW_FILTERS = {
-  timeline:["when"], intel:["tier"], leaks:["leakVer"],
-  signals:["kind"], resonators:["elem"],
+  timeline:["when"], intel:["tier"], leaks:["leakVer", "kind"],
+  resonators:["elem"],
   weapons:["wtype"], echoes:["eset"],
   /* Every view needs a row here even with nothing in it — filtersOn() and
      Reset both index this table unguarded. */
@@ -504,12 +508,92 @@ function versionsIn(text){
   return out;
 }
 
+/* Tag words that are categories, elements or weapon classes rather than
+   somebody's name. They ride along in news.json tags next to the real names,
+   and without this "Spectro" would be filed as a Resonator called Spectro. */
+const LEAK_NOT_A_NAME = new Set(("glacio fusion electro aero spectro havoc " +
+  "sword broadblade pistol gauntlets rectifier " +
+  "identity qol meta system cosmetic datamine unison frazzle").split(" "));
+
+/* Who belongs to which unshipped patch, so a headline that never names a
+   version can still be filed under one. "Hsin sentinel form via seele" says
+   nothing about 3.7 and is obviously about 3.7 — the desk already knows when
+   Hsin arrives, and refusing to use that put a quarter of the view in a
+   bucket marked "patch not stated".
+
+   Two sources, in this order:
+
+   - resonators.json, where `version` is a Resonator's *debut*. Only debuts
+     that have not happened yet go in the map, which is what keeps a headline
+     about Changli out of a future patch she is merely rerunning in.
+   - the desk's own Intel tags, but only for names the roster has never heard
+     of. That is the case this exists for: an unannounced Resonator has no
+     roster row, so Lily can only be known from what has been written about
+     her. A tag two different patches disagree about is dropped rather than
+     guessed at. */
+function leakNameVersions(){
+  const live = currentVersion();
+  const out = new Map();
+  const roster = new Set();
+
+  resonators().forEach(r => {
+    const name = String(r.name || "").toLowerCase();
+    if(!name) return;
+    roster.add(name);
+    /* Multi-word roster names — "Yangyang: Xuanling", "Luuk Herssen" — are
+       almost never written out in a headline, so the first word is indexed
+       too. Short ones are skipped: a three-letter token matches far too much
+       prose to be worth a filing decision. */
+    const first = name.split(/[^a-z]+/)[0];
+    if(first.length > 3) roster.add(first);
+    if(!r.version || (live && cmpVer(r.version, live) <= 0)) return;
+    out.set(name, r.version);
+    if(first.length > 3) out.set(first, r.version);
+  });
+
+  const claimed = new Map();
+  entries().forEach(e => {
+    if(!e.version || (live && cmpVer(e.version, live) <= 0)) return;
+    (e.tags || []).forEach(t => {
+      const k = String(t).toLowerCase();
+      if(!/^[a-z][a-z'-]{2,15}$/.test(k)) return;
+      if(roster.has(k) || LEAK_STOP.has(k) || LEAK_NOT_A_NAME.has(k)) return;
+      if(!claimed.has(k)) claimed.set(k, new Set());
+      claimed.get(k).add(e.version);
+    });
+  });
+  claimed.forEach((vs, k) => { if(vs.size === 1) out.set(k, [...vs][0]); });
+
+  return out;
+}
+
+/* The patch a headline is about without saying so, and the name that gave it
+   away — the reader is told which, because a filing decision the desk made on
+   inference should not look like one the leaker stated. */
+function inferVersion(text, map){
+  const vers = [], by = [];
+  String(text || "").split(/[^A-Za-z]+/).forEach(w => {
+    const v = map.get(w.toLowerCase());
+    if(!v) return;
+    if(!vers.includes(v)) vers.push(v);
+    if(!by.includes(w)) by.push(w);
+  });
+  return {vers, by:by.join(", ")};
+}
+
 /* One row of the view. Feed items and Intel entries are different records
    with different fields, so they are flattened to a common shape here and
    the renderer never has to ask which it is holding — except to choose the
-   row component, which is what `via` carries. */
+   row component, which is what `via` carries.
+
+   Everything the crawl caught is here, not only the leak-shaped part of it.
+   Live Signals used to be a second view over the same feed, and two views
+   fed by one file, differing only in what they hid, is one view with a
+   filter. What is not about an unshipped patch buckets at the end rather
+   than being dropped — see NO_PATCH. */
 function leakRows(){
   const live = currentVersion();
+  const map = leakNameVersions();
   const out = [];
 
   /* Intel first, so a written-up entry outranks the raw thread it came from
@@ -521,7 +605,7 @@ function leakRows(){
                : versionsIn(`${e.version || ""} ${e.title}`);
     if(!vers.length) return;
     out.push({
-      via:"intel", entry:e, date:e.date, vers,
+      via:"intel", entry:e, date:e.date, vers, leaky:true, kind:"intel",
       title:e.title, tier:e.confidence,
       /* Body and tags join the haystack but never the row. Searching "Lily"
          has to find the entry that discusses her in its third paragraph, and
@@ -531,18 +615,22 @@ function leakRows(){
     });
   });
 
-  /* Then the crawl. Official Kuro posts are excluded by definition — a leak
-     is by construction not an announcement — with one exception: an official
-     post that names an unshipped patch is Kuro talking about the future, and
-     leaving it out would make the 3.8 page quietly incomplete. It keeps its
-     Official badge, so it cannot be mistaken for a leaker's claim. */
   signals().forEach(i => {
     const h = headline(i);
-    const vers = versionsIn(`${h.text} ${i.title}`);
-    if(!vers.length && !(i.sourceId === "reddit-leaks")) return;
-    if(!vers.length && i.kind === "official") return;
+    const text = `${h.text} ${i.title}`;
+    let vers = versionsIn(text), by = "";
+    /* Only when the headline states nothing itself. A stated version always
+       wins over an inferred one — "3.7| Suoming's idle 2" is filed under what
+       it says, not under Suoming, and the two agreeing is not a reason to let
+       inference speak for a headline that was perfectly clear. */
+    if(!vers.length){
+      const g = inferVersion(text, map);
+      vers = g.vers; by = g.by;
+    }
     out.push({
-      via:"signal", item:i, date:i.date, vers,
+      via:"signal", item:i, date:i.date, vers, by,
+      leaky: i.sourceId === "reddit-leaks" || i.kind === "community",
+      kind: i.kind || "", hot: !!i.hot,
       title:h.text, tier:i.kind === "official" ? "official" : null,
       hay:[h.text, i.title, i.source || ""].join(" ").toLowerCase()
     });
@@ -565,19 +653,42 @@ function leakRows(){
    0.0 and sort it first: leakVersions pushes it last by name, leakIn asks
    about it by identity, and leakVerLabel is what the reader actually sees. */
 const NO_VER = "unfiled";
+/* And the bucket for everything the crawl caught that is not about an
+   unshipped patch at all — a patch-day trailer, a calendar post, a press
+   piece about the version that is already live. This is what Live Signals
+   was, and it sits last because it is the only part of the view nobody
+   arrives looking for. Kept rather than dropped: it is still the desk's
+   lead list, and dropping it would have been the merge quietly deleting a
+   view rather than absorbing one. */
+const NO_PATCH = "other";
+
+/* Which buckets a row appears in. A leak-shaped row with no patch is
+   "not stated" — somebody is leaking something and did not say when; a row
+   that is not leak-shaped and names no unshipped patch is just news. */
+const bucketsOf = r => r.vers.length ? r.vers : [r.leaky ? NO_VER : NO_PATCH];
+const LEAK_LAST = [NO_VER, NO_PATCH];
 
 function leakVersions(rows){
   const n = {};
-  rows.forEach(r => (r.vers.length ? r.vers : [NO_VER])
-    .forEach(v => n[v] = (n[v] || 0) + 1));
+  rows.forEach(r => bucketsOf(r).forEach(v => n[v] = (n[v] || 0) + 1));
   return Object.keys(n)
-    .sort((a, b) => a === NO_VER ? 1 : b === NO_VER ? -1 : cmpVer(a, b))
+    .sort((a, b) => {
+      const ai = LEAK_LAST.indexOf(a), bi = LEAK_LAST.indexOf(b);
+      if(ai >= 0 || bi >= 0) return (ai < 0 ? -1 : ai) - (bi < 0 ? -1 : bi);
+      return cmpVer(a, b);
+    })
     .map(v => [v, n[v]]);
 }
-const leakVerLabel = v => v === NO_VER ? "Patch not stated" : v;
+const leakVerLabel = v => v === NO_VER ? "Patch not stated"
+  : v === NO_PATCH ? "Not about an unshipped patch" : v;
+/* The rail is 259px and the group header has a whole line. The long label
+   ellipsised to "NOT ABOUT AN U…" in the nav, which tells you nothing at all,
+   so the chip gets its own wording rather than a truncation of somebody
+   else's. */
+const leakVerChip = v => v === NO_PATCH ? "Everything else" : leakVerLabel(v);
 /* One place decides whether a row belongs to a bucket, so the group headers,
    the chip counts and the rendered rows cannot disagree about it. */
-const leakIn = (r, v) => v === NO_VER ? !r.vers.length : r.vers.includes(v);
+const leakIn = (r, v) => bucketsOf(r).includes(v);
 
 /* Who the patch is about, harvested from the headlines themselves.
 
@@ -623,7 +734,14 @@ function leakTitleWords(){
 function leakSubjects(rows){
   const n = {};
   const titleWords = leakTitleWords();
-  rows.forEach(r => {
+  /* Leak-shaped rows only. Once the whole crawl moved in here, Kuro's own
+     marketing came with it, and campaign titles are the most repeated
+     capitalised words in the feed by a distance — "Post-Lament Anthropocene:
+     Stars Intertwined" alone put Lament, Anthropocene, Stars and Intertwined
+     above every Resonator on the list. Nobody searches a leaks page for a
+     banner slogan; they search it for a name, and names come from the part of
+     the feed that is actually leaking something. */
+  rows.filter(r => r.leaky).forEach(r => {
     /* Per row, not per mention — a headline that says "Lily" three times is
        still one headline that is about Lily. */
     const seen = new Set();
@@ -631,7 +749,9 @@ function leakSubjects(rows){
       if(idx === 0 || w.length < 3 || w.length > 16) return;
       if(!/^[A-Z][a-z]+$/.test(w)) return;
       const k = w.toLowerCase();
-      if(LEAK_STOP.has(k) || titleWords.has(k) || seen.has(k)) return;
+      /* Elements, weapon classes and mechanics are the other thing headlines
+         repeat — this row says "Named most", and Electro is not a name. */
+      if(LEAK_STOP.has(k) || LEAK_NOT_A_NAME.has(k) || titleWords.has(k) || seen.has(k)) return;
       seen.add(k);
       (n[w] = n[w] || {w, c:0}).c++;
     });
@@ -1250,9 +1370,9 @@ function weaponIcon(name, size = 17){
 
    Values come off the data, not out of a list — an element or a weapon class
    nothing is filed under would be a filter that can only ever empty the page.
-   A view with no entry here (Events, Live Signals) is a plain nav item: Events
-   has nothing to filter yet, and Signals' kind row still heads its own panel,
-   where the warning bar means it was never the bare strip the others were. */
+   A view with no entry here (Events) is a plain nav item — it has nothing to
+   filter yet. Leaks is the one view with two axes: the patch is its rail list,
+   and the source row sits in the panel where Live Signals used to keep it. */
 const RAIL_FILTERS = {
   timeline: {
     scope:"when", label:"Window",
@@ -1292,7 +1412,7 @@ const RAIL_FILTERS = {
     items: () => {
       const rows = leakRows();
       return [["all", "All", rows.length]]
-        .concat(leakVersions(rows).map(([v, n]) => [v, leakVerLabel(v), n]));
+        .concat(leakVersions(rows).map(([v, n]) => [v, leakVerChip(v), n]));
     }
   }
 };
@@ -1392,7 +1512,7 @@ function renderRail(){
 }
 
 /* Right-hand mark on a nav item, in precedence order: the standing warning
-   Live Signals carries, then the unbuilt flag. Both say something you need
+   Leaks carries, then the unbuilt flag. Both say something you need
    before you open the view. The record counts that used to sit here said
    nothing you'd act on — sixty is how many Resonators exist either way — and
    four figures down one edge read as a scoreboard. Each view still counts
@@ -1924,8 +2044,8 @@ function renderTimeline(){
       <div class="panel-b flush">${recent.map(e => intelCard(e, true)).join("") || `<div class="empty">No entries yet.</div>`}</div>
     </div>
     <div class="panel">
-      <div class="panel-h"><h2>Live signals</h2><span class="sub">Unverified automated</span>
-        <div class="right"><button class="more" data-act="view" data-id="signals">View all ${icon("i-arrow", 12)}</button></div></div>
+      <div class="panel-h"><h2>Latest leaks</h2><span class="sub">Unverified automated</span>
+        <div class="right"><button class="more" data-act="view" data-id="leaks">View all ${icon("i-arrow", 12)}</button></div></div>
       <div class="panel-b flush"><div class="term mini">${sigs.map(signalRow).join("") || `<div class="empty">Fetcher has not run.</div>`}</div></div>
     </div>
   </div>`;
@@ -3984,10 +4104,22 @@ function renderIntel(){
 /* The answer half of the view. Split out from renderLeaks because the search
    box repaints this on every keystroke and must not be replaced while it has
    the caret — the same arrangement as #pull-out. */
-function leakOut(){
-  const q = S.leakQ.trim().toLowerCase();
+/* The rows the patch chip and the source chip leave standing, before the
+   search box has had its say. Both the results and the name chips above them
+   are built from this: the names offered have to be names that are actually
+   in front of you, or the chip row is advertising rows the page is not
+   showing — "Lily 2" while the 3.7 chip is on, and nothing when you press it. */
+function leakScope(){
   let rows = leakRows();
   if(S.leakVer !== "all") rows = rows.filter(r => leakIn(r, S.leakVer));
+  if(S.kind === "hot")      rows = rows.filter(r => r.hot);
+  else if(S.kind !== "all") rows = rows.filter(r => r.kind === S.kind);
+  return rows;
+}
+
+function leakOut(){
+  const q = S.leakQ.trim().toLowerCase();
+  let rows = leakScope();
   if(q) rows = rows.filter(r => r.hay.includes(q));
 
   /* An empty list has to name every control that emptied it, or it says
@@ -3998,13 +4130,16 @@ function leakOut(){
   if(!rows.length){
     const term = esc(S.leakQ.trim());
     const ver  = S.leakVer !== "all" ? leakVerLabel(S.leakVer) : "";
+    const kind = S.kind !== "all" ? (S.kind === "hot" ? "Hot" : KIND_LABEL[S.kind] || S.kind) : "";
     const undo = `${q ? `<button class="more" data-act="leakclear" style="margin-left:10px">Clear search ${icon("i-arrow", 12)}</button>` : ""}${
-      ver ? `<button class="more" data-act="leakallver" style="margin-left:10px">All patches ${icon("i-arrow", 12)}</button>` : ""}`;
+      ver ? `<button class="more" data-act="leakallver" style="margin-left:10px">All patches ${icon("i-arrow", 12)}</button>` : ""}${
+      kind ? `<button class="more" data-act="filter" data-scope="kind" data-id="all" style="margin-left:10px">All sources ${icon("i-arrow", 12)}</button>` : ""}`;
+    const where = [ver ? `under ${esc(ver)}` : "", kind ? `from ${esc(kind)}` : ""].filter(Boolean).join(" ");
 
-    if(q && ver)  return `<div class="empty">Nothing about “${term}” filed under ${esc(ver)}.${undo}</div>`;
-    if(q)         return `<div class="empty">Nothing about “${term}” in the unshipped patches.${undo}</div>`;
-    if(ver)       return `<div class="empty">No leaks filed under ${esc(ver)} yet.${undo}</div>`;
-    return `<div class="empty">Nothing leaked about an unshipped patch yet.</div>`;
+    if(q && where) return `<div class="empty">Nothing about “${term}” filed ${where}.${undo}</div>`;
+    if(q)          return `<div class="empty">Nothing about “${term}” anywhere in the feed.${undo}</div>`;
+    if(where)      return `<div class="empty">Nothing filed ${where} yet.${undo}</div>`;
+    return `<div class="empty">Nothing in the feed yet — the fetcher has not run.</div>`;
   }
 
   /* Grouped by patch, nearest first — a leaks page is read forwards, because
@@ -4020,8 +4155,16 @@ function leakOut(){
      and the page shows no 4.0 at all until you press Show more. A count in
      the nav pointing at a section that is not there reads as a bug in the
      desk, so every bucket keeps its newest row whatever the cap says: the
-     page can be short, but it cannot be short in a way that loses a patch. */
-  const cap = new Set(rows.slice(0, S.leakLimit));
+     page can be short, but it cannot be short in a way that loses a patch.
+
+     Written-up entries are never capped. There are a couple of dozen of them
+     against a feed of a hundred and fifty, they are the only rows on the page
+     anybody actually wrote, and being older than the crawl is what they are
+     for — the newest thing about 3.7 is always some idle animation, so a
+     straight date cap buried all twelve of the patch's write-ups under it and
+     left the header promising reading that was nowhere on the page. */
+  const cap = new Set(rows.filter(r => r.via === "intel"));
+  rows.filter(r => r.via === "signal").slice(0, S.leakLimit).forEach(r => cap.add(r));
   groups.forEach(v => {
     if(rows.some(r => leakIn(r, v) && cap.has(r))) return;
     const first = rows.find(r => leakIn(r, v));
@@ -4040,18 +4183,23 @@ function leakOut(){
     const all    = rows.filter(r => leakIn(r, v));
     const total  = all.length;
     const wrote  = all.filter(r => r.via === "intel").length;
+    /* Only count things as leaks when they all are. The last bucket never is,
+       and neither is a patch bucket the source chip has narrowed to Kuro's own
+       posts — "3.7 · 2 leaks" over two official announcements is the header
+       calling Kuro a leaker. */
+    const noun   = v !== NO_PATCH && all.some(r => r.leaky) ? "leak" : "item";
 
-    return `<div class="panel leakgrp${v === NO_VER ? " unfiled" : ""}">
+    return `<div class="panel leakgrp${v === NO_VER ? " unfiled" : ""}${v === NO_PATCH ? " other" : ""}">
       <div class="panel-h">
         <h2>${esc(leakVerLabel(v))}</h2>
-        <span class="sub">${total} leak${total === 1 ? "" : "s"}${
+        <span class="sub">${total} ${noun}${total === 1 ? "" : "s"}${
           wrote ? ` · ${wrote} written up` : ""}</span>
       </div>
       ${reads.length ? `<div class="panel-b flush">
         <div class="intel-list">${reads.map(r => intelCard(r.entry, true)).join("")}</div>
       </div>` : ""}
       ${raw.length ? `<div class="panel-b flush">
-        <div class="term mini">${raw.map(r => signalRow(r.item)).join("")}</div>
+        <div class="term mini">${raw.map(r => signalRow(r.item, r.by)).join("")}</div>
       </div>` : ""}
     </div>`;
   }).join("") + (rows.length > cap.size ? `<div class="panel"><div class="panel-f">
@@ -4059,15 +4207,51 @@ function leakOut(){
     </div></div>` : "");
 }
 
+/* The name chips, built from whatever the patch and source chips have left
+   standing rather than from the whole feed — see leakScope. Deliberately not
+   narrowed by the search box as well: chips that vanished as you typed would
+   take away the only control that widens the search again. */
+function leakSubjHtml(){
+  const subs = leakSubjects(leakScope());
+  if(!subs.length) return "";
+  const on = S.leakQ.trim().toLowerCase();
+  return `<span class="label">Named most</span>
+    ${subs.map(s => `<button data-act="leaksubj" data-id="${esc(s.w)}"
+        aria-pressed="${on === s.w.toLowerCase()}"
+      >${esc(s.w)}<span class="n">${s.c}</span></button>`).join("")}`;
+}
+
+/* Both halves of the answer, repainted together and without touching the
+   search box that has the caret in it. The chips are in here rather than in
+   the static markup because their counts move with the patch chip, and a
+   count that lies is worse than no count. */
 function paintLeakOut(){
-  const el = $("#leak-out");
-  if(el) el.innerHTML = leakOut();
+  const out = $("#leak-out");
+  if(out) out.innerHTML = leakOut();
+  const subj = $("#leak-subjects");
+  if(subj){
+    subj.innerHTML = leakSubjHtml();
+    subj.hidden = !subj.innerHTML;
+  }
+  const clear = $("#leak-clear");
+  if(clear) clear.hidden = !S.leakQ;
 }
 
 function renderLeaks(){
   const rows = leakRows();
-  const subs = leakSubjects(rows);
   const live = currentVersion();
+  const counts = rows.reduce((a, r) => (a[r.kind] = (a[r.kind]||0)+1, a), {});
+  const subj = leakSubjHtml();
+
+  /* The source axis, inherited whole from Live Signals when that view folded
+     into this one. "Written up" is this view's own addition and sits first
+     among the named kinds: it is the desk's own reading rather than a kind of
+     crawler, and it is the one row anybody filters *for*. */
+  const kinds = chips("kind",
+    [["all", "All", rows.length], ["hot", "Hot", rows.filter(r => r.hot).length]]
+      .concat(counts.intel ? [["intel", "Written up", counts.intel]] : [])
+      .concat(Object.keys(KIND_LABEL).filter(k => counts[k]).map(k => [k, KIND_LABEL[k], counts[k]])),
+    S.kind);
 
   $("#p-leaks").innerHTML = `<div class="stack">
     ${pageTitle("leaks")}
@@ -4075,25 +4259,23 @@ function renderLeaks(){
       ${fbar("leaks")}
       <div class="warnbar big">
         None of this is confirmed
-        <span>Everything below is about a patch that has not shipped${
-          live ? ` — ${esc(live)} is live` : ""}. It is gathered automatically from the
-          leak feeds and from the desk's own notes, at every confidence from a
-          datamine to one person's guess, and it is filed here without being
-          checked. Beta kits get rebalanced, names get changed and whole
-          characters get pulled. Read it as gossip until Kuro says it.</span>
+        <span>The unshipped patches first${live ? `, ${esc(live)} being live` : ""}, then everything
+          else the crawl caught. It is gathered automatically every six hours from the leak
+          feeds and from the desk's own notes, at every confidence from a datamine to one
+          person's guess, and it is filed here without being read. Beta kits get rebalanced,
+          names get changed and whole characters get pulled. Each row carries where it came
+          from; nothing but an Official badge means Kuro said it.</span>
       </div>
       <div class="leakfind">
         <label class="leakq">
           ${icon("i-search", 14)}
-          <input type="search" data-leakq placeholder="Search every unshipped patch — a name, a weapon, a leaker"
+          <input type="search" data-leakq placeholder="Search every patch — a name, a weapon, a leaker"
                  value="${esc(S.leakQ)}" aria-label="Search leaks">
+          <button class="leakx" id="leak-clear" data-act="leakclear" aria-label="Clear search"
+                  ${S.leakQ ? "" : "hidden"}>${icon("i-close", 12)}</button>
         </label>
-        ${subs.length ? `<div class="subjchips">
-          <span class="label">Named most</span>
-          ${subs.map(s => `<button data-act="leaksubj" data-id="${esc(s.w)}"
-              aria-pressed="${S.leakQ.trim().toLowerCase() === s.w.toLowerCase()}"
-            >${esc(s.w)}<span class="n">${s.c}</span></button>`).join("")}
-        </div>` : ""}
+        <div class="chips kindchips">${kinds}</div>
+        <div class="subjchips" id="leak-subjects"${subj ? "" : " hidden"}>${subj}</div>
       </div>
       <div class="panel-b flush" id="leak-out">${leakOut()}</div>
     </div>
@@ -4101,7 +4283,11 @@ function renderLeaks(){
 }
 
 /* ── signals ─────────────────────────────────────────────────────── */
-function signalRow(i){
+/* `by` is set when the row was filed under a patch the headline never named —
+   the desk worked it out from a Resonator mentioned in it. Shown, because a
+   filing the desk inferred should not be indistinguishable from one the
+   leaker stated: if Hsin slips a patch, these are the rows that moved. */
+function signalRow(i, by){
   const h = headline(i);
   /* The mark is the fastest read in the row — you scan for the Kuro diamond to
      find the one official post in forty community threads. Coloured by kind so
@@ -4119,52 +4305,11 @@ function signalRow(i){
     <span class="flags">
       ${h.translated ? `<span class="lang tr">${esc((i.lang || "").toUpperCase())}→EN</span>`
         : i.lang && i.lang !== "en" ? `<span class="lang">${esc(i.lang.toUpperCase())}</span>` : ""}
+      ${by ? `<span class="inferred" title="Filed under this patch because the headline names ${esc(by)}">via ${esc(by)}</span>` : ""}
       ${i.hot ? `<span class="hotflag">Hot</span>` : ""}
       <span class="kind ${esc(i.kind)}">${esc(KIND_LABEL[i.kind] || i.kind || "")}</span>
     </span>
   </a>`;
-}
-
-function renderSignals(){
-  const feed = DATA.feed || {};
-  const all = signals();
-  const counts = all.reduce((a, i) => (a[i.kind] = (a[i.kind]||0)+1, a), {});
-
-  let list = all;
-  if(S.kind === "hot") list = list.filter(i => i.hot);
-  else if(S.kind !== "all") list = list.filter(i => i.kind === S.kind);
-  const shown = list.slice(0, S.sigLimit);
-
-  const filters = chips("kind",
-    [["all", "All", all.length], ["hot", "Hot", all.filter(i => i.hot).length]]
-      .concat(Object.keys(KIND_LABEL).filter(k => counts[k]).map(k => [k, KIND_LABEL[k], counts[k]])),
-    S.kind);
-
-  const ok = (feed.sources || []).filter(s => s.status === "ok").length;
-
-  /* The panel header keeps the run status and the kind chips but not the name:
-     the page title above the stack says "Live Signals" already, and the two
-     would sit a header's height apart saying the same two words. */
-  $("#p-signals").innerHTML = `<div class="stack">
-    ${pageTitle("signals")}
-    <div class="panel sigpanel">
-      <div class="panel-h">
-        <span class="sub">Last run ${feed.fetched ? esc(fmtDate(feed.fetched)) + " " + esc(fmtTime(feed.fetched)) : "—"} · ${ok}/${(feed.sources||[]).length} sources</span>
-        <div class="right chips">${filters}</div>
-      </div>
-      <div class="warnbar">
-        Unverified automated signals
-        <span>Raw headlines pulled every 6 hours. Nothing here is tiered or read — it's a lead list. Anything that survives a read gets written up under Intel.</span>
-      </div>
-      <div class="panel-b flush">
-        ${shown.length ? `<div class="term">${shown.map(signalRow).join("")}</div>`
-          : `<div class="empty">${all.length ? emptyWhy("signal") : "No signals yet — the fetcher has not run."}</div>`}
-      </div>
-      ${list.length > shown.length ? `<div class="panel-f">
-        <button class="more" data-act="morelogs">Show more — ${list.length - shown.length} older ${icon("i-arrow", 12)}</button>
-      </div>` : ""}
-    </div>
-  </div>`;
 }
 
 /* ── resonators ──────────────────────────────────────────────────── */
@@ -5233,7 +5378,7 @@ function renderAside(){
   /* A Source health panel stood here, listing every fetcher by name with a
      status dot. It is build diagnostics — useful to whoever runs the workflow,
      which is one person, and meaningless to everyone reading the desk. The run
-     summary in the Live Signals header is what a reader actually needs. */
+     summary in the Leaks header is what a reader actually needs. */
 
   $("#aside").innerHTML = glance + featured;
 }
@@ -6607,9 +6752,10 @@ function drawerMethodology(){
   const srcs = DATA.feed?.sources || [];
   openDrawer("Methodology", `<div class="drawer-b">
     <h2>How the desk works</h2>
-    <p>Two pipelines, deliberately kept apart. <b>Live Signals</b> is a machine telling you something
+    <p>Two pipelines, deliberately kept apart. The crawl is a machine telling you something
     happened. <b>Intel</b> is a person deciding what it was worth. A cron job can't tell a datamine
-    from someone guessing, so nothing it fetches carries a tier.</p>
+    from someone guessing, so nothing it fetches carries a tier. <b>Leaks</b> shows both at once,
+    filed by the patch each is about, unshipped patches first.</p>
     <div class="dsec"><span class="label">Confidence tiers</span>
       <div style="display:grid;gap:14px">${TIERS.map(t => `
         <div>
@@ -6713,7 +6859,7 @@ function cmdIndex(){
     group:"Intel", label:e.title, hint:fmtShort(e.date), act:["intel", e.id], tier:e.confidence
   }));
   signals().slice(0, 60).forEach(i => out.push({
-    group:"Signals", label:headline(i).text, hint:i.source, act:["url", i.url], tier:null
+    group:"Feed", label:headline(i).text, hint:i.source, act:["url", i.url], tier:null
   }));
   /* The unshipped patches, as their own group. Typing "3.8" in the palette
      should land on the 3.8 leaks rather than make you find the view and then
@@ -6780,8 +6926,7 @@ const RENDER = {
   events: renderEvents,
   pulls: renderPulls,
   intel: renderIntel,
-  leaks: renderLeaks,
-  signals: renderSignals
+  leaks: renderLeaks
 };
 
 function setView(id, focus){
@@ -6930,13 +7075,12 @@ function bind(){
     else if(act === "railfilter"){
       const view = el.dataset.view;
       S[scope] = id;
-      S.sigLimit = 60;
       S.leakLimit = 40;
       if(S.view !== view) setView(view);
       else { renderRail(); draw(view); }
       back(`[data-act="railfilter"][data-view="${view}"][data-scope="${scope}"][aria-pressed="true"]`);
     }
-    else if(act === "filter"){ S[scope] = id; S.sigLimit = 60; draw(S.view); }
+    else if(act === "filter"){ S[scope] = id; S.leakLimit = 40; draw(S.view); }
     /* A sonata set, from its tile at the top of the Echoes view or from a link
        inside an echo record. Clicking the set that is already on clears back
        to all, which is the gesture the rail already uses to fold a view's own
@@ -6960,11 +7104,11 @@ function bind(){
     /* Reset clears the primary axis too, and that one is drawn in the rail. */
     else if(act === "reset"){
       VIEW_FILTERS[S.view].forEach(k => S[k] = "all");
-      S.sigLimit = 60;
+      S.leakQ = "";
+      S.leakLimit = 40;
       renderRail();
       draw(S.view);
     }
-    else if(act === "morelogs"){ S.sigLimit += 60; draw("signals"); }
     /* Both of these repaint the answer and leave the search box standing, for
        the reason given on S.leakQ. */
     else if(act === "moreleaks"){ S.leakLimit += 40; paintLeakOut(); }
