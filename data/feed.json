@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-07T14:02:23.334Z",
+  "fetched": "2026-09-07T22:34:57.467Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -11,7 +11,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 679,
-      "ms": 1056
+      "ms": 1462
     },
     {
       "id": "kurobbs",
@@ -21,7 +21,7 @@
       "status": "ok",
       "count": 29,
       "fetched": 29,
-      "ms": 900
+      "ms": 974
     },
     {
       "id": "youtube",
@@ -31,7 +31,7 @@
       "status": "ok",
       "count": 15,
       "fetched": 15,
-      "ms": 428
+      "ms": 56
     },
     {
       "id": "reddit-leaks",
@@ -41,7 +41,7 @@
       "status": "ok",
       "count": 25,
       "fetched": 25,
-      "ms": 551
+      "ms": 553
     },
     {
       "id": "reddit-main",
@@ -51,7 +51,7 @@
       "status": "skipped",
       "count": 0,
       "fetched": 0,
-      "ms": 2573,
+      "ms": 2646,
       "error": "HTTP 429 Too Many Requests"
     },
     {
@@ -62,7 +62,7 @@
       "status": "ok",
       "count": 40,
       "fetched": 50,
-      "ms": 468
+      "ms": 326
     },
     {
       "id": "mmoculture",
@@ -70,13 +70,63 @@
       "kind": "press",
       "lang": "en",
       "status": "ok",
-      "count": 0,
-      "fetched": 4,
-      "ms": 221
+      "count": 1,
+      "fetched": 5,
+      "ms": 1056
     }
   ],
   "errors": [],
   "items": [
+    {
+      "title": "3.7| Suoming's about voice lines via gamedata leaks (Spoiler warning ⚠️)",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9x1qx/37_suomings_about_voice_lines_via_gamedata_leaks/",
+      "date": "2026-09-07T16:33:46.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "3.7| Hsin's about voice lines via gamedata leaks (SPOILER WARNING, OPEN AT YOUR OWN RISK)",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9ww58/37_hsins_about_voice_lines_via_gamedata_leaks/",
+      "date": "2026-09-07T16:27:56.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Cubes in the New Backpack Battles Style Event",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9vm6u/cubes_in_the_new_backpack_battles_style_event/",
+      "date": "2026-09-07T15:41:10.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Hsin Suoming Shorekeeper basic rotation by SexShrek",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9vdd6/hsin_suoming_shorekeeper_basic_rotation_by/",
+      "date": "2026-09-07T15:31:55.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "3.7|Unison rot (123 and skip suoming rot) *Fixed hsin intro and ult via sleepy",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9uj10/37unison_rot_123_and_skip_suoming_rot_fixed_hsin/",
+      "date": "2026-09-07T15:00:43.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
     {
       "title": "3.7 | Complete Team Menu Showcase via Cut",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9sn6q/37_complete_team_menu_showcase_via_cut/",
@@ -114,6 +164,16 @@
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
       "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves Characters Guide: Full Resonator List, Elements, and Best Picks",
+      "url": "https://mmoculture.com/2026/09/wuthering-waves-characters-guide/",
+      "date": "2026-09-07T10:58:50.000Z",
+      "source": "MMO Culture",
+      "sourceId": "mmoculture",
+      "kind": "press",
       "lang": "en",
       "hot": true
     },
@@ -346,56 +406,6 @@
       "kind": "community",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "3.7| New Weekly Boss Moveset via Sleep",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8m2cn/37_new_weekly_boss_moveset_via_sleep/",
-      "date": "2026-09-06T04:25:58.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Hsin Recovery Animations via Neon Team",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8lykp/hsin_recovery_animations_via_neon_team/",
-      "date": "2026-09-06T04:20:26.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hsin and Suoming Gameplay Showcase via Sleep",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8kzqo/hsin_and_suoming_gameplay_showcase_via_sleep/",
-      "date": "2026-09-06T03:32:13.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "More of Hsin Showcase via Naruse",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8kt4k/more_of_hsin_showcase_via_naruse/",
-      "date": "2026-09-06T03:23:17.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Suoming Gameplay via Naruse",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8ko2c/suoming_gameplay_via_naruse/",
-      "date": "2026-09-06T03:16:21.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Profile Reveal | Nether Qi Art — Jingran",
@@ -768,16 +778,6 @@
       "hot": true
     },
     {
-      "title": "Wuthering Waves announced Hsin and Suomin for patch 3.7.",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNaURubmNlbWlnNWxfUlVaUUg2OUlpc2hCdVRMdEVNbVpKYzZsUTVtdkx1eHRucEphNFY2WktlZUlrX3hrb0d2SVFNR2RLM1hNbzZ1VkZmakJlY1NFVGg3Vk5IelBKQkRfMEd4dF9Tak9DeWY4dXBQU2xlNXNtMTU0anBNM0tGQkE?oc=5",
-      "date": "2026-08-28T07:00:00.000Z",
-      "source": "Wotpack.ru",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "《寰宇人类注疏：纪世通鉴》——玄方终章剧情预告",
       "url": "https://www.kurobbs.com/mc/post/1541819215950454784",
       "date": "2026-08-28T06:00:00.000Z",
@@ -982,6 +982,16 @@
       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1oaEdiU2NvbkZ1TnBTUElNRjl2VU9INmJoU0hlenZ4dEdwcHEzWUJ4NzlSMEtObkhhQU5tVVhnMU45RENlU2ViZ2JmNHNxdE9PZFI2V0JhbUNOSU9HNEdhVjBR?oc=5",
       "date": "2026-08-25T07:00:00.000Z",
       "source": "Pocket Tactics",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Why Wuthering Waves is so rough on Xbox despite multiple updates",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQMEEwc0JIbGpOMmNzOC14Qm8xRjhLYmRydFktLVE1MnJENHFpU29DYmpTaHQtNExmc0htZWZsUF96Uld0NDhlcmI5ZURwaGJVbjU3RVN4VHdvRXVLVVMwQTVXaVJWVF82UmJJSUNaV3hnX2NBRWtqRERaYnZaZS0yOTcxbFhxXzRmMWc?oc=5",
+      "date": "2026-08-24T07:00:00.000Z",
+      "source": "Windows Central",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
