@@ -37,9 +37,11 @@
 // fan site paying for its own CDN, and serving the art from Pages is cheaper
 // for them than every desk visitor hitting theirs. Credit rides in the footer.
 
-import { writeFile, readFile, mkdir, readdir, unlink } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { AssetCache } from "./lib/assets.mjs";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const run = promisify(execFile);
 
@@ -144,12 +146,6 @@ async function fetchImage(url) {
   return buf;
 }
 
-async function download(url, path) {
-  const buf = await fetchImage(url);
-  await writeFile(path, buf);
-  return { bytes: buf.length, alpha: hasAlpha(buf) };
-}
-
 (async function main() {
   const wantChars = await wanted();
   if (!wantChars.length) {
@@ -164,7 +160,7 @@ async function download(url, path) {
 
   const characters = {};
   const misses = [];
-  const keep = new Set();
+  const cache = await AssetCache.open();
 
   for (const name of wantChars) {
     const hit = chars.get(key(name));
@@ -180,14 +176,20 @@ async function download(url, path) {
     for (const [kind, url] of [["icon", hit.icon], ["card", hit.card]]) {
       if (!url) continue;
       const file = `${DIR}/${hit.slug}${kind === "card" ? "-card" : ""}.webp`;
-      try {
-        const { bytes, alpha } = await download(url, file);
-        rec[kind] = file;
-        keep.add(file);
-        console.log(`${kind.padEnd(4)} ${name.padEnd(20)} ${String(bytes).padStart(7)}b ${alpha ? "alpha" : "OPAQUE"}`);
-      } catch (err) {
-        console.log(`${kind.padEnd(4)} ${name.padEnd(20)} failed — ${err.message}`);
+      const got = await cache.get(file, url, fetchImage);
+      if (got.status === "failed") {
+        console.log(`${kind.padEnd(4)} ${name.padEnd(20)} failed — ${got.error.message}`);
+        continue;
       }
+      rec[kind] = file;
+      /* The alpha check only has a buffer to look at on the run that actually
+         downloaded one. A cached file was checked when it arrived, and reading
+         two hundred and forty webps back off disk to say so again would undo
+         the point of not fetching them. */
+      console.log(`${kind.padEnd(4)} ${name.padEnd(20)} ` +
+        (got.status === "fetched"
+          ? `${String(got.bytes).padStart(7)}b ${hasAlpha(got.buf) ? "alpha" : "OPAQUE"}`
+          : got.status === "cached" ? "  cached" : `  kept — ${got.error.message}`));
     }
     if (rec.icon || rec.card) characters[name] = rec;
     else misses.push(`${name} (no image)`);
@@ -199,10 +201,8 @@ async function download(url, path) {
      keeps it in assets/weapons/ where all 120 of them live rather than the 36
      that happen to be somebody's signature — and the *-full.webp gallery
      renders, from back when the desk drew its newest characters from those. */
-  for (const f of await readdir(DIR)) {
-    const path = `${DIR}/${f}`;
-    if (!keep.has(path)) { await unlink(path); console.log(`pruned ${path}`); }
-  }
+  const pruned = await cache.sweep(DIR);
+  await cache.save();
 
   const payload = {
     schema: "wuwa-desk/portraits@1.0",
@@ -216,22 +216,12 @@ async function download(url, path) {
     characters
   };
 
-  /* Same rule as the feed: don't churn the file when nothing moved. Everything
-     but the timestamp is compared, not just the characters — when this script
-     stopped writing a `weapons` key, comparing one field left the old one
-     sitting in the file with nothing to refresh it. */
-  let unchanged = false;
-  try {
-    const { updated, ...prev } = await readJson(OUT);
-    unchanged = JSON.stringify(prev) === JSON.stringify(payload);
-  } catch {}
-  if (!unchanged) {
-    await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
-  }
+  const wrote = await writeIfChanged(OUT, { ...payload, updated: new Date().toISOString() });
 
   console.log(
     `\n${Object.keys(characters).length}/${wantChars.length} characters` +
-      (unchanged ? " (unchanged)" : "")
+      (wrote ? "" : " (unchanged)") +
+      `\n${cache.summary}` + (pruned ? `, ${pruned} pruned` : "")
   );
   if (misses.length) console.log(`no asset yet: ${misses.join(", ")}`);
 })();

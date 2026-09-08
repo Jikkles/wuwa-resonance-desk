@@ -10,10 +10,9 @@
 // So the desk shows a plate for a character until Kuro reveals them, and picks
 // up the real art within 6 hours of the reveal post going live. No manual step.
 
-import { writeFile, readFile, mkdir } from "node:fs/promises";
-
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { readFile, mkdir } from "node:fs/promises";
+import { getJson as json } from "./lib/net.mjs";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const BASE = "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/json/G152/en";
 const ARTICLE_URL = id => `https://wutheringwaves.kurogames.com/en/main/news/detail/${id}`;
@@ -28,14 +27,9 @@ const REVEAL_PATTERNS = [
   { rx: /^post-lament anthropocene: stars intertwined/i, rank: 2 }
 ];
 
-async function getJson(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json,*/*" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return res.json();
-}
+/* User agent, timeout and retries, out of scripts/lib/net.mjs — which is where
+   the reasoning lives, along with why a 403 is not retried and a 503 is. */
+const getJson = url => json(url, { timeout: TIMEOUT_MS });
 
 const readJson = async path => JSON.parse(await readFile(path, "utf8"));
 
@@ -148,20 +142,11 @@ async function artFor(id) {
     art
   };
 
-  // Same rule as the feed: don't churn the file when nothing moved.
-  let unchanged = false;
-  try {
-    const prev = await readJson(OUT);
-    unchanged = JSON.stringify(prev.art) === JSON.stringify(art);
-  } catch {}
-
-  if (!unchanged) {
-    await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
-  }
+  const wrote = await writeIfChanged(OUT, { ...payload, updated: new Date().toISOString() });
 
   console.log(
     `\n${Object.keys(art).length}/${names.length} characters have art` +
-      (unchanged ? " (unchanged)" : "")
+      (wrote ? "" : " (unchanged)")
   );
   if (misses.length) console.log(`awaiting reveal: ${misses.join(", ")}`);
 })();

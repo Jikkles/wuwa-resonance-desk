@@ -21,10 +21,10 @@
 //
 // Only writes when something changed. Prunes icons no reward line mentions.
 
-import { writeFile, readFile, mkdir, readdir, unlink } from "node:fs/promises";
-
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { readFile, mkdir } from "node:fs/promises";
+import { getJson as json, getBuffer as buffer } from "./lib/net.mjs";
+import { AssetCache } from "./lib/assets.mjs";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const API = "https://wutheringwaves.fandom.com/api.php";
 const WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(String(t).replace(/ /g, "_"))}`;
@@ -54,24 +54,10 @@ const BATCH = 50;
 
 const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-async function getJson(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return res.json();
-}
-async function getBuffer(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "image/png,image/webp,image/*" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const buf = Buffer.from(await res.arrayBuffer());
-  if (!buf.length) throw new Error("empty body");
-  return buf;
-}
+/* User agent, timeout and retries, out of scripts/lib/net.mjs — which is where
+   the reasoning lives, along with why a 403 is not retried and a 503 is. */
+const getJson   = url => json(url, { timeout: TIMEOUT_MS });
+const getBuffer = url => buffer(url, { timeout: TIMEOUT_MS });
 
 /* ── the reward line ───────────────────────────────────────────────
    THIS IS THE TWIN OF `rewardTokens` IN assets/app.js. The two have to agree:
@@ -192,18 +178,19 @@ async function lookup(titles) {
   const pages = await lookup([...new Set(wanted.flatMap(candidates))]);
 
   const items = {};
-  const keep = new Set();
   const missing = [];
+  const cache = await AssetCache.open();
 
   for (const name of wanted) {
     const hit = candidates(name).map(c => pages.get(c)).find(p => p?.image);
     if (!hit) { missing.push(name); console.log(`${name.padEnd(44)} no wiki page`); continue; }
 
     const file = `${DIR}/${slug(name)}.png`;
-    try {
-      const buf = await getBuffer(hit.image);
-      await writeFile(file, buf);
-      keep.add(file);
+    const got = await cache.get(file, hit.image, getBuffer);
+    if (got.status === "failed") {
+      missing.push(name);
+      console.log(`${name.padEnd(44)} icon failed — ${got.error.message}`);
+    } else {
       items[name] = {
         icon: file,
         /* Which half of a compound name is the thing itself. Kuro qualifies a
@@ -218,18 +205,16 @@ async function lookup(titles) {
         ...(hit.description ? { description: hit.description } : {}),
         wiki: WIKI(hit.title)
       };
-      console.log(`${name.padEnd(44)} ${hit.rarity ? hit.rarity + "★" : "  "} ${String(buf.length).padStart(7)}b  ${hit.title}`);
-    } catch (err) {
-      missing.push(name);
-      console.log(`${name.padEnd(44)} icon failed — ${err.message}`);
+      const note = got.status === "cached" ? "cached"
+        : got.status === "kept" ? `kept — ${got.error.message}`
+        : `${got.bytes}b`;
+      console.log(`${name.padEnd(44)} ${hit.rarity ? hit.rarity + "★" : "  "} ${note.padStart(9)}  ${hit.title}`);
     }
   }
 
   /* An item no reward line mentions any more shouldn't leave its icon behind. */
-  for (const f of await readdir(DIR)) {
-    const path = `${DIR}/${f}`;
-    if (!keep.has(path)) { await unlink(path); console.log(`pruned ${path}`); }
-  }
+  const pruned = await cache.sweep(DIR);
+  await cache.save();
 
   const payload = {
     schema: "wuwa-desk/items@1.0",
@@ -245,14 +230,9 @@ async function lookup(titles) {
     items
   };
 
-  let unchanged = false;
-  try {
-    const prev = JSON.parse(await readFile(OUT, "utf8"));
-    unchanged = JSON.stringify(prev.items) === JSON.stringify(items);
-  } catch {}
-  if (!unchanged)
-    await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
+  const wrote = await writeIfChanged(OUT, { ...payload, updated: new Date().toISOString() });
 
-  console.log(`\n${Object.keys(items).length} icons${unchanged ? " (unchanged)" : ""}` +
+  console.log(`\n${Object.keys(items).length} icons${wrote ? "" : " (unchanged)"} · ${cache.summary}` +
+    (pruned ? ` · ${pruned} pruned` : "") +
     (missing.length ? `\nno icon: ${missing.join(", ")}` : ""));
 })();

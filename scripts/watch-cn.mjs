@@ -35,9 +35,7 @@
 // broken build, and a red run for it would train the eye to ignore red runs.
 
 import { readFile } from "node:fs/promises";
-
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { getJson as json } from "./lib/net.mjs";
 
 const API = "https://api.kurobbs.com/forum/companyEvent/findEventList";
 const POST_URL = id => `https://www.kurobbs.com/mc/post/${id}`;
@@ -67,15 +65,9 @@ const MARKERS = [
    dash. Nothing else is ever appended, so the tail is the name. */
 const SEPARATORS = /[|｜│—–\-]/;
 
-async function getJson(url, init) {
-  const res = await fetch(url, {
-    ...init,
-    headers: { "User-Agent": UA, Accept: "application/json,*/*", ...(init?.headers || {}) },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return res.json();
-}
+/* User agent, timeout and retries, out of scripts/lib/net.mjs — which is where
+   the reasoning lives, along with why a 403 is not retried and a 503 is. */
+const getJson = (url, init) => json(url, { ...init, timeout: TIMEOUT_MS });
 
 const readJson = async path => JSON.parse(await readFile(path, "utf8"));
 

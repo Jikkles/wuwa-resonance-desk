@@ -25,8 +25,8 @@
 // pixels, so the names are not machine-readable. Open the preview URLs, match
 // them to the events, paste the coordinates in. Ten minutes a patch.
 
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { getJson, getBuffer } from "./lib/net.mjs";
+
 const BASE = "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/json/G152/en";
 
 /* The page's own frame runs a couple of pixels inside each banner. Trim it. */
@@ -44,11 +44,9 @@ if (!article) {
   process.exit(1);
 }
 
-const get = async (url, as = "json") => {
-  const r = await fetch(url, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(30000) });
-  if (!r.ok) throw new Error(`HTTP ${r.status} ${url}`);
-  return as === "json" ? r.json() : Buffer.from(await r.arrayBuffer());
-};
+/* User agent, timeout and retries, out of scripts/lib/net.mjs. */
+const get = (url, as = "json") =>
+  as === "json" ? getJson(url, { timeout: 30000 }) : getBuffer(url, { timeout: 30000 });
 
 /* OSS will render any image as a 24-bit BMP, which is a header and then rows of
    BGR bottom-up — parseable in ten lines, and the whole reason this needs no

@@ -10,7 +10,7 @@
 // Reddit is the one known flake: it 403s datacenter ranges intermittently, so
 // it is marked optional and a failure there does not fail the run.
 
-import { writeFile, readFile, mkdir } from "node:fs/promises";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const UA =
   "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
@@ -265,14 +265,6 @@ const dedupeKey = item =>
   `${item.url.replace(/[?#].*$/, "").replace(/\/$/, "")}` +
   `|${item.title.toLowerCase().replace(/[^a-z0-9一-鿿]+/g, "")}`;
 
-async function readExisting() {
-  try {
-    return JSON.parse(await readFile(OUT, "utf8"));
-  } catch {
-    return null;
-  }
-}
-
 /* Sources sharing a `group` hit one host, so run those serially — Reddit
    answers two parallel requests from the same IP with a 429. */
 async function runAll() {
@@ -341,34 +333,6 @@ async function runAll() {
     .filter(r => r.status === "failed")
     .map(r => `${r.src.id}: ${r.error}`);
 
-  const payload = { sources, errors, items };
-
-  // The workflow commits only when the file changes, so keep `fetched` pinned
-  // unless the content actually moved — otherwise every run is a junk commit.
-  // `ms` and `fetched` wobble every run without meaning anything changed.
-  const stable = p => JSON.stringify({
-    sources: (p.sources || []).map(({ ms, fetched, ...rest }) => rest),
-    errors: p.errors || [],
-    items: p.items || []
-  });
-  const prev = await readExisting();
-  const unchanged = !!prev && stable(prev) === stable(payload);
-
-  await mkdir("data", { recursive: true });
-  await writeFile(
-    OUT,
-    JSON.stringify(
-      {
-        schema: "wuwa-desk/feed@2.0",
-        fetched: unchanged ? prev.fetched : new Date().toISOString(),
-        note: "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
-        ...payload
-      },
-      null,
-      2
-    ) + "\n"
-  );
-
   for (const s of sources) {
     console.log(
       `${s.status.padEnd(7)} ${s.id.padEnd(14)} ${String(s.count).padStart(3)} kept ` +
@@ -376,13 +340,40 @@ async function runAll() {
         (s.error ? `  — ${s.error}` : "")
     );
   }
-  console.log(`\nwrote ${items.length} items${unchanged ? " (unchanged)" : ""}`);
 
-  // Only hard-fail when every non-optional source is down — that means the
-  // runner lost network or every endpoint moved, not a normal bad day.
+  // Every source down is the runner having lost its network, not the internet
+  // having run out of Wuthering Waves news — and the file this run would write
+  // is an empty feed. That used to be written and then reported: the process
+  // exited 1, the workflow's commit step runs on always(), and a blank
+  // feed.json went to the live desk to sit there until the next cycle. Refuse
+  // first, write second. Yesterday's headlines are worth more than none.
   const required = results.filter(r => !r.src.optional);
   if (required.length && required.every(r => r.status === "failed")) {
-    console.error("\nall required sources failed");
+    console.error("\nall required sources failed — keeping the feed that is already there");
     process.exit(1);
   }
+
+  // How long each source took and how many rows it handed over are a report on
+  // the run, not a fact about the feed — nothing on the desk reads either, and
+  // both move every six hours whether or not a single headline did. Pinning
+  // `fetched` was half of the fix and the file still churned, because the
+  // wobbling numbers went on being written underneath it. So they are dropped
+  // from the comparison AND from what is written: the sources list keeps its
+  // name, status and kept-count, which is exactly what the methodology drawer
+  // draws, and the timings stay in the run's own log where they are useful.
+  const reported = sources.map(({ ms, fetched, ...rest }) => rest);
+  const wrote = await writeIfChanged(
+    OUT,
+    {
+      schema: "wuwa-desk/feed@2.0",
+      fetched: new Date().toISOString(),
+      note: "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
+      sources: reported,
+      errors,
+      items
+    },
+    ["fetched"]
+  );
+
+  console.log(`\n${items.length} items${wrote ? " written" : " — unchanged, not rewritten"}`);
 })();

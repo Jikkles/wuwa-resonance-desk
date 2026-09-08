@@ -86,12 +86,20 @@ one and it's identical between everyone holding the same weapon class.
 ## The files
 
 ```
-index.html      shell markup — rail, HUD, panels, drawer, palette
-assets/app.css  all styling
-assets/app.js   reads the JSON, renders every view
-data/*.json     the data
-scripts/*.mjs   the fetchers that write most of it
+index.html         shell markup — rail, HUD, panels, drawer, palette
+assets/app.css     all styling
+assets/app.js      reads the JSON, renders every view
+data/*.json        the data
+scripts/*.mjs      the fetchers that write most of it
+scripts/lib/*.mjs  what all of them do the same way
+assets/.sources.json  which URL each cached picture came from
 ```
+
+`scripts/lib/` is HTTP plumbing and nothing else — a user agent, a timeout, retries, the
+asset cache and "write only if it changed". Every parser stays in the fetcher that owns
+it: three of these read Prydwen's page payload and all three keep their own copy, because
+when that source moves all three want fixing together rather than one of them silently
+inheriting a change made for a different page.
 
 **Yours to write** — no script will ever touch these:
 
@@ -137,7 +145,16 @@ and `echoes.json` to decide what is unwritten — so **run it again after any of
 runs above**, or it will keep carrying a beta copy of something that has since landed.
 That last line of the block is doing real work, not tidying up.
 
-Each prints what it kept and only writes when something changed.
+Each prints what it kept and only writes when something changed — including
+`kits.json` and `resonators.json`, which until recently rewrote their own `updated` date
+on every daily run and committed three quarters of a megabyte to say nothing had happened.
+
+**Art is downloaded once.** `assets/.sources.json` records the URL every cached picture
+came from, and both Fandom and Prydwen serve art from URLs that move when the art does —
+so a matching URL is a matching file and the fetcher skips it. A URL that moves, or a file
+missing off disk, is a fresh download. `DESK_REFRESH_ASSETS=1` ignores the manifest and
+re-fetches everything, which is the escape hatch if either host ever starts serving art
+from a stable URL. The first run after the manifest is deleted downloads the lot.
 
 ## Art
 

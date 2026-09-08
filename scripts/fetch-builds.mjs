@@ -51,9 +51,10 @@
 // already on the desk from the other three fetchers, and this file is entirely
 // names and prose that point at them.
 
-import { writeFile, readFile, mkdir } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const run = promisify(execFile);
 
@@ -398,16 +399,16 @@ async function main() {
   }
 
   await mkdir("data", { recursive: true });
-  await writeFile(OUT, JSON.stringify({
+  const wrote = await writeIfChanged(OUT, {
     schema: "wuwa-desk/builds@1.0",
     note: "Recommended builds and teams, per Resonator. This is the one file on the desk that is judgement rather than record: which sonata set to farm, which echo to put in the main slot, what to roll for, which weapons rank where, and which teams to build — all of it somebody's opinion, none of it a fact the game publishes. It is credited to prydwen.gg wherever it is shown and `reviewed` is the game version their write-up was last revised against. `sets[].echoes` is the main slot, the echo whose skill you actually cast. `stats.format` is the cost layout of the five slots and `stats.slots` is the main stat wanted in each. `stats.targets` is what each stat should read on the level-90 stat screen — the thresholds that turn the substat priority from an order into something you can act on, since an order alone never says when to stop rolling one stat and start on the next. `weapons[].share` is the damage share Prydwen calculates against the best option. A team slot holds every Resonator named as an alternative for that seat.",
     credit: "Builds, teams and rankings via prydwen.gg — their judgement, not the desk's",
     source: "https://www.prydwen.gg/wuthering-waves/characters/",
     generated: new Date().toISOString(),
     builds
-  }, null, 2) + "\n");
+  }, ["generated"]);
 
-  console.log(`\nwrote ${OUT} — ${withBuild} of ${slugFor.size} Resonators have a build`);
+  console.log(`\n${wrote ? "wrote" : "unchanged, kept"} ${OUT} — ${withBuild} of ${slugFor.size} Resonators have a build`);
   const noBuild = [...slugFor.keys()].filter(k => !builds[k]);
   if (noBuild.length) console.log(`nothing published yet for: ${noBuild.join(", ")}`);
 }

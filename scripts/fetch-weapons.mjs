@@ -55,9 +55,11 @@
 // whichever copy is bigger is the one kept. General rather than a list of
 // weapon names: the next one to arrive small should fix itself.
 
-import { writeFile, readFile, mkdir, readdir, unlink } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { AssetCache } from "./lib/assets.mjs";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const run = promisify(execFile);
 
@@ -71,6 +73,9 @@ const WEAPON_IMG = id => `https://cdn.prydwen.gg/images/wuthering-waves/weapons/
    fetch-items.mjs and fetch-kits.mjs read. */
 const FANDOM_API = "https://wutheringwaves.fandom.com/api.php";
 const MIN_ICON_PX = 200;
+/* Which host a cached icon came from, read off the URL the manifest filed it
+   under. Fandom serves its images from static.wikia.nocookie.net. */
+const FANDOM_ART = /nocookie\.net|fandom\.com/;
 const OUT = "data/weapons.json";
 const DIR = "assets/weapons";
 const TIMEOUT_MS = 25000;
@@ -125,7 +130,11 @@ function webpWidth(buf) {
    file it serves for a .png title is a 256px WebP with a transparent ground —
    the same thing Prydwen's CDN returns, which is why it can be written straight
    to disk with no conversion step. Returns null for anything it can't find:
-   a missing wiki page is a reason to keep the small icon, not to fail. */
+   a missing wiki page is a reason to keep the small icon, not to fail.
+
+   Returns the URL alongside the bytes, because the asset cache files a picture
+   under the URL it came from and this is the one call site where that is not
+   the URL the caller asked for. */
 async function fandomIcon(name) {
   const q = new URLSearchParams({
     action: "query", format: "json", list: "allimages",
@@ -135,7 +144,7 @@ async function fandomIcon(name) {
     const { stdout } = await curl(`${FANDOM_API}?${q}`, ["-H", "Accept: application/json"]);
     const hit = (JSON.parse(stdout.toString("utf8")).query?.allimages || [])
       .find(i => String(i.name).toLowerCase() === `weapon_${slug(name).replace(/-/g, "_")}.png`);
-    return hit ? await fetchImage(hit.url) : null;
+    return hit ? { url: hit.url, buf: await fetchImage(hit.url) } : null;
   } catch { return null; }
 }
 
@@ -250,7 +259,7 @@ function rankTable(w) {
   await mkdir(DIR, { recursive: true });
 
   const weapons = [];
-  const keep = new Set();
+  const cache = await AssetCache.open();
   const oddTypes = new Set();
   const holes = [];
   /* Which icons came off the wiki rather than Prydwen. The credit line names
@@ -269,18 +278,30 @@ function rankTable(w) {
 
     const file = `${DIR}/w-${slug(w.Name)}.webp`;
     let icon = "";
-    try {
-      let buf = await fetchImage(WEAPON_IMG(w.ID));
+    /* Already on disk, and the manifest remembers which of the two sources it
+       came from. That answer is worth keeping rather than re-deriving: working
+       it out again costs a download of Prydwen's copy for all 121 weapons, and
+       a second one from the wiki for the handful whose icon is undersized. */
+    const known = await cache.reuse(file);
+    if (known) {
+      icon = file;
+      if (FANDOM_ART.test(known)) wiki.push(w.Name);
+      console.log(`${w.Rarity}★ ${String(w.Name).padEnd(26)}   cached` +
+        (FANDOM_ART.test(known) ? "  ← wiki" : ""));
+    } else try {
+      let url = WEAPON_IMG(w.ID);
+      let buf = await fetchImage(url);
       let from = "prydwen";
       /* Too small to draw at record size. Ask the wiki, and keep whichever copy
          is bigger — the fallback is only worth taking if it actually is one. */
       if (webpWidth(buf) < MIN_ICON_PX) {
         const alt = await fandomIcon(w.Name);
-        if (alt && webpWidth(alt) > webpWidth(buf)) { buf = alt; from = "fandom"; wiki.push(w.Name); }
+        if (alt && webpWidth(alt.buf) > webpWidth(buf)) {
+          buf = alt.buf; url = alt.url; from = "fandom"; wiki.push(w.Name);
+        }
       }
-      await writeFile(file, buf);
+      await cache.put(file, url, buf);
       icon = file;
-      keep.add(file);
       const px = webpWidth(buf);
       console.log(`${w.Rarity}★ ${String(w.Name).padEnd(26)} ${String(buf.length).padStart(7)}b` +
         (px ? ` ${px}px` : "") + (from === "fandom" ? "  ← wiki (prydwen's was small)" : ""));
@@ -316,10 +337,8 @@ function rankTable(w) {
   }
 
   /* A weapon pulled from the source shouldn't leave its icon behind. */
-  for (const f of await readdir(DIR)) {
-    const path = `${DIR}/${f}`;
-    if (!keep.has(path)) { await unlink(path); console.log(`pruned ${path}`); }
-  }
+  const pruned = await cache.sweep(DIR);
+  await cache.save();
 
   const payload = {
     schema: "wuwa-desk/weapons@1.0",
@@ -339,25 +358,13 @@ function rankTable(w) {
     weapons
   };
 
-  /* Same rule as the feed: don't churn the file when nothing moved. The note
-     and the credit are compared too, not just the roster — an icon that starts
-     coming off the wiki instead changes where the file says its pictures came
-     from while every weapon in it stays byte for byte the same, and on the
-     roster alone that rewrite would never be written. */
-  let unchanged = false;
-  try {
-    const prev = JSON.parse(await readFile(OUT, "utf8"));
-    unchanged = JSON.stringify(prev.weapons) === JSON.stringify(weapons)
-      && prev.note === payload.note && prev.credit === payload.credit;
-  } catch {}
-  if (!unchanged) {
-    await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
-  }
+  const wrote = await writeIfChanged(OUT, { ...payload, updated: new Date().toISOString() });
 
   const byRarity = weapons.reduce((a, w) => (a[w.rarity] = (a[w.rarity] || 0) + 1, a), {});
   console.log(
     `\n${weapons.length} weapons (${[5, 4, 3].map(r => `${byRarity[r] || 0}× ${r}★`).join(", ")}), ` +
-      `${keep.size} icons` + (unchanged ? " (unchanged)" : ""));
+      `${weapons.filter(w => w.icon).length} icons` + (wrote ? "" : " (unchanged)") +
+      `\n${cache.summary}` + (pruned ? `, ${pruned} pruned` : ""));
   if (oddTypes.size) console.log(`unknown weapon class: ${[...oddTypes].join(", ")}`);
   if (holes.length) console.log(`passive has a placeholder with no values: ${holes.join(", ")}`);
 })();

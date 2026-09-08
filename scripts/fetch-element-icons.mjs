@@ -37,9 +37,7 @@
 
 import { writeFile, readFile } from "node:fs/promises";
 import { inflateSync } from "node:zlib";
-
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { getJson as json, getBuffer as buffer } from "./lib/net.mjs";
 
 const API = "https://wutheringwaves.fandom.com/api.php";
 const HTML = "index.html";
@@ -63,23 +61,13 @@ const GLYPH = (r, g, b, a) => a > 140 && r > 205 && g > 205 && b > 205;
 const DISC = (r, g, b, a) => a > 200;
 
 /* ── fetch ─────────────────────────────────────────────────────────
-   Fandom content-negotiates to WebP unless you ask for the original, and this
-   script has a PNG decoder in it and no WebP one. ?format=original settles it. */
-async function getJson(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return res.json();
-}
+   User agent, timeout and retries out of scripts/lib/net.mjs. Fandom
+   content-negotiates to WebP unless you ask for the original, and this script
+   has a PNG decoder in it and no WebP one — ?format=original settles that, and
+   the check below is the belt to its braces. */
+const getJson = url => json(url, { timeout: TIMEOUT_MS });
 async function getPng(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "image/png" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const buf = Buffer.from(await res.arrayBuffer());
+  const buf = await buffer(url, { accept: "image/png", timeout: TIMEOUT_MS });
   if (buf.subarray(1, 4).toString("ascii") !== "PNG") throw new Error("not a PNG");
   return buf;
 }

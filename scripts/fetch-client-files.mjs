@@ -59,9 +59,10 @@
 // truncates the same figure instead, which is the whole of why its 5★ base ATK
 // column reads 587 where this one reads 588.
 
-import { writeFile, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const run = promisify(execFile);
 
@@ -584,16 +585,7 @@ function buildKit(detail) {
     resonators
   };
 
-  let unchanged = false;
-  try {
-    const prev = JSON.parse(await readFile(OUT, "utf8"));
-    unchanged = prev.build === build && prev.note === payload.note
-      && JSON.stringify(prev.weapons) === JSON.stringify(weapons)
-      && JSON.stringify(prev.sonata) === JSON.stringify(sonata)
-      && JSON.stringify(prev.resonators) === JSON.stringify(resonators);
-  } catch {}
-  if (!unchanged)
-    await writeFile(OUT, JSON.stringify({...payload, updated: new Date().toISOString()}, null, 2) + "\n");
+  const wrote = await writeIfChanged(OUT, { ...payload, updated: new Date().toISOString() });
 
   const kitPayload = {
     schema: "wuwa-desk/clientkits@1.0",
@@ -614,19 +606,12 @@ function buildKit(detail) {
     kits
   };
 
-  let kitsUnchanged = false;
-  try {
-    const prev = JSON.parse(await readFile(KIT_OUT, "utf8"));
-    kitsUnchanged = prev.build === build && prev.note === kitPayload.note
-      && JSON.stringify(prev.kits) === JSON.stringify(kits);
-  } catch {}
-  if (!kitsUnchanged)
-    await writeFile(KIT_OUT, JSON.stringify({...kitPayload, updated: new Date().toISOString()}, null, 2) + "\n");
+  const wroteKits = await writeIfChanged(KIT_OUT, { ...kitPayload, updated: new Date().toISOString() });
 
   console.log(
     `\n${weapons.length} unshipped weapons, ${sonata.length} unshipped sonata sets, ` +
     `${Object.keys(kits).length} unwritten kits` +
-    (unchanged && kitsUnchanged ? " (unchanged)" : ""));
+    (wrote || wroteKits ? "" : " (unchanged)"));
   if (kitFails.length) console.log(`kit refused: ${kitFails.join("; ")}`);
   /* The handover, said out loud. A beta kit is meant to be temporary — it
      holds the slot until a live source writes the Resonator up, and then it

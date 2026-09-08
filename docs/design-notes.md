@@ -2331,6 +2331,77 @@ All of them are driven off the names already in `versions.json`, so writing a ba
 is what queues that character's art, portrait, weapon and kit. You never hand-place an
 image — but see below for which half of that arrives on its own.
 
+### What all of them do the same way
+
+`scripts/lib/` holds the three things every fetcher was doing itself, and nothing else.
+The line it draws is between plumbing and parsing: a timeout is not about a page, and a
+retry is not about a source, so those are shared. A parser is entirely about the page it
+reads, so it is not — three of these scripts walk Prydwen's React payload and all three
+keep their own copy of the walker, because the day that source moves, all three want
+reading together rather than one of them quietly inheriting a change made for a different
+page.
+
+**`net.mjs` — the request.** Nine scripts each carried the same twelve lines: a user
+agent, an `AbortSignal.timeout`, `if (!res.ok) throw`. Identical everywhere, and
+identically wrong in one respect — none of them retried. Fandom drops a connection every
+few batches and answers a 503 now and then, and the desk's response to "the wiki was
+briefly busy" was the same as its response to "the wiki has changed shape": lose the data
+and try again in six hours. Now a 408, 425, 429 or 5xx is retried twice with a widening
+gap, honouring `Retry-After` where the server sends one. A 403 or a 404 is not: those are
+answers, and asking three times makes the run slower without making it righter. It matters
+that the retry does *not* cover Prydwen — those three scripts talk through `curl`, because
+Cloudflare turns Node's TLS handshake away, and a 403 there is the expected state on a
+runner rather than a blip.
+
+**`assets.mjs` — the download that doesn't happen.** Five fetchers cache art under
+`assets/`, and every one of them used to re-download every file on every run. On the
+six-hourly cron that was ninety-eight images a cycle from Fandom — four hundred a day —
+for a set of pictures that changes when Kuro ships a patch. The local half was four
+hundred and fifty more. It also churned the repo: `assets/items/deep-dreams-film-festival.png`
+moved twice in one day in September without the item changing, because a re-fetch of the
+same URL came back re-encoded, and a binary diff on a PNG is a commit nobody can read and
+a Pages deploy nobody needed.
+
+What makes skipping safe is the shape of the URLs. Fandom hands out revision-scoped image
+URLs — the `cb=` stamp moves when the file is re-uploaded — and Prydwen's are content-hashed
+by its build. So a URL that has not changed is a file that has not changed, and
+`assets/.sources.json` is just a record of which URL each cached file came from. A URL
+that moves is a fresh download, a file missing off disk is a fresh download, and
+`DESK_REFRESH_ASSETS=1` ignores the manifest entirely.
+
+Two smaller things fell out of it. Three reward items share one wiki page, so three files
+wanted the same bytes; they now ask once. And a download that fails while a copy is
+already on disk keeps that copy — these scripts used to drop a record's icon on a fetch
+failure and then prune the perfectly good file underneath it, so a five-second wobble cost
+the desk a picture it already had and the next run fetched it again.
+
+**`out.mjs` — the write that doesn't happen.** This file's own Setup section has claimed
+for a long time that each fetcher "only writes when something changed", and four of them
+did not. `kits.json` and `resonators.json` were rewritten on every daily run with nothing
+in the diff but their own `updated` date: three quarters of a megabyte committed and a
+Pages deploy triggered, every day, to record that yesterday's kits were still yesterday's
+kits. `git log -- data/kits.json` could not tell you when a kit had last actually moved,
+which is the one question that log exists to answer.
+
+The ones that did check mostly checked too little — `fetch-items.mjs` compared its `items`
+map and nothing else, so editing the `note` the file carries changed the script and never
+reached the file. `writeIfChanged` compares the whole document minus its timestamp, which
+is both the stricter test and the shorter one. `feed.json` got the same treatment from the
+other end: its per-source `ms` and row counts are a report on the run rather than a fact
+about the feed, nothing on the desk reads either, and they were guaranteeing a diff every
+six hours whether or not a single headline had moved. They are out of the file and stay in
+the log.
+
+### An empty feed is not a feed
+
+`fetch-feeds.mjs` ends by hard-failing when every non-optional source is down, on the
+grounds that this means the runner lost its network rather than that the internet ran out
+of Wuthering Waves news. It used to do that *after* writing the file. The process exited 1,
+the workflow's commit step runs on `always()`, and a `feed.json` with zero items in it went
+to the live desk to sit there until the next cycle — Signals empty, the HUD counting
+nothing. The check now runs before the write. Yesterday's headlines are worth more than
+none.
+
 ### Prydwen does not serve GitHub Actions
 
 **Prydwen returns a flat 403 to a datacenter IP.** Not a challenge page, not a rate

@@ -29,10 +29,9 @@
 // Times come back as ISO with +08:00 on them, because Kuro's "server time" is
 // UTC+8 and the desk renders every clock in the reader's own zone.
 
-import { writeFile, readFile, mkdir } from "node:fs/promises";
-
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { readFile, mkdir } from "node:fs/promises";
+import { getJson as json } from "./lib/net.mjs";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const BASE = "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/json/G152/en";
 const ARTICLE_URL = id => `https://wutheringwaves.kurogames.com/en/main/news/detail/${id}`;
@@ -44,14 +43,9 @@ const TIMEOUT_MS = 20000;
    and every article past this is a fetch that resolves nothing. */
 const LOOKBACK_DAYS = 100;
 
-async function getJson(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json,*/*" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return res.json();
-}
+/* User agent, timeout and retries, out of scripts/lib/net.mjs — which is where
+   the reasoning lives, along with why a 403 is not retried and a 503 is. */
+const getJson = url => json(url, { timeout: TIMEOUT_MS });
 
 const readJson = async path => JSON.parse(await readFile(path, "utf8"));
 
@@ -461,20 +455,13 @@ function versionFor(versions, when, fallback) {
     events: all
   };
 
-  let unchanged = false;
-  try {
-    unchanged = JSON.stringify(previous.events) === JSON.stringify(all);
-  } catch {}
-
-  if (!unchanged) {
-    await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
-  }
+  const wrote = await writeIfChanged(OUT, { ...payload, updated: new Date().toISOString() });
 
   const withArt = all.filter(e => e.art).length;
   const shots = all.reduce((n, e) => n + (e.media?.length || 0), 0);
   console.log(
     `\n${all.length} events, ${withArt} with Kuro's own art, ${shots} screenshots, ` +
       `${kept.length} hand-written kept` +
-      (unchanged ? " (unchanged)" : "")
+      (wrote ? "" : " (unchanged)")
   );
 })();

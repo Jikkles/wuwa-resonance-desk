@@ -121,7 +121,7 @@ jobs:
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/resonators.json data/kits.json data/versions.json data/permanents.json data/archive.json assets/events
+          git add data/resonators.json data/kits.json data/versions.json data/permanents.json data/archive.json assets/events assets/.sources.json
           if git diff --staged --quiet; then
             echo "no change"
             exit 0

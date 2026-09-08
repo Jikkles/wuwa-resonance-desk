@@ -55,9 +55,12 @@
 // hitting theirs. Echo renders are filed under the monster id and sonata
 // crests under the sonata id, which is why this script owns two directories.
 
-import { writeFile, mkdir, readdir, unlink } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { AssetCache } from "./lib/assets.mjs";
+import { pool } from "./lib/net.mjs";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const run = promisify(execFile);
 
@@ -467,30 +470,22 @@ async function resolveWhere(names) {
    icon that will not come down is a card with a glyph on it, which the view
    already draws for an echo with no published render, and it is not a reason
    to lose 181 records. */
-async function cacheIcons(dir, jobs) {
+async function cacheIcons(cache, dir, jobs) {
   await mkdir(dir, { recursive: true });
-  const written = new Set();
-  let ok = 0, failed = [];
-  for (const { file, url } of jobs) {
-    try {
-      await writeFile(`${dir}/${file}`, await fetchImage(url));
-      written.add(file);
-      ok++;
-    } catch { failed.push(file); }
-  }
-  return { written, ok, failed };
-}
-
-/* Files under a directory this script owns that nothing in the roster points
-   at any more — an echo renamed upstream, or one that has been withdrawn.
-   Removed rather than left: a directory that only ever grows is a directory
-   nobody can tell the live half of. */
-async function sweep(dir, keep) {
-  let stale = 0;
-  for (const f of await readdir(dir).catch(() => [])) {
-    if (f.endsWith(".webp") && !keep.has(f)) { await unlink(`${dir}/${f}`); stale++; }
-  }
-  return stale;
+  const have = new Set();
+  const failed = [];
+  /* Four at a time. Two hundred and fifteen round trips one after another is
+     most of this script's wall clock on the run that has to download them all,
+     and after the first run almost none of them are round trips at all. Four
+     against cdn.prydwen.gg, which is a CDN serving static images and not the
+     site itself — the courtesy gap in fetch-builds.mjs is for the page walk,
+     where sixty requests land on somebody's origin. */
+  await pool(jobs, 4, async ({ file, url }) => {
+    const got = await cache.get(`${dir}/${file}`, url, fetchImage);
+    if (got.status === "failed") failed.push(file);
+    else have.add(file);
+  });
+  return { have, failed };
 }
 
 /* ── main ─────────────────────────────────────────────────────────── */
@@ -592,21 +587,27 @@ async function main() {
   const orphans = echoes.filter(e => !e.sonata.length).map(e => e.name);
   if (orphans.length) console.log(`${orphans.length} echoes roll no known sonata set`);
 
+  const cache = await AssetCache.open();
   console.log(`caching ${echoes.length} echo icons`);
-  const eIcons = await cacheIcons(DIR, echoes.map(e => ({ file: `${e.id}.webp`, url: ECHO_IMG(e.id) })));
+  const eIcons = await cacheIcons(cache, DIR, echoes.map(e => ({ file: `${e.id}.webp`, url: ECHO_IMG(e.id) })));
   console.log(`caching ${sonata.length} sonata crests`);
-  const sIcons = await cacheIcons(SET_DIR, sonata.map(s => ({ file: `set_${s.id}.webp`, url: SET_IMG(s.id) })));
+  const sIcons = await cacheIcons(cache, SET_DIR, sonata.map(s => ({ file: `set_${s.id}.webp`, url: SET_IMG(s.id) })));
 
   /* An icon that did not come down leaves no path behind. The card draws its
      glyph plate for a null, and a path to a file that is not there draws a
      broken image — the desk would rather say it has no picture than pretend. */
-  for (const e of echoes) if (!eIcons.written.has(`${e.id}.webp`)) e.icon = null;
-  for (const s of sonata) if (!sIcons.written.has(`set_${s.id}.webp`)) s.icon = null;
+  for (const e of echoes) if (!eIcons.have.has(`${e.id}.webp`)) e.icon = null;
+  for (const s of sonata) if (!sIcons.have.has(`set_${s.id}.webp`)) s.icon = null;
 
-  const stale = await sweep(DIR, eIcons.written) + await sweep(SET_DIR, sIcons.written);
+  /* The set crests live in a subdirectory of the echo icons, so the echo sweep
+     is told which names it owns — everything ending .webp directly under
+     assets/echoes — and leaves assets/echoes/sets to its own pass. */
+  const stale = await cache.sweep(DIR, f => f.endsWith(".webp"))
+    + await cache.sweep(SET_DIR, f => f.endsWith(".webp"));
+  await cache.save();
 
   await mkdir("data", { recursive: true });
-  await writeFile(OUT, JSON.stringify({
+  const wrote = await writeIfChanged(OUT, {
     schema: "wuwa-desk/echoes@1.0",
     note: "Every echo in the game: class, slot cost, the sonata sets it can roll, its echo skill as a template with the five values each hole takes across ranks 1–5, and where the creature stands. ranks[n] holds what {n} in `skill` becomes at each rank; a null is a value the source does not publish and the view prints as ?. minRank is the lowest rank the echo has real numbers at — most of the roster starts at 2. Cost is derived from class (Common 1, Elite 3, Overlord 4, Calamity 4) and is the only field here not read from a source. `where` is the Wuthering Waves wiki's enemy infobox — family, group, the nation/region/subregion chain or a single dungeon location for Nightmare variants, and what else the creature drops; null means the wiki has no page or no location for it. A class the echoes source left blank is filled from the wiki and never overwritten. Sonata set bonuses are the same data, cleaned to bold-only markup. Icons are cached in assets/echoes/. Skills, sets and art via prydwen.gg; locations via the Wuthering Waves wiki; echo art © Kuro Games.",
     credit: "Echo and sonata data via prydwen.gg, locations via the Wuthering Waves wiki · echo art © Kuro Games",
@@ -615,10 +616,10 @@ async function main() {
     generated: new Date().toISOString(),
     sonata,
     echoes
-  }, null, 2) + "\n");
+  }, ["generated"]);
 
-  console.log(`wrote ${OUT} — ${echoes.length} echoes, ${sonata.length} sets`);
-  console.log(`icons: ${eIcons.ok} echo, ${sIcons.ok} crest, ${stale} stale removed`);
+  console.log(`${wrote ? "wrote" : "unchanged, kept"} ${OUT} — ${echoes.length} echoes, ${sonata.length} sets`);
+  console.log(`icons: ${eIcons.have.size} echo, ${sIcons.have.size} crest, ${stale} stale removed · ${cache.summary}`);
   if (eIcons.failed.length || sIcons.failed.length) {
     console.log(`no icon for: ${[...eIcons.failed, ...sIcons.failed].join(", ")}`);
   }

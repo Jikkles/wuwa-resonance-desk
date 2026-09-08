@@ -42,10 +42,9 @@
 // The archive links every event back to its wiki page and, where the infobox
 // has one, to Kuro's own notice.
 
-import { writeFile, readFile } from "node:fs/promises";
-
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { readFile } from "node:fs/promises";
+import { getJson as json } from "./lib/net.mjs";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const API = "https://wutheringwaves.fandom.com/api.php";
 const WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(String(t).replace(/ /g, "_"))}`;
@@ -61,14 +60,9 @@ const BATCH = 50;
 
 const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-async function getJson(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return res.json();
-}
+/* User agent, timeout and retries, out of scripts/lib/net.mjs — which is where
+   the reasoning lives, along with why a 403 is not retried and a 503 is. */
+const getJson = url => json(url, { timeout: TIMEOUT_MS });
 
 /* Kuro's own site, read as JSON. The website is a client-side app, so the HTML
    at the news URL carries no article in it — the body arrives from here, keyed
@@ -392,17 +386,13 @@ async function pages(titles, props) {
     versions: list
   };
 
-  let unchanged = false;
-  try { unchanged = JSON.stringify(previous.versions) === JSON.stringify(list); } catch {}
-  if (!unchanged) {
-    await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
-  }
+  const wrote = await writeIfChanged(OUT, { ...payload, updated: new Date().toISOString() });
 
   const filed = list.reduce((n, v) => n + v.events.length, 0);
   console.log(
     `\n${list.length} patches, ${filed} events filed` +
     (undated ? `, ${undated} skipped for naming no version` : "") +
-    (unchanged ? " (unchanged)" : ""));
+    (wrote ? "" : " (unchanged)"));
   for (const v of list)
     console.log(`  ${v.id.padEnd(5)} ${(v.title || "—").slice(0, 40).padEnd(42)}` +
       `${String(v.events.length).padStart(2)} events  ${(v.start || "").slice(0, 10)}`);

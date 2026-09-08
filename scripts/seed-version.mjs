@@ -39,9 +39,7 @@
 // once a version is fully written every later run is idle by construction.
 
 import { readFile, writeFile } from "node:fs/promises";
-
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { getJson as json } from "./lib/net.mjs";
 
 const BASE = "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/json/G152/en";
 const ARTICLE_URL = id => `https://wutheringwaves.kurogames.com/en/main/news/detail/${id}`;
@@ -51,14 +49,9 @@ const TIMEOUT_MS = 20000;
 
 const readJson = async p => JSON.parse(await readFile(p, "utf8"));
 
-async function getJson(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json,*/*" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return res.json();
-}
+/* User agent, timeout and retries, out of scripts/lib/net.mjs — which is where
+   the reasoning lives, along with why a 403 is not retried and a 503 is. */
+const getJson = url => json(url, { timeout: TIMEOUT_MS });
 
 /* Kuro's article bodies are CMS HTML — <br> for every line break, entities for
    every apostrophe. Same flattener fetch-events.mjs uses, for the same reason:

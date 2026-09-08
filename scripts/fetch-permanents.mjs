@@ -50,10 +50,10 @@
 // the wiki names and has never had uploaded — see ART_FALLBACK, which reaches
 // past it to Kuro's own post for the one event in that state.
 
-import { writeFile, readFile, mkdir, readdir, unlink } from "node:fs/promises";
-
-const UA =
-  "Mozilla/5.0 (compatible; wuwa-resonance-desk/2.0; +https://github.com/Jikkles/wuwa-resonance-desk)";
+import { mkdir } from "node:fs/promises";
+import { AssetCache } from "./lib/assets.mjs";
+import { getJson as json, getBuffer as buffer } from "./lib/net.mjs";
+import { writeIfChanged } from "./lib/out.mjs";
 
 const API = "https://wutheringwaves.fandom.com/api.php";
 const WIKI = t => `https://wutheringwaves.fandom.com/wiki/${encodeURIComponent(String(t).replace(/ /g, "_"))}`;
@@ -141,25 +141,10 @@ function clip(text, max) {
 
 const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-async function getJson(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return res.json();
-}
-
-async function getBuffer(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "image/png,image/webp,image/*" },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const buf = Buffer.from(await res.arrayBuffer());
-  if (!buf.length) throw new Error("empty body");
-  return buf;
-}
+/* User agent, timeout and retries, out of scripts/lib/net.mjs — which is where
+   the reasoning lives, along with why a 403 is not retried and a 503 is. */
+const getJson   = url => json(url, { timeout: TIMEOUT_MS });
+const getBuffer = url => buffer(url, { timeout: TIMEOUT_MS });
 
 /* Fandom's infoboxes are `|field = value` down one template call, the same
    shape fetch-items.mjs reads. */
@@ -426,13 +411,8 @@ const scaled = (url, w) =>
 
 const extOf = url => (/\.(png|jpe?g|webp)(?=\/|\?|$)/i.exec(url)?.[1] || "png").toLowerCase();
 
-const readJson = async path => JSON.parse(await readFile(path, "utf8"));
-
 (async () => {
   await mkdir(DIR, { recursive: true });
-
-  let previous = { events: [] };
-  try { previous = await readJson(OUT); } catch {}
 
   const listing = await getJson(
     `${API}?action=query&format=json&formatversion=2&list=categorymembers` +
@@ -458,7 +438,7 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
   }
 
   const events = [];
-  const keep = new Set();
+  const cache = await AssetCache.open();
 
   /* No filter here. Every page fetched is on the tab, because the tab is what
      was fetched. */
@@ -468,11 +448,14 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
     const version = /^\d+\.\d+$/.test(field(p.text, "ltd_during")) ? field(p.text, "ltd_during") : "";
 
     let art = null;
+    let artNote = "";
     if (p.image) {
       const file = `${DIR}/${slug(name)}.${extOf(p.image)}`;
-      try {
-        await writeFile(file, await getBuffer(scaled(p.image, IMG_WIDTH)));
-        keep.add(file);
+      const got = await cache.get(file, scaled(p.image, IMG_WIDTH), getBuffer);
+      if (got.status === "failed") {
+        console.log(`${name.padEnd(34)} art failed: ${got.error.message}`);
+      } else {
+        artNote = got.status === "fetched" ? "art" : got.status === "cached" ? "art (cached)" : "art (kept)";
         art = {
           url: file,
           /* Every one of these carries the event's name set across it — that
@@ -486,8 +469,6 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
           source: WIKI(p.title),
           credit: "© Kuro Games, via the Wuthering Waves Wiki on Fandom"
         };
-      } catch (err) {
-        console.log(`${name.padEnd(34)} art failed: ${err.message}`);
       }
     }
     /* Kuro's own, where the wiki has nothing to give. See ART_FALLBACK: this
@@ -522,7 +503,7 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
       source: WIKI(p.title)
     });
 
-    console.log(`${name.padEnd(34)} ${art ? "art" : "no art"}` +
+    console.log(`${name.padEnd(34)} ${(artNote || (art ? "art" : "no art")).padEnd(12)}` +
       `  ${(isoStart(p.text) || "").slice(0, 10)}  ${kindOf(p.text)}`);
   }
 
@@ -531,10 +512,8 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
   /* Banners for events that are no longer on the list — an event the wiki has
      since re-filed, or one whose picture was renamed. Nothing else writes to
      this directory, so anything not claimed above is dead weight. */
-  for (const f of await readdir(DIR).catch(() => [])) {
-    const path = `${DIR}/${f}`;
-    if (!keep.has(path)) { await unlink(path).catch(() => {}); console.log(`removed ${path}`); }
-  }
+  const removed = await cache.sweep(DIR);
+  await cache.save();
 
   const payload = {
     schema: "wuwa-desk/permanents@1.0",
@@ -562,24 +541,13 @@ const readJson = async path => JSON.parse(await readFile(path, "utf8"));
     events
   };
 
-  /* Did anything actually change. The whole payload, not just the events: the
-     note in this file's header is prose written a few lines up, and a gate
-     that only watches the events lets an edit to it sit in the script while
-     the shipped file goes on saying the old thing. `updated` is excluded
-     because it is this comparison's answer, not part of its question — count
-     it and every run differs from the last, which is the no-op commit the gate
-     exists to prevent. */
-  const settled = o => JSON.stringify({ ...o, updated: undefined });
-  let unchanged = false;
-  try { unchanged = settled(previous) === settled(payload); } catch {}
-  if (!unchanged) {
-    await writeFile(OUT, JSON.stringify({ ...payload, updated: new Date().toISOString() }, null, 2) + "\n");
-  }
+  const wrote = await writeIfChanged(OUT, { ...payload, updated: new Date().toISOString() });
 
   console.log(
     `\n${events.length} of ${TAB.length} permanent events, ` +
     `${events.filter(e => e.art).length} with art` +
-    (unchanged ? " (unchanged)" : ""));
+    (wrote ? "" : " (unchanged)") +
+    `\n${cache.summary}` + (removed ? `, ${removed} removed` : ""));
 
   /* The audit. Neither of these is an error — the first is usually a rename
      and the second is usually an event whose mode Kuro retired — but both are

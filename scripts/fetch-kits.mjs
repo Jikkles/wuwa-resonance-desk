@@ -40,7 +40,8 @@
 // whatever tier a human last gave them — Prydwen's pre-release pages are stubs
 // with no skill blocks at all, so there is nothing to scrape for them anyway.
 
-import { writeFile, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
+import { writeIfChanged } from "./lib/out.mjs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 
@@ -1003,7 +1004,10 @@ function deriveCurrent(doc) {
     process.exit(1);
   }
 
-  await writeFile(OUT_INDEX, JSON.stringify({
+  /* Both files, only when they moved. TODAY is a fresh date on every run, so
+     stamping it into a file whose contents are identical is how this job spent
+     a year committing three quarters of a megabyte a day to say nothing. */
+  const wroteIndex = await writeIfChanged(OUT_INDEX, {
     schema: "wuwa-desk/resonators@1.1",
     updated: TODAY,
     note:
@@ -1011,9 +1015,9 @@ function deriveCurrent(doc) {
       "it is ten times the size and only a record that has been opened needs it. " +
       "Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
     resonators: index
-  }, null, 2) + "\n");
+  });
 
-  await writeFile(OUT_KITS, JSON.stringify({
+  const wroteKits = await writeIfChanged(OUT_KITS, {
     schema: "wuwa-desk/kits@1.0",
     updated: TODAY,
     note:
@@ -1023,11 +1027,13 @@ function deriveCurrent(doc) {
       "Skill descriptions via prydwen.gg where it could be reached and wutheringwaves.fandom.com otherwise; skills © Kuro Games.",
     credit: "Kit text via prydwen.gg and wutheringwaves.fandom.com · © Kuro Games",
     kits
-  }, null, 2) + "\n");
+  });
 
   const withKit = Object.keys(kits).length;
   const withDebut = index.filter(r => r.version).length;
-  console.log(`\n${index.length} records · ${withKit} with a full kit${listHtml ? "" : " (kept, prydwen skipped)"} · ${withDebut} with a debut patch`);
+  const still = [!wroteIndex && "index", !wroteKits && "kits"].filter(Boolean);
+  console.log(`\n${index.length} records · ${withKit} with a full kit${listHtml ? "" : " (kept, prydwen skipped)"} · ${withDebut} with a debut patch` +
+    (still.length ? ` · ${still.join(" and ")} unchanged, not rewritten` : ""));
   const gaps = index.filter(r => !kits[r.name]).map(r => r.name);
   if (fromWiki.length) console.log(`kit from the wiki: ${fromWiki.join(", ")}`);
   if (gaps.length) console.log(`no kit published yet: ${gaps.join(", ")}`);
