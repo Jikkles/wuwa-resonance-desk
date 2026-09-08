@@ -7435,10 +7435,25 @@ function bind(){
   document.fonts?.ready.then(fitSoon);
 }
 
-/* ── boot ────────────────────────────────────────────────────────── */
+/* ── boot ──────────────────────────────────────────────────────────
+   No cache option, where this used to say {cache:"no-store"}. That setting
+   meant every visit re-downloaded the whole boot set — about 800KB of JSON —
+   and it was buying nothing, because Pages serves these behind a CDN with
+   max-age=600 whatever the browser asks for. A no-store fetch could not get
+   anything fresher than a normal one; it just declined to keep what it got.
+
+   So the freshness rule is the server's, which is what the ?v= bump on the CSS
+   and the JS exists to work around for the two files where ten minutes matters.
+   For data that a cron writes every six hours it does not: the worst case is a
+   reload inside ten minutes of a refresh showing the run before it, and the
+   HUD prints the timestamp it is drawing so the page never lies about which
+   one that is. In exchange a second visit costs no bytes at all, and the
+   preload hints in index.html can be used — a fetch that opts out of the cache
+   also opts out of those, which would have made them a second download rather
+   than a head start. */
 async function load(name){
   try{
-    const r = await fetch(`data/${name}.json`, {cache:"no-store"});
+    const r = await fetch(`data/${name}.json`);
     if(!r.ok) throw new Error(r.status);
     return await r.json();
   }catch{
@@ -7446,6 +7461,9 @@ async function load(name){
   }
 }
 
+/* THE BOOT SET. index.html preloads exactly this list — keep the two in step.
+   Drift is a missed head start or a console warning about an unused preload,
+   never a broken page: the fetch here is what actually loads the file. */
 (async function(){
   const names = ["versions","news","resonators","weapons","echoes","feed","art","portraits","translations","events","permanents","items","archive","astrite","clientfiles"];
   const loaded = await Promise.all(names.map(load));

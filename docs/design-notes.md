@@ -2292,8 +2292,35 @@ worth running manually on patch day rather than waiting for the daily cron.
 whenever either file changes.** GitHub Pages serves assets with `max-age=600`, and
 browsers hold them longer than that, so without the bump a deploy can look like nothing
 happened — the new HTML loads against yesterday's stylesheet. The query string changes
-the URL, which is the only thing a cache reliably keys on. `index.html` and the JSON
-under `data/` are re-fetched normally, so they need no such treatment.
+the URL, which is the only thing a cache reliably keys on. `index.html` and the JSON under
+`data/` carry no version, and do not need one.
+
+The JSON used to be fetched with `{cache:"no-store"}`, which meant every visit
+re-downloaded the whole boot set — about 800KB — and bought nothing, because Pages serves
+these from behind a CDN with `max-age=600` whatever the browser asks for. A no-store fetch
+could not get anything fresher than a normal one; it just declined to keep what it got. It
+is a plain `fetch()` now, so the freshness rule is the server's. For data a cron writes
+every six hours that is the right rule: the worst case is a reload inside ten minutes of a
+refresh showing the run before it, and the HUD prints the timestamp it is drawing, so the
+page never lies about which one that is. A second visit costs no bytes at all — measured
+at 779KB on a repeat load before, 0 after.
+
+Dropping it also made the fifteen `<link rel="preload" as="fetch">` hints in `index.html`
+usable, which start the data downloads while the browser is still parsing the head rather
+than after 400KB of `app.js` has come down and run. Two things about them are easy to get
+wrong and both were caught by looking at the network panel rather than by reasoning:
+
+- **`crossorigin` is required**, on a same-origin file, counter-intuitively. Without it
+  the preload asks with credentials mode "include" while `fetch()` asks with
+  "same-origin"; the browser treats those as different requests and downloads all fifteen
+  a second time. Chrome logs exactly that if it ever drifts back.
+- **A request that opts out of the cache cannot match a preload either**, which is the
+  other reason `{cache:"no-store"}` had to go before the hints could earn anything.
+
+The list of fifteen is duplicated between `index.html` and the boot set at the bottom of
+`app.js`. Keep them in step, but note what drift costs: a missed head start, or a console
+warning about an unused preload. It can never leave a panel empty, because the fetch in
+`app.js` is what actually loads the file.
 
 ## What updates itself, and what doesn't
 
