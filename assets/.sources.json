@@ -1,0 +1,313 @@
+{
+  "note": "Which URL each cached file under assets/ was downloaded from, so a fetcher can skip a picture it already has. Fandom and Prydwen both serve art from URLs that move when the art moves, so a matching URL means a matching file. Written by scripts/lib/assets.mjs; delete it, or set DESK_REFRESH_ASSETS=1, to force every fetcher to download everything again.",
+  "files": {
+    "assets/items/adagio-helix.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0a/Item_Adagio_Helix.png/revision/latest?cb=20240531120029",
+      "bytes": 16514
+    },
+    "assets/items/advanced-enclosure-tank-lahai-roi.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/ab/Item_Advanced_Enclosure_Tank.png/revision/latest?cb=20241006213511",
+      "bytes": 19270
+    },
+    "assets/items/advanced-enclosure-tank-land-of-xuanfang.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/ab/Item_Advanced_Enclosure_Tank.png/revision/latest?cb=20241006213511",
+      "bytes": 19270
+    },
+    "assets/items/advanced-enclosure-tank.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/ab/Item_Advanced_Enclosure_Tank.png/revision/latest?cb=20241006213511",
+      "bytes": 19270
+    },
+    "assets/items/advanced-energy-core.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/b/b5/Item_Advanced_Energy_Core.png/revision/latest?cb=20240524153038",
+      "bytes": 15146
+    },
+    "assets/items/advanced-resonance-potion.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/e2/Item_Advanced_Resonance_Potion.png/revision/latest?cb=20240524152949",
+      "bytes": 34534
+    },
+    "assets/items/advanced-sealed-tube.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/d6/Item_Advanced_Sealed_Tube.png/revision/latest?cb=20240529094344",
+      "bytes": 24166
+    },
+    "assets/items/aftertune-combustor.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/aa/Item_Aftertune_Combustor.png/revision/latest?cb=20251225065242",
+      "bytes": 11890
+    },
+    "assets/items/andante-helix.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/fb/Item_Andante_Helix.png/revision/latest?cb=20240531120124",
+      "bytes": 21196
+    },
+    "assets/items/astrite.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/16/Item_Astrite.png/revision/latest?cb=20240523021541",
+      "bytes": 11972
+    },
+    "assets/items/basic-ring.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/5e/Item_Basic_Ring.png/revision/latest?cb=20240524220934",
+      "bytes": 23966
+    },
+    "assets/items/broken-string.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/5d/Item_Broken_String.png/revision/latest?cb=20260106143812",
+      "bytes": 19282
+    },
+    "assets/items/broken-wing-polarizer.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/aa/Item_Broken_Wing_Polarizer.png/revision/latest?cb=20260110210213",
+      "bytes": 6884
+    },
+    "assets/items/cadence-bud.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/46/Item_Cadence_Bud.png/revision/latest?cb=20240531113525",
+      "bytes": 16654
+    },
+    "assets/items/cadence-leaf.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/6/67/Item_Cadence_Leaf.png/revision/latest?cb=20240531113616",
+      "bytes": 23542
+    },
+    "assets/items/card-duelist.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a5/Item_Card_Duelist.png/revision/latest?cb=20250728202948",
+      "bytes": 24146
+    },
+    "assets/items/crystal-solvent.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/4d/Item_Crystal_Solvent.png/revision/latest?cb=20240529094355",
+      "bytes": 28050
+    },
+    "assets/items/deep-dreams-film-festival.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/6/65/Item_Deep_Dreams_Film_Festival.png/revision/latest?cb=20250731192636",
+      "bytes": 23164
+    },
+    "assets/items/extracted-phlogiston.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/47/Item_Extracted_Phlogiston.png/revision/latest?cb=20240531223251",
+      "bytes": 14468
+    },
+    "assets/items/forgery-advanced-supply-lahai-roi.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a4/Item_Forgery_Advanced_Supply.png/revision/latest?cb=20241006213413",
+      "bytes": 16980
+    },
+    "assets/items/forgery-advanced-supply.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a4/Item_Forgery_Advanced_Supply.png/revision/latest?cb=20241006213413",
+      "bytes": 16980
+    },
+    "assets/items/forgery-premium-supply-lahai-roi.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/13/Item_Forgery_Premium_Supply.png/revision/latest?cb=20241006213641",
+      "bytes": 24200
+    },
+    "assets/items/forgery-premium-supply.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/13/Item_Forgery_Premium_Supply.png/revision/latest?cb=20241006213641",
+      "bytes": 24200
+    },
+    "assets/items/forging-tide.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/31/Item_Forging_Tide.png/revision/latest?cb=20240523074408",
+      "bytes": 41522
+    },
+    "assets/items/hf-howler-core.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/88/Item_HF_Howler_Core.png/revision/latest?cb=20240527201602",
+      "bytes": 15748
+    },
+    "assets/items/hf-polygon-core.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/3d/Item_HF_Polygon_Core.png/revision/latest?cb=20250102031409",
+      "bytes": 31838
+    },
+    "assets/items/hf-tidal-residuum.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/2/26/Item_HF_Tidal_Residuum.png/revision/latest?cb=20250108173607",
+      "bytes": 16344
+    },
+    "assets/items/hf-whisperin-core.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/2/2c/Item_HF_Whisperin_Core.png/revision/latest?cb=20240527200536",
+      "bytes": 17056
+    },
+    "assets/items/improved-ring.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/42/Item_Improved_Ring.png/revision/latest?cb=20240527202733",
+      "bytes": 23992
+    },
+    "assets/items/incomplete-combustor.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/fb/Item_Incomplete_Combustor.png/revision/latest?cb=20251225065206",
+      "bytes": 9584
+    },
+    "assets/items/lf-autopuppet-kernel.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/38/Item_LF_Autopuppet_Kernel.png/revision/latest?cb=20260710093824",
+      "bytes": 10294
+    },
+    "assets/items/lf-carved-crystal.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/7/74/Item_LF_Carved_Crystal.png/revision/latest?cb=20251226051325",
+      "bytes": 15936
+    },
+    "assets/items/lf-waveworn-shard.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/5d/Item_LF_Waveworn_Shard.png/revision/latest?cb=20260108195908",
+      "bytes": 13622
+    },
+    "assets/items/lustrous-tide.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/8e/Item_Lustrous_Tide.png/revision/latest?cb=20240523073116",
+      "bytes": 37096
+    },
+    "assets/items/malleable-elite-class-echo-i.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a5/Item_Malleable_Elite_Class_Echo.png/revision/latest?cb=20241214170312",
+      "bytes": 28984
+    },
+    "assets/items/malleable-elite-class-echo-ii.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a5/Item_Malleable_Elite_Class_Echo.png/revision/latest?cb=20241214170312",
+      "bytes": 28984
+    },
+    "assets/items/malleable-elite-class-echo-iii.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a5/Item_Malleable_Elite_Class_Echo.png/revision/latest?cb=20241214170312",
+      "bytes": 28984
+    },
+    "assets/items/malleable-elite-class-echo-iv.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a5/Item_Malleable_Elite_Class_Echo.png/revision/latest?cb=20241214170312",
+      "bytes": 28984
+    },
+    "assets/items/mf-autopuppet-kernel.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/ec/Item_MF_Autopuppet_Kernel.png/revision/latest?cb=20260710093835",
+      "bytes": 13248
+    },
+    "assets/items/mf-carved-crystal.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a3/Item_MF_Carved_Crystal.png/revision/latest?cb=20251226051401",
+      "bytes": 19068
+    },
+    "assets/items/mf-howler-core.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0d/Item_MF_Howler_Core.png/revision/latest?cb=20240524220849",
+      "bytes": 19776
+    },
+    "assets/items/mf-polygon-core.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0a/Item_MF_Polygon_Core.png/revision/latest?cb=20250102030344",
+      "bytes": 28006
+    },
+    "assets/items/mf-tidal-residuum.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/45/Item_MF_Tidal_Residuum.png/revision/latest?cb=20250108021333",
+      "bytes": 10950
+    },
+    "assets/items/mf-waveworn-shard.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/b/b5/Item_MF_Waveworn_Shard.png/revision/latest?cb=20260106143922",
+      "bytes": 21694
+    },
+    "assets/items/mf-whisperin-core.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/6/69/Item_MF_Whisperin_Core.png/revision/latest?cb=20240524220755",
+      "bytes": 16162
+    },
+    "assets/items/modifier.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0a/Item_Modifier.png/revision/latest?cb=20250503160535",
+      "bytes": 24694
+    },
+    "assets/items/moment-of-triumph.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/7/7e/Item_Moment_of_Triumph.png/revision/latest?cb=20250616164636",
+      "bytes": 24744
+    },
+    "assets/items/monowing-polarizer.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/84/Item_Monowing_Polarizer.png/revision/latest?cb=20260106142848",
+      "bytes": 12172
+    },
+    "assets/items/phantom-chop-chop.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/9/92/Echo_Phantom_Chop_Chop.png/revision/latest?cb=20251227025025",
+      "bytes": 31024
+    },
+    "assets/items/phantom-crownless.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/b/b3/Echo_Phantom_Crownless.png/revision/latest?cb=20250826163318",
+      "bytes": 29448
+    },
+    "assets/items/phantom-cuddle-wuddle.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/c/cc/Echo_Phantom_Cuddle_Wuddle.png/revision/latest?cb=20250625111726",
+      "bytes": 21282
+    },
+    "assets/items/phantom-fae-ignis.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/4b/Echo_Phantom_Fae_Ignis.png/revision/latest?cb=20250616141655",
+      "bytes": 38904
+    },
+    "assets/items/phantom-myriad-snare-rustfire-chassis.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/9/90/Myriad_Snare_Rustfire_Chassis_Icon.png/revision/latest?cb=20260712010502",
+      "bytes": 35476
+    },
+    "assets/items/phantom-nightmare-crownless.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/eb/Echo_Phantom_Nightmare_Crownless.png/revision/latest?cb=20251028012954",
+      "bytes": 28484
+    },
+    "assets/items/phantom-smiter.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0c/Phantom_Smiter_Icon.png/revision/latest?cb=20260712010502",
+      "bytes": 29582
+    },
+    "assets/items/phantom-twin-nova-collapsar-blade.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/8a/Echo_Phantom_Twin_Nova_-_Collapsar_Blade.png/revision/latest?cb=20260115171756",
+      "bytes": 33404
+    },
+    "assets/items/phantom-twin-nova-nebulous-cannon.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/ec/Echo_Phantom_Twin_Nova_-_Nebulous_Cannon.png/revision/latest?cb=20260115170615",
+      "bytes": 32620
+    },
+    "assets/items/polarized-metallic-drip.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/fd/Item_Polarized_Metallic_Drip.png/revision/latest?cb=20240603094441",
+      "bytes": 12044
+    },
+    "assets/items/premium-enclosure-tank-lahai-roi.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/36/Item_Premium_Enclosure_Tank.png/revision/latest?cb=20241006213718",
+      "bytes": 26424
+    },
+    "assets/items/premium-enclosure-tank-land-of-xuanfang.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/36/Item_Premium_Enclosure_Tank.png/revision/latest?cb=20241006213718",
+      "bytes": 26424
+    },
+    "assets/items/premium-enclosure-tank.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/36/Item_Premium_Enclosure_Tank.png/revision/latest?cb=20241006213718",
+      "bytes": 26424
+    },
+    "assets/items/premium-energy-core.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/88/Item_Premium_Energy_Core.png/revision/latest?cb=20240609195825",
+      "bytes": 15574
+    },
+    "assets/items/premium-resonance-potion.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/d6/Item_Premium_Resonance_Potion.png/revision/latest?cb=20240528230537",
+      "bytes": 38500
+    },
+    "assets/items/premium-sealed-tube.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/08/Item_Premium_Sealed_Tube.png/revision/latest?cb=20240603111454",
+      "bytes": 26028
+    },
+    "assets/items/premium-tuner.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/e1/Item_Premium_Tuner.png/revision/latest?cb=20240529094703",
+      "bytes": 21194
+    },
+    "assets/items/radiant-tide.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/f0/Item_Radiant_Tide.png/revision/latest?cb=20240523074327",
+      "bytes": 38646
+    },
+    "assets/items/reactive-metallic-drip.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/87/Item_Reactive_Metallic_Drip.png/revision/latest?cb=20240603094418",
+      "bytes": 14810
+    },
+    "assets/items/refined-phlogiston.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/9/92/Item_Refined_Phlogiston.png/revision/latest?cb=20240531223335",
+      "bytes": 17576
+    },
+    "assets/items/shell-credit.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/d1/Item_Shell_Credit.png/revision/latest?cb=20240523132525",
+      "bytes": 14210
+    },
+    "assets/items/space-and-blake-bloom-medal.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/db/Item_Space_and_Blake_Bloom_Medal.png/revision/latest?cb=20260719152212",
+      "bytes": 22958
+    },
+    "assets/items/spliced-string.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/6/60/Item_Spliced_String.png/revision/latest?cb=20260204235756",
+      "bytes": 14678
+    },
+    "assets/items/summer-flower.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/2/22/Item_Summer_Flower.png/revision/latest?cb=20251120060334",
+      "bytes": 30980
+    },
+    "assets/items/td-terminator.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/42/Item_TD_Terminator.png/revision/latest?cb=20260306185203",
+      "bytes": 16014
+    },
+    "assets/items/voyager-of-the-world.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a5/Item_Voyager_of_the_World.png/revision/latest?cb=20260722103104",
+      "bytes": 22422
+    },
+    "assets/items/waveworn-residue-226.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/9/9d/Item_Waveworn_Residue_226.png/revision/latest?cb=20240531104429",
+      "bytes": 29906
+    },
+    "assets/items/waveworn-residue-235.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/03/Item_Waveworn_Residue_235.png/revision/latest?cb=20240531104530",
+      "bytes": 29534
+    },
+    "assets/items/xuanfang-wonder.png": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/18/Item_Xuanfang_Wonder.png/revision/latest?cb=20260721090842",
+      "bytes": 23194
+    }
+  }
+}
