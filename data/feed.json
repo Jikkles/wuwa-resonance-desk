@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-09T07:08:29.213Z",
+  "fetched": "2026-09-09T07:36:09.043Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -40,9 +40,8 @@
       "name": "r/WutheringWaves",
       "kind": "community",
       "lang": "en",
-      "status": "skipped",
-      "count": 0,
-      "error": "HTTP 429 Too Many Requests"
+      "status": "ok",
+      "count": 25
     },
     {
       "id": "google-news",
@@ -64,6 +63,36 @@
   "errors": [],
   "items": [
     {
+      "title": "Um... Hi..?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbejba/um_hi/",
+      "date": "2026-09-09T07:20:02.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves EP3.6 — Jingran - “No One Told Me”",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbdzig/wuthering_waves_ep36_jingran_no_one_told_me/",
+      "date": "2026-09-09T06:48:32.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "What are u doing if you become rover for a day ?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbdt91/what_are_u_doing_if_you_become_rover_for_a_day/",
+      "date": "2026-09-09T06:38:48.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "3.7 | New Weekly Boss Render via Solon Leak",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wbdlv1/37_new_weekly_boss_render_via_solon_leak/",
       "date": "2026-09-09T06:27:23.000Z",
@@ -72,6 +101,66 @@
       "kind": "community",
       "lang": "en",
       "hot": true
+    },
+    {
+      "title": "[EN TLd Manga] Tail Grooming by @yami56_u 09/07/26",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbdgbn/en_tld_manga_tail_grooming_by_yami56_u_090726/",
+      "date": "2026-09-09T06:18:57.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "A newbie wants some advice",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbd3tr/a_newbie_wants_some_advice/",
+      "date": "2026-09-09T06:00:22.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "PSA to those who 100%'d the map only using the in game guide for 3.X",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbc92c/psa_to_those_who_100d_the_map_only_using_the_in/",
+      "date": "2026-09-09T05:13:37.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "[Poll] When will Denia return in the story?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbbq5n/poll_when_will_denia_return_in_the_story/",
+      "date": "2026-09-09T04:46:11.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Hmm......",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbbi9z/hmm/",
+      "date": "2026-09-09T04:34:42.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Game storage in future patches",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbatzv/game_storage_in_future_patches/",
+      "date": "2026-09-09T04:00:50.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
     },
     {
       "title": "Wuthering Waves EP3.6 — Jingran - \"No One Told Me\"",
@@ -92,6 +181,46 @@
       "kind": "official",
       "lang": "zh",
       "hot": false
+    },
+    {
+      "title": "Starting the game, need advice pls",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wbaoim/starting_the_game_need_advice_pls/",
+      "date": "2026-09-09T03:53:30.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Quiet afternoon [art by @NK22XXX]",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wba3c8/quiet_afternoon_art_by_nk22xxx/",
+      "date": "2026-09-09T03:24:40.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Would Kuro ever add a blood-related little sister for Rover?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wba2jg/would_kuro_ever_add_a_bloodrelated_little_sister/",
+      "date": "2026-09-09T03:23:37.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "[Version 3.6 Phase 2] Limited-Time Convene Banners: Jingran, Hiyuki, and Mornye",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wba1bx/version_36_phase_2_limitedtime_convene_banners/",
+      "date": "2026-09-09T03:22:00.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "[Version 3.6 Featured Resonator/Weapon Convene: Phase Ⅱ]",
@@ -131,6 +260,126 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "A Warhammer 40K reference in the new event!",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb9hw9/a_warhammer_40k_reference_in_the_new_event/",
+      "date": "2026-09-09T02:56:16.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Kurogames Metheus 1/7 ChangLi",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb9hrx/kurogames_metheus_17_changli/",
+      "date": "2026-09-09T02:56:05.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "I have a question for S6 havers (and knowledgeable people)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb9gf5/i_have_a_question_for_s6_havers_and_knowledgeable/",
+      "date": "2026-09-09T02:54:19.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuwa Concert Singapore Tix",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb9dua/wuwa_concert_singapore_tix/",
+      "date": "2026-09-09T02:50:52.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Today is my birthday, and my only wish for you is that you win your 50/50 tomorrow",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb8d59/today_is_my_birthday_and_my_only_wish_for_you_is/",
+      "date": "2026-09-09T02:04:43.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Daily Questions Megathread - September 09, 2026",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb89ck/daily_questions_megathread_september_09_2026/",
+      "date": "2026-09-09T02:00:13.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "I've tried everything. This is my last hope...",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb5nom/ive_tried_everything_this_is_my_last_hope/",
+      "date": "2026-09-09T00:05:32.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Let’s get the elephant out of the room: GA as Nivora has better character development and is a better character overall than Denia.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb4tpt/lets_get_the_elephant_out_of_the_room_ga_as/",
+      "date": "2026-09-08T23:30:08.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Zani is ready for a promise (by @榮主)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb4iab/zani_is_ready_for_a_promise_by_榮主/",
+      "date": "2026-09-08T23:16:50.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "This is Augusta from Wuthering Waves wearing the Power Girl outfit from DC.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb4ft6/this_is_augusta_from_wuthering_waves_wearing_the/",
+      "date": "2026-09-08T23:14:08.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "A wuwa appreciation post read below",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb45uc/a_wuwa_appreciation_post_read_below/",
+      "date": "2026-09-08T23:02:26.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Zani cosplay by onisuna",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wb3z9g/zani_cosplay_by_onisuna/",
+      "date": "2026-09-08T22:55:02.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
       "hot": false
     },
     {
@@ -826,7 +1075,7 @@
     {
       "title": "Two Years of Memories and Emotion Come Full Circle to Seoul: 'Wuthering Waves World Tour'",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPcTh6YmhvU0pwb2FncUh4a0xNX3dCYzByeUV4UTBXa296cVZkN3ZoeU1NRHhSVmZIblhWRnN4bno1eXZVSFVVMU41a05KVExqLTJVVjFJdW1MUkI4ZWhOdDgxRWdDR2Y4S2sxc3dXc0JNZWxYSVFXYXY5QTVOM012R01PUjdLcnEtdnNoc0VhYVVDZDdSNkZPWEZlZnZqVFducld6NGdzSHJDTmFsUXlpMmxwY2dxYUVDVktfYXhkLUJiSjE4TEJsZQ?oc=5",
-      "date": "2026-08-29T07:00:00.000Z",
+      "date": "2026-08-29T14:51:05.000Z",
       "source": "Inven Global",
       "sourceId": "google-news",
       "kind": "press",
