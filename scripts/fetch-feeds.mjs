@@ -45,20 +45,44 @@ const fromGamesPress = outlet =>
 
 /* ------------------------------------------------------------------ net -- */
 
+/* How long to wait before asking again. A server that says how long it wants
+   is obeyed, up to a ceiling — 429 is the one status where guessing is rude,
+   and Reddit asks for tens of seconds from a datacenter range. Otherwise 2s
+   then 8s, with jitter.
+
+   The old rule was a flat 800ms, 1.6s and no reading of `Retry-After`, which
+   is how r/WutheringWaves spent a month contributing nothing: all three tries
+   landed inside the same rate-limit window, so the retries were three ways of
+   receiving the same 429. lib/net.mjs already got this right; this file keeps
+   its own reader (it retries a 403, where everywhere else a 403 is Prydwen
+   meaning it) and so never inherited the fix. */
+function retryWait(attempt, retryAfter) {
+  const asked = Number(retryAfter);
+  if (Number.isFinite(asked) && asked > 0) return Math.min(asked, 45) * 1000;
+  return Math.round(2000 * 4 ** attempt * (0.85 + Math.random() * 0.3));
+}
+
 async function getText(url, init = {}) {
   let lastErr;
   for (let attempt = 0; attempt <= RETRIES; attempt++) {
+    let retryAfter = null;
     try {
       const res = await fetch(url, {
         ...init,
         headers: { "User-Agent": UA, Accept: "*/*", ...(init.headers || {}) },
         signal: AbortSignal.timeout(TIMEOUT_MS)
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+      if (!res.ok) {
+        retryAfter = res.headers.get("retry-after");
+        // Nobody is going to read this body; undici holds the socket until
+        // someone does.
+        await res.body?.cancel().catch(() => {});
+        throw new Error(`HTTP ${res.status} ${res.statusText}`.trim());
+      }
       return await res.text();
     } catch (err) {
       lastErr = err;
-      if (attempt < RETRIES) await new Promise(r => setTimeout(r, 800 * (attempt + 1)));
+      if (attempt < RETRIES) await new Promise(r => setTimeout(r, retryWait(attempt, retryAfter)));
     }
   }
   throw lastErr;
@@ -265,6 +289,26 @@ const dedupeKey = item =>
   `${item.url.replace(/[?#].*$/, "").replace(/\/$/, "")}` +
   `|${item.title.toLowerCase().replace(/[^a-z0-9一-鿿]+/g, "")}`;
 
+/* Two seconds was the gap, and it was not one. Serialising the group stopped
+   the two subs racing each other, which was the bug it was written for, but
+   Reddit rate-limits a datacenter range over a window measured in tens of
+   seconds — so the second request arrived inside the first one's window and
+   got a 429 nearly every time. Thirty seconds costs a run half a minute it
+   spends waiting on other hosts anyway. */
+const GROUP_GAP_MS = 30000;
+
+/* Which member of a group goes first, rotated on the six-hour cadence this job
+   runs at. With a fixed order the first source spends whatever budget the host
+   is willing to give and the last one always pays for it: r/WutheringWavesLeaks
+   is declared first, and across the last 28 runs it came back with 25 rows
+   every single time while r/WutheringWaves — two seconds behind it — got a 429
+   on 25 of them. Rotating cannot conjure a second budget, but it makes a rate
+   limit fall on the two subs by turns instead of quietly retiring one of them. */
+const rotate = group => {
+  const shift = Math.floor(Date.now() / 216e5) % group.length; // 6h buckets
+  return [...group.slice(shift), ...group.slice(0, shift)];
+};
+
 /* Sources sharing a `group` hit one host, so run those serially — Reddit
    answers two parallel requests from the same IP with a 429. */
 async function runAll() {
@@ -277,8 +321,8 @@ async function runAll() {
   const batches = await Promise.all(
     [...groups.values()].map(async group => {
       const out = [];
-      for (const src of group) {
-        if (out.length) await new Promise(r => setTimeout(r, 2000));
+      for (const src of rotate(group)) {
+        if (out.length) await new Promise(r => setTimeout(r, GROUP_GAP_MS));
         out.push(await runSource(src));
       }
       return out;
@@ -329,9 +373,17 @@ async function runAll() {
     ...(error ? { error } : {})
   }));
 
+  // Every source that did not come back, not just the ones allowed to fail the
+  // run. `optional` decides whether a dead source stops the build; it should
+  // never have decided whether anybody gets told about it. r/WutheringWaves
+  // returned nothing on 25 of the last 28 runs and this list was empty on all
+  // 25, because a skipped source recorded a status and no error in the one
+  // field a person reads — so a source that had been down for a month and a
+  // source that had never existed looked exactly alike. The methodology drawer
+  // already draws it amber; this is the half that reaches the run log.
   const errors = results
-    .filter(r => r.status === "failed")
-    .map(r => `${r.src.id}: ${r.error}`);
+    .filter(r => r.status !== "ok")
+    .map(r => `${r.src.id}: ${r.error}${r.src.optional ? " (optional)" : ""}`);
 
   for (const s of sources) {
     console.log(
@@ -340,6 +392,11 @@ async function runAll() {
         (s.error ? `  — ${s.error}` : "")
     );
   }
+
+  // Said once, plainly, after the table. A step that ends green and a source
+  // that has silently contributed nothing since August look identical in a
+  // scroll-back of eighteen lines; they should not.
+  if (errors.length) console.warn(`\n${errors.length} source(s) down:\n  ${errors.join("\n  ")}`);
 
   // Every source down is the runner having lost its network, not the internet
   // having run out of Wuthering Waves news — and the file this run would write
