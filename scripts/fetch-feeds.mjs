@@ -56,16 +56,22 @@ const fromGamesPress = outlet =>
    receiving the same 429. lib/net.mjs already got this right; this file keeps
    its own reader (it retries a 403, where everywhere else a 403 is Prydwen
    meaning it) and so never inherited the fix. */
-function retryWait(attempt, retryAfter) {
+function retryWait(attempt, retryAfter, status) {
+  const jitter = ms => Math.round(ms * (0.85 + Math.random() * 0.3));
   const asked = Number(retryAfter);
-  if (Number.isFinite(asked) && asked > 0) return Math.min(asked, 45) * 1000;
-  return Math.round(2000 * 4 ** attempt * (0.85 + Math.random() * 0.3));
+  if (Number.isFinite(asked) && asked > 0) return Math.min(asked, 60) * 1000;
+  // Reddit rate-limits without ever sending Retry-After — the first run under
+  // the 30s group gap spent 9.6s across three tries and got a 429 every time,
+  // which is a slower way of not waiting. A 429 is a clock, not a fault, so it
+  // gets one measured in the same units Reddit thinks in: 20s, then 60s.
+  if (status === 429) return jitter(attempt ? 60000 : 20000);
+  return jitter(2000 * 4 ** attempt);
 }
 
 async function getText(url, init = {}) {
   let lastErr;
   for (let attempt = 0; attempt <= RETRIES; attempt++) {
-    let retryAfter = null;
+    let retryAfter = null, status = 0;
     try {
       const res = await fetch(url, {
         ...init,
@@ -74,6 +80,7 @@ async function getText(url, init = {}) {
       });
       if (!res.ok) {
         retryAfter = res.headers.get("retry-after");
+        status = res.status;
         // Nobody is going to read this body; undici holds the socket until
         // someone does.
         await res.body?.cancel().catch(() => {});
@@ -82,7 +89,9 @@ async function getText(url, init = {}) {
       return await res.text();
     } catch (err) {
       lastErr = err;
-      if (attempt < RETRIES) await new Promise(r => setTimeout(r, retryWait(attempt, retryAfter)));
+      if (attempt < RETRIES) {
+        await new Promise(r => setTimeout(r, retryWait(attempt, retryAfter, status)));
+      }
     }
   }
   throw lastErr;
@@ -293,9 +302,12 @@ const dedupeKey = item =>
    the two subs racing each other, which was the bug it was written for, but
    Reddit rate-limits a datacenter range over a window measured in tens of
    seconds — so the second request arrived inside the first one's window and
-   got a 429 nearly every time. Thirty seconds costs a run half a minute it
-   spends waiting on other hosts anyway. */
-const GROUP_GAP_MS = 30000;
+   got a 429 nearly every time. Thirty seconds was tried and was still inside
+   the window — a runner that asked reddit-main and then reddit-leaks half a
+   minute later had the second one turned away — so ninety. The group runs
+   alongside every other source, and the job's ceiling is twenty minutes, so
+   what this costs is wall-clock the run was spending on other hosts anyway. */
+const GROUP_GAP_MS = 90000;
 
 /* Which member of a group goes first, rotated on the six-hour cadence this job
    runs at. With a fixed order the first source spends whatever budget the host
