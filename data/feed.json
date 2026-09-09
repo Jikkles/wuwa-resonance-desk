@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-09T07:36:09.043Z",
+  "fetched": "2026-09-09T07:38:43.409Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -32,8 +32,9 @@
       "name": "r/WutheringWavesLeaks",
       "kind": "community",
       "lang": "en",
-      "status": "ok",
-      "count": 25
+      "status": "skipped",
+      "count": 0,
+      "error": "HTTP 429 Too Many Requests"
     },
     {
       "id": "reddit-main",
@@ -60,7 +61,9 @@
       "count": 1
     }
   ],
-  "errors": [],
+  "errors": [
+    "reddit-leaks: HTTP 429 Too Many Requests (optional)"
+  ],
   "items": [
     {
       "title": "Um... Hi..?",
@@ -91,16 +94,6 @@
       "kind": "community",
       "lang": "en",
       "hot": false
-    },
-    {
-      "title": "3.7 | New Weekly Boss Render via Solon Leak",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wbdlv1/37_new_weekly_boss_render_via_solon_leak/",
-      "date": "2026-09-09T06:27:23.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "[EN TLd Manga] Tail Grooming by @yami56_u 09/07/26",
@@ -383,26 +376,6 @@
       "hot": false
     },
     {
-      "title": "3.7 | Hsin's Liberation Environment Effect via Cut",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wauqu5/37_hsins_liberation_environment_effect_via_cut/",
-      "date": "2026-09-08T17:20:50.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7 | New Map via Seele",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1waquli/37_new_map_via_seele/",
-      "date": "2026-09-08T15:01:14.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Jingran Banner Release Date In WuWa: When Does He Comes Out?",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMjd1ZndrNzRzdzVnVG1hRzdUekRfclV4RllWMEVxWG9NVWVHNWQ2OWhfUng2MGd1eGNoaXZzd25nckVQUTJEckxfMjJQUGlZNzM5VEtjel9DNjNEb0FqRU0zYnl1dVcxT3FRV05rSTEzVllIYzFMY0lrRGg2R2c1b3ZhbzNzVnR3c2VUVGt1MkxqNkxxd05hNk9xc0Y0bzliWlRrMmpYRUNBZw?oc=5",
       "date": "2026-09-08T12:57:30.000Z",
@@ -419,16 +392,6 @@
       "source": "GameSpace.com",
       "sourceId": "google-news",
       "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.X| About the split resource optimization via gamedata leaks",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wal67j/3x_about_the_split_resource_optimization_via/",
-      "date": "2026-09-08T10:59:32.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
       "lang": "en",
       "hot": true
     },
@@ -463,32 +426,12 @@
       "hot": true
     },
     {
-      "title": "3.7| Suoming's about voice lines via gamedata leaks",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wai9d0/37_suomings_about_voice_lines_via_gamedata_leaks/",
-      "date": "2026-09-08T08:13:23.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "WuWa Hsin VA leaked: English, Japanese, CN, and KR (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNcGpfYUdRY2lwdXZHMUp0OVc4VmlrZGpZQUl5S2o3UF9EWl9WeVZXU2hXWE82by12TmpwWGJVZVE4SndFRElTX1NwN1JhekpjR1hDQktyYUI1NkxTRk4yaGY2by1nSFBoRkhVWVFuV1FlMkxzbFdTREw3NWI2dWFqQkh2R1l5V1dQQkdZYjR5S2s?oc=5",
       "date": "2026-09-08T08:08:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7| Hsin's thought voice lines(Spoiler warning ⚠️)via gamedata leaks",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wai5a7/37_hsins_thought_voice_linesspoiler_warning_via/",
-      "date": "2026-09-08T08:06:15.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
       "lang": "en",
       "hot": true
     },
@@ -513,26 +456,6 @@
       "hot": true
     },
     {
-      "title": "3.7 | Some miscellaneous event props",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wahll1/37_some_miscellaneous_event_props/",
-      "date": "2026-09-08T07:32:57.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7| Hsin can fly via Reversed rooms",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wagph1/37_hsin_can_fly_via_reversed_rooms/",
-      "date": "2026-09-08T06:40:07.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "悠悠光影铺 | 「景燃PV」壁纸",
       "url": "https://www.kurobbs.com/mc/post/1546531861442912256",
       "date": "2026-09-08T03:30:00.000Z",
@@ -541,16 +464,6 @@
       "kind": "official",
       "lang": "zh",
       "hot": false
-    },
-    {
-      "title": "Wuthering Waves | Resonator Showcase | Jingran — WORSHIP \"True god, false god... All that fear for nothing.\"",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wacnqt/wuthering_waves_resonator_showcase_jingran/",
-      "date": "2026-09-08T03:05:38.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "Wuthering Waves | Resonator Showcase | Jingran — WORSHIP",
@@ -573,96 +486,6 @@
       "hot": false
     },
     {
-      "title": "3.7| Suoming's about voice lines via gamedata leaks (Spoiler warning ⚠️)",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9x1qx/37_suomings_about_voice_lines_via_gamedata_leaks/",
-      "date": "2026-09-07T16:33:46.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7| Hsin's about voice lines via gamedata leaks (SPOILER WARNING, OPEN AT YOUR OWN RISK)",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9ww58/37_hsins_about_voice_lines_via_gamedata_leaks/",
-      "date": "2026-09-07T16:27:56.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Cubes in the New Backpack Battles Style Event",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9vm6u/cubes_in_the_new_backpack_battles_style_event/",
-      "date": "2026-09-07T15:41:10.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hsin Suoming Shorekeeper basic rotation by SexShrek",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9vdd6/hsin_suoming_shorekeeper_basic_rotation_by/",
-      "date": "2026-09-07T15:31:55.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "3.7|Unison rot (123 and skip suoming rot) *Fixed hsin intro and ult via sleepy",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9uj10/37unison_rot_123_and_skip_suoming_rot_fixed_hsin/",
-      "date": "2026-09-07T15:00:43.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7 | Complete Team Menu Showcase via Cut",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9sn6q/37_complete_team_menu_showcase_via_cut/",
-      "date": "2026-09-07T13:46:45.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7| Hsin's idle 3 (proper showcase via solon leaks",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9sd9r/37_hsins_idle_3_proper_showcase_via_solon_leaks/",
-      "date": "2026-09-07T13:35:08.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7 | More about Story replay mode via FS",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9pi0v/37_more_about_story_replay_mode_via_fs/",
-      "date": "2026-09-07T11:25:02.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7 | New Cube event characters ingame via FS",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9pava/37_new_cube_event_characters_ingame_via_fs/",
-      "date": "2026-09-07T11:14:59.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Wuthering Waves Characters Guide: Full Resonator List, Elements, and Best Picks",
       "url": "https://mmoculture.com/2026/09/wuthering-waves-characters-guide/",
       "date": "2026-09-07T10:58:50.000Z",
@@ -683,26 +506,6 @@
       "hot": false
     },
     {
-      "title": "3.7|Hazard Tower - Floor 4 Season 42 Hsin,ERover,Suisui(123 rotation) via Naruse",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9mn4y/37hazard_tower_floor_4_season_42/",
-      "date": "2026-09-07T08:45:20.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Running Speed Showcase of Hsin's Fox Mode via Solon",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9kaft/running_speed_showcase_of_hsins_fox_mode_via_solon/",
-      "date": "2026-09-07T06:31:43.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "悬疑志怪小说《寻幽记》火热连载中！",
       "url": "https://www.kurobbs.com/mc/post/1545497564765003776",
       "date": "2026-09-07T04:00:00.000Z",
@@ -713,36 +516,6 @@
       "hot": false
     },
     {
-      "title": "3.7| Suoming's idle 2 via solon leaks",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9329x/37_suomings_idle_2_via_solon_leaks/",
-      "date": "2026-09-06T17:53:19.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Suoming idle animation 3 via Solon Leak",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w9264a/suoming_idle_animation_3_via_solon_leak/",
-      "date": "2026-09-06T17:21:16.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.7|More of the new team UI via reversed rooms",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8yvnz/37more_of_the_new_team_ui_via_reversed_rooms/",
-      "date": "2026-09-06T15:16:51.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "WuWa 3.7 banners leaked (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPakFuRVpQMTA4RFBzMVNzeWhOV3JVaXRWdXJOclBVdnlTaXVpeUpTcy1kTlFJZ1A2S0dtWkkzTUdUMm1sSGMzbkJxdjVqWTVuVkZWREtlVVJjeDQxaXlnblRjdGZxZVk2bjVFeHhMb1BlbGJrRlBtbmJVelBEU3VLSA?oc=5",
       "date": "2026-09-06T14:36:00.000Z",
@@ -751,26 +524,6 @@
       "kind": "press",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "The Boy and the Mountain Cat - Weekly Questions & Discussions Megathread",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8wdzc/the_boy_and_the_mountain_cat_weekly_questions/",
-      "date": "2026-09-06T13:35:11.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Profile Reveal | Nether Qi Art — Jingran",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w8w1u9/profile_reveal_nether_qi_art_jingran/",
-      "date": "2026-09-06T13:20:49.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "New 5-Star Weapon \"Thousandfold Deliverance\" Coming Soon",
