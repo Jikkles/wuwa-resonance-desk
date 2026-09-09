@@ -1,6 +1,90 @@
 {
   "note": "Which URL each cached file under assets/ was downloaded from, so a fetcher can skip a picture it already has. Fandom and Prydwen both serve art from URLs that move when the art moves, so a matching URL means a matching file. Written by scripts/lib/assets.mjs; delete it, or set DESK_REFRESH_ASSETS=1, to force every fetcher to download everything again.",
   "files": {
+    "assets/events/a-glimpse-of-xuanfang.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/30/A_Glimpse_of_Xuanfang.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 88126
+    },
+    "assets/events/all-out-towards-the-peaks-of-prestige.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/4a/All_Out%21_Towards_the_Peaks_of_Prestige.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 94008
+    },
+    "assets/events/banners-never-fall.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/2/2b/Banners_Never_Fall.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 57854
+    },
+    "assets/events/cube-cubic-n-cubie.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/c/c4/Cube%2C_Cubic_n_Cubie.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 104192
+    },
+    "assets/events/dreaming-deep.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/e1/Dreaming_Deep.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 75764
+    },
+    "assets/events/into-the-land-of-paradox.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/06/Into_the_Land_of_Paradox.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 47556
+    },
+    "assets/events/lahai-roi-pioneers.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/e8/Lahai-Roi_Pioneers.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 73982
+    },
+    "assets/events/lament-recon-tacet-crisis.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/df/Lament_Recon_Tacet_Crisis.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 58412
+    },
+    "assets/events/mingshen-notices.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/4e/Mingshen_Notices.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 40580
+    },
+    "assets/events/old-man-and-the-whale.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/57/Old_Man_and_the_Whale.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 87514
+    },
+    "assets/events/operation-frontier-renewal.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/3b/Operation_Frontier_Renewal.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 60464
+    },
+    "assets/events/peaks-of-prestige-rekindled-duel.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a6/Peaks_of_Prestige_Rekindled_Duel.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 59382
+    },
+    "assets/events/phantasma-dreamland.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/86/Phantasma_Dreamland.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 108966
+    },
+    "assets/events/shape-of-yesterday.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/b/b8/Shape_of_Yesterday.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 35952
+    },
+    "assets/events/somnium-labyrinth.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/3e/Somnium_Labyrinth.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 74358
+    },
+    "assets/events/star-bouncing.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/49/Star_Bouncing.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 66542
+    },
+    "assets/events/stranger-things-in-honami.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/1d/Stranger_Things_in_Honami.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 82948
+    },
+    "assets/events/tales-of-the-isles.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/9/90/Tales_of_the_Isles.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 55990
+    },
+    "assets/events/tidal-defense-simulator.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/89/Tidal_Defense_Simulator.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 72014
+    },
+    "assets/events/whispers-between-stars.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/6/6b/Whispers_Between_Stars.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 56110
+    },
+    "assets/events/your-summer-will-never-wither.jpg": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a0/Your_Summer_Will_Never_Wither.jpg/revision/latest/scale-to-width-down/720",
+      "bytes": 59008
+    },
     "assets/items/adagio-helix.png": {
       "url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0a/Item_Adagio_Helix.png/revision/latest?cb=20240531120029",
       "bytes": 16514
