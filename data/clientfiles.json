@@ -3,7 +3,7 @@
   "note": "What the beta client's data tables carry that no live source does yet. Every record here is datamined: real client numbers, taken before Kuro has finished balancing them, and subject to change or to being cut before the patch ships. Nothing in this file is ever merged into weapons.json or echoes.json — those are rebuilt wholesale from live sources and would drop it on the next run — so app.js merges it at read time and marks every record it draws from here. A record the live sources already carry is dropped rather than written, whatever the beta says about it: post-balance numbers win. `resonators` is a report rather than data — a character in the client files with no roster record is something for a person to write up, not for a fetcher to file. Base ATK is the client's own rounding of a level-90 figure that ends in .5, which is why it can read one higher than prydwen.gg's truncation of the same number.",
   "credit": "Client data tables via nanoka.cc · © Kuro Games",
   "source": "https://ww.nanoka.cc/",
-  "build": "3.7.0",
+  "build": "3.7.1",
   "weapons": [
     {
       "name": "Thousandfold Deliverance",
@@ -169,7 +169,7 @@
       "statValue90": 24.3,
       "source": "Beta client files",
       "effectName": "Hundredfold Artifice",
-      "effect": "Grants {0} All-Attribute DMG Bonus. After the wielder inflicts Electro Flare or triggers Unison Response, Resonance Skill DMG is Amplified by {1} and ignores {2} of the target's Electro RES. While the wielder is on the field, Electro Flare DMG taken by targets within a certain range is Amplified by {3} for {4}s. Only the highest value applies among effects of the same name.",
+      "effect": "Grants {0} All-Attribute DMG Bonus. After the wielder inflicts Electro Flare or triggers Unison Response, Resonance Skill DMG is Amplified by {1} and ignores {2} of the target's Electro RES. While the wielder is on the field, Electro Flare DMG taken by targets within a certain range is Amplified by {3} for {4}s, triggered {6} time every {5}s. Only the strongest effect of the same name applies.",
       "ranks": [
         [
           "12%",
@@ -205,6 +205,20 @@
           "30",
           "30",
           "30"
+        ],
+        [
+          "0.1",
+          "0.1",
+          "0.1",
+          "0.1",
+          "0.1"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
         ]
       ]
     }
@@ -260,5 +274,5 @@
     }
   ],
   "resonators": [],
-  "updated": "2026-09-07T13:25:14.098Z"
+  "updated": "2026-09-12T12:01:46.673Z"
 }
