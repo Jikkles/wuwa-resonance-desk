@@ -11,7 +11,18 @@
       "end": null,
       "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357",
       "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.6",
-      "events": [],
+      "events": [
+        {
+          "id": "arc-second-coming-of-solaris-coded-deception",
+          "name": "Second Coming of Solaris: Coded Deception",
+          "kind": "Event",
+          "start": "2026-08-27T04:00:00+08:00",
+          "end": "2026-09-14T03:59:00+08:00",
+          "ran": "",
+          "notice": "",
+          "source": "https://wutheringwaves.fandom.com/wiki/Second_Coming_of_Solaris%3A_Coded_Deception"
+        }
+      ],
       "keyVisual": {
         "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1787155200000/q638zx40pwmperl5co-1787190881668.jpg",
         "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357",
@@ -2923,5 +2934,5 @@
       ]
     }
   ],
-  "updated": "2026-08-21T07:56:37.253Z"
+  "updated": "2026-09-12T10:34:16.469Z"
 }
