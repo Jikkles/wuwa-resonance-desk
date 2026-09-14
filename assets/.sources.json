@@ -392,6 +392,494 @@
     "assets/items/xuanfang-wonder.png": {
       "url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/18/Item_Xuanfang_Wonder.png/revision/latest?cb=20260721090842",
       "bytes": 23194
+    },
+    "assets/weapons/w-abyss-surges.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040015.webp",
+      "bytes": 17344
+    },
+    "assets/weapons/w-aether-strike.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040104.webp",
+      "bytes": 22000
+    },
+    "assets/weapons/w-ages-of-harvest.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010026.webp",
+      "bytes": 23234
+    },
+    "assets/weapons/w-amity-accord.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040044.webp",
+      "bytes": 13000
+    },
+    "assets/weapons/w-augment.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050074.webp",
+      "bytes": 19546
+    },
+    "assets/weapons/w-aureate-zenith.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010104.webp",
+      "bytes": 20370
+    },
+    "assets/weapons/w-autumntrace.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010074.webp",
+      "bytes": 13834
+    },
+    "assets/weapons/w-azure-oath.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020096.webp",
+      "bytes": 19030
+    },
+    "assets/weapons/w-beguiling-melody.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010063.webp",
+      "bytes": 25178
+    },
+    "assets/weapons/w-blazing-brilliance.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020016.webp",
+      "bytes": 24058
+    },
+    "assets/weapons/w-blazing-justice.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040036.webp",
+      "bytes": 20064
+    },
+    "assets/weapons/w-bloodpact-s-pledge.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020046.webp",
+      "bytes": 24110
+    },
+    "assets/weapons/w-boson-astrolabe.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050045.webp",
+      "bytes": 25338
+    },
+    "assets/weapons/w-broadblade-41.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010034.webp",
+      "bytes": 13110
+    },
+    "assets/weapons/w-broadblade-of-night.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010013.webp",
+      "bytes": 11492
+    },
+    "assets/weapons/w-broadblade-of-voyager.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010043.webp",
+      "bytes": 12730
+    },
+    "assets/weapons/w-cadenza.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030024.webp",
+      "bytes": 12938
+    },
+    "assets/weapons/w-call-of-the-abyss.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050017.webp",
+      "bytes": 19270
+    },
+    "assets/weapons/w-celestial-spiral.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040084.webp",
+      "bytes": 15138
+    },
+    "assets/weapons/w-comet-flare.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050064.webp",
+      "bytes": 15304
+    },
+    "assets/weapons/w-commando-of-conviction.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020044.webp",
+      "bytes": 18850
+    },
+    "assets/weapons/w-cosmic-ripples.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050015.webp",
+      "bytes": 14556
+    },
+    "assets/weapons/w-dauntless-evernight.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010044.webp",
+      "bytes": 13972
+    },
+    "assets/weapons/w-daybreaker-s-spine.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040056.webp",
+      "bytes": 44270
+    },
+    "assets/weapons/w-defier-s-thorn.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020056.webp",
+      "bytes": 42592
+    },
+    "assets/weapons/w-discord.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010024.webp",
+      "bytes": 13408
+    },
+    "assets/weapons/w-emerald-of-genesis.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020015.webp",
+      "bytes": 17360
+    },
+    "assets/weapons/w-emerald-sentence.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020066.webp",
+      "bytes": 26254
+    },
+    "assets/weapons/w-endless-collapse.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020084.webp",
+      "bytes": 17760
+    },
+    "assets/weapons/w-everbright-polestar.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020076.webp",
+      "bytes": 45416
+    },
+    "assets/weapons/w-fables-of-wisdom.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020094.webp",
+      "bytes": 16826
+    },
+    "assets/weapons/w-feather-edge.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020104.webp",
+      "bytes": 19594
+    },
+    "assets/weapons/w-firstlight-s-herald.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050096.webp",
+      "bytes": 14924
+    },
+    "assets/weapons/w-forged-dwarf-star.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050076.webp",
+      "bytes": 45708
+    },
+    "assets/weapons/w-freeze-frame.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050086.webp",
+      "bytes": 44376
+    },
+    "assets/weapons/w-frostburn.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020086.webp",
+      "bytes": 41962
+    },
+    "assets/weapons/w-fusion-accretion.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050084.webp",
+      "bytes": 17806
+    },
+    "assets/weapons/w-gauntlets-21d.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040034.webp",
+      "bytes": 13184
+    },
+    "assets/weapons/w-gauntlets-of-night.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040013.webp",
+      "bytes": 12038
+    },
+    "assets/weapons/w-gauntlets-of-voyager.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040043.webp",
+      "bytes": 13314
+    },
+    "assets/weapons/w-glint-of-clouds.webp": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/9/9c/Weapon_Glint_of_Clouds.png/revision/latest?cb=20260820165552",
+      "bytes": 41568
+    },
+    "assets/weapons/w-guardian-broadblade.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010053.webp",
+      "bytes": 13614
+    },
+    "assets/weapons/w-guardian-gauntlets.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040053.webp",
+      "bytes": 13150
+    },
+    "assets/weapons/w-guardian-pistols.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030053.webp",
+      "bytes": 13316
+    },
+    "assets/weapons/w-guardian-rectifier.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050053.webp",
+      "bytes": 13862
+    },
+    "assets/weapons/w-guardian-sword.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020053.webp",
+      "bytes": 15148
+    },
+    "assets/weapons/w-helios-cleaver.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010064.webp",
+      "bytes": 14364
+    },
+    "assets/weapons/w-hollow-mirage.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040064.webp",
+      "bytes": 13022
+    },
+    "assets/weapons/w-jinzhou-keeper.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050044.webp",
+      "bytes": 17114
+    },
+    "assets/weapons/w-kumokiri.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010056.webp",
+      "bytes": 38620
+    },
+    "assets/weapons/w-laser-shearer.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020045.webp",
+      "bytes": 21454
+    },
+    "assets/weapons/w-legend-of-drunken-hero.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040094.webp",
+      "bytes": 16024
+    },
+    "assets/weapons/w-lethean-elegy.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050066.webp",
+      "bytes": 36046
+    },
+    "assets/weapons/w-lumingloss.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020074.webp",
+      "bytes": 15142
+    },
+    "assets/weapons/w-luminous-hymn.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050046.webp",
+      "bytes": 29256
+    },
+    "assets/weapons/w-lunar-cutter.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020064.webp",
+      "bytes": 15742
+    },
+    "assets/weapons/w-lustrous-razor.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010015.webp",
+      "bytes": 19278
+    },
+    "assets/weapons/w-lux-umbra.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030036.webp",
+      "bytes": 30572
+    },
+    "assets/weapons/w-marcato.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040024.webp",
+      "bytes": 16252
+    },
+    "assets/weapons/w-meditations-on-mercy.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010094.webp",
+      "bytes": 17498
+    },
+    "assets/weapons/w-moongazer-s-sigil.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040046.webp",
+      "bytes": 49992
+    },
+    "assets/weapons/w-novaburst.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030064.webp",
+      "bytes": 12470
+    },
+    "assets/weapons/w-ocean-s-gift.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050027.webp",
+      "bytes": 22998
+    },
+    "assets/weapons/w-originite-type-i.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010023.webp",
+      "bytes": 12900
+    },
+    "assets/weapons/w-originite-type-ii.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020023.webp",
+      "bytes": 13256
+    },
+    "assets/weapons/w-originite-type-iii.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030023.webp",
+      "bytes": 10858
+    },
+    "assets/weapons/w-originite-type-iv.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040023.webp",
+      "bytes": 12606
+    },
+    "assets/weapons/w-originite-type-v.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050023.webp",
+      "bytes": 12930
+    },
+    "assets/weapons/w-overture.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020024.webp",
+      "bytes": 14640
+    },
+    "assets/weapons/w-phasic-homogenizer.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030045.webp",
+      "bytes": 15484
+    },
+    "assets/weapons/w-pistols-26.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030034.webp",
+      "bytes": 11912
+    },
+    "assets/weapons/w-pistols-of-night.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030013.webp",
+      "bytes": 11702
+    },
+    "assets/weapons/w-pistols-of-voyager.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030043.webp",
+      "bytes": 11820
+    },
+    "assets/weapons/w-pulsation-bracer.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040045.webp",
+      "bytes": 22590
+    },
+    "assets/weapons/w-radiance-cleaver.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010045.webp",
+      "bytes": 24346
+    },
+    "assets/weapons/w-radiant-dawn.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050104.webp",
+      "bytes": 19332
+    },
+    "assets/weapons/w-rectifier-25.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050034.webp",
+      "bytes": 16762
+    },
+    "assets/weapons/w-rectifier-of-night.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050013.webp",
+      "bytes": 17012
+    },
+    "assets/weapons/w-rectifier-of-voyager.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050043.webp",
+      "bytes": 15850
+    },
+    "assets/weapons/w-red-spring.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020026.webp",
+      "bytes": 26280
+    },
+    "assets/weapons/w-relativistic-jet.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030084.webp",
+      "bytes": 12930
+    },
+    "assets/weapons/w-rime-draped-sprouts.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050026.webp",
+      "bytes": 41562
+    },
+    "assets/weapons/w-romance-in-farewell.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030094.webp",
+      "bytes": 13418
+    },
+    "assets/weapons/w-skull-thrasher.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030066.webp",
+      "bytes": 33772
+    },
+    "assets/weapons/w-solar-flame.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030104.webp",
+      "bytes": 14514
+    },
+    "assets/weapons/w-solsworn-ciphers.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040066.webp",
+      "bytes": 52468
+    },
+    "assets/weapons/w-somnoire-anchor.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020017.webp",
+      "bytes": 20362
+    },
+    "assets/weapons/w-spectral-trigger.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030056.webp",
+      "bytes": 31600
+    },
+    "assets/weapons/w-spectrum-blaster.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030046.webp",
+      "bytes": 30328
+    },
+    "assets/weapons/w-starfield-calibrator.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010066.webp",
+      "bytes": 59732
+    },
+    "assets/weapons/w-static-mist.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030015.webp",
+      "bytes": 13786
+    },
+    "assets/weapons/w-stellar-symphony.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050036.webp",
+      "bytes": 38378
+    },
+    "assets/weapons/w-stonard.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040074.webp",
+      "bytes": 15330
+    },
+    "assets/weapons/w-stringmaster.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050016.webp",
+      "bytes": 18546
+    },
+    "assets/weapons/w-sword-18.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020034.webp",
+      "bytes": 13878
+    },
+    "assets/weapons/w-sword-of-night.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020013.webp",
+      "bytes": 13684
+    },
+    "assets/weapons/w-sword-of-voyager.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020043.webp",
+      "bytes": 15798
+    },
+    "assets/weapons/w-the-last-dance.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030016.webp",
+      "bytes": 17770
+    },
+    "assets/weapons/w-thousandfold-deliverance.webp": {
+      "url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/54/Weapon_Thousandfold_Deliverance.png/revision/latest?cb=20260820165507",
+      "bytes": 45828
+    },
+    "assets/weapons/w-thunderbolt.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030074.webp",
+      "bytes": 13762
+    },
+    "assets/weapons/w-thunderflare-dominion.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010046.webp",
+      "bytes": 36870
+    },
+    "assets/weapons/w-tragicomedy.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040026.webp",
+      "bytes": 28684
+    },
+    "assets/weapons/w-training-broadblade.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010011.webp",
+      "bytes": 12136
+    },
+    "assets/weapons/w-training-gauntlets.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040011.webp",
+      "bytes": 13026
+    },
+    "assets/weapons/w-training-pistols.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030011.webp",
+      "bytes": 10604
+    },
+    "assets/weapons/w-training-rectifier.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050011.webp",
+      "bytes": 13702
+    },
+    "assets/weapons/w-training-sword.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020011.webp",
+      "bytes": 13140
+    },
+    "assets/weapons/w-tyro-broadblade.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010012.webp",
+      "bytes": 13716
+    },
+    "assets/weapons/w-tyro-gauntlets.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040012.webp",
+      "bytes": 12644
+    },
+    "assets/weapons/w-tyro-pistols.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030012.webp",
+      "bytes": 11166
+    },
+    "assets/weapons/w-tyro-rectifier.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050012.webp",
+      "bytes": 14808
+    },
+    "assets/weapons/w-tyro-sword.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020012.webp",
+      "bytes": 14876
+    },
+    "assets/weapons/w-undying-flame.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030044.webp",
+      "bytes": 12628
+    },
+    "assets/weapons/w-unflickering-valor.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020036.webp",
+      "bytes": 27504
+    },
+    "assets/weapons/w-variation.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050024.webp",
+      "bytes": 16902
+    },
+    "assets/weapons/w-verdant-summit.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010016.webp",
+      "bytes": 17890
+    },
+    "assets/weapons/w-verity-s-handle.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040016.webp",
+      "bytes": 18330
+    },
+    "assets/weapons/w-waltz-in-masquerade.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050094.webp",
+      "bytes": 20366
+    },
+    "assets/weapons/w-waning-redshift.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010084.webp",
+      "bytes": 18686
+    },
+    "assets/weapons/w-whispers-of-sirens.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050056.webp",
+      "bytes": 37112
+    },
+    "assets/weapons/w-wildfire-mark.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21010036.webp",
+      "bytes": 22272
+    },
+    "assets/weapons/w-woodland-aria.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21030026.webp",
+      "bytes": 17924
     }
   }
 }

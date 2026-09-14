@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/resonators@1.1",
-  "updated": "2026-09-10",
+  "updated": "2026-09-14",
   "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
   "resonators": [
     {
@@ -3257,12 +3257,11 @@
       "region": "Mengzhou",
       "summary": "Mengzhou-born Nethermancer who travels between mirage realms and the ruins of the old world. Assisted Suisui during the main story quest. HP-scaling self-shielding carry.",
       "kit": [
-        "Two alternating stances - Negative Yin and Embracing Yang - swapped via Heavy Attack. Combat opens in Embracing Yang.",
-        "Normal Attacks run four segments in both stances.",
-        "Damage scales off Max HP with self-generated shields for sustain.",
-        "Maintaining Life Fire drives specter damage.",
-        "Resonance Liberation extinguishes the Life Lantern to open the gates of the underworld and pull enemies in.",
-        "Reported as strong in aerial combat."
+        "Two stances - Yin Vessel and Yang Font - swapped by spending 300 Qi on a Heavy Attack. Combat opens in Yang Font.",
+        "Normal Attacks run four segments in either stance; late stages, Dodge Counters and Resonance Skill follow-ups refill Qi.",
+        "DEF is pinned at 0. Max HP feeds his ATK, Fusion DMG Bonus and Incoming Healing instead.",
+        "Shields himself off his own hits, and every shield on the team feeds Ghost Shroud for his Intro to cash in as Fusion DMG.",
+        "Resonance Liberation drops him to 50% HP and opens 15s of Yinghuo - Heavy Attacks scale harder off Max HP and summon Chimei Wangliang."
       ],
       "materials": {
         "ascension": [],
@@ -3270,7 +3269,7 @@
       },
       "confidence": {
         "identity": "official",
-        "kit": "datamined"
+        "kit": "official"
       },
       "sources": [
         {
@@ -3279,14 +3278,15 @@
           "url": "https://www.rpgsite.net/news/21075-wuthering-waves-version-3-6-release-date-gameplay-trailer-dlss-4-5"
         },
         {
-          "name": "TOPUPlive (kit)",
+          "name": "Prydwen (kit)",
           "lang": "en",
-          "url": "https://www.topuplive.com/news/wuwa-3-6-jingran-build.html"
+          "url": "https://www.prydwen.gg/wuthering-waves/characters/jingran"
         }
       ],
       "epithet": "Nether Qi Art",
       "released": "2026-09-10",
-      "nameCN": "景燃"
+      "nameCN": "景燃",
+      "hasKit": true
     },
     {
       "name": "Hsin",

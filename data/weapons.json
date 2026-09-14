@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/weapons@1.0",
-  "note": "Every weapon in the game: class, rarity, level 90 stats, and the passive as a template with its five ascension values. atk90 and statValue90 are max-level figures — there is no level curve here and none is inferred. ranks[n] holds what {n} in `effect` becomes at ascension 1 through 5. Sub-stat values are percentages. Icons are cached in assets/weapons/. Stats and passives via prydwen.gg; weapon art © Kuro Games. Icons for Glint of Clouds are from the Wuthering Waves wiki — prydwen.gg ships those below 200px.",
+  "note": "Every weapon in the game: class, rarity, level 90 stats, and the passive as a template with its five ascension values. atk90 and statValue90 are max-level figures — there is no level curve here and none is inferred. ranks[n] holds what {n} in `effect` becomes at ascension 1 through 5. Sub-stat values are percentages. Icons are cached in assets/weapons/. Stats and passives via prydwen.gg; weapon art © Kuro Games. Icons for Glint of Clouds, Thousandfold Deliverance are from the Wuthering Waves wiki — prydwen.gg ships those below 200px.",
   "credit": "Stats and art via prydwen.gg, some icons via the Wuthering Waves wiki · weapon art © Kuro Games",
   "source": "https://www.prydwen.gg/wuthering-waves/weapons",
   "weapons": [
@@ -1298,6 +1298,55 @@
         ]
       ],
       "icon": "assets/weapons/w-the-last-dance.webp"
+    },
+    {
+      "name": "Thousandfold Deliverance",
+      "rarity": 5,
+      "type": "Broadblade",
+      "id": "21010076",
+      "atk90": 413,
+      "stat": "HP%",
+      "statValue90": 72.2,
+      "source": "",
+      "effect": "Grants {0} All-Attribute DMG Bonus. Casting Intro Skill or gaining a Shield as the active Resonator grants 1 stack of Nature's Order and 1 stack of Cradle of Life. This effect can be triggered via gaining a Shield once every 0.5s, stacking up to 6 times, lasting for 7s. Switching to another Resonator ends both Nature's Order and Cradle of Life immediately.\nNature's Order: Crit. DMG is increased by {1}, up to {2}. When Nature's Order reaches 6 stacks, the Crit. Rate of Heavy Attack DMG is increased by {0}.\nCradle of Life: Casting Heavy Attack consumes up to 2 stacks of Cradle of Life. For every 1 stack of Cradle of Life consumed, Heavy Attack DMG ignores {3} of the target's DEF, up to {4}. The effect lasts for 2s.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ],
+        [
+          "15%",
+          "17.5%",
+          "20%",
+          "22.5%",
+          "25%"
+        ],
+        [
+          "30%",
+          "35%",
+          "40%",
+          "45%",
+          "50%"
+        ]
+      ],
+      "icon": "assets/weapons/w-thousandfold-deliverance.webp"
     },
     {
       "name": "Thunderflare Dominion",
@@ -3296,5 +3345,5 @@
       "icon": "assets/weapons/w-tyro-sword.webp"
     }
   ],
-  "updated": "2026-08-28T16:28:31.094Z"
+  "updated": "2026-09-14T10:55:41.793Z"
 }

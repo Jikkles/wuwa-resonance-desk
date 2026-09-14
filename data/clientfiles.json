@@ -6,104 +6,6 @@
   "build": "3.7.1",
   "weapons": [
     {
-      "name": "Thousandfold Deliverance",
-      "rarity": 5,
-      "type": "Broadblade",
-      "id": "21010076",
-      "atk90": 413,
-      "stat": "HP",
-      "statValue90": 72.2,
-      "source": "Beta client files",
-      "effectName": "Hark, Spirits and Stars",
-      "effect": "Grants {0} All-Attribute DMG Bonus. Casting Intro Skill or gaining a Shield as the active Resonator grants 1 stack of Nature's Order and 1 stack of Cradle of Life. This effect can be triggered via gaining a Shield once every 0.5s, stacking up to {1} times, lasting for {2}s. Switching to another Resonator ends both Nature's Order and Cradle of Life immediately.\nNature's Order: Crit. DMG is increased by {3}, up to {4}. When Nature's Order reaches {10} stacks, the Crit. Rate of Heavy Attack DMG is increased by {11}.\nCradle of Life: Casting Heavy Attack consumes up to {5} stacks of Cradle of Life. For every {6} stack of Cradle of Life consumed, Heavy Attack DMG ignores {7} of the target's DEF, up to {8}. The effect lasts for {9}s.",
-      "ranks": [
-        [
-          "12%",
-          "15%",
-          "18%",
-          "21%",
-          "24%"
-        ],
-        [
-          "6",
-          "6",
-          "6",
-          "6",
-          "6"
-        ],
-        [
-          "7",
-          "7",
-          "7",
-          "7",
-          "7"
-        ],
-        [
-          "4%",
-          "5%",
-          "6%",
-          "7%",
-          "8%"
-        ],
-        [
-          "24%",
-          "30%",
-          "36%",
-          "42%",
-          "48%"
-        ],
-        [
-          "2",
-          "2",
-          "2",
-          "2",
-          "2"
-        ],
-        [
-          "1",
-          "1",
-          "1",
-          "1",
-          "1"
-        ],
-        [
-          "15%",
-          "17.5%",
-          "20%",
-          "22.5%",
-          "25%"
-        ],
-        [
-          "30%",
-          "35%",
-          "40%",
-          "45%",
-          "50%"
-        ],
-        [
-          "2",
-          "2",
-          "2",
-          "2",
-          "2"
-        ],
-        [
-          "6",
-          "6",
-          "6",
-          "6",
-          "6"
-        ],
-        [
-          "12%",
-          "15%",
-          "18%",
-          "21%",
-          "24%"
-        ]
-      ]
-    },
-    {
       "name": "Unspoken Rue",
       "rarity": 5,
       "type": "Sword",
@@ -274,5 +176,5 @@
     }
   ],
   "resonators": [],
-  "updated": "2026-09-12T12:01:46.673Z"
+  "updated": "2026-09-14T11:01:24.609Z"
 }
