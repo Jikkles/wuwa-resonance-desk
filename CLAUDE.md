@@ -42,17 +42,27 @@ The handover is already enforced in code, in two places, and neither should be l
   record loses to a published one.
 
 **The half that is not automatic**: Prydwen returns a flat 403 to GitHub Actions, so
-`fetch-kits.mjs` and `fetch-weapons.mjs` only ever run locally. A Resonator can therefore
-go live while the desk is still drawing their beta kit. `fetch-client-files.mjs` shouts
-about exactly that — `RELEASED and still on the beta kit: <name>` — and the fix is:
+`fetch-kits.mjs`, `fetch-weapons.mjs` and `fetch-builds.mjs` only ever deliver from a local
+run. A Resonator can therefore go live while the desk is still drawing their beta kit and
+beta signature weapon. `scripts/patch-day-alert.mjs` runs last in the feeds job and opens
+the GitHub issue **"Patch day: released Resonators still on beta data"** when that happens
+— it names who, lists the exact fetchers to run, comments when a new name joins, and closes
+itself once the live data has been pushed. The fix it asks for is always this shape:
 
 ```bash
-node scripts/fetch-kits.mjs && node scripts/fetch-client-files.mjs
+node scripts/fetch-kits.mjs && node scripts/fetch-weapons.mjs && \
+  node scripts/fetch-builds.mjs && node scripts/fetch-client-files.mjs
 ```
 
-Watch for that line on patch day. Beta text is pre-balance: multipliers move and mechanics
-get cut between the beta and the live build, which is the whole reason the live version
-has to win.
+Then rewrite that Resonator's hand-written `kit` notes in `resonators.json` against the
+live kit: they were written from leaks, no fetcher touches them, and once the kit tier is
+official they read as Kuro's word. `node scripts/patch-day-alert.mjs` on its own prints the
+same report locally without touching the issue.
+
+There is deliberately no wiki fallback for weapons: the wiki's stats module holds level 1
+figures (the desk shows level 90 and infers no curve) and lagged days behind release.
+Beta text is pre-balance: multipliers move and mechanics get cut between the beta and the
+live build, which is the whole reason the live version has to win.
 
 Every record drawn from beta files must say so — the `Beta` flag, the `Datamined` pill, the
 note over the skills. Do not add a beta record anywhere that cannot carry one of those.

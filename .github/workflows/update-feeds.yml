@@ -14,6 +14,8 @@ on:
 # or the push step fails on every run.
 permissions:
   contents: write
+  # For the patch-day alert, which opens and closes its own issue.
+  issues: write
 
 # A slow run must not overlap the next scheduled one and race the push. Shared
 # with update-kits.yml, which commits to the same branch — one queue for
@@ -142,3 +144,16 @@ jobs:
           # Another run may have landed while this one was fetching.
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      # A released Resonator still on beta data — kit, signature weapon or
+      # builds — needs a local run, because Prydwen refuses this runner. That
+      # used to be one log line in a step that cannot fail, and it went unread
+      # for four days on Jingran. This turns it into an issue, which notifies.
+      # After the commit, so it reads the files the desk is actually serving,
+      # including a pull that another run landed in the meantime.
+      - name: Raise patch-day alert
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/patch-day-alert.mjs
