@@ -5975,8 +5975,8 @@ function drawerResonator(name){
         <span class="label">Kit notes — ${TIER_MEANS[kitTier] || "Unverified"}</span>
         <div style="margin-bottom:12px">${tierBadge(kitTier, kitTier === "official")}</div>
         <ul>${r.kit.map(k => `<li>${esc(k)}</li>`).join("")}</ul>
-        <p class="tier-note" style="margin-top:14px">Pre-balance. Multipliers and mechanics
-        routinely shift between beta phases.</p>
+        ${kitTier === "official" ? "" : `<p class="tier-note" style="margin-top:14px">Pre-balance. Multipliers and mechanics
+        routinely shift between beta phases.</p>`}
       </div>` : ""}
     </div>
 
