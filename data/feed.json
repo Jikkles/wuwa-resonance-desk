@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-17T17:59:10.759Z",
+  "fetched": "2026-09-17T22:44:07.019Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -62,6 +62,106 @@
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Idk if this bothers anyone else...",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj8pqo/idk_if_this_bothers_anyone_else/",
+      "date": "2026-09-17T22:41:29.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "IS THIS THE HIGHEST SCORE DANJIN CAN MAKE ON ENDSTATE MATRIX???",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj7bng/is_this_the_highest_score_danjin_can_make_on/",
+      "date": "2026-09-17T21:44:46.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Red dots reappeared. mildly infuriating.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj7869/red_dots_reappeared_mildly_infuriating/",
+      "date": "2026-09-17T21:40:49.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Hsin have an offer for you",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj5piy/hsin_have_an_offer_for_you/",
+      "date": "2026-09-17T20:41:33.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Aemeath by pouwnnxx",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj4g4p/aemeath_by_pouwnnxx/",
+      "date": "2026-09-17T19:55:08.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Did a thing",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj3kjn/did_a_thing/",
+      "date": "2026-09-17T19:22:22.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Breakfast in her kitchen (crynexiaorou11)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj3ez1/breakfast_in_her_kitchen_crynexiaorou11/",
+      "date": "2026-09-17T19:16:49.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "I found a glitcg",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj1t8d/i_found_a_glitcg/",
+      "date": "2026-09-17T18:18:04.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "WuWa Suoming kit leak: Skill, Liberation, and all abilities explained (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQMi1GTnVQQWNVQ3N0UFdqUkJxV3FsbFZEc196UDNFaDJkc0g4ckppaWNoU1p2THdnMW9BV1VrXzFWZ1JLMHZCVVVybTJ3VWhwa29DenlGS2huMlBHazFOdEFtZG5LUVIzNXhBYkI5aERDdkRtUm81c241UGpDZ0F1M3RqWS1BMEsxck9rM29Ha3hZUjdnV2xOOU1pcHdzSnZoWmJfVFJuUVRfRDZWZnVr?oc=5",
+      "date": "2026-09-17T18:13:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering wave Rover next element",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj1231/wuthering_wave_rover_next_element/",
+      "date": "2026-09-17T17:50:46.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "my solo days are over duo with no healer is not bad galbrena augusta s0r1 aemeath s3",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1wj0zdb/my_solo_days_are_over_duo_with_no_healer_is_not/",
@@ -223,91 +323,11 @@
       "hot": false
     },
     {
-      "title": "Waiter! Waiter! More When Stars Cascade Down event please",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wiu76y/waiter_waiter_more_when_stars_cascade_down_event/",
-      "date": "2026-09-17T13:35:43.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Survey asked for age, i said prefer not to say, and the survey immediately said it was completed, this is the 2nd time I can't fill in the survey...",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1witrxm/survey_asked_for_age_i_said_prefer_not_to_say_and/",
-      "date": "2026-09-17T13:18:10.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Do you have a character you regret pulling? If so, who?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wit1ko/do_you_have_a_character_you_regret_pulling_if_so/",
-      "date": "2026-09-17T12:46:53.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "\"Straight to the underworld... Couldn't have asked for better.\" - Official Jingran wallpaper",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wit1k9/straight_to_the_underworld_couldnt_have_asked_for/",
-      "date": "2026-09-17T12:46:52.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Lucy got mentioned in latest event",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wit18c/lucy_got_mentioned_in_latest_event/",
-      "date": "2026-09-17T12:46:30.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Today is my wife's birthday",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wiswvr/today_is_my_wifes_birthday/",
-      "date": "2026-09-17T12:41:12.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Really going to look forward to this message",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wishmq/really_going_to_look_forward_to_this_message/",
-      "date": "2026-09-17T12:22:21.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "EP3.7 — Hsin - Ode to Hsin and Moon",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wis2u5/ep37_hsin_ode_to_hsin_and_moon/",
       "date": "2026-09-17T12:03:09.000Z",
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves EP3.7 — Hsin - \"Ode to Hsin and Moon\"",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wis0w7/wuthering_waves_ep37_hsin_ode_to_hsin_and_moon/",
-      "date": "2026-09-17T12:00:44.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
       "kind": "community",
       "lang": "en",
       "hot": false
@@ -330,16 +350,6 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
-      "hot": false
-    },
-    {
-      "title": "Did they make the shilled buff too good?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wiqnmx/did_they_make_the_shilled_buff_too_good/",
-      "date": "2026-09-17T10:51:36.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
       "hot": false
     },
     {
@@ -537,6 +547,26 @@
       "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBobk83dUNndVZlcEFmWFE4U2g1WjFmTWl1RGc2ZHhNVjRmRXItWUQtVGhLbXVwVHBlYmI4b1FKbnM0S3RiREEycTUxYmZaeFhNWlRaU1BXbS1VdzBrdHlyZXVHaVo1R1VHNzNSTFRYU09jR0xDcXc?oc=5",
       "date": "2026-09-14T08:00:00.000Z",
       "source": "Pocket Gamer",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Is Wuthering Waves cross-platform? Crossplay for PC, Android and iOS",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOZHJRWXBZakJIM1ZkTWE5ZjhfckROYk51LV9jRkZqNGdjXzhJcTZiNjdrWWJ3aHRuOVBIRl9sVzMtNnFXcWN1N1Nnb2VvT1F5Z1E3R0haWnNUaEQ5REJMS2JzTzhBb3V6czBsSmd1S1Vva0wzOFFsSWZ1dXFxZjYzOFl3LTgwUTJJZGtlbEhPdHFwWHVLVE9iVGtrWkRQRFk?oc=5",
+      "date": "2026-09-14T07:00:00.000Z",
+      "source": "Dexerto",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "What is pity in Wuthering Waves? How to get guaranteed 5-star character",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOaEpuRE9SRjJTMlBoOFdLN1B6b0YyUGNzQmtjSVRBUFZZLWk1enRpZ19wWkI4UURiTGhveHY3b1FaaHYxT01FOWxpWkt6SW0yZFRqSnBCM2drYjhCNVIwY0Y3T1pwOW83X1RWdEstTllxMnlfZGY3QTEweElPZ0dfYlZ1eVItekdTZ2xXUjYxeWxaVGdqQ3l1bWxsYUloMnpEX0dlVHNzd19yckhWa0lv?oc=5",
+      "date": "2026-09-13T18:12:19.000Z",
+      "source": "Dexerto",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -975,7 +1005,7 @@
     {
       "title": "Time until Jingran releases in Wuthering Waves 3.6",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNQUpZVHZoaFkzbnVuS1dybWkxT1RoUUd0OWhQc2VIOHJ5aDJPTmdXdW5pTlNVRkNOTzYzem5NSXhzS1ROZ29neWNIQzVtMFpaZWpyRThLTUItTHpfMndTVGcxNW5veWt5UkNieEY2TUxYQUMyRjctR1RqZHcwTHBDaUZqOA?oc=5",
-      "date": "2026-09-09T07:49:00.000Z",
+      "date": "2026-09-09T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
@@ -1461,36 +1491,6 @@
       "kind": "press",
       "lang": "en",
       "hot": false
-    },
-    {
-      "title": "Qingxiao S1 vs R1 in WuWa: Which one should you get? (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPU0NvVW9wak9mb0VNN3ZUdnlXeWoyUXBuZG5VUUVHNzNscFVwdV9aajl0UUQ1VnR0cENoNXJSSTN5Rk9JV3Q1dk54X0dDV0FBWHFDTEpmaXJ0TXNNUkxPNVExSkdZT3hEelp5V2xCOGtZeHVuLUI4YjJobGQ0WUxIeU9XYmpkdnNkSTR5Znp6T3lSUQ?oc=5",
-      "date": "2026-08-20T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Qingxiao Teams in WuWa: Best Team Comps and Characters",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWjFlaE1WXzlmSWJVMDFYaWlpQ1lEZWNtdExhZnE0T1RackU3UnU3YzRJNFFxU2IxNGpRTnMtRGhURkExeVpGT0t4VFRCVzB0a2EwRGJON2d6ckNidFY1SGxpa1N6NjZDRGdPdlktNEp3MlRqYmk1VEZ2d2xycjV6V1h0N2JoYUEwLUJ4OXZIYmx2bE9GQWlEZQ?oc=5",
-      "date": "2026-08-20T07:00:00.000Z",
-      "source": "GameRant",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Qingxiao vs Denia in WuWa 3.6: Who should you pull for? (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPVTdmUWlXVWs4TzE0QzFZRnY4YzRhSWFsX0R4alVFZGN5U0tUZENXVi01elRBaDVGV3pEbGtPSkZNRW11Y1VkUDRaLTJxYkFmM3B4Slk0UUpnSHFnd0lRUzc1SDg3Y1Y1dHRacE9NQTJWVkUzU1p6dzlac1BqLVdYZVlQcTQ1QU45dFcxVlRHT3hYRGxxU0E?oc=5",
-      "date": "2026-08-20T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "Wuthering Waves Launches Collaboration with Domino's Pizza",
