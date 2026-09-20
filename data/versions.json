@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-08-31",
+  "updated": "2026-09-20",
   "current": "3.5",
   "versions": [
     {
@@ -48,9 +48,7 @@
         {
           "n": 2,
           "start": "2026-09-10",
-          "end": "2026-10-01",
-          "estimated_start": true,
-          "estimated_end": true,
+          "end": "2026-09-29",
           "banners": [
             {
               "name": "Jingran",
