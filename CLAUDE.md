@@ -67,6 +67,39 @@ live build, which is the whole reason the live version has to win.
 Every record drawn from beta files must say so — the `Beta` flag, the `Datamined` pill, the
 note over the skills. Do not add a beta record anywhere that cannot carry one of those.
 
+## Preview day is the desk's other patch day
+
+Kuro's preview broadcast lands on a Friday evening CN time, about ten days before the
+patch — in practice the second Friday before release, though the reliable signal is the
+article, not the calendar. It is the single biggest data drop of the cycle: version title,
+release date, key visual, both phases of banners, every featured weapon, the event list
+and the QoL notes, all at once.
+
+`node scripts/fetch-version-notices.mjs` takes most of that on its own, off the 6h cron,
+and `--dry-run` prints the report without touching the issue. It reads three article
+shapes off Kuro's static article CDN — the version preview, the numbered Featured Convene
+notice, and the standalone debut convene that the numbered one leaves out — and fills
+`versions.json` from them, flipping `beta` → `announced` and retiring a `provisional` key
+visual for the real one.
+
+**The half that is not automatic**: the banner lineup is announced as six infographics
+with no text under them. Nothing on Kuro's site names Phase 1's Resonators in words until
+the convene notice, a day before that phase opens. So the fetcher opens the issue
+**"Version preview: banner lineup still needs a human"**, and the work it is asking for is
+always this shape:
+
+- Fill `phases` in `versions.json` from the infographic. A returning Resonator's `convene`
+  is already in their `runs` in `resonators.json` — the name has never changed for anyone,
+  so look it up rather than reading it off a screenshot.
+- Phase dates read off the broadcast are estimates. Flag them `estimated_start` /
+  `estimated_end` and let the convene notice clear the flags.
+- Write the announcement into `news.json` at `official`, and set `outcome` on the leaks it
+  resolved — `confirmed` where they held, `superseded` where the broadcast overrode them.
+
+Events are not part of this. `fetch-events.mjs` builds the calendar from Kuro's own event
+notices, which go up around patch day rather than at the broadcast, so event names belong
+in a `news.json` entry on preview day and become dated rows on their own a week later.
+
 ## Checking visual changes
 
 Layout bugs are invisible in the source. Serve the repo and drive it with Playwright.

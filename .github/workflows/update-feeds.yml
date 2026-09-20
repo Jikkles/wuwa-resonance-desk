@@ -65,6 +65,20 @@ jobs:
         if: always()
         run: node scripts/fetch-events.mjs
 
+      # The patch timeline, off Kuro's own version notices. Same host and the
+      # same article index as the two steps above, and a separate step for the
+      # same reason. This is the one that catches the preview broadcast: Kuro
+      # put the 3.7 announcement up at 12:20 UTC on a Saturday and the 14:00
+      # run is what turns it into a dated, titled, illustrated record without
+      # anyone watching a stream. It also raises the issue for the half of that
+      # announcement Kuro only ever publish as a picture.
+      - name: Resolve version notices
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/fetch-version-notices.mjs
+
       # Icons for whatever those events pay out, resolved against Fandom. Runs
       # after the calendar because it reads the reward lines the step above just
       # wrote — a new patch's rewards are new items, and this is what turns them
@@ -135,7 +149,7 @@ jobs:
         run: |
           git config user.name  "feed-bot"
           git config user.email "feed-bot@users.noreply.github.com"
-          git add data/feed.json data/art.json data/events.json data/items.json data/portraits.json data/translations.json data/weapons.json data/echoes.json data/builds.json data/clientfiles.json data/clientkits.json assets/items assets/portraits assets/weapons assets/echoes assets/.sources.json
+          git add data/feed.json data/art.json data/events.json data/items.json data/portraits.json data/translations.json data/weapons.json data/echoes.json data/builds.json data/clientfiles.json data/clientkits.json data/versions.json assets/items assets/portraits assets/weapons assets/echoes assets/.sources.json
           if git diff --staged --quiet; then
             echo "no change"
             exit 0

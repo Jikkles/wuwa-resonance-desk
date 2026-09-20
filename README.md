@@ -106,8 +106,23 @@ inheriting a change made for a different page.
 | File | What you write |
 |---|---|
 | `data/news.json` | intel entries and their tiers |
-| `data/versions.json` | a patch's `notes`, and the `keyVisual*` crop values |
+| `data/versions.json` | a patch's `notes`, the `keyVisual*` crop values, and the banner lineup on the day it is announced |
 | `data/events.json` | events Kuro has named but not yet published (`"origin": "hand"`) |
+
+`versions.json` used to be wholly hand-written and is now mostly not.
+`fetch-version-notices.mjs` reads Kuro's own posts and keeps the timeline in step with
+them: the version preview, about ten days out, gives the title, the release date and the
+key visual, and the Featured Convene notices, about a day before each phase opens, give
+the convene names and confirm the phase windows. It fills blanks and replaces `estimated_*`
+dates; anything else that disagrees is reported and left for you.
+
+The one thing it cannot do is the banner lineup at announcement. Kuro publish that only as
+infographics — six pictures with no text behind them — and nothing on their site says
+"Phase 1: Hsin, Chisa, Iuno" in words until the convene notice ten days later. So the
+script opens the issue **"Version preview: banner lineup still needs a human"** with the
+shape to fill in, and closes it once the phases have banners on them. Convene names never
+change between a Resonator's runs, so `runs` in `resonators.json` already has the one you
+need.
 
 Everything else — roster, kits, builds, weapons, echoes, events, art, portraits, the
 headline feed, the patch archive, the beta client records — is fetched. The fetchers only
