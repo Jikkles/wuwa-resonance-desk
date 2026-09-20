@@ -1,12 +1,12 @@
 {
   "schema": "wuwa-desk/versions@1.0",
   "updated": "2026-09-20",
-  "current": "3.5",
+  "current": "3.6",
   "versions": [
     {
       "id": "3.6",
       "title": "Lamplight in Mirage, Sword's Resolve in Heart",
-      "status": "announced",
+      "status": "live",
       "region": "Mengzhou",
       "livestream": "2026-08-07",
       "start": "2026-08-20",
@@ -41,7 +41,8 @@
               "attribute": "Fusion",
               "weapon": "Rectifier",
               "rerun": true,
-              "signature": "Forged Dwarf Star"
+              "signature": "Forged Dwarf Star",
+              "convene": "False Promise for Tomorrow"
             }
           ]
         },
@@ -69,7 +70,8 @@
               "weapon": "Sword",
               "rerun": true,
               "signature": "Frostburn",
-              "note": "First rerun"
+              "note": "First rerun",
+              "convene": "Thousand Futures Mirrored in Snow"
             },
             {
               "name": "Mornye",
@@ -78,7 +80,8 @@
               "weapon": "Broadblade",
               "role": "Healer",
               "rerun": true,
-              "signature": "Starfield Calibrator"
+              "signature": "Starfield Calibrator",
+              "convene": "Distant May the Starlights Be"
             }
           ]
         }
@@ -88,7 +91,7 @@
     {
       "id": "3.5",
       "title": "Blade of Past Resounds, Lingering Dream Hymns",
-      "status": "live",
+      "status": "past",
       "region": "Mengzhou",
       "start": "2026-07-10",
       "keyVisual": {
@@ -158,22 +161,103 @@
           ]
         }
       ],
-      "notes": "Ends 19 August, one day before 3.6. A [Starpath Reverbs] selector runs the full patch alongside the phase banners - one pick from Jiyan, Yinlin, Jinhsi, Changli, Zhezhi or Xiangli Yao. Muyu stands as the arc antagonist heading into 3.6."
+      "notes": "Ends 19 August, one day before 3.6. A [Starpath Reverbs] selector runs the full patch alongside the phase banners - one pick from Jiyan, Yinlin, Jinhsi, Changli, Zhezhi or Xiangli Yao. Muyu stands as the arc antagonist heading into 3.6.",
+      "livestream": "2026-06-26"
     },
     {
       "id": "3.7",
-      "title": "",
-      "status": "beta",
+      "title": "Prism's Illusion, Heart's Illumination",
+      "status": "announced",
       "keyVisual": {
-        "url": "assets/reveals/hsin.jpg",
-        "title": "Hsin drip marketing card, 3.7's first art",
-        "source": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vykz4x/hsin_drip_marketing/",
-        "credit": "© Kuro Games, mirrored from r/WutheringWavesLeaks",
-        "provisional": true,
-        "note": "Not a version key visual — Kuro has not published a 3.7 preview yet. This is the character drip card, standing in as the patch record's only art. Replace it when the real preview key visual lands."
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1789660800000/jkef15wfsy8xtht89n-1789741057893.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
+        "title": "Version 3.7 Preview key visual",
+        "credit": "© Kuro Games"
       },
-      "phases": [],
-      "notes": "Both 3.7 Resonators are officially identified and both now have a reported role. Kuro's own line covers identity and stops there: Hsin is a 5-star Electro Rectifier, Suoming a 5-star Electro Sword, confirmed by the drip cards of 26 and 27 August and the profile cards of 28 August. Suoming's archive text places her as founder and Seal Master of the Ten Seals Covenant in Huating, later Intendant of the Ministry of Sentinel Affairs - serving under Hsin. Everything about how either of them plays is leak-only. Team Gemberry's tag list of 29 August gives Hsin as a Main DPS scaling off the Resonance Skill, with two switchable modes - Electro Flare and a Tune Break system rendered as Harmony - and Suoming as a Main Damage Dealer on Basic Attack who also amplifies Electro and Resonance Skill damage, which reverses six weeks of reports treating her as Hsin's support. Two Electro echo sets followed on 31 August, and the trigger written into Hsin's is 同奏 - the characters the English client already renders as Unison for Jinhsi - which puts the long-running coordinated attack claim in doubt as a translation rather than a mechanic. No kit files, banner order or dates: the beta had not opened as of 28 August. Community arithmetic on past patch lengths projects beta 4 September, broadcast 18 September, Phase 1 2 October and Phase 2 24 October, and reads Hsin into Phase 1 off the drip order alone. None of that is from Kuro."
+      "phases": [
+        {
+          "n": 1,
+          "start": "2026-09-30",
+          "end": "2026-10-22",
+          "estimated_end": true,
+          "banners": [
+            {
+              "name": "Hsin",
+              "rarity": 5,
+              "attribute": "Electro",
+              "weapon": "Rectifier",
+              "role": "Main DPS",
+              "new": true,
+              "convene": "As Full as Tonight, Forever",
+              "signature": "Blooming Jadehaven"
+            },
+            {
+              "name": "Chisa",
+              "rarity": 5,
+              "attribute": "Havoc",
+              "weapon": "Broadblade",
+              "role": "Support and Healer",
+              "rerun": true,
+              "convene": "Horizon of Dawnbreak",
+              "signature": "Kumokiri"
+            },
+            {
+              "name": "Iuno",
+              "rarity": 5,
+              "attribute": "Aero",
+              "weapon": "Gauntlets",
+              "role": "Support and Healer",
+              "rerun": true,
+              "convene": "Across Time's Waxes and Wanes",
+              "signature": "Moongazer's Sigil"
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "start": "2026-10-22",
+          "end": "2026-11-10",
+          "estimated_start": true,
+          "estimated_end": true,
+          "banners": [
+            {
+              "name": "Suoming",
+              "rarity": 5,
+              "attribute": "Electro",
+              "weapon": "Sword",
+              "role": "Main DPS",
+              "new": true,
+              "convene": "Nine Deaths, One Unbent Heart",
+              "signature": "Unspoken Rue"
+            },
+            {
+              "name": "Lynae",
+              "rarity": 5,
+              "attribute": "Spectro",
+              "weapon": "Pistols",
+              "role": "Support",
+              "rerun": true,
+              "convene": "Undefined Spectrum",
+              "signature": "Spectrum Blaster"
+            },
+            {
+              "name": "Lucilla",
+              "rarity": 5,
+              "attribute": "Glacio",
+              "weapon": "Rectifier",
+              "role": "Support",
+              "rerun": true,
+              "convene": "Tomorrow in the Frame",
+              "signature": "Freeze Frame",
+              "note": "First rerun"
+            }
+          ]
+        }
+      ],
+      "notes": "Announced on the 19 September preview broadcast and dated by Kuro to 30 September (UTC+8). Six 5-star Resonator banners across two phases, three a phase, matching 3.6's back half rather than its front - and every featured 5-star weapon is the signature of a Resonator on the same phase, so there is nothing to split a weapon budget on. Hsin opens, Suoming closes, which is the order the drip cards ran in. Only the 30 September start is Kuro's own date: the phase boundary and the close are read off a 42-day patch with 21-day phases and carry (est) until the Featured Convene notices publish. The patch is the finale of the Xuanfang Unveiled arc - Chapter IV Act IV [Simulacrum of the Heart], the Simulacrum Nexus of Mengzhou area, and Unison arriving as a named system rather than the coordinated attack the August leaks had it as.",
+      "region": "Mengzhou",
+      "livestream": "2026-09-19",
+      "start": "2026-09-30"
     }
   ]
 }

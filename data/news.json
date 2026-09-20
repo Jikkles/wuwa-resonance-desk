@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-09-07",
+  "updated": "2026-09-20",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -8,6 +8,136 @@
     "rumour": "One unverified source, or sources disagreeing. Assume it's wrong until something better shows up."
   },
   "entries": [
+    {
+      "id": "2026-09-19-37-qol",
+      "date": "2026-09-19",
+      "version": "3.7",
+      "category": "qol",
+      "confidence": "official",
+      "title": "Main Quest replay arrives, and echoes stack to 999 in the backlog",
+      "body": "Replay Mode goes into the Journey Log, letting Main Quests be played again. It opens with 1.0 through 1.3 only and Kuro says later chapters follow in future versions, so the finale of one arc ships with the means to go back to the start of the last one. The rest is inventory and camera. Echoes auto-stack in the backlog up to 999 a line, the echo recommendation now reads Resonance Modes when it suggests a fit, team setups go from a shorter list to twenty with a 3D party view to manage them in, and the camera gains Handheld and Selfie modes with the Tripod one reworked. Client downloads split into tiers - UHD, HD and SD on PC, HD and SD on mobile - which is the first time the install size has been something a player chooses.",
+      "tags": [
+        "3.7",
+        "qol",
+        "replay",
+        "echoes",
+        "camera"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games - Version 3.7 Preview",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454"
+        },
+        {
+          "name": "Gematsu - Version 3.7 launches September 30",
+          "lang": "en",
+          "url": "https://www.gematsu.com/2026/09/wuthering-waves-version-3-7-update-prisms-illusion-hearts-illumination-launches-september-30"
+        },
+        {
+          "name": "Game8 - 3.7 livestream details",
+          "lang": "en",
+          "url": "https://game8.co/games/Wuthering-Waves/archives/622037"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-19-37-echo-sets-official",
+      "date": "2026-09-19",
+      "version": "3.7",
+      "category": "system",
+      "confidence": "official",
+      "title": "Three sonata sets get their names, and Unison is a system Kuro will say out loud",
+      "body": "Heart of Sworn Vigil, Flash of Electric Reflection and Flower of Tinged Yearning are the three new sonata effects, landing with five new echoes - Formrender, Soulfrayer, Skywatch Lancer, Bloomburst Puppet and Jade Nether Serpent, plus Phantom: Skywatch Lancer. Two Electro sets and a healing set is exactly the shape Team Gemberry posted on 31 August, three weeks early. The word that matters is Unison. It appears in the preview as a named mechanic arriving with the patch, which settles a fortnight of argument in favour of the reading the 31 August post proposed: 同奏 is Unison, the thing the English client already calls Unison in Jinhsi's kit, and the Harmony and Synchronization in earlier leaks were two more renderings of the same two characters. What Hsin's beta files then showed is that this did not cancel the coordinated attack - Edict on her Resonance Liberation is one in the plain sense, and it runs alongside Unison rather than instead of it. Both halves of the August reporting were describing something real; they were describing two different things. Set effects and numbers are still beta figures until the patch is live.",
+      "tags": [
+        "3.7",
+        "echoes",
+        "sonata",
+        "Unison",
+        "translation"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games - Version 3.7 Preview",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454"
+        },
+        {
+          "name": "Gematsu - Version 3.7 launches September 30",
+          "lang": "en",
+          "url": "https://www.gematsu.com/2026/09/wuthering-waves-version-3-7-update-prisms-illusion-hearts-illumination-launches-september-30"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-19-37-events",
+      "date": "2026-09-19",
+      "version": "3.7",
+      "category": "event",
+      "confidence": "official",
+      "title": "Nine limited events, a permanent one, and the Simulacrum Nexus to run them in",
+      "body": "The preview names nine limited-time events for 3.7 - Cubie Wars, Gifts of Waking Moon, Echo Erase, Dreams in the Capsule, Past Dreams, Traced Seals, Artisan's Search, Beyond the Waves: Land of Xuanfang, Gifts of Singing Drizzle and Waking Moon Fishing - alongside Moonlit Path, which the separate Special Report covers with the store merchandise. Blooms for the Shadow joins as a permanent event rather than a patch-length one. The area they hang off is the Simulacrum Nexus of Mengzhou, six scenes of it, and the story is Chapter IV Act IV [Simulacrum of the Heart] with the Tales Quest [Moonlike Heart, Mortal Longing] beside it - the finale of Xuanfang Unveiled. The desk's event calendar fills itself from Kuro's own event notices, which go up around patch day rather than at the broadcast, so these are names now and dated rows on 30 September.",
+      "tags": [
+        "3.7",
+        "events",
+        "story",
+        "Mengzhou"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games - Version 3.7 Preview",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454"
+        },
+        {
+          "name": "Kuro Games - Version 3.7 Special Report",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5453"
+        },
+        {
+          "name": "Gematsu - Version 3.7 launches September 30",
+          "lang": "en",
+          "url": "https://www.gematsu.com/2026/09/wuthering-waves-version-3-7-update-prisms-illusion-hearts-illumination-launches-september-30"
+        }
+      ]
+    },
+    {
+      "id": "2026-09-19-37-preview-banners",
+      "date": "2026-09-19",
+      "version": "3.7",
+      "category": "banner",
+      "confidence": "official",
+      "title": "3.7 dated to 30 September, and both phases run three 5-star banners",
+      "body": "Kuro's preview post puts Version 3.7 \"Prism's Illusion, Heart's Illumination\" on 30 September (UTC+8), after maintenance. Phase 1 is Hsin's debut on [As Full as Tonight, Forever], with Chisa on [Horizon of Dawnbreak] and Iuno on [Across Time's Waxes and Wanes] beside her. Phase 2 opens with Suoming on [Nine Deaths, One Unbent Heart], against reruns for Lynae on [Undefined Spectrum] and Lucilla on [Tomorrow in the Frame] - Lucilla's first, three patches after her debut. Six 5-star Resonators over the patch, three a phase, where 3.6 ran two then three. The weapon banners are unusually tidy: Blooming Jadehaven, Kumokiri and Moongazer's Sigil in Phase 1, Unspoken Rue, Spectrum Blaster and Freeze Frame in Phase 2 - every one of them the signature of a Resonator featured on the same phase, so a weapon pull is never a pull away from the character you are already going for. Both new Resonators are Electro, which is the pairing the 9 August tracked list was doubted for. Kuro dated the patch and nothing inside it: the phase boundary around 22 October and the close around 10 November are the desk's arithmetic and carry (est) until the Featured Convene notices publish their own durations, which they do about a day before each phase opens.",
+      "tags": [
+        "3.7",
+        "banners",
+        "Hsin",
+        "Suoming",
+        "Chisa",
+        "Iuno",
+        "Lynae",
+        "Lucilla",
+        "weapons"
+      ],
+      "sources": [
+        {
+          "name": "Kuro Games - Version 3.7 Preview",
+          "lang": "en",
+          "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454"
+        },
+        {
+          "name": "Game8 - 3.7 banners and release date",
+          "lang": "en",
+          "url": "https://game8.co/games/Wuthering-Waves/archives/616859"
+        },
+        {
+          "name": "Gematsu - Version 3.7 launches September 30",
+          "lang": "en",
+          "url": "https://www.gematsu.com/2026/09/wuthering-waves-version-3-7-update-prisms-illusion-hearts-illumination-launches-september-30"
+        }
+      ]
+    },
     {
       "id": "2026-08-27-37-suoming-drip",
       "date": "2026-08-27",
@@ -257,7 +387,8 @@
           "lang": "en",
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1vikye9/37_info_about_hsin_via_sleep/"
         }
-      ]
+      ],
+      "outcome": "superseded"
     },
     {
       "id": "2026-08-01-36-beta-361",
@@ -1236,7 +1367,7 @@
           "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1w37g42/37_another_new_echo_set_via_team_gemberry/"
         }
       ],
-      "outcome": ""
+      "outcome": "confirmed"
     },
     {
       "id": "2026-09-05-38-lily-datamine",
