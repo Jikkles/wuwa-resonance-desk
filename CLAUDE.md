@@ -96,9 +96,20 @@ always this shape:
 - Write the announcement into `news.json` at `official`, and set `outcome` on the leaks it
   resolved — `confirmed` where they held, `superseded` where the broadcast overrode them.
 
-Events are not part of this. `fetch-events.mjs` builds the calendar from Kuro's own event
-notices, which go up around patch day rather than at the broadcast, so event names belong
-in a `news.json` entry on preview day and become dated rows on their own a week later.
+**Events are the same job again.** Kuro name a patch's events on the broadcast and publish
+each one's notice only around patch day, so `fetch-events.mjs` has nothing to fetch for
+ten days. Do not leave the calendar showing the old patch: write them into
+`data/events.json` by hand with `origin: "hand"`, which is what that flag is for — the
+fetcher keeps hand entries and hands each slot over the moment Kuro's own notice appears
+under the same name.
+
+The banner art is already public, inside the preview infographic rather than as files.
+`node scripts/find-event-art.mjs <articleId>` prints crop coordinates for every band in
+it; open the preview URLs, match band to event, paste the crop in. An event Kuro has not
+illustrated gets no `art` — the desk draws its own plate, which is the intended look, not
+a borrowed picture. Trim a band that includes the gold section title above the frame or
+Kuro's own name plate inside it, or set `art.nameplate` so the desk doesn't draw a second
+title over the first.
 
 ## Checking visual changes
 
