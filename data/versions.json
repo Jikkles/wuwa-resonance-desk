@@ -231,16 +231,6 @@
               "signature": "Unspoken Rue"
             },
             {
-              "name": "Lynae",
-              "rarity": 5,
-              "attribute": "Spectro",
-              "weapon": "Pistols",
-              "role": "Support",
-              "rerun": true,
-              "convene": "Undefined Spectrum",
-              "signature": "Spectrum Blaster"
-            },
-            {
               "name": "Lucilla",
               "rarity": 5,
               "attribute": "Glacio",
@@ -250,11 +240,21 @@
               "convene": "Tomorrow in the Frame",
               "signature": "Freeze Frame",
               "note": "First rerun"
+            },
+            {
+              "name": "Lynae",
+              "rarity": 5,
+              "attribute": "Spectro",
+              "weapon": "Pistols",
+              "role": "Support",
+              "rerun": true,
+              "convene": "Undefined Spectrum",
+              "signature": "Spectrum Blaster"
             }
           ]
         }
       ],
-      "notes": "Announced on the 19 September preview broadcast and dated by Kuro to 30 September (UTC+8). Six 5-star Resonator banners across two phases, three a phase, matching 3.6's back half rather than its front - and every featured 5-star weapon is the signature of a Resonator on the same phase, so there is nothing to split a weapon budget on. Hsin opens, Suoming closes, which is the order the drip cards ran in. Only the 30 September start is Kuro's own date: the phase boundary and the close are read off a 42-day patch with 21-day phases and carry (est) until the Featured Convene notices publish. The patch is the finale of the Xuanfang Unveiled arc - Chapter IV Act IV [Simulacrum of the Heart], the Simulacrum Nexus of Mengzhou area, and Unison arriving as a named system rather than the coordinated attack the August leaks had it as.",
+      "notes": "Announced on the 19 September preview broadcast and dated by Kuro to 30 September (UTC+8). Six 5-star Resonator banners across two phases, three a phase, matching 3.6's back half rather than its front - and every featured 5-star weapon is the signature of a Resonator on the same phase, so there is nothing to split a weapon budget on. Hsin opens, Suoming closes, which is the order the drip cards ran in. The phase dates are firmer than they look. Kuro printed no convene window in the preview, but they did print one event's: [Gifts of Singing Drizzle], a Phase 2 login event, runs 2026-10-22 10:00 to 2026-11-11 03:59 server time. A phase 2 login event has opened on the hour the phase opened in every patch the desk has recorded, so 22 October is where the boundary falls and 11 November is where the patch hands over. Both still carry (est), because an event window is not a convene window and the Featured Convene notice is what settles it - about a day before each phase opens, at which point the fetcher clears the flags itself. The patch is the finale of the Xuanfang Unveiled arc - Chapter IV Act IV Simulacrum of the Heart, the Simulacrum Nexus of Mengzhou area, and Unison arriving as a named system rather than the coordinated attack the August leaks had it as.",
       "region": "Mengzhou",
       "livestream": "2026-09-19",
       "start": "2026-09-30"
