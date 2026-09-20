@@ -90,8 +90,9 @@ const TIMEOUT_MS = 20000;
    about patches that have already been archived. */
 const LOOKBACK_DAYS = 120;
 
-const ISSUE_TITLE = "Version preview: banner lineup still needs a human";
+const ISSUE_TITLE = "Kuro published it as pictures — needs a human";
 const MARK = /<!-- desk-lineup: (.*?) -->/;
+const EVENTS = "data/events.json";
 const DRY = process.argv.includes("--dry-run") || !process.env.GITHUB_ACTIONS;
 
 const run = promisify(execFile);
@@ -163,6 +164,15 @@ async function firstKeyVisual(html) {
    absence is not a parse failure — it leaves `start` for a human, or for the
    Update Content post that follows two days before release. */
 const PREVIEW = /\bVersion\s+(\d+\.\d+)\s*["“”](.+?)["“”]/i;
+/* Two posts match that, and the difference matters for the event art. "Version
+   Preview" is the broadcast one, ten days out, and it illustrates the patch —
+   story, area, Resonators, weapons. "Update Content" is the quiet one two days
+   before release, and it is the one carrying the events sheet: a banner per
+   event stacked down a single tall JPEG. 3.6's was article 5310, whose second
+   sheet is 1080x12145 with nine bands in it, and every 3.6 event on the desk
+   crops its art out of exactly that. So an announced patch whose events have
+   no pictures is waiting on this post and nothing else. */
+const UPDATE_CONTENT = /Update\s+Content/i;
 const RELEASE_ON = /(?:Scheduled|Planned)\s+for\s+Release\s+on\s+([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?/i;
 
 const MONTHS = ["january", "february", "march", "april", "may", "june",
@@ -439,17 +449,82 @@ function lineupGaps(doc) {
     .map(v => ({ id: v.id, title: v.title, start: v.start }));
 }
 
+/* The same problem one step later, and the same answer. Kuro name a patch's
+   events on the broadcast and draw them in the Update Content post, so between
+   the two the desk carries the names with its own plate where a banner would
+   go. That is the intended look for an event nobody has drawn yet — but once
+   the sheet is out, those plates are just a job nobody did.
+//
+   Only while the patch is still unreleased. After it ships, each event gets a
+   notice of its own with its own banner, and fetch-events.mjs takes it from
+   there without anyone being asked. */
+function eventArtGaps(doc, events, updatePosts) {
+  const today = new Date().toISOString().slice(0, 10);
+  const out = [];
+  for (const v of doc.versions) {
+    if (!v.start || v.start < today) continue;
+    const post = updatePosts.get(v.id);
+    if (!post) continue;
+    const bare = (events.events || [])
+      .filter(e => e.version === v.id && !e.art)
+      .map(e => e.name);
+    if (bare.length) out.push({ id: v.id, articleId: post, names: bare });
+  }
+  return out;
+}
+
 async function gh(...args) {
   const { stdout } = await run("gh", args, { maxBuffer: 16 * 1024 * 1024 });
   return stdout;
 }
 
-function issueBody(gaps) {
-  return [
-    "Kuro have announced these, and the desk has the patch but not the banners.",
-    "",
-    ...gaps.map(g => `- **${g.id}**${g.title ? ` "${g.title}"` : ""} — releases ${g.start}`),
-    "",
+function issueBody({ lineup, eventArt }) {
+  const lines = [];
+
+  if (eventArt.length) {
+    lines.push(
+      "## Event banners are out",
+      "",
+      "Kuro have published the events sheet for these — a banner per event stacked down one tall",
+      "JPEG in the Update Content post — and the desk is still drawing its own plate instead.",
+      "");
+    for (const g of eventArt) {
+      lines.push(
+        `- **${g.id}** — article ${g.articleId}, ${g.names.length} event${g.names.length > 1 ? "s" : ""} with no art: ` +
+        g.names.map(n => `\`${n}\``).join(", "));
+    }
+    lines.push(
+      "",
+      "```bash",
+      ...eventArt.map(g => `node scripts/find-event-art.mjs ${g.articleId}`),
+      "```",
+      "",
+      "That prints a paste-ready `art` block and a preview URL per band. Open the previews, match",
+      "each band to its event, and paste the crop into that event's `art` in `data/events.json`.",
+      "The names are pixels, so the matching is the part that has to be done by eye — everything",
+      "either side of it is done. Trim a band that takes in the gold section title above the frame",
+      "or Kuro's own name plate inside it, or set `art.nameplate` so the desk doesn't draw a second",
+      "title over the first.",
+      "",
+      "An event Kuro genuinely haven't drawn keeps the plate. That is the intended look, not a gap.",
+      "");
+  }
+
+  if (lineup.length) {
+    if (eventArt.length) lines.push("## Banner lineup", "");
+    lines.push(
+      "Kuro have announced these, and the desk has the patch but not the banners.",
+      "",
+      ...lineup.map(g => `- **${g.id}**${g.title ? ` "${g.title}"` : ""} — releases ${g.start}`),
+      "");
+  }
+
+  return lines.concat(lineupTail(lineup, eventArt)).join("\n");
+}
+
+function lineupTail(lineup, eventArt) {
+  const tail = [];
+  if (lineup.length) tail.push(
     "The lineup is only on the preview infographics — Kuro publish no text version of it until the",
     "Featured Resonator/Weapon Convene notice, which goes up about a day before each phase opens.",
     "`fetch-version-notices.mjs` reads that notice and fills the phases in by itself when it lands,",
@@ -469,17 +544,27 @@ function issueBody(gaps) {
     "Phase dates read off the broadcast are estimates until the convene notices confirm them, so flag",
     "them `estimated_start` / `estimated_end` and let the fetcher clear the flags.",
     "",
-    "Then add the announcement to `data/news.json` at `official`, and close this.",
+    "Then add the announcement to `data/news.json` at `official`.",
+    "");
+  tail.push(
+    "This issue closes itself once every version above is dealt with.",
     "",
-    "This issue closes itself once every version above has banners on it.",
-    "",
-    `<!-- desk-lineup: ${gaps.map(g => g.id).join("; ")} -->`
-  ].join("\n");
+    "<!-- desk-lineup: " +
+      [...lineup.map(g => `lineup=${g.id}`), ...eventArt.map(g => `art=${g.id}`)].join("; ") +
+      " -->");
+  return tail;
 }
 
 async function raise(gaps) {
+  /* One flat list of what is outstanding, for the marker and the "also waiting
+     now" comment. A version can be on it twice for two different reasons. */
+  const items = [
+    ...gaps.lineup.map(g => `lineup=${g.id}`),
+    ...gaps.eventArt.map(g => `art=${g.id}`)
+  ];
+
   if (DRY) {
-    if (gaps.length) console.log(`\n--dry-run: would open or update "${ISSUE_TITLE}" with:\n\n${issueBody(gaps)}`);
+    if (items.length) console.log(`\n--dry-run: would open or update "${ISSUE_TITLE}" with:\n\n${issueBody(gaps)}`);
     else console.log(`\n--dry-run: would close "${ISSUE_TITLE}" if it is open`);
     return;
   }
@@ -489,10 +574,10 @@ async function raise(gaps) {
   const open = JSON.parse(await gh("issue", "list", "--state", "open", "--limit", "200",
     "--json", "number,title,body")).find(i => i.title === ISSUE_TITLE);
 
-  if (!gaps.length) {
+  if (!items.length) {
     if (open) {
       await gh("issue", "close", String(open.number),
-        "--comment", "Every announced version has its banner lineup now — closing.");
+        "--comment", "Everything Kuro published as a picture has been read off it now — closing.");
       console.log(`closed #${open.number}`);
     }
     return;
@@ -506,12 +591,12 @@ async function raise(gaps) {
   if (open.body.trim() === next.trim()) { console.log(`#${open.number} already says this`); return; }
 
   const before = new Set((open.body.match(MARK)?.[1] || "").split("; ").filter(Boolean));
-  const arrived = gaps.filter(g => !before.has(g.id));
+  const arrived = items.filter(i => !before.has(i));
   await gh("issue", "edit", String(open.number), "--body", next);
   if (arrived.length)
     await gh("issue", "comment", String(open.number), "--body",
-      `Also waiting now: ${arrived.map(g => `**${g.id}**`).join("; ")}.`);
-  console.log(`updated #${open.number}` + (arrived.length ? `, new: ${arrived.map(g => g.id).join(", ")}` : ""));
+      `Also waiting now: ${arrived.map(i => `**${i}**`).join("; ")}.`);
+  console.log(`updated #${open.number}` + (arrived.length ? `, new: ${arrived.join(", ")}` : ""));
 }
 
 /* ---------- main ---------- */
@@ -537,6 +622,12 @@ async function raise(gaps) {
     .sort((a, b) => String(a.startTime).localeCompare(String(b.startTime)));
 
   const previews = recent.filter(a => PREVIEW.test(a.articleTitle));
+  /* The newest Update Content post per version — the one carrying the events
+     sheet. `recent` is oldest-first, so the last write wins. */
+  const updatePosts = new Map();
+  for (const a of previews)
+    if (UPDATE_CONTENT.test(a.articleTitle))
+      updatePosts.set(PREVIEW.exec(a.articleTitle)[1], a.articleId);
   const numbered = recent.filter(a => PHASE_NOTICE.test(a.articleTitle));
   const loose = recent.filter(a => LOOSE_NOTICE.test(a.articleTitle));
   console.log(`${recent.length} articles in the window: ${previews.length} preview, ` +
@@ -628,9 +719,19 @@ async function raise(gaps) {
     console.log("versions.json unchanged");
   }
 
-  const gaps = lineupGaps(doc);
-  if (gaps.length) console.log(`\nannounced with no banner lineup: ${gaps.map(g => g.id).join(", ")}`);
+  const events = await readJson(EVENTS).catch(() => ({ events: [] }));
+  const gaps = {
+    lineup: lineupGaps(doc),
+    eventArt: eventArtGaps(doc, events, updatePosts)
+  };
+
+  if (gaps.lineup.length) console.log(`\nannounced with no banner lineup: ${gaps.lineup.map(g => g.id).join(", ")}`);
   else console.log("\nevery announced version has its banner lineup");
+
+  if (gaps.eventArt.length)
+    for (const g of gaps.eventArt)
+      console.log(`${g.id}: events sheet is out (article ${g.articleId}), ${g.names.length} events still on the desk's plate`);
+  else console.log("no events waiting on a sheet Kuro has already published");
 
   await raise(gaps).catch(err => console.log(`alert not raised: ${err.message}`));
 })().catch(err => {

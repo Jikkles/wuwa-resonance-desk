@@ -103,13 +103,27 @@ ten days. Do not leave the calendar showing the old patch: write them into
 fetcher keeps hand entries and hands each slot over the moment Kuro's own notice appears
 under the same name.
 
-The banner art is already public, inside the preview infographic rather than as files.
-`node scripts/find-event-art.mjs <articleId>` prints crop coordinates for every band in
-it; open the preview URLs, match band to event, paste the crop in. An event Kuro has not
-illustrated gets no `art` — the desk draws its own plate, which is the intended look, not
-a borrowed picture. Trim a band that includes the gold section title above the frame or
-Kuro's own name plate inside it, or set `art.nameplate` so the desk doesn't draw a second
-title over the first.
+**Event banner art arrives later than the names, and from a different post.** The preview
+illustrates the patch — story, area, Resonators, weapons — and draws at most one or two
+events. The rest are drawn in the **Update Content** post, two days before release: one
+tall JPEG with a banner per event stacked down it. 3.6's was article 5310, whose second
+sheet is 1080x12145 with nine bands, and every 3.6 event on the desk crops its art out of
+exactly that. So between the broadcast and that post there is no art to have, and the
+desk's own plate is the correct answer rather than a missing one.
+
+`fetch-version-notices.mjs` watches for that post and raises the issue **"Kuro published
+it as pictures — needs a human"** naming the article. Then:
+
+```bash
+node scripts/find-event-art.mjs <articleId>
+```
+
+It prints a paste-ready `art` block and a preview URL per band. Open the previews, match
+band to event, paste the crop into `data/events.json`. Matching is the only part a person
+has to do — the names are pixels. Trim a band that takes in the gold section title above
+the frame or Kuro's own name plate inside it, or set `art.nameplate` so the desk doesn't
+draw a second title over the first. Never borrow a picture from another event to fill a
+gap; an undrawn event keeps the plate.
 
 ## Checking visual changes
 

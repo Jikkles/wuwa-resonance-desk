@@ -116,13 +116,19 @@ key visual, and the Featured Convene notices, about a day before each phase open
 the convene names and confirm the phase windows. It fills blanks and replaces `estimated_*`
 dates; anything else that disagrees is reported and left for you.
 
-The one thing it cannot do is the banner lineup at announcement. Kuro publish that only as
-infographics — six pictures with no text behind them — and nothing on their site says
-"Phase 1: Hsin, Chisa, Iuno" in words until the convene notice ten days later. So the
-script opens the issue **"Version preview: banner lineup still needs a human"** with the
-shape to fill in, and closes it once the phases have banners on them. Convene names never
-change between a Resonator's runs, so `runs` in `resonators.json` already has the one you
-need.
+What it cannot do is read a picture. Two things a patch announcement carries arrive only
+as pixels, and for both the script raises the issue **"Kuro published it as pictures —
+needs a human"** and closes it once they are dealt with:
+
+- **The banner lineup**, at announcement. Nothing on Kuro's site says "Phase 1: Hsin,
+  Chisa, Iuno" in words until the convene notice ten days later. Convene names never
+  change between a Resonator's runs, so `runs` in `resonators.json` already has the one
+  you need.
+- **The event banners**, two days before release. The preview draws at most one or two
+  events; the rest come in the **Update Content** post as one tall sheet with a banner per
+  event. The issue names that article, and `find-event-art.mjs <id>` turns it into
+  paste-ready crops. Until that post exists there is no art to have, and the desk's plate
+  is the intended look rather than a gap.
 
 Everything else — roster, kits, builds, weapons, echoes, events, art, portraits, the
 headline feed, the patch archive, the beta client records — is fetched. The fetchers only
