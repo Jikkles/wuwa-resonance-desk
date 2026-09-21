@@ -5,10 +5,19 @@
   "source": "https://wutheringwaves.fandom.com/wiki/Category%3AIn-Game_Events",
   "versions": [
     {
+      "id": "3.7",
+      "title": "Prism's Illusion, Heart's Illumination",
+      "start": "2026-09-30T10:00:00+08:00",
+      "end": null,
+      "notice": "",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.7",
+      "events": []
+    },
+    {
       "id": "3.6",
       "title": "Lamplight in Mirage, Sword's Resolve in Heart",
       "start": "2026-08-20T10:00:00+08:00",
-      "end": null,
+      "end": "2026-09-30T10:00:00+08:00",
       "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357",
       "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.6",
       "events": [
@@ -23,6 +32,7 @@
           "source": "https://wutheringwaves.fandom.com/wiki/Second_Coming_of_Solaris%3A_Coded_Deception"
         }
       ],
+      "endDerived": true,
       "keyVisual": {
         "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1787155200000/q638zx40pwmperl5co-1787190881668.jpg",
         "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5357",
@@ -2934,5 +2944,5 @@
       ]
     }
   ],
-  "updated": "2026-09-12T10:34:16.469Z"
+  "updated": "2026-09-21T12:37:38.001Z"
 }
