@@ -3,7 +3,7 @@
   "note": "What the beta client's data tables carry that no live source does yet. Every record here is datamined: real client numbers, taken before Kuro has finished balancing them, and subject to change or to being cut before the patch ships. Nothing in this file is ever merged into weapons.json or echoes.json — those are rebuilt wholesale from live sources and would drop it on the next run — so app.js merges it at read time and marks every record it draws from here. A record the live sources already carry is dropped rather than written, whatever the beta says about it: post-balance numbers win. `resonators` is a report rather than data — a character in the client files with no roster record is something for a person to write up, not for a fetcher to file. Base ATK is the client's own rounding of a level-90 figure that ends in .5, which is why it can read one higher than prydwen.gg's truncation of the same number.",
   "credit": "Client data tables via nanoka.cc · © Kuro Games",
   "source": "https://ww.nanoka.cc/",
-  "build": "3.7.1",
+  "build": "3.7.3",
   "weapons": [
     {
       "name": "Unspoken Rue",
@@ -89,10 +89,10 @@
         ],
         [
           "10%",
-          "15%",
-          "20%",
-          "25%",
-          "30%"
+          "13.5%",
+          "17%",
+          "20.5%",
+          "24%"
         ],
         [
           "30%",
@@ -176,5 +176,5 @@
     }
   ],
   "resonators": [],
-  "updated": "2026-09-14T11:01:24.609Z"
+  "updated": "2026-09-22T07:26:39.560Z"
 }
