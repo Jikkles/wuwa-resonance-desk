@@ -366,8 +366,8 @@
       "permanent": true,
       "start": "2026-03-19T11:00:00+08:00",
       "end": null,
-      "summary": "Progress the Main Quest to unlock the events of the corresponding Resonators.",
-      "detail": "Progress the Main Quest to unlock the events of the corresponding Resonators. Certain conditions are required to unlock some of the events.",
+      "summary": "Green and hazy as they may feel, school days always shine like gems in the river of memory.",
+      "detail": "Green and hazy as they may feel, school days always shine like gems in the river of memory. Those stories drift among the stars, your constant companions through every quiet night. As the New Solar Celebration unfolds, fresh little tales begin to blossom between you and your friends...",
       "rewards": "Astrite x300, Advanced Resonance Potion x18, Advanced Energy Core x10, Advanced Sealed Tube x14, Forgery Advanced Supply - Lahai-Roi x15, Advanced Enclosure Tank - Lahai-Roi x16, Memories of the Stars x1, Shell Credit x550000",
       "eligibility": "",
       "art": {
@@ -519,5 +519,5 @@
       "source": "https://wutheringwaves.fandom.com/wiki/Lament_Recon%3A_Tacet_Crisis"
     }
   ],
-  "updated": "2026-09-02T16:35:22.605Z"
+  "updated": "2026-09-23T11:20:56.512Z"
 }
