@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-25T18:17:47.267Z",
+  "fetched": "2026-09-25T23:09:57.856Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -62,6 +62,86 @@
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Aemeath × Space Oddity",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wqaiqj/aemeath_space_oddity/",
+      "date": "2026-09-25T22:57:05.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "I hope they will add Companion Quests to this function",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wqa7vq/i_hope_they_will_add_companion_quests_to_this/",
+      "date": "2026-09-25T22:43:47.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "do think will see male sentinel resonator/sentinel in 4.0?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wq9uh8/do_think_will_see_male_sentinel_resonatorsentinel/",
+      "date": "2026-09-25T22:27:14.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Let me be there for everyone",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wq7gko/let_me_be_there_for_everyone/",
+      "date": "2026-09-25T20:46:54.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Fonts matter right right",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wq6tca/fonts_matter_right_right/",
+      "date": "2026-09-25T20:21:03.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Guys Wake up, New Hsin Brainrot just Dropped",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wq6oug/guys_wake_up_new_hsin_brainrot_just_dropped/",
+      "date": "2026-09-25T20:16:05.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Is this task possible with a premium team without Resonance Chain(RC)?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wq67xr/is_this_task_possible_with_a_premium_team_without/",
+      "date": "2026-09-25T19:57:46.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "The Most Insane ToA Clear | 1 Limited Weapon Calcharo Xiangli Yao Mortefi vs Hazard 4 | Mobile",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wq3ogh/the_most_insane_toa_clear_1_limited_weapon/",
+      "date": "2026-09-25T18:17:28.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "Man, I love female Rover !",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1wq2ya8/man_i_love_female_rover/",
@@ -253,46 +333,6 @@
       "hot": false
     },
     {
-      "title": "Apparently you can be under the login screen map",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wpsw2y/apparently_you_can_be_under_the_login_screen_map/",
-      "date": "2026-09-25T10:35:52.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "S0R1 Hiyuki Lucilla Suisui | 23096 Points | Matrix",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wpsmm6/s0r1_hiyuki_lucilla_suisui_23096_points_matrix/",
-      "date": "2026-09-25T10:20:13.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Happy Mid-Autumn Festival for our Fox Sentinel Hsin",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wpsfwo/happy_midautumn_festival_for_our_fox_sentinel_hsin/",
-      "date": "2026-09-25T10:09:09.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves | Hsin Official Illustration",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wpsbf6/wuthering_waves_hsin_official_illustration/",
-      "date": "2026-09-25T10:01:32.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "衔灯逐光，唤满月照人间。朝朝相望，求此世灯火繁。",
       "url": "https://www.kurobbs.com/mc/post/1552744120166420480",
       "date": "2026-09-25T10:00:00.000Z",
@@ -300,46 +340,6 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
-      "hot": false
-    },
-    {
-      "title": "Permanent red dot in guidebook",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wprzmz/permanent_red_dot_in_guidebook/",
-      "date": "2026-09-25T09:41:30.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "As long as I get double crits in each echoes ,it's enough",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wprp5s/as_long_as_i_get_double_crits_in_each_echoes_its/",
-      "date": "2026-09-25T09:23:40.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "The Effects of the Banner Situation?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wprec5/the_effects_of_the_banner_situation/",
-      "date": "2026-09-25T09:04:25.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Random death battle Collab: Augusta vs bayle the dread frome elden ring,who would won in the battle?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1wprajc/random_death_battle_collab_augusta_vs_bayle_the/",
-      "date": "2026-09-25T08:57:45.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
       "hot": false
     },
     {
@@ -696,7 +696,7 @@
       "title": "Wuthering Waves Is Introducing Main Quest Replay In Version 3.7",
       "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOaUZObmxFNmx3WXRXcFdEZFUzQTg5cnBMOG83aDJJVkJVVGtpQzQ5TmZkdXdNRmQwdDhQdEN6aFRpbk13NENVMlMtMEtSZ0NfOUo3eG1LT3lHS3lNSFJOaTFQZ2JPd3d6eTBFaTlrRVBXeVVwN294OEtjRUlHTFdkdGJIcXRoalVIR0c0SDdXRQ?oc=5",
       "date": "2026-09-19T20:22:03.000Z",
-      "source": "MMOBomb",
+      "source": "mmobomb.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -727,6 +727,16 @@
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1OYWFyZk5feGJjaXZRYnk3cDB2MDgzU0E0VllEalN1cHF0NW9FbmJoMm13MGo3ajRIcFFNMnh0V2FieTdiM25oVjNpdFFBU1ZrT2Q2eDVDSU95eG03RW5nQ2JkUS1hVTg4S0FJLURnQURVMXo4Z05HM1R2WQ?oc=5",
       "date": "2026-09-19T18:47:06.000Z",
       "source": "DualShockers",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Wuthering Waves Version 3.7 'Prism's Illusion, Heart's Illumination' Releases on September 30",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNMnhJMEVGZHhqQU9CZU5hUjJUXy0wVVh3ZmdaZ3dtc0tRdkkySVF2TDNxM1hBcHdZSDVOT3Ixb20wLXJVbHNxd2RqYnh0ekdlc3lNcndzM1I0aXU0cnBXTzNVdEJIN3JlMl90Umx0NlBIRi1ONUFDbl9WVzFaanRoSEQ4TjVuZld0a251S3R0NllOWW1aRkZHWERENHp3RXJFdHUtV0R0VHRyRUxoRHNoZ01R?oc=5",
+      "date": "2026-09-19T18:38:37.000Z",
+      "source": "finalweapon.net",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1086,7 +1096,7 @@
       "title": "Wuthering Waves 3.7 Livestream Time & Codes",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOSUs4d2cxbmhPSjZmaFFQaS1Cemh6SkRiVzVKRzE3eGZEV1p6b1pCZDRXSVRfTGdTRDJPR25XSHJ0dE5KcHpaYUsxVzZyN3drbno3SENLV3hXdHNkamZwWU9OcG51OWJRNnlUV3hGWE1BSDV2WEpRaVJmWnhBd1JNaUNXZFJSZUsxZ3FQdFJGYjktaDd3ZWpzS1RtNFRMVF80?oc=5",
       "date": "2026-09-19T07:00:13.000Z",
-      "source": "GameRant",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1101,16 +1111,6 @@
       "kind": "press",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Wuthering Waves system requirements: Recommended PC, iOS & Android settings",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPMTRJcEtPVy1wOWRqMHJiOERySGQ0QkROcnpKX0xyOHNQdWV1S0F2NWNEUklTSlFydXA4MmlYelRpWWNaaTdvMTc3OWt1YldobVloMFh3OWRBUXp3aGR4T3FmSWU1emxjUUc0d2dJQWRPTkR3MTZobmFBWXV0YkExMVpLWlFkUEdmeTNCRGpFY1JhZk5CaHM3ekRNYmxMUkFSMVVWNURvUVE5VTFGR0xqWg?oc=5",
-      "date": "2026-09-18T07:00:00.000Z",
-      "source": "Dexerto",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Wuthering Waves: Release date, platforms, & everything we know",
@@ -1160,16 +1160,6 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
-      "hot": false
-    },
-    {
-      "title": "Does Wuthering Waves have multiplayer or co-op?",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNbXZxTGtfSVhpai1CVXdFdm9BczNOSGozcFJLNmZrTDRwSTEyVXNnOGJTUm9sVkZQT2Iza0ptcHpTU29DT1h6YURjV2tqTGRQODlZYTJ3Y2wyeTVoMWQwU1kwMGQ0NG5ScVllMVlmSjNpYmQtUl9nUlNBdzlveTZ6VElXZlZOQTdSSU9uVnB5Zw?oc=5",
-      "date": "2026-09-17T07:00:00.000Z",
-      "source": "Dexerto",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
       "hot": false
     },
     {
@@ -1281,6 +1271,16 @@
       "kind": "video",
       "lang": "en",
       "hot": false
+    },
+    {
+      "title": "Wuthering Waves 3.7 Preview Special Broadcast Scheduled for September 19",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxObjFEQ2kwdFpibDdvby1rMWxmSmZrdl82a05FamlQbVE1MmZvSm8xS1FOSl8xMkdQcXlHQXl1VkVTMVdmUm1yZlhIU2ZtNldCYWRpaVJMN01naWlSdUI3ejN1RFkxdW1BV2lWaGZic2cwNVpUMmZuUTFWdFhyc2VDYkNLazNnSnE2NjFoV0lJQ0ROVnVtc0MtaklOdkRnYUQyV0ExNXBTQnVOUzli?oc=5",
+      "date": "2026-09-12T07:00:00.000Z",
+      "source": "finalweapon.net",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "WuWa 3.7 livestream date, time, and expected announcements (Wuthering Waves)",
@@ -1456,7 +1456,7 @@
       "title": "Jingran Banner Release Date In WuWa: When Does He Comes Out?",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMjd1ZndrNzRzdzVnVG1hRzdUekRfclV4RllWMEVxWG9NVWVHNWQ2OWhfUng2MGd1eGNoaXZzd25nckVQUTJEckxfMjJQUGlZNzM5VEtjel9DNjNEb0FqRU0zYnl1dVcxT3FRV05rSTEzVllIYzFMY0lrRGg2R2c1b3ZhbzNzVnR3c2VUVGt1MkxqNkxxd05hNk9xc0Y0bzliWlRrMmpYRUNBZw?oc=5",
       "date": "2026-09-08T07:00:00.000Z",
-      "source": "GameRant",
+      "source": "gamerant.com",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
