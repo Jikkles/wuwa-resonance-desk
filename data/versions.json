@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-09-20",
+  "updated": "2026-09-29",
   "current": "3.6",
   "versions": [
     {
@@ -179,7 +179,6 @@
           "n": 1,
           "start": "2026-09-30",
           "end": "2026-10-22",
-          "estimated_end": true,
           "banners": [
             {
               "name": "Hsin",
