@@ -209,16 +209,21 @@ async function parseNotice(article, name) {
   const text = toText(article.articleContent);
   const durationLine = field(text, "Duration");
   const imgs = imagesIn(article.articleContent);
+  const wide = await Promise.all(imgs.map(isLandscape));
+  /* The banner is the first landscape picture, not the first picture. Cubie
+     Wars' preview led with a 1140x1699 info card, and the desk drew a slice of
+     its type as the event's art. No landscape frame means no banner here, and
+     whatever the record already had (a crop out of the events sheet) stands. */
+  const banner = imgs.findIndex((_, i) => wide[i]);
   return {
     name,
-    art: imgs[0] || null,
+    art: banner >= 0 ? imgs[banner] : null,
     /* Whatever else in the post is a picture rather than a page — see
        isLandscape. When a notice carries a real screenshot of the mode being
        played this is where it comes from, and the event record shows them as a
        reel; when it carries nothing but the banner and the poster, which is
        most of them, the list comes back empty and no reel draws. */
-    shots: (await Promise.all(imgs.slice(1).map(async u => (await isLandscape(u)) ? u : null)))
-      .filter(Boolean),
+    shots: imgs.filter((u, i) => wide[i] && i !== banner),
     when: durationLine ? parseWhen(durationLine) : null,
     rewards: field(text, "Rewards") || "",
     eligibility: field(text, "Eligibility") || "",
@@ -325,11 +330,17 @@ function versionFor(versions, when, fallback) {
      wrote the entry cut the coordinates out of it. When Kuro's own list
      lands and supersedes the entry, that art has to come with it: the
      overview has no pictures, and dropping them would take the calendar
-     backwards on patch day. */
+     backwards on patch day.
+     The previous run's own record for the name stands behind them. A notice
+     that is one picture and no text supersedes the hand entry on the first
+     run, and without this the window written into it would be gone on the
+     second. A hand entry still wins where both exist. */
   const handByKey = new Map();
   for (const e of previous.events || []){
-    if (e.origin !== "hand") continue;
-    for (const nm of [e.name, ...(e.alias || [])]) handByKey.set(key(nm), e);
+    for (const nm of [e.name, ...(e.alias || [])]) {
+      const had = handByKey.get(key(nm));
+      if (!had || (e.origin === "hand" && had.origin !== "hand")) handByKey.set(key(nm), e);
+    }
   }
 
   const events = [];
@@ -343,16 +354,19 @@ function versionFor(versions, when, fallback) {
     const when = overview?.when?.start || overview?.when?.end
       ? overview.when
       : notice?.when || overview?.when || {};
-    const version = versionFor(versions, when, overview?.version);
+    /* A preview notice is often one picture and no text, so it has no window
+       to place it by — Cubie Wars was. The hand entry it is superseding already
+       says which patch it belongs to, and that beats dropping Kuro's banner. */
+    const version = versionFor(versions, when, overview?.version || hand?.version);
     /* "After the Version 3.5 update" is a real start date once you know when
        the patch opened — resolve it rather than printing Kuro's phrasing. */
     const start = when.start || (when.withPatch && version && patchStart[version]
-      ? `${patchStart[version]}T04:00:00+08:00` : null);
+      ? `${patchStart[version]}T04:00:00+08:00` : null) || hand?.start || null;
 
-    const desc = (overview?.desc || []).join(" ").trim() || notice?.blurb || "";
+    const desc = (overview?.desc || []).join(" ").trim() || notice?.blurb || hand?.detail || hand?.summary || "";
     const kind = (overview?.kind || "").replace(/\s*Event$/i, "").trim()
       || (notice?.articleTitle?.match(/\]\s*(.+?)(,|$)/)?.[1] || "").replace(/\s*Event.*$/i, "").trim()
-      || "Event";
+      || hand?.kind || "Event";
 
     /* Outside every window the desk knows about. Kuro's news page still
        carries the last two patches' notices, and an event that closed before
@@ -367,7 +381,8 @@ function versionFor(versions, when, fallback) {
       section: overview?.section || "Special Events",
       permanent: !!when.permanent,
       start,
-      end: when.end || null,
+      end: when.end || hand?.end || null,
+      ...(!start && hand?.startsWithPatch ? { startsWithPatch: true } : {}),
       summary: clip(desc.split(/(?<=[.!?])\s/)[0], 160),
       detail: desc,
       rewards: notice?.rewards || hand?.rewards || "",
