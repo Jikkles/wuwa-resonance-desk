@@ -78,4 +78,4 @@ $stamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mmZ")
 git commit --quiet -m "chore: refresh local-only data $stamp" 2>&1 | ForEach-Object { Say "git: $_" }
 git pull --rebase --quiet 2>&1 | ForEach-Object { Say "git: $_" }
 git push --quiet 2>&1 | ForEach-Object { Say "git: $_" }
-if ($LASTEXITCODE -eq 0) { Say "pushed $stamp" } else { Say "push failed — the commit is local, the next run pushes it" }
+if ($LASTEXITCODE -eq 0) { Say "pushed $stamp" } else { Say "push failed -- the commit is local, the next run pushes it" }

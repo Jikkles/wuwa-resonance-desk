@@ -28,4 +28,4 @@ $principal = New-ScheduledTaskPrincipal -UserId "$env:USERDOMAIN\$env:USERNAME" 
 Register-ScheduledTask -TaskName $name -Action $action -Trigger $trigger -Settings $settings `
   -Principal $principal -Description "Runs the Prydwen fetchers and the event-art OCR for the Resonance Desk, then pushes. See scripts/local-run.ps1." `
   -Force | Out-Null
-"registered '$name' — every 6 hours from $($start.ToString('HH:mm')), log at $env:LOCALAPPDATA\resonance-desk\local-run.log"
+"registered '$name' -- every 6 hours from $($start.ToString('HH:mm')), log at $env:LOCALAPPDATA\resonance-desk\local-run.log"
