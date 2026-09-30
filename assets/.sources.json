@@ -393,6 +393,486 @@
       "url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/18/Item_Xuanfang_Wonder.png/revision/latest?cb=20260721090842",
       "bytes": 23194
     },
+    "assets/portraits/aalto-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/aalto_card.webp",
+      "bytes": 52136
+    },
+    "assets/portraits/aalto.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/aalto_icon.webp",
+      "bytes": 10028
+    },
+    "assets/portraits/aemeath-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/math_card.webp",
+      "bytes": 44684
+    },
+    "assets/portraits/aemeath.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/math_icon.webp",
+      "bytes": 8612
+    },
+    "assets/portraits/augusta-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/aug_card.webp",
+      "bytes": 58558
+    },
+    "assets/portraits/augusta.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/aug_icon.webp",
+      "bytes": 10234
+    },
+    "assets/portraits/baizhi-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/baizhi_card.webp",
+      "bytes": 49794
+    },
+    "assets/portraits/baizhi.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/baizhi_icon.webp",
+      "bytes": 7624
+    },
+    "assets/portraits/brant-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_brant.webp",
+      "bytes": 51078
+    },
+    "assets/portraits/brant.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_brant.webp",
+      "bytes": 7928
+    },
+    "assets/portraits/buling-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/buling_card.webp",
+      "bytes": 48482
+    },
+    "assets/portraits/buling.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/buling_icon.webp",
+      "bytes": 10472
+    },
+    "assets/portraits/calcharo-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/kakarot_card.webp",
+      "bytes": 51772
+    },
+    "assets/portraits/calcharo.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/kakarot_icon.webp",
+      "bytes": 11602
+    },
+    "assets/portraits/camellya-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_cam.webp",
+      "bytes": 51210
+    },
+    "assets/portraits/camellya.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_cam.webp",
+      "bytes": 9172
+    },
+    "assets/portraits/cantarella-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_canta.webp",
+      "bytes": 46188
+    },
+    "assets/portraits/cantarella.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_canta.webp",
+      "bytes": 7168
+    },
+    "assets/portraits/carlotta-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_carlotta.webp",
+      "bytes": 48582
+    },
+    "assets/portraits/carlotta.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_carlotta.webp",
+      "bytes": 8182
+    },
+    "assets/portraits/cartethyia-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/cart_card.webp",
+      "bytes": 49128
+    },
+    "assets/portraits/cartethyia.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/cart_icon.webp",
+      "bytes": 9114
+    },
+    "assets/portraits/changli-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_changli.webp",
+      "bytes": 48258
+    },
+    "assets/portraits/changli.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/changli_icon.webp",
+      "bytes": 9984
+    },
+    "assets/portraits/chisa-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/chisa_card.webp",
+      "bytes": 40256
+    },
+    "assets/portraits/chisa.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/chisa_icon.webp",
+      "bytes": 7152
+    },
+    "assets/portraits/chixia-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/chixia_card.webp",
+      "bytes": 53336
+    },
+    "assets/portraits/chixia.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/chixia_icon.webp",
+      "bytes": 10906
+    },
+    "assets/portraits/ciaccona-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/cia_card.webp",
+      "bytes": 51800
+    },
+    "assets/portraits/ciaccona.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/cia_icon.webp",
+      "bytes": 10292
+    },
+    "assets/portraits/danjin-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/danjin_card.webp",
+      "bytes": 45828
+    },
+    "assets/portraits/danjin.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/danjin_icon.webp",
+      "bytes": 9836
+    },
+    "assets/portraits/denia-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/denia_card.webp",
+      "bytes": 43658
+    },
+    "assets/portraits/denia.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/denia_sm.webp",
+      "bytes": 9120
+    },
+    "assets/portraits/encore-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/encore_card.webp",
+      "bytes": 56560
+    },
+    "assets/portraits/encore.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/encore_icon.webp",
+      "bytes": 10270
+    },
+    "assets/portraits/galbrena-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/gal_card.webp",
+      "bytes": 47824
+    },
+    "assets/portraits/galbrena.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/gal_icon.webp",
+      "bytes": 9322
+    },
+    "assets/portraits/hiyuki-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/hiyuki_card.webp",
+      "bytes": 40940
+    },
+    "assets/portraits/hiyuki.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/hiyuki_sm.webp",
+      "bytes": 7038
+    },
+    "assets/portraits/hsin-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/hsin_card.webp",
+      "bytes": 74238
+    },
+    "assets/portraits/hsin.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/hsin_icon.webp",
+      "bytes": 11204
+    },
+    "assets/portraits/iuno-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/iuno_card.webp",
+      "bytes": 56524
+    },
+    "assets/portraits/iuno.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/ioun_icon.webp",
+      "bytes": 8906
+    },
+    "assets/portraits/jianxin-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/jiaxin_card.webp",
+      "bytes": 56876
+    },
+    "assets/portraits/jianxin.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/jiaxin_icon.webp",
+      "bytes": 9904
+    },
+    "assets/portraits/jingran-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/jingran_card.webp",
+      "bytes": 67070
+    },
+    "assets/portraits/jingran.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/jingran_icon.webp",
+      "bytes": 9190
+    },
+    "assets/portraits/jinhsi-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/jihni_card.webp",
+      "bytes": 42624
+    },
+    "assets/portraits/jinhsi.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/jihni_icon.webp",
+      "bytes": 7942
+    },
+    "assets/portraits/jiyan-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/jiyan_card.webp",
+      "bytes": 55656
+    },
+    "assets/portraits/jiyan.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/jiyan_icon.webp",
+      "bytes": 9698
+    },
+    "assets/portraits/lingyang-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/ling_card.webp",
+      "bytes": 61280
+    },
+    "assets/portraits/lingyang.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/ling_icon.webp",
+      "bytes": 11580
+    },
+    "assets/portraits/lucilla-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/47_card.webp",
+      "bytes": 42976
+    },
+    "assets/portraits/lucilla.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/47_icon.webp",
+      "bytes": 6132
+    },
+    "assets/portraits/lucy-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/lucy_card.webp",
+      "bytes": 54180
+    },
+    "assets/portraits/lucy.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/lucy_icon.webp",
+      "bytes": 9940
+    },
+    "assets/portraits/lumi-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_lumi.webp",
+      "bytes": 44744
+    },
+    "assets/portraits/lumi.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_lumi.webp",
+      "bytes": 8204
+    },
+    "assets/portraits/lupa-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/lupa_card.webp",
+      "bytes": 51356
+    },
+    "assets/portraits/lupa.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/lupa_icon.webp",
+      "bytes": 10250
+    },
+    "assets/portraits/luuk-herssen-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/45_card.webp",
+      "bytes": 33394
+    },
+    "assets/portraits/luuk-herssen.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/45_icon.webp",
+      "bytes": 7710
+    },
+    "assets/portraits/lynae-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/48_card.webp",
+      "bytes": 40210
+    },
+    "assets/portraits/lynae.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/48_icon.webp",
+      "bytes": 7904
+    },
+    "assets/portraits/mornye-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/46_card.webp",
+      "bytes": 38908
+    },
+    "assets/portraits/mornye.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/46_icon.webp",
+      "bytes": 7460
+    },
+    "assets/portraits/mortefi-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/mortefi_card.webp",
+      "bytes": 54654
+    },
+    "assets/portraits/mortefi.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/mortefi_icon.webp",
+      "bytes": 10204
+    },
+    "assets/portraits/phoebe-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_phoebe.webp",
+      "bytes": 46506
+    },
+    "assets/portraits/phoebe.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_phoebe.webp",
+      "bytes": 7104
+    },
+    "assets/portraits/phrolova-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/phr_card.webp",
+      "bytes": 44784
+    },
+    "assets/portraits/phrolova.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/phr_icon.webp",
+      "bytes": 7142
+    },
+    "assets/portraits/qingxiao-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/qingxiao_card.webp",
+      "bytes": 66660
+    },
+    "assets/portraits/qingxiao.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/qingxiao_icon.webp",
+      "bytes": 11558
+    },
+    "assets/portraits/qiuyuan-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/qiu_card.webp",
+      "bytes": 50432
+    },
+    "assets/portraits/qiuyuan.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/qiu_icon.webp",
+      "bytes": 7068
+    },
+    "assets/portraits/rebecca-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/rebecca_card.webp",
+      "bytes": 59448
+    },
+    "assets/portraits/rebecca.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/rebecca_icon.webp",
+      "bytes": 8364
+    },
+    "assets/portraits/roccia-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_roccia.webp",
+      "bytes": 44854
+    },
+    "assets/portraits/roccia.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_roccia.webp",
+      "bytes": 8356
+    },
+    "assets/portraits/rover-aero-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/rover_card.webp",
+      "bytes": 63524
+    },
+    "assets/portraits/rover-aero.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/rover_icon.webp",
+      "bytes": 9756
+    },
+    "assets/portraits/rover-electro-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/rover_card.webp",
+      "bytes": 63524
+    },
+    "assets/portraits/rover-electro.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/rover_icon.webp",
+      "bytes": 9756
+    },
+    "assets/portraits/rover-havoc-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/rover_card.webp",
+      "bytes": 63524
+    },
+    "assets/portraits/rover-havoc.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/rover_icon.webp",
+      "bytes": 9756
+    },
+    "assets/portraits/rover-spectro-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/rover_card.webp",
+      "bytes": 63524
+    },
+    "assets/portraits/rover-spectro.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/rover_icon.webp",
+      "bytes": 9756
+    },
+    "assets/portraits/sanhua-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/senhua_card.webp",
+      "bytes": 46776
+    },
+    "assets/portraits/sanhua.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/senhua_icon.webp",
+      "bytes": 10214
+    },
+    "assets/portraits/sigrika-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/44_card.webp",
+      "bytes": 45590
+    },
+    "assets/portraits/sigrika.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/44_icon.webp",
+      "bytes": 8348
+    },
+    "assets/portraits/suisui-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/suisui_card.webp",
+      "bytes": 61534
+    },
+    "assets/portraits/suisui.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/suisui_icon.webp",
+      "bytes": 11226
+    },
+    "assets/portraits/suoming-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/suoming_card.webp",
+      "bytes": 65074
+    },
+    "assets/portraits/suoming.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/suoming_icon.webp",
+      "bytes": 10088
+    },
+    "assets/portraits/taoqi-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/taoqi_card.webp",
+      "bytes": 56440
+    },
+    "assets/portraits/taoqi.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/taoqi_icon.webp",
+      "bytes": 11474
+    },
+    "assets/portraits/the-shorekeeper-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_keeper.webp",
+      "bytes": 39418
+    },
+    "assets/portraits/the-shorekeeper.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_keeper.webp",
+      "bytes": 6578
+    },
+    "assets/portraits/verina-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/verina_card.webp",
+      "bytes": 53618
+    },
+    "assets/portraits/verina.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/verina_icon.webp",
+      "bytes": 11230
+    },
+    "assets/portraits/xiangli-yao-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_xiang.webp",
+      "bytes": 35634
+    },
+    "assets/portraits/xiangli-yao.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_xiang.webp",
+      "bytes": 5320
+    },
+    "assets/portraits/yangyang-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/yang_card.webp",
+      "bytes": 56344
+    },
+    "assets/portraits/yangyang-xuanling-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/yangyang-xuanling_card.webp",
+      "bytes": 67640
+    },
+    "assets/portraits/yangyang-xuanling.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/yangyang-xuanling_icon.webp",
+      "bytes": 9620
+    },
+    "assets/portraits/yangyang.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/yang_icon.png",
+      "bytes": 60972
+    },
+    "assets/portraits/yinlin-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/yinglin_card.webp",
+      "bytes": 75158
+    },
+    "assets/portraits/yinlin.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/yinglin_icon.webp",
+      "bytes": 12958
+    },
+    "assets/portraits/youhu-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_youhu.webp",
+      "bytes": 35996
+    },
+    "assets/portraits/youhu.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_youhu.webp",
+      "bytes": 8876
+    },
+    "assets/portraits/yuanwu-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/yuanwu_card.webp",
+      "bytes": 49126
+    },
+    "assets/portraits/yuanwu.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/yuanwu_icon.webp",
+      "bytes": 8878
+    },
+    "assets/portraits/zani-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_zani.webp",
+      "bytes": 38532
+    },
+    "assets/portraits/zani.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_zani.webp",
+      "bytes": 7338
+    },
+    "assets/portraits/zhezhi-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/card_zhe.webp",
+      "bytes": 45100
+    },
+    "assets/portraits/zhezhi.webp": {
+      "url": "https://cdn.prydwen.gg/images/ww/characters/icon_zhe.webp",
+      "bytes": 7698
+    },
     "assets/weapons/w-abyss-surges.webp": {
       "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21040015.webp",
       "bytes": 17344
@@ -440,6 +920,10 @@
     "assets/weapons/w-bloodpact-s-pledge.webp": {
       "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020046.webp",
       "bytes": 24110
+    },
+    "assets/weapons/w-blooming-jadehaven.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050116.webp",
+      "bytes": 6434
     },
     "assets/weapons/w-boson-astrolabe.webp": {
       "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050045.webp",
@@ -848,6 +1332,10 @@
     "assets/weapons/w-unflickering-valor.webp": {
       "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020036.webp",
       "bytes": 27504
+    },
+    "assets/weapons/w-unspoken-rue.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020107.webp",
+      "bytes": 3022
     },
     "assets/weapons/w-variation.webp": {
       "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050024.webp",

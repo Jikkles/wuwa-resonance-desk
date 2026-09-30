@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/kits@1.0",
-  "updated": "2026-09-14",
+  "updated": "2026-09-30",
   "note": "Six skills, two Inherent Skills and the six-node Resonance Chain per Resonator, as they read in the live client. Text carries **bold** and __underline__ markers rather than markup — the desk escapes the string before turning those back into elements. Skill descriptions via prydwen.gg where it could be reached and wutheringwaves.fandom.com otherwise; skills © Kuro Games.",
   "credit": "Kit text via prydwen.gg and wutheringwaves.fandom.com · © Kuro Games",
   "kits": {
@@ -13846,6 +13846,295 @@
                 "When the target's Off-Tune Level is full, the Resonator may cast Tune Break on the target.",
                 "While in Yin Vessel, press or hold Normal Attack shortly after casting this skill to Basic Attack - Drink Soul Stage 2.",
                 "While in Yang Font, press or hold Normal Attack shortly after casting this skill to Basic Attack - Devil's Bane Stage 2."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "Hsin": {
+      "slug": "hsin",
+      "skills": {
+        "basic": {
+          "name": "Manifold Bloom",
+          "blocks": [
+            {
+              "p": [
+                "While in Answering Form, perform up to **4** consecutive attacks, dealing __Electro DMG__.",
+                "While in Answering Form, consume STA to deal __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 2.",
+                "While in Answering Form and in mid-air, press Normal Attack to cast the skill at the cost of STA, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 2.",
+                "While in Answering Form and in mid-air, hold Normal Attack to cast Heavy Attack - Answering Form: Reign at Ease, continuously consuming STA and dealing __Electro DMG__ to the target. Switching to another Resonator ends the skill action immediately.",
+                "When the Normal Attack button is released during Heavy Attack - Answering Form: Reign at Ease, Hsin casts Mid-air Attack - Answering Form: Reign at Ease , consuming STA to perform a Plunging Attack, transforming into the Moon Fox upon landing and dealing __Electro DMG__.",
+                "After casting Mid-air Attack- Answering Form: Reign at Ease, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 2.",
+                "While in Answering Form, press Normal Attack within a short time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 3.",
+                "While in Illumining Form and not in the Mechanism Dominion state, command Xuanfang Mechanisms to perform up to **3** consecutive attacks, dealing __Electro DMG__.",
+                "Casting Basic Attack - Illumining Form Stage 1 generates a Modular Heartlock at the target's position. Casting Basic Attack - Illumining Form Stage 2, Heavy Attack - Illumining Form, Dodge Counter - Illumining Form, or Resonance Skill - Illumining Form causes the Modular Heartlock to collapse, dealing __Electro DMG__.",
+                "Casting this skill consumes STA when Hsin is in mid-air.",
+                "While in Illumining Form, consume STA to command Xuanfang Mechanisms, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Illumining Form Stage 3.",
+                "While in Illumining Form and on the ground, press Jump to cast this skill, dealing __Electro DMG__.",
+                "While in Illumining Form and Hsin is in mid-air, Resonance Skill - Illumining Form is replaced with Mid-air Attack - Illumining Form.",
+                "Consume STA to perform a Plunging Attack, dealing __Electro DMG__.",
+                "While in Illumining Form, press Normal Attack within a short time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Illumining Form Stage 3.",
+                "While in Illumining Form and in the Mechanism Dominion state, command Xuanfang Mechanisms to perform up to **4** consecutive attacks, dealing __Electro DMG__.",
+                "While in Illumining Form and in the Mechanism Dominion state, press Normal Attack within a short time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Illumining Form: Pillars Aligned Stage 3."
+              ]
+            }
+          ]
+        },
+        "skill": {
+          "name": "Heartward by Moon",
+          "blocks": [
+            {
+              "p": [
+                "While in Answering Form, press Resonance Skill to deal __Electro DMG__.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 4. Can be cast in mid-air.",
+                "If Hsin moves while on the ground within a short time after casting this skill, She turns into the Moon Fox.",
+                "While turned into the Moon Fox and out of combat, Hsin gains Dustless Tread. With Dustless Tread, Hsin can enter the target's aggro range without triggering combat. Dustless Tread is removed when Hsin enters combat, is switched out, or ends the Moon Fox form by having environmental, gameplay, or feature interactions.",
+                "While turned into the Moon Fox and out of combat, Hsin restores 6% of Max HP every 3s.",
+                "Taking damage, failing to perform a Dodge with directional input while on the ground, or Dodging in mid-air will end the Moon Fox form. Switching to another Resonator or pressing Resonance Skill also ends the Moon Fox form. Press Normal Attack to cast Basic Attack - Answering Form Stage 4, which also ends the Moon Fox form.",
+                "Resonance Liberation is disabled when Hsin is in the Moon Fox form.",
+                "While in Illumining Form and Hsin is on the ground, press Resonance Skill to have Hsin command a Colossal Xuanfang Mechanism, dealing __Electro DMG__."
+              ]
+            }
+          ]
+        },
+        "liberation": {
+          "name": "Nexus Alight",
+          "blocks": [
+            {
+              "p": [
+                "Casting Heavy Attack - Answering Form: Realm Wanderer unlocks Formshift.",
+                "Cast Formshift to unfurl the Manifold Sanctum. Hsin turns into Illumining Form, unlocking a new set of combat abilities, and enters the Heart Manifest state.",
+                "Can be cast in mid-air close to the ground.",
+                "While in Illumining Form, engaging in quest dialogue, performing a environmental interaction with an animation, or using a Utility switches Hsin back to Answering Form to perform the corresponding action. While in Illumining Form, Hsin can walk on the surface of water, and will continuously consume STA in the deep water areas. In Walking Mode, Hsin in Illumining Form can step off a cliff into the air and walk slowly in mid-air, continuously consuming STA in this state. Hsin cannot restore STA while in Illumining Form and air-borne.",
+                "Casting Heavy Attack - Illumining Form: Beholding All Horizons unlocks Pillars Across Heaven.",
+                "Cast Pillars Across Heaven to bring the Manifold Sanctum crashing down, dealing __Electro DMG__ to the target, considered Resonance Skill DMG.",
+                "Can be cast in mid-air close to the ground.",
+                "Hsin returns to Answering Form and exits the Heart Manifest state.",
+                "Casting Formshift grants Hsin 21 stacks of Edict for 45s. The effect cannot exceed 21 stacks and all stacks are removed when the duration ends. After the active Resonator in the team deals DMG, Hsin automatically consumes Edict in the following **3s** trigger the following effect up to once per second. Retriggering the effect resets the durtion:",
+                "When Edict is consumed, summon a Soaring Pillar from the Manifold Sanctum as a Coordinated Attack to strike the target once, dealing Electro DMG.",
+                "Edict can be automatically consumed up to **1** stack per second.",
+                "Damage dealt by Soaring Pillar does not trigger this effect.",
+                "When Hsin is knocked out, all Edict stacks are removed.",
+                "Increases Hsin's resistance to interruption for **45s**.",
+                "Entering the Heart Manifest state resets Hsin's Illumining Form.",
+                "While in the Heart Manifest state and in Illumining Form, if Pillars Across Heaven has not been unlocked, press Resonance Liberation to have Hsin cast Invoked Form: Answering. While in Answering Form, press Resonance Liberation to have Hsin cast Invoked Form: Illumining.",
+                "Hsin temporarily reverts to Answering Form. When this skill is cast, if Hsin is on the ground, She casts Basic Attack - Answering Form Stage 2; if She is in mid-air, She casts Mid-air Attack - Answering Form.",
+                "Hsin turns back into Illumining Form. When this skill is cast, if Hsin is on the ground, She casts Upward Cut - Illumining Form; if She is in mid-air, She casts Mid-air Attack - Illumining Form."
+              ]
+            }
+          ]
+        },
+        "forte": {
+          "name": "Forms Turn, Heart Abides",
+          "blocks": [
+            {
+              "p": [
+                "While in Answering Form, Hsin can gain and consume Answering Heart.",
+                "While in Illumining Form, Hsin can gain and consume Illumining Heart.",
+                "While in Answering Form, when Hsin's Answering Heart reaches **100** points, Heavy Attack - Answering Form is replaced with Heavy Attack - Answering Form: Realm Wanderer.",
+                "Hold Normal Attack to cast the skill at the cost of STA and **100** points of Answering Heart. Hsin is immune to interruption during the action, and deals __Electro DMG__ to the target, considered Resonance Skill DMG.",
+                "Casting Heavy Attack - Answering Form: Realm Wanderer grants Hsin Resolution of Wishes. This Heavy Attack - Answering Form: Realm Wanderer consumes Resolution of Wishes to become Heavy Attack - Answering Form: Realm Protector, dealing greater DMG. Resolution of Wishes can only be gained once every 24s.",
+                "While casting Heavy Attack - Answering Form: Realm Wanderer or Heavy Attack - Answering Form: Realm Protector, if Hsin is not in the Heart Manifest state, unlock Resonance Liberation - Formshift.",
+                "While in Illumining Form, when Hsin's Illumining Heart reaches **0** during the Mechanism Dominion state, Heavy Attack - Illumining Form is replaced with Heavy Attack - Illumining Form: Beholding All Horizons.",
+                "Hold Normal Attack to cast the skill at the cost of STA, dealing __Electro DMG__ to the target, considered Resonance Skill DMG.",
+                "Casting Heavy Attack - Illumining Form: Beholding All Horizons grants Hsin Law of Heaven. This Heavy Attack - Illumining Form: Beholding All Horizons consumes Law of Heaven to become Heavy Attack - Illumining Form: Stilling All Horizons, dealing greater DMG. Law of Heaven can only be gained once every **24s**.",
+                "Casting Heavy Attack - Illumining Form: Beholding All Horizons or Heavy Attack - Illumining Form: Stilling All Horizons ends the Mechanism Dominion state and unlocks Resonance Liberation - Pillars Across Heaven. Can be cast in mid-air.",
+                "While in Illumining Form, when Hsin's Illumining Heart reaches 300 points and She is on the ground, Resonance Skill is replaced with Resonance Skill - Illumining Form: Pillars Aligned.",
+                "When Hsin is on the ground, press Resonance Skill to deal __Electro DMG__ to surrounding targets, considered Resonance Skill DMG.",
+                "Casting Resonance Skill - Illumining Form: Pillars Aligned sends Hsin into the Mechanism Dominion state.",
+                "Mechanism Dominion",
+                "The Mechanism Dominion state lasts **13s**.",
+                "While this state is active, Basic Attack - Illumining Form is replaced with Basic Attack - Illumining Form: Pillars Aligned, and Dodge Counter - Illumining Form is replaced with Dodge Counter - Illumining Form: Pillars Aligned.",
+                "When Basic Attack - Illumining Form: Pillars Aligned or Dodge Counter - Illumining Form: Pillars Aligned hits a target, Illumining Heart is consumed if Hsin is the active Resonator.",
+                "Exiting Mechanism Dominion clears Illumining Heart.",
+                "While in Resonance Mode - Unison, Hsin gains the following effects:",
+                "Hsin can trigger Unison Response, but not in Co-op Mode.",
+                "After casting Intro Skill - Answering Form or Intro Skill - Answering Form: Manifold Unison, the next Resonance Liberation - Formshift grants Hsin Unison for 5s.",
+                "When Hsin triggers Unison Response, She gains Source Intent, and the Intro Skill cast this time is replaced with Intro Skill - Manifold Unison, dealing greater DMG.",
+                "When Hsin casts an Intro Skill without triggering Unison Response while holding Source Intent, She consumes Source Intent instead, and the Intro Skill is replaced with Intro Skill - Manifold Unison, dealing greater DMG.",
+                "The effects on Hsin mentioned above are removed when Hsin switches Resonance Mode.",
+                "Casting Intro Skill - Illumining Form or Intro Skill - Illumining Form: Manifold Unison sends Hsin directly into the Mechanism Dominion state.",
+                "While in Resonance Mode - Electro Flare, Hsin gains the following effects:",
+                "When Hsin enters combat, targets within a certain range do not lose Electro Flare stacks when it's triggered.",
+                "After Resonators in the team inflict Electro Rage to a target, every **1** stack of Electro Rage inflicted grants Hsin **1** stack of Heart of Thunder, stacking up to **100** times, and consumes all Electro Rage stacks from that target. Heart of Thunder is removed when Hsin switches Resonance Mode.",
+                "At the last stage of Resonance Skill - Heartward by Moon, Hsin actively triggers **1** instance of Electro Flare DMG on the targets. Its DMG Multiplier is equal to **35%** x (the number of Heart of Thunder stacks on Hsin) x (the Electro Flare DMG Multiplier corresponding to the target's current Electro Flare stacks).",
+                "While casting Resonance Skill - Heartward by Moon, switching to another Resonator or ending the skill early will end the above effects early.",
+                "Some time after casting Resonance Skill - Heartward by Moon, Hsin consumes all remaining stacks of Heart of Thunder.",
+                "When Hsin has at least **50** stacks of Heart of Thunder, Resonance Skill - Illumining Form stagnates nearby targets during the action.",
+                "After casting Resonance Liberation - Formshift, inflict **5** stacks of Electro Flare on nearby targets within a certain range. It also makes Basic Attack - Illumining Form: Pillars Aligned or Dodge Counter - Illumining Form: Pillars Aligned inflict Electro Flare on hit targets, up to **5** times. Casting Resonance Liberation - Formshift again resets this count. Switching Resonance Mode removes it.",
+                "Resonance Skill - Illumining Form: Pillars Aligned and Heavy Attack - Illumining Form: Stilling All Horizons inflict **5** stacks of Electro Flare on the target hit. Intro Skill - Illumining Form, Intro Skill - Answering Form, and Heavy Attack - Answering Form: Realm Protector inflict **1** stack of Electro Flare on the target hit.",
+                "While Hsin is in Resonance Mode - Unison with Unison, switching to another Resonator will remove Hsin's Unison to trigger Hsin's Outro Skill and the incoming Resonator's Intro Skill. If Hsin has full Concerto Energy and Unison at the same time, only Unison is consumed to trigger the effect.",
+                "While Hsin is in Resonance Mode - Unison and the active Resonator in the team has Unison, Hsin triggers Unison Response when She is switched in and casts Intro Skill, granting **1** stack of Unison Boon to all Resonators in the team for **30s**.",
+                "Hsin can only grant up to **1** stack of Unison Boon in this way.",
+                "Only the Resonators who can trigger Unison Reponse can gain this effect. Each stack of Unison Boon increases the total DMG dealt by Resonators who can trigger Unison Response in the team by 3%, stacking up to **2** times.",
+                "Can hold up to **100** points of Answering Heart.",
+                "While in Answering Form, when Normal Attack - Answering Form, Resonance Skill - Answering Form, Intro Skill - Answering Form, or Intro Skill - Answering Form: Manifold Unison hits a target, Hsin gains Answering Heart if She is the active Resonator. Casting Intro Skill - Answering Form or Intro Skill - Answering Form: Manifold Unison grants **60** points of Answering Heart.",
+                "Can hold up to **300** points of Illumining Heart.",
+                "While in Illumining Form and not in the Mechanism Dominion state, when Normal Attack - Illumining Form, or Resonance Skill - Illumining Form hits a target, Hsin gains Illumining Heart if She is the active Resonator.",
+                "While in Resonance Mode - Unison, casting Intro Skill - Illumining Form or Intro Skill - Illumining Form: Manifold Unison directly sends Hsin into the Mechanism Dominion state and grants 300 points of Illumining Heart.",
+                "While in Resonance Mode - Electro Flare, after casting Resonance Liberation - Formshift, when the Modular Heartlock generated by Basic Attack - Illumining Form Stage 1 is collapsed by Basic Attack - Illumining Form Stage 2, Heavy Attack - Illumining Form, Dodge Counter - Illumining Form, or Resonance Skill - Illumining Form, gain **150** points of Illumining Heart if Hsin is the active Resonator. This effect can only be triggered once before the next cast of Resonance Liberation - Formshift resets it, and is disabled when switched to the other Resonance Mode."
+              ]
+            }
+          ]
+        },
+        "intro": {
+          "name": "Glance on a Whim",
+          "blocks": [
+            {
+              "p": [
+                "This skill becomes available while in Answering Form. Attack the target, dealing Electro DMG.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 3 (when in Resonance Mode - Unison) or Basic Attack - Answering Form Stage 4 (when in Resonance Mode - Electro Flare).",
+                "The skill becomes available when in Answering Form. Attack the target, dealing greater __Electro DMG__, considered Resonance Skill DMG.",
+                "After casting this skill, press Normal Attack within a short time to cast Basic Attack - Answering Form Stage 3.",
+                "This skill becomes available while in Illumining Form. Attack the target, dealing __Electro DMG__.",
+                "The skill becomes available when in Illumining Form. Attack the target, dealing greater __Electro DMG__, considered Resonance Skill DMG."
+              ]
+            }
+          ]
+        },
+        "outro": {
+          "name": "Herself a Thousand Lanterns",
+          "blocks": [
+            {
+              "p": [
+                "Attack the target, dealing __Electro DMG__ equal to **100%** of Hsin's ATK.",
+                "Hsin gains Nightglow upon entering combat or casting Resonance Liberation - Pillars Across Heaven. When Hsin casts Outro Skill, Nightglow is consumed to trigger various effects depending on the Resonance Mode She is in:",
+                "While in Resonance Mode - Unison, Resonators in the team other than Hsin gain Shared Light when they gain Unison. After Hsin casts Outro Skill, Resonators with Shared Light gain **20%** All DMG Amplification for **30s**.",
+                "While in Resonance Mode - Electro Flare, __Electro DMG__ dealt by Resonators in the team other than Hsin is Amplified by **20%** for **20s**.",
+                "The above effects end early when Hsin switches Resonance Mode."
+              ]
+            }
+          ]
+        }
+      },
+      "inherent": [
+        {
+          "name": "Tides of Succession",
+          "blocks": [
+            {
+              "p": [
+                "While in Resonance Mode - Unison, when Hsin casts Intro Skill - Answering Form: Manifold Unison or Intro Skill - Illumining Form: Manifold Unison, Her ATK is increased by **50%** for **8s**. Switching to another Resonator or Resonance Mode ends this effect.",
+                "While in Resonance Mode - Electro Flare, after Resonators in the team inflict Electro Flare, Hsin gains **25%** __Electro DMG Bonus__, stacking up to **2** times. Each Resonator can trigger this effect only once. In addition, if Rover: Electro is in the same team, when Rover: Electro casts Intro Skill - Thunderous Fury, both Hsin and Rover: Electro gain **20%** __Electro DMG Bonus__ for **30s**.",
+                "This effect resets when a Resonator is added to the team or when Hsin switches Resonance Mode."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Gleaning Simple Joys",
+          "blocks": [
+            {
+              "p": [
+                "While in Resonance Mode - Unison, the maximum stacks of the Unison Boon effect on Resonators in the team are increased by **1**. When a Resonator in the team triggers Unison Response, all Resonators in the team gain **1** stack of Unison Boon for **30s**. This effect does not stack.",
+                "While in Resonance Mode - Electro Flare and Hsin is not in the Heart Manifest state, Hsin gains **1** stack of Thunderglow after Resonators in the team other than Hsin inflict Electro Flare, stacking up to **10** times.",
+                "While Hsin is in the Heart Manifest state, when targets within a certain range have **0** stacks of Electro Flare, inflict **1** stack of Electro Flare on the targets. If Thunderglow on Hsin reaches the stack limit, Hsin also inflicts Fleeting Thunder on the targets:",
+                "When Hsin inflicts Fleeting Thunder on the target, She also inflicts Electro Flare on the target to the stack limit, up to **16** stacks of Electro Flare.",
+                "When Fleeting Thunder is active, if the maximum stacks of Electro Flare on the target are increased, Hsin will inflict Electro Flare on the target to the stack limit again, up to **16** stacks of Electro Flare.",
+                "Fleeting Thunder will be removed when the target leaves the designated range around Hsin.",
+                "Exiting the Heart Manifest state or switching Resonance Mode removes the effects mentioned above."
+              ]
+            }
+          ]
+        }
+      ],
+      "chain": [
+        {
+          "n": 1,
+          "name": "A Boat to Cross the Rising Tide",
+          "blocks": [
+            {
+              "p": [
+                "Casting Resonance Liberation - Formshift grants Hsin **2** stacks of Radiance Ward, stacking up to **2** times. Switching to Answering Form clears all stacks. When Hsin takes DMG from an enemy target's attack, **1** stack of Radiance Ward can be consumed to make Her immune to interruption and reduce DMG taken by **60%** for **1s**. This effect can be triggered once every **1s**.",
+                "While in Resonance Mode - Unison: The DMG Multipliers of Intro Skill - Answering Form: Manifold Unison and Intro Skill - Illumining Form: Manifold Unison are increased by **15%**, and each stack of Unison Boon additionally increases the DMG Multipliers of Intro Skill - Answering Form: Manifold Unison and Intro Skill - Illumining Form: Manifold Unison by **10%**, up to a total **4** stacks.",
+                "While in Resonance Mode - Electro Flare:",
+                "When Hsin enters combat, if Heart of Thunder is below **50** stacks, it is increased to **50** stacks, triggered once every **12s**.",
+                "The DMG Multiplier of Electro Flare DMG dealt when Forte Circuit - Resonance Skill: Illumining Form hits a target and consumes **5** stacks of Heart of Thunder is increased to **210%**. The DMG Multiplier of Electro Flare DMG dealt when Forte Circuit - Resonance Skill: Heartward by Moon consumes all remaining Heart of Thunder at once is increased to **42%**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "name": "To Wake Is to Wonder What I Am",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multipliers of Heavy Attack - Answering Form: Realm Wanderer and Heavy Attack - Answering Form: Realm Protector are increased by **60%**.",
+                "The DMG Multipliers of Heavy Attack - Illumining Form: Beholding All Horizons and Heravy Attack - Illumining Form: Stilling All Horizons are increased by **60%**.",
+                "When Hsin enters combat, the Cooldowns for Hsin to gain Resolution of Wishes and Law of Heaven are reset. If Hsin is in Answering Form, **100** additional points of Answering Heart are also restored. This effect can be triggered once every **12s**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "name": "A Dream of Return Among the Hills",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multiplier of Resonance Liberation - Pillars Across Heaven is increased by **70%**.",
+                "While in Resonance Mode - Unison: The Crit. DMG of Resonance Liberation - Pillars Across Heaven is increased by **20%**, and each stack of Unison Boon additionally increases its Crit. DMG by **15%**, stacking up to **4** times.",
+                "While in Resonance Mode - Electro Flare:",
+                "When the last stage of Resonance Liberation - Pillars Across Heaven hits a target inflicted with Electro Flare, it triggers **1** instance of Electro Flare DMG, with its DMG Multiplier equal to **1500%** times the Electro Flare DMG Multiplier corresponding to the current Electro Flare stacks on the target."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "name": "A River of Lanterns, a River of Wishes",
+          "blocks": [
+            {
+              "p": [
+                "When Resonators in the team inflict Electro Flare or Electro Rage to a target, or when Resonators in the team gain Unison or trigger Unison Response, all Resonators in the team gain **20%** All-Attribute DMG Bonus for **30s**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "name": "Forms Turn as the Heart Wills",
+          "blocks": [
+            {
+              "p": [
+                "While in Illumining Form, DMG taken by Hsin is reduced by **20%**.",
+                "When Hsin takes a fatal blow, She will not be knocked out, but instead restores **100%** of Max HP and becomes immune to DMG and interruption for **1s**. This effect can be triggered once every **10** minute."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "name": "The Moon Owes Its Light to the Living",
+          "blocks": [
+            {
+              "p": [
+                "Targets take **40%** more Resonance Skill DMG from Hsin.",
+                "Resonance Skill DMG dealt by Hsin ignores **20%** of the target's DEF.",
+                "While in Resonance Mode - Unison:",
+                "The maximum stacks of the Unison Boon effect on Resonators in the team are increased by **1**. When a Resonator in the team triggers Unison Response, all Resonators in the team gain **1** stack of Unison Boon for **30s**. This effect does not stack.",
+                "While in Resonance Mode - Electro Flare:",
+                "While in combat, Electro Flare DMG taken by targets within a certain range around Hsin can be Critical, with Crit. Rate fixed at **80%** and Crit. DMG fixed at **230%**."
+              ]
+            }
+          ]
+        }
+      ],
+      "extra": [
+        {
+          "kind": "Forte Circuit",
+          "name": "Tune Break: Rectifier",
+          "blocks": [
+            {
+              "p": [
+                "When the target's Off-Tune Level is full, the Resonator may cast Tune Break on the target."
               ]
             }
           ]

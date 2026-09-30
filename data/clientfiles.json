@@ -3,128 +3,8 @@
   "note": "What the beta client's data tables carry that no live source does yet. Every record here is datamined: real client numbers, taken before Kuro has finished balancing them, and subject to change or to being cut before the patch ships. Nothing in this file is ever merged into weapons.json or echoes.json — those are rebuilt wholesale from live sources and would drop it on the next run — so app.js merges it at read time and marks every record it draws from here. A record the live sources already carry is dropped rather than written, whatever the beta says about it: post-balance numbers win. `resonators` is a report rather than data — a character in the client files with no roster record is something for a person to write up, not for a fetcher to file. Base ATK is the client's own rounding of a level-90 figure that ends in .5, which is why it can read one higher than prydwen.gg's truncation of the same number.",
   "credit": "Client data tables via nanoka.cc · © Kuro Games",
   "source": "https://ww.nanoka.cc/",
-  "build": "3.7.3",
-  "weapons": [
-    {
-      "name": "Unspoken Rue",
-      "rarity": 5,
-      "type": "Sword",
-      "id": "21020107",
-      "atk90": 588,
-      "stat": "CRIT Rate",
-      "statValue90": 24.3,
-      "source": "Beta client files",
-      "effectName": "Locked Thunder, Trapped Rain",
-      "effect": "ATK is increased by {0}. Upon obtaining Unison, grants {1} Electro DMG Bonus for {3}s.\nUpon obtaining Unison, grants the Binding Mind effect and removes Yearning Mind: Resonators in the team gain {2} Electro DMG Bonus for {3}s. Effects of the same name cannot stack.\nWhen the wielder consumes Concerto Energy, grants the Yearning Mind effect and removes Binding Mind: the wielder additionally gains {4} Electro DMG Bonus for {5}s. Switching to another Resonator ends this effect early.",
-      "ranks": [
-        [
-          "12%",
-          "15%",
-          "18%",
-          "21%",
-          "24%"
-        ],
-        [
-          "30%",
-          "37.5%",
-          "45%",
-          "52.5%",
-          "60%"
-        ],
-        [
-          "24%",
-          "30%",
-          "36%",
-          "42%",
-          "48%"
-        ],
-        [
-          "30",
-          "30",
-          "30",
-          "30",
-          "30"
-        ],
-        [
-          "40%",
-          "50%",
-          "60%",
-          "70%",
-          "80%"
-        ],
-        [
-          "14",
-          "14",
-          "14",
-          "14",
-          "14"
-        ]
-      ]
-    },
-    {
-      "name": "Blooming Jadehaven",
-      "rarity": 5,
-      "type": "Rectifier",
-      "id": "21050116",
-      "atk90": 588,
-      "stat": "CRIT Rate",
-      "statValue90": 24.3,
-      "source": "Beta client files",
-      "effectName": "Hundredfold Artifice",
-      "effect": "Grants {0} All-Attribute DMG Bonus. After the wielder inflicts Electro Flare or triggers Unison Response, Resonance Skill DMG is Amplified by {1} and ignores {2} of the target's Electro RES. While the wielder is on the field, Electro Flare DMG taken by targets within a certain range is Amplified by {3} for {4}s, triggered {6} time every {5}s. Only the strongest effect of the same name applies.",
-      "ranks": [
-        [
-          "12%",
-          "15%",
-          "18%",
-          "21%",
-          "24%"
-        ],
-        [
-          "36%",
-          "45%",
-          "54%",
-          "63%",
-          "72%"
-        ],
-        [
-          "10%",
-          "13.5%",
-          "17%",
-          "20.5%",
-          "24%"
-        ],
-        [
-          "30%",
-          "37.5%",
-          "45%",
-          "52.5%",
-          "60%"
-        ],
-        [
-          "30",
-          "30",
-          "30",
-          "30",
-          "30"
-        ],
-        [
-          "0.1",
-          "0.1",
-          "0.1",
-          "0.1",
-          "0.1"
-        ],
-        [
-          "1",
-          "1",
-          "1",
-          "1",
-          "1"
-        ]
-      ]
-    }
-  ],
+  "build": "3.7",
+  "weapons": [],
   "sonata": [
     {
       "id": 36,
@@ -176,5 +56,5 @@
     }
   ],
   "resonators": [],
-  "updated": "2026-09-22T07:26:39.560Z"
+  "updated": "2026-09-30T16:02:12.788Z"
 }

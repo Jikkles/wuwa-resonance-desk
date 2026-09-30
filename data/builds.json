@@ -3,7 +3,7 @@
   "note": "Recommended builds and teams, per Resonator. This is the one file on the desk that is judgement rather than record: which sonata set to farm, which echo to put in the main slot, what to roll for, which weapons rank where, and which teams to build — all of it somebody's opinion, none of it a fact the game publishes. It is credited to prydwen.gg wherever it is shown and `reviewed` is the game version their write-up was last revised against. `sets[].echoes` is the main slot, the echo whose skill you actually cast. `stats.format` is the cost layout of the five slots and `stats.slots` is the main stat wanted in each. `stats.targets` is what each stat should read on the level-90 stat screen — the thresholds that turn the substat priority from an order into something you can act on, since an order alone never says when to stop rolling one stat and start on the next. `weapons[].share` is the damage share Prydwen calculates against the best option. A team slot holds every Resonator named as an alternative for that seat.",
   "credit": "Builds, teams and rankings via prydwen.gg — their judgement, not the desk's",
   "source": "https://www.prydwen.gg/wuthering-waves/characters/",
-  "generated": "2026-09-14T11:00:42.980Z",
+  "generated": "2026-09-30T16:00:56.954Z",
   "builds": {
     "Aalto": {
       "slug": "aalto",
@@ -286,55 +286,55 @@
         {
           "name": "Emerald of Genesis",
           "dupes": 1,
-          "share": "86.80%",
+          "share": "86.60%",
           "note": "Assumes 1 less Energy Regen roll, distributed into damaging stats instead. Aemeath's second best and permanently accessible option which gives her the same Base ATK and CRIT Rate as her Signature while giving extra Energy Regen and ATK%. Overall a super strong choice that she can perform greatly with, in spite of her Signature being a good upgrade."
         },
         {
           "name": "Red Spring",
           "dupes": 1,
-          "share": "84.70%",
+          "share": "84.50%",
           "note": "This weapon, much like other CRIT 5-stars below it, can provide slightly better performance than Emerald of Genesis if its extra Energy Regen is not needed. Camellya's Signature is the most favoured of them because Aemeath does a bit of Basic Attack DMG that this weapon can buff, giving it a marginal edge over other 5-star options below it."
         },
         {
           "name": "Emerald Sentence",
           "dupes": 1,
-          "share": "84.50%",
+          "share": "84.30%",
           "note": "Qiuyuan's Signature is mostly an ATK and CRIT Rate stat-stick for Aemeath as she does not deal any Heavy Attack type damage, but it does provide a very marginal increase to Echo damage team-wide."
         },
         {
           "name": "Blazing Brilliance",
           "dupes": 1,
-          "share": "84.20%",
+          "share": "83.90%",
           "note": "ATK and CRIT DMG stat-stick for Aemeath, who does not benefit from this weapon's Skill DMG-focused effects."
         },
         {
           "name": "Feather Edge",
           "dupes": 5,
-          "share": "79.30%",
+          "share": "79.00%",
           "note": "This Battle Pass exclusive is the best 4-star choice for Aemeath as she fully takes advantage of this weapon's ATK and Liberation damage-increasing effects while having a nice CRIT stat to boot. However, its low base ATK makes it pale in comparison to 5-stars."
         },
         {
           "name": "Somnoire Anchor",
           "dupes": 5,
-          "share": "76.00%",
+          "share": "76.10%",
           "note": "An event exclusive that gives some ramp-up ATK and CRIT Rate buffs. A good 4-star choice while not comparable to any 5-star."
         },
         {
           "name": "Endless Collapse",
           "dupes": 5,
-          "share": "75.60%",
+          "share": "75.70%",
           "note": "This 4-star weapon has the main advantage of completely erasing any Energy Regen needs for Aemeath (though this barely matters in Fusion Burst due to high team-wide Energy generation to begin with) and gives a good amount of ATK, but it doesn't do much else which makes it preferable to upgrade to a 5-star option if possible."
         },
         {
           "name": "Commando of Conviction",
           "dupes": 5,
-          "share": "75.30%",
+          "share": "75.40%",
           "note": "Best No Gacha option for Aemeath, accessible for free at the start of the game. Gives a solid amount of ATK which makes it fine to use for beginners, but try to upgrade to any 5-star as soon as possible."
         }
       ],
       "teams": [
         {
-          "name": "Best Fusion Burst Team",
+          "name": "Fusion Burst Team",
           "slots": [
             [
               "Aemeath"
@@ -351,7 +351,7 @@
           "note": "With Lupa, have her on Moonlit Clouds alongside Denia on Flaming Clawprint. Lupa Outro buffs Aemeath and Denia rotates first to Outro into Lupa."
         },
         {
-          "name": "Best Tune Rupture Team",
+          "name": "Tune Rupture Team",
           "slots": [
             [
               "Aemeath"
@@ -363,7 +363,7 @@
               "Mornye"
             ]
           ],
-          "note": "Plenty of alternative Supports can be considered here; general Liberation DMG buffers work, Shorekeeper and Verina are viable, Lupa is strong in Quickswap and Chisa can be ran in Fusion Burst mode too - mix and match depending on what's available!"
+          "note": null
         },
         {
           "name": "Mono Fusion",
@@ -467,67 +467,67 @@
         {
           "name": "Verdant Summit",
           "dupes": 1,
-          "share": "93.50%",
+          "share": "93.60%",
           "note": "Jiyan's Signature weapon is fantastic on Augusta and has similar performance to even her Signature weapon thanks to its easy to acquire 48% Heavy Attack DMG Bonus increase, as well as 12% general DMG Bonus, good Base ATK and CRIT DMG stats."
         },
         {
           "name": "Ages of Harvest",
           "dupes": 1,
-          "share": "81.90%",
+          "share": "82.00%",
           "note": "While this weapon focuses on boosting Resonance Skill damage, Jinhsi's Signature is still great on Augusta as she does deal some amount of Skill damage and benefits from its good Base ATK, as well as its DMG Bonus and CRIT Rate increasing effects."
         },
         {
           "name": "Wildfire Mark",
           "dupes": 1,
-          "share": "78.60%",
+          "share": "78.50%",
           "note": "This Broadblade lacks the extra punch that the above options do as its passive effect is entirely useless on Augusta. It does buff Mortefi's DMG if he is present on the team, however he is far from dealing most of the damage in the team and Augusta only uses this Broadblade for its ATK and CRIT DMG stats, which makes it rank lower than above options."
         },
         {
           "name": "Radiance Cleaver",
           "dupes": 1,
-          "share": "78.60%",
+          "share": "78.50%",
           "note": "Simple ATK and CRIT DMG stat-stick for Augusta, the strongest permanently available choice for her."
         },
         {
           "name": "Kumokiri",
           "dupes": 1,
-          "share": "78.40%",
+          "share": "78.30%",
           "note": "Simple ATK and CRIT Rate stat-stick for Augusta, who does not benefit from this weapon's Liberation DMG-increasing effects."
         },
         {
           "name": "Aureate Zenith",
           "dupes": 5,
-          "share": "75.60%",
+          "share": "75.40%",
           "note": "The new Battle Pass Broadblade is amazing on Augusta and is her best 4* option bar none as it increases ATK, Heavy Attack DMG Bonus and CRIT DMG by massive amounts especially at Rank 5. Unfortunately, its lower-end Base ATK makes it rank below almost all 5-star options, but it remains a good choice if you don't wish to invest any pulls into Augusta and rather spend for this weapon instead."
         },
         {
           "name": "Lustrous Razor",
           "dupes": 1,
-          "share": "75.10%",
+          "share": "74.80%",
           "note": "One of the best permanent choices for Augusta who benefits from its Energy Regen boosting effect but its Resonance Liberation DMG increase is useless on her, which makes it rank below all limited options. Nonetheless very much usable on Augusta who performs fantastically even with this weapon equipped."
         },
         {
           "name": "Autumntrace",
           "dupes": 5,
-          "share": "71.40%",
+          "share": "70.90%",
           "note": "This Battle Pass weapon also gives Augusta good stats, particularly ATK and CRIT Rate, but suffers like all other 4-star weapons from low Base ATK which causes it to perform lower than all 5-star options. However it remains very much usable on Augusta."
         },
         {
           "name": "Waning Redshift",
           "dupes": 5,
-          "share": "67.20%",
+          "share": "66.90%",
           "note": "The best non-Battle Pass 4-star for Augusta as it gives her some flat Resonance Energy which means she doesn't need any Energy Regen on her build to work, however only increasing ATK isn't enough to make it stand out above other options."
         },
         {
           "name": "Helios Cleaver",
           "dupes": 5,
-          "share": "64.30%",
+          "share": "63.90%",
           "note": "Similar to Waning Redshift but focuses even more on increasing ATK after using multiple Resonance Skills, which Augusta isn't able to fully stack, making it lag behind other choices in terms of performance."
         },
         {
           "name": "Meditations on Mercy",
           "dupes": 5,
-          "share": "61.50%",
+          "share": "61.30%",
           "note": "Last resort option if none of the above weapons are owned. Solely used as an ATK stat-stick as its passive is entirely unused on Augusta, but accessible as a guarantee thanks to being craftable."
         }
       ],
@@ -568,11 +568,7 @@
           "echoes": [
             {
               "name": "Fallacy of No Return",
-              "note": "Grants 10% increased Energy Regeneration for the wearer and a team wide 10% ATK boost on use for 20 seconds. A strong option for those looking to generate as much energy as possible or who favor a more permanent party buffing effect compared to Bell-Borne Geochelone."
-            },
-            {
-              "name": "Bell-Borne Geochelone",
-              "note": "While nowadays a worse option for the Rejuvenating Glow set for damage than the Fallacy of No Return due to a shorter buff uptime, only granting 10% DMG Bonus for 15 seconds, the Bell-Borne Geochelone remains a good choice if you don't have a good Fallacy to use for the set. It also has increased survivability by blocking 50% of the damage from a max of 3 hits if you desire to have that in your team."
+              "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
             }
           ]
         },
@@ -855,7 +851,7 @@
     },
     "Buling": {
       "slug": "buling",
-      "reviewed": "2.8",
+      "reviewed": "3.7",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/buling",
       "sets": [
         {
@@ -867,11 +863,7 @@
           "echoes": [
             {
               "name": "Fallacy of No Return",
-              "note": "Grants 10% increased Energy Regeneration for the wearer and a team wide 10% ATK boost on use for 20 seconds. A strong option for those looking to generate as much energy as possible or who favor a more permanent party buffing effect compared to Bell-Borne Geochelone."
-            },
-            {
-              "name": "Bell-Borne Geochelone",
-              "note": "While nowadays a worse option for the Rejuvenating Glow set for damage than the Fallacy of No Return due to a shorter buff uptime, only granting 10% DMG Bonus for 15 seconds, the Bell-Borne Geochelone remains a good choice if you don't have a good Fallacy to use for the set. It also has increased survivability by blocking 50% of the damage from a max of 3 hits if you desire to have that in your team."
+              "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
             }
           ]
         }
@@ -965,15 +957,13 @@
       ],
       "teams": [
         {
-          "name": "Team #1: Best Team",
+          "name": "Best Team",
           "slots": [
             [
-              "Carlotta"
+              "Hsin"
             ],
             [
-              "Zhezhi",
-              "Brant",
-              "Cantarella"
+              "Rover (Electro)"
             ],
             [
               "Buling"
@@ -982,20 +972,21 @@
           "note": null
         },
         {
-          "name": "Team #2: F2P Team",
+          "name": "Alternative Teams",
           "slots": [
             [
+              "Phrolova",
               "Carlotta"
             ],
             [
-              "Taoqi",
-              "Yangyang"
+              "Cantarella",
+              "Zhezhi"
             ],
             [
               "Buling"
             ]
           ],
-          "note": null
+          "note": "Only use Zhezhi with Carlotta/Cantarella with Phrolova. Danjin can work as a F2P replacement for Phrolova."
         }
       ]
     },
@@ -1287,31 +1278,31 @@
         {
           "name": "Blazing Brilliance",
           "dupes": 1,
-          "share": "88.40%",
+          "share": "86.70%",
           "note": "Simple ATK and CRIT DMG stat-stick for Camellya, who does not benefit from this weapon's Skill DMG-related effects."
         },
         {
           "name": "Feather Edge",
           "dupes": 5,
-          "share": "77.80%",
+          "share": "77.70%",
           "note": "Provides extra ATK and Liberation DMG Bonus when casting Ultimate as well as some CRIT Rate and low Base ATK. This Battle Pass exclusive is the best 4-star choice Camellya has overall, but Emerald of Genesis is a much more recommended pick-up."
         },
         {
           "name": "Lumingloss",
           "dupes": 5,
-          "share": "76.80%",
+          "share": "76.10%",
           "note": "This Battle Pass exclusive provides solid Base ATK and extra Basic DMG when casting Skill, overall a solid choice but still a 4-star in terms of base stats and lacks CRIT."
         },
         {
           "name": "Somnoire Anchor",
           "dupes": 5,
-          "share": "76.30%",
+          "share": "75.70%",
           "note": "Past event exclusive intended for Camellya, gives her some scaling ATK and CRIT Rate with decent Base ATK. Usable, but overall Emerald of Genesis is still by far the msot recommended."
         },
         {
           "name": "Commando of Conviction",
           "dupes": 5,
-          "share": "75.30%",
+          "share": "74.50%",
           "note": "Best no-gacha option for Camellya, obtainable for free at the start of the game. Just a 4-star ATK stat-stick that gives nothing else, but decent for a start. Pick up Emerald of Genesis or Camellya's Signature ASAP to replace this though."
         }
       ],
@@ -1629,32 +1620,50 @@
         {
           "name": "Phasic Homogenizer",
           "dupes": 1,
-          "share": "93.50%",
-          "note": "An amazing generalist permanently available pistol that can universally improve the wearer's ATK, DMG Bonus and CRIT DMG. Can get close to a lot of character signatures and is overall a must-have for most accounts."
+          "share": "95.10%",
+          "note": "An amazing generalist permanently available pistol that can universally improve the wearer's ATK, DMG Bonus and CRIT DMG. Can get close to a lot of character signatures and is overall a must-have for most accounts. Highly recommended on Carlotta instead of her Signature, as it is permanently accessible and barely comes up short of her best in slot."
         },
         {
           "name": "Woodland Aria",
           "dupes": 1,
-          "share": "86.20%",
+          "share": "90.30%",
           "note": "Simple ATK and CRIT Rate stat-stick for Carlotta, who does not benefit from this weapon's Aero Erosion-focused effects."
+        },
+        {
+          "name": "Spectrum Blaster",
+          "dupes": 1,
+          "share": "89.40%",
+          "note": "Simple ATK and CRIT Rate stat-stick for Carlotta, who barely benefits from this weapon's Basic DMG-increasing effect."
+        },
+        {
+          "name": "Lux & Umbra",
+          "dupes": 1,
+          "share": "88.90%",
+          "note": "Simple ATK and CRIT DMG stat-stick for Carlotta, who cannot benefit from this weapon's Heavy and Echo DMG-related effects."
         },
         {
           "name": "Static Mist",
           "dupes": 1,
-          "share": "82.80%",
-          "note": "One of the stronger permanently available choices for Carlotta, which gives her a range of useful stats including high Base ATK, CRIT Rate, and Energy Regen. Also gives the next incoming teammate a small ATK boost after her Outro, which is rather inconsequential in her best teams but can be helpful in some of them."
+          "share": "87.80%",
+          "note": "Support-focused permanently accessible 5-star weapon. Can provide some ATK% to the next character who Intros in from Carlotta, has a small Energy Regen boost and a nice Base ATK/CRIT Rate, however it's outclassed on her by Phasic Homogenizer quite significantly, and is better relegated to Support options like Lynae who can buff Carlotta with it instead."
         },
         {
           "name": "Undying Flame",
           "dupes": 5,
+          "share": "76.20%",
+          "note": "Carlotta's best 4-star weapon which gives her a good amount of ATK and Skill DMG when casting Intro. Still not ideal compared to any other 5-star."
+        },
+        {
+          "name": "Relativistic Jet",
+          "dupes": 5,
           "share": "75.80%",
-          "note": "Carlotta's best 4-star weapon which gtives her a good amount of ATK and Skill DMG when casting Intro. Simple and effective."
+          "note": "This weapon provides some ATK and flat Energy restoration to Carlotta, but it's overall not enough for her to clear endgame content with comfortably anymore. Generally not recommended."
         },
         {
           "name": "Pistols#26",
           "dupes": 5,
           "share": "72.00%",
-          "note": "Best fully F2P-accessible option which outclasses all other 4-star Pistol choices and below, but its passive does require Carlotta to never take any damage from the enemy. However, she is one of the easiest characters to do this with thanks to her really high attack range, so overall this weapon synergizes quite well with her and provides her a good ATK boost."
+          "note": "Best fully F2P-accessible option which outclasses all non-listed 4-star Pistol choices, but its passive does require Carlotta to never take any damage from the enemy. However, she is one of the easiest characters to do this with thanks to her really high attack range, so overall this weapon synergizes quite well with her. That being said, weapons other than Phasic Homogenizer and above probably are not enough to clear endgame comfortably, so keep this as a temporary choice."
         }
       ],
       "teams": [
@@ -1770,37 +1779,37 @@
         {
           "name": "Red Spring",
           "dupes": 1,
-          "share": "79.50%",
+          "share": "81.40%",
           "note": "Camellya's weapon works well for Cartethyia by virtue of providing 24.3% CRIT Rate as its secondary stat, but also providing an extra 30% Basic Attack DMG bonus via the weapon's passive effect which she uses decently well. For this reason, it is the second best option behind her sought-after Signature."
-        },
-        {
-          "name": "Feather Edge",
-          "dupes": 5,
-          "share": "76.30%",
-          "note": "This Battle Pass exclusive is fantastic on Cartethyia because the usual issue of 4-star weapons being low Base ATK doesn't hinder her at all (since she doesn't scale off of it). Instead, she can enjoy the large amount of Liberation DMG Bonus (one of her two main damage types) and the 20.3% CRIT Rate provided by the weapon, making it a great alternative to her Signature."
         },
         {
           "name": "Blazing Brilliance",
           "dupes": 1,
-          "share": "77.00%",
+          "share": "79.50%",
           "note": "Simple CRIT DMG and Skill DMG stat-stick for Cartethyia, which doesn't compare to above options as Skill DMG is a negligible part of her damage overall."
+        },
+        {
+          "name": "Feather Edge",
+          "dupes": 5,
+          "share": "79.10%",
+          "note": "This Battle Pass exclusive is fantastic on Cartethyia because the usual issue of 4-star weapons being low Base ATK doesn't hinder her at all (since she doesn't scale off of it). Instead, she can enjoy the large amount of Liberation DMG Bonus (one of her two main damage types) and the 20.3% CRIT Rate provided by the weapon, making it a great alternative to her Signature."
         },
         {
           "name": "Emerald Sentence",
           "dupes": 1,
-          "share": "75.90%",
+          "share": "78.70%",
           "note": "Simple CRIT Rate stat-stick for Cartethyia, who barely makes any use of the weapon's passive effects (very minor increase to her Echo Skill DMG which is really negligible)."
         },
         {
           "name": "Emerald of Genesis",
           "dupes": 1,
-          "share": "75.70%",
+          "share": "78.60%",
           "note": "CRIT Rate and Energy Regen stat-stick for Cartethyia, making it the best permanently available option as she lacks any good alternatives that aren't from the Battle Pass."
         },
         {
           "name": "Guardian Sword",
           "dupes": 5,
-          "share": "72.30%",
+          "share": "75.80%",
           "note": "Last resort option if none of the above are owned, as this is the only Sword in the game that provides HP% other than Cartethyia's Signature."
         }
       ],
@@ -2055,7 +2064,7 @@
           "name": "Rejuvenating Glow",
           "mix": [],
           "share": null,
-          "note": "Best overall set for Chisa with the exception of non-ATK scaling teams like the Cartethyia team. Provides 15% ATK to the whole team practically permanently as long as Chisa triggers healing (very easy to achieve via her Ultimate). The usual Main Echo of this set, Fallacy of No Return, further contributes with Energy Regen to the wielder of the set and an increased ATK boost to all party members on cast. Overall the best set to partially buff Chisa's own damage but most importantly increase her teammates', so long as they scale on ATK.",
+          "note": "Best overall set for Chisa as a third slot (barring non-ATK scaling teams like Cartethyia). Provides 15% ATK to the whole team practically permanently as long as Chisa triggers healing (very easy to achieve via her Ultimate). The usual Main Echo of this set, Fallacy of No Return, further contributes with Energy Regen to the wielder of the set and an increased ATK boost to all party members on cast. Overall the best set to partially buff Chisa's own damage but most importantly increase her teammates', so long as they scale on ATK.",
           "echoes": [
             {
               "name": "Fallacy of No Return",
@@ -2068,11 +2077,11 @@
           "name": "Moonlit Clouds",
           "mix": [],
           "share": null,
-          "note": "Best set for Chisa in the Yangyang: Xuanling + Suisui team. A niche set for her that is optimal in one of her best teams, as it gives the incoming character 22.5% ATK and 12% DMG Bonus via Impermanence Heron, allowing for the strongest possible buffs to go to Yangyang as Suisui operates in the 3rd slot (where Chisa usually is otherwise).",
+          "note": "Best set for Chisa as a second slot, such as in the Yangyang: Xuanling + Suisui team. A niche set for her that is optimal in some specific teams, including one of her best teams, as it gives the incoming character 22.5% ATK and 12% DMG Bonus via Impermanence Heron, allowing for the strongest possible buffs to go to your main DPS as another Support operates in the 3rd slot (where Chisa usually is otherwise).",
           "echoes": [
             {
               "name": "Impermanence Heron",
-              "note": "The best and only real option 5P Moonlit Clouds has, as it grants an extra 12% DMG Bonus on top of the ATK boost to the next character that Moonlit Clouds would usually give. Additionally restores a lot of Energy to the caster when it deals damage. On Cantarella, this Echo should either be used before her rotation starts or it can be instantly interrupted via her Ultimate - this way, no Energy or damage is generated but the buff will still apply to the incoming ally."
+              "note": "The best and only real option 5P Moonlit Clouds has, as it grants an extra 12% DMG Bonus on top of the ATK boost to the next character that Moonlit Clouds would usually give. Additionally restores a lot of Energy to the caster when it deals damage. On Chisa, this Echo is best used with a Swap Cancel before her rotation starts. If that's not possible/too difficult, cancelling it with a Dash into her Ultimate is the best option to not lose on time."
             }
           ]
         },
@@ -2085,7 +2094,7 @@
             "Moonlit Clouds, Empyrean Anthem, Tidebreaking Courage"
           ],
           "share": null,
-          "note": "Chisa's best set to maximize her personal damage, which grants her 20% ATK and 30% Liberation DMG Bonus for 5s when applying Havoc Bane. Considering she applies Havoc Bane every 2s all the time and primarily deals Liberation DMG, this set is meant for her.",
+          "note": "Chisa's best set to maximize her personal damage, best used in non-ATK scaling teams like Cartethyia, which grants her 20% ATK and 30% Liberation DMG Bonus for 5s when applying Havoc Bane. Considering she applies Havoc Bane every 2s all the time and primarily deals Liberation DMG, this set is meant for her. However, it is inferior to sets that prioritize team buffing, such as Rejuvenating Glow and Moonlit Clouds, when the main damage dealer of your team scales off of ATK (which those two sets can buff).",
           "echoes": [
             {
               "name": "Reminiscence: Threnodian - Leviathan",
@@ -2201,7 +2210,7 @@
       ],
       "teams": [
         {
-          "name": "Team #1: Best Team",
+          "name": "Best Team",
           "slots": [
             [
               "Yangyang: Xuanling"
@@ -2219,7 +2228,7 @@
           "note": "Have Chisa on Moonlit Clouds in the 2nd slot with Suisui on the team for optimal buffing, else leave her as a Rejuvenating Glow 3rd slot Support."
         },
         {
-          "name": "Team #2: Aemeath Fusion Burst",
+          "name": "Aemeath Fusion Burst",
           "slots": [
             [
               "Aemeath"
@@ -2234,7 +2243,7 @@
           "note": null
         },
         {
-          "name": "Team #3: Hiyuki Team",
+          "name": "Hiyuki Team",
           "slots": [
             [
               "Hiyuki"
@@ -2249,7 +2258,22 @@
           "note": null
         },
         {
-          "name": "Team #4: Cartethyia Team",
+          "name": "Hsin Flare Team",
+          "slots": [
+            [
+              "Hsin"
+            ],
+            [
+              "Rover (Electro)"
+            ],
+            [
+              "Chisa"
+            ]
+          ],
+          "note": "This may be Hsin's strongest current Flare team if the player is willing to take advantage of Chisa's many Quickswap windows to shorten team rotations down and fit in extra important Hsin attacks."
+        },
+        {
+          "name": "Cartethyia Team",
           "slots": [
             [
               "Cartethyia"
@@ -2265,7 +2289,7 @@
           "note": "Chisa is only stronger than Aero Rover in the third slot with her Signature. Also remember to use Skyfall Severance to convert Havoc Bane into Erosion if you use them with Chisa!"
         },
         {
-          "name": "Team #5: Phoebe Expert Team",
+          "name": "Phoebe Expert Team",
           "slots": [
             [
               "Phoebe"
@@ -2553,37 +2577,37 @@
         {
           "name": "Phasic Homogenizer",
           "dupes": 1,
-          "share": "86.90%",
+          "share": "87.30%",
           "note": "An amazing generalist permanently available pistol that can universally improve the wearer's ATK, DMG Bonus and CRIT DMG. Can get close to a lot of character signatures and is overall a must-have for most accounts. Better than Static Mist in compositions that don't benefit from its ATK buff such as Cartethyia's team."
-        },
-        {
-          "name": "Lux & Umbra",
-          "dupes": 1,
-          "share": "83.00%",
-          "note": "Best Echo with this weapon is Reminiscence: Fleurdelys. Galbrena's Signature has a good Base ATK and CRIT DMG boosts, but can also amplify Heavy Attack DMG and Echo Skill DMG when both damage types are triggered close to one another alongside an extra DEF Ignore buff. Ciaccona takes a solid damage increase from the Heavy Attack DMG Amplify and DEF Ignore towards the end of her rotation if she uses her Echo Skill while her Forte Heavy Attack is about to cast, making it a great alternative overall."
         },
         {
           "name": "Spectrum Blaster",
           "dupes": 1,
-          "share": "82.80%",
+          "share": "84.20%",
           "note": "Lynae's Signature weapon can proivde extra Basic Attack DMG to Ciaccona and also has a lot of CRIT Rate and ATK for her to benefit from, however she cannot trigger the party-wide buff this weapon provides which makes it generally worse than the permanent banner weapons."
+        },
+        {
+          "name": "Lux & Umbra",
+          "dupes": 1,
+          "share": "84.10%",
+          "note": "Best Echo with this weapon is Reminiscence: Fleurdelys. Galbrena's Signature has a good Base ATK and CRIT DMG boosts, but can also amplify Heavy Attack DMG and Echo Skill DMG when both damage types are triggered close to one another alongside an extra DEF Ignore buff. Ciaccona takes a solid damage increase from the Heavy Attack DMG Amplify and DEF Ignore towards the end of her rotation if she uses her Echo Skill while her Forte Heavy Attack is about to cast, making it a great alternative overall."
         },
         {
           "name": "The Last Dance",
           "dupes": 1,
-          "share": "78.80%",
+          "share": "80.20%",
           "note": "While Ciaccona takes full advantage of this weapon's passive thanks to her really short rotation, Skill DMG is the most negligible part of her damage types which makes this weapon mostly an atk and CRIT DMG stat-stick. Still a good choice for personal damage overall."
         },
         {
           "name": "Static Mist",
           "dupes": 1,
-          "share": "77.00%",
+          "share": "79.30%",
           "note": "Can outclass Phasic Homogenizer in ATK-scaling teams thanks to team buffing. One of the 2 best permanently available options for Ciaccona, which makes her give 10% ATK to the next character she Outros into and also provides her with high Base ATK, CRIT Rate and some Energy Regen, making her take full advantage of the weapon's passive."
         },
         {
           "name": "Romance in Farewell",
           "dupes": 5,
-          "share": "69.90%",
+          "share": "72.70%",
           "note": "Best 4-star and F2P no-gacha option for Ciaccona, this Rinascita craftable synergizes well with her ability to apply Aero Erosion constantly on enemies, allowing her to take full advantage of this weapon's massive ATK increase. Still lower than other options because it only provides ATK (and 4-stars have lower Base ATK than 5-stars too which makes increasing ATK% less effective)."
         }
       ],
@@ -3398,45 +3422,45 @@
           "note": "An amazing generalist permanently available pistol that can universally improve the wearer's ATK, DMG Bonus and CRIT DMG. Can get close to a lot of character signatures and is overall a must-have for most accounts."
         },
         {
-          "name": "The Last Dance",
-          "dupes": 1,
-          "share": "84.30%",
-          "note": "Simple ATK and CRIT DMG stat-stick for Galbrena, who does not benefit from this weapon's Skill DMG-increasing effects."
-        },
-        {
           "name": "Spectrum Blaster",
           "dupes": 1,
-          "share": "84.20%",
+          "share": "85.70%",
           "note": "Simple ATK and CRIT DMG stat-stick for Galbrena who does not benefit from this weapon's Tune Break and Basic DMG-focused effects."
+        },
+        {
+          "name": "The Last Dance",
+          "dupes": 1,
+          "share": "84.90%",
+          "note": "Simple ATK and CRIT DMG stat-stick for Galbrena, who does not benefit from this weapon's Skill DMG-increasing effects."
         },
         {
           "name": "Static Mist",
           "dupes": 1,
-          "share": "81.60%",
+          "share": "83.00%",
           "note": "The standard banner 5-star is a great choice for Galbrena, having a fully utilized passive in Mono Fusion teams to buff the next incoming character's damage (Lupa for example), while still being generally useful via its high Base ATK, CRIT Rate and Energy Regen stats in any team. This makes it not face significant drop-offs compared to her Signature weapon, which isn't necessary to clear endgame contents thanks to Static Mist, provided Galbrena has good teammates to back her up."
         },
         {
           "name": "Woodland Aria",
           "dupes": 1,
-          "share": "79.80%",
+          "share": "80.20%",
           "note": "Simple stat-stick for Galbrena, who does not benefit from this weapon's Aero Erosion-focused effects."
         },
         {
           "name": "Solar Flame",
           "dupes": 5,
-          "share": "77.00%",
+          "share": "77.50%",
           "note": "This Battle Pass exclusive provides a good CRIT Rate stat as well as a ramp-up ATK and Heavy ATK DMG increase when dealing Basic or Heavy Attack DMG, all fantastic stats for Galbrena. However, it isn't as strong as any 5-star choice due to its lower Base ATK than the choices above."
         },
         {
           "name": "Relativistic Jet",
           "dupes": 5,
-          "share": "71.80%",
+          "share": "71.50%",
           "note": "Overall a great 4-star choice for Galbrena who needs a slight amount of Energy. This weapon's passive increases ATK and restores flat Energy when casting Skill, which makes it a solid choice for her as it makes her not require any Energy Regen substats, although it's not comparable to any 5-star."
         },
         {
           "name": "Pistols#26",
           "dupes": 5,
-          "share": "68.40%",
+          "share": "68.30%",
           "note": "The best no-gacha option, this craftable 4-star provides extra ATK over time assuming you don't get hit. This weapon will perform worse than calculated if Galbrena gets hit by enemies often, however it should still outclass any other option than the ones listed above."
         }
       ],
@@ -3603,43 +3627,43 @@
         {
           "name": "Blazing Brilliance",
           "dupes": 1,
-          "share": "83.10%",
+          "share": "83.00%",
           "note": "Changli's Signature matches Emerald of Genesis in performance, slightly surpassing it since CRIT DMG and Skill DMG are acceptable stats for Hiyuki and the 12% ATK does not require Hiyuki to cast her Skills in order to acquire it (it's permanent). Despite needing 1 more Energy Regen roll than the permanent option, the slightly better damaging stats this weapon offers makes it Hiyuki's 2nd best in slot, although quite far behind her Signature."
         },
         {
           "name": "Emerald of Genesis",
           "dupes": 1,
-          "share": "82.40%",
+          "share": "82.30%",
           "note": "The Standard Banner Sword that's often the best F2P choice on almost all Sword damage dealers, Hiyuki being no exception. Provides her some Energy Regen and ATK% when casting Skills as well as CRIT Rate and good Base ATK, making it one of her best alternatives since few other Swords give her desirable stats."
         },
         {
           "name": "Emerald Sentence",
           "dupes": 1,
-          "share": "81.40%",
+          "share": "81.20%",
           "note": "Qiuyuan's Signature can buff the Echo Skill DMG of the team making it very slightly more than a stat-stick on Hiyuki, but it really doesn't have much of an effect for her teams so overall it's practically the same as an ATK and CRIT Rate stat-stick for Hiyuki."
         },
         {
           "name": "Red Spring",
           "dupes": 1,
-          "share": "81.20%",
+          "share": "81.10%",
           "note": "Simple ATK and CRIT Rate stat-stick for Hiyuki, who barely benefits from this weapon's Basic DMG-focused effects."
         },
         {
           "name": "Everbright Polestar",
           "dupes": 1,
-          "share": "80.20%",
+          "share": "79.80%",
           "note": "Simple ATK, DMG Bonus and CRIT Rate stat-stick for Hiyuki, who does not benefit from this weapon's Tune Rupture and Fusion Burst-related effects."
         },
         {
           "name": "Feather Edge",
           "dupes": 5,
-          "share": "78.50%",
+          "share": "78.10%",
           "note": "Best 4-star weapon for Hiyuki, this Battle Pass exclusive provides CRIT Rate, and an ATK and Liberation DMG Bonus on its passive which in spite of its low Base ATK makes it competitive with low-ranking 5-star options."
         },
         {
           "name": "Fables of Wisdom",
           "dupes": 5,
-          "share": "72.20%",
+          "share": "68.80%",
           "note": "Best fully F2P, no-gacha weapon for Hiyuki, simple ATK stat-stick with decent Base ATK. Upgrade to a better weapon when possible."
         }
       ],
@@ -3681,6 +3705,184 @@
             ]
           ],
           "note": "Other Support options listed above are possible to use in this team but will provide very subpar results. Not recommended, try to get Suisui or Chisa for a strong backing in terms of Support."
+        }
+      ]
+    },
+    "Hsin": {
+      "slug": "hsin",
+      "reviewed": "3.7",
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/hsin",
+      "sets": [
+        {
+          "type": "Best",
+          "name": "Heart of Sworn Vigil",
+          "mix": [],
+          "share": "100.00%",
+          "note": "Hsin's Signature set gives her access to 15% CRIT Rate and 32.5% Electro DMG Bonus in total, making it the best blend of stats she has access to.",
+          "echoes": [
+            {
+              "name": "Reminiscence: Suhsin the Inevitable",
+              "note": "Simple Summon Echo, gives Hsin 20% Electro DMG Bonus when equipped in the main slot, making it her best by default for that reason alone."
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "format": "43311",
+        "slots": [
+          "CRIT Rate / CRIT DMG",
+          "Electro DMG",
+          "Electro DMG ≥ ATK%",
+          "ATK%",
+          "ATK%"
+        ],
+        "substats": "Energy Regen (Until Satisfied) > CRIT Rate = CRIT DMG > ATK% = Skill DMG% > ATK",
+        "note": null,
+        "targets": [
+          {
+            "stat": "HP",
+            "value": "14500+",
+            "note": null
+          },
+          {
+            "stat": "DEF",
+            "value": "1100+",
+            "note": null
+          },
+          {
+            "stat": "ATK",
+            "value": "2100-2500+",
+            "note": null
+          },
+          {
+            "stat": "CRIT Rate",
+            "value": "65%+",
+            "note": null
+          },
+          {
+            "stat": "CRIT DMG",
+            "value": "230-270%+",
+            "note": null
+          },
+          {
+            "stat": "Energy Regen",
+            "value": "110-115%",
+            "note": "Lower end was estimated in a Electro Rover/Suisui Flare team, higher end was estimated in a Jinhsi/Shorekeeper Unison team."
+          },
+          {
+            "stat": "Electro DMG Bonus",
+            "value": "50-80%+",
+            "note": null
+          }
+        ]
+      },
+      "weapons": [
+        {
+          "name": "Blooming Jadehaven",
+          "dupes": 1,
+          "share": "100.0%",
+          "note": "Hsin's Signature and best weapon, has the standard Base ATK, DMG Bonus and CRIT Rate stats, but also Skill DMG Amplification, Electro RES Ignore and Electro Flare DMG Amplification. Overall a big deal in terms of stats for her, far outclasses permanent options."
+        },
+        {
+          "name": "Lethean Elegy",
+          "dupes": 1,
+          "share": "79.70%",
+          "note": "Solid alternative to Hsin's Signature in Flare teams, provides Hsin with Skill DMG and DEF Ignore as well as good base stats. Still far outclassed in Unison teams though for buff uptime reasons, which is an issue across all weapons but her Signature."
+        },
+        {
+          "name": "Stringmaster",
+          "dupes": 1,
+          "share": "76.20%",
+          "note": "One of the best generalist Rectifiers, with high ATK and CRIT Rate stats but still has significant losses compared to Hsin's Signature regardless of the team."
+        },
+        {
+          "name": "Whispers of Sirens",
+          "dupes": 1,
+          "share": "72.8%",
+          "note": "Mostly an ATK and CRIT DMG stat-stick for Hsin, barely benefits from this weapon's Basic Attack DMG-increasing effect but overall a negligible boost."
+        },
+        {
+          "name": "Freeze Frame",
+          "dupes": 1,
+          "share": "71.00%",
+          "note": "ATK and CRIT Rate stat-stick for Hsin, who does not benefit from this weapon's Glacio Chafe-related effects."
+        },
+        {
+          "name": "Luminous Hymn",
+          "dupes": 1,
+          "share": "69.80%",
+          "note": "ATK and CRIT Rate stat-stick for Hsin, who does not benefit from this weapon's Spectro Frazzle-related effects. Overall worse than Freeze Frame due to a lower Base ATK (higher CRIT Rate isn't too beneficial due to a tendency to overcap on it)."
+        },
+        {
+          "name": "Forged Dwarf Star",
+          "dupes": 1,
+          "share": "69.80%",
+          "note": "Same as Luminous Hymn."
+        },
+        {
+          "name": "Cosmic Ripples",
+          "dupes": 1,
+          "share": "66.00%",
+          "note": "Best permanent weapon option for almost all Rectifier damage dealers, but its lack of CRIT-related stats and its Basic DMG-increasing effects are not that useful on Hsin. Generally recommended to go for her Signature if this is your 2nd option."
+        },
+        {
+          "name": "Augment",
+          "dupes": 5,
+          "share": "64.60%",
+          "note": "ATK and CRIT Rate stat-stick, this Battle Pass exclusive provides some decent stats for Hsin but they're generally lower and worse than 5-star weapons."
+        },
+        {
+          "name": "Fusion Accretion",
+          "dupes": 5,
+          "share": "58.70%",
+          "note": "Provides some extra Energy and ATK when casting Skill, has decent Base ATK compared to other 4-stars, but generally provides a much worse blend of stats than almost any 5-star weapon."
+        },
+        {
+          "name": "Radiant Dawn",
+          "dupes": 5,
+          "share": "57.60%",
+          "note": "This Battle Pass exclusive increases ATK and CRIT DMG and benefits Flare mode more than Unison mode, as multiple Skills are cast in Flare mode to ensure uptime on its ATK and Basic DMG% increasing buff. However, even still it's not recommended over any other 5-star due to low Base ATK issues."
+        },
+        {
+          "name": "Jinzhou Keeper",
+          "dupes": 5,
+          "share": "56.70%",
+          "note": "Best permanently accessible weapon option for Unison Hsin, generally not sufficient and would replace with her Signature weapon as quickly as possible as it simply gives way better stats for her."
+        }
+      ],
+      "teams": [
+        {
+          "name": "Best Team (Flare)",
+          "slots": [
+            [
+              "Hsin"
+            ],
+            [
+              "Rover (Electro)"
+            ],
+            [
+              "Suisui",
+              "Chisa",
+              "Buling"
+            ]
+          ],
+          "note": "By way of more flexibility in quickswap, Chisa could prove stronger for more experienced players willing to take advantage of the mechanic."
+        },
+        {
+          "name": "Best Team (Unison)",
+          "slots": [
+            [
+              "Hsin"
+            ],
+            [
+              "Jinhsi"
+            ],
+            [
+              "The Shorekeeper",
+              "Verina"
+            ]
+          ],
+          "note": "Generally never recommended unless you really want to make use of Unison Hsin or Jinhsi, delivers very similar performance to Electro Rover + Buling in a Flare team."
         }
       ]
     },
@@ -4155,66 +4357,66 @@
           "name": "Thousandfold Deliverance",
           "dupes": 1,
           "share": "100.0%",
-          "note": "Jingran's best weapon by a very large amount, his Signature is the only weapon in the game to grant him such a massive 72% HP stat. This allows him to run a 44111 build while still capping his HP-related self-buffs at 50000, all this topped by CRIT Rate, CRIT DMG and DEF Ignore stats make his weapon much better than any other option he has."
+          "note": "Jingran's best weapon by a very large amount, his Signature is the only weapon in the game to grant him such a massive 72% HP stat. This allows him to run a CRIT-oriented 44111 build while still capping his HP-related self-buffs at 50000, all this topped by CRIT Rate, CRIT DMG and DEF Ignore stats make his weapon much better than any other option he has."
         },
         {
           "name": "Thunderflare Dominion",
           "dupes": 1,
-          "share": "85.1%",
-          "note": "While Jingran can fully benefit from Augusta's Signature weapon buffs, the stats it provides are, much like any other weapon he could access, overall much lower than his own Signature, so overall it ends up performing as a decent alternative if you can get up to 50000 total HP, but on our calculations this isn't feasible which makes it rank quite a bit lower even though it's his second best choice."
+          "share": "85.5%",
+          "note": "While Jingran can fully benefit from Augusta's Signature weapon buffs, the stats it provides are, much like any other weapon he could access, overall much lower than his own Signature, so overall it ends up performing as a decent alternative if you can get up to 50000 total HP."
         },
         {
           "name": "Verdant Summit",
           "dupes": 1,
-          "share": "82.0%",
+          "share": "82.3%",
           "note": "Essentially a slightly worse version of Thunderflare Dominion as it provides general DMG Bonus and Heavy DMG Bonus, but has a worse overall stat spread for Jingran."
         },
         {
           "name": "Wildfire Mark",
           "dupes": 1,
-          "share": "78.8%",
+          "share": "79.0%",
           "note": "CRIT DMG, ATK and Fusion DMG Bonus stat-stick for Jingran. Provides the whole team with 24% Fusion DMG Bonus nearly instantly in Jingran's rotation, a buff that can then be upkept permanently easily. Not quite his best option but a decent one nonetheless."
         },
         {
           "name": "Radiance Cleaver",
           "dupes": 1,
-          "share": "73.7%",
+          "share": "73.9%",
           "note": "Best permanently available option. ATK and CRIT DMG stat-stick for Jingran, who does not benefit from this weapon's Tune Strain-related effects."
         },
         {
           "name": "Aureate Zenith",
           "dupes": 5,
-          "share": "73.1%",
+          "share": "73.0%",
           "note": "Best 4-star weapon, this Battle Pass exclusive grants solid ATK, Heavy DMG Bonus and CRIT DMG stats at the cost of a low Base ATK."
         },
         {
           "name": "Ages of Harvest",
           "dupes": 1,
-          "share": "70.9%",
+          "share": "71.2%",
           "note": "CRIT Rate and DMG Bonus stat-stick for Jingran, who barely benefits from this weapon's Skill DMG-increasing effects."
         },
         {
           "name": "Kumokiri",
           "dupes": 1,
-          "share": "69.1%",
+          "share": "69.2%",
           "note": "Grants a massive amount of CRIT Rate without giving Jingran much else. One of his worse stat-sticks due to excess CRIT Rate."
         },
         {
           "name": "Autumntrace",
           "dupes": 5,
-          "share": "68.7%",
+          "share": "68.5%",
           "note": "This Battle Pass exclusive grants decent ATK and CRIT Rate boosts for Jingran, but its low-end Base ATK makes it worse than almost any 5-star weapon."
         },
         {
           "name": "Lustrous Razor",
           "dupes": 1,
-          "share": "67.6%",
+          "share": "67.7%",
           "note": "The old standard banner 5-star is frankly not recommended on Jingran. He wants CRIT and HP stats, neither of which this weapon gives, so overall the only good stat you get out of using this weapon is Energy Regen. Upgrade to Signature ASAP if this is your best choice."
         },
         {
           "name": "Helios Cleaver",
           "dupes": 5,
-          "share": "62.8%",
+          "share": "62.6%",
           "note": "Similarly to Lustrous Razor, purely an ATK stat-stick for Jingran that offers nothing else. Not recommended."
         },
         {
@@ -4278,13 +4480,13 @@
               "Verina"
             ]
           ],
-          "note": "In these teams, your Support character should run the Halo of Starry Radiance set with the Spacetrek Explorer main Echo."
+          "note": "In these teams, Shorekeeper should run the Halo of Starry Radiance set with the Spacetrek Explorer main Echo. Mortefi or Rebecca with Verina should be on Stonewall Bracer (make sure to use it before Rebecca's rotation if you're using the Rebecca+Verina team)."
         }
       ]
     },
     "Jinhsi": {
       "slug": "jinhsi",
-      "reviewed": "3.2",
+      "reviewed": "3.7",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/jinhsi",
       "sets": [
         {
@@ -4360,55 +4562,55 @@
         {
           "name": "Kumokiri",
           "dupes": 1,
-          "share": "87.90%",
+          "share": "89.30%",
           "note": "Very high CRIT Rate, solid Base ATK and up to 16% Liberation DMG Bonus make this weapon the second best weapon Jinhsi has after her Signature."
         },
         {
           "name": "Wildfire Mark",
           "dupes": 1,
-          "share": "87.60%",
+          "share": "87.90%",
           "note": "Lupa's Signature Weapon is able to buff Resonance Liberation DMG by 24% easily, and on top of its good CRIT DMG and high Base ATK stats this makes it a viable choice for Jinhsi to buff her Ultimate's damage. She will not tend to extend this weapon's effect to gain Fusion DMG Bonus, however doing so can be considered in a team with Brant or Mortefi to get extra leverage out of this weapon's effects (which would not make it better than her Signature, but improve its performance a bit)."
         },
         {
           "name": "Verdant Summit",
           "dupes": 1,
-          "share": "86.90%",
+          "share": "87.80%",
           "note": "Simple ATK, DMG Bonus and CRIT DMG stat-stick for Jinhsi, who does not benefit from this weapon's Heavy DMG-related effects."
         },
         {
           "name": "Radiance Cleaver",
           "dupes": 1,
-          "share": "86.40%",
+          "share": "87.70%",
           "note": "Best permanently available option for Jinhsi, which acts as a simple ATK and CRIT DMG stat-stick for her."
         },
         {
           "name": "Thunderflare Dominion",
           "dupes": 1,
-          "share": "84.80%",
+          "share": "86.30%",
           "note": "While this weapon gives very high Base ATK, it does so at the cost of CRIT, and on Jinhsi its Heavy Attack-related effects are unusable making this weapon viable but not the best."
         },
         {
           "name": "Lustrous Razor",
           "dupes": 1,
-          "share": "80.10%",
+          "share": "82.00%",
           "note": "This permanent weapon option gives lots of ATK and some Energy Regen which alleviates Jinhsi's Energy Regen requirements. Plus, she can maximize its passive effect to increase Liberation DMG. However, due to its lack of CRIT stats like the above options, it ranks worse overall."
         },
         {
           "name": "Aureate Zenith",
           "dupes": 5,
-          "share": "72.30%",
+          "share": "73.90%",
           "note": "This Battle Pass exclusive is the best 4-star as it gives some CRIT alongside ATK, but its low base ATK much like all other 4-stars makes it rank worse than any 5-star options."
         },
         {
           "name": "Waning Redshift",
           "dupes": 5,
-          "share": "70.70%",
+          "share": "72.20%",
           "note": "Provides ATK and flat Energy which helps alleviate Energy Regen requirements, one of the better 4-star choices available."
         },
         {
           "name": "Helios Cleaver",
           "dupes": 5,
-          "share": "69.50%",
+          "share": "71.40%",
           "note": "Best fully F2P accessible-option, giving a solid amount of ATK but nothing else."
         }
       ],
@@ -4420,14 +4622,17 @@
               "Jinhsi"
             ],
             [
-              "Zhezhi"
+              "Hsin",
+              "Zhezhi",
+              "Yinlin",
+              "Cantarella"
             ],
             [
               "The Shorekeeper",
               "Verina"
             ]
           ],
-          "note": "Cantarella can be used instead of Zhezhi if there are temporary Endgame buffs favouring Echo Skill casts. Verina can be stronger than Shorekeeper if CRIT consistency isn't a problem. Otherwise, Shorekeeper is always the best choice."
+          "note": "Any of the other 3 teammates are recommended over Cantarella, since Jinhsi and Cantarella cannot rotate on a 1-2-3-2-3 loop like normal. Only consider Cantarella to take advantage of temporary endgame buffs that favour Echo Skill casts/Havoc DMG. Additionally, while Hsin is Jinhsi's best theoretical teammate, the same cannot be said for Hsin herself who is better off running a F2P Flare team."
         },
         {
           "name": "Quickswap Team",
@@ -4436,16 +4641,14 @@
               "Jinhsi"
             ],
             [
-              "Yinlin",
               "Brant",
               "Changli"
             ],
             [
-              "Verina",
-              "The Shorekeeper"
+              "Verina"
             ]
           ],
-          "note": "Verina must be used with Brant and Changli in order to have Coordinated Attacks on the team. Generally difficult teams to pilot for casual players - not recommended unless you know what you're doing."
+          "note": "Generally difficult teams to pilot for casual players - not recommended unless you know what you're doing."
         },
         {
           "name": "Budget Team",
@@ -5162,32 +5365,32 @@
         {
           "name": "Lux & Umbra",
           "dupes": 1,
-          "share": "88.40%",
+          "share": "88.30%",
           "note": "Galbrena's Signaure grants Lucy a very easy to access Heavy DMG Amplification and DEF Ignore buff that can apply to the latter half of her rotation, where a majority of her damage is dealt. Only strong alternative to her Signature if available."
         },
         {
           "name": "Skull Thrasher",
           "dupes": 1,
-          "share": "84.00%",
+          "share": "83.60%",
           "note": "Rebecca's Signature is best used on her instead of Lucy, but if you somehow acquire it and don't want to use it on Rebecca, Lucy can increase party-wide ATK using it. Generally not recommended but theoretically possible."
         },
         {
           "name": "Phasic Homogenizer",
           "dupes": 1,
-          "share": "83.50%",
+          "share": "83.40%",
           "note": "Strongest permanently available option for all Pistol main damage dealers, granting universal ATK, CRIT and DMG Bonus buffs to any character upon dealing Tune Break damage. Overall a good choice if you time your Tune Break Skill casts in a team with Shorekeeper (or in WhiWa), falls behind significantly with Mornye though."
-        },
-        {
-          "name": "The Last Dance",
-          "dupes": 1,
-          "share": "79.30%",
-          "note": "Simple ATK and CRIT DMG stat-stick for Lucy, who barely benefits from this weapon's Skill DMG-increasing effects."
         },
         {
           "name": "Spectrum Blaster",
           "dupes": 1,
-          "share": "79.20%",
+          "share": "79.10%",
           "note": "Simple ATK and CRIT Rate stat-stick for Lucy, who barely benefits from this weapon's Basic DMG-increasing effects."
+        },
+        {
+          "name": "The Last Dance",
+          "dupes": 1,
+          "share": "78.80%",
+          "note": "Simple ATK and CRIT DMG stat-stick for Lucy, who barely benefits from this weapon's Skill DMG-increasing effects."
         },
         {
           "name": "Static Mist",
@@ -5204,19 +5407,19 @@
         {
           "name": "Solar Flame",
           "dupes": 5,
-          "share": "74.40%",
+          "share": "74.20%",
           "note": "This Battle Pass exclusive is the best 4-star choice for Lucy thanks to its ability to increase her ATK and Heavy DMG while still granting CRIT buffs. Does not compare to any 5-star choice though."
         },
         {
           "name": "Relativistic Jet",
           "dupes": 5,
-          "share": "67.50%",
+          "share": "66.90%",
           "note": "Another fallback option that's even weaker than Static Mist while still helping to alleviate Energy Regen requirements. A low Base ATK and no CRIT-increasing effect makes this weapon much less preferred than 5-star choices."
         },
         {
           "name": "Pistols#26",
           "dupes": 5,
-          "share": "64.60%",
+          "share": "65.00%",
           "note": "Best no-gacha option if necessary, granting some extra ATK when no damage is taken by the character equipping it. Upgrade to 5-star options as soon as possible though."
         }
       ],
@@ -5483,13 +5686,13 @@
         {
           "name": "Ages of Harvest",
           "dupes": 1,
-          "share": "87.80%",
+          "share": "88.00%",
           "note": "Mostly a CRIT Rate and Base ATK stat stick for Lupa. She is fully able to take advantage of this weapon's effect, but in practice it only buffs the Foebreaker Resonance Skill after her Ultimate which only represents 1/8 of her damage. So while it remains a great option, it's not the strongest."
         },
         {
           "name": "Kumokiri",
           "dupes": 1,
-          "share": "87.00%",
+          "share": "87.50%",
           "note": "Chisa's Signature provides Lupa with a very small amount of Liberation DMG on Intro, and a huge chunk of CRIT Rate at the cost of slightly lower Base ATK than other 5-stars. Its stat totals (due to lower Base ATK) don't make it better than Ages of Harvest but do make it a good alternative if you don't own her Signature weapon."
         },
         {
@@ -5499,33 +5702,33 @@
           "note": "Mostly a CRIT DMG and Base ATK stat stick for Lupa. She is fully able to take advantage of this weapon's effect, but in practice it only buffs her Wolf's Claw Heavy Attack which only represents 1/16 of her damage, so while it remains a great option, it's not the strongest."
         },
         {
-          "name": "Thunderflare Dominion",
-          "dupes": 1,
-          "share": "84.60%",
-          "note": "Simple ATK and CRIT Rate stat-stick for Lupa who does not benefit from this weapon's Heavy Attack DMG-focused effects."
-        },
-        {
           "name": "Radiance Cleaver",
           "dupes": 1,
-          "share": null,
+          "share": "84.40%",
           "note": "The best permanently available option for Lupa which acts as a nice ATK and CRIT DMG stat-stick for her."
+        },
+        {
+          "name": "Thunderflare Dominion",
+          "dupes": 1,
+          "share": "84.30%",
+          "note": "Simple ATK and CRIT Rate stat-stick for Lupa who does not benefit from this weapon's Heavy Attack DMG-focused effects."
         },
         {
           "name": "Lustrous Razor",
           "dupes": 1,
-          "share": "80.50%",
+          "share": "81.40%",
           "note": "The Standard Banner Broadblade is for once a great option on Lupa. In spite of its secondary stat being ATK% which is often less preferable, as Lupa gives herself a ton of DMG bonus and this weapon's effect increases Resonance Liberation DMG even further on top of giving her much-needed Energy Regen, this weapon's stats end up being quite desirable on Lupa which makes it a perfectly suitable choice for her."
         },
         {
           "name": "Waning Redshift",
           "dupes": 5,
-          "share": "75.00%",
+          "share": "75.80%",
           "note": "The best 4-star option on Lupa thanks to its solid Base ATK, ATK-increasing effects, and ability to restore flat Energy when Resonance Skill is cast, which eases Lupa's build requirements as she tends to require a good chunk of Energy Regen."
         },
         {
           "name": "Aureate Zenith",
           "dupes": 5,
-          "share": "74.80%",
+          "share": "74.90%",
           "note": "This Battle Pass exclusive provides Lupa with a quickly accessed ATK increase after casting Ultimate, but also a nice CRIT DMG secondary stat. As she barely benefits from the Heavy Attack DMG increase this weapon provides, and its Base ATK is rather low, it ranks lower than above options."
         },
         {
@@ -5537,13 +5740,13 @@
         {
           "name": "Helios Cleaver",
           "dupes": 5,
-          "share": "68.50%",
+          "share": "69.30%",
           "note": "While Lupa is unable to fully access this Broadblade's stackable ATK buff when using Resonance Skill, this weapon remains better than any 3-star choices as it does give a good chunk of ATK."
         },
         {
           "name": "Meditations on Mercy",
           "dupes": 5,
-          "share": "66.10%",
+          "share": "66.90%",
           "note": "The best option that's fully F2P-accessible. It's strongly recommended to pull for Lustrous Razor if this weapon is all you have access to, but its ATK main stats are good enough to last you until Lustrous Razor becomes accessible."
         }
       ],
@@ -5696,67 +5899,67 @@
         {
           "name": "Pulsation Bracer",
           "dupes": 1,
-          "share": "85.70%",
+          "share": "87.50%",
           "note": "Amazing F2P option for Luuk which is accessible via the permanent weapon banner providing him with the same ATK and CRIT Rate as his Signature with a weaker passive that grants him a good amount of Basic DMG Bonus instead. Overall his second best option."
         },
         {
           "name": "Blazing Justice",
           "dupes": 1,
-          "share": "83.40%",
+          "share": "84.60%",
           "note": "Zani's Signature provides Luuk with ATK, CRIT DMG and some DEF Ignore which makes it a pretty good alternative to Pulsation Bracer if you need it (it may also be situationally better via crit-fishing)."
         },
         {
           "name": "Moongazer's Sigil",
           "dupes": 1,
-          "share": "80.70%",
+          "share": "82.40%",
           "note": "Simple ATK and CRIT Rate stat-stick for Luuk, who does not benefit from this weapon's Liberation DMG-focused effects."
         },
         {
           "name": "Verity's Handle",
           "dupes": 1,
-          "share": "80.40%",
+          "share": "81.80%",
           "note": "Simple ATK, CRIT Rate and DMG Bonus stat-stick for Luuk, who does not benefit from this weapon's Liberation DMG-focused effects."
         },
         {
           "name": "Tragicomedy",
           "dupes": 1,
-          "share": "80.20%",
+          "share": "81.50%",
           "note": "Simple ATK and CRIT Rate stat-stick for Luuk, who does not benefit from this weapon's Heavy ATK-increasing effects."
         },
         {
           "name": "Abyss Surges",
           "dupes": 1,
-          "share": "74.50%",
+          "share": "75.70%",
           "note": "Much weaker permanent option than Pulsation Bracer as it does not provide CRIT as its secondary stat but provides ATK instead, and also provides a worse passive for Luuk's damage overall. Avoid this weapon in favour of Pulsation Bracer if possible."
         },
         {
           "name": "Celestial Spiral",
           "dupes": 5,
-          "share": "66.50%",
+          "share": "68.80%",
           "note": "Provides a solid amount of ATK while restoring some amount of Energy for Luuk, lowering his Energy needs by a good amount."
         },
         {
           "name": "Aether Strike",
           "dupes": 5,
-          "share": "65.90%",
+          "share": "66.90%",
           "note": "Since Luuk uses his Ultimate at the end of his rotation, this Battle Pass Exclusive's passive is almost useless for him which makes a lot of options significantly stronger than this weapon on top of its already low Base ATK in spite of its CRIT DMG stat."
         },
         {
           "name": "Stonard",
           "dupes": 5,
-          "share": "63.90%",
+          "share": "65.50%",
           "note": "ATK and CRIT Rate stat-stick for Luuk, who does not benefit from this weapon's Liberation DMG-increasing effects. Much weaker than 5-stars due to a much lower Base ATK."
         },
         {
           "name": "Hollow Mirage",
           "dupes": 5,
-          "share": "63.50%",
+          "share": "64.70%",
           "note": "While this weapon's passive can theoretically have permanent uptime (which is assumed in these calculations), if any damage is taken Luuk will take a while to refresh the weapon passive's stacks which may make it perform slightly worse than shown. Generally shoot for better options (particularly Pulsation Bracer) if possible."
         },
         {
           "name": "Legend of Drunken Hero",
           "dupes": 5,
-          "share": "61.60%",
+          "share": "63.30%",
           "note": "Weak ATK stat-stick for Luuk who cannot use this weapon's passive and only gains ATK from it. While this weapon is the best no-gacha choice he has, it is generally strongly recommended to go for Pulsation Bracer at minimum due to its ease of access compared to any options below it (particularly this weapon)."
         }
       ],
@@ -5860,49 +6063,43 @@
         {
           "name": "Static Mist",
           "dupes": 1,
-          "share": "81.50%",
+          "share": "88.70%",
           "note": "While Static Mist provides noticeably less personal damage than other 5-star weapons, it is generally the best choice on Lynae after her Signature as its passive allows her to buff the Main DPS of the team's ATK which is almost always preferable compared to improving her own personal damage."
         },
         {
           "name": "Phasic Homogenizer",
           "dupes": 1,
-          "share": "91.20%",
+          "share": "93.90%",
           "note": "An amazing generalist permanently available pistol that can universally improve the wearer's ATK, DMG Bonus and CRIT DMG. Can get close to a lot of character signatures and is overall a must-have for most accounts."
+        },
+        {
+          "name": "Woodland Aria",
+          "dupes": 1,
+          "share": "90.00%",
+          "note": "ATK and CRIT Rate stat-stick for Lynae who does not benefit from this weapon's Aero Erosion-focused effects."
         },
         {
           "name": "The Last Dance",
           "dupes": 1,
-          "share": "85.00%",
+          "share": "89.50%",
           "note": "Mostly an ATK and CRIT DMG stat-stick for Lynae, who barely benefits from this weapon's Skill DMG-increasing effects."
         },
         {
           "name": "Lux & Umbra",
           "dupes": 1,
-          "share": "83.80%",
+          "share": "89.30%",
           "note": "ATK and CRIT DMG stat-stick for Lynae who cannot benefit from this weapon's Heavy Attack and Echo DMG-focused effects."
-        },
-        {
-          "name": "Woodland Aria",
-          "dupes": 1,
-          "share": "82.60%",
-          "note": "ATK and CRIT Rate stat-stick for Lynae who does not benefit from this weapon's Aero Erosion-focused effects."
         },
         {
           "name": "Solar Flame",
           "dupes": 5,
-          "share": "70.30%",
+          "share": "82.70%",
           "note": "ATK and CRIT Rate stat-stick for Lynae, who does not benefit from this weapon's Heavy ATK DMG-increasing effects."
-        },
-        {
-          "name": "Relativistic Jet",
-          "dupes": 5,
-          "share": "68.80%",
-          "note": "Grants a small amount of flat Energy to the wearer, alleviating Energy Regen requirements. Otherwise only provides ATK and no other stats while having lower base ATK than 5-star weapons. Generally good 4-star, but will not outclass 5-star weapons."
         },
         {
           "name": "Pistols#26",
           "dupes": 5,
-          "share": "68.50%",
+          "share": "80.30%",
           "note": "Strongest no-gacha weapon for most pistol users, granting extra ATK to the wearer practically permanently so long as they don't take any damage. Generally inferior to all above options as it only grants ATK and nothing else."
         }
       ],
@@ -6905,61 +7102,61 @@
         {
           "name": "Red Spring",
           "dupes": 1,
-          "share": "80.16%",
+          "share": "81.10%",
           "note": "Camellya's Signature grants some Basic ATK DMG bonus that Qingxiao uses to an extent, but otherwise it's not an ideal replacement to her own Signature weapon. Decent alternative."
         },
         {
           "name": "Azure Oath",
           "dupes": 1,
-          "share": "78.73%",
+          "share": "79.70%",
           "note": "Simple ATK, CRIT Rate and DMG Bonus stat-stick for Qingxiao, who does not benefit from this weapon's Havoc Bane-related effects."
         },
         {
           "name": "Everbright Polestar",
           "dupes": 1,
-          "share": "78.73%",
+          "share": "79.70%",
           "note": "Simple ATK, CRIT Rate and DMG Bonus stat-stick for Qingxiao, who does not benefit from this weapon's Tune Rupture/Fusion Burst-related effects."
         },
         {
           "name": "Emerald Sentence",
           "dupes": 1,
-          "share": "78.48%",
+          "share": "79.40%",
           "note": "Largely a simple ATK and CRIT Rate stat-stick for Qingxiao, buffs the party's Echo DMG Bonus by a bit but only makes an extremely small, particularly negligible difference in her teams."
         },
         {
           "name": "Frostburn",
           "dupes": 1,
-          "share": "78.18%",
+          "share": "79.10%",
           "note": "Simple ATK and CRIT Rate stat-stick for Qingxiao, who does not benefit from this weapon's Glacio Chafe-related effects."
         },
         {
           "name": "Emerald of Genesis",
           "dupes": 1,
-          "share": "77.60%",
+          "share": "78.50%",
           "note": "Best permanent weapon option, provides Qingxiao with good Base ATK and CRIT Rate to work with alongside one less Energy Regen roll needed thanks to its secondary stat and some extra ATK% from casting a Skill once. Not ideal compared to her Signature though."
         },
         {
           "name": "Blazing Brilliance",
           "dupes": 1,
-          "share": "75.97%",
+          "share": "75.60%",
           "note": "Gives CRIT DMG instead of CRIT Rate as part of its main stats which is not favoured on Qingxiao, also gives Skill DMG which is essentially useless on Qingxiao. Not recommended over any other 5-star."
         },
         {
           "name": "Feather Edge",
           "dupes": 5,
-          "share": "69.51%",
+          "share": "70.30%",
           "note": "Best 4-star weapon option, this Battle Pass exclusive provides CRIT Rate by default, and some ATK and Liberation DMG Bonus when casting Ultimate. Due to a much lower Base ATK than any 5-star weapon, it's not favoured over other options, but still is the best 4-star choice even if it's not recommended."
         },
         {
           "name": "Lumingloss",
           "dupes": 5,
-          "share": "65.53%",
+          "share": "65.80%",
           "note": "This Battle Pass exclusive provides Qingxiao with a lot of ATK as well as Basic Attack and Heavy Attack DMG when Skill is cast. Falls behind due to a lack of CRIT stats when compared to above choices."
         },
         {
           "name": "Commando of Conviction",
           "dupes": 5,
-          "share": "64.42%",
+          "share": "64.60%",
           "note": "Best permanently available, no-gacha option. Simple ATK stat-stick for Qingxiao. Not recommended in general, at best use temporarily before moving on to the much stronger Signature weapon."
         }
       ],
@@ -7201,11 +7398,11 @@
           "echoes": [
             {
               "name": "Bell-Borne Geochelone",
-              "note": "Provides 10% DMG Bonus for 15s as well as DMG reduction for 3 hits. If hit 3 times, the damage buff runs out, which means you want to avoid getting hit to make full use of this Echo; however, it's optimal on Rebecca without Quickswap as it can be cast right before her Ultimate (after her Forte Heavy Attack) in order to cancel the animation, buff your main DPS, the most of Rebecca's rotation, as well as the most of your Support's rotation (just frontload their damage)."
+              "note": "Provides 10% DMG Bonus for 15s as well as DMG reduction for 3 hits. If hit 3 times, the damage buff runs out, which means you want to avoid getting hit to make full use of this Echo; however, it's optimal on Rebecca as it can be cast right before her Ultimate (after her Forte Heavy Attack) in order to cancel the animation, buff your main DPS, the most of Rebecca's rotation, as well as the most of your Support's rotation (just make sure to frontload their damage if possible/needed)."
             },
             {
-              "name": "Impermanence Heron",
-              "note": "Theoretically a more consistent option in quickswap, that can increase the incoming character's DMG Bonus by 12% via Outro as well as restore extra Energy for the character if its damage lands on the enemy. However, this Echo is a transform that takes time to cast during Rebecca's rotation, meaning it must be cast before her rotation - restricting this Echo's use to quickswap teams."
+              "name": "Stonewall Bracer",
+              "note": "Niche Main Echo for specifically the Jingran/Rebecca/Verina team. Should be used during Verina's rotation before Rebecca Intros in, provides a Shield to Jingran in order for him to gain a lot of Fusion DMG Bonus."
             }
           ]
         },
@@ -7299,19 +7496,19 @@
         {
           "name": "Spectrum Blaster",
           "dupes": 1,
-          "share": "92.70%",
+          "share": "93.00%",
           "note": "Lynae's Signature provides Rebecca with a constant Basic DMG Bonus self-buff as well as significant ATK and CRIT Rate bonuses. While it doesn't offer the team-wide DMG Bonus buff as Rebecca can't apply Tune Rupture, it comes out on top of other options below it by sheer personal damage increase alone, making it a very strong alternative to her Signature."
         },
         {
           "name": "Static Mist",
           "dupes": 1,
-          "share": "83.20%",
+          "share": "83.30%",
           "note": "Best permanent option when privileging Team DPS. While this weapon offers lower personal damage than a lot of others below it, the ATK% buff it offers to the next incoming character via Outro makes it a very strong weapon for any Pistols 2nd slot buffer, and Rebecca is no exception, as this weapon constitutes a perfect permanent option and alternative to her Signature."
         },
         {
           "name": "Phasic Homogenizer",
           "dupes": 1,
-          "share": "90.60%",
+          "share": "90.70%",
           "note": "This weapon hones in on Rebecca's personal damage more than Static Mist, and it sacrifices team DPS to increase her own damage instead. Generally, this trade-off is not worth it in a full team context, but it's almost as good as Static Mist still and a good alternative to her Signature as well."
         },
         {
@@ -7323,7 +7520,7 @@
         {
           "name": "The Last Dance",
           "dupes": 1,
-          "share": "85.90%",
+          "share": "85.80%",
           "note": "Simple ATK and CRIT DMG stat-stick for Rebecca, who barely benefits from this weapon's Skill DMG-related effects."
         },
         {
@@ -7341,13 +7538,13 @@
         {
           "name": "Solar Flame",
           "dupes": 5,
-          "share": "78.10%",
+          "share": "77.70%",
           "note": "This Battle Pass exclusive is the best 4-star choice Rebecca has access to, it grants her with some ATK and CRIT Rate but falls behind any 5-star significantly due to a low Base ATK."
         },
         {
           "name": "Pistols#26",
           "dupes": 5,
-          "share": "76.60%",
+          "share": "75.90%",
           "note": "Best no-gacha option if necessary, granting some extra ATK when no damage is taken by the character equipping it. Upgrade to 5-star options as soon as possible though."
         }
       ],
@@ -7775,19 +7972,19 @@
     },
     "Rover (Electro)": {
       "slug": "rover-electro",
-      "reviewed": "3.5",
+      "reviewed": "3.7",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/rover-electro",
       "sets": [
         {
           "type": "Best",
-          "name": "Moonlit Clouds",
+          "name": "Flash of Electric Reflection",
           "mix": [],
           "share": "100.00%",
-          "note": "Offers 10% unconditional Energy Regen on the 2P, a nice boost to ease Energy requirements. More importantly, upon using Outro, grants the next character switching in a 22.5% ATK boost, increasing their damage by a good amount.",
+          "note": "Essentially the Electro version of Chromatic Foam. Provides Electro Rover with 20% Electro DMG Bonus and 25% Electro DMG Bonus to the incoming character they Outro into, making for their best blend of personal damage and buffing potential.",
           "echoes": [
             {
-              "name": "Impermanence Heron",
-              "note": "The best and only real option 5P Moonlit Clouds has, as it grants an extra 12% DMG Bonus on top of the ATK boost to the next character that Moonlit Clouds would usually give."
+              "name": "Soulfrayer",
+              "note": "Simple Summon Echo that gives 12% extra Electro DMG Bonus to the incoming character upon casting Outro. Adds onto the set's 25% for a total of 37% DMG Bonus buffing, making it a very strong source of buffs for Electro Rover."
             }
           ]
         }
@@ -7831,12 +8028,12 @@
           },
           {
             "stat": "Energy Regen",
-            "value": "120%+",
-            "note": "General safe assumption for most teams, using an average Energy generation value from any Main DPS (60) and Support (30)."
+            "value": "117-120%+",
+            "note": "Lower end was estimated in a Hsin/Suisui team, higher end was estimated in a Hsin/Buling team."
           },
           {
             "stat": "Electro DMG Bonus",
-            "value": "30-60%+",
+            "value": "40-70%+",
             "note": null
           }
         ]
@@ -7851,53 +8048,71 @@
         {
           "name": "Red Spring",
           "dupes": 1,
-          "share": "91.10%",
+          "share": "93.00%",
           "note": "As Electro Rover also deals a decent amount of Basic DMG, Red Spring is a good choice although not the best one on them."
         },
         {
           "name": "Azure Oath",
           "dupes": 1,
-          "share": "90.40%",
+          "share": "92.20%",
           "note": "ATK, DMG Bonus and CRIT Rate stat-stick for Electro Rover, who does not benefit from this weapon's Havoc Bane-related effects."
         },
         {
           "name": "Everbright Polestar",
           "dupes": 1,
-          "share": "90.40%",
+          "share": "92.20%",
           "note": "ATK, DMG Bonus and CRIT Rate stat-stick for Electro Rover, who does not benefit from this weapon's Tune Rupture/Fusion Burst-related effects."
-        },
-        {
-          "name": "Emerald of Genesis",
-          "dupes": 1,
-          "share": "90.00%",
-          "note": "Best permanent weapon option for almost all Sword users. Grants CRIT Rate, Energy Regen, and some ramp-up ATK when casting multiple Skills."
-        },
-        {
-          "name": "Frostburn",
-          "dupes": 1,
-          "share": "89.50%",
-          "note": "SImple ATK and CRIT Rate stat-stick for Electro Rover, who does not benefit from this weapon's Glacio Chafe-related effects."
         },
         {
           "name": "Emerald Sentence",
           "dupes": 1,
-          "share": "89.50%",
+          "share": "92.10%",
           "note": "SImple ATK and CRIT Rate stat-stick for Electro Rover, who does not benefit from this weapon's Heavy/Echo DMG-related effects."
+        },
+        {
+          "name": "Frostburn",
+          "dupes": 1,
+          "share": "91.50%",
+          "note": "SImple ATK and CRIT Rate stat-stick for Electro Rover, who does not benefit from this weapon's Glacio Chafe-related effects."
+        },
+        {
+          "name": "Emerald of Genesis",
+          "dupes": 1,
+          "share": "91.40%",
+          "note": "Best permanent weapon option for almost all Sword users. Grants CRIT Rate, Energy Regen, and some ramp-up ATK when casting multiple Skills."
         },
         {
           "name": "Feather Edge",
           "dupes": 5,
-          "share": "80.80%",
+          "share": "81.40%",
           "note": "Best 4-star option, this Battle Pass exclusive grants Electro Rover with some increase to their ATK and Liberation DMG when casting Ultimate, while also coming with a decent CRIT Rate stat at the expense of Base ATK."
         },
         {
           "name": "Fables of Wisdom",
           "dupes": 5,
-          "share": "77.30%",
+          "share": "78.00%",
           "note": "Best no-gacha option, granting a lot of ATK to Electro Rover but no other stats to speak of."
         }
       ],
-      "teams": []
+      "teams": [
+        {
+          "name": "Best Team",
+          "slots": [
+            [
+              "Hsin"
+            ],
+            [
+              "Rover (Electro)"
+            ],
+            [
+              "Suisui",
+              "Chisa",
+              "Buling"
+            ]
+          ],
+          "note": "By way of more flexibility in quickswap, Chisa could prove stronger for more experienced players willing to take advantage of the mechanic."
+        }
+      ]
     },
     "Rover (Havoc)": {
       "slug": "rover-havoc",
@@ -8112,11 +8327,7 @@
           "echoes": [
             {
               "name": "Fallacy of No Return",
-              "note": "Grants 10% increased Energy Regeneration for the wearer and a team wide 10% ATK boost on use for 20 seconds. A strong option for those looking to generate as much energy as possible or who favor a more permanent party buffing effect compared to Bell-Borne Geochelone."
-            },
-            {
-              "name": "Bell-Borne Geochelone",
-              "note": "While nowadays a worse option for the Rejuvenating Glow set for damage than the Fallacy of No Return due to a shorter buff uptime, only granting 10% DMG Bonus for 15 seconds, the Bell-Borne Geochelone remains a good choice if you don't have a good Fallacy to use for the set. It also has increased survivability by blocking 50% of the damage from a max of 3 hits if you desire to have that in your team."
+              "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
             }
           ]
         },
@@ -8582,43 +8793,43 @@
         {
           "name": "Blazing Justice",
           "dupes": 1,
-          "share": "85.40%",
+          "share": "85.20%",
           "note": "Zani's Signature weapon provides the same base stats as her Signature alongside an extra 8% DEF Ignore when Sigrika casts her Basic Attacks, making for a small extra boost compared to the alternatives below it."
         },
         {
           "name": "Pulsation Bracer",
           "dupes": 1,
-          "share": "82.10%",
+          "share": "82.00%",
           "note": "Calculation also applicable to Tragicomedy and Daybreaker's Spine. The best permanent option for Sigrika which is just an ATK and CRIT Rate stat-stick for her."
         },
         {
           "name": "Verity's Handle",
           "dupes": 1,
-          "share": "81.80%",
+          "share": "82.00%",
           "note": "Another ATK and CRIT Rate stat-stick which provides 12% All-Attribute DMG Bonus instead of ATK, making it a bit worse than the above options."
         },
         {
           "name": "Moongazer's Sigil",
           "dupes": 1,
-          "share": "78.50%",
+          "share": "80.90%",
           "note": "This weapon gives too much CRIT Rate when factoring in Sigrika's own kit buffs, and also has a lower Base ATK than the above options, which makes it perform worse than them as an ATK and CRIT Rate stat-stick for Sigrika."
         },
         {
           "name": "Abyss Surges",
           "dupes": 1,
-          "share": "76.30%",
+          "share": "78.50%",
           "note": "While this weapon provides massive ATK and Energy Regen stats, it lacks the CRIT stat that the weapons above it have, making it a worse option overall."
         },
         {
           "name": "Aether Strike",
           "dupes": 5,
-          "share": "69.40%",
+          "share": "76.60%",
           "note": "This Battle Pass exclusive is the best 4-star option Sigrika has by a tiny margin thanks to the CRIT and ATK stats it provides, but due to a much lower Base ATK than all other 5-star choices it pales in comparison to them."
         },
         {
           "name": "Legend of Drunken Hero",
           "dupes": 5,
-          "share": "69.40%",
+          "share": "70.60%",
           "note": "Best F2P no-gacha option for Sigrika, of which she can enable the passive thanks to Ciaccona being on her team in our calculations. Without the passive activated, it will perform worse than listed but still be an acceptable temporary choice. Still, try to chase 5-star options like Pulsation Bracer if you can to get good performance out of Sigrika."
         }
       ],
@@ -8748,7 +8959,7 @@
         {
           "name": "Firstlight's Herald",
           "dupes": 1,
-          "share": null,
+          "share": "100.00%",
           "note": "Suisui's best in slot Signature weapon grants the whole team a 20% ATK buff, decent increase to the party's overall damage output, as well as a lot of Energy Regen which she needs to access her full buffs."
         },
         {
@@ -8805,13 +9016,28 @@
           "note": null
         },
         {
-          "name": "Aemeath Team",
+          "name": "Aemeath Fusion Burst Team",
           "slots": [
             [
               "Aemeath"
             ],
             [
               "Denia"
+            ],
+            [
+              "Suisui"
+            ]
+          ],
+          "note": null
+        },
+        {
+          "name": "Hsin Flare Team",
+          "slots": [
+            [
+              "Hsin"
+            ],
+            [
+              "Rover (Electro)"
             ],
             [
               "Suisui"
@@ -8835,11 +9061,7 @@
           "echoes": [
             {
               "name": "Fallacy of No Return",
-              "note": "Grants 10% increased Energy Regeneration for the wearer and a team wide 10% ATK boost on use for 20 seconds. A strong option for those looking to generate as much energy as possible or who favor a more permanent party buffing effect compared to Bell-Borne Geochelone."
-            },
-            {
-              "name": "Bell-Borne Geochelone",
-              "note": "While nowadays a worse option for the Rejuvenating Glow set for damage than the Fallacy of No Return due to a shorter buff uptime, only granting 10% DMG Bonus for 15 seconds, the Bell-Borne Geochelone remains a good choice if you don't have a good Fallacy to use for the set. It also has increased survivability by blocking 50% of the damage from a max of 3 hits if you desire to have that in your team."
+              "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
             }
           ]
         },
@@ -8956,7 +9178,7 @@
     },
     "The Shorekeeper": {
       "slug": "the-shorekeeper",
-      "reviewed": "2.6",
+      "reviewed": "3.6",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/the-shorekeeper",
       "sets": [
         {
@@ -8969,10 +9191,6 @@
             {
               "name": "Fallacy of No Return",
               "note": "Grants 10% Energy Regen on cast, making it possible to run a Spectro DMG 3-cost on Shorekeeper using 4-star weapons while still reaching the 230% Energy Regen requirement Shorekeeper must meet, which can boost her personal damage a good amount. On top of this, the Echo also grants the entire team a 10% boost to ATK for 20 seconds and deals damage based on the wearers HP, so it will slightly boost both Shorekeeper's and the whole team's damage contribution, making it her best choice generally."
-            },
-            {
-              "name": "Bell-Borne Geochelone",
-              "note": "While nowadays a worse option for the Rejuvenating Glow set for damage than the Fallacy of No Return due to a shorter buff uptime, only granting 10% DMG Bonus for 15 seconds, the Bell-Borne Geochelone remains a good choice if you don't have a good Fallacy to use for the set. It also has increased survivability by blocking 50% of the damage from a max of 3 hits if you desire to have that in your team."
             }
           ]
         },
@@ -9000,7 +9218,7 @@
           "HP%"
         ],
         "substats": "Energy Regen (Until 230%) > CRIT DMG ≥ Liberation DMG% > HP% > CRIT Rate > HP > ATK% = ATK",
-        "note": "ER/Spectro is the end-goal for main stats to really increase Shorekeeper's damage as much as possible, however it may be difficult without Signature so always privilege reaching the Energy Regen requirement of 230% (with Fallacy of No Return + passive = 250%).",
+        "note": "ER/Spectro is the end-goal for main stats to really increase Shorekeeper's damage as much as possible, however it may be difficult without Signature so always privilege reaching the Energy Regen requirement of 230%-240% (based on whether or not you have Fallacy of No Return equipped).",
         "targets": [
           {
             "stat": "HP",
@@ -9038,25 +9256,25 @@
         {
           "name": "Stellar Symphony",
           "dupes": 1,
-          "share": "116.30%",
+          "share": null,
           "note": "Shorekeeper's Signature is her best weapon but not by a big difference compared to Variation. It does provide a 14% team-wide ATK boost when casting Shorekeeper's skill and provides an extra Concerto boost when casting Ultimate. Additionally, it increases Energy Regen by a massive amount, making reaching Shorekeeper's 230% requirement easy. However, due to providing lower amounts of Concerto than an R5 Variation, its competition is fierce as this weapon makes Shorekeeper's opening rotation noticeably slower."
         },
         {
           "name": "Variation",
           "dupes": 5,
-          "share": "100.00%",
+          "share": null,
           "note": "The best 4-star weapon in the game for many players, Variation provides a simple, yet massive Concerto boost when casting Skill on top of a massive amount of Energy Regen. This weapon speeds up Shorekeeper's rotation significantly and makes her rotations quick and smooth, making it one of the best choices very close to her Signature even at R1."
         },
         {
           "name": "Rectifier#25",
           "dupes": 5,
-          "share": "87.20%",
+          "share": null,
           "note": "The best option for Shorekeeper that doesn't require any gacha. Provides a big amount of Energy Regen and a small ATK% boost when casting Skill, acquired for free via crafting."
         },
         {
           "name": "Call of the Abyss",
           "dupes": 5,
-          "share": "85.10%",
+          "share": null,
           "note": "More healing-focused option for Shorekeeper which is also given for free via an Exploration quest in Rinascita. Provides the same amount of Energy Regen as the above options, but has the added pro of increasing Healing Bonus by 16% for 15s when casting Ultimate. Better than Rectifier#25 if the player desires more healing on the team, but it is not a necessity."
         }
       ],
@@ -9127,7 +9345,7 @@
     },
     "Verina": {
       "slug": "verina",
-      "reviewed": "2.2",
+      "reviewed": "3.6",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/verina",
       "sets": [
         {
@@ -9139,24 +9357,7 @@
           "echoes": [
             {
               "name": "Fallacy of No Return",
-              "note": "Grants 10% increased Energy Regeneration for the wearer and a team wide 10% ATK boost on use for 20 seconds. A strong option for those looking to generate as much energy as possible or who favor a more permanent party buffing effect compared to Bell-Borne Geochelone."
-            },
-            {
-              "name": "Bell-Borne Geochelone",
-              "note": "While nowadays a worse option for the Rejuvenating Glow set for damage than the Fallacy of No Return due to a shorter buff uptime, only granting 10% DMG Bonus for 15 seconds, the Bell-Borne Geochelone remains a good choice if you don't have a good Fallacy to use for the set. It also has increased survivability by blocking 50% of the damage from a max of 3 hits if you desire to have that in your team."
-            }
-          ]
-        },
-        {
-          "type": "Special",
-          "name": "Halo of Starry Radiance",
-          "mix": [],
-          "share": null,
-          "note": "Niche set for Verina in Jingran teams that don't feature a natural Shielld applier. Ran in favour of Rejuvenating Glow since this set grants a base 20% ATK permanently to all characters in the team as long as the healer can apply Healing constantly off-field, something Shorekeeper is capable of. 5% better than Rejuvenating Glow's 15% ATK and less clunky to use thanks to having a Summon Echo instead of a Transform one on Rejuvenating Glow (which would be Stonewall Bracer).",
-          "echoes": [
-            {
-              "name": "Spacetrek Explorer",
-              "note": "Grants a Shield when summoned on cast, provides Jingran with a massive Fusion DMG Bonus boost if a Shielding teammate like Iuno isn't there to generate Shields without the need for this Echo."
+              "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
             }
           ]
         }
@@ -9215,31 +9416,19 @@
           "name": "Variation",
           "dupes": 5,
           "share": null,
-          "note": "Without a doubt the best option on Verina, that enables her to cut down one attack in her rotation and as such shave even more time off her already super short rotation, effectively boosting her team's damage even more. The Energy Regen is also a really nice substat for Verina (and her best one at that.)"
-        },
-        {
-          "name": "Stellar Symphony",
-          "dupes": 1,
-          "share": null,
-          "note": "Shorekeeper’s signature weapon is not only amazing for her but also for any Rectifier support. Granting insane amounts of Energy Regen as its secondary stat, increasing the equipped character’s HP all the while providing additional Concerto Energy when casting your Ultimate is seriously valuable for any support that can equip the weapon."
-        },
-        {
-          "name": "Call of the Abyss",
-          "dupes": 5,
-          "share": null,
-          "note": "Best weapon choice if you don't have Concerto weapons available, acquired for free via Rinascita Exploration Quests, which gives a great amount of Energy Regen and an extra Healing Bonus boost upon casting Ultimate for higher sustain."
+          "note": "Without a doubt the best option on Verina, that enables her to cut down one attack in her rotation and as such shave even more time off her already super short rotation, effectively boosting her team's DPS even more. The Energy Regen is also a really nice substat for Verina (and her best one at that.)"
         },
         {
           "name": "Rectifier#25",
           "dupes": 5,
           "share": null,
-          "note": "This F2P craftable option is a good choice for Verina if you don't own any of the above options, as it grants her an ATK% boost and a good base ATK for extra Healing capabilities as well as a lot of Energy Regen which she needs to use her Ultimate during her rotation."
+          "note": "The best option for Verina that doesn't require any gacha. Provides a big amount of Energy Regen and a small ATK% boost when casting Skill, acquired for free via crafting."
         },
         {
-          "name": "Rectifier of Voyager",
+          "name": "Call of the Abyss",
           "dupes": 5,
           "share": null,
-          "note": "An easily accessible supportive option with a reasonable amount of Energy Regen. It also grants the unique ability to gain a sizable chunk of raw Resonance Energy once every 20 seconds. For most character's rotations in teams, this bonus will be ready every time it's their turn to switch-in, making this weapon a great choice for any character who doesn't need damage but needs their Ultimate fast and has trouble accessing it otherwise. The flat energy gain is more powerful the less energy the character and team they are a part of can generate. This weapon is preferred over certain 4-star Rectifier options that give Energy Regen such as Rectifier#25 as the flat Energy boost from this weapon's passive is more effective at granting Resonance Energy."
+          "note": "More healing-focused option for Verina which is also given for free via an Exploration quest in Rinascita. Provides the same amount of Energy Regen as the above options, but has the added pro of increasing Healing Bonus by 16% for 15s when casting Ultimate. Better than Rectifier#25 if the player desires more healing on the team, but it is not a necessity."
         }
       ],
       "teams": []
@@ -9339,37 +9528,37 @@
         {
           "name": "Verity's Handle",
           "dupes": 1,
-          "share": "98.7%",
+          "share": "97.6%",
           "note": "Xiangli Yao's Signature is his second best choice, granting him with solid ATK, CRIT Rate and DMG Bonus, making for an excellent stat-stick for him."
         },
         {
           "name": "Blazing Justice",
           "dupes": 1,
-          "share": "92.0%",
+          "share": "89.3%",
           "note": "Zani's Signature weapon is generally good for Gauntlets damage dealers thanks to its consistent ATK and CRIT DMG stats as well as its easily applied DEF Ignore effect."
-        },
-        {
-          "name": "Solsworn Ciphers",
-          "dupes": 1,
-          "share": "89.4%",
-          "note": "Simple ATK and CRIT DMG stat-stick for Xiangli Yao, gives some extra but very negligible damage to his Echo Skill but does not benefit from any of its effects otherwise."
         },
         {
           "name": "Tragicomedy",
           "dupes": 1,
-          "share": "89.4%",
+          "share": "88.4%",
           "note": "Simple ATK and CRIT Rate stat-stick for Xiangli Yao, who does not benefit from this weapon's Heavy Attack-oriented effects."
         },
         {
           "name": "Pulsation Bracer",
           "dupes": 1,
-          "share": "89.4%",
+          "share": "88.4%",
           "note": "Strongest permanently available option and simple ATK and CRIT Rate stat-stick for Xiangli Yao, who does not benefit from this weapon's Basic DMG-oriented effects."
+        },
+        {
+          "name": "Solsworn Ciphers",
+          "dupes": 1,
+          "share": "86.8%",
+          "note": "Simple ATK and CRIT DMG stat-stick for Xiangli Yao, gives some extra but very negligible damage to his Echo Skill but does not benefit from any of its effects otherwise."
         },
         {
           "name": "Abyss Surges",
           "dupes": 1,
-          "share": "82.7%",
+          "share": "81.1%",
           "note": "Another strong permanent option for Xiangli Yao that does not grant him any CRIT but instead favours ATK and Energy Regen. Inferior choice overall but still viable."
         },
         {
@@ -9718,7 +9907,7 @@
         {
           "name": "Emerald Sentence",
           "dupes": 1,
-          "share": "88.00%",
+          "share": "87.90%",
           "note": "Provides the same base stats as her Signature, however replaces the passive by a boost to team-wide Echo DMG and Heavy DMG, making it her second best in slot (still behind her Signature even with Phrolova being buffable with this weapon on her team)."
         },
         {
@@ -9730,37 +9919,37 @@
         {
           "name": "Red Spring",
           "dupes": 1,
-          "share": "80.60%",
+          "share": "80.50%",
           "note": "Mostly an ATK and CRIT Rate stat-stick for Yangyang, granting her a negligible Basic DMG Bonus increase."
         },
         {
           "name": "Frostburn",
           "dupes": 1,
-          "share": "80.30%",
+          "share": "80.10%",
           "note": "ATK and CRIT Rate stat-stick for Yangyang, who does not benefit from this weapon's Glacio Chafe-oriented effects."
         },
         {
           "name": "Blazing Brilliance",
           "dupes": 1,
-          "share": "79.90%",
+          "share": "79.70%",
           "note": "ATK and CRIT DMG stat-stick for Yangyang, who does not benefit from this weapon's Skill DMG-oriented effects."
         },
         {
           "name": "Emerald of Genesis",
           "dupes": 1,
-          "share": "79.10%",
+          "share": "79.00%",
           "note": "Mostly an ATK and CRIT Rate stat-stick for Yangyang, best permanent option that grants a negligible Energy Regen increase (as Yangyang already gets 10% from her Echo set) and a ramp-up ATK bonus when casting Skills."
         },
         {
           "name": "Lumingloss",
           "dupes": 5,
-          "share": "74.30%",
+          "share": "73.70%",
           "note": "Best 4-star option, this Battle Pass exclusive grants Yangyang some Heavy DMG Bonus and a good amount of ATK. Still pales in comparison to any 5-star though."
         },
         {
           "name": "Fables of Wisdom",
           "dupes": 5,
-          "share": "69.30%",
+          "share": "68.60%",
           "note": "Best no-gacha option, granting a lot of ATK to Yangyang but no other stats to speak of."
         }
       ],
@@ -9921,37 +10110,37 @@
         {
           "name": "Whispers of Sirens",
           "dupes": 1,
-          "share": "96.70%",
+          "share": "96.90%",
           "note": "Cantarella's Signature weapon provides super high CRIT DMG and solid ATK and Basic DMG Bonus stats. While Yinlin does tend to overcap on CRIT Rate when running her Signature weapon, it isn't an issue on this weapon which makes it one of the best alternatives Yinlin has available."
         },
         {
           "name": "Rime-Draped Sprouts",
           "dupes": 1,
-          "share": "96.30%",
+          "share": "96.60%",
           "note": "Slightly worse version of Whispers of Sirens, giving the same base stats and benefits but less Basic DMG Bonus."
         },
         {
           "name": "Lethean Elegy",
           "dupes": 1,
-          "share": "94.80%",
+          "share": "95.10%",
           "note": "This weapon has a lower CRIT Rate secondary stat but gets higher Base ATK as a trade-off. On top of its 8% DEF Ignore effect, it also provides Yinlin enough CRIT Rate to CRIT consistently without overcapping, making it a great choice for her."
         },
         {
           "name": "Cosmic Ripples",
           "dupes": 1,
-          "share": "90.00%",
+          "share": "89.70%",
           "note": "Best permanently available option for Yinlin, lacks CRIT stat boosts but gives a lot of ATK and Energy Regen in exchange."
         },
         {
           "name": "Luminous Hymn",
           "dupes": 1,
-          "share": "89.30%",
+          "share": "89.50%",
           "note": "ATK and CRIT Rate stat-stick for Yinlin, who does not benefit from this weapon's Spectro Frazzle-oriented effects. Also runs into CRIT Rate overcap issues."
         },
         {
           "name": "Augment",
           "dupes": 5,
-          "share": "88.10%",
+          "share": "87.90%",
           "note": "Best 4-star weapon option, this Battle Pass Exclusive gets an easy-to-activate ATK buff when casting Ultimate and also gives a nice CRIT secondary stat but has lower Base ATK as a 4-star making it worse than any 5-star option."
         },
         {
@@ -9963,7 +10152,7 @@
         {
           "name": "Jinzhou Keeper",
           "dupes": 5,
-          "share": "78.10%",
+          "share": "77.80%",
           "note": "Easy-to-activate ATK buffs make this weapon the best F2P 4-star choice for Yinlin, but it does not provide any CRIT stats and has a low Base ATK which makes it easily replaced by the above options."
         }
       ],
@@ -10034,11 +10223,7 @@
           "echoes": [
             {
               "name": "Fallacy of No Return",
-              "note": "One of two main Echo choice for Youhu. Grants 10% increased Energy Regeneration for Youhu herself and a team wide 10% ATK boost on use for 20 seconds. A strong option for those looking to generate as much energy as possible on Youhu or who favor a more permanent party buffing effect compared to Bell-Borne Geochelone."
-            },
-            {
-              "name": "Bell-Borne Geochelone",
-              "note": "While nowadays a worse option for the Rejuvenating Glow set for damage than the Fallacy of No Return due to a shorter buff uptime, only granting 10% DMG Bonus for 15 seconds, the Bell-Borne Geochelone remains a good choice if you don't have a good Fallacy to use for the set. It also has increased survivability by blocking 50% of the damage from a max of 3 hits if you desire to have that in your team."
+              "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
             }
           ]
         },
@@ -10193,11 +10378,7 @@
           "echoes": [
             {
               "name": "Fallacy of No Return",
-              "note": "Grants 10% increased Energy Regeneration for the wearer and a team wide 10% ATK boost on use for 20 seconds. A strong option for those looking to generate as much energy as possible or who favor a more permanent party buffing effect compared to Bell-Borne Geochelone."
-            },
-            {
-              "name": "Bell-Borne Geochelone",
-              "note": "While nowadays a worse option for the Rejuvenating Glow set for damage than the Fallacy of No Return due to a shorter buff uptime, only granting 10% DMG Bonus for 15 seconds, the Bell-Borne Geochelone remains a good choice if you don't have a good Fallacy to use for the set. It also has increased survivability by blocking 50% of the damage from a max of 3 hits if you desire to have that in your team."
+              "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
             }
           ]
         },
@@ -10634,13 +10815,13 @@
         {
           "name": "Lethean Elegy",
           "dupes": 1,
-          "share": "94.50%",
+          "share": "94.60%",
           "note": "Phrolova's Signature stands out as the only Rectifier with high Base ATK which works well on Zhezhi, not to mention the easily triggered Echo and Skill DMG Amplification as well as the DEF Ignore for 12s, all of which gives her a nice damage boost overall."
         },
         {
           "name": "Stringmaster",
           "dupes": 1,
-          "share": "93.80%",
+          "share": "93.70%",
           "note": "Yinlin's Signature Rectifier is easily one of the best generalist options in the game, giving Zhezhi a nice but short-lived ATK% buff that can apply to some Coordinated Attacks and the most damaging part of her on-field rotation. However, buffs run out quickly which make it not as ideal as her Signature while still being a completely excellent replacement."
         },
         {
@@ -10652,31 +10833,31 @@
         {
           "name": "Cosmic Ripples",
           "dupes": 1,
-          "share": "84.60%",
+          "share": "84.10%",
           "note": "Best permanently available option for all Rectifier damage dealers, granting a scaling Basic DMG Bonus buff, some Energy Regen and a massive amount of ATK. Not as ideal as above options due to the absence of CRIT in the stats this weapon grants, but still a capable alternative."
         },
         {
           "name": "Augment",
           "dupes": 5,
-          "share": "81.10%",
+          "share": "80.70%",
           "note": "Best 4-star weapon option, this Battle Pass Exclusive gets an easy-to-activate ATK buff when casting Ultimate and also gives a nice CRIT secondary stat but has lower Base ATK as a 4-star making it worse than any 5-star option."
         },
         {
           "name": "Radiant Dawn",
           "dupes": 5,
-          "share": "78.10%",
+          "share": "77.90%",
           "note": "Another good Battle Pass Exclusive that grants ATK and Basic DMG when casting Skill, not as ideal as any 5-star due to low Base ATK but also gives CRIT DMG on its secondary stat, making it a decent choice overall albeit easily replaced."
         },
         {
           "name": "Fusion Accretion",
           "dupes": 5,
-          "share": "73.80%",
+          "share": "73.50%",
           "note": "Grants some flat Energy when casting Skill and otherwise only gives some decent ATK increases. Replace this weapon when possible, but decent placeholder until 5-star options are acquired."
         },
         {
           "name": "Jinzhou Keeper",
           "dupes": 5,
-          "share": "69.20%",
+          "share": "68.80%",
           "note": "Similarly to Fusion Accretion, best no-gacha option accessible at the start of the game but gives nothing except ATK and should be replaced as soon as possible."
         }
       ],

@@ -3396,7 +3396,7 @@
       },
       "confidence": {
         "identity": "official",
-        "kit": "datamined"
+        "kit": "official"
       },
       "sources": [
         {
@@ -3448,7 +3448,8 @@
         "Electro Flare",
         "Unison"
       ],
-      "nameCN": "心"
+      "nameCN": "心",
+      "hasKit": true
     },
     {
       "name": "Suoming",

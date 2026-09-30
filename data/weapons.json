@@ -194,6 +194,48 @@
       "icon": "assets/weapons/w-bloodpact-s-pledge.webp"
     },
     {
+      "name": "Blooming Jadehaven",
+      "rarity": 5,
+      "type": "Rectifier",
+      "id": "21050116",
+      "atk90": 588,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
+      "source": "",
+      "effect": "Grants {0} All-Attribute DMG Bonus. After the wielder inflicts Electro Flare or triggers Unison Response, Resonance Skill DMG is Amplified by {1} and ignores {2} of the target's Electro RES. While the wielder is on the field, Electro Flare DMG taken by targets within a certain range is Amplified by {3} for 30s, triggered 1 time every 0.1s. Only the strongest effect of the same name applies.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "36%",
+          "45%",
+          "54%",
+          "63%",
+          "72%"
+        ],
+        [
+          "10%",
+          "13.5%",
+          "17%",
+          "20.5%",
+          "24%"
+        ],
+        [
+          "30%",
+          "37.5%",
+          "45%",
+          "52.5%",
+          "60%"
+        ]
+      ],
+      "icon": "assets/weapons/w-blooming-jadehaven.webp"
+    },
+    {
       "name": "Boson Astrolabe",
       "rarity": 5,
       "type": "Rectifier",
@@ -1438,6 +1480,19 @@
         ]
       ],
       "icon": "assets/weapons/w-unflickering-valor.webp"
+    },
+    {
+      "name": "Unspoken Rue",
+      "rarity": 5,
+      "type": "Sword",
+      "id": "21020107",
+      "atk90": 0,
+      "stat": "",
+      "statValue90": 0,
+      "source": "",
+      "effect": "",
+      "ranks": [],
+      "icon": "assets/weapons/w-unspoken-rue.webp"
     },
     {
       "name": "Verdant Summit",
@@ -3345,5 +3400,5 @@
       "icon": "assets/weapons/w-tyro-sword.webp"
     }
   ],
-  "updated": "2026-09-14T10:55:41.793Z"
+  "updated": "2026-09-30T16:00:19.776Z"
 }
