@@ -70,10 +70,12 @@ const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " +
   "Chrome/126.0.0.0 Safari/537.36";
 
-/* The site names the build it is serving in its own page source; the static
-   host has no index and 404s every build but the current one, so the version
-   has to be read rather than guessed. */
+/* The static host has no index and 404s every build but the current one, so
+   the version has to be read rather than guessed. The site used to inline it in
+   its page source; since the 3.7 release it reads it from this manifest instead,
+   keyed by game — `ww.latest` is the newest build it serves. */
 const SITE = "https://ww.nanoka.cc/";
+const MANIFEST = "https://static.nanoka.cc/manifest.json";
 const BASE = build => `https://static.nanoka.cc/ww/${build}`;
 const OUT = "data/clientfiles.json";
 /* Kit text goes to a file of its own for the same reason kits.json is separate
@@ -403,9 +405,8 @@ function buildKit(detail) {
 }
 
 (async function main() {
-  const page = await getText(SITE);
-  const build = (page.match(/static\.nanoka\.cc\/ww\/([0-9][0-9.]*)\//) || [])[1];
-  if (!build) throw new Error("no build version in the source page — the site layout changed");
+  const build = String((await getJSON(MANIFEST))?.ww?.latest || "");
+  if (!/^[0-9][0-9.]*$/.test(build)) throw new Error("no ww build in the source manifest — the site layout changed");
   console.log(`beta build ${build}\n`);
 
   const [cWeapons, cChars, cSonata] = await Promise.all([
