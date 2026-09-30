@@ -76,6 +76,9 @@ const MIN_ICON_PX = 200;
 /* Which host a cached icon came from, read off the URL the manifest filed it
    under. Fandom serves its images from static.wikia.nocookie.net. */
 const FANDOM_ART = /nocookie\.net|fandom\.com/;
+/* fetch-weapon-icons.mjs files the game client's own icon off nanoka.cc when
+   Prydwen's is small — or, as with 3.7's two, not the game's picture at all. */
+const CLIENT_ART = /nanoka\.cc/;
 const OUT = "data/weapons.json";
 const DIR = "assets/weapons";
 const TIMEOUT_MS = 25000;
@@ -266,6 +269,7 @@ function rankTable(w) {
      both sources when it isn't empty — the desk says where a picture came
      from, and "art via prydwen.gg" stops being true the moment one didn't. */
   const wiki = [];
+  const client = [];
 
   /* 5★ first, then by name — the file reads the way the view does, and a diff
      on it stays legible when Kuro adds two weapons in the middle of the list. */
@@ -286,8 +290,9 @@ function rankTable(w) {
     if (known) {
       icon = file;
       if (FANDOM_ART.test(known)) wiki.push(w.Name);
+      if (CLIENT_ART.test(known)) client.push(w.Name);
       console.log(`${w.Rarity}★ ${String(w.Name).padEnd(26)}   cached` +
-        (FANDOM_ART.test(known) ? "  ← wiki" : ""));
+        (FANDOM_ART.test(known) ? "  ← wiki" : CLIENT_ART.test(known) ? "  ← client" : ""));
     } else try {
       let url = WEAPON_IMG(w.ID);
       let buf = await fetchImage(url);
@@ -354,10 +359,14 @@ function rankTable(w) {
       "Stats and passives via prydwen.gg; weapon art © Kuro Games." +
       (wiki.length
         ? ` Icons for ${wiki.join(", ")} are from the Wuthering Waves wiki — prydwen.gg ships those below ${MIN_ICON_PX}px.`
+        : "") +
+      (client.length
+        ? ` Icons for ${client.join(", ")} are the game client's own, via nanoka.cc.`
         : ""),
-    credit: wiki.length
-      ? "Stats and art via prydwen.gg, some icons via the Wuthering Waves wiki · weapon art © Kuro Games"
-      : "Stats and art via prydwen.gg · weapon art © Kuro Games",
+    credit: "Stats and art via prydwen.gg" +
+      (wiki.length ? ", some icons via the Wuthering Waves wiki" : "") +
+      (client.length ? ", some from the game client via nanoka.cc" : "") +
+      " · weapon art © Kuro Games",
     source: WEAPONS_URL,
     weapons
   };

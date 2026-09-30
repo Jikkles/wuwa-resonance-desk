@@ -15,12 +15,14 @@
 // without the page, the moment Prydwen lists the weapon. This does exactly
 // that, and nothing else:
 //
-//   - a weapon (live or beta) with no icon on disk gets Prydwen's by id, or the
-//     wiki's by name when Prydwen has none;
-//   - a weapon whose icon is under MIN_ICON_PX is offered both again and keeps
-//     whichever is biggest. Prydwen often ships a new weapon at 100px and the
-//     wiki uploads the 256px one days later; fetch-weapons.mjs files the first
-//     and never looks again, so the blurry one used to stay for good.
+//   - a weapon (live or beta) with no icon on disk gets the client's own icon
+//     by id off nanoka's asset host, else Prydwen's by id, else the wiki's by
+//     name;
+//   - a weapon whose icon is under MIN_ICON_PX is offered all three again and
+//     keeps whichever is biggest, the client's on a tie. Prydwen often ships a
+//     new weapon at 100px, and not always the game's picture: 3.7's Blooming
+//     Jadehaven and Unspoken Rue went up as close crops of some other render.
+//     The client file is the icon the game draws, at 256px, from the beta on.
 //
 // Weapons already at full size cost nothing — no request is made for them.
 // It writes only the icon files (assets/weapons/w-<slug>.webp, the same path
@@ -40,6 +42,9 @@ const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " +
   "Chrome/126.0.0.0 Safari/537.36";
 const WEAPON_IMG = id => `https://cdn.prydwen.gg/images/wuthering-waves/weapons/${id}.webp`;
+/* The client's UI texture, as nanoka.cc extracts it. No build in the path. */
+const CLIENT_IMG = id =>
+  `https://static.nanoka.cc/assets/ww/UIResources/Common/Image/IconWeapon/T_IconWeapon${id}_UI.webp`;
 const FANDOM_API = "https://wutheringwaves.fandom.com/api.php";
 /* Same floor as fetch-weapons.mjs: the record draws an icon about 256px. */
 const MIN_ICON_PX = 200;
@@ -124,10 +129,11 @@ async function fandom(name) {
     const tries = [];
     let best = null;
     for (const [from, get] of [
+      ["client", async () => { const url = CLIENT_IMG(w.id); return { url, buf: await download(url) }; }],
       ["prydwen", async () => { const url = WEAPON_IMG(w.id); return { url, buf: await download(url) }; }],
       ["wiki", () => fandom(w.name)]
     ]) {
-      if (from === "prydwen" && !w.id) continue;
+      if (from !== "wiki" && !w.id) continue;
       try {
         const got = await get();
         const gpx = webpWidth(got.buf);
