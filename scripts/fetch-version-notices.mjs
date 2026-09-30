@@ -141,15 +141,20 @@ const imagesIn = html =>
    aspect and can afford to be strict. */
 const KEY_VISUAL_RATIO = [1.6, 2.0];
 
-async function firstKeyVisual(html) {
+async function measure(url) {
+  try {
+    const info = await getJson(`${url}${url.includes("?") ? "&" : "?"}x-oss-process=image/info`);
+    const w = Number(info?.ImageWidth?.value), h = Number(info?.ImageHeight?.value);
+    return w && h ? { w, h } : null;
+  } catch { return null; /* another host, or a CDN that declined to measure */ }
+}
+
+async function firstKeyVisual(html, { widerThan = 0 } = {}) {
   for (const url of imagesIn(html)) {
-    try {
-      const info = await getJson(`${url}${url.includes("?") ? "&" : "?"}x-oss-process=image/info`);
-      const w = Number(info?.ImageWidth?.value), h = Number(info?.ImageHeight?.value);
-      if (!w || !h) continue;
-      const r = w / h;
-      if (r >= KEY_VISUAL_RATIO[0] && r <= KEY_VISUAL_RATIO[1]) return url;
-    } catch { /* another host, or a CDN that declined to measure */ }
+    const size = await measure(url);
+    if (!size) continue;
+    const r = size.w / size.h;
+    if (r >= KEY_VISUAL_RATIO[0] && r <= KEY_VISUAL_RATIO[1]) return size.w > widerThan ? url : null;
   }
   return null;
 }
@@ -313,7 +318,7 @@ function versionRecord(doc, id, floor) {
   return fresh;
 }
 
-function applyPreview(doc, { version, title, start, published, keyVisual, articleId, floor }) {
+function applyPreview(doc, { version, title, start, published, keyVisual, articleId, floor, isUpdate }) {
   const v = versionRecord(doc, version, floor);
   if (!v) return false;
   let touched = false;
@@ -330,15 +335,17 @@ function applyPreview(doc, { version, title, start, published, keyVisual, articl
 
   /* A record written off leaks carries a stand-in picture flagged provisional
      — a drip card, usually. The real preview key visual retires it. */
-  if (keyVisual && (!v.keyVisual?.url || v.keyVisual.provisional)) {
+  const fromPreview = /Preview key visual$/.test(v.keyVisual?.title || "");
+  if (keyVisual && (!v.keyVisual?.url || v.keyVisual.provisional || (isUpdate && fromPreview))
+      && keyVisual !== v.keyVisual?.url) {
     v.keyVisual = {
       url: keyVisual,
       source: ARTICLE_URL(articleId),
-      title: `Version ${version} Preview key visual`,
+      title: `Version ${version} ${isUpdate ? "update" : "Preview"} key visual`,
       credit: "© Kuro Games"
     };
     touched = true;
-    say(`  ${version}: key visual from the preview post`);
+    say(`  ${version}: key visual from the ${isUpdate ? "Update Content" : "preview"} post`);
   }
 
   /* The shell reads status off the dates, except that a version marked beta
@@ -644,19 +651,29 @@ async function raise(gaps) {
     /* The body is only fetched for its pictures, and only when the desk still
        needs one — a version already carrying a real key visual costs nothing
        to skip, and skips half a dozen CDN measurements with it. */
+    /* The Update Content post can also retire a key visual taken from the
+       broadcast preview. It opens on the key visual every time, and the preview
+       does not: 3.7's led with a 1920x1080 table of contents, which is 16:9 as
+       well and went up as the key visual for eleven days. The real one is 4K,
+       a contents page is web-sized, so the Update Content frame wins only when
+       it is the wider picture — 3.6's preview already had the 4K one. */
+    const isUpdate = UPDATE_CONTENT.test(a.articleTitle);
     const existing = doc.versions.find(v => v.id === version);
+    const fromPreview = /Preview key visual$/.test(existing?.keyVisual?.title || "");
+    const replace = isUpdate && fromPreview && existing.keyVisual.url;
     let keyVisual = null;
-    if (!existing?.keyVisual?.url || existing.keyVisual.provisional) {
+    if (!existing?.keyVisual?.url || existing.keyVisual.provisional || replace) {
       const full = await getJson(`${BASE}/article/${a.articleId}.json`);
-      keyVisual = await firstKeyVisual(full.articleContent);
-      if (!keyVisual) say(`  ${version}: no 16:9 frame in the preview post`);
+      const widerThan = replace ? (await measure(existing.keyVisual.url))?.w ?? Infinity : 0;
+      keyVisual = await firstKeyVisual(full.articleContent, { widerThan });
+      if (!keyVisual && !replace) say(`  ${version}: no 16:9 frame in the ${isUpdate ? "Update Content" : "preview"} post`);
     }
 
     touched = applyPreview(doc, {
       version,
       title: m[2].trim(),
       start: releaseDate(a.articleTitle, `${String(a.startTime).replace(" ", "T")}Z`),
-      published, keyVisual, articleId: a.articleId, floor
+      published, keyVisual, articleId: a.articleId, floor, isUpdate
     }) || touched;
   }
 

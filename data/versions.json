@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-09-29",
+  "updated": "2026-09-30",
   "current": "3.6",
   "versions": [
     {
@@ -169,9 +169,9 @@
       "title": "Prism's Illusion, Heart's Illumination",
       "status": "announced",
       "keyVisual": {
-        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1789660800000/jkef15wfsy8xtht89n-1789741057893.jpg",
-        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-        "title": "Version 3.7 Preview key visual",
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/lhdi179svdjham40sc-1790578113847.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "title": "Version 3.7 update key visual",
         "credit": "© Kuro Games"
       },
       "phases": [
