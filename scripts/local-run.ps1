@@ -16,6 +16,8 @@
 # machine already has. Output goes to %LOCALAPPDATA%\resonance-desk\local-run.log.
 
 $ErrorActionPreference = "Continue"
+# Node writes UTF-8; without this the log reads its stars and dots as mojibake.
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $repo = Split-Path -Parent $PSScriptRoot
 Set-Location $repo
 
