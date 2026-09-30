@@ -111,6 +111,10 @@ async function fandom(name) {
     const file = iconFile(w.name);
     const have = await onDisk(file);
     const px = webpWidth(have);
+    /* Kept whether or not it is replaced below: writing one icon into
+       assets/weapons makes cache.save() drop every manifest line in there this
+       run did not keep, and fetch-weapons.mjs then re-downloads the lot. */
+    if (have) await cache.reuse(file);
     if (have && px >= MIN_ICON_PX) {
       if (!w.icon) { w.icon = file; touched.add(doc); }
       continue;
