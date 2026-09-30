@@ -750,6 +750,11 @@ async function raise(gaps) {
       console.log(`${g.id}: events sheet is out (article ${g.articleId}), ${g.names.length} events still on the desk's plate`);
   else console.log("no events waiting on a sheet Kuro has already published");
 
+  /* The feeds job runs this before the event-art job has had its go at the
+     sheet, so an alert raised here would open on every Update Content day and
+     close an hour later. The event-art job runs this again once the art is
+     in, and that run is the one that speaks. */
+  if (process.argv.includes("--no-alert")) { console.log("--no-alert: issue left to the event-art job"); return; }
   await raise(gaps).catch(err => console.log(`alert not raised: ${err.message}`));
 })().catch(err => {
   console.error(`fetch-version-notices failed: ${err.message}`);

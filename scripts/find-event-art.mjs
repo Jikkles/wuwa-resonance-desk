@@ -34,8 +34,9 @@
 // Content post, then the Version Preview post, for the patch on the desk.
 // It only fills an event with no art, or one still on a crop out of an earlier
 // post; a notice's own banner and a crop already taken from this post are left
-// alone. Anything it cannot place is printed, not guessed. scripts/local-run.ps1
-// runs it on a schedule — GitHub's runners are Linux and have no such engine.
+// alone. Anything it cannot place is printed, not guessed. The event-art job in
+// update-feeds.yml runs it every cycle on GitHub's Windows runner, which carries
+// the same engine and is free on a public repo.
 
 import { getJson, getBuffer } from "./lib/net.mjs";
 import { execFile } from "node:child_process";

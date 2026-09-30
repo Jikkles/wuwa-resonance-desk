@@ -121,16 +121,28 @@ sheet is 1080x12145 with nine bands, and every 3.6 event on the desk crops its a
 exactly that. So between the broadcast and that post there is no art to have, and the
 desk's own plate is the correct answer rather than a missing one.
 
-`fetch-version-notices.mjs` watches for that post and raises the issue **"Kuro published
-it as pictures — needs a human"** naming the article. Then:
+**That matching is automatic now.** `node scripts/find-event-art.mjs --apply` reads the
+sheet with the OCR engine built into Windows (`scripts/lib/ocr.ps1` — no install, no key),
+matches each title to an event already in `events.json` for the patch, cuts the banner
+under it by the frame's gold corner blocks, and writes the crop — plus the window printed
+under it, where the entry has none. It fills only events with no art, or ones on a crop
+out of the preview; a notice's own banner is never touched. On 3.7 it cut all twelve
+within 3px of the hand-cut crops. The `event-art` job in `update-feeds.yml` runs it every
+cycle on GitHub's Windows runner. The events have to be in `events.json` by name first —
+that part is still the job above.
+
+`fetch-version-notices.mjs` still watches for that post, and the `event-art` job raises
+the issue **"Kuro published it as pictures — needs a human"** only after the OCR has had
+its go (the feeds job runs it with `--no-alert`). So an open issue means the OCR could not
+place a title; the job log prints each one it left alone. By hand, on Windows:
 
 ```bash
+node scripts/find-event-art.mjs --apply       # or, to eyeball every band:
 node scripts/find-event-art.mjs <articleId>
 ```
 
-It prints a paste-ready `art` block and a preview URL per band. Open the previews, match
-band to event, paste the crop into `data/events.json`. Matching is the only part a person
-has to do — the names are pixels. Trim a band that takes in the gold section title above
+The second prints a paste-ready `art` block and a preview URL per band. Open the previews,
+match band to event, paste the crop into `data/events.json`. Trim a band that takes in the gold section title above
 the frame or Kuro's own name plate inside it, or set `art.nameplate` so the desk doesn't
 draw a second title over the first. Never borrow a picture from another event to fill a
 gap; an undrawn event keeps the plate.

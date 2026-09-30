@@ -72,12 +72,12 @@ jobs:
       # run is what turns it into a dated, titled, illustrated record without
       # anyone watching a stream. It also raises the issue for the half of that
       # announcement Kuro only ever publish as a picture.
+      # --no-alert: the issue it raises is left to the event-art job below,
+      # which runs this again after cutting the banners it asks a human for.
       - name: Resolve version notices
         if: always()
         continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/fetch-version-notices.mjs
+        run: node scripts/fetch-version-notices.mjs --no-alert
 
       # Icons for whatever those events pay out, resolved against Fandom. Runs
       # after the calendar because it reads the reward lines the step above just
@@ -182,3 +182,58 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/patch-day-alert.mjs
+
+  # Event banner art out of Kuro's events sheet. The sheet sets every event's
+  # name as type inside one tall picture, and reading it back needs an OCR
+  # engine: Windows 10/11 and Windows Server ship one (Windows.Media.Ocr), so
+  # this job runs on GitHub's Windows runner, which costs nothing on a public
+  # repo. A job of its own because the step before it is Linux, and after the
+  # feeds job so it reads the events that job just wrote.
+  event-art:
+    needs: fetch
+    if: always()
+    runs-on: windows-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # The feeds job has usually just pushed; start from what it pushed.
+      - name: Catch up with the feeds job
+        run: git pull --rebase origin "${GITHUB_REF_NAME}"
+
+      - name: Cut event banners off the sheet
+        continue-on-error: true
+        run: node scripts/find-event-art.mjs --apply
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "feed-bot"
+          git config user.email "feed-bot@users.noreply.github.com"
+          git add data/events.json
+          if git diff --staged --quiet; then
+            echo "no change"
+            exit 0
+          fi
+          git commit -m "chore: cut event art $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      # The version-notices issue, raised here rather than in the feeds job:
+      # by now the OCR has had its go, so an event it could not place is the
+      # only thing left to ask a human for. Read-only on versions.json in
+      # effect — the feeds job already wrote anything it would.
+      - name: Raise version-notices alert
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/fetch-version-notices.mjs
