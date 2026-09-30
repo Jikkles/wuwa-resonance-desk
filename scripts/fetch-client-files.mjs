@@ -59,7 +59,7 @@
 // truncates the same figure instead, which is the whole of why its 5★ base ATK
 // column reads 587 where this one reads 588.
 
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { writeIfChanged } from "./lib/out.mjs";
@@ -87,6 +87,9 @@ const KIT_OUT = "data/clientkits.json";
 const TIMEOUT_MS = 30000;
 
 const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+/* Same path fetch-weapons.mjs gives the shipped weapon, so the icon carries
+   straight over on release. */
+const betaIcon = name => `assets/weapons/w-${slug(name)}.webp`;
 
 /* curl rather than fetch(), same as every other fetcher here that talks to a
    host behind a CDN. */
@@ -471,12 +474,16 @@ function buildKit(detail) {
          empty chip. */
       source: "Beta client files",
       /* The passive's own name, which the client carries and Prydwen's page
-         does not. Kept because a beta weapon has no icon on the desk and no
-         convene history, so the record is thin without it — and because it is
+         does not. Kept because a beta weapon may have no icon on the desk yet
+         and has no convene history, so the record is thin without it — and because it is
          the one thing on the record that is not a number. */
       effectName: String(detail.effect_name || ""),
       effect: passive.effect,
-      ranks: rankTable(passive.effect, detail.param)
+      ranks: rankTable(passive.effect, detail.param),
+      /* fetch-weapon-icons.mjs puts the icon here by the weapon id, off
+         Prydwen's CDN, which answers the runner where Prydwen's pages do not.
+         Carried over on every rewrite, or each run would drop it again. */
+      ...(await stat(betaIcon(detail.name || w.en)).then(() => ({ icon: betaIcon(detail.name || w.en) }), () => ({})))
     });
     console.log(`  weapon  ${w.en} — ${detail.rarity}★ ${WCLASSES[detail.type] || "?"}`);
   }

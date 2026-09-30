@@ -43,9 +43,19 @@ The handover is already enforced in code, in two places, and neither should be l
 
 **The half that is not automatic**: Prydwen returns a flat 403 to GitHub Actions, so
 `fetch-kits.mjs`, `fetch-weapons.mjs` and `fetch-builds.mjs` only ever deliver from a local
-run. A Resonator can therefore go live while the desk is still drawing their beta kit and
-beta signature weapon. `scripts/patch-day-alert.mjs` runs last in the feeds job and opens
-the GitHub issue **"Patch day: released Resonators still on beta data"** when that happens
+run. Everything must run on GitHub — Tom does not want a job on his own PC, and nothing
+that costs money or needs an account or key.
+
+Weapon *icons* do not need the blocked pages. `fetch-weapon-icons.mjs` runs on the cron
+after the beta step and gives any weapon, live or beta, with no icon or one under 200px
+Prydwen's copy by the weapon id off their image CDN, else the wiki's, keeping the bigger.
+So a new signature weapon draws its picture on patch day even while its stats are still
+beta — and a blurry 100px icon (Prydwen often ships a new weapon that small) is replaced
+the day the wiki uploads the full one.
+
+The kits, stats and builds still need that local run, so a Resonator can go live while
+the desk is still drawing their beta kit and beta signature weapon stats.
+`scripts/patch-day-alert.mjs` runs last in the feeds job and opens the GitHub issue **"Patch day: released Resonators still on beta data"** when that happens
 — it names who, lists the exact fetchers to run, comments when a new name joins, and closes
 itself once the live data has been pushed. The fix it asks for is always this shape:
 

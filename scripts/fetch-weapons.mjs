@@ -55,7 +55,7 @@
 // whichever copy is bigger is the one kept. General rather than a list of
 // weapon names: the next one to arrive small should fix itself.
 
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { AssetCache } from "./lib/assets.mjs";
@@ -336,7 +336,11 @@ function rankTable(w) {
     });
   }
 
-  /* A weapon pulled from the source shouldn't leave its icon behind. */
+  /* A weapon pulled from the source shouldn't leave its icon behind. A beta
+     weapon's is not that: fetch-weapon-icons.mjs files it here ahead of
+     release, under the name this script will give it on the day. */
+  const beta = JSON.parse(await readFile("data/clientfiles.json", "utf8").catch(() => "{}")).weapons || [];
+  for (const w of beta) await cache.reuse(`${DIR}/w-${slug(w.name)}.webp`);
   const pruned = await cache.sweep(DIR);
   await cache.save();
 

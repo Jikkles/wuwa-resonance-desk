@@ -133,6 +133,17 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-client-files.mjs
 
+      # Icons for any weapon, live or beta, that has none or a blurry one: by
+      # the weapon's id off Prydwen's image CDN, else the wiki. The weapons
+      # step cannot reach Prydwen's pages from here, but an icon needs no page,
+      # and this is what puts a new signature weapon's picture up on patch day.
+      # After the beta step, so a weapon new to the client files is covered in
+      # the same run.
+      - name: Resolve weapon icons
+        if: always()
+        continue-on-error: true
+        run: node scripts/fetch-weapon-icons.mjs
+
       # English for the Chinese headlines, looked up rather than translated —
       # Kuro publish most of these notices on their own English site. Last,
       # because it reads the feed the first step wrote: a signal has to be in
