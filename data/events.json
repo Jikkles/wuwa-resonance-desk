@@ -49,18 +49,18 @@
       "rewards": "",
       "eligibility": "",
       "art": {
-        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1789660800000/o046s4vski652r4tcv-1789740979981.jpg",
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/pdhlordq6txzihumi3-1790577900644.jpg",
         "crop": {
           "x": 78,
-          "y": 1219,
+          "y": 4402,
           "w": 924,
-          "h": 449
+          "h": 486
         },
-        "title": "Wuthering Waves Version Preview | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
-        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-        "published": "2026-09-19",
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\" Planned for Release on September 30th (UTC+8)",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
         "credit": "© Kuro Games",
-        "note": "Kuro's own event banner, cropped out of the Version 3.7 preview infographic — the only place they have published it so far."
+        "note": "Kuro's own event banner, cut automatically out of the events sheet in this post until the event's own notice carries it."
       },
       "confidence": "official",
       "origin": "hand",
@@ -888,5 +888,5 @@
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
     }
   ],
-  "updated": "2026-09-30T16:09:45.137Z"
+  "updated": "2026-09-30T16:26:40.818Z"
 }
