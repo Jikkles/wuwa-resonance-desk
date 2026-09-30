@@ -3,6 +3,44 @@
   "note": "Limited-time events, read off Kuro's own EN posts: the per-patch Content Overview for the list, dates and flavour, and each event's own notice for its banner art, screenshots and rewards. Art is hotlinked from Kuro's CDN, never rehosted. `media` is the notice's other pictures where they are landscape — a screenshot of the mode, not the post set as a poster. An event with no notice yet has no art by design. Times carry +08:00 because Kuro publishes them in server time.",
   "events": [
     {
+      "id": "3.7-cubie-wars",
+      "name": "Cubie Wars",
+      "kind": "Leisure",
+      "version": "3.7",
+      "section": "Special Events",
+      "permanent": false,
+      "start": null,
+      "end": "2026-11-11T11:59:00+08:00",
+      "startsWithPatch": true,
+      "summary": "Unlock Cubie Warriors by clearing stages, earn Stage Badges from Adventure Goals toward milestone rewards, and spend Show Coins at the Backstage Store.",
+      "detail": "Unlock Cubie Warriors by clearing stages, earn Stage Badges from Adventure Goals toward milestone rewards, and spend Show Coins at the Backstage Store.",
+      "rewards": [
+        "Astrite x1200",
+        "Showtime! (Event Sigil)",
+        "Wooly's Blessing (Event Avatar)",
+        "Premium Tuner",
+        "Bloom of Hearkening"
+      ],
+      "eligibility": "Reach Union Level 14. Complete the quest \"Cubie Wars\" first for the best experience.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 1094,
+          "w": 924,
+          "h": 486
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
+      "confidence": "official",
+      "origin": "kuro",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5555"
+    },
+    {
       "version": "3.7",
       "section": "Special Events",
       "permanent": false,
@@ -42,200 +80,301 @@
       "permanent": true,
       "start": null,
       "end": null,
-      "rewards": "",
-      "eligibility": "",
+      "rewards": [
+        "Astrite x400",
+        "Lustrous Tide x10",
+        "Phantom: Smolder",
+        "Fox Shadow at Sunset (Motorbike Livery)",
+        "Modifier"
+      ],
+      "eligibility": "Meet the Nexus Fox Shadow in Mengxuan Vale in Main Quest \"Simulacrum of the Heart\".",
       "art": {
-        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1789660800000/ndu20kshb5zkjrjmoa-1789740868079.jpg",
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
         "crop": {
           "x": 78,
-          "y": 4686,
+          "y": 4945,
           "w": 924,
-          "h": 458
+          "h": 486
         },
-        "title": "Wuthering Waves Version Preview | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
-        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-        "published": "2026-09-19",
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
         "credit": "© Kuro Games",
-        "note": "Kuro's own event banner, cropped out of the Version 3.7 preview infographic — the only place they have published it so far."
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
       },
       "confidence": "official",
       "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
       "intel": "2026-09-19-37-events",
       "id": "3.7-blooms-for-the-shadow",
       "name": "Blooms for the Shadow",
       "kind": "Permanent",
-      "summary": "A permanent addition rather than a patch-length one.",
-      "detail": "Announced on the preview as 3.7's new permanent event, so it outlives the patch. Kuro have published the art and the name and nothing else yet."
+      "summary": "Gather Thousandfold Petals across the Simulacrum Nexus's three Heart Realms and raise the Fox Shadow's trust.",
+      "detail": "Offer Thousandfold Petals at the Heart Calmer Altars to level each Heart Realm, which raises Heart Realm Stability and unlocks stronger bonuses across the Simulacrum Nexus. Permanent from the 3.7 update."
     },
     {
       "version": "3.7",
       "section": "Special Events",
       "permanent": false,
       "start": null,
-      "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
+      "end": "2026-11-11T03:59:00+08:00",
+      "rewards": [
+        "Radiant Tide x5",
+        "Lustrous Tide x5"
+      ],
+      "eligibility": "Reach Union Level 8.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 2530,
+          "w": 924,
+          "h": 486
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
       "confidence": "official",
       "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-      "intel": "2026-09-19-37-events",
-      "id": "3.7-cubie-wars",
-      "name": "Cubie Wars",
-      "kind": "Leisure",
-      "startsWithPatch": true,
-      "summary": "A leisure event, named on the broadcast and not yet written up."
-    },
-    {
-      "version": "3.7",
-      "section": "Special Events",
-      "permanent": false,
-      "start": null,
-      "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
-      "confidence": "official",
-      "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-      "intel": "2026-09-19-37-events",
-      "id": "3.7-echo-erase",
-      "name": "Echo Erase",
-      "kind": "Leisure",
-      "startsWithPatch": true,
-      "summary": "A leisure event, named on the broadcast and not yet written up."
-    },
-    {
-      "version": "3.7",
-      "section": "Special Events",
-      "permanent": false,
-      "start": null,
-      "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
-      "confidence": "official",
-      "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
       "intel": "2026-09-19-37-events",
       "id": "3.7-gifts-of-waking-moon",
       "name": "Gifts of Waking Moon",
       "kind": "7-Day Login",
       "startsWithPatch": true,
-      "summary": "The front half's seven-day login event. Rewards not yet published."
+      "summary": "Log in on seven days of the patch for five Radiant Tides and five Lustrous Tides.",
+      "detail": "Log in to claim each day's reward."
     },
     {
       "version": "3.7",
       "section": "Special Events",
       "permanent": false,
       "start": null,
-      "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
+      "end": "2026-11-11T03:59:00+08:00",
+      "rewards": [
+        "Astrite x500",
+        "Forgery Premium Supply - Lahai-Roi",
+        "Premium Resonance Potion",
+        "Premium Sealed Tube",
+        "Bloom of Hearkening"
+      ],
+      "eligibility": "Meet the Nexus Fox Shadow in Mengxuan Vale in Main Quest \"Simulacrum of the Heart\".",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 6360,
+          "w": 924,
+          "h": 486
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
       "confidence": "official",
       "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
       "intel": "2026-09-19-37-events",
       "id": "3.7-dreams-in-the-capsule",
       "name": "Dreams in the Capsule",
       "kind": "Exploration",
       "startsWithPatch": true,
-      "summary": "An area exploration event, presumably through the Simulacrum Nexus of Mengzhou."
+      "summary": "Four phases that unlock with the Main Quest, each paying out on CSC Cipherlocks.",
+      "detail": "Puzzle, combat and collection tasks in each of four phases, unlocked in sequence as the Main Quest progresses. Rewards scale with the CSC Cipherlocks collected."
     },
     {
       "version": "3.7",
       "section": "Special Events",
-      "permanent": false,
+      "permanent": true,
       "start": null,
       "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
+      "rewards": [
+        "Astrite x180",
+        "Advanced Resonance Potion",
+        "Advanced Sealed Tube",
+        "Advanced Energy Core",
+        "Shell Credit"
+      ],
+      "eligibility": "Complete Main Quest Chapter IV Act IV \"Simulacrum of the Heart: Epilogue\".",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 7718,
+          "w": 924,
+          "h": 486
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
       "confidence": "official",
       "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
       "intel": "2026-09-19-37-events",
       "id": "3.7-past-dreams-traced-seals",
       "name": "Past Dreams, Traced Seals",
       "kind": "Photo Collection",
-      "startsWithPatch": true,
-      "summary": "A photo collection event. One event, despite the comma in the name."
-    },
-    {
-      "version": "3.7",
-      "section": "Special Events",
-      "permanent": false,
-      "start": null,
-      "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
-      "confidence": "official",
-      "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-      "intel": "2026-09-19-37-events",
-      "id": "3.7-artisans-search",
-      "name": "Artisan's Search",
-      "kind": "Combat",
-      "startsWithPatch": true,
-      "summary": "The patch's featured combat event. Astrite payout not yet published."
-    },
-    {
-      "version": "3.7",
-      "section": "Special Events",
-      "permanent": false,
-      "start": null,
-      "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
-      "confidence": "official",
-      "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-      "intel": "2026-09-19-37-events",
-      "id": "3.7-beyond-the-waves-land-of-xuanfang",
-      "name": "Beyond the Waves: Land of Xuanfang",
-      "kind": "Exploration",
-      "startsWithPatch": true,
-      "summary": "The featured exploration event, across the Land of Xuanfang."
+      "summary": "Six Chrono Traces hidden across the Simulacrum Nexus. Find each from its clue and photograph it.",
+      "detail": "Explore by the clues, then snap the right photo or search the target location to complete each Collection task. Permanent from the 3.7 update."
     },
     {
       "version": "3.7",
       "section": "H5 Web Event",
       "permanent": false,
       "start": null,
-      "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
+      "end": "2026-11-11T23:59:00+08:00",
+      "rewards": [
+        "Astrite x480 (inviter)",
+        "Astrite x50 (returnee)",
+        "Shell Credit"
+      ],
+      "eligibility": "Reach Union Level 8.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 14434,
+          "w": 924,
+          "h": 486
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
       "confidence": "official",
       "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-      "intel": "2026-09-19-37-events",
-      "id": "3.7-waking-moon-fishing",
-      "name": "Waking Moon Fishing",
-      "kind": "Web",
-      "summary": "A browser event, named on the broadcast. No link published yet."
-    },
-    {
-      "version": "3.7",
-      "section": "H5 Web Event",
-      "permanent": false,
-      "start": null,
-      "end": null,
-      "rewards": "",
-      "eligibility": "",
-      "art": null,
-      "confidence": "official",
-      "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
       "intel": "2026-09-19-37-events",
       "id": "3.7-back-to-solaris",
       "name": "Back to Solaris",
       "kind": "Web",
-      "summary": "A browser event, named on the broadcast. No link published yet."
+      "summary": "Invite up to three returning players with your code. Both sides earn Astrite.",
+      "startsWithPatch": true,
+      "detail": "Share an invitation code with up to 3 Returning Players on your server, complete in-game tasks for Fox Fortune Sticks and exchange them for rewards. A returning Rover can link to one inviter, once."
+    },
+    {
+      "version": "3.7",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-10-08T04:00:00+08:00",
+      "end": "2026-10-26T03:59:00+08:00",
+      "rewards": [
+        "Astrite x500",
+        "Forgery Premium Supply - Lahai-Roi",
+        "Premium Enclosure Tank - Land of Xuanfang",
+        "Premium Resonance Potion",
+        "Premium Tuner"
+      ],
+      "eligibility": "Reach Union Level 14 and activate Four Chime Shaftpost in Main Quest \"The Wind Before the Storm\".",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 9011,
+          "w": 924,
+          "h": 486
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+      "intel": "2026-09-19-37-events",
+      "id": "3.7-artisans-search",
+      "name": "Artisan's Search",
+      "kind": "Combat",
+      "summary": "Timed waves inside a Sonoro Sphere: damage earns Coins, taking hits loses them.",
+      "detail": "Fight waves against the clock with unique buffs. Clearing a wave adds time and unlocks stronger buffs, and the Coins held at the end of the countdown are the stage's score."
+    },
+    {
+      "version": "3.7",
+      "section": "H5 Web Event",
+      "permanent": false,
+      "start": "2026-10-15T10:00:00+08:00",
+      "end": "2026-11-01T09:59:00+08:00",
+      "rewards": [
+        "Astrite x100",
+        "Advanced Resonance Potion",
+        "Advanced Sealed Tube",
+        "Advanced Energy Core",
+        "Shell Credit"
+      ],
+      "eligibility": "Reach Union Level 8.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 13210,
+          "w": 924,
+          "h": 486
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+      "intel": "2026-09-19-37-events",
+      "id": "3.7-waking-moon-fishing",
+      "name": "Waking Moon Fishing",
+      "kind": "Web",
+      "summary": "A web event of stages and tasks for Astrite and upgrade materials.",
+      "detail": "Challenge event stages and complete event tasks for Astrite, Shell Credits, Advanced Sealed Tubes and more."
+    },
+    {
+      "version": "3.7",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-10-22T10:00:00+08:00",
+      "end": "2026-11-09T03:59:00+08:00",
+      "rewards": [
+        "Astrite x400",
+        "Forgery Advanced Supply - Lahai-Roi",
+        "Premium Energy Core",
+        "Premium Resonance Potion",
+        "Premium Sealed Tube"
+      ],
+      "eligibility": "Reach Union Level 14.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 10506,
+          "w": 924,
+          "h": 486
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+      "intel": "2026-09-19-37-events",
+      "id": "3.7-echo-erase",
+      "name": "Echo Erase",
+      "kind": "Leisure",
+      "summary": "A new stage every day, each on Easy and Hard. Clear Easy to unlock Hard.",
+      "detail": "Stages open daily, and each stage's goals pay out rewards."
     },
     {
       "version": "3.7",
@@ -246,30 +385,68 @@
       "rewards": [
         "Radiant Tide x10"
       ],
-      "eligibility": "",
+      "eligibility": "Reach Union Level 8.",
       "art": {
-        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1789660800000/o046s4vski652r4tcv-1789740979981.jpg",
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
         "crop": {
           "x": 78,
-          "y": 330,
+          "y": 3702,
           "w": 924,
-          "h": 385
+          "h": 486
         },
-        "title": "Wuthering Waves Version Preview | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
-        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
-        "published": "2026-09-19",
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
         "credit": "© Kuro Games",
-        "note": "Kuro's own event banner, cropped out of the Version 3.7 preview infographic — the only place they have published it so far."
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
       },
       "confidence": "official",
       "origin": "hand",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5454",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
       "intel": "2026-09-19-37-events",
       "id": "3.7-gifts-of-singing-drizzle",
       "name": "Gifts of Singing Drizzle",
       "kind": "7-Day Login",
       "summary": "Log in across the back half of the patch for ten Radiant Tides and more.",
       "detail": "The only event Kuro dated in the preview, and the date is the useful one: it opens at 10:00 on 22 October, which is the hour Phase 2 opens, and closes with the patch."
+    },
+    {
+      "version": "3.7",
+      "section": "Special Events",
+      "permanent": false,
+      "start": "2026-10-29T04:00:00+08:00",
+      "end": "2026-11-11T03:59:00+08:00",
+      "rewards": [
+        "Astrite x400",
+        "Lustrous Tide x5",
+        "Premium Enclosure Tank - Land of Xuanfang",
+        "Premium Tuner",
+        "Premium Sealed Tube"
+      ],
+      "eligibility": "Reach Union Level 14.",
+      "art": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+        "crop": {
+          "x": 78,
+          "y": 11794,
+          "w": 924,
+          "h": 482
+        },
+        "title": "Wuthering Waves Update Content | Version 3.7 \"Prism's Illusion, Heart's Illumination\"",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+        "published": "2026-09-28",
+        "credit": "© Kuro Games",
+        "note": "Kuro's own event banner, cropped out of the Version 3.7 Update Content events sheet until the event's own notice carries it."
+      },
+      "confidence": "official",
+      "origin": "hand",
+      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5529",
+      "intel": "2026-09-19-37-events",
+      "id": "3.7-beyond-the-waves-land-of-xuanfang",
+      "name": "Beyond the Waves: Land of Xuanfang",
+      "kind": "Exploration",
+      "summary": "Daily tasks earn Adventure Logs, which trade for Adventure Packages across three Inventories.",
+      "detail": "Some Adventure Packages trigger special mechanics that pay out large rewards. Clearing every delivery in an Inventory unlocks the next."
     },
     {
       "id": "3.6-gifts-of-drifting-mist",
@@ -711,5 +888,5 @@
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5091"
     }
   ],
-  "updated": "2026-09-20T16:24:35.669Z"
+  "updated": "2026-09-30T16:09:45.137Z"
 }
