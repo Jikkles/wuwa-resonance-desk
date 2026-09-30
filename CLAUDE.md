@@ -41,10 +41,16 @@ The handover is already enforced in code, in two places, and neither should be l
 - `loadKits()` and `mergeBeta()` in `assets/app.js` merge live-first, so even a stale beta
   record loses to a published one.
 
-**The half that is not automatic**: Prydwen returns a flat 403 to GitHub Actions, so
+**The half GitHub cannot do**: Prydwen returns a flat 403 to GitHub Actions, so
 `fetch-kits.mjs`, `fetch-weapons.mjs` and `fetch-builds.mjs` only ever deliver from a local
-run. A Resonator can therefore go live while the desk is still drawing their beta kit and
-beta signature weapon. `scripts/patch-day-alert.mjs` runs last in the feeds job and opens
+run. That local run is now a Windows scheduled task on Tom's desktop —
+`scripts/local-run.ps1`, every 6 hours, registered by `scripts/install-local-run.ps1`
+(`-Remove` takes it out). It runs those three, `fetch-client-files.mjs` after them, and the
+event-art OCR below, then commits and pushes whatever changed as `chore: refresh local-only
+data`. It skips itself if the working tree has uncommitted changes, and logs to
+`%LOCALAPPDATA%\resonance-desk\local-run.log` — look there first when patch day goes wrong.
+It only runs while that PC is on, so a Resonator can still go live while the desk is
+drawing their beta kit and beta signature weapon. `scripts/patch-day-alert.mjs` runs last in the feeds job and opens
 the GitHub issue **"Patch day: released Resonators still on beta data"** when that happens
 — it names who, lists the exact fetchers to run, comments when a new name joins, and closes
 itself once the live data has been pushed. The fix it asks for is always this shape:
@@ -111,16 +117,26 @@ sheet is 1080x12145 with nine bands, and every 3.6 event on the desk crops its a
 exactly that. So between the broadcast and that post there is no art to have, and the
 desk's own plate is the correct answer rather than a missing one.
 
-`fetch-version-notices.mjs` watches for that post and raises the issue **"Kuro published
-it as pictures — needs a human"** naming the article. Then:
+**That matching is automatic now, on Windows.** `node scripts/find-event-art.mjs --apply`
+reads the sheet with the OCR engine built into Windows 10/11 (`scripts/lib/ocr.ps1` — no
+install, no key), matches each title to an event already in `events.json` for the patch,
+cuts the banner under it by the frame's gold corner blocks, and writes the crop — plus the
+window printed under it, where the entry has none. It fills only events with no art, or
+ones on a crop out of the preview; a notice's own banner is never touched. On 3.7 it cut
+all twelve within 3px of the hand-cut crops. The local scheduled task runs it, so the
+events have to be in `events.json` by name first — that part is still the job above.
+
+`fetch-version-notices.mjs` still watches for that post and raises the issue **"Kuro
+published it as pictures — needs a human"**, which now means the PC hasn't run since, or
+the OCR could not place a title: `--apply` prints each one it left alone. By hand:
 
 ```bash
+node scripts/find-event-art.mjs --apply       # or, to eyeball every band:
 node scripts/find-event-art.mjs <articleId>
 ```
 
-It prints a paste-ready `art` block and a preview URL per band. Open the previews, match
-band to event, paste the crop into `data/events.json`. Matching is the only part a person
-has to do — the names are pixels. Trim a band that takes in the gold section title above
+The second prints a paste-ready `art` block and a preview URL per band. Open the previews,
+match band to event, paste the crop into `data/events.json`. Trim a band that takes in the gold section title above
 the frame or Kuro's own name plate inside it, or set `art.nameplate` so the desk doesn't
 draw a second title over the first. Never borrow a picture from another event to fill a
 gap; an undrawn event keeps the plate.
