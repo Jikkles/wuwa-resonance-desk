@@ -59,7 +59,7 @@ const DETAIL = 26;
 
 const APPLY = process.argv.includes("--apply");
 const article = process.argv.slice(2).find(a => /^\d+$/.test(a));
-if (!article && !APPLY) {
+if (!article && !APPLY && !process.argv.includes("--self-test")) {
   console.error("usage: node scripts/find-event-art.mjs <articleId>   (e.g. 5310)\n" +
     "       node scripts/find-event-art.mjs --apply [articleId]");
   process.exit(1);
@@ -397,7 +397,42 @@ async function apply() {
   }
 }
 
-(APPLY ? apply : main)().catch(err => {
+/* --self-test: read one known title strip off the 3.7 sheet and say whether the
+   OCR engine is there and reading. The event-art job runs it every cycle,
+   because --apply only calls the engine on the one day a sheet has events
+   left to draw, and a runner image that lost its OCR language should show up
+   on an ordinary Tuesday, not on patch day. */
+const SELF_TEST = {
+  url: "https://hw-media-cdn-mingchao.kurogame.com/object/1790524800000/b307u53274ngsynr6w-1790578044718.jpg",
+  crop: "x_0,y_900,w_1080,h_300",
+  expect: "Cubie Wars"
+};
+
+async function selfTest() {
+  const dir = await mkdtemp(join(tmpdir(), "event-art-"));
+  try {
+    let buf;
+    try {
+      buf = await get(`${SELF_TEST.url}?x-oss-process=image/crop,${SELF_TEST.crop}/quality,q_92`, "buffer");
+    } catch (err) {
+      /* Kuro taking an old picture down is not the engine failing. */
+      console.log(`self-test image unavailable (${err.message}) — engine not checked`);
+      return;
+    }
+    const file = join(dir, "self-test.jpg");
+    await writeFile(file, buf);
+    const lines = await ocrFile(file);
+    const read = lines.map(l => l.text).join(" | ");
+    if (!lines.some(l => key(l.text).includes(key(SELF_TEST.expect)))) {
+      throw new Error(`OCR read "${read || "nothing"}", expected "${SELF_TEST.expect}"`);
+    }
+    console.log(`OCR engine ok — read "${read}"`);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+}
+
+(process.argv.includes("--self-test") ? selfTest : APPLY ? apply : main)().catch(err => {
   console.error(`find-event-art failed: ${err.message}`);
   process.exitCode = 1;
 });

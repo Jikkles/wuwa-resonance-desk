@@ -210,6 +210,12 @@ jobs:
       - name: Catch up with the feeds job
         run: git pull --rebase origin "${GITHUB_REF_NAME}"
 
+      # Fails loudly (a red step, not a red run) if the runner has lost its
+      # OCR engine, which would otherwise surface only on patch day.
+      - name: Check the OCR engine
+        continue-on-error: true
+        run: node scripts/find-event-art.mjs --self-test
+
       - name: Cut event banners off the sheet
         continue-on-error: true
         run: node scripts/find-event-art.mjs --apply
