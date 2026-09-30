@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-09-30T16:41:33.219Z",
+  "fetched": "2026-09-30T16:46:01.016Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -1343,26 +1343,6 @@
       "hot": true
     },
     {
-      "title": "Wuthering Waves codes September 2026",
-      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5ZbGRQMnBzdE9xamlDMzNMTVd2ZFN3WVlLcmZjWkVKUWVSbmVoTWxIdC1zd28wanhfcWpGYktTWE0xMlpUekdDajhUOER5TGxsR1hmZS1fak0yN2wyMER4NQ?oc=5",
-      "date": "2026-09-23T09:17:11.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuthering Waves events schedule",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9tSDNaNWVYVmt3aXFfYy16Uy1VX1JFdEdDVV9CM1VveTQ3djNUV3RGajVjYTZoNjdXUDFuQ1k4QlBYY1AxLWNEaHctS0NTaDNXS1AxZWlqTmhvbWp1RDNfc0hB?oc=5",
-      "date": "2026-09-22T16:19:09.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves Xuanfang Narrative Recap | Adversity Unraveled",
       "url": "https://www.youtube.com/watch?v=WEEkDjI6ALU",
       "date": "2026-09-22T10:00:12.000Z",
@@ -1557,6 +1537,26 @@
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOSUs4d2cxbmhPSjZmaFFQaS1Cemh6SkRiVzVKRzE3eGZEV1p6b1pCZDRXSVRfTGdTRDJPR25XSHJ0dE5KcHpaYUsxVzZyN3drbno3SENLV3hXdHNkamZwWU9OcG51OWJRNnlUV3hGWE1BSDV2WEpRaVJmWnhBd1JNaUNXZFJSZUsxZ3FQdFJGYjktaDd3ZWpzS1RtNFRMVF80?oc=5",
       "date": "2026-09-19T07:00:00.000Z",
       "source": "GameRant",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "WuWa 3.7 livestream codes (Wuthering Waves): How to get 300 Astrites?",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQajZ1VXVtd21vTm9XMUpqWFJoMjNwMDBWOEhYeWtSdjAtbEtFWDFCRjJzTTY2LWdpSUZJVm1uNEkxMEVpdW1NbkgwZ2ZIWkc3NUFJMjdwTk9KRXNlS25hRmZ1b2ROSlR5RktWa29NdjlSa2E3bEF4b3gxbWdybXZ2S3FjeW84QnBZdTZzUXY1czFMc041b1BTRHZRcFFBcFE?oc=5",
+      "date": "2026-09-19T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "WuWa 3.7 livestream summary: Release date, banners, codes, and everything new (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOMXJkYXUxb2RoYl9QVThnSlFLWTFEaGVQMWNDbFltOERCNEtLY3RvaTZuWjBBLVZiRjR0WkpoZHBHc25Kem5oUmJmaS0wbFJDSGdidE5EVHh2VnFSMXB0blJ5RXdnMEF0MkJ5REVMeFltTTFTRWJFd1JsbnVxWDlzVFQ4eldFVmJxLUlHMWFnTDcwc3RMRTAweXh6dWZ3Y0FiTUxOcEY4Vk0zakNnXzRnRXVwcVNZU2VWdmREYjdB?oc=5",
+      "date": "2026-09-19T07:00:00.000Z",
+      "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
