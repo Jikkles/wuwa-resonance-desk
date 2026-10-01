@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/resonators@1.1",
-  "updated": "2026-09-30",
+  "updated": "2026-10-01",
   "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
   "resonators": [
     {
@@ -3449,7 +3449,8 @@
         "Unison"
       ],
       "nameCN": "心",
-      "hasKit": true
+      "hasKit": true,
+      "released": "2026-09-30"
     },
     {
       "name": "Suoming",
@@ -3530,7 +3531,8 @@
         "Resonance Skill DMG amplification",
         "Unison"
       ],
-      "nameCN": "锁暝"
+      "nameCN": "锁暝",
+      "released": "2026-10-22"
     },
     {
       "name": "Rover (Havoc)",
