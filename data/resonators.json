@@ -3511,8 +3511,6 @@
           "url": "https://ww.nanoka.cc/weapon/21050116"
         }
       ],
-      "image": "assets/reveals/hsin-card.jpg",
-      "imageCredit": "Drip marketing card © Kuro Games",
       "roleTags": [
         "Main DPS",
         "Resonance Skill DMG",
@@ -3602,8 +3600,6 @@
         }
       ],
       "role": "Main DPS",
-      "image": "assets/reveals/suoming-card.jpg",
-      "imageCredit": "Drip marketing card © Kuro Games",
       "roleTags": [
         "Main DPS",
         "Basic Attack DMG",
