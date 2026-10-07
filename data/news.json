@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/news@1.0",
-  "updated": "2026-09-20",
+  "updated": "2026-10-07",
   "confidenceTiers": {
     "official": "Kuro Games said it themselves — livestream, patch notes, or in-game notice. Safe to plan around.",
     "datamined": "Pulled straight out of the beta client files. The numbers are real, but they're pre-balance and often change before launch.",
@@ -1369,6 +1369,39 @@
         }
       ],
       "outcome": "confirmed"
+    },
+    {
+      "id": "2026-10-07-38-lily-drip",
+      "date": "2026-10-07",
+      "version": "3.8",
+      "category": "identity",
+      "confidence": "official",
+      "title": "Lily's drip card is out - 5-star, a perfumer who heals through dreams, and spelled Lily after all",
+      "body": "Kuro posted the 3.8 drip card on Kurobbs at 03:00 UTC on 7 October as 《寰宇人类注疏：群星交错》——莉莉, the Post-Lament Anthropocene: Stars Intertwined series every new Resonator's card runs under, and it was on r/WutheringWavesLeaks within the minute with the animation six minutes behind. The card shows Lily seated in mid-air among drifting mirror frames and butterflies - lavender hair, a black-and-white gothic dress under a dark veil, a lily held like a wand, a great pale figure in profile behind her - captioned \"Past sorrows scatter with the wind. I pray this fragrance guides you forward.\" The animation's text is the substance: she has a preternatural sense of smell and makes perfumes that weave short-lived dreams to heal the troubled psyches of others, and whoever she heals falls into a dream wrapped in the scent of flowers. Three things are now Kuro's rather than the leaks'. Her name, drawn in English on the card as LILY - the 5 September datamine's internal Lili was a romanisation, not the release spelling. Her rarity, five stars. And her look, which is the one Step's August hints described: black-and-white gothic dress, lavender hair touched with pink. What the card does not carry is an attribute or weapon mark, so Spectro and Pistols stay with the client files until her profile card, which for Hsin and Suoming came a day or two after the drip. The healing flavour text fits the support-healer slot she has been pencilled into, but it is a character description, not a kit.",
+      "tags": [
+        "3.8",
+        "Lily",
+        "identity",
+        "drip"
+      ],
+      "sources": [
+        {
+          "name": "Kurobbs - Post-Lament Anthropocene: Stars Intertwined, Lily",
+          "lang": "zh",
+          "url": "https://www.kurobbs.com/mc/post/1556738806818492416"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Lily drip marketing",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wzlsz8/lily_drip_marketing/"
+        },
+        {
+          "name": "r/WutheringWavesLeaks - Lily drip marketing animation",
+          "lang": "en",
+          "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1wzlx8d/lily_drip_marketing_animation/"
+        }
+      ],
+      "outcome": ""
     },
     {
       "id": "2026-09-05-38-lily-datamine",
