@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-10-15T18:05:08.936Z",
+  "fetched": "2026-10-15T22:56:45.080Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -62,6 +62,116 @@
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Aalto is the only 4* dps character I have fully maxed out. He is genuinely super fun to play",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6zbil/aalto_is_the_only_4_dps_character_i_have_fully/",
+      "date": "2026-10-15T22:19:03.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Found A very interesting disturbing Ad",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6yke2/found_a_very_interesting_disturbing_ad/",
+      "date": "2026-10-15T21:46:09.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Which element Rover will have next in your opinion?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6xwq7/which_element_rover_will_have_next_in_your_opinion/",
+      "date": "2026-10-15T21:18:12.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Players over Union Level 80, what’s your union exp at now",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6xep6/players_over_union_level_80_whats_your_union_exp/",
+      "date": "2026-10-15T20:57:53.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Recent characters, different games, same EN VA",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6wwwy/recent_characters_different_games_same_en_va/",
+      "date": "2026-10-15T20:38:05.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "My Attempt at Hsin Fanart.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6wdhc/my_attempt_at_hsin_fanart/",
+      "date": "2026-10-15T20:16:40.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "game not loading/working after UHD texture download?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6w9u8/game_not_loadingworking_after_uhd_texture_download/",
+      "date": "2026-10-15T20:12:50.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Switch to cloud gaming guys!!",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6vlqe/switch_to_cloud_gaming_guys/",
+      "date": "2026-10-15T19:47:39.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Sister Xuanqing and Hsin (@Z_RAIN1)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6v9yb/sister_xuanqing_and_hsin_z_rain1/",
+      "date": "2026-10-15T19:34:55.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "What Hologram do you hate the most?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6tx3i/what_hologram_do_you_hate_the_most/",
+      "date": "2026-10-15T18:43:39.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "This red black and white color palette is just so hard to miss isn't it",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6ti45/this_red_black_and_white_color_palette_is_just_so/",
+      "date": "2026-10-15T18:27:59.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "Scales of the past 1.x",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6rb3z/scales_of_the_past_1x/",
@@ -196,116 +306,6 @@
       "title": "The upcoming spending events",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6ksux/the_upcoming_spending_events/",
       "date": "2026-10-15T12:51:54.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "200 runs of Hsin farming",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6k9kd/200_runs_of_hsin_farming/",
-      "date": "2026-10-15T12:26:06.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "It would be nice to have a mute sprinting voicelines option",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6k7km/it_would_be_nice_to_have_a_mute_sprinting/",
-      "date": "2026-10-15T12:23:25.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "I maxed out Jingran, Hsin and Yangyang and still have not touched this domain.",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6k1zl/i_maxed_out_jingran_hsin_and_yangyang_and_still/",
-      "date": "2026-10-15T12:15:43.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "What not pulling Hsin does to a MF pt 2 (Ciaccona, XLY, Rebecca TOA 41 Clear)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6k1ls/what_not_pulling_hsin_does_to_a_mf_pt_2_ciaccona/",
-      "date": "2026-10-15T12:15:09.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "[SolarisSeasideStory] Carlotta vs Cantarella (animation) - Wuthering Waves x DillonGoo Studios",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6jyem/solarisseasidestory_carlotta_vs_cantarella/",
-      "date": "2026-10-15T12:10:35.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Future in-game AI-content",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6jybb/future_ingame_aicontent/",
-      "date": "2026-10-15T12:10:27.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Threnodian The White Tower. by 奶牛猫天下第一",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6joxk/threnodian_the_white_tower_by_奶牛猫天下第一/",
-      "date": "2026-10-15T11:58:05.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "is Lynae the Best Sub DPS in the game?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6j79e/is_lynae_the_best_sub_dps_in_the_game/",
-      "date": "2026-10-15T11:31:30.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Why am I just discovering Rover can travel across the map without using stamina? 💀",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6iwy5/why_am_i_just_discovering_rover_can_travel_across/",
-      "date": "2026-10-15T11:15:37.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "made this on my school seminar",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6iqhc/made_this_on_my_school_seminar/",
-      "date": "2026-10-15T11:05:31.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hsin - Immovable Object vs Unstoppable Force",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1x6inc3/hsin_immovable_object_vs_unstoppable_force/",
-      "date": "2026-10-15T11:00:45.000Z",
       "source": "r/WutheringWaves",
       "sourceId": "reddit-main",
       "kind": "community",
@@ -653,16 +653,6 @@
       "hot": false
     },
     {
-      "title": "Best Gaming Phone 2026: Play Wuthering Waves and Genshin Impact with ease",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5zZXUwS2s1b1pJOFJueWpvT2JVYVZXUTExZVdEWXF5ZUJXX2JRdlpadHVGRHU2cW5fWk9yeENtakNZYTNvaEMyZFpPYXBLaEFuOWlObzdqYXpnSldJOUxxcER1Wjc0alZFN19YSnJ0WQ?oc=5",
-      "date": "2026-10-07T14:51:01.000Z",
-      "source": "Trusted Reviews",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Midnight Podcast | Hsin",
       "url": "https://www.youtube.com/watch?v=Rkg9wN2U6GY",
       "date": "2026-10-07T11:00:18.000Z",
@@ -671,6 +661,26 @@
       "kind": "video",
       "lang": "en",
       "hot": false
+    },
+    {
+      "title": "Best Gaming Phone 2026: Play Wuthering Waves and Genshin Impact with ease",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5zZXUwS2s1b1pJOFJueWpvT2JVYVZXUTExZVdEWXF5ZUJXX2JRdlpadHVGRHU2cW5fWk9yeENtakNZYTNvaEMyZFpPYXBLaEFuOWlObzdqYXpnSldJOUxxcER1Wjc0alZFN19YSnJ0WQ?oc=5",
+      "date": "2026-10-07T07:00:00.000Z",
+      "source": "Trusted Reviews",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "WuWa 3.8 drip marketing reveals Lily, an upcoming playable character (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxORWVQRTFOU19MUEVMT09PZHFzOFFDMGpEVUUtZnZhZVlHWDRmaWxXcERzR05CLWRFOEZpb3hWTmZNam9uclYtS25WRnRIS1dGN3Vqbmw1cEVGWUxDZWs4S3dCM2tCUnhRd2dmTVRGZ3F4Tjl4VnNmSlpkZ2dOaTJ5MWgwaEpVVldGTzBmb0Z4R0lxaU1lLVlEeFlJcTJ0S2NGdW1SYlFiUEZJd3MxUlZYMy03dDcwVUk?oc=5",
+      "date": "2026-10-07T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
     },
     {
       "title": "Keywords about New Federation via seele",
@@ -691,16 +701,6 @@
       "kind": "community",
       "lang": "en",
       "hot": false
-    },
-    {
-      "title": "WuWa 3.8 drip marketing reveals Lily, an upcoming playable character (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxORWVQRTFOU19MUEVMT09PZHFzOFFDMGpEVUUtZnZhZVlHWDRmaWxXcERzR05CLWRFOEZpb3hWTmZNam9uclYtS25WRnRIS1dGN3Vqbmw1cEVGWUxDZWs4S3dCM2tCUnhRd2dmTVRGZ3F4Tjl4VnNmSlpkZ2dOaTJ5MWgwaEpVVldGTzBmb0Z4R0lxaU1lLVlEeFlJcTJ0S2NGdW1SYlFiUEZJd3MxUlZYMy03dDcwVUk?oc=5",
-      "date": "2026-10-07T04:02:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "Lily Drip Marketing Animation",
@@ -1043,16 +1043,6 @@
       "hot": false
     },
     {
-      "title": "Best teams for Hsin in WuWa (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE56NGJXZHJ0M0hMbjJ3UXZIenczbTF3WGVrQjdoX2hwSjNiU2RBaGp2NkdJSHFuSjhyWVN1ekJHblNrU2RVNXBqVzFrTUlralkwMUY5S2JibS1hblI3Rk94cWxpQWdwU2NaaVhXcWNLdHQzT3VaVjNRYzJ2eVc?oc=5",
-      "date": "2026-09-30T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Best WuWa Hsin build guide: Echoes, weapons, and teams (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNUERoWTJCbXB0S3Q0QXFud0dqQW1zejlNSnJBREFjZUFkY1ZIYXJRS1hZNHhqQV9rbVdzenVkMi1ETENZRkZBaUtJUEdNb2xJQ09JZ1FUUnU5ZDQyTFBGOE5aaVhtSzI2Y2pzVTdFQU1NQkFFbUxaU0I1Q1dLUWk0TkFjd3JRME55bW04Y1VaYnA1MGJVVC1mZ2Y0TU10aVpy?oc=5",
       "date": "2026-09-30T07:00:00.000Z",
@@ -1101,6 +1091,16 @@
       "kind": "press",
       "lang": "en",
       "hot": true
+    },
+    {
+      "title": "WuWa Bloom of Hearkening location farming guide (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQVHFTY3R2TEFUci11Z3FRRnlRX1ZPZHU3bjFiRVFDMTJEQXY0eG85bjFoWko2clZ4ckdEM0drSUpTQ1ZQb2lCWjloY1hBXzdZSWVDSVUyY0h6MnQ5T2JublFobkpQWEl2ZkVYWnJPZXA0d0o0MFJIemxhR3VGSDd4TG9UcnM5b1hyRnB2Ry04azhyM0gxWXFKclZ3blM?oc=5",
+      "date": "2026-09-30T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
     },
     {
       "title": "Wuthering Waves Version 3.7 Opening Cinematics | Simulacrum of the Heart",
