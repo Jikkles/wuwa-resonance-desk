@@ -11,7 +11,18 @@
       "end": null,
       "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/5571",
       "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.7",
-      "events": [],
+      "events": [
+        {
+          "id": "arc-artisan-s-search",
+          "name": "Artisan's Search",
+          "kind": "Trial",
+          "start": "2026-10-08T04:00:00+08:00",
+          "end": "2026-10-26T03:59:00+08:00",
+          "ran": "",
+          "notice": "https://x.com/Wuthering_Waves/status/2107652131511509056",
+          "source": "https://wutheringwaves.fandom.com/wiki/Artisan's_Search"
+        }
+      ],
       "keyVisual": {
         "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1790611200000/dngsdsx5ljkeowz86m-1790680670533.jpg",
         "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5571",
@@ -2959,5 +2970,5 @@
       ]
     }
   ],
-  "updated": "2026-10-02T12:20:58.320Z"
+  "updated": "2026-10-16T11:11:26.891Z"
 }
