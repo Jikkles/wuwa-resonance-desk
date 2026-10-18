@@ -529,14 +529,6 @@
       "type": "Universal Currency",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Shell_Credit"
     },
-    "Space and Blake Bloom Medal": {
-      "icon": "assets/items/space-and-blake-bloom-medal.png",
-      "page": "Space and Blake Bloom Medal",
-      "rarity": 5,
-      "type": "Sigil",
-      "description": "Dedicated to the faculty and students who shone in the drill.",
-      "wiki": "https://wutheringwaves.fandom.com/wiki/Space_and_Blake_Bloom_Medal"
-    },
     "Spliced String": {
       "icon": "assets/items/spliced-string.png",
       "page": "Spliced String",
@@ -593,5 +585,5 @@
       "wiki": "https://wutheringwaves.fandom.com/wiki/Xuanfang_Wonder"
     }
   },
-  "updated": "2026-08-31T21:36:47.678Z"
+  "updated": "2026-10-18T22:17:46.933Z"
 }

@@ -735,32 +735,7 @@
       "origin": "hand",
       "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5310",
       "intel": "2026-08-07-36-events"
-    },
-    {
-      "id": "3.5-lament-recon-tacet-crisis",
-      "name": "Lament Recon: Tacet Crisis",
-      "kind": "Combat",
-      "version": "3.5",
-      "section": "Special Events",
-      "permanent": false,
-      "start": "2026-07-11T10:00:00+08:00",
-      "end": "2026-08-19T11:59:00+08:00",
-      "summary": "2026-07-11 10:00 - 2026-08-19 11:59 (server time)",
-      "detail": "2026-07-11 10:00 - 2026-08-19 11:59 (server time)",
-      "rewards": "Astrite x1200, Space and Blake Bloom Medal (Event Sigil), Space and Blake Bloom (Event Avatar), Modifier, Premium Tuner, Forgery Premium Supply - Lahai-Roi, Premium Enclosure Tank - Land of Xuanfang, Shell Credit, and other materials.",
-      "eligibility": "",
-      "art": {
-        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1783612800000/7zkzq35o525m52cjmj-1783666245394.jpg",
-        "title": "Event Preview | [Lament Recon: Tacet Crisis] Combat Event, Coming Soon!",
-        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5129",
-        "published": "2026-07-10",
-        "credit": "© Kuro Games"
-      },
-      "confidence": "official",
-      "origin": "kuro",
-      "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5129",
-      "headline": true
     }
   ],
-  "updated": "2026-10-18T12:30:28.756Z"
+  "updated": "2026-10-18T22:17:43.171Z"
 }
