@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-10-22T07:14:46.381Z",
+  "fetched": "2026-10-22T13:34:14.536Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -17,7 +17,7 @@
       "kind": "official",
       "lang": "zh",
       "status": "ok",
-      "count": 29
+      "count": 28
     },
     {
       "id": "youtube",
@@ -63,6 +63,196 @@
   "errors": [],
   "items": [
     {
+      "title": "What is the name of the Jinzhou Challenge song?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xciodn/what_is_the_name_of_the_jinzhou_challenge_song/",
+      "date": "2026-10-22T13:32:16.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Lucilla [art by cchungla]",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcimf7/lucilla_art_by_cchungla/",
+      "date": "2026-10-22T13:30:10.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Bigoming 😮😮",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xchsv9/bigoming/",
+      "date": "2026-10-22T12:55:52.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Old standard weapon Vs Blazing Justice for Lingyang in a Sanhua-Verina team (numbers in the description)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xche1m/old_standard_weapon_vs_blazing_justice_for/",
+      "date": "2026-10-22T12:36:55.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "She's the only character with 7 roles, quite fitting for her story as an ex assassin",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcgmr7/shes_the_only_character_with_7_roles_quite/",
+      "date": "2026-10-22T12:00:58.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Suoming and fluffiness [@ryokukablog]",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcg5x2/suoming_and_fluffiness_ryokukablog/",
+      "date": "2026-10-22T11:37:55.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "This is why understanding character rotations is important and why a wheelchair isn't a magic tool",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcg5ms/this_is_why_understanding_character_rotations_is/",
+      "date": "2026-10-22T11:37:31.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Man this could have been peak if they added the umbrella as a glider. hopefully they will",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcg0hb/man_this_could_have_been_peak_if_they_added_the/",
+      "date": "2026-10-22T11:30:04.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Shocking",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xceq7j/shocking/",
+      "date": "2026-10-22T10:19:32.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "She looks so scared, and smol, her feet can't even touch the bottom of the boat 🥀",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xce9uo/she_looks_so_scared_and_smol_her_feet_cant_even/",
+      "date": "2026-10-22T09:52:58.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Who's your favorite for each attribute",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xce7fd/whos_your_favorite_for_each_attribute/",
+      "date": "2026-10-22T09:48:57.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Looking for Video Reccomendations / Lore",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcdxws/looking_for_video_reccomendations_lore/",
+      "date": "2026-10-22T09:32:07.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Candy Crush WuWa Edition, what y'all think?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcds6y/candy_crush_wuwa_edition_what_yall_think/",
+      "date": "2026-10-22T09:22:24.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "I sure hope every time Kuro Games makes an Accessory for a Spending Event, it occupies a different spot on Rover so one day, we get to see all of those silly (and expensive) things on him/her at once. XD",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcdlac/i_sure_hope_every_time_kuro_games_makes_an/",
+      "date": "2026-10-22T09:10:10.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Red Spring to the rescue – Suoming 2nd BiS",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcddr1/red_spring_to_the_rescue_suoming_2nd_bis/",
+      "date": "2026-10-22T08:57:48.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Suoming and the Ninth (@_Colyba_)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcd0pg/suoming_and_the_ninth_colyba/",
+      "date": "2026-10-22T08:33:03.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "The right way to talk to Suoming",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcchnr/the_right_way_to_talk_to_suoming/",
+      "date": "2026-10-22T07:59:16.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "even Suoming's bodyguards",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xccbn7/even_suomings_bodyguards/",
+      "date": "2026-10-22T07:48:23.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Smollotta Has Lost Everything",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcc0di/smollotta_has_lost_everything/",
+      "date": "2026-10-22T07:27:41.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "New merchandise for Changli & Jinhsi",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcblow/new_merchandise_for_changli_jinhsi/",
       "date": "2026-10-22T07:02:19.000Z",
@@ -86,6 +276,16 @@
       "title": "Team Umbrella",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcbf53/team_umbrella/",
       "date": "2026-10-22T06:51:14.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Suoming Release Day Build Guide: Hsin Synergy, S0 vs S2, Weapons, Echoes & Teams",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcb71n/suoming_release_day_build_guide_hsin_synergy_s0/",
+      "date": "2026-10-22T06:36:53.000Z",
       "source": "r/WutheringWaves",
       "sourceId": "reddit-main",
       "kind": "community",
@@ -123,86 +323,6 @@
       "hot": false
     },
     {
-      "title": "full-circle 🌙",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xcaxr7/fullcircle/",
-      "date": "2026-10-22T06:21:18.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Unpopular opinion: Anyone doesn't like the color scheme of Hsin's 2nd form?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc9va7/unpopular_opinion_anyone_doesnt_like_the_color/",
-      "date": "2026-10-22T05:19:27.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Suoming so small that she need a kickstand to stand on the bike",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc9thv/suoming_so_small_that_she_need_a_kickstand_to/",
-      "date": "2026-10-22T05:16:39.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hsin - Suoming - Shorekeeper | WhiWa Run 2nd Half",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc95k2/hsin_suoming_shorekeeper_whiwa_run_2nd_half/",
-      "date": "2026-10-22T04:39:40.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Bruh, this game's too pretty",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc7wsl/bruh_this_games_too_pretty/",
-      "date": "2026-10-22T03:33:11.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Suoming and her weapon came home!!",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc7lhg/suoming_and_her_weapon_came_home/",
-      "date": "2026-10-22T03:16:19.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "\"To battle? Alright. May all be well in Hsin's keeping.\"",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc7b4o/to_battle_alright_may_all_be_well_in_hsins_keeping/",
-      "date": "2026-10-22T03:01:59.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hsin - Suoming - Shorekeeper | Tower of Adversity Season 40 | Floor 4",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc7aqc/hsin_suoming_shorekeeper_tower_of_adversity/",
-      "date": "2026-10-22T03:01:25.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "“出战吗？好，心驭万全。”",
       "url": "https://www.kurobbs.com/mc/post/1562136007013879808",
       "date": "2026-10-22T03:00:00.000Z",
@@ -223,26 +343,6 @@
       "hot": false
     },
     {
-      "title": "Suoming build complete! (she's so tiny, and the glasses make her look so smug lmao)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc79g4/suoming_build_complete_shes_so_tiny_and_the/",
-      "date": "2026-10-22T02:59:51.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hsin - Suoming - Shorekeeper | Endstate Matrix",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc6tm1/hsin_suoming_shorekeeper_endstate_matrix/",
-      "date": "2026-10-22T02:37:36.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Wuthering Waves Version 3.7 Phase II adds new 5-star Resonator Suoming",
       "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNd1NBWXRNS3Vidlp3VWNJLWVqRzZLN3M1UExwQW15Y1pkVnVJOGgzTWw0MGZJNi05V19jVTQ5NHg2al91MXVWY0lYTEl0cFJ2M0hCSFNBZFpxcWZ5SDNhczQwcm96N1RNNy11SUtDd0pzeFBnNWRjUFlBUFFzS1dzdVBxV2FIMi1QSnRHUGRWSG5tMHZ1RGRqekc0TUx5N0JOZVBhRXpKekVTQ2IwSEhsYXJR?oc=5",
       "date": "2026-10-22T02:30:40.000Z",
@@ -251,106 +351,6 @@
       "kind": "press",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Suoming Day 1 Build",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc69uh/suoming_day_1_build/",
-      "date": "2026-10-22T02:11:43.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Daily Questions Megathread - October 22, 2026",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc61cr/daily_questions_megathread_october_22_2026/",
-      "date": "2026-10-22T02:00:36.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "What a lovely family bonding of Black Shores",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc5wy8/what_a_lovely_family_bonding_of_black_shores/",
-      "date": "2026-10-22T01:54:38.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Spawncamping Suoming, who’s pulling for herv",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc5w50/spawncamping_suoming_whos_pulling_for_herv/",
-      "date": "2026-10-22T01:53:32.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "I've been playing for almost a year and just found out about this +50% Echo Drop Rate Food! (never seen it mentioned on those YT Tips Videos)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc4sbp/ive_been_playing_for_almost_a_year_and_just_found/",
-      "date": "2026-10-22T01:00:13.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Follow the beat!",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc49tb/follow_the_beat/",
-      "date": "2026-10-22T00:34:47.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Yesterday of Suoming EP Shots was Suomingtastic",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc090e/yesterday_of_suoming_ep_shots_was_suomingtastic/",
-      "date": "2026-10-21T21:37:32.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Suoming (@FoxyReine)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc07f9/suoming_foxyreine/",
-      "date": "2026-10-21T21:35:45.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Sound bug, help",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xc038d/sound_bug_help/",
-      "date": "2026-10-21T21:31:06.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Carlotta progress shot. Took me 6hrs for this part of her attire..",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xbzgbk/carlotta_progress_shot_took_me_6hrs_for_this_part/",
-      "date": "2026-10-21T21:06:17.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Wuthering Waves Review: Combat, Exploration and the Gacha Experience",
@@ -816,16 +816,6 @@
       "title": "✦ 故梦同乐✦",
       "url": "https://www.kurobbs.com/mc/post/1560254477250478080",
       "date": "2026-10-16T04:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
-      "title": "✦ 故影同行✦",
-      "url": "https://www.kurobbs.com/mc/post/1559239252537393152",
-      "date": "2026-10-15T04:00:00.000Z",
       "source": "Kurobbs (official CN)",
       "sourceId": "kurobbs",
       "kind": "official",
