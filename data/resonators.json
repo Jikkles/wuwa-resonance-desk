@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/resonators@1.1",
-  "updated": "2026-10-07",
+  "updated": "2026-10-22",
   "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
   "resonators": [
     {
@@ -3536,7 +3536,7 @@
       "attribute": "Electro",
       "weapon": "Sword",
       "version": "3.7",
-      "status": "teased",
+      "status": "released",
       "signature": "Unspoken Rue",
       "region": "Mengzhou",
       "epithet": "Locked in the past, the prisoner lingers long",
