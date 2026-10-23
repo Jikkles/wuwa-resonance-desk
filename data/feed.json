@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-10-23T18:09:29.733Z",
+  "fetched": "2026-10-23T22:57:38.669Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -62,6 +62,46 @@
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Waking Moon Fishing",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xds07l/waking_moon_fishing/",
+      "date": "2026-10-23T22:26:27.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Coolest plunge in the game?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdq0g8/coolest_plunge_in_the_game/",
+      "date": "2026-10-23T21:03:16.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "is this even possible?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdo0zo/is_this_even_possible/",
+      "date": "2026-10-23T19:45:07.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "My Suoming fanart",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdmpzq/my_suoming_fanart/",
+      "date": "2026-10-23T18:55:45.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "More Old Federation/New Federation lore via Seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xdl1o1/more_old_federationnew_federation_lore_via_seele/",
@@ -306,46 +346,6 @@
       "title": "Just for Fun Team TOA2 - Suoming(S0R1)-Yinlin(S0R0)-Chisa(S6R2)",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdanm1/just_for_fun_team_toa2/",
       "date": "2026-10-23T10:46:52.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Will she ever be back?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdanbx/will_she_ever_be_back/",
-      "date": "2026-10-23T10:46:23.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Mascot costume",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdabc1/mascot_costume/",
-      "date": "2026-10-23T10:27:20.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Cartethyia 1/6 Scale Figure It's finally going on sale.",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdab0r/cartethyia_16_scale_figure_its_finally_going_on/",
-      "date": "2026-10-23T10:26:48.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hungry Rover",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xda5av/hungry_rover/",
-      "date": "2026-10-23T10:17:21.000Z",
       "source": "r/WutheringWaves",
       "sourceId": "reddit-main",
       "kind": "community",
