@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/kits@1.0",
-  "updated": "2026-09-30",
+  "updated": "2026-10-23",
   "note": "Six skills, two Inherent Skills and the six-node Resonance Chain per Resonator, as they read in the live client. Text carries **bold** and __underline__ markers rather than markup — the desk escapes the string before turning those back into elements. Skill descriptions via prydwen.gg where it could be reached and wutheringwaves.fandom.com otherwise; skills © Kuro Games.",
   "credit": "Kit text via prydwen.gg and wutheringwaves.fandom.com · © Kuro Games",
   "kits": {
@@ -14135,6 +14135,283 @@
             {
               "p": [
                 "When the target's Off-Tune Level is full, the Resonator may cast Tune Break on the target."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "Suoming": {
+      "skills": {
+        "basic": {
+          "name": "Furled Canopy",
+          "blocks": [
+            {
+              "h": "Basic Attack",
+              "p": [
+                "Press or hold Normal Attack to perform up to 3 consecutive attacks, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Basic Attack - Unfurled Canopy",
+              "p": [
+                "While in the Deep Mind state, Basic Attack is replaced with Basic Attack - Unfurled Canopy, performing up to 4 consecutive attacks, dealing __Electro DMG__.",
+                "Hold Normal Attack to cast Basic Attack - Unfurled Canopy Stage 1 and Stage 2 in succession.",
+                "Shortly after casting Basic Attack - Unfurled Canopy Stage 2, hold Normal Attack to cast Basic Attack - Unfurled Canopy: Whirling Thunder Stage 1 and Stage 2 in succession, dealing __Electro DMG__.",
+                "Shortly after casting Basic Attack - Unfurled Canopy Stage 3, hold Normal Attack to cast Basic Attack - Unfurled Canopy Stage 4.",
+                "Shortly after casting Basic Attack - Unfurled Canopy: Whirling Thunder Stage 1, press or hold Normal Attack to cast Basic Attack - Unfurled Canopy: Whirling Thunder Stage 2."
+              ]
+            },
+            {
+              "h": "Basic Attack - Unfurled Canopy: Whirling Thunder",
+              "p": [
+                "Deal __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Mid-air Attack",
+              "p": [
+                "Consume STA to perform a Plunging Attack, dealing __Electro DMG__."
+              ]
+            },
+            {
+              "h": "Dodge Counter",
+              "p": [
+                "Press Normal Attack within a certain time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "- While in the Deep Mind state, Dodge Counter is replaced with Dodge Counter - Unfurled Canopy.",
+                "- Shortly after casting the skill, press Normal Attack to cast Basic Attack Stage 3."
+              ]
+            },
+            {
+              "h": "Dodge Counter - Unfurled Canopy",
+              "p": [
+                "Press Normal Attack within a certain time after a successful Dodge to attack the target, dealing __Electro DMG__.",
+                "- Shortly after casting the skill, press Normal Attack to cast Basic Attack - Unfurled Canopy Stage 3.",
+                "- Shortly after casting the skill, hold Normal Attack to cast Basic Attack - Unfurled Canopy: Whirling Thunder Stage 1, dealing __Electro DMG__."
+              ]
+            }
+          ]
+        },
+        "skill": {
+          "name": "Furled Canopy: Rift Cleaver",
+          "blocks": [
+            {
+              "h": "Resonance Skill - Unfurled Canopy: Crimson Gleam",
+              "p": [
+                "Attack targets within range, dealing __Electro DMG__.",
+                "- While in the Awakened Mind state, press Normal Attack shortly after casting this skill to cast Basic Attack Stage 3.",
+                "- While in the Deep Mind state, press Normal Attack shortly after casting this skill to chain into Basic Attack - Unfurled Canopy Stage 4."
+              ]
+            }
+          ]
+        },
+        "liberation": {
+          "name": "Umbral Canopy: Miasma Lock",
+          "blocks": [
+            {
+              "h": "Blight Rain, Miasmic Thunder",
+              "p": [
+                "While casting Outro Skill, if Suoming has Unison, when a Resonator on the field deals damage, a Thunder Crest is summoned as a Coordinated Attack on the target, dealing __Electro DMG__.",
+                "- Within 3s after this damage is dealt, a Thunder Crest can be summoned each second. This effect is triggered once per second. The damage dealt by Thunder Crest does not trigger this effect.",
+                "- Only 1 Thunder Crest can be summoned per second, up to 6 in total.",
+                "- This effect lasts 8s, or until the number of summoned Thunder Crest reaches the limit."
+              ]
+            }
+          ]
+        },
+        "forte": {
+          "name": "Bound Obsession, Forged Mind",
+          "blocks": [
+            {
+              "h": "Resonance Skill - Furled Canopy: Sealed Delusion",
+              "p": [
+                "While in the Awakened Mind state, when Delusion reaches 800 points, Resonance Skill is replaced with Resonance Skill - Furled Canopy: Sealed Delusion, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- Casting this skill sends Suoming into Deep Mind and clears all Delusion."
+              ]
+            },
+            {
+              "h": "Resonance Skill - Unfurled Canopy: Unforsaken Mind",
+              "p": [
+                "While in the Deep Mind state, when Delusion reaches 800 points, Resonance Skill is replaced with Resonance Skill - Unfurled Canopy: Unforsaken Mind, pulling in nearby targets and dealing __Electro DMG__, considered Basic Attack DMG."
+              ]
+            },
+            {
+              "h": "Basic Attack - Umbral Canopy: Engraved Heart",
+              "p": [
+                "Within a certain period after casting Resonance Skill - Unfurled Canopy: Unforsaken Mind, Basic Attack and Resonance Skill are replaced with Basic Attack - Umbral Canopy: Engraved Heart. Press or hold Normal Attack or Resonance Skill to cast this skill. Attack targets within range, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- Casting this skill sends Suoming into Calamity Mind and clears all Delusion; she enters Awakened Mind once the skill ends.",
+                "- When casting this skill, hold Normal Attack or Resonance Skill to continuously attack the target for a certain period.",
+                "- While casting this skill, Suoming is immune to DMG and interruption for a certain period.",
+                "- During the skill action, she cannot move, dash, jump, dodge, or cast Basic Attack, Resonance Skill, Resonance Liberation, Dodge Counter, Plunging Attack, Mid-air Attack, or Intro Skill, and Resonator switching is also restricted."
+              ]
+            },
+            {
+              "h": "Unison",
+              "p": [
+                "When Suoming has Unison, switching to another Resonator will remove her Unison to trigger Suoming's Outro Skill and the incoming Resonator's Intro Skill. When Suoming's Concerto Energy is full and she has Unison, only the Unison effect is consumed."
+              ]
+            },
+            {
+              "h": "Unison Response",
+              "p": [
+                "Suoming can trigger Unison Response.",
+                "When the active Resonator in the team has Unison, Suoming triggers Unison Response after she is switched in and casts Intro Skill, granting all Resonators in the team 1 stacks of Unison Boon for 30s.",
+                "Suoming can grant up to 1 stacks of Unison Boon. Gaining it again only resets the duration.",
+                "Unison Response cannot be triggered in Co-op."
+              ]
+            },
+            {
+              "h": "Unison Boon",
+              "p": [
+                "Only the Resonators who can trigger Unison Response can gain this effect. Each stack of Unison Boon increases the total DMG dealt by Resonators in the team who can trigger Unison Response by 3%, up to 2 stacks."
+              ]
+            },
+            {
+              "h": "Delusion",
+              "p": [
+                "Can hold up to 800 points of Delusion.",
+                "- Hitting a target with Basic Attack, Basic Attack - Unfurled Canopy, Basic Attack - Unfurled Canopy: Whirling Thunder, Dodge Counter, Dodge Counter - Unfurled Canopy, or Resonance Skill - Unfurled Canopy: Crimson Gleam grants Delusion if Suoming is the active Resonator.",
+                "- Casting Resonance Liberation grants 200 points of Delusion.",
+                "- Casting Intro Skill - Unfurled Canopy: Thunder Rending or Intro Skill - Unfurled Canopy: Whirling Thunder (Unison) grants 200 points of Delusion."
+              ]
+            }
+          ]
+        },
+        "intro": {
+          "name": "Furled Canopy: Flash Rift",
+          "blocks": [
+            {
+              "h": "Intro Skill - Unfurled Canopy: Thunder Rending",
+              "p": [
+                "Deal __Electro DMG__, considered Basic Attack DMG.",
+                "- Press Normal Attack shortly after casting this skill to chain into Basic Attack - Unfurled Canopy: Whirling Thunder Stage 2."
+              ]
+            },
+            {
+              "h": "Intro Skill - Furled Canopy: Sealed Delusion (Unison)",
+              "p": [
+                "Attack the target, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- Casting this skill sends Suoming into the Deep Mind state and clears all Delusion."
+              ]
+            },
+            {
+              "h": "Intro Skill - Unfurled Canopy: Whirling Thunder (Unison)",
+              "p": [
+                "Attack the target, dealing __Electro DMG__, considered Basic Attack DMG.",
+                "- While in the Deep Mind state, press Normal Attack shortly after casting Intro Skill - Unfurled Canopy: Whirling Thunder (Unison) to chain into Basic Attack - Unfurled Canopy: Whirling Thunder Stage 2."
+              ]
+            }
+          ]
+        },
+        "outro": {
+          "name": "Canopy Rumble",
+          "blocks": [
+            {
+              "p": [
+                "The incoming Resonator gains 20% Electro DMG Amplification for 8s or until the Resonator is switched out. While having Unison Boon, they also gain 25% Resonance Skill DMG Amplification."
+              ]
+            }
+          ]
+        }
+      },
+      "inherent": [
+        {
+          "name": "Rain-Soaked Covenant",
+          "blocks": [
+            {
+              "p": [
+                "Casting Intro Skill - Furled Canopy: Flash Rift, Intro Skill - Unfurled Canopy: Thunder Rending, Intro Skill - Furled Canopy: Sealed Delusion (Unison), or Intro Skill - Unfurled Canopy: Whirling Thunder (Unison) grants 50% Electro DMG Bonus for 15s. Switching to another Resonator ends this effect early.",
+                "- When Suoming casts Intro Skill - Furled Canopy: Sealed Delusion (Unison) or Intro Skill - Unfurled Canopy: Whirling Thunder (Unison), she additionally gains 10 points of Concerto Energy, triggered only once every 25s."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Sunken Seal, Forged Lock",
+          "blocks": [
+            {
+              "p": [
+                "When Suoming has Unison and casts Outro Skill, she gains the Aligned Seals effect for 30s.",
+                "Within 8s after Suoming casts Resonance Liberation or Basic Attack - Umbral Canopy: Engraved Heart, if she gains or has Aligned Seals, her Outro Skill grants the incoming Resonator 30% Electro DMG Bonus, plus an additional 20% for each stack of Unison Boon they have, up to 40%. This effect lasts for 8s or until the Resonator is switched out.",
+                "When Suoming has Unison, casting Resonance Skill - Furled Canopy: Rift Cleaver removes Unison and the Unison Boon on her, consumes 20 points of Concerto Energy, and clears all Delusion, granting the Seal Master effect: the DMG Multipliers of Basic Attack - Unfurled Canopy and Basic Attack - Unfurled Canopy: Whirling Thunder are increased by 100%, each stage of both skills restores 5 additional points of Concerto Energy on hit, and Suoming's Crit. DMG is increased by 100%. This effect lasts for 12s or until the Resonator is switched out.",
+                "- Gaining Unison ends this effect early.",
+                "- Gaining the Aligned Seals effect ends this effect early.",
+                "- The Seal Master effect cannot be gained while the Aligned Seals effect is active.",
+                "- While the Seal Master effect is active, press or hold Normal Attack shortly after casting Basic Attack - Unfurled Canopy Stage 4 to chain into Basic Attack - Unfurled Canopy Stage 2."
+              ]
+            }
+          ]
+        }
+      ],
+      "chain": [
+        {
+          "n": 1,
+          "name": "Into the Blight Rain",
+          "blocks": [
+            {
+              "p": [
+                "Resonance Skill - Unfurled Canopy: Unforsaken Mind is immune to interruption.",
+                "The DMG Multipliers of Intro Skill - Furled Canopy: Flash Rift, Intro Skill - Unfurled Canopy: Thunder Rending, Intro Skill - Furled Canopy: Sealed Delusion (Unison), and Intro Skill - Unfurled Canopy: Whirling Thunder (Unison) are increased by 60%."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "name": "Breaking Thunder, Slaying Evil",
+          "blocks": [
+            {
+              "p": [
+                "Crit. DMG is increased by 40%.",
+                "Casting Outro Skill increases the incoming Resonator's Crit. DMG by 10%, plus an additional 6% for each stack of Unison Boon they have, up to 24%. This effect lasts for 30s or until the Resonator is switched out."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "name": "Lone Canopy, Solitary Road",
+          "blocks": [
+            {
+              "p": [
+                "Casting Intro Skill - Furled Canopy: Flash Rift or Intro Skill - Unfurled Canopy: Thunder Rending grants 1 stacks of Unison Boon for 30s. This effect can be triggered once every 25s.",
+                "- If Suoming has already granted Unison Boon and it is still in effect, gaining it again only resets its duration.",
+                "Casting Resonance Liberation grants Suoming 30% Basic Attack DMG Amplification for 25s."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "name": "Covenant Borne Upon the Heart",
+          "blocks": [
+            {
+              "p": [
+                "Suoming's ATK is increased by 20%."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "name": "Seal Deep, Never Forgotten",
+          "blocks": [
+            {
+              "p": [
+                "The DMG Multiplier of Resonance Liberation - Umbral Canopy: Miasma Lock is increased by 40%."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "name": "Nine Shadows at Her Side",
+          "blocks": [
+            {
+              "p": [
+                "The effect of each stack of Unison Boon on all Resonators in the team is increased by 50%, up to 4 stacks of Unison Boon.",
+                "The DMG Multiplier of Basic Attack - Umbral Canopy: Engraved Heart is increased by 50%.",
+                "When Suoming has Seal Master, her Crit. DMG is further increased by 200%."
               ]
             }
           ]
