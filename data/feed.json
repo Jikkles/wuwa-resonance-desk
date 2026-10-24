@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-10-24T17:16:05.954Z",
+  "fetched": "2026-10-24T22:17:58.046Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -49,7 +49,7 @@
       "kind": "press",
       "lang": "en",
       "status": "ok",
-      "count": 30
+      "count": 33
     },
     {
       "id": "mmoculture",
@@ -62,6 +62,146 @@
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Carlotta complete ✅ 100%. I hope my artstyle compliments her beauty..",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xekj7y/carlotta_complete_100_i_hope_my_artstyle/",
+      "date": "2026-10-24T21:34:27.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wishlist for the game",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xek8mc/wishlist_for_the_game/",
+      "date": "2026-10-24T21:21:27.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Aemeath WIP",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xejnan/aemeath_wip/",
+      "date": "2026-10-24T20:56:12.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "S0R1 Hsin Suoming Shorekeeper Quick Test | EM S2P3 - 19606 Points",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xej8i9/s0r1_hsin_suoming_shorekeeper_quick_test_em_s2p3/",
+      "date": "2026-10-24T20:38:46.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Campus Event at UC berkeley!",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xeipx7/campus_event_at_uc_berkeley/",
+      "date": "2026-10-24T20:16:58.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Lol, look what i found while scrolling my gallery",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xei2vn/lol_look_what_i_found_while_scrolling_my_gallery/",
+      "date": "2026-10-24T19:50:46.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "a dark theory",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xehztf/a_dark_theory/",
+      "date": "2026-10-24T19:47:15.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "I hate the motorcycle.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xehm75/i_hate_the_motorcycle/",
+      "date": "2026-10-24T19:31:47.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "It would have been nice to have these as a collectible in our inventory.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xegwvc/it_would_have_been_nice_to_have_these_as_a/",
+      "date": "2026-10-24T19:03:09.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Would anyone happen to have clean versions of these Hsins without the text?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xeg41a/would_anyone_happen_to_have_clean_versions_of/",
+      "date": "2026-10-24T18:31:13.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Hsin in Unison Mode : Is she better suited for single-target content than WhiWa?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xefzed/hsin_in_unison_mode_is_she_better_suited_for/",
+      "date": "2026-10-24T18:26:04.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Finally got the title thanks to Hsin and Suoming",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xeenj0/finally_got_the_title_thanks_to_hsin_and_suoming/",
+      "date": "2026-10-24T17:33:05.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves v3.7 Quest Order Guide",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xeeejq/wuthering_waves_v37_quest_order_guide/",
+      "date": "2026-10-24T17:22:47.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "A week late, but here are my thoughts & recap from the Wuthering Waves LA Concert (from an Asia server player who also went to Tokyo!)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xee51a/a_week_late_but_here_are_my_thoughts_recap_from/",
+      "date": "2026-10-24T17:12:13.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "My Aemeath painting has been treated right ❤️",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1xedsyz/my_aemeath_painting_has_been_treated_right/",
@@ -116,16 +256,6 @@
       "title": "suoming is NOT amused 😭",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1xebdc9/suoming_is_not_amused/",
       "date": "2026-10-24T15:21:05.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "H(ot)sin Cosplay (by @gany3izi)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xea816/hotsin_cosplay_by_gany3izi/",
-      "date": "2026-10-24T14:33:54.000Z",
       "source": "r/WutheringWaves",
       "sourceId": "reddit-main",
       "kind": "community",
@@ -213,51 +343,11 @@
       "hot": false
     },
     {
-      "title": "What I think the other Overseers might look like",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe96s5/what_i_think_the_other_overseers_might_look_like/",
-      "date": "2026-10-24T13:50:31.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Sup gng ✌️",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe94zj/sup_gng/",
-      "date": "2026-10-24T13:48:23.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Significant visual bugs on the Xbox Series X version of Wuwa",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe8zjq/significant_visual_bugs_on_the_xbox_series_x/",
-      "date": "2026-10-24T13:41:50.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "Hiyuki Skin via Pero",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xe8cve/hiyuki_skin_via_pero/",
       "date": "2026-10-24T13:14:09.000Z",
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "He's so silly and cute😭",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe83ea/hes_so_silly_and_cute/",
-      "date": "2026-10-24T13:02:25.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
       "kind": "community",
       "lang": "en",
       "hot": false
@@ -291,96 +381,6 @@
       "kind": "community",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Mengzhou Festival Art so far.",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe6frs/mengzhou_festival_art_so_far/",
-      "date": "2026-10-24T11:39:44.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "cloudy effect on map.",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe5pqv/cloudy_effect_on_map/",
-      "date": "2026-10-24T10:59:14.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Suoming EX (Re0n)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe5kfg/suoming_ex_re0n/",
-      "date": "2026-10-24T10:50:39.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Waking Moon Fishing",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4u8x/waking_moon_fishing/",
-      "date": "2026-10-24T10:06:13.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Waking Moon Serenity",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4r4w/waking_moon_serenity/",
-      "date": "2026-10-24T10:01:09.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Fix this please💔",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4pyx/fix_this_please/",
-      "date": "2026-10-24T09:59:28.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "These moments were so beautiful 🤩",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4hyp/these_moments_were_so_beautiful/",
-      "date": "2026-10-24T09:45:40.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "the event is both a blessing for quickswapping fun, and random visual clutter, give me teams to play, im having too much fun with this.",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4ho9/the_event_is_both_a_blessing_for_quickswapping/",
-      "date": "2026-10-24T09:45:11.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "She is significantly shorter than this kid model 🥀",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4eye/she_is_significantly_shorter_than_this_kid_model/",
-      "date": "2026-10-24T09:40:14.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "先约电台傍晚频道 | 锁暝",
@@ -1273,6 +1273,16 @@
       "hot": false
     },
     {
+      "title": "Current and upcoming Wuthering Waves banners",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE0taTZ6SWt3OVpzekh5TW95eVl0MjJXeUdjRzE2Y3p5czduTDlIaW1NQXVMQ3c0Z3BhWDdBRmNxc0pGQlhvb1Yzbi1hRDhCVWdEYVd2MWFBUU00SDAyVW5qTjBn?oc=5",
+      "date": "2026-10-02T07:00:00.000Z",
+      "source": "Pocket Tactics",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
       "title": "Wuthering Waves Tier List – Best WuWa Characters Ranked (October 2026)",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBhZVZyUlhXWVdKSkpGM0RsbnptRl9ZcmdmXzFpYXhXWng0cFhyczBuQXJwa004N0xlbjlOZE5KYXo1dXhUaWN1ZGN2RmtER1JDM3NCUEpTTmJ6bTA1MURvR28yeUFLZ9IBa0FVX3lxTFBfd3RjVDh0SDM3eklvMDd5NE1MVjNyMHpib1JMRVJUSTB2cERDQkM5d0FEODdRNGVER0pabXc5d0FJc3YxTjdxOWRqVzR0cGZGbVk1bjVrclRodmRiRDB4QnJTaGg0V3FkVEtn?oc=5",
       "date": "2026-10-01T07:00:00.000Z",
@@ -1323,6 +1333,16 @@
       "hot": false
     },
     {
+      "title": "Hsin S1 vs R1 in WuWa: Which one should you get? (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQSGhvYy11UmdQYVJudVluV0RvejFJUVJaLXk0blZScFZ1bnJxWDNuNU9xek91dWxZTjZRTGdaemJKVFBxRnR6eU1tMmRUZUNDcmlyRG04c21ENjFxd0lOZ2k3TngwSm1SY0pZRk02NjQ1X2VfcUUyY3JfbTRQSTBkZWVFU1RlV3MyV2FWVw?oc=5",
+      "date": "2026-09-30T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "Wuthering Waves Version 3.7 goes live with new Resonator Hsin",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPbzlFMUtJN05lZmpUaHMteVdUalROTDBONHhBYkpKT20wYlh2aTZjVU9BZ29tT0NWaEkwV3FmMHJlMVk0Rlh5RjFqXzY3UHNXLVJScGE0SE9zYnB4ckQwa0ZscVU2Z2lBUktpeVV6RzdjNnhYYVdMYnJ3WHlPNEZROFVHRlo1bjdvZ3I4RWxnM25JM2YtdWR5S1lJNFRkN1dyZ3VEMmNn?oc=5",
       "date": "2026-09-30T07:00:00.000Z",
@@ -1335,6 +1355,16 @@
     {
       "title": "WuWa 3.7 patch notes (Wuthering Waves): New characters, location, events, and more",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNUE0SjFCM1FpclNqa0xKQXl2WFZlMGhXX3FRY0V1MlM2OFdJX2JHQzBVVVZMVlI2QWFEQXB2TU5NT3Y5b2VOVExBaEV2ei1TQkM1YVk1SzRidU1ycTVqenlqUmIxYzRrVnRzUHg2RGRLWDh4VmpibTZkWjRmZmJOeTRSWnJZWUNXSDVpbDAyMHFyUENtUUpSaTlTQlAxX1ZxUERHQ1Z3?oc=5",
+      "date": "2026-09-30T07:00:00.000Z",
+      "source": "Sportskeeda",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "WuWa 3.7: Best 5-star character to choose from the Moonlit Path selector (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOaUNoWm9kc0N3YklrNk1SaGZSRkFYaG1ranB2VHIwUHFEUVpLY1ByNzlTR1NNSkNsR01hbklQbVZRT2pZaGpHYlIxYlNXMElrRjMzR2lRdFBiRVhJVmtxOEpQRmhiLWctTWp3OE53d0FZM19RWVU4ZXpnLTRSX2J4RldFMlRIT1l6aVh0Mzc1Yy04WWhHX1k4Yk4xWnR3NU10MkpBeWs2Q19BVVNIU1lWSQ?oc=5",
       "date": "2026-09-30T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
