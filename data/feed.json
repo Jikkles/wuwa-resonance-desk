@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-10-24T06:57:44.189Z",
+  "fetched": "2026-10-24T12:30:33.487Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -17,16 +17,15 @@
       "kind": "official",
       "lang": "zh",
       "status": "ok",
-      "count": 28
+      "count": 27
     },
     {
       "id": "youtube",
       "name": "Wuthering Waves (YouTube)",
       "kind": "video",
       "lang": "en",
-      "status": "failed",
-      "count": 0,
-      "error": "HTTP 404 Not Found"
+      "status": "ok",
+      "count": 15
     },
     {
       "id": "reddit-leaks",
@@ -50,7 +49,7 @@
       "kind": "press",
       "lang": "en",
       "status": "ok",
-      "count": 40
+      "count": 32
     },
     {
       "id": "mmoculture",
@@ -61,16 +60,214 @@
       "count": 3
     }
   ],
-  "errors": [
-    "youtube: HTTP 404 Not Found"
-  ],
+  "errors": [],
   "items": [
     {
-      "title": "I lost my account",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe1qah/i_lost_my_account/",
-      "date": "2026-10-24T06:53:52.000Z",
+      "title": "3.8| Some npc props via solon",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xe7476/38_some_npc_props_via_solon/",
+      "date": "2026-10-24T12:14:50.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "3.8| All possible endings for the main event",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xe6npz/38_all_possible_endings_for_the_main_event/",
+      "date": "2026-10-24T11:52:00.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "3.8| More about the main event via gamedata",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xe6k4w/38_more_about_the_main_event_via_gamedata/",
+      "date": "2026-10-24T11:46:30.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Mengzhou Festival Art so far.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe6frs/mengzhou_festival_art_so_far/",
+      "date": "2026-10-24T11:39:44.000Z",
       "source": "r/WutheringWaves",
       "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "F2P, haven't won a 50/50 since April, and I'm saving for S6 Hiyuki. I'm cooked 💀",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe5sd1/f2p_havent_won_a_5050_since_april_and_im_saving/",
+      "date": "2026-10-24T11:02:55.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "cloudy effect on map.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe5pqv/cloudy_effect_on_map/",
+      "date": "2026-10-24T10:59:14.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "I accidentally pulled Lucilla. I don't even need her lol",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe5lg7/i_accidentally_pulled_lucilla_i_dont_even_need/",
+      "date": "2026-10-24T10:52:14.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Suoming EX (Re0n)",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe5kfg/suoming_ex_re0n/",
+      "date": "2026-10-24T10:50:39.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Waking Moon Fishing",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4u8x/waking_moon_fishing/",
+      "date": "2026-10-24T10:06:13.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Waking Moon Serenity",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4r4w/waking_moon_serenity/",
+      "date": "2026-10-24T10:01:09.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Fix this please💔",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4pyx/fix_this_please/",
+      "date": "2026-10-24T09:59:28.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "These moments were so beautiful 🤩",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4hyp/these_moments_were_so_beautiful/",
+      "date": "2026-10-24T09:45:40.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "the event is both a blessing for quickswapping fun, and random visual clutter, give me teams to play, im having too much fun with this.",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4ho9/the_event_is_both_a_blessing_for_quickswapping/",
+      "date": "2026-10-24T09:45:11.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "She is significantly shorter than this kid model 🥀",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4eye/she_is_significantly_shorter_than_this_kid_model/",
+      "date": "2026-10-24T09:40:14.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "The powercreep situation isn't as bad as I hear peoples make it out to be. What peoples should complain about is the HP inflation and the Shill abuse",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4c5h/the_powercreep_situation_isnt_as_bad_as_i_hear/",
+      "date": "2026-10-24T09:35:21.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Suoming dps has a big problem",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4bty/suoming_dps_has_a_big_problem/",
+      "date": "2026-10-24T09:34:45.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Johnyuan Waves, the off-screen protagonist",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe4asj/johnyuan_waves_the_offscreen_protagonist/",
+      "date": "2026-10-24T09:32:56.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "先约电台傍晚频道 | 锁暝",
+      "url": "https://www.kurobbs.com/mc/post/1562500952695017472",
+      "date": "2026-10-24T09:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Which TOA Hazard Floor 4 Bosses You Genuinely Despises to Beat, and Take A lot of time to Finish it",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe3qu5/which_toa_hazard_floor_4_bosses_you_genuinely/",
+      "date": "2026-10-24T08:58:32.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Photo mode?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe3eh3/photo_mode/",
+      "date": "2026-10-24T08:36:45.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Hsin Suoming Lily simple 4 lib rotation",
+      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xe2uvc/hsin_suoming_lily_simple_4_lib_rotation/",
+      "date": "2026-10-24T08:02:29.000Z",
+      "source": "r/WutheringWavesLeaks",
+      "sourceId": "reddit-leaks",
       "kind": "community",
       "lang": "en",
       "hot": false
@@ -86,9 +283,19 @@
       "hot": false
     },
     {
-      "title": "A little vent/frustration post",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe0xqv/a_little_ventfrustration_post/",
-      "date": "2026-10-24T06:06:10.000Z",
+      "title": "Dynamic MFG/6x/5x not working",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe17q1/dynamic_mfg6x5x_not_working/",
+      "date": "2026-10-24T06:22:34.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Take my money Kuro Games",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xe0q63/take_my_money_kuro_games/",
+      "date": "2026-10-24T05:53:30.000Z",
       "source": "r/WutheringWaves",
       "sourceId": "reddit-main",
       "kind": "community",
@@ -116,16 +323,6 @@
       "hot": false
     },
     {
-      "title": "Hsin Suoming Lily Basic Rotation",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xdzwqq/hsin_suoming_lily_basic_rotation/",
-      "date": "2026-10-24T05:06:47.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Yangyang 4-star Main DPS Vs Lampylumen Myriad (ToA Hazard 1) in WuWa 3.7",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdzp51/yangyang_4star_main_dps_vs_lampylumen_myriad_toa/",
       "date": "2026-10-24T04:55:20.000Z",
@@ -146,12 +343,32 @@
       "hot": false
     },
     {
+      "title": "Waking Moon Fishing",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdyvma/waking_moon_fishing/",
+      "date": "2026-10-24T04:09:38.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "Six Seven in Chibis -Pat-tat ♪ Pat-tat ♪ Pat-tat pat-tat pat-tat♪-",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdyukm/six_seven_in_chibis_pattat_pattat_pattat_pattat/",
       "date": "2026-10-24T04:08:04.000Z",
       "source": "r/WutheringWaves",
       "sourceId": "reddit-main",
       "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Pat-tat ♪ Pat-tat ♪ Pat-tat pat-tat pat-tat♪",
+      "url": "https://www.youtube.com/watch?v=EqRYtREFQvY",
+      "date": "2026-10-24T04:00:28.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -196,136 +413,6 @@
       "hot": false
     },
     {
-      "title": "Well that just happened... got achievement too for some reason at the end",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdwxqf/well_that_just_happened_got_achievement_too_for/",
-      "date": "2026-10-24T02:25:26.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Do you have a favorite media reference in Wuwa?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdwtd4/do_you_have_a_favorite_media_reference_in_wuwa/",
-      "date": "2026-10-24T02:19:05.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Daily Questions Megathread - October 24, 2026",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdwgc5/daily_questions_megathread_october_24_2026/",
-      "date": "2026-10-24T02:00:31.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Cartwheel uno reverse [@Gladiustyrfing]",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdvgeu/cartwheel_uno_reverse_gladiustyrfing/",
-      "date": "2026-10-24T01:08:57.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "The Sun & Moon: Septimont's finest duo joins the hunt!",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdvfvp/the_sun_moon_septimonts_finest_duo_joins_the_hunt/",
-      "date": "2026-10-24T01:08:06.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "[ENDSTATE MATRIX ULTIMATE S6R1 HSIN CEILING SHOWCASE] shorekeeper what? i'll use mornye instead",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xduteg/endstate_matrix_ultimate_s6r1_hsin_ceiling/",
-      "date": "2026-10-24T00:36:03.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Concert Cartethyia by me (@pyochuu)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xduhpn/concert_cartethyia_by_me_pyochuu/",
-      "date": "2026-10-24T00:20:05.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Suoming knows what's up (FoxyReine)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdu6q2/suoming_knows_whats_up_foxyreine/",
-      "date": "2026-10-24T00:06:06.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "It’s the same picture [@LeppiB]",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdtn0k/its_the_same_picture_leppib/",
-      "date": "2026-10-23T23:41:27.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Waking Moon Fishing",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xds07l/waking_moon_fishing/",
-      "date": "2026-10-23T22:26:27.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Coolest plunge in the game?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdq0g8/coolest_plunge_in_the_game/",
-      "date": "2026-10-23T21:03:16.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "is this even possible?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdo0zo/is_this_even_possible/",
-      "date": "2026-10-23T19:45:07.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "My Suoming fanart",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdmpzq/my_suoming_fanart/",
-      "date": "2026-10-23T18:55:45.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "More Old Federation/New Federation lore via Seele",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xdl1o1/more_old_federationnew_federation_lore_via_seele/",
       "date": "2026-10-23T17:52:55.000Z",
@@ -336,51 +423,11 @@
       "hot": false
     },
     {
-      "title": "Getting to the recommended build is pretty fun",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdkqm8/getting_to_the_recommended_build_is_pretty_fun/",
-      "date": "2026-10-23T17:41:07.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Why are the 2nd phase characters no getting a story quest",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdklb1/why_are_the_2nd_phase_characters_no_getting_a/",
-      "date": "2026-10-23T17:35:31.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Dreamfield Odyssey Event Menu via pero_waves",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xdk5qc/dreamfield_odyssey_event_menu_via_pero_waves/",
       "date": "2026-10-23T17:19:03.000Z",
       "source": "r/WutheringWavesLeaks",
       "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Wuwa disabled my network adapters automatically somehow.",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdjy6c/wuwa_disabled_my_network_adapters_automatically/",
-      "date": "2026-10-23T17:11:11.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Lily by @__GaoU",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xdjmat/lily_by_gaou/",
-      "date": "2026-10-23T16:59:08.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
       "kind": "community",
       "lang": "en",
       "hot": false
@@ -406,6 +453,16 @@
       "hot": true
     },
     {
+      "title": "Insider Channel: Special Program | What do you think of these?",
+      "url": "https://www.youtube.com/shorts/jezf8V8iM4s",
+      "date": "2026-10-23T10:00:28.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "寰宇频道特别栏目 | 这个如何",
       "url": "https://www.kurobbs.com/mc/post/1562422064655937536",
       "date": "2026-10-23T10:00:00.000Z",
@@ -413,16 +470,6 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
-      "hot": false
-    },
-    {
-      "title": "Mongil: Star Dive, Wuthering Waves, Chaos Zero Nightmare - We've Gacha Covered",
-      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE4wUXg4SktBVnBkLUh3bnFKandLNmRnbWtQQTdGQXU1TnB2bXZXNXN4TTltZ3g4Z3RrYS0xRm1YRFhiTm9fM05vbzRyYWgxSlJWV0Z3dTctU191ZWNzeHI0SDJXTjdUbG9SZktHNGFfajRPT2M?oc=5",
-      "date": "2026-10-23T09:14:00.000Z",
-      "source": "Pocket Gamer",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
       "hot": false
     },
     {
@@ -596,46 +643,6 @@
       "hot": true
     },
     {
-      "title": "4.0 effect via FS(lol)",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xcwknj/40_effect_via_fslol/",
-      "date": "2026-10-22T22:17:40.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "3.8 | Dreamingscape Expedition event character buffs via Seele",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xcu8s3/38_dreamingscape_expedition_event_character_buffs/",
-      "date": "2026-10-22T20:42:59.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Lily sequence menu/pose via Seele",
-      "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xcsi03/lily_sequence_menupose_via_seele/",
-      "date": "2026-10-22T19:37:50.000Z",
-      "source": "r/WutheringWavesLeaks",
-      "sourceId": "reddit-leaks",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Suoming vs Lynae vs Lucilla in WuWa 3.7: Who should you pull for? (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQU1YxQ2FjV2o1d1dxOHpjSHRRdzlFV0hIeGVpdkJtUHROdzNCWGQ1cDV0ZWZMM1VrMk9FUXZjQS1JTUxmWHhITWE4UFN6eC1qUFhxajZiaXQxUFc2cGVZbnRsaklTeXp5cXhnMlo0U3lOcVZaMGNtb3VucTBnZXZqTUxFNlpwUWtJOFlXN2tkUnE1RTRLMlAwbERYRTI2Q1EwX05J?oc=5",
-      "date": "2026-10-22T08:20:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
-    },
-    {
       "title": "谛天鉴州监都沉浸的趣味体验！",
       "url": "https://www.kurobbs.com/mc/post/1562073632074412032",
       "date": "2026-10-22T07:00:00.000Z",
@@ -659,26 +666,6 @@
       "title": "WuWa Suoming Resonance Chain guide (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQZWpaRjJmTTRYMWdKWWZXRzgxcU15M0k3ZGhFNlo4RVNrWUdmbjVaNUZWZENDNVVZMHd4QklkSU1SWWh2QmhYZ1NqS2hWb1EwY0swSVpMSDRTWF9Ub3k5RWlCNmQzTTJiRVhWX1czWjJlamtpQ3FCLTRiR2FGckp1WmVzM0dSMFAyR082c2ZMYw?oc=5",
       "date": "2026-10-22T05:10:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Best weapons for Suoming in WuWa (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQVWpKRnFQQVlsLU1nZ0xNV053VFFHTENJZkNubWtCeDhCUXRWVG1KOVQtUmlpdDJkbFBBLUFUTG5oSWo1RlFXM2d1cVAyTUMzUU4wZ2w4RWc1MnUxWE13eWdYLTRhSlhDYUd4NVh1Z0x1STY3Y09GMTM5WklBMXVoZ2pXSQ?oc=5",
-      "date": "2026-10-22T04:36:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Is Suoming worth pulling in WuWa? (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPaFEtUjBEUHN1TmJfZm93TkpjSXNoVTFWT0Z5WVBEQlU3c1M5d0hjd01odGh4QTdjdlFOblhmYTNXcWNxR0JTZmloUEZuWG40NEZfN281Q2dCQ3dQV2J6blNFclJzQ1lQTEJlRHZaLXFiSURScFM0N0ZFSEppaWFBbVJraFNUamZl?oc=5",
-      "date": "2026-10-22T04:08:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
@@ -786,6 +773,16 @@
       "hot": false
     },
     {
+      "title": "Wuthering Waves EP3.7 — Suoming - \"Oaths Unbent\"",
+      "url": "https://www.youtube.com/watch?v=mEB7-q0W1sE",
+      "date": "2026-10-21T04:00:10.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "《鸣潮》先约电台EP3.7——锁暝《千劫起，一念生》",
       "url": "https://www.kurobbs.com/mc/post/1562417353349160960",
       "date": "2026-10-21T04:00:00.000Z",
@@ -886,6 +883,16 @@
       "hot": true
     },
     {
+      "title": "Wuthering Waves | Resonator Showcase | Suoming — PROMISE",
+      "url": "https://www.youtube.com/watch?v=AvS_afduMds",
+      "date": "2026-10-20T03:00:23.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
       "title": "《鸣潮》共鸣者「锁暝」PV | 契阔",
       "url": "https://www.kurobbs.com/mc/post/1561771205557829632",
       "date": "2026-10-20T03:00:00.000Z",
@@ -946,6 +953,16 @@
       "hot": false
     },
     {
+      "title": "New 5-Star Weapon \"Unspoken Rue\" Coming Soon",
+      "url": "https://www.youtube.com/shorts/wVm2cqncnxM",
+      "date": "2026-10-18T10:30:09.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "《寰宇人类注疏：万端造物》——沉冥",
       "url": "https://www.kurobbs.com/mc/post/1560255093196275712",
       "date": "2026-10-18T10:00:00.000Z",
@@ -976,6 +993,16 @@
       "hot": false
     },
     {
+      "title": "Wuthering Waves Resonator Combat Showcase | Suoming",
+      "url": "https://www.youtube.com/watch?v=UBnxmZINwic",
+      "date": "2026-10-18T03:00:20.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": true
+    },
+    {
       "title": "《鸣潮》共鸣者战斗演示 | 锁暝",
       "url": "https://www.kurobbs.com/mc/post/1561054477446103040",
       "date": "2026-10-18T03:00:00.000Z",
@@ -983,6 +1010,26 @@
       "sourceId": "kurobbs",
       "kind": "official",
       "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves version 1.2 update: Release date, characters & events",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQd0JhSTN5aXYtbm5tdmh0MzBZNjRjRVVzRXRFOXdHVHBjRUpYWWduU1JURElLZE5XTVZKeTY2U2JuRTEyck5XajdZdEFFdGFvSnVwazNXcEUzSU1tTnl4SGp3MktUSi1Zdk9RcHdURkkydUxjZURlNTV1RW5JWGlvUmNwdHRzdjRNM193?oc=5",
+      "date": "2026-10-17T07:00:00.000Z",
+      "source": "Dexerto",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Post-Lament Anthropocene: Stars Intertwined | Suoming",
+      "url": "https://www.youtube.com/shorts/JDlC44vmGa8",
+      "date": "2026-10-17T03:00:31.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
       "hot": false
     },
     {
@@ -1026,26 +1073,6 @@
       "hot": false
     },
     {
-      "title": "✦ 故梦同乐✦",
-      "url": "https://www.kurobbs.com/mc/post/1560254477250478080",
-      "date": "2026-10-16T04:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
-      "title": "鸣潮 ×爱回收返航新生 联动即将开启！",
-      "url": "https://www.kurobbs.com/mc/post/1559881108967899136",
-      "date": "2026-10-14T04:05:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
-    },
-    {
       "title": "Post-Lament Anthropocene: Comprehensive Mirror for Historians — Records of the Huanglong Sentinels",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5608",
       "date": "2026-10-14T04:00:00.000Z",
@@ -1064,6 +1091,16 @@
       "kind": "official",
       "lang": "en",
       "hot": true
+    },
+    {
+      "title": "Wuthering Waves Story Cinematics | Joy Beneath the Waking Moon",
+      "url": "https://www.youtube.com/watch?v=D80kH61IQtM",
+      "date": "2026-10-13T04:00:28.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
     },
     {
       "title": "Post-Lament Anthropocene: Enemies — Suhsin the Inevitable",
@@ -1086,12 +1123,72 @@
       "hot": true
     },
     {
-      "title": "WuWa: Lily's attribute and weapon type revealed (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQaG13c1p4LVBJVlBRaC1jR2M2MW5reEpwS1gtbExDN09vOWxnWlNra1N1QVhhWTlHQW5wTnpaQXY4MFNjSjd1bEVIaDNPUkJndDhOcjVxMVJLTVdnaFE2ZGJka0N5Q2dUbGRsbmJGMEdBcV9nY0dtQkMtWVhCZjVRMW1jWnJveUMxMENKQnpoTDl1bnJQNnlnU0Fn?oc=5",
-      "date": "2026-10-08T07:00:00.000Z",
-      "source": "Sportskeeda",
+      "title": "Wuthering Waves Story Cinematics | What the Heart Speaks, the Heart Brings Forth",
+      "url": "https://www.youtube.com/watch?v=TaXb_hAGDFo",
+      "date": "2026-10-12T03:00:21.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Singapore Stop of Wuthering Waves Concert Tour | \"Unwavering Startorch\" Stage Performance",
+      "url": "https://www.youtube.com/watch?v=DjhjAeOHoCQ",
+      "date": "2026-10-11T10:00:20.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Solaris Starry Stage Season 2 — Wuthering Waves Fan Creation Special Program (Full CC Subtitles)",
+      "url": "https://www.youtube.com/watch?v=KR9Znt09XPw",
+      "date": "2026-10-11T02:45:08.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Singapore Stop of Wuthering Waves Concert Tour | \"Turning Around\" Stage Performance",
+      "url": "https://www.youtube.com/watch?v=_YFSWnNTLTk",
+      "date": "2026-10-10T11:00:31.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "WuWa Revealed New Character: Lily",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9iSjRqZmlORzRhdFpnTDUxc19MLWh0b1FoaU84czAzdnpEVUJIVjNRel9DWGFacllTSG1WR1hGSzd1aExIekwxU0RhLWYzZTVIeDhxYV82TkdEMktkdFhnNTRwYTgxdWpnUldIS214SF9XdFE2VEh4elpuQ0xUQQ?oc=5",
+      "date": "2026-10-08T13:00:17.000Z",
+      "source": "GameSpace.com",
       "sourceId": "google-news",
       "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "\"This scent... Mm. This time, I hope it's a good dream.\"",
+      "url": "https://www.youtube.com/shorts/ri0uQlnih7A",
+      "date": "2026-10-08T03:05:22.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Midnight Podcast | Hsin",
+      "url": "https://www.youtube.com/watch?v=Rkg9wN2U6GY",
+      "date": "2026-10-07T11:00:18.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
       "lang": "en",
       "hot": false
     },
@@ -1106,6 +1203,16 @@
       "hot": true
     },
     {
+      "title": "Post-Lament Anthropocene: Stars Intertwined — Lily",
+      "url": "https://www.youtube.com/shorts/1EL_hOZzwH0",
+      "date": "2026-10-07T03:05:11.000Z",
+      "source": "Wuthering Waves (YouTube)",
+      "sourceId": "youtube",
+      "kind": "video",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "How Kuro Games keeps Wuthering Waves fresh two years after launch",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNOUFoVkV3dmhEUHdTcXJNSlhtbHk3Ulh5bmlFX1NVM0lDUC1FYmNQSmFOdm5OTFR5YzZWNU80UWpxMzV5VHRmbW5ibThLQUJIMG5CS3lSak9qZURET2xPXzdrdy1LSV9US0VmQllxU3B0dUN3MGxKT2tKNUxCLTB2ZzUya0daMEoyUFBNT2dTVUY0amZN?oc=5",
       "date": "2026-10-06T07:00:00.000Z",
@@ -1114,16 +1221,6 @@
       "kind": "press",
       "lang": "en",
       "hot": false
-    },
-    {
-      "title": "Wuthering Waves 3.7 gives new and returning players plenty of reasons to jump in",
-      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5Ra20wWFZ6cElnWFI5Y3dtSFhEZG05bVFCdnU5ckRNM0RZeW14MTlaZkhFUXJpcjR1cGR6RHcyNzN4djEyUkwzVEFYWFFHbm9sMG92TXRmQ3NaeXFmRHhnX1Vxc3d0NmZrdVlVWF93?oc=5",
-      "date": "2026-10-06T07:00:00.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "Tidal Photography: Land of Xuanfang Photo Challenge | Winners Reveal",
@@ -1150,6 +1247,16 @@
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9FNTBaRkQ1NnNfU2NJVUVTa1Frck5QZXRNbDFCVkEydl9ndXZTZzJ3TTVYeVAtaXFhdWNZZEExWTAtOHF1aWU5bU9BS0ZFdEhxNF95Vk9WSFg4Zjh3b0NScXZKWHI?oc=5",
       "date": "2026-10-05T07:00:00.000Z",
       "source": "Pocket Gamer",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuthering Waves Next Update “Prism’s Illusion, Heart’s Illumination” Launches September 30th",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQOFFITXU2WFdzSUhxaXlTaU01clJXb2p0N3BVUlZmZ1RMVVkzenFjTzBTeFVxR3FrNno3ZTh0aVJZeGJDNGVvSVI1WnY0THJhUEQyMVJYV0M3RXBWWlVRZXZxc0tmWW5OLXR4WllqYXE0eG1iTkZOSjNLVjNQaWxheG8wZWxBX1k3NjhTZEFfeTM1bE8tVHA2d0ZLMVBQWXRqdExkWnJzQkFlenNPSWRHTUJpR2hNaDFxc01sZEVnYU8?oc=5",
+      "date": "2026-10-03T11:30:55.000Z",
+      "source": "OpenCritic",
       "sourceId": "google-news",
       "kind": "press",
       "lang": "en",
@@ -1216,16 +1323,6 @@
       "hot": false
     },
     {
-      "title": "Best WuWa Hsin build guide: Echoes, weapons, and teams (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNUERoWTJCbXB0S3Q0QXFud0dqQW1zejlNSnJBREFjZUFkY1ZIYXJRS1hZNHhqQV9rbVdzenVkMi1ETENZRkZBaUtJUEdNb2xJQ09JZ1FUUnU5ZDQyTFBGOE5aaVhtSzI2Y2pzVTdFQU1NQkFFbUxaU0I1Q1dLUWk0TkFjd3JRME55bW04Y1VaYnA1MGJVVC1mZ2Y0TU10aVpy?oc=5",
-      "date": "2026-09-30T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "How to unlock Simulacrum Nexus of Mengzhou in WuWa (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOdE1odlMtSldYR3ZrRG1GUTFNQ1l1UFR2T3FlbGJzcHpkOXFwNXJ6T19fTWtEXzRHNzNNM2NZWk9EVmpzQ2dkeXNyNVpPeFBYQlItb2pKemprN2FpcTlwZDNqQTVZZ1laNEJRVUhBVF93dzR3SUJoQmZabEY0Mm1acFhFT0MxeFJPVC02b2xnejQxMGVrY18zbw?oc=5",
       "date": "2026-09-30T07:00:00.000Z",
@@ -1236,8 +1333,8 @@
       "hot": false
     },
     {
-      "title": "Is Hsin worth pulling in WuWa? (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNYjNQUUxaWjlTNzNQMEdZUjYxb3Y1bHNWcFBuMjlFcUhya21SX3RaVi1rd3I4YmY0TEMxX3l2LXVENzBwTFRPdWEwOVBacVh4MkZTcWdUdXg2YzRCZ0NPdlZnS3ZRRXFIblZFaGhabkxuSUU1MmNXa2cwMlBJeGg3S0dCa2U?oc=5",
+      "title": "Hsin S1 vs R1 in WuWa: Which one should you get? (Wuthering Waves)",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQSGhvYy11UmdQYVJudVluV0RvejFJUVJaLXk0blZScFZ1bnJxWDNuNU9xek91dWxZTjZRTGdaemJKVFBxRnR6eU1tMmRUZUNDcmlyRG04c21ENjFxd0lOZ2k3TngwSm1SY0pZRk02NjQ1X2VfcUUyY3JfbTRQSTBkZWVFU1RlV3MyV2FWVw?oc=5",
       "date": "2026-09-30T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
@@ -1266,38 +1363,8 @@
       "hot": true
     },
     {
-      "title": "WuWa Bloom of Hearkening location farming guide (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQVHFTY3R2TEFUci11Z3FRRnlRX1ZPZHU3bjFiRVFDMTJEQXY0eG85bjFoWko2clZ4ckdEM0drSUpTQ1ZQb2lCWjloY1hBXzdZSWVDSVUyY0h6MnQ5T2JublFobkpQWEl2ZkVYWnJPZXA0d0o0MFJIemxhR3VGSDd4TG9UcnM5b1hyRnB2Ry04azhyM0gxWXFKclZ3blM?oc=5",
-      "date": "2026-09-30T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "WuWa Miasmic Branch location and farming guide (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOLUp2OUNUeGVfVzlEX0RYRF9iaVB2dkp6Y0hRaGVOYlNDM0JBTWFGT1NmUWFlUE9lbHAzMEhCY0lYcVVqcjY2WjE0WHZFRVVzS2p3R0d6VzFWUUdtTmxqS1BlV1llM2pEZFRVYTRoNVpmY0diVllreVhtUFRvcnRxQ096WXptVnVTR0dIdEVqSWtoVjRrN1J3NjhB?oc=5",
-      "date": "2026-09-30T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "WuWa Past Dreams, Traced Seals quest guide (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQT3l6U2JIX1hiTzh2b2FTYVJCb2tVd2JhejNVLTRBT3d2YUpudmNTcTM1WlpNSTJBcVhmRTV1Y3l2ak5ZMkllNmxMNVlNb2FNemo5UGpFc2RxNjA5UFJqS0RZb210dU96aHpORUg5X0s1OWxGTmU1eS1GNy11bDM3eWFYUERWa3JZc1dZX1J0WkdKNV9Ud0VpQw?oc=5",
-      "date": "2026-09-30T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "WuWa Strange Tales of the Fins quest guide (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOUVJSamVnYTJyWmRqcUtoYnk2ZXB3elhna1V4TmU0VE1Nc1lDMG9JdE9WcXR0LVMzLUw4QVVjSXBkTnBWM0F3SzBnXy1wMDQ5ZTBPQXl0cDJQbENRc01nQW1DQ2gyUlpTX2EyRzhfWk13U2ZCcUFudmVNdHRpMWlkUmpWRTZzck5GRHhFTWVqN1o?oc=5",
       "date": "2026-09-30T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
@@ -1346,6 +1413,16 @@
       "hot": true
     },
     {
+      "title": "Wuthering Waves Singapore Show Sells Out in 40 Minutes",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNMF9qQzdxYzFfUTNfS09la2JWdDFra0JjVGRySHRDWFlDcVF3V0NGTTJQZTZaN3l6V0VfSldJaVJNWVFlaUVORlc5d29OMVJiUXdmZWxfWk50eXJxaWUtUXpjVkozQlcwZnNIeVZiMUM3U0hvVHBjYmY3dUxNcHBVeXpySmk1U1FPWWYyVjhBYlpDZU5rLUxITmotRQ?oc=5",
+      "date": "2026-09-29T07:00:00.000Z",
+      "source": "GameSpace.com",
+      "sourceId": "google-news",
+      "kind": "press",
+      "lang": "en",
+      "hot": false
+    },
+    {
       "title": "[Version 3.7 Featured Resonator/Weapon Convene: Phase Ⅰ]",
       "url": "https://wutheringwaves.kurogames.com/en/main/news/detail/5546",
       "date": "2026-09-29T03:15:00.000Z",
@@ -1374,16 +1451,6 @@
       "kind": "official",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "All Wuthering Waves characters listed",
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBhZ3l4eGlpNWYzU214blBuY0Y2ZV9zVUNXYkNqODNfcEhoRTdZRExLdkktYmRWLXNZSTNhMWNjTlQzQjJyWnVFcDE3UUNWajhZNld4N2VOVGlONFVZc19IOWZJa05qTVE?oc=5",
-      "date": "2026-09-28T07:00:00.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "Wuthering Waves – Check Out Hsin Showcases",
@@ -1434,16 +1501,6 @@
       "kind": "press",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "WuWa Hsin pre-farm guide (Wuthering Waves)",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPdmJuSm9NaVRteWUxU1FqY1Y0eHhaM0hPMUNKMUlmSmxVY2N1LTc3NWhNZlpLRTlBemNwRTZuNS1zejRuU01EU2pRZnZDSXQydnBJMDhHSGdfNVI2MjNwMnQzN29Tdkl0ZW1hUHhWSEVpY19MTENUQ3hOSFU5MjFzX05B?oc=5",
-      "date": "2026-09-27T07:00:00.000Z",
-      "source": "Sportskeeda",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "New Region Preview I | Simulacrum Nexus of Mengzhou, Coming Soon!",
