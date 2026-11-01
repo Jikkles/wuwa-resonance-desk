@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/feed@2.0",
-  "fetched": "2026-10-31T23:09:37.163Z",
+  "fetched": "2026-11-01T08:51:53.120Z",
   "note": "Auto-fetched headlines. Unvetted, untiered — a lead list, not the record.",
   "sources": [
     {
@@ -49,7 +49,7 @@
       "kind": "press",
       "lang": "en",
       "status": "ok",
-      "count": 28
+      "count": 27
     },
     {
       "id": "mmoculture",
@@ -62,6 +62,126 @@
   ],
   "errors": [],
   "items": [
+    {
+      "title": "Average convo between exes",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xky1t3/average_convo_between_exes/",
+      "date": "2026-11-01T08:40:10.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Will these figures be available on amiami or hobby genki?",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkwxyw/will_these_figures_be_available_on_amiami_or/",
+      "date": "2026-11-01T07:28:03.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "best friends forever ⸜(｡˃ ᵕ ˂ )⸝❤︎",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkwof5/best_friends_forever_ᵕ/",
+      "date": "2026-11-01T07:11:06.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Wuwa Icons",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkvb1l/wuwa_icons/",
+      "date": "2026-11-01T05:44:53.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Screw this shitty ass starter banner….",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkuca0/screw_this_shitty_ass_starter_banner/",
+      "date": "2026-11-01T04:46:26.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": true
+    },
+    {
+      "title": "Fourth wall breaking moment",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkua8f/fourth_wall_breaking_moment/",
+      "date": "2026-11-01T04:43:00.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "One vs The Army",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkt6ix/one_vs_the_army/",
+      "date": "2026-11-01T03:39:20.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Kids got the Halloween zoomies",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xksy6p/kids_got_the_halloween_zoomies/",
+      "date": "2026-11-01T03:26:11.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "《不简单，共鸣者！| 玄方地界》——「锁暝」篇",
+      "url": "https://www.kurobbs.com/mc/post/1564720226258563072",
+      "date": "2026-11-01T03:00:00.000Z",
+      "source": "Kurobbs (official CN)",
+      "sourceId": "kurobbs",
+      "kind": "official",
+      "lang": "zh",
+      "hot": false
+    },
+    {
+      "title": "Daily Questions Megathread - November 01, 2026",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkrewk/daily_questions_megathread_november_01_2026/",
+      "date": "2026-11-01T02:00:56.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "First time reaching 100k points",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkpe0v/first_time_reaching_100k_points/",
+      "date": "2026-11-01T00:14:44.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
+    {
+      "title": "Is it worth it to spend for Shorekeeper",
+      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xko3n2/is_it_worth_it_to_spend_for_shorekeeper/",
+      "date": "2026-10-31T23:12:08.000Z",
+      "source": "r/WutheringWaves",
+      "sourceId": "reddit-main",
+      "kind": "community",
+      "lang": "en",
+      "hot": false
+    },
     {
       "title": "When Denia can't mount a defense against Rover by @dobu_jelly, TL by @DedpulNINL",
       "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkn7na/when_denia_cant_mount_a_defense_against_rover_by/",
@@ -203,56 +323,6 @@
       "hot": false
     },
     {
-      "title": "Phrolova tattoo!",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkefdq/phrolova_tattoo/",
-      "date": "2026-10-31T16:21:22.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Lunar fox nail art",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkeb8k/lunar_fox_nail_art/",
-      "date": "2026-10-31T16:16:50.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "First time answering \"not enough content\" on the survey",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xke4ec/first_time_answering_not_enough_content_on_the/",
-      "date": "2026-10-31T16:09:01.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Drop your wuwa mobile wallpapers🙌",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xke0og/drop_your_wuwa_mobile_wallpapers/",
-      "date": "2026-10-31T16:04:49.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "S0 Calcharo Yao Yinlin 7k Points Round 1 | ESM",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkdgqv/s0_calcharo_yao_yinlin_7k_points_round_1_esm/",
-      "date": "2026-10-31T15:42:32.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
       "title": "Lily facial expressions via GameData Leaks",
       "url": "https://www.reddit.com/r/WutheringWavesLeaks/comments/1xkd2sq/lily_facial_expressions_via_gamedata_leaks/",
       "date": "2026-10-31T15:26:56.000Z",
@@ -261,66 +331,6 @@
       "kind": "community",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "Why is my game so insanely laggy in this city when it's not like that at all in the rest of the map, and will it also be that laggy in all the regions after this one ?",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkcxbc/why_is_my_game_so_insanely_laggy_in_this_city/",
-      "date": "2026-10-31T15:20:37.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Hiyuki (by Hanasawa)",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkccct/hiyuki_by_hanasawa/",
-      "date": "2026-10-31T14:57:22.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Happy Halloween!",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkc58b/happy_halloween/",
-      "date": "2026-10-31T14:48:59.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "The Lily Glow Up is Unreal Guys!",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xkbjof/the_lily_glow_up_is_unreal_guys/",
-      "date": "2026-10-31T14:24:09.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
-    },
-    {
-      "title": "Did anyone tried Wuthering waves on Droid deck (Steam OS) ? Does the anticheat prevent the game from launching ? I'm thinking about trying the PC version through my Samsung dex Config with an external SSD and Active cooling",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xka039/did_anyone_tried_wuthering_waves_on_droid_deck/",
-      "date": "2026-10-31T13:18:00.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": true
-    },
-    {
-      "title": "Fg on mobile",
-      "url": "https://www.reddit.com/r/WutheringWaves/comments/1xk9mj8/fg_on_mobile/",
-      "date": "2026-10-31T13:01:13.000Z",
-      "source": "r/WutheringWaves",
-      "sourceId": "reddit-main",
-      "kind": "community",
-      "lang": "en",
-      "hot": false
     },
     {
       "title": "\"How to Summon a Moon Fox\"",
@@ -955,7 +965,7 @@
     {
       "title": "WuWa Lily signature weapon stats and materials leaked (Wuthering Waves)",
       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQM1hqT3pnZ1ljTjFTSVZBRDhwVHJoLUtuWkpod2dFRkJBV0dJdlBodkZmTWdaZVVFNE5kZzhPSWN6cjNjaTNmd09BdmtiWVlXQzVEZmRScG8yNzRpal9YN3dSVEh5U0J5ZnJpT3NxRWtLeHFSeFFUNkhvaWhpUENJSnBLS2tUTVk3VU9SX2Q0YzV3dVh5UnBrd2ZR?oc=5",
-      "date": "2026-10-23T08:42:00.000Z",
+      "date": "2026-10-23T07:00:00.000Z",
       "source": "Sportskeeda",
       "sourceId": "google-news",
       "kind": "press",
@@ -1111,16 +1121,6 @@
       "kind": "official",
       "lang": "en",
       "hot": true
-    },
-    {
-      "title": "[无音消除]休闲活动",
-      "url": "https://www.kurobbs.com/mc/post/1562067251725283328",
-      "date": "2026-10-21T08:00:00.000Z",
-      "source": "Kurobbs (official CN)",
-      "sourceId": "kurobbs",
-      "kind": "official",
-      "lang": "zh",
-      "hot": false
     },
     {
       "title": "《瑝珑图志》——谛观纳言·梦州谛天鉴",
@@ -1371,16 +1371,6 @@
       "kind": "press",
       "lang": "en",
       "hot": false
-    },
-    {
-      "title": "Current and upcoming Wuthering Waves banners",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE0taTZ6SWt3OVpzekh5TW95eVl0MjJXeUdjRzE2Y3p5czduTDlIaW1NQXVMQ3c0Z3BhWDdBRmNxc0pGQlhvb1Yzbi1hRDhCVWdEYVd2MWFBUU00SDAyVW5qTjBn?oc=5",
-      "date": "2026-10-02T07:00:00.000Z",
-      "source": "Pocket Tactics",
-      "sourceId": "google-news",
-      "kind": "press",
-      "lang": "en",
-      "hot": true
     },
     {
       "title": "Wuthering Waves Fan Creation Event \"Prism's Illusion, Heart's Illumination\" is now live!",
