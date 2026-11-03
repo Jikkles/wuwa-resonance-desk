@@ -211,6 +211,14 @@
       "icon": "assets/portraits/jiyan.webp",
       "card": "assets/portraits/jiyan-card.webp"
     },
+    "Lily": {
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/lily",
+      "element": "Spectro",
+      "weapon": "Pistols",
+      "rarity": 5,
+      "icon": "assets/portraits/lily.webp",
+      "card": "assets/portraits/lily-card.webp"
+    },
     "Lingyang": {
       "source": "https://www.prydwen.gg/wuthering-waves/characters/lingyang",
       "element": "Glacio",
@@ -484,5 +492,5 @@
       "card": "assets/portraits/zhezhi-card.webp"
     }
   },
-  "updated": "2026-09-30T16:01:09.653Z"
+  "updated": "2026-11-03T20:27:22.932Z"
 }

@@ -4,7 +4,7 @@
   "credit": "Echo and sonata data via prydwen.gg, locations via the Wuthering Waves wiki · echo art © Kuro Games",
   "source": "https://www.prydwen.gg/wuthering-waves/echoes",
   "sourceLocations": "https://wutheringwaves.fandom.com",
-  "generated": "2026-08-28T17:21:48.116Z",
+  "generated": "2026-11-03T20:27:43.959Z",
   "sonata": [
     {
       "id": 5,
@@ -148,6 +148,40 @@
       "icon": "assets/echoes/sets/set_16.webp"
     },
     {
+      "id": 35,
+      "name": "Flash of Electric Reflection",
+      "slug": "flash-of-electric-reflection",
+      "pieces": [
+        {
+          "n": 2,
+          "text": "Electro DMG <b>+ 10%</b>."
+        },
+        {
+          "n": 5,
+          "text": "When the Resonator inflicts Electro Flare on enemies, they gain the following effects: Gain <b>10%</b> Electro DMG Bonus for <b>15s</b>. While this effect is active, casting Outro Skill grants the incoming Resonator <b>25% </b>Electro DMG Bonus for <b>15s</b>."
+        }
+      ],
+      "alias": null,
+      "icon": "assets/echoes/sets/set_35.webp"
+    },
+    {
+      "id": 37,
+      "name": "Flower of Tinged Yearning",
+      "slug": "flower-of-tinged-yearning",
+      "pieces": [
+        {
+          "n": 2,
+          "text": "Healing <b>+ 10%</b>."
+        },
+        {
+          "n": 5,
+          "text": "Healing a Resonator in the team increases the ATK of all Resonators in the team by <b>10%</b> for <b>30s</b>. Effects of the same name cannot be stacked. While the effect is active, if the Resonator gains Unison or triggers Unison Response, their ATK is further increased by<b> 15%</b>."
+        }
+      ],
+      "alias": null,
+      "icon": "assets/echoes/sets/set_37.webp"
+    },
+    {
       "id": 1,
       "name": "Freezing Frost",
       "slug": "freezing-frost",
@@ -248,6 +282,23 @@
       ],
       "alias": null,
       "icon": "assets/echoes/sets/set_33.webp"
+    },
+    {
+      "id": 36,
+      "name": "Heart of Sworn Vigil",
+      "slug": "heart-of-sworn-vigil",
+      "pieces": [
+        {
+          "n": 2,
+          "text": "Electro DMG <b>+ 10%</b>."
+        },
+        {
+          "n": 5,
+          "text": "Inflicting Electro Flare on the target, obtaining Unison, or triggering Unison Response increases the Resonator's Crit. Rate by <b>15%</b> and grants them <b>22.5%</b> Electro DMG for <b>30s</b>."
+        }
+      ],
+      "alias": null,
+      "icon": "assets/echoes/sets/set_36.webp"
     },
     {
       "id": 34,
@@ -782,7 +833,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        33
+        33,
+        35
       ],
       "skill": "Use Echo Skill to transform into an Aureate Picket, immediately recover {0} HP times plus an additional instance of 24 points of HP, then bash into enemies and deal {1} Aero DMG.\\n\\nCD: 8s",
       "ranks": [
@@ -909,6 +961,53 @@
         "wiki": "https://wutheringwaves.fandom.com/wiki/Bell-Borne_Geochelone"
       },
       "icon": "assets/echoes/340000020.webp"
+    },
+    {
+      "name": "Bloomburst Puppet",
+      "slug": "bloomburst-puppet",
+      "id": "6000222",
+      "class": "Common",
+      "cost": 1,
+      "sonata": [
+        36
+      ],
+      "skill": "Summon a Bloomburst Puppet to startle the target, dealing 1 instance of {0} Glacio DMG, followed by 2 instances of {1} Glacio DMG and 1 instance of {2}  Glacio DMG.\\n\\n\nCD: 8s",
+      "ranks": [
+        [
+          "0",
+          "17.28%",
+          "20.16%",
+          "23.04%",
+          "25.92%"
+        ],
+        [
+          null,
+          "8.64%",
+          "10.08%",
+          "11.52%",
+          "12.96%"
+        ],
+        [
+          null,
+          "51.84%",
+          "60.48%",
+          "69.12%",
+          "77.76%"
+        ]
+      ],
+      "minRank": 2,
+      "where": {
+        "family": "Tacet Discord",
+        "group": "Autopuppet",
+        "nation": "Huanglong",
+        "region": "Mengzhou",
+        "subregion": "Simulacrum Nexus of Mengzhou",
+        "location": null,
+        "drops": null,
+        "element": "Glacio",
+        "wiki": "https://wutheringwaves.fandom.com/wiki/Bloomburst_Puppet"
+      },
+      "icon": "assets/echoes/6000222.webp"
     },
     {
       "name": "Calamity Effigy",
@@ -2183,7 +2282,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        32
+        32,
+        36
       ],
       "skill": "Use Echo Skill to summon Fog Lionarch: Body to ram into enemies, dealing {0} Fusion DMG.\\n\\nCD: 15s",
       "ranks": [
@@ -2216,7 +2316,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        32
+        32,
+        36
       ],
       "skill": "Use Echo Skill to summon Fog Lionarch: Head to dart toward enemies, dealing 86.40% Fusion DMG.\\n\\nCD: 8s",
       "ranks": [],
@@ -2245,7 +2346,7 @@
         33,
         34
       ],
-      "skill": "Use Echo Skill to summon Forbidden Bastion to bash over enemies, dealing {0} Glacio DMG.\\n\\nResonators with this Echo equipped in the main slot gain {1} Healing Bonus.\\n\\nCD: 20s",
+      "skill": "Use Echo Skill to summon Forbidden Bastion to bash over enemies, dealing {0} Glacio DMG.\\n\\nResonators with this Echo equipped in the main slot gain 10% Healing Bonus.\\n\\nCD: 20s",
       "ranks": [
         [
           "0",
@@ -2253,13 +2354,6 @@
           "184.80%",
           "211.20%",
           "237.60%"
-        ],
-        [
-          null,
-          null,
-          null,
-          null,
-          null
         ]
       ],
       "minRank": 2,
@@ -2275,6 +2369,40 @@
         "wiki": "https://wutheringwaves.fandom.com/wiki/Forbidden_Bastion"
       },
       "icon": "assets/echoes/6000216.webp"
+    },
+    {
+      "name": "Formrender",
+      "slug": "formrender",
+      "id": "6000223",
+      "class": "Elite",
+      "cost": 3,
+      "sonata": [
+        36,
+        37
+      ],
+      "skill": "Use Echo Skill to summon a Formrender, dealing {0} Fusion DMG.\\n\\n\nThe Resonator with this Echo equipped in the main slot gains 10.00% Energy Regen.\\n\\n\nCD: 20s",
+      "ranks": [
+        [
+          "0",
+          "182.40%",
+          "212.80%",
+          "243.20%",
+          "273.60%"
+        ]
+      ],
+      "minRank": 2,
+      "where": {
+        "family": "Tacet Discord",
+        "group": "Autopuppet",
+        "nation": "Huanglong",
+        "region": "Mengzhou",
+        "subregion": "Simulacrum Nexus of Mengzhou",
+        "location": null,
+        "drops": null,
+        "element": "Fusion",
+        "wiki": "https://wutheringwaves.fandom.com/wiki/Formrender"
+      },
+      "icon": "assets/echoes/6000223.webp"
     },
     {
       "name": "Frostbite Coleoid",
@@ -3373,6 +3501,46 @@
       "icon": "assets/echoes/6000183.webp"
     },
     {
+      "name": "Jade Nether Serpent",
+      "slug": "jade-nether-serpent",
+      "id": "6000219",
+      "class": "Common",
+      "cost": 1,
+      "sonata": [
+        36
+      ],
+      "skill": "Summon a Jade Nether Serpent that bombards the target with fireballs, dealing {0} Fusion DMG 5 times, then {1} Fusion DMG once.\\n\\n\nCD: 8s",
+      "ranks": [
+        [
+          "0",
+          "8.64%",
+          "10.08%",
+          "11.52%",
+          "12.96%"
+        ],
+        [
+          null,
+          "43.20%",
+          "50.40%",
+          "57.60%",
+          "64.80%"
+        ]
+      ],
+      "minRank": 2,
+      "where": {
+        "family": "Tacet Discord",
+        "group": "Autopuppet",
+        "nation": "Huanglong",
+        "region": "Mengzhou",
+        "subregion": "Simulacrum Nexus of Mengzhou",
+        "location": null,
+        "drops": null,
+        "element": "Fusion",
+        "wiki": "https://wutheringwaves.fandom.com/wiki/Jade_Nether_Serpent"
+      },
+      "icon": "assets/echoes/6000219.webp"
+    },
+    {
       "name": "Jué",
       "slug": "ju",
       "id": "6000059",
@@ -3462,7 +3630,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        33
+        33,
+        37
       ],
       "skill": "Use Echo Skill to summon Kernel Puppet: Worry to attack enemies, dealing {0} Fusion DMG.\\n\\nCD: 8s",
       "ranks": [
@@ -3495,7 +3664,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        34
+        34,
+        37
       ],
       "skill": "Use Echo Skill to summon Kernel Puppet: Fright to attack enemies, dealing an instance of {0} Havoc DMG and an instance of {1} Havoc DMG.\\n\\nCD: 8s",
       "ranks": [
@@ -3535,7 +3705,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        34
+        34,
+        37
       ],
       "skill": "Use Echo Skill to summon Kernel Puppet: Grief to attack enemies, dealing {0} Spectro DMG.\\n\\nCD: 8s",
       "ranks": [
@@ -3568,7 +3739,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        32
+        32,
+        36
       ],
       "skill": "Use Echo Skill to summon Kernel Puppet: Joy to attack enemies, dealing {0} Physical DMG.\\n\\nCD: 8s",
       "ranks": [
@@ -3601,7 +3773,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        33
+        33,
+        37
       ],
       "skill": "Use Echo Skill to summon Kernel Puppet: Reflection to attack enemies, dealing {0} Electro DMG.\\n\\nCD: 8s",
       "ranks": [
@@ -3634,7 +3807,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        33
+        33,
+        35
       ],
       "skill": "Use Echo Skill to summon Kernel Puppet: Worry to attack enemies, dealing {0} Glacio DMG.\\n\\nCD: 8s",
       "ranks": [
@@ -5249,7 +5423,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        34
+        34,
+        35
       ],
       "skill": "Use Echo Skill to summon a Porcelain Picket to slash forward, dealing 2 instances of {0} Aero DMG and 7 instances of {1} Aero DMG to enemies along the path.\\n\\nCD: 8s",
       "ranks": [
@@ -5544,6 +5719,51 @@
       "minRank": 2,
       "where": null,
       "icon": "assets/echoes/6000194.webp"
+    },
+    {
+      "name": "Reminiscence: Suhsin the Inevitable",
+      "slug": "reminiscence-suhsin-the-inevitable",
+      "id": "6000225",
+      "class": "Calamity",
+      "cost": 4,
+      "sonata": [
+        35,
+        36
+      ],
+      "skill": "Cast Echo Skill to deal 4 instances of {0} Electro DMG and 1 instance of {1} Electro DMG.\\n\\n\nWhen equipped by Hsin, the Echo Skill instead deals 5 instances of {2} Electro DMG and 1 instance of {3} Electro DMG to targets within a larger range.\\n\\n\nThe Resonator with this Echo equipped in their main slot gains 10.00% Electro DMG Bonus. Inflicting Electro Flare, gaining Unison, or triggering Unison Response grants the Resonator an extra 10.00% Electro DMG Bonus for 30s.\\n\\n\nCD: 20s",
+      "ranks": [
+        [
+          "0",
+          "18.24%",
+          "21.28%",
+          "24.32%",
+          "27.36%"
+        ],
+        [
+          null,
+          "109.44%",
+          "127.68%",
+          "145.92%",
+          "164.16%"
+        ],
+        [
+          null,
+          "5.47%",
+          "6.38%",
+          "7.29%",
+          "8.20%"
+        ],
+        [
+          null,
+          "155.04%",
+          "180.88%",
+          "206.72%",
+          "232.56%"
+        ]
+      ],
+      "minRank": 2,
+      "where": null,
+      "icon": "assets/echoes/6000225.webp"
     },
     {
       "name": "Reminiscence: Threnodian - Leviathan",
@@ -5980,6 +6200,40 @@
       "icon": "assets/echoes/6000191.webp"
     },
     {
+      "name": "Skywatch Lancer",
+      "slug": "skywatch-lancer",
+      "id": "6000220",
+      "class": "Elite",
+      "cost": 3,
+      "sonata": [
+        35,
+        37
+      ],
+      "skill": "Summon a Skywatch Lancer to attack the target, dealing {0} Aero DMG 6 times.\\n\\n\nCD: 15s",
+      "ranks": [
+        [
+          "0",
+          "21.39%",
+          "24.96%",
+          "28.52%",
+          "32.09%"
+        ]
+      ],
+      "minRank": 2,
+      "where": {
+        "family": "Tacet Discord",
+        "group": "Autopuppet",
+        "nation": "Huanglong",
+        "region": "Mengzhou",
+        "subregion": "Simulacrum Nexus of Mengzhou",
+        "location": null,
+        "drops": null,
+        "element": "Aero",
+        "wiki": "https://wutheringwaves.fandom.com/wiki/Skywatch_Lancer"
+      },
+      "icon": "assets/echoes/6000220.webp"
+    },
+    {
       "name": "Smiter",
       "slug": "smiter",
       "id": "6000202",
@@ -6086,6 +6340,40 @@
         "wiki": "https://wutheringwaves.fandom.com/wiki/Snip_Snap"
       },
       "icon": "assets/echoes/310000080.webp"
+    },
+    {
+      "name": "Soulfrayer",
+      "slug": "soulfrayer",
+      "id": "6000224",
+      "class": "Elite",
+      "cost": 3,
+      "sonata": [
+        35,
+        36
+      ],
+      "skill": "Use Echo Skill to summon a Soulfrayer, dealing {0} Electro DMG 3 times.\\n\\n\nCasting Outro Skill within 15s after summoning Soulfrayer grants 12.00% Electro DMG Bonus to the incoming Resonator for 15s.\\n\\n\nCD: 20s",
+      "ranks": [
+        [
+          "0",
+          "60.79%",
+          "70.92%",
+          "81.05%",
+          "91.18%"
+        ]
+      ],
+      "minRank": 2,
+      "where": {
+        "family": "Tacet Discord",
+        "group": "Autopuppet",
+        "nation": "Huanglong",
+        "region": "Mengzhou",
+        "subregion": "Simulacrum Nexus of Mengzhou",
+        "location": null,
+        "drops": null,
+        "element": "Electro",
+        "wiki": "https://wutheringwaves.fandom.com/wiki/Soulfrayer"
+      },
+      "icon": "assets/echoes/6000224.webp"
     },
     {
       "name": "Spacetrek Explorer",
@@ -6232,7 +6520,8 @@
       "class": "Common",
       "cost": 1,
       "sonata": [
-        34
+        34,
+        35
       ],
       "skill": "Use Echo Skill to summon a Stone Picket, dealing {0} Aero DMG.\\n\\nCD: 8s",
       "ranks": [
@@ -6420,7 +6709,8 @@
       "class": "Calamity",
       "cost": 4,
       "sonata": [
-        32
+        32,
+        37
       ],
       "skill": "Use Echo Skill to attack nearby enemies, dealing {0} Havoc DMG and summoning 4 Blades of Thousand Memories that last 15s.\\n\\nWhile Blades of Thousand Memories last, when the Resonator inflicts Havoc Bane, consume 1 Blade of Thousand Memories to deal {1} Havoc DMG once to the target. This effect can be triggered once every 1s\\n\\nResonators with this Echo equipped in the main slot gain 12.00% Havoc DMG and 12.00% Heavy Attack DMG.\\n\\nCD: 20s",
       "ranks": [

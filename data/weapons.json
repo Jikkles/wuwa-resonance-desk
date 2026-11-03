@@ -198,7 +198,7 @@
       "rarity": 5,
       "type": "Rectifier",
       "id": "21050116",
-      "atk90": 588,
+      "atk90": 587,
       "stat": "CRIT Rate",
       "statValue90": 24.3,
       "source": "",
@@ -345,7 +345,7 @@
       "rarity": 5,
       "type": "Sword",
       "id": "21020056",
-      "atk90": 413,
+      "atk90": 412,
       "stat": "HP",
       "statValue90": 72.2,
       "source": "Rate-up",
@@ -478,7 +478,7 @@
       "rarity": 5,
       "type": "Rectifier",
       "id": "21050096",
-      "atk90": 413,
+      "atk90": 412,
       "stat": "Energy Regen",
       "statValue90": 77.04,
       "source": "",
@@ -1185,7 +1185,7 @@
       "rarity": 5,
       "type": "Broadblade",
       "id": "21010066",
-      "atk90": 414,
+      "atk90": 412,
       "stat": "Energy Regen",
       "statValue90": 77,
       "source": "Rate-up",
@@ -1346,7 +1346,7 @@
       "rarity": 5,
       "type": "Broadblade",
       "id": "21010076",
-      "atk90": 413,
+      "atk90": 412,
       "stat": "HP%",
       "statValue90": 72.2,
       "source": "",
@@ -1458,7 +1458,7 @@
       "rarity": 5,
       "type": "Sword",
       "id": "21020036",
-      "atk90": 415,
+      "atk90": 412,
       "stat": "Energy Regen",
       "statValue90": 77,
       "source": "Rate-up",
@@ -1486,12 +1486,41 @@
       "rarity": 5,
       "type": "Sword",
       "id": "21020107",
-      "atk90": 0,
-      "stat": "",
-      "statValue90": 0,
+      "atk90": 588,
+      "stat": "CRIT Rate",
+      "statValue90": 24.3,
       "source": "",
-      "effect": "",
-      "ranks": [],
+      "effect": "ATK is increased by {0}. Upon gaining Unison, the wielder gains {1} Electro DMG Bonus for 30s.\nUpon gaining Unison, the wielder removes Yearning Mind and grants all Resonators in the team the Binding Mind effect: gain {2} Electro DMG Bonus for 30s. Effects of the same name cannot stack.\nWhen the wielder consumes Concerto Energy, they remove Binding Mind from all Resonators in the team and gain the Yearning Mind effect: the wielder additionally gains {3} Electro DMG Bonus for 14s. Switching to another Resonator ends this effect early.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "30%",
+          "37.5%",
+          "45%",
+          "52.5%",
+          "60%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ],
+        [
+          "40%",
+          "50%",
+          "60%",
+          "70%",
+          "80%"
+        ]
+      ],
       "icon": "assets/weapons/w-unspoken-rue.webp"
     },
     {
@@ -3190,113 +3219,8 @@
       "icon": "assets/weapons/w-sword-of-voyager.webp"
     },
     {
-      "name": "Training Broadblade",
-      "rarity": 3,
-      "type": "Broadblade",
-      "id": "21010011",
-      "atk90": 250,
-      "stat": "ATK",
-      "statValue90": 11.4,
-      "source": "",
-      "effect": "Increases ATK by {0}.",
-      "ranks": [
-        [
-          "4%",
-          "5%",
-          "6%",
-          "7%",
-          "8%"
-        ]
-      ],
-      "icon": "assets/weapons/w-training-broadblade.webp"
-    },
-    {
-      "name": "Training Gauntlets",
-      "rarity": 3,
-      "type": "Gauntlets",
-      "id": "21040011",
-      "atk90": 250,
-      "stat": "ATK",
-      "statValue90": 11.4,
-      "source": "",
-      "effect": "Increases ATK by {0}.",
-      "ranks": [
-        [
-          "4%",
-          "5%",
-          "6%",
-          "7%",
-          "8%"
-        ]
-      ],
-      "icon": "assets/weapons/w-training-gauntlets.webp"
-    },
-    {
-      "name": "Training Pistols",
-      "rarity": 3,
-      "type": "Pistols",
-      "id": "21030011",
-      "atk90": 250,
-      "stat": "ATK",
-      "statValue90": 11.4,
-      "source": "",
-      "effect": "Increases ATK by {0}.",
-      "ranks": [
-        [
-          "4%",
-          "5%",
-          "6%",
-          "7%",
-          "8%"
-        ]
-      ],
-      "icon": "assets/weapons/w-training-pistols.webp"
-    },
-    {
-      "name": "Training Rectifier",
-      "rarity": 3,
-      "type": "Rectifier",
-      "id": "21050011",
-      "atk90": 250,
-      "stat": "ATK",
-      "statValue90": 11.4,
-      "source": "",
-      "effect": "Increases ATK by {0}.",
-      "ranks": [
-        [
-          "4%",
-          "5%",
-          "6%",
-          "7%",
-          "8%"
-        ]
-      ],
-      "icon": "assets/weapons/w-training-rectifier.webp"
-    },
-    {
-      "name": "Training Sword",
-      "rarity": 3,
-      "type": "Sword",
-      "id": "21020011",
-      "atk90": 250,
-      "stat": "ATK",
-      "statValue90": 11.4,
-      "source": "",
-      "effect": "Increases ATK by {0}.",
-      "ranks": [
-        [
-          "4%",
-          "5%",
-          "6%",
-          "7%",
-          "8%"
-        ]
-      ],
-      "icon": "assets/weapons/w-training-sword.webp"
-    },
-    {
       "name": "Tyro Broadblade",
-      "rarity": 3,
+      "rarity": 2,
       "type": "Broadblade",
       "id": "21010012",
       "atk90": 275,
@@ -3317,7 +3241,7 @@
     },
     {
       "name": "Tyro Gauntlets",
-      "rarity": 3,
+      "rarity": 2,
       "type": "Gauntlets",
       "id": "21040012",
       "atk90": 275,
@@ -3338,7 +3262,7 @@
     },
     {
       "name": "Tyro Pistols",
-      "rarity": 3,
+      "rarity": 2,
       "type": "Pistols",
       "id": "21030012",
       "atk90": 275,
@@ -3359,7 +3283,7 @@
     },
     {
       "name": "Tyro Rectifier",
-      "rarity": 3,
+      "rarity": 2,
       "type": "Rectifier",
       "id": "21050012",
       "atk90": 275,
@@ -3380,7 +3304,7 @@
     },
     {
       "name": "Tyro Sword",
-      "rarity": 3,
+      "rarity": 2,
       "type": "Sword",
       "id": "21020012",
       "atk90": 275,
@@ -3398,7 +3322,112 @@
         ]
       ],
       "icon": "assets/weapons/w-tyro-sword.webp"
+    },
+    {
+      "name": "Training Broadblade",
+      "rarity": 1,
+      "type": "Broadblade",
+      "id": "21010011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-broadblade.webp"
+    },
+    {
+      "name": "Training Gauntlets",
+      "rarity": 1,
+      "type": "Gauntlets",
+      "id": "21040011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-gauntlets.webp"
+    },
+    {
+      "name": "Training Pistols",
+      "rarity": 1,
+      "type": "Pistols",
+      "id": "21030011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-pistols.webp"
+    },
+    {
+      "name": "Training Rectifier",
+      "rarity": 1,
+      "type": "Rectifier",
+      "id": "21050011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-rectifier.webp"
+    },
+    {
+      "name": "Training Sword",
+      "rarity": 1,
+      "type": "Sword",
+      "id": "21020011",
+      "atk90": 250,
+      "stat": "ATK",
+      "statValue90": 11.4,
+      "source": "",
+      "effect": "Increases ATK by {0}.",
+      "ranks": [
+        [
+          "4%",
+          "5%",
+          "6%",
+          "7%",
+          "8%"
+        ]
+      ],
+      "icon": "assets/weapons/w-training-sword.webp"
     }
   ],
-  "updated": "2026-09-30T20:16:51.937Z"
+  "updated": "2026-11-03T20:27:31.395Z"
 }

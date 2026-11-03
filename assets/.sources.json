@@ -1,6 +1,902 @@
 {
   "note": "Which URL each cached file under assets/ was downloaded from, so a fetcher can skip a picture it already has. Fandom and Prydwen both serve art from URLs that move when the art moves, so a matching URL means a matching file. Written by scripts/lib/assets.mjs; delete it, or set DESK_REFRESH_ASSETS=1, to force every fetcher to download everything again.",
   "files": {
+    "assets/echoes/310000010.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000010.webp",
+      "bytes": 28140
+    },
+    "assets/echoes/310000020.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000020.webp",
+      "bytes": 21004
+    },
+    "assets/echoes/310000030.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000030.webp",
+      "bytes": 19084
+    },
+    "assets/echoes/310000040.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000040.webp",
+      "bytes": 17386
+    },
+    "assets/echoes/310000050.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000050.webp",
+      "bytes": 19918
+    },
+    "assets/echoes/310000060.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000060.webp",
+      "bytes": 17542
+    },
+    "assets/echoes/310000070.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000070.webp",
+      "bytes": 20744
+    },
+    "assets/echoes/310000080.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000080.webp",
+      "bytes": 25576
+    },
+    "assets/echoes/310000090.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000090.webp",
+      "bytes": 24078
+    },
+    "assets/echoes/310000100.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000100.webp",
+      "bytes": 28322
+    },
+    "assets/echoes/310000110.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000110.webp",
+      "bytes": 25382
+    },
+    "assets/echoes/310000120.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000120.webp",
+      "bytes": 18042
+    },
+    "assets/echoes/310000130.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000130.webp",
+      "bytes": 14202
+    },
+    "assets/echoes/310000140.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000140.webp",
+      "bytes": 31208
+    },
+    "assets/echoes/310000150.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000150.webp",
+      "bytes": 29876
+    },
+    "assets/echoes/310000160.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000160.webp",
+      "bytes": 28560
+    },
+    "assets/echoes/310000170.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000170.webp",
+      "bytes": 29678
+    },
+    "assets/echoes/310000180.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000180.webp",
+      "bytes": 20232
+    },
+    "assets/echoes/310000190.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000190.webp",
+      "bytes": 26144
+    },
+    "assets/echoes/310000200.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000200.webp",
+      "bytes": 30894
+    },
+    "assets/echoes/310000210.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000210.webp",
+      "bytes": 31838
+    },
+    "assets/echoes/310000220.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000220.webp",
+      "bytes": 18116
+    },
+    "assets/echoes/310000250.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000250.webp",
+      "bytes": 34494
+    },
+    "assets/echoes/310000260.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000260.webp",
+      "bytes": 24370
+    },
+    "assets/echoes/310000270.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000270.webp",
+      "bytes": 21968
+    },
+    "assets/echoes/310000280.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000280.webp",
+      "bytes": 19522
+    },
+    "assets/echoes/310000330.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000330.webp",
+      "bytes": 21590
+    },
+    "assets/echoes/310000370.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000370.webp",
+      "bytes": 20710
+    },
+    "assets/echoes/310000380.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000380.webp",
+      "bytes": 25114
+    },
+    "assets/echoes/310000390.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000390.webp",
+      "bytes": 24914
+    },
+    "assets/echoes/310000400.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000400.webp",
+      "bytes": 19020
+    },
+    "assets/echoes/310000410.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000410.webp",
+      "bytes": 16936
+    },
+    "assets/echoes/310000420.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000420.webp",
+      "bytes": 17444
+    },
+    "assets/echoes/310000430.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000430.webp",
+      "bytes": 41882
+    },
+    "assets/echoes/310000440.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000440.webp",
+      "bytes": 19916
+    },
+    "assets/echoes/310000450.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000450.webp",
+      "bytes": 22994
+    },
+    "assets/echoes/310000460.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000460.webp",
+      "bytes": 20146
+    },
+    "assets/echoes/310000470.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000470.webp",
+      "bytes": 17824
+    },
+    "assets/echoes/310000480.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/310000480.webp",
+      "bytes": 32648
+    },
+    "assets/echoes/320000010.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000010.webp",
+      "bytes": 22524
+    },
+    "assets/echoes/320000020.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000020.webp",
+      "bytes": 19346
+    },
+    "assets/echoes/320000030.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000030.webp",
+      "bytes": 18858
+    },
+    "assets/echoes/320000040.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000040.webp",
+      "bytes": 30744
+    },
+    "assets/echoes/320000050.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000050.webp",
+      "bytes": 30468
+    },
+    "assets/echoes/320000060.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000060.webp",
+      "bytes": 27812
+    },
+    "assets/echoes/320000070.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000070.webp",
+      "bytes": 23248
+    },
+    "assets/echoes/320000080.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000080.webp",
+      "bytes": 35662
+    },
+    "assets/echoes/320000090.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000090.webp",
+      "bytes": 35784
+    },
+    "assets/echoes/320000100.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000100.webp",
+      "bytes": 26518
+    },
+    "assets/echoes/320000110.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000110.webp",
+      "bytes": 33790
+    },
+    "assets/echoes/320000120.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000120.webp",
+      "bytes": 24774
+    },
+    "assets/echoes/320000130.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000130.webp",
+      "bytes": 29834
+    },
+    "assets/echoes/320000180.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000180.webp",
+      "bytes": 33840
+    },
+    "assets/echoes/320000220.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000220.webp",
+      "bytes": 27234
+    },
+    "assets/echoes/320000230.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000230.webp",
+      "bytes": 28396
+    },
+    "assets/echoes/320000240.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000240.webp",
+      "bytes": 24880
+    },
+    "assets/echoes/320000250.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000250.webp",
+      "bytes": 33986
+    },
+    "assets/echoes/320000260.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000260.webp",
+      "bytes": 31548
+    },
+    "assets/echoes/320000270.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000270.webp",
+      "bytes": 30256
+    },
+    "assets/echoes/320000280.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000280.webp",
+      "bytes": 30262
+    },
+    "assets/echoes/320000290.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000290.webp",
+      "bytes": 23236
+    },
+    "assets/echoes/320000300.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/320000300.webp",
+      "bytes": 22672
+    },
+    "assets/echoes/330000010.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000010.webp",
+      "bytes": 24618
+    },
+    "assets/echoes/330000020.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000020.webp",
+      "bytes": 25670
+    },
+    "assets/echoes/330000030.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000030.webp",
+      "bytes": 31276
+    },
+    "assets/echoes/330000040.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000040.webp",
+      "bytes": 37602
+    },
+    "assets/echoes/330000050.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000050.webp",
+      "bytes": 24862
+    },
+    "assets/echoes/330000060.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000060.webp",
+      "bytes": 34154
+    },
+    "assets/echoes/330000110.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000110.webp",
+      "bytes": 35824
+    },
+    "assets/echoes/330000120.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000120.webp",
+      "bytes": 28204
+    },
+    "assets/echoes/330000130.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000130.webp",
+      "bytes": 38706
+    },
+    "assets/echoes/330000140.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000140.webp",
+      "bytes": 28830
+    },
+    "assets/echoes/330000150.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000150.webp",
+      "bytes": 37106
+    },
+    "assets/echoes/330000160.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000160.webp",
+      "bytes": 37220
+    },
+    "assets/echoes/330000170.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000170.webp",
+      "bytes": 23968
+    },
+    "assets/echoes/330000180.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000180.webp",
+      "bytes": 32190
+    },
+    "assets/echoes/330000190.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000190.webp",
+      "bytes": 24206
+    },
+    "assets/echoes/330000200.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/330000200.webp",
+      "bytes": 37708
+    },
+    "assets/echoes/340000010.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/340000010.webp",
+      "bytes": 27126
+    },
+    "assets/echoes/340000020.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/340000020.webp",
+      "bytes": 28806
+    },
+    "assets/echoes/340000060.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/340000060.webp",
+      "bytes": 29606
+    },
+    "assets/echoes/340000070.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/340000070.webp",
+      "bytes": 36432
+    },
+    "assets/echoes/340000080.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/340000080.webp",
+      "bytes": 26410
+    },
+    "assets/echoes/340000100.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/340000100.webp",
+      "bytes": 41468
+    },
+    "assets/echoes/6000051.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000051.webp",
+      "bytes": 21710
+    },
+    "assets/echoes/6000054.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000054.webp",
+      "bytes": 20568
+    },
+    "assets/echoes/6000055.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000055.webp",
+      "bytes": 18346
+    },
+    "assets/echoes/6000056.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000056.webp",
+      "bytes": 27520
+    },
+    "assets/echoes/6000057.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000057.webp",
+      "bytes": 29174
+    },
+    "assets/echoes/6000058.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000058.webp",
+      "bytes": 30002
+    },
+    "assets/echoes/6000059.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000059.webp",
+      "bytes": 29132
+    },
+    "assets/echoes/6000060.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000060.webp",
+      "bytes": 31838
+    },
+    "assets/echoes/6000093.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000093.webp",
+      "bytes": 26796
+    },
+    "assets/echoes/6000094.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000094.webp",
+      "bytes": 27354
+    },
+    "assets/echoes/6000095.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000095.webp",
+      "bytes": 30088
+    },
+    "assets/echoes/6000096.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000096.webp",
+      "bytes": 25384
+    },
+    "assets/echoes/6000097.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000097.webp",
+      "bytes": 28046
+    },
+    "assets/echoes/6000098.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000098.webp",
+      "bytes": 22716
+    },
+    "assets/echoes/6000099.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000099.webp",
+      "bytes": 22340
+    },
+    "assets/echoes/6000100.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000100.webp",
+      "bytes": 21590
+    },
+    "assets/echoes/6000101.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000101.webp",
+      "bytes": 25122
+    },
+    "assets/echoes/6000102.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000102.webp",
+      "bytes": 24812
+    },
+    "assets/echoes/6000103.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000103.webp",
+      "bytes": 24552
+    },
+    "assets/echoes/6000104.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000104.webp",
+      "bytes": 25172
+    },
+    "assets/echoes/6000105.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000105.webp",
+      "bytes": 42886
+    },
+    "assets/echoes/6000106.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000106.webp",
+      "bytes": 17640
+    },
+    "assets/echoes/6000107.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000107.webp",
+      "bytes": 25462
+    },
+    "assets/echoes/6000108.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000108.webp",
+      "bytes": 25868
+    },
+    "assets/echoes/6000109.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000109.webp",
+      "bytes": 29770
+    },
+    "assets/echoes/6000110.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000110.webp",
+      "bytes": 27094
+    },
+    "assets/echoes/6000111.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000111.webp",
+      "bytes": 32330
+    },
+    "assets/echoes/6000112.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000112.webp",
+      "bytes": 35772
+    },
+    "assets/echoes/6000113.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000113.webp",
+      "bytes": 28194
+    },
+    "assets/echoes/6000114.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000114.webp",
+      "bytes": 33118
+    },
+    "assets/echoes/6000115.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000115.webp",
+      "bytes": 44332
+    },
+    "assets/echoes/6000116.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000116.webp",
+      "bytes": 10146
+    },
+    "assets/echoes/6000117.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000117.webp",
+      "bytes": 25508
+    },
+    "assets/echoes/6000118.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000118.webp",
+      "bytes": 18404
+    },
+    "assets/echoes/6000119.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000119.webp",
+      "bytes": 38722
+    },
+    "assets/echoes/6000120.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000120.webp",
+      "bytes": 29260
+    },
+    "assets/echoes/6000121.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000121.webp",
+      "bytes": 25284
+    },
+    "assets/echoes/6000160.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000160.webp",
+      "bytes": 39332
+    },
+    "assets/echoes/6000161.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000161.webp",
+      "bytes": 14342
+    },
+    "assets/echoes/6000162.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000162.webp",
+      "bytes": 13548
+    },
+    "assets/echoes/6000163.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000163.webp",
+      "bytes": 17712
+    },
+    "assets/echoes/6000164.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000164.webp",
+      "bytes": 18096
+    },
+    "assets/echoes/6000165.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000165.webp",
+      "bytes": 15812
+    },
+    "assets/echoes/6000166.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000166.webp",
+      "bytes": 14174
+    },
+    "assets/echoes/6000167.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000167.webp",
+      "bytes": 14702
+    },
+    "assets/echoes/6000168.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000168.webp",
+      "bytes": 33094
+    },
+    "assets/echoes/6000169.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000169.webp",
+      "bytes": 30412
+    },
+    "assets/echoes/6000170.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000170.webp",
+      "bytes": 17910
+    },
+    "assets/echoes/6000171.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000171.webp",
+      "bytes": 24292
+    },
+    "assets/echoes/6000172.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000172.webp",
+      "bytes": 18836
+    },
+    "assets/echoes/6000173.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000173.webp",
+      "bytes": 34630
+    },
+    "assets/echoes/6000174.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000174.webp",
+      "bytes": 24376
+    },
+    "assets/echoes/6000175.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000175.webp",
+      "bytes": 24882
+    },
+    "assets/echoes/6000176.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000176.webp",
+      "bytes": 23624
+    },
+    "assets/echoes/6000177.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000177.webp",
+      "bytes": 21132
+    },
+    "assets/echoes/6000178.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000178.webp",
+      "bytes": 23042
+    },
+    "assets/echoes/6000179.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000179.webp",
+      "bytes": 28880
+    },
+    "assets/echoes/6000180.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000180.webp",
+      "bytes": 34404
+    },
+    "assets/echoes/6000181.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000181.webp",
+      "bytes": 26226
+    },
+    "assets/echoes/6000182.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000182.webp",
+      "bytes": 24970
+    },
+    "assets/echoes/6000183.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000183.webp",
+      "bytes": 29072
+    },
+    "assets/echoes/6000184.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000184.webp",
+      "bytes": 21966
+    },
+    "assets/echoes/6000185.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000185.webp",
+      "bytes": 26482
+    },
+    "assets/echoes/6000186.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000186.webp",
+      "bytes": 30968
+    },
+    "assets/echoes/6000187.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000187.webp",
+      "bytes": 18960
+    },
+    "assets/echoes/6000188.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000188.webp",
+      "bytes": 26814
+    },
+    "assets/echoes/6000189.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000189.webp",
+      "bytes": 27574
+    },
+    "assets/echoes/6000190.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000190.webp",
+      "bytes": 33038
+    },
+    "assets/echoes/6000191.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000191.webp",
+      "bytes": 35966
+    },
+    "assets/echoes/6000192.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000192.webp",
+      "bytes": 31614
+    },
+    "assets/echoes/6000193.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000193.webp",
+      "bytes": 33992
+    },
+    "assets/echoes/6000194.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000194.webp",
+      "bytes": 28986
+    },
+    "assets/echoes/6000195.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000195.webp",
+      "bytes": 28626
+    },
+    "assets/echoes/6000196.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000196.webp",
+      "bytes": 26156
+    },
+    "assets/echoes/6000197.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000197.webp",
+      "bytes": 16314
+    },
+    "assets/echoes/6000198.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000198.webp",
+      "bytes": 30200
+    },
+    "assets/echoes/6000199.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000199.webp",
+      "bytes": 32340
+    },
+    "assets/echoes/6000200.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000200.webp",
+      "bytes": 16900
+    },
+    "assets/echoes/6000201.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000201.webp",
+      "bytes": 20126
+    },
+    "assets/echoes/6000202.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000202.webp",
+      "bytes": 5196
+    },
+    "assets/echoes/6000203.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000203.webp",
+      "bytes": 4648
+    },
+    "assets/echoes/6000204.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000204.webp",
+      "bytes": 6518
+    },
+    "assets/echoes/6000205.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000205.webp",
+      "bytes": 5912
+    },
+    "assets/echoes/6000206.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000206.webp",
+      "bytes": 4474
+    },
+    "assets/echoes/6000207.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000207.webp",
+      "bytes": 5386
+    },
+    "assets/echoes/6000208.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000208.webp",
+      "bytes": 5626
+    },
+    "assets/echoes/6000209.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000209.webp",
+      "bytes": 5372
+    },
+    "assets/echoes/6000210.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000210.webp",
+      "bytes": 5790
+    },
+    "assets/echoes/6000211.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000211.webp",
+      "bytes": 5806
+    },
+    "assets/echoes/6000212.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000212.webp",
+      "bytes": 4228
+    },
+    "assets/echoes/6000213.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000213.webp",
+      "bytes": 5600
+    },
+    "assets/echoes/6000214.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000214.webp",
+      "bytes": 4550
+    },
+    "assets/echoes/6000215.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000215.webp",
+      "bytes": 5454
+    },
+    "assets/echoes/6000216.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000216.webp",
+      "bytes": 4676
+    },
+    "assets/echoes/6000217.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000217.webp",
+      "bytes": 6174
+    },
+    "assets/echoes/6000218.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000218.webp",
+      "bytes": 5382
+    },
+    "assets/echoes/6000219.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000219.webp",
+      "bytes": 4938
+    },
+    "assets/echoes/6000220.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000220.webp",
+      "bytes": 4408
+    },
+    "assets/echoes/6000221.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000221.webp",
+      "bytes": 5398
+    },
+    "assets/echoes/6000222.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000222.webp",
+      "bytes": 4394
+    },
+    "assets/echoes/6000223.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000223.webp",
+      "bytes": 6864
+    },
+    "assets/echoes/6000224.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000224.webp",
+      "bytes": 4996
+    },
+    "assets/echoes/6000225.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/monsters/6000225.webp",
+      "bytes": 4938
+    },
+    "assets/echoes/sets/set_1.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_1.webp",
+      "bytes": 1890
+    },
+    "assets/echoes/sets/set_10.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_10.webp",
+      "bytes": 1744
+    },
+    "assets/echoes/sets/set_11.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_11.webp",
+      "bytes": 1548
+    },
+    "assets/echoes/sets/set_12.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_12.webp",
+      "bytes": 1278
+    },
+    "assets/echoes/sets/set_13.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_13.webp",
+      "bytes": 1662
+    },
+    "assets/echoes/sets/set_14.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_14.webp",
+      "bytes": 1660
+    },
+    "assets/echoes/sets/set_15.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_15.webp",
+      "bytes": 1652
+    },
+    "assets/echoes/sets/set_16.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_16.webp",
+      "bytes": 1766
+    },
+    "assets/echoes/sets/set_17.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_17.webp",
+      "bytes": 1598
+    },
+    "assets/echoes/sets/set_18.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_18.webp",
+      "bytes": 1794
+    },
+    "assets/echoes/sets/set_19.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_19.webp",
+      "bytes": 1972
+    },
+    "assets/echoes/sets/set_2.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_2.webp",
+      "bytes": 1628
+    },
+    "assets/echoes/sets/set_20.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_20.webp",
+      "bytes": 1576
+    },
+    "assets/echoes/sets/set_21.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_21.webp",
+      "bytes": 1818
+    },
+    "assets/echoes/sets/set_22.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_22.webp",
+      "bytes": 1598
+    },
+    "assets/echoes/sets/set_23.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_23.webp",
+      "bytes": 1764
+    },
+    "assets/echoes/sets/set_24.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_24.webp",
+      "bytes": 1686
+    },
+    "assets/echoes/sets/set_25.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_25.webp",
+      "bytes": 1806
+    },
+    "assets/echoes/sets/set_26.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_26.webp",
+      "bytes": 1656
+    },
+    "assets/echoes/sets/set_27.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_27.webp",
+      "bytes": 1664
+    },
+    "assets/echoes/sets/set_28.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_28.webp",
+      "bytes": 1658
+    },
+    "assets/echoes/sets/set_29.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_29.webp",
+      "bytes": 1754
+    },
+    "assets/echoes/sets/set_3.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_3.webp",
+      "bytes": 1682
+    },
+    "assets/echoes/sets/set_30.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_30.webp",
+      "bytes": 1744
+    },
+    "assets/echoes/sets/set_31.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_31.webp",
+      "bytes": 1636
+    },
+    "assets/echoes/sets/set_32.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_32.webp",
+      "bytes": 1826
+    },
+    "assets/echoes/sets/set_33.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_33.webp",
+      "bytes": 2182
+    },
+    "assets/echoes/sets/set_34.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_34.webp",
+      "bytes": 2414
+    },
+    "assets/echoes/sets/set_35.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_35.webp",
+      "bytes": 2420
+    },
+    "assets/echoes/sets/set_36.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_36.webp",
+      "bytes": 2622
+    },
+    "assets/echoes/sets/set_37.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_37.webp",
+      "bytes": 2610
+    },
+    "assets/echoes/sets/set_4.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_4.webp",
+      "bytes": 1660
+    },
+    "assets/echoes/sets/set_5.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_5.webp",
+      "bytes": 1844
+    },
+    "assets/echoes/sets/set_6.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_6.webp",
+      "bytes": 1682
+    },
+    "assets/echoes/sets/set_7.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_7.webp",
+      "bytes": 1430
+    },
+    "assets/echoes/sets/set_8.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_8.webp",
+      "bytes": 1338
+    },
+    "assets/echoes/sets/set_9.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/icons/set_9.webp",
+      "bytes": 1662
+    },
     "assets/events/a-glimpse-of-xuanfang.jpg": {
       "url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/30/A_Glimpse_of_Xuanfang.jpg/revision/latest/scale-to-width-down/720",
       "bytes": 88126
@@ -596,6 +1492,14 @@
     "assets/portraits/jiyan.webp": {
       "url": "https://cdn.prydwen.gg/images/ww/characters/jiyan_icon.webp",
       "bytes": 9698
+    },
+    "assets/portraits/lily-card.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/lily_card.webp",
+      "bytes": 64196
+    },
+    "assets/portraits/lily.webp": {
+      "url": "https://cdn.prydwen.gg/images/wuthering-waves/characters/lily_icon.webp",
+      "bytes": 8698
     },
     "assets/portraits/lingyang-card.webp": {
       "url": "https://cdn.prydwen.gg/images/ww/characters/ling_card.webp",
