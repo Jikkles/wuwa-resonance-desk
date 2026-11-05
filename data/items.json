@@ -90,6 +90,14 @@
       "description": "A material used to break through weapons, ascend [[Resonators]] and upgrade skills.",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Basic_Ring"
     },
+    "Bloom of Hearkening": {
+      "icon": "assets/items/bloom-of-hearkening.png",
+      "page": "Bloom of Hearkening",
+      "rarity": 1,
+      "type": "Ascension Material",
+      "description": "A material used for Resonator Ascension.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Bloom_of_Hearkening"
+    },
     "Broken String": {
       "icon": "assets/items/broken-string.png",
       "page": "Broken String",
@@ -585,5 +593,5 @@
       "wiki": "https://wutheringwaves.fandom.com/wiki/Xuanfang_Wonder"
     }
   },
-  "updated": "2026-10-18T22:17:46.933Z"
+  "updated": "2026-11-05T09:06:23.727Z"
 }
