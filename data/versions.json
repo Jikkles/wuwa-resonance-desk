@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-10-21",
+  "updated": "2026-11-06",
   "current": "3.7",
   "versions": [
     {
@@ -255,6 +255,21 @@
       "region": "Mengzhou",
       "livestream": "2026-09-19",
       "start": "2026-09-30"
+    },
+    {
+      "id": "3.8",
+      "title": "Lilies in a Dying Dream",
+      "status": "announced",
+      "phases": [],
+      "notes": "",
+      "start": "2026-11-12",
+      "livestream": "2026-11-06",
+      "keyVisual": {
+        "url": "https://hw-media-cdn-mingchao.kurogame.com/object/1793721600000/npk1hh5p6zr36a8zo6-1793782837243.jpg",
+        "source": "https://wutheringwaves.kurogames.com/en/main/news/detail/5689",
+        "title": "Version 3.8 Preview key visual",
+        "credit": "© Kuro Games"
+      }
     }
   ]
 }
