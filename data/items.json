@@ -537,6 +537,14 @@
       "type": "Universal Currency",
       "wiki": "https://wutheringwaves.fandom.com/wiki/Shell_Credit"
     },
+    "Showtime!": {
+      "icon": "assets/items/showtime.png",
+      "page": "Showtime!",
+      "rarity": 5,
+      "type": "Sigil",
+      "description": "The story behind the stage never ends, and the lights on the stage always shine.",
+      "wiki": "https://wutheringwaves.fandom.com/wiki/Showtime!"
+    },
     "Spliced String": {
       "icon": "assets/items/spliced-string.png",
       "page": "Spliced String",
@@ -593,5 +601,5 @@
       "wiki": "https://wutheringwaves.fandom.com/wiki/Xuanfang_Wonder"
     }
   },
-  "updated": "2026-11-05T09:06:23.727Z"
+  "updated": "2026-11-07T23:30:13.387Z"
 }
