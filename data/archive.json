@@ -5,10 +5,19 @@
   "source": "https://wutheringwaves.fandom.com/wiki/Category%3AIn-Game_Events",
   "versions": [
     {
+      "id": "3.8",
+      "title": "Lilies in a Dying Dream",
+      "start": "2026-11-12T11:00:00+08:00",
+      "end": null,
+      "notice": "",
+      "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.8",
+      "events": []
+    },
+    {
       "id": "3.7",
       "title": "Prism's Illusion, Heart's Illumination",
       "start": "2026-09-30T11:00:00+08:00",
-      "end": null,
+      "end": "2026-11-12T03:59:00+08:00",
       "notice": "https://wutheringwaves.kurogames.com/en/main/news/detail/5571",
       "source": "https://wutheringwaves.fandom.com/wiki/Version%2F3.7",
       "events": [
@@ -2970,5 +2979,5 @@
       ]
     }
   ],
-  "updated": "2026-10-16T11:11:26.891Z"
+  "updated": "2026-11-07T12:49:56.742Z"
 }

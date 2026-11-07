@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/resonators@1.1",
-  "updated": "2026-11-06",
+  "updated": "2026-11-07",
   "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
   "resonators": [
     {
@@ -28,7 +28,8 @@
         "3.1",
         "3.3",
         "3.5",
-        "3.6"
+        "3.6",
+        "3.8"
       ],
       "runs": [
         {
@@ -162,6 +163,12 @@
           "convene": "Where Santu Beckons",
           "start": "2026-09-10",
           "end": "2026-09-29"
+        },
+        {
+          "version": "3.8",
+          "convene": "Bloom of Yesterday's Dreamsoil",
+          "start": "2026-11-12",
+          "end": "2026-12-03"
         }
       ],
       "confidence": {
@@ -1354,7 +1361,8 @@
         "3.2",
         "3.3",
         "3.4",
-        "3.6"
+        "3.6",
+        "3.8"
       ],
       "runs": [
         {
@@ -1470,6 +1478,12 @@
           "convene": "Wind of Transcendence",
           "start": "2026-08-20",
           "end": "2026-09-10"
+        },
+        {
+          "version": "3.8",
+          "convene": "Bloom of Yesterday's Dreamsoil",
+          "start": "2026-11-12",
+          "end": "2026-12-03"
         }
       ],
       "confidence": {
@@ -1921,7 +1935,8 @@
         "3.0",
         "3.2",
         "3.4",
-        "3.7"
+        "3.7",
+        "3.8"
       ],
       "runs": [
         {
@@ -2037,6 +2052,12 @@
           "convene": "Horizon of Dawnbreak",
           "start": "2026-09-30",
           "end": "2026-10-22"
+        },
+        {
+          "version": "3.8",
+          "convene": "Bloom of Yesterday's Dreamsoil",
+          "start": "2026-11-12",
+          "end": "2026-12-03"
         }
       ],
       "confidence": {
@@ -3735,7 +3756,17 @@
       "image": "assets/reveals/lily-card.jpg",
       "imageCredit": "Drip marketing card © Kuro Games",
       "nameCN": "莉莉",
-      "region": "New Federation"
+      "region": "New Federation",
+      "convene": "Bloom of Yesterday's Dreamsoil",
+      "released": "2026-11-12",
+      "runs": [
+        {
+          "version": "3.8",
+          "convene": "Bloom of Yesterday's Dreamsoil",
+          "start": "2026-11-12",
+          "end": "2026-12-03"
+        }
+      ]
     },
     {
       "name": "Rover (Havoc)",
