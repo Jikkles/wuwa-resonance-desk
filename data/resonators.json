@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/resonators@1.1",
-  "updated": "2026-11-07",
+  "updated": "2026-11-08",
   "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
   "resonators": [
     {
@@ -3766,7 +3766,9 @@
           "start": "2026-11-12",
           "end": "2026-12-03"
         }
-      ]
+      ],
+      "role": "Support and Healer",
+      "epithet": "Dream Weaving"
     },
     {
       "name": "Rover (Havoc)",
