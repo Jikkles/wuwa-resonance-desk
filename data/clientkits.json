@@ -3,7 +3,7 @@
   "note": "Kit text for the Resonators no live source has written up yet, read out of the beta client's own skill trees. Same six skills, two Inherent Skills and six Resonance Chain nodes that kits.json stores, in the same shape and with the same **bold** and __underline__ markers, so app.js can draw one without knowing where it came from — plus the sub-ability headings the client writes and prydwen.gg flattens away. Never merged into kits.json: that file is filled by prydwen.gg and the wiki, and the moment either writes a page for one of these, this record should lose to it. Numbers are the client's, taken before Kuro has finished balancing them. The Tune Break node every Resonator carries is dropped — it is one paragraph about Off-Tune Level, identical between everyone who holds the same weapon class, and it describes the class rather than the character.",
   "credit": "Kit text via nanoka.cc's datamine of the beta client · skills © Kuro Games",
   "source": "https://ww.nanoka.cc/",
-  "build": "3.8.5",
+  "build": "3.8",
   "kits": {
     "Lily": {
       "slug": "lily",
@@ -63,7 +63,7 @@
             {
               "h": "Slumberland",
               "p": [
-                "Lasts for 50s. When Lily is in Slumberland, she heals the nearby active Resonator every 3s. During Slumberland, use directional input to command Dreambind to deal __Spectro DMG__ to nearby targets. Dreambind pulls in targets within a certain range every 5s, and stops attacking 10s after movement stops. Press Resonance Liberation again during Slumberland to end it early.",
+                "Lasts for 50s. When Lily is in Slumberland, she heals the nearby active Resonator every 3s. During Slumberland, use directional input to command Dreambind to attack, dealing __Spectro DMG__ to nearby targets. Dreambind pulls in targets within a certain range every 5s while attacking, and stops attacking 10s after movement stops. Press Resonance Liberation again during Slumberland to end it early.",
                 "When Lily is in Slumberland and a Resonator in the team other than Lily casts Intro Skill, targets within a certain range are pulled in. This effect can be triggered once every 10s. Lily is immune to interruption during Slumberland and takes 50% less DMG.",
                 "Switching to another Resonator during Slumberland keeps Lily on the field but stops the attacks of Dreambind. Lily leaves the field when Slumberland ends, or earlier if she gets too far from the active Resonator. Casting Intro Skill - Eternal Bloom also ends Slumberland immediately."
               ]
@@ -233,7 +233,7 @@
             {
               "p": [
                 "Lily is immune to interruption while casting Heavy Attack - Woven Fairytale, Heavy Attack - Woven Phantasm, Heavy Attack - Fairytale's Finale, or Heavy Attack - Phantasm's End.",
-                "While Cradle Lullaby is active, each Intro Skill cast by a Resonator in the team now grants 2 stacks of Dream Aroma."
+                "While Cradle Lullaby is active, each Intro Skill cast by a Resonator in the team other than Lily now grants 2 stacks of Dream Aroma."
               ]
             }
           ]
@@ -244,7 +244,7 @@
           "blocks": [
             {
               "p": [
-                "While Cradle Lullaby is active, when a Resonator in the team casts an Intro Skill, each stack of Dream Aroma additionally increases Crit. Rate by **2%** and Crit. DMG by **6%**."
+                "While Cradle Lullaby is active, when a Resonator in the team other than Lily casts an Intro Skill, each stack of Dream Aroma additionally increases Crit. Rate by **2%** and Crit. DMG by **6%**."
               ]
             }
           ]
@@ -258,7 +258,7 @@
                 "Lily additionally gains **170** points of Dream Perfume upon entering combat, triggered once every **12**s. When Lily deals DMG with Intro Skill - Eternal Bloom, she additionally gains **170** points of Dream Perfume.",
                 "Casting Resonance Liberation - Into the Dream Cradle additionally restores **10** points of Concerto Energy.",
                 "Dealing DMG with Heavy Attack - Fairytale's Finale or Heavy Attack - Phantasm's End additionally restores **10** points of Resonance Energy.",
-                "During Heavy Attack - Woven Fairytale or Heavy Attack - Woven Phantasm, Lily gains Dreambell Chime faster, and the healing provided by Heavy Attack - Woven Fairytale and Heavy Attack - Woven Phantasm is increased by {5}."
+                "During Heavy Attack - Woven Fairytale or Heavy Attack - Woven Phantasm, Lily gains Dreambell Chime faster."
               ]
             }
           ]
@@ -269,7 +269,7 @@
           "blocks": [
             {
               "p": [
-                "Heavy Attack - Woven Fairytale, Heavy Attack - Woven Phantasm, and Slumberland have their Healing increased by **30%**."
+                "Slumberland's healing is increased by **30%**."
               ]
             }
           ]
@@ -291,7 +291,8 @@
           "blocks": [
             {
               "p": [
-                "The __Spectro DMG__ dealt by Heavy Attack - Fairytale's Finale, Heavy Attack - Phantasm's End, and Intro Skill - Eternal Bloom is further increased by **100%**."
+                "The __Spectro DMG__ dealt by Heavy Attack - Fairytale's Finale, Heavy Attack - Phantasm's End is additionally increased by **100%**.",
+                "The __Spectro DMG__ dealt by Intro Skill - Eternal Bloom is additionally increased by **700%**."
               ]
             }
           ]
@@ -299,5 +300,5 @@
       ]
     }
   },
-  "updated": "2026-11-06T20:18:20.120Z"
+  "updated": "2026-11-10T09:25:04.867Z"
 }

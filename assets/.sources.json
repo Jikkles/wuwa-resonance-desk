@@ -1997,6 +1997,10 @@
       "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21050066.webp",
       "bytes": 36046
     },
+    "assets/weapons/w-lullaby.webp": {
+      "url": "https://static.nanoka.cc/assets/ww/UIResources/Common/Image/IconWeapon/T_IconWeapon21030076_UI.webp",
+      "bytes": 21600
+    },
     "assets/weapons/w-lumingloss.webp": {
       "url": "https://cdn.prydwen.gg/images/wuthering-waves/weapons/21020074.webp",
       "bytes": 15142
