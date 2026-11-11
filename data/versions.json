@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/versions@1.0",
-  "updated": "2026-11-06",
+  "updated": "2026-11-11",
   "current": "3.7",
   "versions": [
     {
@@ -260,7 +260,35 @@
       "id": "3.8",
       "title": "Lilies in a Dying Dream",
       "status": "announced",
-      "phases": [],
+      "phases": [
+        {
+          "n": 1,
+          "banners": [
+            {
+              "name": "Sigrika",
+              "rarity": 5,
+              "attribute": "Aero",
+              "weapon": "Gauntlets",
+              "role": "Main DPS",
+              "rerun": true,
+              "convene": "When the Runes Glitter",
+              "signature": "Solsworn Ciphers"
+            },
+            {
+              "name": "Qiuyuan",
+              "rarity": 5,
+              "attribute": "Aero",
+              "weapon": "Sword",
+              "role": "Support",
+              "rerun": true,
+              "convene": "Wanderer Knows No Far and Near",
+              "signature": "Emerald Sentence"
+            }
+          ],
+          "start": "2026-11-12",
+          "end": "2026-12-03"
+        }
+      ],
       "notes": "",
       "start": "2026-11-12",
       "livestream": "2026-11-06",
