@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/weapons@1.0",
-  "note": "Every weapon in the game: class, rarity, level 90 stats, and the passive as a template with its five ascension values. atk90 and statValue90 are max-level figures — there is no level curve here and none is inferred. ranks[n] holds what {n} in `effect` becomes at ascension 1 through 5. Sub-stat values are percentages. Icons are cached in assets/weapons/. Stats and passives via prydwen.gg; weapon art © Kuro Games. Icons for Glint of Clouds, Thousandfold Deliverance are from the Wuthering Waves wiki — prydwen.gg ships those below 200px. Icons for Blooming Jadehaven, Unspoken Rue are the game client's own, via nanoka.cc.",
+  "note": "Every weapon in the game: class, rarity, level 90 stats, and the passive as a template with its five ascension values. atk90 and statValue90 are max-level figures — there is no level curve here and none is inferred. ranks[n] holds what {n} in `effect` becomes at ascension 1 through 5. Sub-stat values are percentages. Icons are cached in assets/weapons/. Stats and passives via prydwen.gg; weapon art © Kuro Games. Icons for Glint of Clouds, Thousandfold Deliverance are from the Wuthering Waves wiki — prydwen.gg ships those below 200px. Icons for Blooming Jadehaven, Lullaby, Unspoken Rue are the game client's own, via nanoka.cc.",
   "credit": "Stats and art via prydwen.gg, some icons via the Wuthering Waves wiki, some from the game client via nanoka.cc · weapon art © Kuro Games",
   "source": "https://www.prydwen.gg/wuthering-waves/weapons",
   "weapons": [
@@ -480,7 +480,7 @@
       "id": "21050096",
       "atk90": 412,
       "stat": "Energy Regen",
-      "statValue90": 77.04,
+      "statValue90": 77,
       "source": "",
       "effect": "Increases Max HP by {0}. Casting Resonance Liberation restores {1} points of Concerto Energy, triggered once every 20s. Inflicting Glacio Chafe grants Snow Taint for 6s. Applying healing grants Ripples for 6s. If the wielder has done both while on the field, the next Outro Skill grants both effects for 6s. When the wielder has both Snow Taint and Ripples, the ATK of all nearby Resonators in the team is increased by {2}. Effects of the same name do not stack.",
       "ranks": [
@@ -752,6 +752,48 @@
         ]
       ],
       "icon": "assets/weapons/w-lethean-elegy.webp"
+    },
+    {
+      "name": "Lullaby",
+      "rarity": 5,
+      "type": "Pistols",
+      "id": "21030076",
+      "atk90": 413,
+      "stat": "Energy Regen",
+      "statValue90": 77,
+      "source": "",
+      "effect": "Increases Max HP by {0}. Casting Resonance Liberation restores {1} points of Concerto Energy, triggered once every 20s. All Resonators in the team gain Soothed Soul for 30s when the wielder provides healing with Heavy Attack. When Soothed Soul is active, if a Resonator in the team gains Unison or triggers Unison Response, that Resonator gains {2} ATK increase for 30s. This effect is removed when Soothed Soul ends. When the wielder provides healing with Heavy Attack, the active Resonator also gains {3} Echo Skill DMG Bonus for 30s. Effects of the same name do not stack.",
+      "ranks": [
+        [
+          "12%",
+          "15%",
+          "18%",
+          "21%",
+          "24%"
+        ],
+        [
+          "8",
+          "10",
+          "12",
+          "14",
+          "16"
+        ],
+        [
+          "16%",
+          "20%",
+          "24%",
+          "28%",
+          "32%"
+        ],
+        [
+          "24%",
+          "30%",
+          "36%",
+          "42%",
+          "48%"
+        ]
+      ],
+      "icon": "assets/weapons/w-lullaby.webp"
     },
     {
       "name": "Luminous Hymn",
@@ -1486,7 +1528,7 @@
       "rarity": 5,
       "type": "Sword",
       "id": "21020107",
-      "atk90": 588,
+      "atk90": 587,
       "stat": "CRIT Rate",
       "statValue90": 24.3,
       "source": "",
@@ -3429,5 +3471,5 @@
       "icon": "assets/weapons/w-training-sword.webp"
     }
   ],
-  "updated": "2026-11-03T20:27:31.395Z"
+  "updated": "2026-11-12T09:25:30.436Z"
 }

@@ -3,7 +3,7 @@
   "note": "Recommended builds and teams, per Resonator. This is the one file on the desk that is judgement rather than record: which sonata set to farm, which echo to put in the main slot, what to roll for, which weapons rank where, and which teams to build — all of it somebody's opinion, none of it a fact the game publishes. It is credited to prydwen.gg wherever it is shown and `reviewed` is the game version their write-up was last revised against. `sets[].echoes` is the main slot, the echo whose skill you actually cast. `stats.format` is the cost layout of the five slots and `stats.slots` is the main stat wanted in each. `stats.targets` is what each stat should read on the level-90 stat screen — the thresholds that turn the substat priority from an order into something you can act on, since an order alone never says when to stop rolling one stat and start on the next. `weapons[].share` is the damage share Prydwen calculates against the best option. A team slot holds every Resonator named as an alternative for that seat.",
   "credit": "Builds, teams and rankings via prydwen.gg — their judgement, not the desk's",
   "source": "https://www.prydwen.gg/wuthering-waves/characters/",
-  "generated": "2026-11-03T20:28:26.075Z",
+  "generated": "2026-11-12T09:26:15.633Z",
   "builds": {
     "Aalto": {
       "slug": "aalto",
@@ -210,7 +210,7 @@
     },
     "Aemeath": {
       "slug": "aemeath",
-      "reviewed": "3.6",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/aemeath",
       "sets": [
         {
@@ -555,7 +555,7 @@
     },
     "Baizhi": {
       "slug": "baizhi",
-      "reviewed": "2.2",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/baizhi",
       "sets": [
         {
@@ -850,7 +850,7 @@
     },
     "Buling": {
       "slug": "buling",
-      "reviewed": "3.7",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/buling",
       "sets": [
         {
@@ -863,6 +863,19 @@
             {
               "name": "Fallacy of No Return",
               "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
+            }
+          ]
+        },
+        {
+          "type": "Special",
+          "name": "Flower of Tinged Yearning",
+          "mix": [],
+          "share": null,
+          "note": "Comfort set option for Unison teams only. Gives 10% ATK to the team for 30s upon healing, which is increased to 25% for Unison characters. The niche nature of this set makes it less flexible than Rejuvenating Glow, but if you only plan to use Buling with Unison characters, this set can be considered for its higher buff uptime compared to Rejuvenating Glow, making it more comfortable to use.",
+          "echoes": [
+            {
+              "name": "Formrender",
+              "note": "Provides 10% Energy Regen when equipped in the main slot. Simple Summon Echo that ensures Energy Regen requirements are met a bit easier."
             }
           ]
         }
@@ -2714,7 +2727,7 @@
     },
     "Danjin": {
       "slug": "danjin",
-      "reviewed": "2.2",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/danjin",
       "sets": [
         {
@@ -3132,7 +3145,7 @@
     },
     "Encore": {
       "slug": "encore",
-      "reviewed": "2.6",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/encore",
       "sets": [
         {
@@ -3491,6 +3504,7 @@
             ],
             [
               "The Shorekeeper",
+              "Lily",
               "Verina"
             ]
           ],
@@ -3550,7 +3564,7 @@
     },
     "Hiyuki": {
       "slug": "hiyuki",
-      "reviewed": "3.6",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/hiyuki",
       "sets": [
         {
@@ -3709,7 +3723,7 @@
     },
     "Hsin": {
       "slug": "hsin",
-      "reviewed": "3.7",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/hsin",
       "sets": [
         {
@@ -3860,12 +3874,13 @@
               "Suoming"
             ],
             [
+              "Lily",
               "The Shorekeeper",
               "Verina",
               "Buling"
             ]
           ],
-          "note": "Jinhsi is theoretically usable instead of Suoming here, but there's a huge performance gap and it's not recommended over an F2P Flare team."
+          "note": "Lily is best overall, but can have performance drops in Whimpering Wastes compared to Shorekeeper due to being unable to provide CRIT consistency to the team until S2. Jinhsi is theoretically usable instead of Suoming here, but there's a huge performance gap and it's not recommended over an F2P Flare team."
         },
         {
           "name": "Best Team (Flare)",
@@ -4632,7 +4647,7 @@
               "Verina"
             ]
           ],
-          "note": "Any of the other 3 teammates are recommended over Cantarella, since Jinhsi and Cantarella cannot rotate on a 1-2-3-2-3 loop like normal. Only consider Cantarella to take advantage of temporary endgame buffs that favour Echo Skill casts/Havoc DMG. Additionally, while Hsin is Jinhsi's best theoretical teammate, the same cannot be said for Hsin herself who is better off running a F2P Flare team."
+          "note": "Any of the other 3 teammates are recommended over Cantarella, since Jinhsi and Cantarella cannot rotate on a 1-2-3-2-3 loop like normal. Only consider Cantarella to take advantage of temporary endgame buffs that favour Echo Skill casts/Havoc DMG. Additionally, while Hsin is Jinhsi's best theoretical teammate, the same cannot be said for Hsin herself who is better off running a F2P Flare team. Lily can be ran in the 3rd slot with Hsin on the team."
         },
         {
           "name": "Quickswap Team",
@@ -4869,9 +4884,103 @@
         }
       ]
     },
+    "Lily": {
+      "slug": "lily",
+      "reviewed": "3.8",
+      "source": "https://www.prydwen.gg/wuthering-waves/characters/lily",
+      "sets": [
+        {
+          "type": "Best",
+          "name": "Rejuvenating Glow",
+          "mix": [],
+          "share": null,
+          "note": "Best set for Lily for general use. Since she buffs both Echo and Unison characters and Flower of Tinged Yearning only provides full buffs to Unison characters, this is her best set to take advantage of her two-sided buffing profile.",
+          "echoes": [
+            {
+              "name": "Fallacy of No Return",
+              "note": "Allows Rejuvenating Glow to provide as many total buffs as Flower of Tinged Yearning on cast, giving an extra 10% ATK to the team and an extra 10% Energy Regen to the wearer. It can easily be summoned before Lily's Ultimate to have roughly the same effects as her Signature set, with the added perk of working in more than just Unison teams."
+            }
+          ]
+        },
+        {
+          "type": "Special",
+          "name": "Flower of Tinged Yearning",
+          "mix": [],
+          "share": null,
+          "note": "Comfort set option for now, as Lily can be used in both Unison and Echo teams. Has 10s more uptime on 10% ATK to the team and Energy Regen to Lily herself. The drawback is that these buffs only apply to Unison teams, so if you want to take advantage of Lily's Echo Skill buffing capabilities, this set is inferior.",
+          "echoes": [
+            {
+              "name": "Formrender",
+              "note": "Provides 10% Energy Regen when equipped in the main slot. Simple Summon Echo that ensures Energy Regen requirements are met a bit easier."
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "format": "43311",
+        "slots": [
+          "HP%",
+          "Energy Regen",
+          "Energy Regen / Spectro DMG Bonus",
+          "HP%",
+          "HP%"
+        ],
+        "substats": "Energy Regen (Until 260%) > CRIT DMG > CRIT Rate (Until 20%) > HP% > Heavy Attack DMG% > HP",
+        "note": "Energy Regen until 260% is all Lily needs to operate. Chase damage improvements beyond that if you wish to optimize fully, according to the priority listed. This also applies to Main Stats with a Spectro DMG Bonus 3-cost.",
+        "targets": []
+      },
+      "weapons": [
+        {
+          "name": "Lullaby",
+          "dupes": 1,
+          "share": null,
+          "note": "Lily's Signature is 1 of 2 weapons that allow her to maximize her Energy Regen requirements. Best weapon by a slight margin, giving her the Concerto she needs to speed up her Opener on top of two buffs: 24% party-wide Echo Skill DMG Bonus for all characters, and 16% ATK to Unison characters only."
+        },
+        {
+          "name": "Cadenza",
+          "dupes": 1,
+          "share": null,
+          "note": "Replacement option to Signature. Lily works completely fine on Cadenza instead of Lullaby, as the team buffs it provides are negligible, and this weapon still accomplishes the key goals of giving extra Concerto for the Opener while giving Lily extra Energy Regen, which is needed for full Energy Regen-gated team buffs,"
+        }
+      ],
+      "teams": [
+        {
+          "name": "Unison Team",
+          "slots": [
+            [
+              "Hsin"
+            ],
+            [
+              "Suoming"
+            ],
+            [
+              "Lily"
+            ]
+          ],
+          "note": null
+        },
+        {
+          "name": "Echo Teams",
+          "slots": [
+            [
+              "Sigrika",
+              "Galbrena"
+            ],
+            [
+              "Qiuyuan",
+              "Lucilla"
+            ],
+            [
+              "Lily"
+            ]
+          ],
+          "note": "Galbrena is much worse here and Shorekeeper is a better fit for that team, because she deals partial Heavy Attack DMG which Lily doesn't buff."
+        }
+      ]
+    },
     "Lingyang": {
       "slug": "lingyang",
-      "reviewed": "2.6",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/lingyang",
       "sets": [
         {
@@ -5064,7 +5173,7 @@
     },
     "Lucilla": {
       "slug": "lucilla",
-      "reviewed": "3.6",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/lucilla",
       "sets": [
         {
@@ -5260,6 +5369,7 @@
             ],
             [
               "The Shorekeeper",
+              "Lily",
               "Verina"
             ]
           ],
@@ -7365,10 +7475,10 @@
               "Qiuyuan"
             ],
             [
-              "Ciaccona",
               "The Shorekeeper",
+              "Lily",
               "Phrolova",
-              "Verina"
+              "Ciaccona"
             ]
           ],
           "note": "Phrolova can be stronger in multi-wave scenarios like Whimpering Wastes, but it's worth keeping in mind Phrolova also has stronger teams of her own."
@@ -7402,6 +7512,7 @@
             ],
             [
               "The Shorekeeper",
+              "Lily",
               "Verina"
             ]
           ],
@@ -7997,7 +8108,7 @@
     },
     "Rover (Electro)": {
       "slug": "rover-electro",
-      "reviewed": "3.7",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/rover-electro",
       "sets": [
         {
@@ -8012,19 +8123,32 @@
               "note": "Simple Summon Echo that gives 12% extra Electro DMG Bonus to the incoming character upon casting Outro. Adds onto the set's 25% for a total of 37% DMG Bonus buffing, making it a very strong source of buffs for Electro Rover."
             }
           ]
+        },
+        {
+          "type": "Special",
+          "name": "Heart of Sworn Vigil",
+          "mix": [],
+          "share": null,
+          "note": "Hsin's Signature set gives DPS Electro Rover access to 15% CRIT Rate and 32.5% Electro DMG Bonus in total, making it the best blend of stats they have access to in this role.",
+          "echoes": [
+            {
+              "name": "Reminiscence: Suhsin the Inevitable",
+              "note": "Best for DPS Electro Rover. Simple Summon Echo, gives Suoming 20% Electro DMG Bonus when equipped in the main slot, making it their best as a DPS for that reason alone."
+            }
+          ]
         }
       ],
       "stats": {
         "format": "43311",
         "slots": [
           "CRIT Rate / CRIT DMG",
-          "Electro DMG",
-          "Electro DMG",
+          "Electro DMG / ATK%",
+          "Electro DMG / ATK%",
           "ATK%",
           "ATK%"
         ],
         "substats": "Energy Regen (Until Satisfied) > CRIT Rate = CRIT DMG > ATK% > Skill DMG% = ATK > Liberation DMG%",
-        "note": null,
+        "note": "Prioritize Electro DMG Bonus main stats as a Hybrid, use ATK% main stats a DPS.",
         "targets": [
           {
             "stat": "HP",
@@ -8074,7 +8198,7 @@
           "name": "Red Spring",
           "dupes": 1,
           "share": "93.00%",
-          "note": "As Electro Rover also deals a decent amount of Basic DMG, Red Spring is a good choice although not the best one on them."
+          "note": "As Electro Rover also deals a decent amount of Basic DMG, Red Spring is a good choice although not the best one on them as a Hybrid, while being a normal stat-stick as a DPS."
         },
         {
           "name": "Azure Oath",
@@ -8138,27 +8262,42 @@
           "note": null
         },
         {
-          "name": "Best Team",
+          "name": "Premium DPS Team",
           "slots": [
-            [
-              "Hsin"
-            ],
             [
               "Rover (Electro)"
             ],
             [
-              "Suisui",
-              "Chisa",
-              "Buling"
+              "Lynae"
+            ],
+            [
+              "Mornye",
+              "The Shorekeeper"
             ]
           ],
-          "note": "By way of more flexibility in quickswap, Chisa could prove stronger for more experienced players willing to take advantage of the mechanic."
+          "note": "Buling and Verina are also decent options for a Support, same as below. Other general buffers like Rebecca, or even Yinlin/Zhezhi for Electro/Skill buffs respectively are usable in the second slot, but much worse than Lynae."
+        },
+        {
+          "name": "F2P DPS Team",
+          "slots": [
+            [
+              "Rover (Electro)"
+            ],
+            [
+              "Taoqi"
+            ],
+            [
+              "Buling",
+              "Verina"
+            ]
+          ],
+          "note": "Don't expect strong results out of this team, keep your expectations low as this is a fully F2P team. Buling is stronger at S6 than S0 Verina, while S2 Verina is the best pick if owned. If both are S0, Verina is your best option."
         }
       ]
     },
     "Rover (Havoc)": {
       "slug": "rover-havoc",
-      "reviewed": "2.2",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/rover-havoc",
       "sets": [
         {
@@ -8626,18 +8765,6 @@
       },
       "weapons": [
         {
-          "name": "Blazing Brilliance",
-          "dupes": 1,
-          "share": "108.39%",
-          "note": "Changli's signature weapon that's not only fantastic for her but also usable on all damage-focused Sword users who have a large portion of their damage originating from Resonance Skill damage. Offers a huge main stat of CRIT DMG% granting excellent scaling, 12% permanent ATK% and up to 56% increased Resonance Skill DMG% which should be at or close to full power during the bulk of your rotation when opening with one or two resonance skills."
-        },
-        {
-          "name": "Red Spring",
-          "dupes": 1,
-          "share": "103.32%",
-          "note": "Camellya's signature weapon is usable by all Basic Attack focused Sword wielding characters, but clearly designed with her in mind due to a lot of its power locked behind spending Concerto mid-rotation - something only Camellya can do. Offers a decent amount of ATK%, CRIT RATE% and Basic Attack DMG for all characters but a huge Basic Attack DMG bonus after spending Concerto."
-        },
-        {
           "name": "Emerald Sentence",
           "dupes": 1,
           "share": "100.00%",
@@ -8873,38 +9000,19 @@
               "Lucilla"
             ],
             [
-              "Ciaccona",
               "The Shorekeeper",
+              "Lily",
               "Phrolova",
               "Verina"
             ]
           ],
-          "note": "Phrolova can be considered stronger for AoE multi-wave encounters like Whimpering Wastes. Generally privilege other Support options in single-wave encounters."
-        },
-        {
-          "name": "Alternative Teams",
-          "slots": [
-            [
-              "Sigrika"
-            ],
-            [
-              "Lynae",
-              "Ciaccona"
-            ],
-            [
-              "Mornye",
-              "Rover (Aero)",
-              "The Shorekeeper",
-              "Verina"
-            ]
-          ],
-          "note": "Mornye should only be used alongside Lynae, Aero Rover should only be used alongside Ciaccona."
+          "note": "Phrolova can be considered stronger for AoE multi-wave encounters like Whimpering Wastes. Generally privilege other Support options in single-wave encounters. Ciaccona can also be considered in the third slot with Qiuyuan on the team only."
         }
       ]
     },
     "Suisui": {
       "slug": "suisui",
-      "reviewed": "3.7",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/suisui",
       "sets": [
         {
@@ -9077,7 +9185,7 @@
     },
     "Suoming": {
       "slug": "suoming",
-      "reviewed": "3.7",
+      "reviewed": "3.8",
       "source": "https://www.prydwen.gg/wuthering-waves/characters/suoming",
       "sets": [
         {
@@ -9245,12 +9353,13 @@
               "Suoming"
             ],
             [
+              "Lily",
               "The Shorekeeper",
               "Verina",
               "Buling"
             ]
           ],
-          "note": null
+          "note": "Lily is best overall, but can have performance drops in Whimpering Wastes compared to Shorekeeper due to being unable to provide CRIT consistency to the team until S2."
         },
         {
           "name": "DPS Team",
@@ -9421,6 +9530,19 @@
         },
         {
           "type": "Special",
+          "name": "Flower of Tinged Yearning",
+          "mix": [],
+          "share": null,
+          "note": "Comfort set option for Unison teams only. Gives 10% ATK to the team for 30s upon healing, which is increased to 25% for Unison characters. The niche nature of this set makes it less flexible than Rejuvenating Glow, but if you only plan to use Shorekeeper with Unison characters, this set can be considered for its higher buff uptime compared to Rejuvenating Glow, making it more comfortable to use.",
+          "echoes": [
+            {
+              "name": "Formrender",
+              "note": "Provides 10% Energy Regen when equipped in the main slot. Simple Summon Echo that ensures Energy Regen requirements are met a bit easier."
+            }
+          ]
+        },
+        {
+          "type": "Special",
           "name": "Halo of Starry Radiance",
           "mix": [],
           "share": null,
@@ -9583,6 +9705,19 @@
             {
               "name": "Fallacy of No Return",
               "note": "Simple summon Echo that can be cast any time (ideally right before the wielder's Outro), granting 10% ATK to the team for 20s (sufficient for 2 other teammates' rotation times if cast right before Outro) as well as 10% Energy Regen to the wielder to help with Energy requirements."
+            }
+          ]
+        },
+        {
+          "type": "Special",
+          "name": "Flower of Tinged Yearning",
+          "mix": [],
+          "share": null,
+          "note": "Comfort set option for Unison teams only. Gives 10% ATK to the team for 30s upon healing, which is increased to 25% for Unison characters. The niche nature of this set makes it less flexible than Rejuvenating Glow, but if you only plan to use Verina with Unison characters, this set can be considered for its higher buff uptime compared to Rejuvenating Glow, making it more comfortable to use.",
+          "echoes": [
+            {
+              "name": "Formrender",
+              "note": "Provides 10% Energy Regen when equipped in the main slot. Simple Summon Echo that ensures Energy Regen requirements are met a bit easier."
             }
           ]
         }
