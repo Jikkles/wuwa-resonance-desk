@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/kits@1.0",
-  "updated": "2026-11-03",
+  "updated": "2026-11-12",
   "note": "Six skills, two Inherent Skills and the six-node Resonance Chain per Resonator, as they read in the live client. Text carries **bold** and __underline__ markers rather than markup — the desk escapes the string before turning those back into elements. Skill descriptions via prydwen.gg where it could be reached and wutheringwaves.fandom.com otherwise; skills © Kuro Games.",
   "credit": "Kit text via prydwen.gg and wutheringwaves.fandom.com · © Kuro Games",
   "kits": {
@@ -14360,6 +14360,229 @@
         {
           "kind": "Forte Circuit",
           "name": "Tune Break - Sword",
+          "blocks": [
+            {
+              "p": [
+                "When the target's Off-Tune Level is full, the Resonator may cast Tune Break on the target."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "Lily": {
+      "slug": "lily",
+      "skills": {
+        "basic": {
+          "name": "Mend and Cleanse",
+          "blocks": [
+            {
+              "p": [
+                "Press repeatedly or hold Normal Attack to perform up to **4** consecutive attacks, dealing __Spectro DMG__.",
+                "Consume STA to perform a Plunging Attack, dealing __Spectro DMG__.",
+                "Press Normal Attack shortly after a successful Dodge to attack the target, dealing __Spectro DMG__. Press Normal Attack shortly after casting this skill to cast Basic Attack Stage 4."
+              ]
+            }
+          ]
+        },
+        "skill": {
+          "name": "Dream Blend",
+          "blocks": [
+            {
+              "p": [
+                "Lily starts with Heavy Attack - Woven Fairytale by default. When Heavy Attack - Woven Fairytale is active, press Resonance Skill to deal __Spectro DMG__ to nearby targets, then switch to Heavy Attack - Woven Phantasm.",
+                "This skill shares a Cooldown with Resonance Skill - Reverie Blend.",
+                "When Heavy Attack - Woven Phantasm is active, press Resonance Skill to deal __Spectro DMG__ to nearby targets, then switch to Heavy Attack - Woven Fairytale.",
+                "This skill shares a Cooldown with Resonance Skill - Nightmare Blend."
+              ]
+            }
+          ]
+        },
+        "liberation": {
+          "name": "Into the Dream Cradle",
+          "blocks": [
+            {
+              "p": [
+                "Casting this skill sends Lily into Slumberland and grants her Cradle Lullaby.",
+                "Casting this skill also grants Lily a Shield equal to **100%** of her Max HP for **4s**. This Shield does not carry over to the incoming Resonator.",
+                "Can be cast in mid-air close to the ground.",
+                "Lasts for **50s**. When Lily is in Slumberland, she heals the nearby active Resonator every **3s**. During Slumberland, use directional input to command Dreambind to attack, dealing __Spectro DMG__ to nearby targets. Dreambind pulls in targets within a certain range every **5s** while attacking, and stops attacking **10s** after movement stops. Press Resonance Liberation again during Slumberland to end it early.",
+                "When Lily is in Slumberland and a Resonator in the team other than Lily casts Intro Skill, targets within a certain range are pulled in. This effect can be triggered once every **10s**. Lily is immune to interruption during Slumberland and takes **50%** less DMG. Switching to another Resonator during Slumberland keeps Lily on the field but stops the attacks of Dreambind. Lily leaves the field when Slumberland ends, or earlier if she gets too far from the active Resonator. Casting Intro Skill - Eternal Bloom also ends Slumberland immediately.",
+                "Lasts for **25s**. While this effect is active, each Intro Skill cast by a Resonator in the team other than Lily grants **1** stack of Dream Aroma. Cradle Lullaby is removed when Lily is the incoming Resonator.",
+                "Stacks up to **4** times. Each stack increases the ATK of all Resonators in the team by **0.1%** for every **1%** of Lily's Energy Regen exceeding **190%**, up to **7%**. This effect is removed when Lily is the incoming Resonator or when Cradle Lullaby ends."
+              ]
+            }
+          ]
+        },
+        "forte": {
+          "name": "Dreamland of Flowers",
+          "blocks": [
+            {
+              "p": [
+                "Can hold up to **300** points.",
+                "Basic Attack, Mid-air Attack, and Dodge Counter restore Dream Perfume when dealing damage.",
+                "Casting Resonance Skill - Reverie Blend or Resonance Skill - Nightmare Blend restores **130** points of Dream Perfume.",
+                "Casting Intro Skill - Eternal Bloom restores **130** points of Dream Perfume.",
+                "Can hold up to **300** points.",
+                "Can be gained continuously during Heavy Attack - Woven Fairytale and Heavy Attack - Woven Phantasm. Any unconsumed Dreambell Chime will be converted into an equal amount of Dream Perfume.",
+                "When Dream Perfume is full, hold Normal Attack to cast Heavy Attack - Woven Fairytale, consuming all Dream Perfume to grant **1** stack of Dream Shelter. During the skill, Lily pulls in nearby targets and continuously deals __Spectro DMG__ to them. She also heals all Resonators in the team every second for **2s**.",
+                "Casting Heavy Attack - Woven Fairytale grants Lily Wish of Praying Dream. Switching to another Resonator during Heavy Attack - Woven Fairytale ends the skills immediately.",
+                "Lily continuously gains Dreambell Chime and Concerto Energy (up to **30** points) during the skill.",
+                "When Dreambell Chime reaches **300** points, press or hold Normal Attack to end the skill immediately and cast Heavy Attack - Fairytale's Finale. Heavy Attack - Fairytale's Finale is automatically cast at the end of Heavy Attack - Woven Fairytale. Casting Heavy Attack - Fairytale's Finale consumes all Dreambell Chime.",
+                "Attack targets within range, dealing __Spectro DMG__.",
+                "For every **1%** of Lily's Energy Regen exceeding **100%**, this skill gains **0.5%** Crit. Rate, up to **80%**, and **1%** Crit. DMG, up to **160%**.",
+                "Lily gains Sillage for **6s** while casting this skill. Casting Outro Skill consumes Sillage and grants Silvered Dream to Resonators in the team. This effect can be triggered once every **20s**.",
+                "Lily cannot be switched off while casting this skill.",
+                "When Dream Perfume is full, hold Normal Attack to cast Heavy Attack - Woven Phantasm, consuming all Dream Perfume to grant **1** stack of Dream Shelter. During the skill, Lily pulls in nearby targets and continuously deals __Spectro DMG__ to them. She also heals all Resonators in the team every second for **2s**.",
+                "Casting Heavy Attack - Woven Phantasm grants Lily Wish of Praying Dream.",
+                "Switching to another Resonator during Heavy Attack - Woven Phantasm ends the skill immediately.",
+                "Lily continuously gains Dreambell Chime and Concerto Energy (up to **30** points) during the skill.",
+                "When Dreambell Chime reaches **300** points, press or hold Normal Attack to end the skill immediately and cast Heavy Attack - Phantasm's End. Heavy Attack - Phantasm's End is automatically cast at the end of Heavy Attack - Woven Phantasm. Casting Heavy Attack - Phantasm's End consumes all Dreambell Chime.",
+                "Attack targets within range, dealing Spectro DMG.",
+                "For every **1%** of Lily's Energy Regen exceeding **100%**, this skill gains **0.5%** Crit. Rate, up to **80%**, and **1%** Crit. DMG, up to **160%**.",
+                "Lily gains Sillage for **6s** while casting this skill. Casting Outro Skill consumes Sillage and grants Silvered Dream to Resonators in the team. This effect can be triggered once every **20s**.",
+                "Lily cannot be switched off while casting this skill.",
+                "Lasts for **30s**.",
+                "When the Resonator with this effect is the active Resonator and can trigger Unison Response, each stack of Unison Boon on the team increases their ATK by **0.1%** for every **1%** of Lily's Energy Regen exceeding **190%**, up to **7%**, counting up to **4** stacks of Unison Boon.",
+                "The active Resonator's Echo Skill Crit. Rate and Echo Skill Crit. DMG are increased. Every **0.7%** of Lily's Energy Regen exceeding **190%** increases Echo Skill Crit. Rate by **0.1%**, up to **10%**. Every **0.7%** of Lily's Energy Regen exceeding **190%** increases Echo Skill Crit. DMG by **0.2%**, up to **20%**.",
+                "All Resonators in the team gain increased resistance to interruption.",
+                "Casting Heavy Attack - Woven Fairytale or Heavy Attack - Woven Phantasm grants **1** stack of Dream Shelter, stacking up to **1** time. Dream Shelter is removed when Heavy Attack - Fairytale's Finale or Heavy Attack - Phantasm's End ends, or when Heavy Attack - Woven Fairytale or Heavy Attack - Woven Phantasm is interrupted. Receiving damage from an enemy target consumes **1** stack of Dream Shelter to grant Lily immunity to interruption and reduce the DMG taken by **60%** for **1s**. This effect can be triggered once every **1s**.",
+                "Can be gained once every **25s**.",
+                "When Lily has Wish of Praying Dream, the current Heavy Attack - Woven Fairytale or Heavy Attack - Woven Phantasm consumes Wish of Praying Dream to increase the skill's healing by **400%**."
+              ]
+            }
+          ]
+        },
+        "intro": {
+          "name": "Blooming Dream",
+          "blocks": [
+            {
+              "p": [
+                "Attack the target, dealing __Spectro DMG__. Press Normal Attack shortly after casting this skill to cast Basic Attack Stage 3.",
+                "Eternal Bloom",
+                "After casting Resonance Liberation - Into the Dream Cradle, Lily's next Intro Skill First Bloom is replaced with Eternal Bloom. When cast, it attacks the target, dealing __Spectro DMG__.",
+                "For every **1%** of Lily's Energy Regen exceeding **100%**, this skill gains **0.5%** Crit. Rate, up to **80%**, and **1%** Crit. DMG, up to **160%**.",
+                "Casting the skill grants Deep Dream Fragrance for **8s**. Casting Heavy Attack - Woven Fairytale or Heavy Attack - Woven Phantasm consumes Deep Dream Fragrance to additionally grant **100** points of Dreambell Chime.",
+                "Press Normal Attack shortly after casting this skill to cast Basic Attack Stage 3."
+              ]
+            }
+          ]
+        },
+        "outro": {
+          "name": "Blooming Fragrance",
+          "blocks": [
+            {
+              "p": [
+                "Resonators in the team gain **25%** All DMG Amplification for **30s**."
+              ]
+            }
+          ]
+        }
+      },
+      "inherent": [
+        {
+          "name": "Woven Scent",
+          "blocks": [
+            {
+              "p": [
+                "Casting Intro Skill - Eternal Bloom additionally restores **10** points of Concerto Energy, triggered once every **20s**.",
+                "Casting Heavy Attack - Fairytale's Finale or Heavy Attack - Phantasm's End additionally restores **15** points of Concerto Energy, triggered once every **20s**."
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Flowers for You",
+          "blocks": [
+            {
+              "p": [
+                "While a nearby active Resonator has **50%** or more HP, Lily grants them **10%** DMG Reduction.",
+                "When a Resonator in the team takes a fatal blow, they will not fall and will instead gain a Shield equal to **10%** of Lily's Max HP for **10s**. This effect can be triggered once every **5** min.",
+                "Casting Enhanced Heavy Attack - Fairytale's Finale or Enhanced Heavy Attack - Phantasm's End grants Floral Blessing to Resonators in the team.",
+                "Lasts for **60s**. When the HP of a Resonator in the team is below **50%** of their Max HP, restore **50%** of their Max HP and remove Floral Blessing. This effect can be triggered once every **120s**."
+              ]
+            }
+          ]
+        }
+      ],
+      "chain": [
+        {
+          "n": 1,
+          "name": "Look, White Flowers from the Ruins of Dreams",
+          "blocks": [
+            {
+              "p": [
+                "Lily is immune to interruption while casting Heavy Attack - Woven Fairytale, Heavy Attack - Woven Phantasm, Heavy Attack - Fairytale's Finale, or Heavy Attack - Phantasm's End.",
+                "While Cradle Lullaby is active, each Intro Skill cast by a Resonator in the team other than Lily now grants **2** stacks of Dream Aroma."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "name": "Listen, a Requiem from the Dream Cradle",
+          "blocks": [
+            {
+              "p": [
+                "While Cradle Lullaby is active, when a Resonator in the team other than Lily casts an Intro Skill, each stack of Dream Aroma additionally increases Crit. Rate by **2%** and Crit. DMG by **6%**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "name": "May Your Soul Wander No More",
+          "blocks": [
+            {
+              "p": [
+                "Lily additionally gains **170** points of Dream Perfume upon entering combat, triggered once every **12s**.",
+                "When Lily deals DMG with Intro Skill - Eternal Bloom, she additionally gains **170** points of Dream Perfume.",
+                "Casting Resonance Liberation - Into the Dream Cradle additionally restores **10** points of Concerto Energy.",
+                "Dealing DMG with Heavy Attack - Fairytale's Finale or Heavy Attack - Phantasm's End additionally restores **10** points of Resonance Energy.",
+                "During Heavy Attack - Woven Fairytale or Heavy Attack - Woven Phantasm, Lily gains Dreambell Chime faster."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "name": "May Your Past Sink into Silence",
+          "blocks": [
+            {
+              "p": [
+                "Slumberland's healing is increased by **30%**."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "name": "May You Find Peace in Endless Light",
+          "blocks": [
+            {
+              "p": [
+                "While Lily is in Slumberland, the pull-in effect range is increased by **50%** when a Resonator in the team casts Intro Skill."
+              ]
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "name": "May My Reverie Never End",
+          "blocks": [
+            {
+              "p": [
+                "The __Spectro DMG__ dealt by Heavy Attack - Fairytale's Finale, Heavy Attack - Phantasm's End is additionally increased by **100%**.",
+                "The __Spectro DMG__ dealt by Intro Skill - Eternal Bloom is additionally increased by **700%**."
+              ]
+            }
+          ]
+        }
+      ],
+      "extra": [
+        {
+          "kind": "Forte Circuit",
+          "name": "Tune Break: Pistols",
           "blocks": [
             {
               "p": [

@@ -1,6 +1,6 @@
 {
   "schema": "wuwa-desk/resonators@1.1",
-  "updated": "2026-11-10",
+  "updated": "2026-11-12",
   "note": "Identity, debut patch and rerun history per Resonator. Kit text lives in kits.json — it is ten times the size and only a record that has been opened needs it. Identity and banner history via wutheringwaves.fandom.com; kit via prydwen.gg, or the wiki where Prydwen could not be reached.",
   "resonators": [
     {
@@ -3854,7 +3854,7 @@
       "attribute": "Spectro",
       "weapon": "Pistols",
       "version": "3.8",
-      "status": "teased",
+      "status": "released",
       "summary": "A perfumer with a preternatural sense of smell, whose scents weave short-lived dreams that heal troubled minds - whoever she treats falls asleep wrapped in the smell of flowers, and the dream's content and length differ from one dreamer to the next. That is the text of Kuro's drip card, posted on Kurobbs on 7 October as 莉莉 and drawn in English as LILY, which settles the spelling the 5 September datamine had as Lili. The card makes her name, her 5-star rarity and her design official: lavender hair, a black-and-white gothic dress under a dark veil, a lily held like a wand, among drifting mirror frames and butterflies. It carries no attribute or weapon mark, so Spectro and Pistols are still the client files' word rather than Kuro's until the profile card lands. Nothing on her kit yet; the healer reading fits the card's flavour text but is not a kit, and the 3.8 beta has not opened.",
       "kit": [],
       "materials": {
@@ -3862,8 +3862,8 @@
         "skill": []
       },
       "confidence": {
-        "identity": "datamined",
-        "kit": "rumour"
+        "identity": "official",
+        "kit": "official"
       },
       "sources": [
         {
@@ -3902,7 +3902,8 @@
         }
       ],
       "role": "Support and Healer",
-      "epithet": "Dream Weaving"
+      "epithet": "Dream Weaving",
+      "hasKit": true
     },
     {
       "name": "Rover (Havoc)",
